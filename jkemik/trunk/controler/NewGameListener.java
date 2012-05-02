@@ -67,6 +67,7 @@ public class NewGameListener implements MouseListener{
 					"Exit JKemik?\n", "Question",
 					JOptionPane.YES_NO_OPTION);
 			if(res == 0){
+				JKemik.writeSettings();
 				System.exit(0);
 				System.out.println("Exitting ... ");
 			}else{
