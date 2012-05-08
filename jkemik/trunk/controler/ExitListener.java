@@ -23,16 +23,13 @@ public class ExitListener implements MouseListener{
 	public void mouseClicked(MouseEvent arg0) {
 		int response = JOptionPane.showConfirmDialog(null,
 				"Are you sure you want to exit the Game?\n", "Question",
-				JOptionPane.YES_NO_CANCEL_OPTION);
+				JOptionPane.YES_OPTION);
 		if (response == 0) {
 			// Save settings
 			JKemik.writeSettings();
 			// Save current Game
 			System.exit(0);
 			//Application.setDone();
-		} else if (response == 1) {
-			// Save settings
-			System.exit(0);
 		} else {
 			
 		}

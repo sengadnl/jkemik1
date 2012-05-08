@@ -38,15 +38,17 @@ public class JKemik extends Application {
 	public static SettingsPanel settings;
 	private static boolean isStarted = false;
 	public static Load load;
-	static File file = new File(Globals.settingsTemplateObjectFile);
+	static File s_object = new File(Globals.settingsTemplateObjectFile);
+	static File t_object = new File(Globals.templateObjectFile);
 
 	protected void init() {
-		//manual = new Manual();
+		
 		load = new Load(400, 210);
 		load.plus("Building game template ...");// 1
-		template = new GTemplate();
+
+		readTemplate();
 		readSettings();
-		//settings_t = new STemplate();
+		
 		game = new Game(new Player(Color.WHITE, "Dany"), new Player(
 				Color.WHITE, "Sarah"));
 		settings = new SettingsPanel(250, 200);
@@ -62,7 +64,6 @@ public class JKemik extends Application {
 				setDone();
 			}
 		} catch (Exception e) {
-
 		}
 	}
 
@@ -88,8 +89,13 @@ public class JKemik extends Application {
 	public static void writeSettings() {
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(
-					new FileOutputStream(file));
+					new FileOutputStream(s_object));
 			out.writeObject(settings_t);
+			
+			ObjectOutputStream out1 = new ObjectOutputStream(
+					new FileOutputStream(t_object));
+			out1.writeObject(template);
+			
 		} catch (FileNotFoundException exception1) {
 			System.out.println("JKemik: writeSettings "
 					+ exception1.getMessage());
@@ -106,14 +112,40 @@ public class JKemik extends Application {
 			String str = "" + settings_t.getMaxWinVal();
 			SettingsPanel.setMax_win(str);
 	}
+	public static void readTemplate() {
+		try {
+			
+			if (t_object.exists()) {
+				ObjectInputStream input = new ObjectInputStream(
+						new FileInputStream(t_object));
+				template = (GTemplate) input.readObject();
+				//updateSettingsPanel();
+				input.close();
+			}else{
+				template = new GTemplate();
+			}
+		} catch (FileNotFoundException exception1) {
+			System.out.println("JKemik: readSettings "
+					+ exception1.getMessage());
+		} catch (IOException exception2) {
+			System.out.println("JKemik: readSettings "
+					+ exception2.getMessage());
+		}catch(ClassNotFoundException exception3){
+			System.out.println("JKemik: readSettings "
+					+ exception3.getMessage());
+		}
+
+	}
+
 	public static void readSettings() {
 		try {
 			
-			if (file.exists()) {
+			if (s_object.exists()) {
 				ObjectInputStream input = new ObjectInputStream(
-						new FileInputStream(file));
+						new FileInputStream(s_object));
+				
 				settings_t = (STemplate) input.readObject();
-				//updateSettingsPanel();
+				
 				input.close();
 			}else{
 				settings_t = new STemplate();

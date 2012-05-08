@@ -81,6 +81,15 @@ public class RotateColor extends JPanel {
 	public void rotateColor(int i){
 		this.setBackground(this.colors[i]);
 	}
+	/**
+	 * */
+	public void rotateColor(Color c){
+		for(int i = 0; i < colors.length; i ++){
+			if(c.equals(colors[i])){
+				this.setBackground(colors[i]);
+			}
+		}
+	}
 
 	protected Color[] loadColors() {
 		this.colors = new Color[this.BOARD_SIZE];
@@ -123,8 +132,6 @@ public class RotateColor extends JPanel {
 	public void setColors(Color[] colors) {
 		this.colors = colors;
 	}
-
-	
 	/**
 	 * @return the colorIndex
 	 */

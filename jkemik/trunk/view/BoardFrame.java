@@ -335,27 +335,27 @@ public class BoardFrame extends JFrame {
 		//panel32.setBackground(this.CPANEL_COLOR);
 		panel32.setLayout(new BorderLayout(5, 5));
 
-		label1 = new JLabel("PLYR1");
+		label1 = new JLabel(JKemik.template.getP1_name());
 		label1.setForeground(Color.WHITE);
 		label1.setHorizontalAlignment(SwingConstants.CENTER);
 
-		label2 = new JLabel("PLYR2");
+		label2 = new JLabel(JKemik.template.getP2_name());
 		label2.setForeground(Color.WHITE);
 		label2.setHorizontalAlignment(SwingConstants.CENTER);
 
 		Holder1 = new JPanel();
-
 		Holder2 = new JPanel();
-
 		Holder3 = new JPanel();
 
 		pColor1 = new RotateColor((int) BOTTOM_COLOR_P_W,
 				(int) BOTTOM_COLOR_P_H);
-		pColor1.rotateColor(0); // set initial color
+		//pColor1.rotateColor(0); // set initial color
+		pColor1.rotateColor(JKemik.template.getP1_c());
 		pColor2 = new RotateColor((int) BOTTOM_COLOR_P_W,
 				(int) BOTTOM_COLOR_P_H);
-		pColor2.rotateColor(5); // set initial color
-
+		//pColor2.rotateColor(5); // set initial color
+		pColor2.rotateColor(JKemik.template.getP2_c());
+		
 		l1 = new RotateLabel(this.gridsize);
 		l2 = new RotateLabel(this.gameType);
 
