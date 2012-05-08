@@ -349,11 +349,9 @@ public class BoardFrame extends JFrame {
 
 		pColor1 = new RotateColor((int) BOTTOM_COLOR_P_W,
 				(int) BOTTOM_COLOR_P_H);
-		//pColor1.rotateColor(0); // set initial color
 		pColor1.rotateColor(JKemik.template.getP1_c());
 		pColor2 = new RotateColor((int) BOTTOM_COLOR_P_W,
 				(int) BOTTOM_COLOR_P_H);
-		//pColor2.rotateColor(5); // set initial color
 		pColor2.rotateColor(JKemik.template.getP2_c());
 		
 		l1 = new RotateLabel(this.gridsize);
