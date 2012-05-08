@@ -24,6 +24,7 @@ public class GameThemeListener implements MouseListener{
 		this.label.rotateLabel();
 		String str = this.label.getActiveLabel();
 		JKemik.view.setTheme(str);
+		JKemik.settings_t.setTheme(str);
 		BoardFrame.panel2.repaint();
 		// change the grid size
 		if (BoardFrame.grid.DRAWN) {

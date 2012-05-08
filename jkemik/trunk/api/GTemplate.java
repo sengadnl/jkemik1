@@ -29,14 +29,13 @@ public class GTemplate implements Serializable{
 	
 	private Color p1_c;
 	private Color p2_c;
-	private double G_size;
 	private Dimension dimension; // = Toolkit.getDefaultToolkit().getScreenSize();
 	private final double GRID_PERCENT = 0.8; //
 	private final double VERY_LARGE_SCALAR = 128;
 	private final double LARGE_SCALAR = 16;
 	private final double MIDIUM_SCALAR = 32;
 	private final double SMALL_SCALAR = 64;
-	
+	private double G_size = SMALL_SCALAR;
 
 	public GTemplate() {
 		this.dimension = Toolkit.getDefaultToolkit().getScreenSize();

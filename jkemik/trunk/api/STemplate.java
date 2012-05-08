@@ -11,10 +11,19 @@ public class STemplate implements Serializable {
 	private boolean autoCapture = true;
 	private boolean manualCapture = false;
 	private boolean autoPass = false;
+	private String theme = "Origins";
 	private int maxWinVal = 2;
 
 	public STemplate() {
 
+	}
+
+	public String getTheme() {
+		return theme;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
 	}
 
 	public int getMaxWinVal() {

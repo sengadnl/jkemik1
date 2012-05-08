@@ -54,7 +54,7 @@ public class BoardFrame extends JFrame {
 		designPanel2();
 		JKemik.load.plus("createPanel2();..."); // 12
 		
-		setTheme("Origins");
+		setTheme(JKemik.settings_t.getTheme());
 
 		makingGame = true;
 		upDateSetting();
@@ -229,7 +229,7 @@ public class BoardFrame extends JFrame {
 		panel21.add(p1panel);
 		p1panel.initPanelForNewGame("P1", Color.WHITE);
 
-		grid = new Grid(64);
+		grid = new Grid((int)JKemik.template.getG_size());
 		ViewEvents.gridMouseAction(grid);
 
 		panel23 = new JPanel();
@@ -572,6 +572,15 @@ public class BoardFrame extends JFrame {
 			setSkin(new Color(50,50,50), new Color(90,90,90),new Color(100,100,100));
 		}
 	}
+	public void setTheme(int t){
+		if(BoardFrame.THEME_JKEMIK == t){
+			setSkin(new Color(40, 40, 0), new Color(70, 70, 0), new Color(150,150, 0));
+		}else if(BoardFrame.THEME_ORIGINS == t){
+			setSkin(new Color(0,30,0), new Color(10,30,0),new Color(60,90,60));
+		}else{
+			setSkin(new Color(50,50,50), new Color(90,90,90),new Color(100,100,100));
+		}
+	}
 
 	public static void upDateSetting() {
 		try {
@@ -668,7 +677,7 @@ public class BoardFrame extends JFrame {
 	public static JLabel settings;
 
 	private String[] gridsize = { "32x20", "64x40", "8x5", "16x10" };
-	private String[] gameType = { "Jkemik", "Origins", "Google" };
+	private String[] gameType = { "Origins","Jkemik","Google" };
 
 	public static final double CORNER_WIDTH = .33;
 	public static final double CORNER_HEIGHT = .064;
@@ -693,5 +702,7 @@ public class BoardFrame extends JFrame {
 	public static boolean makingGame;
 	public static int COUNTER = 0;
 	public static int MAX_VAL = 0;
-
+	public static final int THEME_JKEMIK = 0;
+	public static final int THEME_ORIGINS = 1;
+	public static final int THEME_OLD = 3;
 }
