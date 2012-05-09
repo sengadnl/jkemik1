@@ -173,10 +173,18 @@ public class JKemik extends Application {
 		}
 		return true;
 	}
+	public static void options(String args[]){
+		if(args[0].equals("-v")){
+			System.out.println("\nJ-Kemik Version " + Globals.VERSION);
+		}
+	}
 
 	public static void main(String[] args) {
-
-		(new JKemik()).run();
+		if(args.length > 0){
+			options(args);
+		}else{
+			(new JKemik()).run();
+		}
 	}
 
 }
