@@ -175,7 +175,7 @@ public class JKemik extends Application {
 	}
 	public static void options(String args[]){
 		if(args[0].equals("-v")){
-			System.out.println("\nJ-Kemik Version " + Globals.VERSION);
+			System.out.println("\nJ-Kemik Version " + Globals.VERSION);//
 		}
 	}
 
