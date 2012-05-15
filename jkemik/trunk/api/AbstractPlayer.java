@@ -8,8 +8,8 @@ import utilities.Tools;
 /**
  * COPYRIGHT(c)2010 Daniel Senga. All Right Reserved. This class is a parent to
  * all Player Objects and their subclasses.
- * 
  * @author Daniel Senga Version 0.02010
+ * @version 10.0
  */
 abstract class AbstractPlayer implements Serializable {
 
