@@ -18,7 +18,7 @@ public class Globals {
 	public static final String templateObjectFile = "/tmp/template.obj";
 	public static final String gameObjectFile = "../controler/conf/game.obj";
 	public static final String settingsTemplateObjectFile = "/tmp/stemplate.obj";
-	public static final String VERSION = "0.100";
+	public static final String VERSION = "0.110";
 	public static final int RED_INDEX = 0;
 	public static final int WHITE_INDEX = 4;
 	public static final int GREEN_INDEX = 5;
