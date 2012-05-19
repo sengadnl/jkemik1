@@ -1,0 +1,23 @@
+#labels Phase-Deploy
+=Getting started=
+
+1. Download the latest build.
+
+2. To run:
+ _Open a terminal._
+
+ _Navigate to the location of the downloaded jar file._
+
+ _Issue the command: *java -jar filename*_
+
+3. On start, the application is in Game configuration mode. Use the interactive control panel below the grid board to select player colors, change the grid size and set player names. Then click save to start the game.
+
+4. Use the "END/NEW" button to end the current Game and start a new one.
+
+5. Use the "OPTION" to change other game settings.
+
+===ATTENTION:===
+
+_The currently implementation of JKemik does nod restrict a player from playing for his opponent. So the switching of turn relies on players integrity. I will hopefully come up with a remedy to this issue at some point._
+
+See Rules for more details
