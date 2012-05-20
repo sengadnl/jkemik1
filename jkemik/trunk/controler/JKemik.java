@@ -26,7 +26,7 @@ import api.Player;
 import api.STemplate;
 
 /**
- * @author dalet
+ * @author Daniel Senga
  * 
  */
 public class JKemik extends Application {
