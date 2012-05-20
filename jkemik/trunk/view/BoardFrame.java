@@ -13,7 +13,7 @@ import utilities.Tools;
 import utilities.ValidateInput;
 
 /**
- * @author dalet
+ * @author Daniel Senga
  * 
  */
 public class BoardFrame extends JFrame {
