@@ -1,2 +1,2 @@
-Rules
-GetStarted
+[Rules Rules]
+[GetStarted Getting Started]
