@@ -25,7 +25,7 @@ public class Load extends JFrame {
 	static JProgressBar progressBar;
 	static JLabel label; 
 	protected static int COUNTER = 1;
-	protected static int MAX_VAL = 33;
+	protected static int MAX_VAL = 11;
 
 	private static java.awt.Container container;
 
@@ -86,6 +86,7 @@ public class Load extends JFrame {
 				progressBar.setValue(COUNTER++);
 				Thread.sleep(num);
 			}else{
+				System.out.println("Set Load invisible");
 				setVisible(false);
 				COUNTER = 0;
 			}

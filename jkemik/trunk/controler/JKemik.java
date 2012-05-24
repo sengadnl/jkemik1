@@ -31,7 +31,7 @@ import api.STemplate;
  */
 public class JKemik extends Application {
 	public static Game game;
-	//public static Manual manual;
+	// public static Manual manual;
 	public static GTemplate template;
 	public static STemplate settings_t;
 	public static BoardFrame view;
@@ -42,23 +42,32 @@ public class JKemik extends Application {
 	static File t_object = new File(Globals.templateObjectFile);
 
 	protected void init() {
-		
-		load = new Load(400, 210);
-		load.plus("Building game template ...");// 1
-
-		readTemplate();
-		readSettings();
-		
-		game = new Game(new Player(Color.WHITE, "Dany"), new Player(
-				Color.WHITE, "Sarah"));
-		settings = new SettingsPanel(250, 200);
+		try {
+			load = new Load(400, 210);
+			System.out.println("Before checking tmp");
+			File tmp = new File(Globals.tempFile);
+			if (tmp.exists()) {
+				System.out.println("tmp exists");
+				readTemplate();
+				readSettings();
+			} else {
+				if (tmp.mkdir()) {
+					System.out.println(tmp + " created...");
+					template = new GTemplate();
+					settings_t = new STemplate();
+				}
+			}
+			game = new Game(new Player(Color.WHITE, "Dany"), new Player(
+					Color.WHITE, "Sarah"));
+			settings = new SettingsPanel(250, 200);
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
 	}
 
 	protected void idle() {
 		try {
-			load.plus("Checking screen resolution...");
 			if (screenResolutionCheck()) {
-				load.plus("Constructing the BoarFrame");// 2
 				view = new BoardFrame(Globals.FRAME_WIDTH, Globals.FRAME_HEIGHT);
 			} else {
 				setDone();
@@ -91,11 +100,11 @@ public class JKemik extends Application {
 			ObjectOutputStream out = new ObjectOutputStream(
 					new FileOutputStream(s_object));
 			out.writeObject(settings_t);
-			
+
 			ObjectOutputStream out1 = new ObjectOutputStream(
 					new FileOutputStream(t_object));
 			out1.writeObject(template);
-			
+
 		} catch (FileNotFoundException exception1) {
 			System.out.println("JKemik: writeSettings "
 					+ exception1.getMessage());
@@ -105,23 +114,25 @@ public class JKemik extends Application {
 		}
 
 	}
-	public static void updateSettingsPanel(){
-			settings.setAutoCap(settings_t.getAutoCaptureStatus());
-			settings.setAutoPass(settings_t.getAutoPassStatus());
-			settings.setMaxWinVal(settings_t.getMaxWinVal());
-			String str = "" + settings_t.getMaxWinVal();
-			SettingsPanel.setMax_win(str);
+
+	public static void updateSettingsPanel() {
+		settings.setAutoCap(settings_t.getAutoCaptureStatus());
+		settings.setAutoPass(settings_t.getAutoPassStatus());
+		settings.setMaxWinVal(settings_t.getMaxWinVal());
+		String str = "" + settings_t.getMaxWinVal();
+		SettingsPanel.setMax_win(str);
 	}
+
 	public static void readTemplate() {
 		try {
-			
+
 			if (t_object.exists()) {
 				ObjectInputStream input = new ObjectInputStream(
 						new FileInputStream(t_object));
 				template = (GTemplate) input.readObject();
-				//updateSettingsPanel();
+				// updateSettingsPanel();
 				input.close();
-			}else{
+			} else {
 				template = new GTemplate();
 			}
 		} catch (FileNotFoundException exception1) {
@@ -130,7 +141,7 @@ public class JKemik extends Application {
 		} catch (IOException exception2) {
 			System.out.println("JKemik: readSettings "
 					+ exception2.getMessage());
-		}catch(ClassNotFoundException exception3){
+		} catch (ClassNotFoundException exception3) {
 			System.out.println("JKemik: readSettings "
 					+ exception3.getMessage());
 		}
@@ -139,15 +150,15 @@ public class JKemik extends Application {
 
 	public static void readSettings() {
 		try {
-			
+
 			if (s_object.exists()) {
 				ObjectInputStream input = new ObjectInputStream(
 						new FileInputStream(s_object));
-				
+
 				settings_t = (STemplate) input.readObject();
-				
+
 				input.close();
-			}else{
+			} else {
 				settings_t = new STemplate();
 			}
 		} catch (FileNotFoundException exception1) {
@@ -156,7 +167,7 @@ public class JKemik extends Application {
 		} catch (IOException exception2) {
 			System.out.println("JKemik: readSettings "
 					+ exception2.getMessage());
-		}catch(ClassNotFoundException exception3){
+		} catch (ClassNotFoundException exception3) {
 			System.out.println("JKemik: readSettings "
 					+ exception3.getMessage());
 		}
@@ -173,16 +184,22 @@ public class JKemik extends Application {
 		}
 		return true;
 	}
-	public static void options(String args[]){
-		if(args[0].equals("-v")){
+
+	public static void options(String args[]) {
+		if (args[0].equals("-v")) {
 			System.out.println("\nJ-Kemik Version " + Globals.VERSION);//
 		}
 	}
 
+	// private boolean createTempDir() {
+	// File tmp = new File(Globals.tempFile);
+	// return tmp.mkdir();
+	// }
+
 	public static void main(String[] args) {
-		if(args.length > 0){
+		if (args.length > 0) {
 			options(args);
-		}else{
+		} else {
 			(new JKemik()).run();
 		}
 	}

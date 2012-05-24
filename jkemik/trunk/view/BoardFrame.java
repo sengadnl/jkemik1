@@ -25,35 +25,23 @@ public class BoardFrame extends JFrame {
 	public BoardFrame(double width, double height) {
 
 		this.width = width;
-		JKemik.load.plus("this.width = width..."); // 3
 		this.height = height;
-		JKemik.load.plus("this.height = height;..."); // 4
 		height = 800.0;
 		width = 1280.0;
-		JKemik.load.plus("height = 800.0...width = 1280.0..");// 5
 
 		setFrameSize((int) width, (int) height);
-		JKemik.load.plus("setFrameSize((int)width,(int)height);..."); // 6
-
 		setContainerAttributs();
-		JKemik.load.plus("setContainerAttributs();..."); // 7
 
 		System.out.println("Frame: " + width + " X " + height);
 		System.out.println("Frame container: " + container.getWidth() + " X "
 				+ container.getHeight());
 		// Layout
 		setLayout(new BorderLayout());
-		JKemik.load.plus("setLayout(new BorderLayout(1,1));...");// 8
-
-		createPanel123();
-		JKemik.load.plus("createPanel123();..."); // 9
-		designPanel1();
-		JKemik.load.plus("createPanel1();..."); // 10
-		designPanel3();
-		JKemik.load.plus("createPanel3();..."); // 11
-		designPanel2();
-		JKemik.load.plus("createPanel2();..."); // 12
 		
+		createPanel123();
+		designPanel1();
+		designPanel3();
+		designPanel2();
 		setTheme(JKemik.settings_t.getTheme());
 
 		makingGame = true;
@@ -62,49 +50,37 @@ public class BoardFrame extends JFrame {
 		initializeEvents();
 
 		setTitle("J-Kemik");
-		//setUndecorated(true);
+		// setUndecorated(true);
 		setVisible(true);
 	}
-	private void initializeEvents(){
-		JKemik.load.plus("Adding color picker 1 event..."); 
+
+	private void initializeEvents() {
+		JKemik.load.plus("Adding color picker 1 event...");
 		ViewEvents.changeColorPanel1Action(pColor1);
-		
-		JKemik.load.plus("Adding color picker 2 event..."); 
+		JKemik.load.plus("Adding color picker 2 event...");
 		ViewEvents.changeColorPanel2Action(pColor2);
-		
-		JKemik.load.plus("Adding board size event..."); 
+		JKemik.load.plus("Adding board size event...");
 		ViewEvents.setBoardSizeAction(l1);
-		
 		JKemik.load.plus("Setting type event...");
 		ViewEvents.setGameThemeAction(l2);
-		
-		JKemik.load.plus("Adding player 1 name prompt ..."); 
+		JKemik.load.plus("Adding player 1 name prompt ...");
 		ViewEvents.addPlayer1NameAction(label1);
-		
 		JKemik.load.plus("Adding player 2 name prompt ...");
 		ViewEvents.addPlayer2NameAction(label2);
-		
 		ViewEvents.saveAction(save);
-		
 		JKemik.load.plus("Adding undo event listener...");
 		ViewEvents.undoAction(undo);
-		
 		JKemik.load.plus("Adding capture event listener..."); // 21
 		ViewEvents.captureAction(capture);
-		
 		JKemik.load.plus("Setting Grid initial state...");
 		grid.removeMouseListener(ViewEvents.gridListener);
-		
 		JKemik.load.plus("Setting cursor initial state...");// 24
 		grid.removeMouseMotionListener(ViewEvents.gridListener);
-		
 		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
 		ViewEvents.ExitGameEvent();
-		
 		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
 		ViewEvents.settingsLabelAction();
-		
-		
+
 		ViewEvents.passTurnAction(pass_turn);
 		ViewEvents.saveSettingsAction();
 		ViewEvents.onAutoCaptureAction();
@@ -123,7 +99,6 @@ public class BoardFrame extends JFrame {
 	private void setContainerAttributs() {
 		container = getContentPane();
 		container.setBackground(new Color(0, 0, 0));
-		JKemik.load.plus("Done!..."); // 27
 	}
 
 	private void setFrameSize(int w, int h) {
@@ -131,23 +106,19 @@ public class BoardFrame extends JFrame {
 		if (ValidateInput.validateScreenResolution(w, h)) {
 			setSize(w, h);
 		}
-		JKemik.load.plus("Done!..."); // 28
 	}
 
 	private void createPanel123() {
-		JKemik.load.plus("Building Panels 1-3 ..."); // 26
 		panel1 = new JPanel();
 		panel1.setLayout(new BorderLayout());
 		panel1.setPreferredSize(new Dimension((int) this.width,
 				(int) (CORNER_HEIGHT * this.height)));
-		//panel1.setBackground(this.THEME_COLOR);
 		add(panel1, BorderLayout.NORTH);
 
 		panel2 = new JPanel();
 		panel2.setLayout(new BorderLayout());
 		panel2.setPreferredSize(new Dimension((int) (.8 * this.width),
 				(int) (SIDE_HEIGHT * this.height)));
-		//panel2.setBackground(BOARD_COLOR);
 
 		add(panel2, BorderLayout.CENTER);
 
@@ -155,10 +126,7 @@ public class BoardFrame extends JFrame {
 		panel3.setLayout(new BorderLayout());// 10,10
 		panel3.setPreferredSize(new Dimension((int) this.width,
 				(int) (CORNER_HEIGHT * this.height)));
-		//panel3.setBackground(this.THEME_COLOR);
 		add(panel3, BorderLayout.SOUTH);
-
-		JKemik.load.plus("Done!..."); // 29
 	}
 
 	private void designPanel1() {
@@ -166,8 +134,7 @@ public class BoardFrame extends JFrame {
 		panel11.setPreferredSize(new Dimension(
 				(int) (CORNER_WIDTH * this.width),
 				(int) (CORNER_HEIGHT * this.height)));
-		//panel11.setBackground(this.THEME_COLOR);
-		
+
 		panel11.setLayout(new BorderLayout());
 
 		JKIcon icon = new JKIcon("media/jkemik-logo-small.gif", "");
@@ -177,11 +144,10 @@ public class BoardFrame extends JFrame {
 		panel12 = new JPanel();
 		panel12.setPreferredSize(new Dimension((int) (P2_W * this.width),
 				(int) (CORNER_HEIGHT * this.height)));
-		
+
 		print_point = new JLabel("");
 		print_point.setForeground(Color.GREEN);
 		panel12.add(print_point);
-		
 
 		panel1.add(panel12, BorderLayout.CENTER);
 
@@ -189,22 +155,21 @@ public class BoardFrame extends JFrame {
 		panel13.setPreferredSize(new Dimension(
 				(int) (CORNER_WIDTH * this.width),
 				(int) (CORNER_HEIGHT * this.height)));
-		
+
 		System.out.println("Panel13: " + (CORNER_WIDTH * this.width) + " X "
 				+ (CORNER_HEIGHT * this.height));
-		
+
 		panel13.setBackground(this.THEME_COLOR);
 
 		Game_status = new JLabel("NEW");
 		Game_status.setForeground(Color.GREEN);
 
-		
 		settings = new JLabel("OPTIONS");
 		settings.setForeground(new Color(150, 150, 255));
-		
+
 		exit = new JLabel("EXIT");
 		exit.setForeground(Color.RED);
-		
+
 		help = new JLabel("HELP");
 		help.setForeground(Color.WHITE);
 
@@ -212,30 +177,26 @@ public class BoardFrame extends JFrame {
 		panel13.add(settings);
 		panel13.add(exit);
 		panel13.add(help);
-		
+
 		panel1.add(panel13, BorderLayout.EAST);
-		JKemik.load.plus("Done!..."); // 30
 	}
 
 	private void designPanel2() {
-		JKemik.load.plus("Building the Board ..."); //
 		panel21 = new JPanel();
 		panel21.setPreferredSize(new Dimension((int) (SIDE_WIDTH * this.width),
 				(int) (SIDE_HEIGHT * this.height)));
-		//panel21.setBackground(this.THEME_COLOR);
-
+		
 		p1panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (PLAYER_PNL_H_SCALAR * SIDE_HEIGHT * this.height));
 		panel21.add(p1panel);
 		p1panel.initPanelForNewGame("P1", Color.WHITE);
 
-		grid = new Grid((int)JKemik.template.getG_size());
+		grid = new Grid((int) JKemik.template.getG_size());
 		ViewEvents.gridMouseAction(grid);
 
 		panel23 = new JPanel();
 		panel23.setPreferredSize(new Dimension((int) (SIDE_WIDTH * this.width),
 				(int) (SIDE_HEIGHT * this.height)));
-//		panel23.setBackground(this.THEME_COLOR);
 
 		p2panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (.25 * SIDE_HEIGHT * this.height));
@@ -245,13 +206,10 @@ public class BoardFrame extends JFrame {
 		panel2.add(panel21, BorderLayout.WEST);
 		panel2.add(grid, BorderLayout.CENTER);
 		panel2.add(panel23, BorderLayout.EAST);
-		JKemik.load.plus("Done!..."); // 31
 	}
 
 	private void designPanel3() {
-		JKemik.load.plus("Building the control Panel ..."); //
 		panel31 = new JPanel();
-		//panel31.setLayout(new GridLayout(2,4));
 		panel33 = new JPanel();
 		panel31.setPreferredSize(new Dimension(
 				(int) (CORNER_WIDTH * this.width),
@@ -264,17 +222,16 @@ public class BoardFrame extends JFrame {
 
 		createPanel32();
 		createPanel33();
-		
+
 		System.out.println("Panel33: " + (CORNER_WIDTH * this.width) + " X "
 				+ (CORNER_HEIGHT * this.height));
-		JKemik.load.plus("Done!..."); // 32
 	}
-	private void createPanel33(){
-		JKemik.load.plus("Building panel 33...");
+
+	private void createPanel33() {
 		panel33.setPreferredSize(new Dimension(
 				(int) (CORNER_WIDTH * this.width),
 				(int) (CORNER_HEIGHT * this.height)));
-		
+
 		pass_turn = new JButton("PASS");
 		pass_turn.setBackground(new Color(255, 150, 0));
 		pass_turn.setForeground(new Color(255, 255, 200));
@@ -293,10 +250,10 @@ public class BoardFrame extends JFrame {
 		panel33.add(capture);
 		capture.setVisible(false);
 		panel3.add(panel33, BorderLayout.EAST);
-
 	}
+
 	private void createPanel31() {
-		
+
 		AutoCap = new JLabel("ON");
 		AutoCap.setForeground(Color.WHITE);
 		AutoPass = new JLabel("OFF");
@@ -309,7 +266,7 @@ public class BoardFrame extends JFrame {
 
 		JLabel lb = new JLabel("Auto Pass");
 		lb.setForeground(Color.ORANGE);
-		
+
 		JLabel lc = new JLabel("Win");
 		lc.setForeground(Color.ORANGE);
 
@@ -320,19 +277,16 @@ public class BoardFrame extends JFrame {
 		panel31.add(lc);
 		panel31.add(Win);
 	}
+
 	public void createPanel32() {
 		blank1 = new JLabel(" ");
-		//blank1.setBackground(this.THEME_COLOR);
-		
 		blank2 = new JLabel(" ");
 		blank3 = new JLabel(" ");
-		//blank3.setBackground(this.THEME_COLOR);
 		blank4 = new JLabel(" ");
 		blank5 = new JLabel(" ");
 		blank6 = new JLabel(" ");
 
 		panel32 = new JPanel();
-		//panel32.setBackground(this.CPANEL_COLOR);
 		panel32.setLayout(new BorderLayout(5, 5));
 
 		label1 = new JLabel(JKemik.template.getP1_name());
@@ -353,14 +307,13 @@ public class BoardFrame extends JFrame {
 		pColor2 = new RotateColor((int) BOTTOM_COLOR_P_W,
 				(int) BOTTOM_COLOR_P_H);
 		pColor2.rotateColor(JKemik.template.getP2_c());
-		
+
 		l1 = new RotateLabel(this.gridsize);
 		l2 = new RotateLabel(this.gameType);
 
 		save = new JButton("SAVE");
 		save.setBackground(new Color(200, 0, 0));
 		save.setForeground(new Color(255, 255, 255));
-		// panel33.add(save);
 
 		Holder1.setLayout(new GridLayout(4, 1));
 		Holder1.add(blank1);
@@ -389,10 +342,8 @@ public class BoardFrame extends JFrame {
 		panel3.add(panel32, BorderLayout.CENTER);
 		System.out.println("Panel32: " + (P2_W * this.width) + " X "
 				+ (CORNER_HEIGHT * this.height));
-		JKemik.load.plus("Done!..."); 
-		
 	}
-	
+
 	public static void desableGameControlPanel() {
 		l1.setForeground(Tools.fade(Color.WHITE));
 		l2.setForeground(Tools.fade(Color.WHITE));
@@ -411,10 +362,10 @@ public class BoardFrame extends JFrame {
 
 		p1panel.initPanelForNewGame("", pColor1.getBackground());
 		p2panel.initPanelForNewGame("", pColor2.getBackground());
-		
+
 		pColor1.setBackground(JKemik.template.getP1_c());
 		pColor2.setBackground(JKemik.template.getP2_c());
-		
+
 		boostButton(save);
 	}
 
@@ -541,20 +492,20 @@ public class BoardFrame extends JFrame {
 		this.THEME_COLOR = theme;
 		this.CPANEL_COLOR = cpanel;
 		BOARD_COLOR = board;
-		
+
 		Grid.GRID_LINE_COL = Tools.fade(BOARD_COLOR);
 		panel1.setBackground(this.THEME_COLOR);
 		panel11.setBackground(this.THEME_COLOR);
 		panel12.setBackground(this.THEME_COLOR);
-		
+
 		panel2.setBackground(BOARD_COLOR);
 		panel21.setBackground(this.THEME_COLOR);
 		panel23.setBackground(this.THEME_COLOR);
-		
+
 		panel3.setBackground(this.THEME_COLOR);
 		panel31.setBackground(this.THEME_COLOR);
 		panel33.setBackground(this.THEME_COLOR);
-		
+
 		blank1.setBackground(this.THEME_COLOR);
 		blank3.setBackground(this.THEME_COLOR);
 		panel32.setBackground(this.CPANEL_COLOR);
@@ -563,22 +514,29 @@ public class BoardFrame extends JFrame {
 		Holder3.setBackground(this.CPANEL_COLOR);
 	}
 
-	public void setTheme(String str){
-		if(str.equals("Jkemik")){
-			setSkin(new Color(40, 40, 0), new Color(70, 70, 0), new Color(150,150, 0));
-		}else if(str.equals("Origins")){
-			setSkin(new Color(0,30,0), new Color(10,30,0),new Color(60,90,60));
-		}else{
-			setSkin(new Color(50,50,50), new Color(90,90,90),new Color(100,100,100));
+	public void setTheme(String str) {
+		if (str.equals("Jkemik")) {
+			setSkin(new Color(40, 40, 0), new Color(70, 70, 0), new Color(150,
+					150, 0));
+		} else if (str.equals("Origins")) {
+			setSkin(new Color(0, 30, 0), new Color(10, 30, 0), new Color(60,
+					90, 60));
+		} else {
+			setSkin(new Color(50, 50, 50), new Color(90, 90, 90), new Color(
+					100, 100, 100));
 		}
 	}
-	public void setTheme(int t){
-		if(BoardFrame.THEME_JKEMIK == t){
-			setSkin(new Color(40, 40, 0), new Color(70, 70, 0), new Color(150,150, 0));
-		}else if(BoardFrame.THEME_ORIGINS == t){
-			setSkin(new Color(0,30,0), new Color(10,30,0),new Color(60,90,60));
-		}else{
-			setSkin(new Color(50,50,50), new Color(90,90,90),new Color(100,100,100));
+
+	public void setTheme(int t) {
+		if (BoardFrame.THEME_JKEMIK == t) {
+			setSkin(new Color(40, 40, 0), new Color(70, 70, 0), new Color(150,
+					150, 0));
+		} else if (BoardFrame.THEME_ORIGINS == t) {
+			setSkin(new Color(0, 30, 0), new Color(10, 30, 0), new Color(60,
+					90, 60));
+		} else {
+			setSkin(new Color(50, 50, 50), new Color(90, 90, 90), new Color(
+					100, 100, 100));
 		}
 	}
 
@@ -601,7 +559,6 @@ public class BoardFrame extends JFrame {
 
 		}
 	}
-	
 
 	public static boolean isMakingGame() {
 		return makingGame;
@@ -610,7 +567,6 @@ public class BoardFrame extends JFrame {
 	public static void setMakingGame(boolean inOptions) {
 		BoardFrame.makingGame = inOptions;
 	}
-
 
 	public double height = 0.0;
 	public double width = 0.0;
@@ -649,7 +605,7 @@ public class BoardFrame extends JFrame {
 	public static JButton undo;
 	public static JButton capture;
 	public static JButton pass_turn;
-	//public static JKIcon ex;
+	// public static JKIcon ex;
 
 	public static JLabel blank1;
 	public static JLabel blank2;
@@ -677,7 +633,7 @@ public class BoardFrame extends JFrame {
 	public static JLabel settings;
 
 	private String[] gridsize = { "32x20", "64x40", "8x5", "16x10" };
-	private String[] gameType = { "Origins","Jkemik","Google" };
+	private String[] gameType = { "Origins", "Jkemik", "Google" };
 
 	public static final double CORNER_WIDTH = .33;
 	public static final double CORNER_HEIGHT = .064;
