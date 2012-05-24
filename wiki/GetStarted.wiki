@@ -16,9 +16,11 @@
 
 3. On start, the application is in Game configuration mode. Use the interactive control panel below the grid board to select player colors, change the grid size and set player names. Then click save to start the game.
 
-4. Use the "END/NEW" button to end the current Game and start a new one.
+4. Use the *END/NEW* button to end the current Game and start a new one.
 
-5. Use the "OPTION" to change other game settings.
+5. Use the *OPTION* to change other game settings.
+
+6. And *EXIT* to exit the application.
 
 ===ATTENTION:===
 
