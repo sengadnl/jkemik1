@@ -111,7 +111,6 @@ public class SaveButtonListener implements MouseListener {
 			BoardFrame.setMakingGame(false);
 			JKemik.settings.setVisible(false);
 			JKemik.writeSettings();
-
 		}
 	}
 
