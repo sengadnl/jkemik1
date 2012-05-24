@@ -6,9 +6,13 @@
 2. To run:
  _Open a terminal._
 
- _Navigate to the location of the downloaded jar file._
+ _Navigate to the location of the downloaded zip file._
 
- _Issue the command: *java -jar filename*_
+ _Run *unzip -r filename.zip*_
+
+ _Run *cd jkemik/*_
+
+ _The next command will launch jkemik: *./jkemik* or you can also issue *java -jar .jkemik.jar*_
 
 3. On start, the application is in Game configuration mode. Use the interactive control panel below the grid board to select player colors, change the grid size and set player names. Then click save to start the game.
 
