@@ -1,14 +1,14 @@
 = RULES =
 
-*Rule one*: _One dot play_ 
+*Rule one*: *One dot play* 
 
 Players can only place on dot during their turn.
 
-*Rule two*: _Adjacent dot capture_ 
+*Rule two*: *Adjacent dot capture* 
 
 Dots are placed where the grid lines intersect with each other, a valid capture should only be form by connecting adjacent dots. Two dots are adjacent if and only if they are located on the same scare on the grid.
 
-*Rule three*: _Nonempty Capture_ 
+*Rule three*: *Nonempty Capture* 
 
 A capture consists of a loop of adjacent dot, as defined in the second rule. These dots must form a wall around one or more of the opponent's dots. Therefore, a cell can also be captured.
 
