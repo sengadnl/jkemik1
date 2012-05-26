@@ -2,7 +2,7 @@
 =Getting started=
 
 ==Installation==
- * Download the latest [Downloads Jkemik] update.
+ * Download the latest [http://code.google.com/p/jkemik/downloads/list Jkemik] update.
  * To run:
   # Open a terminal.
   # Navigate to the location of the downloaded zip file.
@@ -19,18 +19,6 @@
  * Once satisfied with all the game attributes, a click on the *SAVE* button initiates the game.
 
  * Use the *END/NEW* buttons to end a current Game and start a new one.
-==Scoring==
- * *Dot Rule*: One point is earned for every captured *Dot*. 1 *Dot* = 1 Point
- * *Cell Value Rule*: The value of a captured cell equates the number of captured points within itself. Therefore the value of this *cell* is also subtracted from the score of its former owner. 
- * *Cell Wall Rule*: *Dots* that make the building blocks of a captured cell are counted as captured *Dots* for the player who is capturing the cell.
- * *Empty Cell Rule*: An empty capture is invalid 
- 
-      SCORING FORMULA
-      Supposed: 
-         * D the sum of captured *Dots*.
-         * C the Sum of captured *Cell* values.
-
-          _SCORE = D + C_   
 
 ==Settings==
  * Use the *OPTION* button to change other game settings.
