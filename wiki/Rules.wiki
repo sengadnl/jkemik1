@@ -29,4 +29,4 @@ See the [GetStarted StartGuide] for details on how to run the application.
          * D the sum of captured *Dots*.
          * C the Sum of captured *Cell* values.
 
-          *_SCORE = D + C_*   
+          _SCORE = D + C_   
