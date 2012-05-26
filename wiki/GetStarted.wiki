@@ -22,12 +22,13 @@
 ==Scoring==
  * *Dot Rule*: One point is earned for every captured *dot*. 1 *Dot* = 1 Point
  * *Cell Value Rule*: The value of a captured cell equates the number of captured points within itself. Therefore the value of this *cell* is also subtracted from the score of its former owner. 
- * *Cell Wall Rule*: *Dots* that make the building blocks of a captured cell are counted as captured *Dots* for the player who is capturing the cell. 
+ * *Cell Wall Rule*: *Dots* that make the building blocks of a captured cell are counted as captured *Dots* for the player who is capturing the cell.
+ * *Empty Cell Rule*: An empty capture is invalid 
  
       SCORING FORMULA
       Supposed: 
-         * D the sum of captured *dots*.
-         * C the Sum of captured *cell* values.
+         * D the sum of captured *Dots*.
+         * C the Sum of captured *Cell* values.
 
           _SCORE = D + C_   
 
