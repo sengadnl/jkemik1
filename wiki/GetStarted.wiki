@@ -19,6 +19,17 @@
  * Once satisfied with all the game attributes, a click on the *SAVE* button initiates the game.
 
  * Use the *END/NEW* button to end the current Game and start a new one.
+==Scoring==
+ * *Dot Rule*: One point is earned for every captured *dot*. 1 *Dot* = 1 Point
+ * *Cell Value Rule*: The value of a captured cell equates the number of captured points within itself. Therefore the value of this *cell* is also subtracted from the score of its former owner. 
+ * *Cell Wall Rule*: *Dots* that make the building blocks of a captured cell are counted as captured *Dots* for the player who is capturing the cell. 
+ 
+ ===Scoring Formula===
+ Supposed: 
+   * D the sum of captured *dots*.
+   * C the Sum of captured *cell* values.
+
+   _SCORE = D + C_   
 
 ==Settings==
  * Use the *OPTION* button to change other game settings.
