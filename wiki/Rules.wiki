@@ -1,6 +1,6 @@
 = RULES =
 
-==Play Rules==
+==A. Play==
 
   * *One Dot play* 
 
@@ -16,7 +16,7 @@
 
 See the [GetStarted StartGuide] for details on how to run the application.
 
-==Scoring Rules==
+==B. Scoring==
 
  * *Dot Rule*: One point is earned for every captured *Dot*. 1 *Dot* = 1 Point
  * *Cell Value Rule*: The value of a captured Cell equates the number of captured points within itself. Therefore the value of this *Cell* is also subtracted from the score of its former owner. 
