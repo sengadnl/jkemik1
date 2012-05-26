@@ -8,7 +8,7 @@
 
   * *Adjacent dot capture* 
 
-     Dots are placed where the grid lines intersect with each other, a valid capture should only be form by connecting adjacent *Dots*. Two *Dots* are adjacent if and only if they are located on the same scare on the grid.
+     Dots are placed where the grid lines intersect with each other, a valid capture should only be formed by adjacent *Dots*. Two *Dots* are adjacent if and only if they are located on the same board square.
 
   * *Nonempty Capture* 
 
