@@ -4,7 +4,7 @@
 
   * *One Dot play* 
 
-    Players can only place on dot during their turn.
+    Players can only place one dot during their turn.
 
   * *Adjacent dot capture* 
 
