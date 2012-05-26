@@ -24,8 +24,9 @@ See the [GetStarted StartGuide] for details on how to run the application.
  * *Empty Cell Rule*: An empty capture is invalid 
  
       SCORING FORMULA
+
       Supposed: 
          * D the sum of captured *Dots*.
          * C the Sum of captured *Cell* values.
 
-          _SCORE = D + C_   
+          *_SCORE = D + C_*   
