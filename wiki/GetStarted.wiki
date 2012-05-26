@@ -4,11 +4,11 @@
 ==Installation==
  * Download the latest build.
  * To run:
-  #_Open a terminal._
-  #_Navigate to the location of the downloaded zip file._
-  #_Run *unzip -r filename.zip*_
-  #_Run *cd jkemik/*_
-  #_The next command will launch jkemik: *./jkemik* or you can also issue *java -jar .jkemik.jar*_
+  # Open a terminal.
+  # Navigate to the location of the downloaded zip file.
+  # Run *unzip -r filename.zip*
+  # Run *cd jkemik/*
+  # The next command will launch jkemik: *./jkemik* or you can also issue *java -jar .jkemik.jar*
 
 ==Starting a new game==
  * On start, the application is in Game configuration mode. The interactive control panel below the grid board is game configuration center:
