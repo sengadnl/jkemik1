@@ -1,15 +1,31 @@
 = RULES =
 
-*One dot play* 
+==Play Rules==
 
-Players can only place on dot during their turn.
+  * *One Dot play* 
 
-*Adjacent dot capture* 
+    Players can only place on dot during their turn.
 
-Dots are placed where the grid lines intersect with each other, a valid capture should only be form by connecting adjacent dots. Two dots are adjacent if and only if they are located on the same scare on the grid.
+  * *Adjacent dot capture* 
 
-*Nonempty Capture* 
+     Dots are placed where the grid lines intersect with each other, a valid capture should only be form by connecting adjacent *Dots*. Two *Dots* are adjacent if and only if they are located on the same scare on the grid.
 
-A capture consists of a loop of adjacent dot, as defined in the second rule. These dots must form a wall around one or more of the opponent's dots. Therefore, a cell can also be captured.
+  * *Nonempty Capture* 
+
+    A capture consists of a loop of adjacent *Dots*, as defined in the second rule. These *Dots* must form a wall around one or more of the opponent's *Dots*. Therefore, a Cell can also be captured.
 
 See the [GetStarted StartGuide] for details on how to run the application.
+
+==Scoring Rules==
+
+ * *Dot Rule*: One point is earned for every captured *Dot*. 1 *Dot* = 1 Point
+ * *Cell Value Rule*: The value of a captured Cell equates the number of captured points within itself. Therefore the value of this *Cell* is also subtracted from the score of its former owner. 
+ * *Cell Wall Rule*: *Dots* that make the building blocks of a captured cell are counted as captured *Dots* for the player who is capturing the cell.
+ * *Empty Cell Rule*: An empty capture is invalid 
+ 
+      SCORING FORMULA
+      Supposed: 
+         * D the sum of captured *Dots*.
+         * C the Sum of captured *Cell* values.
+
+          _SCORE = D + C_   
