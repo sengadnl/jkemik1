@@ -1,7 +1,7 @@
 #labels Phase-Deploy
 =Getting started=
 
-==Installation==
+==Installing and Running Jkemik==
  * Download the latest [http://code.google.com/p/jkemik/downloads/list Jkemik] update.
  * To run:
   # Open a terminal.
@@ -10,7 +10,7 @@
   # Run *cd jkemik/*
   # The next command will launch jkemik: *./jkemik* or you can also issue *java -jar .jkemik.jar*
 
-==Starting a new game==
+==Starting a New Game==
  * On start, the application is in Game configuration mode. The interactive control panel below the grid board is the game configuration center:
   # Players can decide on a aboard _theme_. 
   # They can select their respective _colors_. 
@@ -20,7 +20,7 @@
 
  * Use the *END/NEW* buttons to end a current Game and start a new one.
 
-==Settings==
+==System Preferences==
  * Use the *OPTION* button to change other game settings.
    * *Max Win*: Sets the maximum score. The first player to reach this score wins the game.
    * *Auto Capture*: Turn automatic capture on.
