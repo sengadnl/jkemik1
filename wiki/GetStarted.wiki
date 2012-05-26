@@ -26,4 +26,4 @@
 
 _The currently implementation of JKemik does nod restrict a player from playing for his opponent. So the switching of turn relies on players integrity. I will hopefully come up with a remedy to this issue at some point._
 
-See Rules for more details
+See [Rules Rules] for more details
