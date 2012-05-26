@@ -39,10 +39,10 @@
    * *Auto Pass Turn*: Turns automatic turn switching.
 
 ==Exiting the game==
- * And *EXIT* to exit the application.
+ * use the *EXIT* button to exit the application.
 
 ===ATTENTION:===
 
-*_The currently implementation of JKemik does nod restrict a player from playing for his opponent. So the switching of turn relies on players integrity. I will hopefully come up with a remedy to this issue at some point._
+*_The currently implementation of JKemik does nod restrict a player from playing for his opponent. Therefore switching turns relies on players integrity. I will hopefully come up with a remedy to this issue at some point._
 
 See [Rules Rules] for more details
