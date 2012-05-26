@@ -16,7 +16,7 @@
   # They can select their respective _colors_. 
   # They can decide on the _grid size_.
   # They can register their _names_. 
- * Once satisfied with all the game attributes, a click on the *SAVE* button initiates the game.
+ * Once satisfied with the new game settings, a click on the *SAVE* button will initiates the game.
 
  * Use the *END/NEW* buttons to end a current Game and start a new one.
 
