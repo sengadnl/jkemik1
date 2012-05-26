@@ -27,7 +27,7 @@
    * *Auto Pass Turn*: Turns automatic turn switching.
 
 ==Exiting the game==
- * use the *EXIT* button to exit the application.
+ * Use the *EXIT* button to exit the application.
 
 ===ATTENTION:===
 
