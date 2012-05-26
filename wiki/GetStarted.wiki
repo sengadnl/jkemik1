@@ -14,7 +14,7 @@
  * On start, the application is in Game configuration mode. The interactive control panel below the grid board is the game configuration center:
   # Players can decide on a aboard _theme_. 
   # They can select their respective _colors_. 
-  # They can decide the _grid size_.
+  # They can decide on the _grid size_.
   # They can register their _names_. 
  * Once satisfied with all the game attributes, a click on the *SAVE* button initiates the game.
 
