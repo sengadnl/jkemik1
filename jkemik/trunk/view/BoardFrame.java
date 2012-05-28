@@ -189,7 +189,7 @@ public class BoardFrame extends JFrame {
 		p1panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (PLAYER_PNL_H_SCALAR * SIDE_HEIGHT * this.height));
 		panel21.add(p1panel);
-		p1panel.initPanelForNewGame("P1", Color.WHITE);
+		p1panel.initPanelForNewGame(JKemik.template.getP2_name(), Color.WHITE);
 
 		grid = new Grid((int) JKemik.template.getG_size());
 		ViewEvents.gridMouseAction(grid);
@@ -201,7 +201,7 @@ public class BoardFrame extends JFrame {
 		p2panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (.25 * SIDE_HEIGHT * this.height));
 		panel23.add(p2panel);
-		p2panel.initPanelForNewGame("P2", Color.WHITE);
+		p2panel.initPanelForNewGame(JKemik.template.getP2_name(), Color.WHITE);
 
 		panel2.add(panel21, BorderLayout.WEST);
 		panel2.add(grid, BorderLayout.CENTER);
@@ -254,11 +254,12 @@ public class BoardFrame extends JFrame {
 
 	private void createPanel31() {
 
-		AutoCap = new JLabel("ON");
+		AutoCap = new JLabel(JKemik.settings_t.getAutoCaptureStatus());
 		AutoCap.setForeground(Color.WHITE);
-		AutoPass = new JLabel("OFF");
+		AutoPass = new JLabel(JKemik.settings_t.getAutoPassStatus());
 		AutoPass.setForeground(Color.WHITE);
-		Win = new JLabel(SettingsPanel.max_win.getText());
+		//System.out.println("....... win--" + JKemik.settings_t.getMaxWinVal());
+		Win = new JLabel("" + JKemik.settings_t.getMaxWinVal());
 		Win.setForeground(Color.WHITE);
 
 		JLabel la = new JLabel("Auto Capture");
@@ -605,7 +606,6 @@ public class BoardFrame extends JFrame {
 	public static JButton undo;
 	public static JButton capture;
 	public static JButton pass_turn;
-	// public static JKIcon ex;
 
 	public static JLabel blank1;
 	public static JLabel blank2;

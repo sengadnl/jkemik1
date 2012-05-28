@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controler.JKemik;
+
 
 import utilities.Globals;
 
@@ -39,7 +41,7 @@ public class SettingsPanel extends JFrame {
 	private int maxWinVal;
 
 	private String[] auto_cap = { "ON", "OFF" };
-	private String[] auto_t_p = { "OFF", "ON" };
+	private String[] auto_t_p = { "ON", "OFF" };
 
 	private static java.awt.Container container;
 
@@ -100,7 +102,7 @@ public class SettingsPanel extends JFrame {
 
 		auto_capture = new RotateLabel(auto_cap);
 		auto_turn_pass = new RotateLabel(auto_t_p);
-		max_win = new JTextField("2");
+		max_win = new JTextField("" + JKemik.settings_t.getMaxWinVal());
 		max_win.setBackground(Color.GRAY);
 		max_win.setForeground(Color.WHITE);
 		max_win.setCaretColor(Color.GREEN);
