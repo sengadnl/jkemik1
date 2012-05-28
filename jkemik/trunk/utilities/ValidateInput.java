@@ -19,7 +19,7 @@ public class ValidateInput {
 						"Wrong Input", JOptionPane.ERROR_MESSAGE);
 				return false;
 			}
-			if (!(name1.length() <= 5) || !(name2.length() <= 5)) {
+			if (!(name1.length() <= 10) || !(name2.length() <= 10)) {
 				JOptionPane.showMessageDialog(null,
 						"Name must be < 5 characters",
 						"Wrong Input", JOptionPane.ERROR_MESSAGE);
@@ -55,10 +55,9 @@ public class ValidateInput {
 	}
 
 	public static boolean validateScreenResolution(int width, int height) {
-		if (!(width >= 1280) && !(height >= 800)) {
-			JOptionPane.showMessageDialog(null, "Your screen resolution is "
-					+ width + "X" + height + "\n"
-					+ "it must be greater than or equal to (1280X800)",
+		if ((width < 1280) && (height < 800)) {
+			JOptionPane.showMessageDialog(null, "Your screen resolution must be "
+					+ width + "X" + height + " or greater.",
 					"Wrong Input", JOptionPane.ERROR_MESSAGE);
 			System.exit(1);
 		}

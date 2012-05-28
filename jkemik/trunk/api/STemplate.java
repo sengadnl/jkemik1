@@ -10,9 +10,9 @@ public class STemplate implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private boolean autoCapture = true;
 	private boolean manualCapture = false;
-	private boolean autoPass = false;
+	private boolean autoPass = true;
 	private String theme = "Origins";
-	private int maxWinVal = 2;
+	private int maxWinVal = 4;
 
 	public STemplate() {
 
