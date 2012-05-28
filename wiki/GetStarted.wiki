@@ -11,7 +11,7 @@
   # The next command will launch jkemik: *./jkemik* or you can also issue *java -jar .jkemik.jar*
 
 ==Starting a New Game==
-
+http://jkemik.googlecode.com/files/jkemik-Dashboard.png
  * On start, the application is in Game configuration mode. To start a game use the Jkemik Dashboard illustrated in the above image to customize the game. 
   # Players can decide on a aboard _theme_. 
   # They can select their respective _colors_. 
