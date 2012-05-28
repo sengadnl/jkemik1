@@ -1,6 +1,8 @@
 #labels Phase-Deploy
 =Getting started=
 
+http://jkemik.googlecode.com/files/jkemik-small.png
+
 ==Installing and Running Jkemik==
  * Download the latest [http://code.google.com/p/jkemik/downloads/list Jkemik] update.
  * To run:
