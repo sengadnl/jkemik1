@@ -11,6 +11,7 @@
   # The next command will launch jkemik: *./jkemik* or you can also issue *java -jar .jkemik.jar*
 
 ==Starting a New Game==
+http://jkemik.googlecode.com/files/jkemik-control-panel.png
  * On start, the application is in Game configuration mode. The interactive control panel below the grid board is the game configuration center:
   # Players can decide on a aboard _theme_. 
   # They can select their respective _colors_. 
