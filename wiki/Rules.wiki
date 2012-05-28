@@ -1,5 +1,7 @@
 = RULES =
 
+http://jkemik.googlecode.com/files/jkemik-game.png
+
 ==A. Play==
 
   * *One Dot play* 
