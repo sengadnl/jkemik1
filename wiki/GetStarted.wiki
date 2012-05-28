@@ -12,7 +12,7 @@
 
 ==Starting a New Game==
 http://jkemik.googlecode.com/files/jkemik-Dashboard.png
- * On start, the application is in Game configuration mode. To start a game click on *NEW* in the main view and use the Jkemik Dashboard illustrated in the above image to customize the game. 
+ * On start, the application is in Game configuration mode. To start a game click on *NEW* in the main view and use the Jkemik Dashboard illustrated in the above image to customize the game. Simply click on what you want the change.
   # Players can decide on a aboard _theme_. 
   # They can select their respective _colors_. 
   # They can decide on the _grid size_.
