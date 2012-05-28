@@ -2,7 +2,7 @@
 =Getting started=
 
 ==Installing and Running Jkemik==
- * Download the latest [http://code.google.com/p/jkemik/downloads/detail?name=jkemik-linux-0.71.zip&can=2&q=#makechanges Jkemik] update.
+ * Click [http://code.google.com/p/jkemik/downloads/detail?name=jkemik-linux-0.71.zip&can=2&q=#makechanges here] to download the latest Jkemik update.
  * To run:
   # Open a terminal.
   # Navigate to the location of the downloaded zip file.
