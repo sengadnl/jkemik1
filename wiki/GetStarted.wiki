@@ -13,6 +13,9 @@
 ==Starting a New Game==
 http://jkemik.googlecode.com/files/jkemik-Dashboard.png
  * On start, the application is in Game configuration mode. To start a game click on *NEW* in the main view and use the Jkemik Dashboard illustrated in the above image to customize the game. Simply click on what you want the change.
+
+On the *Dashboard*: 
+
   # Players can decide on a aboard _theme_. 
   # They can select their respective _colors_. 
   # They can decide on the _grid size_.
@@ -29,7 +32,7 @@ http://jkemik.googlecode.com/files/jkemik-settings-panel.png
    * *Auto Pass Turn*: Turns automatic turn switching.
 
 ==Exiting the game==
- * Use the *EXIT* button to exit the application.
+ * Use the *EXIT* button from the main view to exit the application.
 
 ===ATTENTION:===
 
