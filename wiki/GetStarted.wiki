@@ -22,6 +22,7 @@ http://jkemik.googlecode.com/files/jkemik-Dashboard.png
  * Use the *END/NEW* buttons to end a current Game and start a new one.
 
 ==Environment Customization==
+http://jkemik.googlecode.com/files/jkemik-settings-panel.png
  * Use the *OPTION* button to change other game settings.
    * *Max Win*: Sets the maximum score. The first player to reach this score wins the game.
    * *Auto Capture*: Turn automatic capture on.
