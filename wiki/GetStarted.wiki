@@ -24,8 +24,8 @@ http://jkemik.googlecode.com/files/jkemik-Dashboard.png
 ==Environment Customization==
 http://jkemik.googlecode.com/files/jkemik-settings-panel.png
  * Use the *OPTION* button to change other game settings.
-   * *Max Win*: Sets the maximum score. The first player to reach this score wins the game.
-   * *Auto Capture*: Turn automatic capture on.
+   * *Max Win*: Sets the maximum score. The player who reaches this score wins the game.
+   * *Auto Capture*: Turns automatic capture on.
    * *Auto Pass Turn*: Turns automatic turn switching.
 
 ==Exiting the game==
