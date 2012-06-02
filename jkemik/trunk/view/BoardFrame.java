@@ -9,6 +9,7 @@ import javax.swing.*;
 
 import controler.JKemik;
 import controler.ViewEvents;
+import utilities.Globals;
 import utilities.Tools;
 import utilities.ValidateInput;
 
@@ -49,7 +50,7 @@ public class BoardFrame extends JFrame {
 
 		initializeEvents();
 
-		setTitle("J-Kemik");
+		setTitle("J-Kemik " + Globals.VERSION);
 		// setUndecorated(true);
 		setVisible(true);
 	}
