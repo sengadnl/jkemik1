@@ -6,7 +6,7 @@
  * To run:
   # Open a terminal.
   # Navigate to the location of the downloaded zip file.
-  # Run *unzip -r filename.zip*
+  # Run *tar xvfz filename.tar.gz*
   # Run *cd jkemik/*
   # The next command will launch jkemik: *./jkemik* or you can also issue *java -jar .jkemik.jar*
 
