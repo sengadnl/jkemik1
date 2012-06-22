@@ -65,9 +65,8 @@ public class Game implements Serializable {
 			
 			ArrayList<Point> area = getTrueArea(current, TempArea);
 
-			if (isAreaEmpty(area, guestP)) {// Engine.getGame().
+			if (isAreaEmpty(area, guestP)) {
 				currentP.setSelected(new ArrayList<Point>());
-				System.err.println("This cell is empty: " + area);
 				return null;
 			}
 
@@ -77,8 +76,8 @@ public class Game implements Serializable {
 						&& !Tools.containPoint(p, currPlayerCaptures)) {
 
 					/* keep track of captures for this cell */
-					// p.setFlag_dead(true);
 					captured.add(p);
+					
 					/* keep track of total captures for this player */
 					currPlayerCaptures.add(p);
 					getDeadDots().add(p);//
@@ -154,13 +153,8 @@ public class Game implements Serializable {
 	}
 
 	public void setPlayFlag() {
-		// if (JKemik.settings_t.isAutoPass()) {
-		// currentP.setPlay_flag(1);
-		// guest.setPlay_flag(1);
-		// } else {
 		currentP.setPlay_flag(1);
 		guest.setPlay_flag(0);
-		// }
 	}
 
 	public void unSetPlayFlag() {
@@ -246,11 +240,7 @@ public class Game implements Serializable {
 			if (Tools.containPoint(p, cell.getCapturedPoints())) {
 				currentP.addCapturedCells(c);
 				cell.setValue(cell.getValue() + c.getValue());
-				// Cell temp = new Cell(null,null,null,null);
-				// temp = c;
 				cell.addCellToCell(c);
-				// guest.removeCell(c);
-				//
 				guest.setScore(guest.getScore() - c.getValue());
 			}
 		}

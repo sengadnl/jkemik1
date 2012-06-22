@@ -42,9 +42,7 @@ abstract class AbstractPlayer implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public boolean buildPath(Point o, double squareSize) {
-		//System.out.println("BuildPath1: " + o);
 		if (this.successful) {
-			//System.out.println("BuildPath2: " + o);
 			return true;
 		}
 		/* Get all adjacent Points */
@@ -53,34 +51,24 @@ abstract class AbstractPlayer implements Serializable {
 		/* Find the point in this box that belongs to the path */
 		for (int i = 0; i < box.length; i++) {
 			/* Stop recursive call here if a path was already found */
-			//System.out.println("BuildPath4: " + o);
 			if (this.successful) {
-				//System.out.println("BuildPath5: " + o);
-				System.err.println("Recursion is done...");
 				return true;
 			}
 			if (Game.isPath(box[i])) {// if this Point is path
-				//System.out.println("BuildPath6: " + box[i]);
 				if (box[i].compareTo(this.from) != 0) {// is it == to previous
-					//System.out.println("BuildPath7: " + o);
 					if (!Tools.containPoint(o, this.selected)) {
-						//System.out.println("BuildPath8: " + o);
 						/* Add o if it hasn't been visited */
 						this.selected.add(o);
 						this.from = o; /* Move to the next Point */
 						if (box[i].compareTo(this.origin) == 0
 								&& this.selected.size() > 3) {
-							//System.out.println("BuildPath9: " + o);
-							//System.out.println("add " + box[i]);
 							this.successful = true;/* Set recursive call stop */
 							this.origin = null;/* Reset the origin */
-							
-							System.out.println("A cell was found: \n" + this.selected);
+							System.out.println("A cell was found: \n");
 							return true;/* Capture was found */
 						}
 						/* This adjacent Point was a dead end */
 						if (!buildPath(box[i], squareSize)) {
-							//System.out.println("BuildPath10: " + o);
 							this.selected.remove(o);
 							continue;
 						}

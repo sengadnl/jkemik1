@@ -32,6 +32,7 @@ public class NameListener implements MouseListener {
 
 	public void mouseClicked(MouseEvent e) {
 		String name = JOptionPane.showInputDialog("Player Name <= 5 chars");
+		try{
 		this.lab.setText(name.toUpperCase());
 		name = BoardFrame.getLabel1().getText();
 		
@@ -39,6 +40,9 @@ public class NameListener implements MouseListener {
 			JKemik.template.setP1_name(name);
 		} else {
 			JKemik.template.setP1_name(name);
+		}
+		}catch(Exception ex){
+			System.out.println("Exception in NameListener : " + ex.getMessage());
 		}
 	}
 

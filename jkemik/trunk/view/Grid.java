@@ -83,6 +83,7 @@ public class Grid extends JPanel {
 		Grid.g2 = (Graphics2D) g;
 		try {
 			drawCursor(hl_x, hl_y, GRID_LINE_COL);
+			
 			/* Find the closest point to the cursor */
 			closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
 			Point temp = makeDrawable(Grid.x, Grid.y);
@@ -97,7 +98,6 @@ public class Grid extends JPanel {
 
 					drawCircle(temp, game.getCurrentP().getColor());
 					game.getCurrentP().getPloted().add(temp);
-					System.out.println("Played" + temp);
 					game.setEmbuche_on(true);
 					game.setPlayFlag();
 					game.getCurrentP().setTurn(false);
@@ -141,7 +141,6 @@ public class Grid extends JPanel {
 
 		if (mouseMove) {
 			g2.setColor(c);
-			//Point temp = new Point(x - HALF_DIAMETER, y - HALF_DIAMETER);
 			Point temp = makeDrawable(x, y);
 			if (Tools.containPoint(temp, game.getCurrentP().getPloted())
 					|| Tools.containPoint(temp, game.getGuest().getPloted())
@@ -171,11 +170,11 @@ public class Grid extends JPanel {
 
 				Cell cell = game.capture(currentPP, squareSize);
 				if (cell != null) {
-					
+					System.out.println("Cell was not NULL");
 					if (drawCell(cell)) {
 						game.getCurrentP().setSelected(new ArrayList<Point>());
 						i = -1;
-						System.out.println("Cell was drawn");
+						
 						return true;
 					}
 				} else {
@@ -242,7 +241,6 @@ public class Grid extends JPanel {
 
 			/* draw cell contour */
 			drawLine(contour.get(0), contour.get(contour.size() - 1));
-			System.out.println("size " + contour.size());
 			for (int i = 0; i < contour.size() - 1; i++) {
 				drawLine(contour.get(i), contour.get(i + 1));
 
