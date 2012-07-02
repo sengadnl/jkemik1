@@ -70,7 +70,9 @@ public class JKemik extends Application {
 			if (screenResolutionCheck()) {
 				view = new BoardFrame(Globals.FRAME_WIDTH, Globals.FRAME_HEIGHT);
 			} else {
-				setDone();
+				System.out.println("Exiting ...");
+				System.exit(0);
+				//setDone();
 			}
 		} catch (Exception e) {
 		}
@@ -176,10 +178,10 @@ public class JKemik extends Application {
 
 	public boolean screenResolutionCheck() {
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		if (Globals.FRAME_HEIGHT != dimension.getHeight()
-				&& Globals.FRAME_WIDTH != dimension.getWidth()) {
+		if (Globals.FRAME_HEIGHT > dimension.getHeight()
+				&& Globals.FRAME_WIDTH > dimension.getWidth()) {
 			JOptionPane.showMessageDialog(null,
-					"JKemik only supports 1280 X 800 for the moment.");
+					"JKemik only supports 1280 X 800 screen resolution and greater.");
 			return false;
 		}
 		return true;

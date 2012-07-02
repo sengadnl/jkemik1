@@ -51,8 +51,8 @@ public class BoardFrame extends JFrame {
 		initializeEvents();
 
 		setTitle("J-Kemik " + Globals.VERSION);
-	
 		setVisible(true);
+		pack();
 	}
 
 	private void initializeEvents() {

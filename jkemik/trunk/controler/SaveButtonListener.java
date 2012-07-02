@@ -16,6 +16,7 @@ import view.Grid;
 import api.GTemplate;
 import api.Game;
 import api.Player;
+import api.Point;
 
 /**
  * @author dalet
@@ -55,7 +56,7 @@ public class SaveButtonListener implements MouseListener {
 			p2 = new Player(c2, str2);
 			game = new Game(p1, p2);
 			JKemik.game = game;
-			
+		
 			JKemik.game.setMaxScore(JKemik.settings_t.getMaxWinVal());
 			
 			BoardFrame.desableGameControlPanel();
@@ -74,7 +75,7 @@ public class SaveButtonListener implements MouseListener {
 			BoardFrame.boostButton(BoardFrame.pass_turn);
 			BoardFrame.boostButton(BoardFrame.capture);
 			BoardFrame.boostButton(BoardFrame.undo);
-
+			BoardFrame.print_point.setText("" + (new Point(0, 0)).toString());
 			String p1n = t.getP1_name();
 			String p2n = t.getP2_name();
 			Color p1c = t.getP1_c();

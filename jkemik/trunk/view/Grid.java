@@ -83,11 +83,12 @@ public class Grid extends JPanel {
 		Grid.g2 = (Graphics2D) g;
 		try {
 			drawCursor(hl_x, hl_y, GRID_LINE_COL);
-			
+
 			/* Find the closest point to the cursor */
 			closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
 			Point temp = makeDrawable(Grid.x, Grid.y);
-			BoardFrame.print_point.setText("" + (new Point(hl_x,hl_y)).toString());
+			BoardFrame.print_point.setText(""
+					+ (new Point(hl_x, hl_y)).toString());
 			highLightDot(ccolor);
 			Game game = JKemik.game;
 			if (this.mouseclicked && game.getCurrentP().isTurn()) {
@@ -117,7 +118,7 @@ public class Grid extends JPanel {
 				}
 				undo = false;
 			}
-			if(game.isEmbuche_on()){
+			if (game.isEmbuche_on()) {
 				embush();
 			}
 			if (JKemik.settings_t.isAutoPass()
@@ -133,7 +134,7 @@ public class Grid extends JPanel {
 			drawGrid();
 			this.DRAWN = true;
 		}
-		
+
 	}
 
 	public void highLightDot(Color c) {
@@ -156,7 +157,7 @@ public class Grid extends JPanel {
 	}
 
 	public boolean connectDots() {
-		
+
 		Game game = JKemik.game;
 		game.getCurrentP().setSuccessful(false);
 
@@ -174,7 +175,7 @@ public class Grid extends JPanel {
 					if (drawCell(cell)) {
 						game.getCurrentP().setSelected(new ArrayList<Point>());
 						i = -1;
-						
+
 						return true;
 					}
 				} else {
@@ -201,7 +202,9 @@ public class Grid extends JPanel {
 					BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
 					BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
 
-				}else{game.setEmbuche_on(false);}
+				} else {
+					game.setEmbuche_on(false);
+				}
 			} catch (Exception e) {
 				System.out.println("Error in PaintComponent: capture "
 						+ e.getMessage());
@@ -214,7 +217,9 @@ public class Grid extends JPanel {
 						BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
 
 						game.setEmbuche_on(false);
-					}else{game.setEmbuche_on(false);}
+					} else {
+						game.setEmbuche_on(false);
+					}
 				} catch (Exception e) {
 					System.out.println("Error in PaintComponent: capture "
 							+ e.getMessage());
@@ -231,13 +236,14 @@ public class Grid extends JPanel {
 			ArrayList<Point> contour = cell.getCellContour();
 			ArrayList<Point> captured = cell.getCapturedPoints();
 			ArrayList<Point> area = cell.getAreaIncell();
-			if(area.isEmpty()){
+			if (area.isEmpty()) {
 				return false;
 			}
-			
+
 			/* set color */
 			g2.setColor(game.getCurrentP().getColor());
-			g2.setStroke(new BasicStroke(GRID_LINE_STROKE + CURSOR_VARIANT_STROKE));
+			g2.setStroke(new BasicStroke(GRID_LINE_STROKE
+					+ CURSOR_VARIANT_STROKE));
 
 			/* draw cell contour */
 			drawLine(contour.get(0), contour.get(contour.size() - 1));
@@ -251,7 +257,8 @@ public class Grid extends JPanel {
 				drawCursor(p1, GRID_LINE_COL);
 				drawCursor(p2, GRID_LINE_COL);
 				g2.setColor(game.getCurrentP().getColor());
-				g2.setStroke(new BasicStroke(GRID_LINE_STROKE + CURSOR_VARIANT_STROKE));
+				g2.setStroke(new BasicStroke(GRID_LINE_STROKE
+						+ CURSOR_VARIANT_STROKE));
 			}
 
 			/* mark empty dots */
@@ -527,5 +534,10 @@ public class Grid extends JPanel {
 		g2.setColor(c);
 		g2.fill(this.circle);
 		g2.draw(this.circle);
+	}
+
+	public void initCursorLocation() {
+		hl_x = 0; 
+		hl_y = 0;
 	}
 }
