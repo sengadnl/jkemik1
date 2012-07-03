@@ -20,17 +20,17 @@ public class GameThemeListener implements MouseListener{
 		this.label = label;
 	}
 	public void mouseClicked(MouseEvent e) {
-		BoardFrame.grid.DRAWN = true;
-		this.label.rotateLabel();
-		String str = this.label.getActiveLabel();
-		JKemik.view.setTheme(str);
-		JKemik.settings_t.setTheme(str);
-		BoardFrame.panel2.repaint();
-		// change the grid size
-		if (BoardFrame.grid.DRAWN) {
-			BoardFrame.grid.DRAWN = false;
-			BoardFrame.grid.repaint();
-		}
+//		BoardFrame.grid.DRAWN = true;
+//		this.label.rotateLabel();
+//		String str = this.label.getActiveLabel();
+//		JKemik.view.setTheme(str);
+//		JKemik.settings_t.setTheme(str);
+//		BoardFrame.panel2.repaint();
+//		// change the grid size
+//		if (BoardFrame.grid.DRAWN) {
+//			BoardFrame.grid.DRAWN = false;
+//			BoardFrame.grid.repaint();
+//		}
 	}
 	public void mouseEntered(MouseEvent e) {
 		this.label.highlight();
