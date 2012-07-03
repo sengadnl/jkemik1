@@ -17,7 +17,7 @@ import utilities.ValidateInput;
  * @author Daniel Senga
  * 
  */
-public class BoardFrame extends JFrame {
+public class BoardFrame extends JFrame implements GridFactory {
 	/**
 	 * @author Daniel Senga
 	 * @throws InterruptedException
@@ -48,51 +48,51 @@ public class BoardFrame extends JFrame {
 		makingGame = true;
 		upDateSetting();
 
-		initializeEvents();
+		//initializeEvents();
 
 		setTitle("J-Kemik " + Globals.VERSION);
 		setVisible(true);
 		pack();
 	}
 
-	private void initializeEvents() {
-		JKemik.load.plus("Adding color picker 1 event...");
-		ViewEvents.changeColorPanel1Action(pColor1);
-		JKemik.load.plus("Adding color picker 2 event...");
-		ViewEvents.changeColorPanel2Action(pColor2);
-		JKemik.load.plus("Adding board size event...");
-		ViewEvents.setBoardSizeAction(l1);
-		JKemik.load.plus("Setting type event...");
-		ViewEvents.setGameThemeAction(l2);
-		JKemik.load.plus("Adding player 1 name prompt ...");
-		ViewEvents.addPlayer1NameAction(label1);
-		JKemik.load.plus("Adding player 2 name prompt ...");
-		ViewEvents.addPlayer2NameAction(label2);
-		ViewEvents.saveAction(save);
-		JKemik.load.plus("Adding undo event listener...");
-		ViewEvents.undoAction(undo);
-		JKemik.load.plus("Adding capture event listener..."); // 21
-		ViewEvents.captureAction(capture);
-		JKemik.load.plus("Setting Grid initial state...");
-		grid.removeMouseListener(ViewEvents.gridListener);
-		JKemik.load.plus("Setting cursor initial state...");// 24
-		grid.removeMouseMotionListener(ViewEvents.gridListener);
-		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
-		ViewEvents.ExitGameEvent();
-		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
-		ViewEvents.settingsLabelAction();
-
-		ViewEvents.passTurnAction(pass_turn);
-		ViewEvents.saveSettingsAction();
-		ViewEvents.onAutoCaptureAction();
-		ViewEvents.onAutoPassTurnAction();
-		ViewEvents.exitListener();
-		ViewEvents.helpListener();
-
-		fadeButton(pass_turn);
-		fadeButton(capture);
-		fadeButton(undo);
-	}
+//	private void initializeEvents() {
+//		JKemik.load.plus("Adding color picker 1 event...");
+//		ViewEvents.changeColorPanel1Action(pColor1);
+//		JKemik.load.plus("Adding color picker 2 event...");
+//		ViewEvents.changeColorPanel2Action(pColor2);
+//		JKemik.load.plus("Adding board size event...");
+//		ViewEvents.setBoardSizeAction(l1);
+//		JKemik.load.plus("Setting type event...");
+//		ViewEvents.setGameThemeAction(l2);
+//		JKemik.load.plus("Adding player 1 name prompt ...");
+//		ViewEvents.addPlayer1NameAction(label1);
+//		JKemik.load.plus("Adding player 2 name prompt ...");
+//		ViewEvents.addPlayer2NameAction(label2);
+//		ViewEvents.saveAction(save);
+//		JKemik.load.plus("Adding undo event listener...");
+//		ViewEvents.undoAction(undo);
+//		JKemik.load.plus("Adding capture event listener..."); // 21
+//		ViewEvents.captureAction(capture);
+//		JKemik.load.plus("Setting Grid initial state...");
+//		grid.removeMouseListener(ViewEvents.gridListener);
+//		JKemik.load.plus("Setting cursor initial state...");// 24
+//		grid.removeMouseMotionListener(ViewEvents.gridListener);
+//		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
+//		ViewEvents.ExitGameEvent();
+//		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
+//		ViewEvents.settingsLabelAction();
+//
+//		ViewEvents.passTurnAction(pass_turn);
+//		ViewEvents.saveSettingsAction();
+//		ViewEvents.onAutoCaptureAction();
+//		ViewEvents.onAutoPassTurnAction();
+//		ViewEvents.exitListener();
+//		ViewEvents.helpListener();
+//
+//		fadeButton(pass_turn);
+//		fadeButton(capture);
+//		fadeButton(undo);
+//	}
 
 	/**
 	 * Defines container's attributes
@@ -192,8 +192,9 @@ public class BoardFrame extends JFrame {
 		panel21.add(p1panel);
 		p1panel.initPanelForNewGame(JKemik.template.getP2_name(), Color.WHITE);
 
-		grid = new Grid((int) JKemik.template.getG_size());
-		ViewEvents.gridMouseAction(grid);
+		//grid = new Grid((int) JKemik.template.getG_size());
+		grid = getNormalGrid((int) JKemik.template.getG_size());
+		//ViewEvents.gridMouseAction(grid);
 
 		panel23 = new JPanel();
 		panel23.setPreferredSize(new Dimension((int) (SIDE_WIDTH * this.width),
@@ -569,6 +570,15 @@ public class BoardFrame extends JFrame {
 	public static void setMakingGame(boolean inOptions) {
 		BoardFrame.makingGame = inOptions;
 	}
+	@Override
+	public Grid getNormalGrid(int sqrSize) {
+		return new NormalGrid(sqrSize);
+	}
+
+	@Override
+	public Grid getSpecialGrid(int sqrSize) {
+		return new SpecialGrid(sqrSize);
+	}
 
 	public double height = 0.0;
 	public double width = 0.0;
@@ -662,4 +672,5 @@ public class BoardFrame extends JFrame {
 	public static final int THEME_JKEMIK = 0;
 	public static final int THEME_ORIGINS = 1;
 	public static final int THEME_OLD = 3;
+	
 }

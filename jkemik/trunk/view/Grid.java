@@ -19,12 +19,12 @@ import api.Point;
  * @author Dalet
  * 
  */
-public class Grid extends JPanel {
+abstract class Grid extends JPanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Graphics2D g2;
+	protected static Graphics2D g2;
 	public static Color GRID_LINE_COL = new Color(100, 100, 0);
 	private static int GRID_LINE_STROKE = 2;
 	private static int CURSOR_VARIANT_STROKE = 6;
@@ -41,7 +41,7 @@ public class Grid extends JPanel {
 
 	private Ellipse2D.Double circle;
 	private static Color pcolor = new Color(255, 255, 255);
-	private static Color ccolor = new Color(255, 255, 255);// Cursor color
+	protected static Color ccolor = new Color(255, 255, 255);// Cursor color
 
 	public static double Height = 640;
 	public static double Width = 1024;
@@ -81,6 +81,7 @@ public class Grid extends JPanel {
 	public void paintComponent(Graphics g) {
 
 		Grid.g2 = (Graphics2D) g;
+		drawGrid();
 		try {
 			drawCursor(hl_x, hl_y, GRID_LINE_COL);
 
@@ -130,10 +131,10 @@ public class Grid extends JPanel {
 			System.out.println("Error in paint: " + e.getMessage());
 		}
 
-		if (!this.DRAWN) {
-			drawGrid();
-			this.DRAWN = true;
-		}
+		//if (!this.DRAWN) {
+		//	drawGrid();
+		//	this.DRAWN = true;
+		//}
 
 	}
 
@@ -292,7 +293,7 @@ public class Grid extends JPanel {
 		}
 	}
 
-	private void unDraw(Point p) {
+	protected void unDraw(Point p) {
 
 		try {
 			double px = p.getXC();

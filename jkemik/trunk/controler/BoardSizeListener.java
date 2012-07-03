@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import api.GTemplate;
 import view.BoardFrame;
-import view.Grid;
+//import view.Grid;
 import view.RotateLabel;
 /**
  * @author dalet
@@ -22,14 +22,14 @@ public class BoardSizeListener implements MouseListener{
 		this.label.rotateLabel();
 		GTemplate t = JKemik.template;
 		String s = this.label.getActiveLabel();
-		Grid.setSquareSize(Grid.getSqrSize(s));
-		t.setG_size(Grid.getSquareSize());
-		BoardFrame.panel2.repaint();
-		// change the grid size
-		if (BoardFrame.grid.DRAWN) {
-			BoardFrame.grid.DRAWN = false;
-			BoardFrame.grid.repaint();
-		}
+//		Grid.setSquareSize(Grid.getSqrSize(s));
+//		t.setG_size(Grid.getSquareSize());
+//		BoardFrame.panel2.repaint();
+//		// change the grid size
+//		if (BoardFrame.grid.DRAWN) {
+//			BoardFrame.grid.DRAWN = false;
+//			BoardFrame.grid.repaint();
+//		}
 	}
 
 	
