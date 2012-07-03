@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 import utilities.ValidateInput;
 import view.BoardFrame;
-import view.Grid;
+//import view.Grid;
 import api.GTemplate;
 import api.Game;
 import api.Player;
@@ -50,8 +50,8 @@ public class SaveButtonListener implements MouseListener {
 			t.setP2_c(c2);
 			t.setP1_name(str1);
 			t.setP2_name(str2);
-			Grid.setPcolor(t.getP1_c());
-			Grid.setCcolor(t.getP1_c());
+//			Grid.setPcolor(t.getP1_c());
+//			Grid.setCcolor(t.getP1_c());
 			p1 = new Player(c1, str1);
 			p2 = new Player(c2, str2);
 			game = new Game(p1, p2);
@@ -90,12 +90,12 @@ public class SaveButtonListener implements MouseListener {
 					JOptionPane.YES_NO_OPTION);
 			if (response == 1) {
 				game.switchPlayTurns();
-				Grid.setCcolor(game.getCurrentP().getColor());
+//				Grid.setCcolor(game.getCurrentP().getColor());
 			} else {
 				
 			}
-			BoardFrame.grid.addMouseListener(ViewEvents.gridListener);
-			BoardFrame.grid.addMouseMotionListener(ViewEvents.gridListener);
+//			BoardFrame.grid.addMouseListener(ViewEvents.gridListener);
+//			BoardFrame.grid.addMouseMotionListener(ViewEvents.gridListener);
 			if(JKemik.settings_t.isAutoCapture()){
 				BoardFrame.capture.setVisible(false);
 			}else{
