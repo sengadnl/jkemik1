@@ -4,7 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import view.Grid;
+//import view.Grid;
 
 /**
  * @author dalet
@@ -30,7 +30,7 @@ public class PassTurnListener implements MouseListener {
 		/* Pass turn on if mouse was clicked and it's no longer currentP's turn */
 		if (JKemik.game.getCurrentP().getPlay_flag() == 1) {
 			JKemik.game.switchPlayTurns();
-			Grid.setCcolor(JKemik.game.getCurrentP().getColor());
+		//	Grid.setCcolor(JKemik.game.getCurrentP().getColor());
 		} else {
 			JOptionPane.showMessageDialog(null,
 					"YOU MUST PLAY BEFORE PASSING A TURN!!!", "Ellegal Action",

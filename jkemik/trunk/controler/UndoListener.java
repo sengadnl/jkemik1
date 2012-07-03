@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import view.BoardFrame;
-import view.Grid;
+//import view.Grid;
 
 /**
  * @author dalet
@@ -26,7 +26,7 @@ public class UndoListener implements MouseListener {
 	public void mouseClicked(MouseEvent arg0) {
 		if(JKemik.game.getCurrentP().getPlay_flag() == 1){
 			if (!JKemik.game.getCurrentP().isTurn()) {
-				Grid.undo = true;
+				//Grid.undo = true;
 				BoardFrame.repaintGrid();
 				JKemik.game.getCurrentP().setTurn(true);
 			}
