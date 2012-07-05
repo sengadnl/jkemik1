@@ -4,7 +4,6 @@
 package api;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import java.io.Serializable;
@@ -13,7 +12,7 @@ import java.io.Serializable;
  * @author Junes
  * 
  */
-abstract class AbstractPoint extends Component implements Comparable<Point>, Serializable{
+abstract class AbstractPoint implements Comparable<Point>, Serializable{
 	/**
 	 * 
 	 */
