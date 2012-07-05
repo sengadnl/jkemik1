@@ -37,15 +37,18 @@ public class Game implements Serializable {
 	 * Only plotted points can be undone, dead points can not be revived
 	 */
 	public boolean undo() {
-
+		System.out.println("entering undo...");
 		int index = currentP.getPloted().size();
 		lastp = currentP.getPloted().get(index - 1);
 
-		if (!currentP.getPloted().remove(lastp)) {// remove last point
+		if (Tools.containPoint(lastp, currentP.getConnectedPoints())) {
 			return false;
 		}
-		unSetPlayFlag();
-		return true;
+		if (currentP.getPloted().remove(lastp)) {// remove last point
+			unSetPlayFlag();
+			return true;
+		}
+		return false;
 	}
 
 	public String toString() {
@@ -54,7 +57,7 @@ public class Game implements Serializable {
 
 	public Cell capture(Point o, double squareSize) {
 		Cell cell = null; /* cell to be returned */
-		
+
 		if (currentP.buildPath(o, squareSize)) {
 			ArrayList<Point> guestP = guest.getPloted();
 			ArrayList<Point> current = currentP.getPloted();
@@ -62,7 +65,7 @@ public class Game implements Serializable {
 			ArrayList<Point> captured = new ArrayList<Point>();
 			ArrayList<Point> TempArea = Tools.getArea(currentP.getSelected(),
 					squareSize);
-			
+
 			ArrayList<Point> area = getTrueArea(current, TempArea);
 
 			if (isAreaEmpty(area, guestP)) {
@@ -77,13 +80,13 @@ public class Game implements Serializable {
 
 					/* keep track of captures for this cell */
 					captured.add(p);
-					
+
 					/* keep track of total captures for this player */
 					currPlayerCaptures.add(p);
 					getDeadDots().add(p);//
 					guestP.remove(p);
 
-				}else if (!Tools.containPoint(p, getDeadDots())
+				} else if (!Tools.containPoint(p, getDeadDots())
 						&& !Tools.containPoint(p, current)
 						&& !Tools.containPoint(p, guestP)) {//
 					getDeadDots().add(p);//
@@ -120,9 +123,11 @@ public class Game implements Serializable {
 		}
 		return false;
 	}
-	public boolean checkEndGame(){
-		if((guest.getScore()) >= this.getMaxScore()){
-			System.out.println(guest.getName() + " : " + currentP.getScore() + "");
+
+	public boolean checkEndGame() {
+		if ((guest.getScore()) >= this.getMaxScore()) {
+			System.out.println(guest.getName() + " : " + currentP.getScore()
+					+ "");
 			return true;
 		}
 		return false;
@@ -191,11 +196,13 @@ public class Game implements Serializable {
 	/**
 	 * This function set the current player
 	 * 
-	 * @param current player
+	 * @param current
+	 *            player
 	 */
 	public void setCurrentP(Player current) {
 		currentP = current;
 	}
+
 	public boolean isAreaEmpty(ArrayList<Point> trueArea,
 			ArrayList<Point> guestPlottedPoints) {
 		try {

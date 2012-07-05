@@ -41,8 +41,8 @@ public class NewGameListener implements MouseListener{
 			BoardFrame.l2.addMouseListener(ViewEvents.gameThemeListener);
 			BoardFrame.save.addMouseListener(ViewEvents.saveListener);
 			BoardFrame.settings.addMouseListener(ViewEvents.saveSettings);
-//			BoardFrame.grid.removeMouseListener(ViewEvents.gridListener);
-//			BoardFrame.grid.removeMouseMotionListener(ViewEvents.gridListener);
+			BoardFrame.grid.removeMouseListener(ViewEvents.gridListener);
+			BoardFrame.grid.removeMouseMotionListener(ViewEvents.gridListener);
 			BoardFrame.enableGameControlPanel();
 			
 			//Reset game exit label
@@ -56,8 +56,8 @@ public class NewGameListener implements MouseListener{
 			
 			//Reset grid
 			BoardFrame.panel2.repaint();
-//			BoardFrame.grid.DRAWN = false;
-//			BoardFrame.grid.repaint();
+			BoardFrame.grid.DRAWN = false;
+			BoardFrame.grid.repaint();
 			
 			BoardFrame.p1panel.initPanelForNewGame("P1", Color.WHITE);
 			BoardFrame.p2panel.initPanelForNewGame("P2", Color.WHITE);

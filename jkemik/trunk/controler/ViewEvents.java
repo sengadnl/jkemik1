@@ -19,7 +19,7 @@ public class ViewEvents {
 	public static NameListener n1Listener = new NameListener(BoardFrame.label1, 1);
 	public static NameListener n2Listener = new NameListener(BoardFrame.label2, 2);
 	public static NewGameListener newGameListener = new NewGameListener(BoardFrame.Game_status);
-	//public static GridMouseListener gridListener = new GridMouseListener(BoardFrame.grid);
+	public static GridMouseListener gridListener = new GridMouseListener(BoardFrame.grid);
 	public static BoardSizeListener gridSizeListener = new BoardSizeListener(BoardFrame.l1);
 	public static GameThemeListener gameThemeListener = new GameThemeListener(BoardFrame.l2);
 	public static SaveButtonListener saveListener = new SaveButtonListener(BoardFrame.save);
@@ -66,10 +66,10 @@ public class ViewEvents {
 	public static void saveAction(JButton save) {
 		save.addMouseListener(saveListener);
 	}
-//	public static void gridMouseAction(final Grid grid) {
-//		grid.addMouseListener(gridListener);
-//		grid.addMouseMotionListener(gridListener);
-//	}
+	public static void gridMouseAction(final Grid grid) {
+		grid.addMouseListener(gridListener);
+		grid.addMouseMotionListener(gridListener);
+	}
 
 	
 	public static void changeColorPanel1Action(final RotateColor panel) {
