@@ -5,7 +5,6 @@ package utilities;
 
 import java.awt.Color;
 import java.util.ArrayList;
-
 import api.Point;
 
 
@@ -14,6 +13,12 @@ import api.Point;
  * 
  */
 public class Tools {
+	public static boolean isMaxWinLessThanGrid(int gridSize, int maxWin){
+		if(maxWin > gridSize){
+			return false;
+		}
+		return true;
+	}
 
 
 	/**

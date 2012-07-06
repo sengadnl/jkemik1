@@ -48,12 +48,15 @@ public class Grid extends JPanel {
 
 	public static double Columns = 0.0, rows = 0.0;
 	public static double x = 0, y = 0, hl_x = 0, hl_y = 0;
-	public static int poistions_count = 0;
+	public static int position_count = 0;
 
 	public Grid(int squareSize) {
 		setPreferredSize(new Dimension((int) Width, (int) Height));
 		setSquareSize(squareSize);
 		calColAndRows((int) squareSize);
+	}
+	public static int squareCount(){
+		return (int )((Grid.Width/Grid.squareSize) * (Grid.Height/Grid.squareSize));
 	}
 
 	public static void calColAndRows(int squareSize) {
@@ -425,13 +428,13 @@ public class Grid extends JPanel {
 			if (currentposition <= Width) {
 				g2.draw(new Line2D.Double(squareSize * index, 0,
 						Grid.squareSize * index, Grid.Height));
-				poistions_count++;
+				position_count++;
 			}
 			// draw rows
 			if (currentposition <= Grid.Height) {
 				g2.draw(new Line2D.Double(0, Grid.squareSize * index,
 						Grid.Width, Grid.squareSize * index));
-				poistions_count++;
+				position_count++;
 			}
 			currentposition += Grid.squareSize;
 			index++;
@@ -442,7 +445,7 @@ public class Grid extends JPanel {
 	 * @return the poistions_count
 	 */
 	public static int getPoistions_count() {
-		return poistions_count;
+		return position_count;
 	}
 
 	/**
@@ -450,7 +453,7 @@ public class Grid extends JPanel {
 	 *            the poisitions_count to set
 	 */
 	public static void setPoistions_count(int poistions_count) {
-		Grid.poistions_count = poistions_count;
+		Grid.position_count = poistions_count;
 	}
 
 	/**

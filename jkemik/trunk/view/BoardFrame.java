@@ -38,7 +38,7 @@ public class BoardFrame extends JFrame {
 				+ container.getHeight());
 		// Layout
 		setLayout(new BorderLayout());
-		
+
 		createPanel123();
 		designPanel1();
 		designPanel3();
@@ -49,7 +49,6 @@ public class BoardFrame extends JFrame {
 		upDateSetting();
 
 		initializeEvents();
-
 		setTitle("J-Kemik " + Globals.VERSION);
 		setVisible(true);
 		pack();
@@ -186,7 +185,7 @@ public class BoardFrame extends JFrame {
 		panel21 = new JPanel();
 		panel21.setPreferredSize(new Dimension((int) (SIDE_WIDTH * this.width),
 				(int) (SIDE_HEIGHT * this.height)));
-		
+
 		p1panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (PLAYER_PNL_H_SCALAR * SIDE_HEIGHT * this.height));
 		panel21.add(p1panel);
@@ -259,7 +258,8 @@ public class BoardFrame extends JFrame {
 		AutoCap.setForeground(Color.WHITE);
 		AutoPass = new JLabel(JKemik.settings_t.getAutoPassStatus());
 		AutoPass.setForeground(Color.WHITE);
-		//System.out.println("....... win--" + JKemik.settings_t.getMaxWinVal());
+		// System.out.println("....... win--" +
+		// JKemik.settings_t.getMaxWinVal());
 		Win = new JLabel("" + JKemik.settings_t.getMaxWinVal());
 		Win.setForeground(Color.WHITE);
 
