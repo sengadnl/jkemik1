@@ -529,19 +529,6 @@ public class BoardFrame extends JFrame {
 		}
 	}
 
-	public void setTheme(int t) {
-		if (BoardFrame.THEME_JKEMIK == t) {
-			setSkin(new Color(40, 40, 0), new Color(70, 70, 0), new Color(150,
-					150, 0));
-		} else if (BoardFrame.THEME_ORIGINS == t) {
-			setSkin(new Color(0, 30, 0), new Color(10, 30, 0), new Color(60,
-					90, 60));
-		} else {
-			setSkin(new Color(50, 50, 50), new Color(90, 90, 90), new Color(
-					100, 100, 100));
-		}
-	}
-
 	public static void upDateSetting() {
 		try {
 			if (JKemik.settings_t.isAutoCapture()) {
@@ -652,8 +639,8 @@ public class BoardFrame extends JFrame {
 	private static java.awt.Container container;
 	private static final long serialVersionUID = 1L;
 
-	private Color THEME_COLOR;
-	private Color CPANEL_COLOR;
+	public static Color THEME_COLOR;
+	public static Color CPANEL_COLOR;
 	public static Color BOARD_COLOR;
 
 	public static boolean makingGame;
