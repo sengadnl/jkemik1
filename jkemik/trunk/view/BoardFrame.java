@@ -249,6 +249,13 @@ public class BoardFrame extends JFrame {
 		capture.setForeground(new Color(255, 255, 255));
 		panel33.add(capture);
 		capture.setVisible(false);
+		
+		debug = new JButton("DEBUG");
+		debug.setBackground(new Color(0, 0, 200));
+		debug.setForeground(new Color(255, 200, 255));
+		panel33.add(debug);
+		undo.setVisible(false);
+		
 		panel3.add(panel33, BorderLayout.EAST);
 	}
 
@@ -590,6 +597,7 @@ public class BoardFrame extends JFrame {
 	public static JLabel label2;
 	public static JLabel help;
 
+	public static JButton debug;
 	public static JButton save;
 	public static JButton undo;
 	public static JButton capture;
