@@ -491,29 +491,29 @@ public class BoardFrame extends JFrame {
 	}
 
 	public void setSkin(Color theme, Color cpanel, Color board) {
-		this.THEME_COLOR = theme;
-		this.CPANEL_COLOR = cpanel;
+		BoardFrame.THEME_COLOR = theme;
+		BoardFrame.CPANEL_COLOR = cpanel;
 		BOARD_COLOR = board;
 
-		Grid.GRID_LINE_COL = Tools.fade(BOARD_COLOR);
-		panel1.setBackground(this.THEME_COLOR);
-		panel11.setBackground(this.THEME_COLOR);
-		panel12.setBackground(this.THEME_COLOR);
+		Grid.setGridLineCol(BoardFrame.THEME_COLOR);
+		panel1.setBackground(BoardFrame.THEME_COLOR);
+		panel11.setBackground(BoardFrame.THEME_COLOR);
+		panel12.setBackground(BoardFrame.THEME_COLOR);
 
 		panel2.setBackground(BOARD_COLOR);
-		panel21.setBackground(this.THEME_COLOR);
-		panel23.setBackground(this.THEME_COLOR);
+		panel21.setBackground(BoardFrame.THEME_COLOR);
+		panel23.setBackground(BoardFrame.THEME_COLOR);
 
-		panel3.setBackground(this.THEME_COLOR);
-		panel31.setBackground(this.THEME_COLOR);
-		panel33.setBackground(this.THEME_COLOR);
+		panel3.setBackground(BoardFrame.THEME_COLOR);
+		panel31.setBackground(BoardFrame.THEME_COLOR);
+		panel33.setBackground(BoardFrame.THEME_COLOR);
 
-		blank1.setBackground(this.THEME_COLOR);
-		blank3.setBackground(this.THEME_COLOR);
-		panel32.setBackground(this.CPANEL_COLOR);
-		Holder1.setBackground(this.CPANEL_COLOR);
-		Holder2.setBackground(this.CPANEL_COLOR);
-		Holder3.setBackground(this.CPANEL_COLOR);
+		blank1.setBackground(BoardFrame.THEME_COLOR);
+		blank3.setBackground(BoardFrame.THEME_COLOR);
+		panel32.setBackground(BoardFrame.CPANEL_COLOR);
+		Holder1.setBackground(BoardFrame.CPANEL_COLOR);
+		Holder2.setBackground(BoardFrame.CPANEL_COLOR);
+		Holder3.setBackground(BoardFrame.CPANEL_COLOR);
 	}
 
 	public void setTheme(String str) {
