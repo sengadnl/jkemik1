@@ -6,7 +6,9 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import utilities.Tools;
 import view.BoardFrame;
+import view.Grid;
 import view.SettingsPanel;
 
 public class SaveSettingsListener implements MouseListener {
@@ -25,10 +27,18 @@ public class SaveSettingsListener implements MouseListener {
 						JOptionPane.WARNING_MESSAGE);
 			} else {
 				String str = SettingsPanel.max_win.getText();
-				JKemik.settings_t.setMaxWinVal(Integer.parseInt(str));
-				BoardFrame.upDateSetting();
-				BoardFrame.capture.setVisible(false);
-				JKemik.settings.setVisible(false);
+				int maxw = Integer.parseInt(str);
+				int size = Grid.squareCount()/2; //Half the number of squares on the board
+				if(Tools.isMaxWinLessThanGrid(size, maxw)){
+					JKemik.settings_t.setMaxWinVal(maxw);
+					BoardFrame.upDateSetting();
+					BoardFrame.capture.setVisible(false);
+					JKemik.settings.setVisible(false);
+				}else{
+					JOptionPane.showMessageDialog(null, "The maximum win must be <= " 
+							+ size + " due to the board size", "Wrong Input",
+							JOptionPane.WARNING_MESSAGE);
+				}
 			}
 		} catch (Exception exp) {
 
