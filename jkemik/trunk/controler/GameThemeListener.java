@@ -20,15 +20,15 @@ public class GameThemeListener implements MouseListener{
 		this.label = label;
 	}
 	public void mouseClicked(MouseEvent e) {
-		BoardFrame.grid.DRAWN = true;
+		BoardFrame.grid.drawn = true;
 		this.label.rotateLabel();
 		String str = this.label.getActiveLabel();
 		JKemik.view.setTheme(str);
 		JKemik.settings_t.setTheme(str);
 		BoardFrame.panel2.repaint();
 		// change the grid size
-		if (BoardFrame.grid.DRAWN) {
-			BoardFrame.grid.DRAWN = false;
+		if (BoardFrame.grid.drawn) {
+			BoardFrame.grid.drawn = false;
 			BoardFrame.grid.repaint();
 		}
 	}

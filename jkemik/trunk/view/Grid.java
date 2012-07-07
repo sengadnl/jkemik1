@@ -34,11 +34,12 @@ public class Grid extends JPanel {
 	public static double squareSize = 64;
 	public static double half_squareSize = 32;
 	public boolean mouseclicked = false;
+	public static boolean debug = false;
 	public static boolean mouseMove = false;
 	public static boolean undo = false;
 	public static boolean saveSettings = false;
 	public static boolean ON = false;
-	public boolean DRAWN = false;
+	public boolean drawn = false;
 
 	private Ellipse2D.Double circle;
 	private static Color pcolor = new Color(255, 255, 255);
@@ -126,18 +127,24 @@ public class Grid extends JPanel {
 			if (game.isEmbuche_on()) {
 				embush();
 			}
+			
 			if (JKemik.settings_t.isAutoPass()
 					&& game.getCurrentP().getPlay_flag() == 1) {
-				JKemik.game.switchPlayTurns();
-				Grid.setCcolor(JKemik.game.getCurrentP().getColor());
+				game.switchPlayTurns();
+				Grid.setCcolor(game.getCurrentP().getColor());
+			}
+			
+			if(Grid.debug){
+				drawGame(game);
+				Grid.debug = false;
 			}
 		} catch (Exception e) {
 			System.out.println("Error in paint: " + e.getMessage());
 		}
 
-		if (!this.DRAWN) {
+		if (!this.drawn) {
 			drawGrid();
-			this.DRAWN = true;
+			this.drawn = true;
 		}
 
 	}
@@ -614,4 +621,21 @@ public class Grid extends JPanel {
 	public static void setGridLineStroke(int gridLineStroke) {
 		Grid.gridLineStroke = gridLineStroke;
 	}
+
+	public static boolean isDebug() {
+		return debug;
+	}
+
+	public static void setDebug(boolean debug) {
+		Grid.debug = debug;
+	}
+
+	public boolean isDrawn() {
+		return drawn;
+	}
+
+	public void setDrawn(boolean drawn) {
+		this.drawn = drawn;
+	}
+	
 }
