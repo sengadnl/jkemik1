@@ -6,20 +6,24 @@ package utilities;
 import java.awt.Color;
 import java.util.ArrayList;
 import api.Point;
-
+import api.STemplate;
 
 /**
  * @author dalet
  * 
  */
 public class Tools {
-	public static boolean isMaxWinLessThanGrid(int gridSize, int maxWin){
-		if(maxWin > gridSize){
+	public static boolean isMaxWinLessThanGrid(int gridSize, int maxWin) {
+		if (maxWin > gridSize) {
 			return false;
 		}
 		return true;
 	}
 
+	public static void resetMaxWin(int GridSqrCount, STemplate t) {
+		int defaultMaxWin = GridSqrCount/2;
+		t.setMaxWinVal(defaultMaxWin);
+	}
 
 	/**
 	 * fades color
@@ -75,8 +79,8 @@ public class Tools {
 		if (b > Globals.FADE_THRESHOLD) {
 			b = b - (b * Globals.FADE_VARIANT);
 		}
-//		System.out.println("Faded: \n" + "\nr = " + (int) r + "\ng = "
-//				+ (int) g + "\nb = " + (int)b);
+		// System.out.println("Faded: \n" + "\nr = " + (int) r + "\ng = "
+		// + (int) g + "\nb = " + (int)b);
 		return new Color((int) r, (int) g, (int) b);
 	}
 
@@ -87,7 +91,7 @@ public class Tools {
 		double r = c.getRed();
 		double g = c.getGreen();
 		double b = c.getBlue();
-		int red = (int)r, green = (int)g, blue = (int)b;
+		int red = (int) r, green = (int) g, blue = (int) b;
 		try {
 			r = r / (1 - Globals.FADE_VARIANT);
 			g = g / (1 - Globals.FADE_VARIANT);
@@ -101,7 +105,7 @@ public class Tools {
 			if (b < 0 || b > 255) {
 				b = blue;
 			}
-		
+
 		} catch (Exception e) {
 			System.err.println("In Tools.boost: " + e.getMessage());
 		}
@@ -126,7 +130,8 @@ public class Tools {
 	 *        the sides of the square cells which JKemik grid is made of
 	 * @return none
 	 */
-	public static ArrayList<Point> getArea(ArrayList<Point> list, double squareSize) {
+	public static ArrayList<Point> getArea(ArrayList<Point> list,
+			double squareSize) {
 
 		/* contain point of the area inside a cell */
 		ArrayList<Point> area = new ArrayList<Point>();
@@ -170,7 +175,7 @@ public class Tools {
 						&& isInPolygon(list, newPoint)) {
 					area.add(newPoint);// in the future we will simply be
 					// counting instead of storing the point
-					xCurrent = xCurrent + (int)squareSize;
+					xCurrent = xCurrent + (int) squareSize;
 
 				} else {
 					break;
@@ -189,7 +194,7 @@ public class Tools {
 						&& !containPoint(newPoint, list)
 						&& isInPolygon(list, newPoint)) {
 					area.add(newPoint);
-					xCurrent = xCurrent - (int)squareSize;
+					xCurrent = xCurrent - (int) squareSize;
 				} else {
 					break;
 				}
@@ -243,32 +248,32 @@ public class Tools {
 		return ret;
 	}
 
-//	public static void filterX(Point p, ArrayList<Point> area,
-//			ArrayList<Point> selected, int squareSize) {
-//		double left = p.getXC(), right = p.getXC();
-//		left = left + squareSize;
-//		while (true) {
-//			Point newPoint = new Point(left, p.getYC());
-//			if (containPoint(newPoint, selected) || newPoint.getXC() > 0.0) {
-//				break;
-//			}
-//			if (containPoint(newPoint, area)) {
-//				area.remove(newPoint);
-//			}
-//			left = left - squareSize;
-//		}
-//
-//		while (true) {
-//			Point newPoint = new Point(right, p.getYC());
-//			if (containPoint(newPoint, selected) || newPoint.getXC() > 1000.0) {
-//				break;
-//			}
-//			if (containPoint(newPoint, area)) {
-//				area.remove(newPoint);
-//			}
-//			right = right + squareSize;
-//		}
-//	}
+	// public static void filterX(Point p, ArrayList<Point> area,
+	// ArrayList<Point> selected, int squareSize) {
+	// double left = p.getXC(), right = p.getXC();
+	// left = left + squareSize;
+	// while (true) {
+	// Point newPoint = new Point(left, p.getYC());
+	// if (containPoint(newPoint, selected) || newPoint.getXC() > 0.0) {
+	// break;
+	// }
+	// if (containPoint(newPoint, area)) {
+	// area.remove(newPoint);
+	// }
+	// left = left - squareSize;
+	// }
+	//
+	// while (true) {
+	// Point newPoint = new Point(right, p.getYC());
+	// if (containPoint(newPoint, selected) || newPoint.getXC() > 1000.0) {
+	// break;
+	// }
+	// if (containPoint(newPoint, area)) {
+	// area.remove(newPoint);
+	// }
+	// right = right + squareSize;
+	// }
+	// }
 
 	/**
 	 * this function filters the Area
@@ -455,8 +460,10 @@ public class Tools {
 
 	/**
 	 * @author dalet
-	 * @param an ArrayList of points, integer representing the y coordinate of
-	 * one of the most left or most right point that shares this y coordinate
+	 * @param an
+	 *            ArrayList of points, integer representing the y coordinate of
+	 *            one of the most left or most right point that shares this y
+	 *            coordinate
 	 * @return an integer array containing x coordinates of the left and right
 	 *         bounding points
 	 */

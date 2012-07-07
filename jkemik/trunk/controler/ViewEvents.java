@@ -32,7 +32,11 @@ public class ViewEvents {
 	public static AutoTurnPassAction autoTurnPassListener = new AutoTurnPassAction(SettingsPanel.auto_turn_pass);
 	public static ExitListener exitlistener = new ExitListener(BoardFrame.exit);
 	public static HelpListener helpListener = new HelpListener(BoardFrame.help);
+	public static DebugListener debugListener = new DebugListener(BoardFrame.debug);
 	
+	public static void debugListener(){
+		BoardFrame.debug.addMouseListener(debugListener);
+	}
 	public static void helpListener(){
 		BoardFrame.help.addMouseListener(helpListener);
 	}

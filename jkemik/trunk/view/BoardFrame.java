@@ -82,6 +82,7 @@ public class BoardFrame extends JFrame {
 		ViewEvents.settingsLabelAction();
 
 		ViewEvents.passTurnAction(pass_turn);
+		ViewEvents.debugListener();
 		ViewEvents.saveSettingsAction();
 		ViewEvents.onAutoCaptureAction();
 		ViewEvents.onAutoPassTurnAction();
@@ -159,7 +160,7 @@ public class BoardFrame extends JFrame {
 		System.out.println("Panel13: " + (CORNER_WIDTH * this.width) + " X "
 				+ (CORNER_HEIGHT * this.height));
 
-		panel13.setBackground(this.THEME_COLOR);
+		panel13.setBackground(BoardFrame.THEME_COLOR);
 
 		Game_status = new JLabel("NEW");
 		Game_status.setForeground(Color.GREEN);
@@ -437,6 +438,7 @@ public class BoardFrame extends JFrame {
 	}
 
 	public static void repaintGrid() {
+		grid.setDrawn(false);
 		grid.repaint();
 	}
 
@@ -530,6 +532,9 @@ public class BoardFrame extends JFrame {
 		} else if (str.equals("Origins")) {
 			setSkin(new Color(0, 30, 0), new Color(10, 30, 0), new Color(60,
 					90, 60));
+		} else if (str.equals("Geeky")) {
+			setSkin(new Color(0, 0, 0), new Color(0, 0, 0), new Color(0,
+					40, 0));
 		} else {
 			setSkin(new Color(50, 50, 50), new Color(90, 90, 90), new Color(
 					100, 100, 100));
@@ -629,7 +634,7 @@ public class BoardFrame extends JFrame {
 	public static JLabel settings;
 
 	private String[] gridsize = { "32x20", "64x40", "8x5", "16x10" };
-	private String[] gameType = { "Origins", "Jkemik", "Google" };
+	private String[] gameType = { "Origins", "Jkemik", "Google", "Geeky" };
 
 	public static final double CORNER_WIDTH = .33;
 	public static final double CORNER_HEIGHT = .064;

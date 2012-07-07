@@ -88,7 +88,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 			// Reset grid
 			BoardFrame.panel2.repaint();
-			BoardFrame.grid.DRAWN = false;
+			BoardFrame.grid.drawn = false;
 			BoardFrame.grid.repaint();
 
 			BoardFrame.p1panel.initPanelForNewGame("P1", Color.WHITE);

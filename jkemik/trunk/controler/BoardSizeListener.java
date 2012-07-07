@@ -5,6 +5,8 @@ package controler;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import api.GTemplate;
+import api.STemplate;
+import utilities.Tools;
 import view.BoardFrame;
 import view.Grid;
 import view.RotateLabel;
@@ -26,10 +28,13 @@ public class BoardSizeListener implements MouseListener{
 		t.setG_size(Grid.getSquareSize());
 		BoardFrame.panel2.repaint();
 		// change the grid size
-		if (BoardFrame.grid.DRAWN) {
-			BoardFrame.grid.DRAWN = false;
+		if (BoardFrame.grid.drawn) {
+			BoardFrame.grid.drawn = false;
 			BoardFrame.grid.repaint();
 		}
+		STemplate st = JKemik.settings_t;
+		Tools.resetMaxWin(Grid.squareCount(), st);
+		BoardFrame.upDateSetting();
 	}
 
 	
