@@ -7,6 +7,8 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import api.Point;
+
 import controler.JKemik;
 import controler.ViewEvents;
 import utilities.Globals;
@@ -92,6 +94,7 @@ public class BoardFrame extends JFrame {
 		fadeButton(pass_turn);
 		fadeButton(capture);
 		fadeButton(undo);
+
 	}
 
 	/**
@@ -527,17 +530,39 @@ public class BoardFrame extends JFrame {
 
 	public void setTheme(String str) {
 		if (str.equals("Jkemik")) {
-			setSkin(new Color(40, 40, 0), new Color(70, 70, 0), new Color(150,
+			setSkin(new Color(70, 70, 0), new Color(90, 90, 0), new Color(150,
 					150, 0));
+			pColor1.setArrayColors(Globals.CHEMIK_COLOR);
+			pColor2.setArrayColors(Globals.CHEMIK_COLOR);
+			pColor1.rotateColor(1);
+			pColor1.setBackground(Globals.CHEMIK_COLOR[1]);
+			pColor2.setBackground(Globals.CHEMIK_COLOR[0]);
+			
+			
 		} else if (str.equals("Origins")) {
 			setSkin(new Color(0, 30, 0), new Color(10, 30, 0), new Color(60,
 					90, 60));
+			pColor1.setArrayColors(Globals.ORIGINE_COLOR);
+			pColor2.setArrayColors(Globals.ORIGINE_COLOR);
+			pColor1.rotateColor(1);
+			pColor1.setBackground(Globals.ORIGINE_COLOR[1]);
+			pColor2.setBackground(Globals.ORIGINE_COLOR[0]);
 		} else if (str.equals("Geeky")) {
-			setSkin(new Color(0, 0, 0), new Color(0, 0, 0), new Color(0,
-					40, 0));
+			setSkin(new Color(0, 0, 0), new Color(0, 0, 0), new Color(40,
+					60, 40));
+			pColor1.setArrayColors(Globals.CLASSIC_COLOR);
+			pColor2.setArrayColors(Globals.CLASSIC_COLOR);
+			pColor1.rotateColor(1);
+			pColor1.setBackground(Globals.CLASSIC_COLOR[1]);
+			pColor2.setBackground(Globals.CLASSIC_COLOR[0]);
 		} else {
 			setSkin(new Color(50, 50, 50), new Color(90, 90, 90), new Color(
 					100, 100, 100));
+			pColor1.setArrayColors(Globals.GEECKY_COLOR);
+			pColor2.setArrayColors(Globals.GEECKY_COLOR);
+			pColor1.rotateColor(1);
+			pColor1.setBackground(Globals.GEECKY_COLOR[1]);
+			pColor2.setBackground(Globals.GEECKY_COLOR[0]);
 		}
 	}
 
@@ -567,6 +592,28 @@ public class BoardFrame extends JFrame {
 
 	public static void setMakingGame(boolean inOptions) {
 		BoardFrame.makingGame = inOptions;
+	}
+	public static void newGameGuiUpdate(){
+		BoardFrame.desableGameControlPanel();
+		BoardFrame.pColor1.removeMouseListener(ViewEvents.p1Listener);
+		BoardFrame.pColor2.removeMouseListener(ViewEvents.p2Listener);
+		BoardFrame.label1.removeMouseListener(ViewEvents.n1Listener);
+		BoardFrame.label2.removeMouseListener(ViewEvents.n2Listener);
+		BoardFrame.l1.removeMouseListener(ViewEvents.gridSizeListener);
+		BoardFrame.l2.removeMouseListener(ViewEvents.gameThemeListener);
+		BoardFrame.settings.removeMouseListener(ViewEvents.saveSettings);
+		BoardFrame.Game_status.setText("END");
+		BoardFrame.Game_status.setForeground(Color.RED);
+
+		BoardFrame.fadeLabel(BoardFrame.settings);
+		BoardFrame.fadeButton(BoardFrame.save);
+		BoardFrame.boostButton(BoardFrame.pass_turn);
+		BoardFrame.boostButton(BoardFrame.capture);
+		BoardFrame.boostButton(BoardFrame.undo);
+		BoardFrame.print_point.setText("" + (new Point(0, 0)).toString());
+//		BoardFrame.p1panel.initPanelForNewGame(p1n, p1c);
+//		BoardFrame.p2panel.initPanelForNewGame(p2n, p2c);
+		BoardFrame.save.removeMouseListener(ViewEvents.saveListener);
 	}
 
 	public double height = 0.0;

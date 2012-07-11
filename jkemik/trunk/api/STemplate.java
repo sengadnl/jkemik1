@@ -11,7 +11,7 @@ public class STemplate implements Serializable {
 	private boolean autoCapture = true;
 	private boolean manualCapture = false;
 	private boolean autoPass = true;
-	private String theme = "Origins";
+	private String theme = "Geeky";
 	private int maxWinVal = 4;
 
 	public STemplate() {
