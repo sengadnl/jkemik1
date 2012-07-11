@@ -33,6 +33,7 @@ public class NewGameListener implements MouseListener{
 				JOptionPane.YES_NO_OPTION);
 		if (response == 0) {
 			// set listeners
+		
 			BoardFrame.pColor1.addMouseListener(ViewEvents.p1Listener);
 			BoardFrame.pColor2.addMouseListener(ViewEvents.p2Listener);
 			BoardFrame.label1.addMouseListener(ViewEvents.n1Listener);
@@ -67,6 +68,7 @@ public class NewGameListener implements MouseListener{
 					"Exit JKemik?\n", "Question",
 					JOptionPane.YES_NO_OPTION);
 			if(res == 0){
+				JKemik.writeGame();
 				JKemik.writeSettings();
 				System.exit(0);
 				System.out.println("Exitting ... ");

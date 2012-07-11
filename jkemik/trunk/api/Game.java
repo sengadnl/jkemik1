@@ -517,7 +517,7 @@ public class Game implements Serializable {
 	public void setMaxScore(int max) {
 		this.maxScore = max;
 	}
-
+	
 	/* Connecting dots utilities */
 	public Point origin = new Point(1000.0, 1000.0);
 	public Point from = new Point(553355, 7798979);
@@ -525,6 +525,8 @@ public class Game implements Serializable {
 	public boolean connect = false;
 	public boolean embuche_on = false;
 	public boolean see_wall = false;
+	
+	
 	public Point lastp = new Point(553355, 7798979);
 	private double curX = 0.0;
 	private double curY = 0.0;

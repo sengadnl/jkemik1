@@ -15,25 +15,26 @@ public class RotateColor extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final int BOARD_SIZE = 12;
+	private final int BOARD_SIZE = 3;
 	private final int W;
 	private final int H;
 	private Color[] colors;
 	private int colorIndex = 0;// specifies which color to pick
 	private boolean changeFlag = false;
-	private final Dimension DIMENSION = new Dimension((int)(this.W*.8),
+	private final Dimension DIMENSION = new Dimension((int) (this.W * .8),
 			(int) (this.H * .2));
 
-	//private Color bg;
+	// private Color bg;
 
 	public RotateColor(int w, int h) {
 		this.W = w;
 		this.H = h;
 		setPreferredSize(new Dimension(this.W, this.H));
 		loadColors();
-		setBackground(new Color(100,0,0));
+		setBackground(new Color(100, 0, 0));
 		setBackground(this.colors[this.colorIndex]);
-		this.setBorder(BorderFactory.createLineBorder(new Color(150,150,0), 2));
+		this.setBorder(BorderFactory
+				.createLineBorder(new Color(150, 150, 0), 2));
 	}
 
 	/**
@@ -44,18 +45,16 @@ public class RotateColor extends JPanel {
 	}
 
 	/**
-	 * @param changeFlag the changeFlag to set
+	 * @param changeFlag
+	 *            the changeFlag to set
 	 */
 	public void setChangeFlag(boolean changeFlag) {
 		this.changeFlag = changeFlag;
 	}
 
-
 	public Color getPanelBGC() {
 		return this.getBackground();
 	}
-
-	
 
 	public void rotateColor(JPanel panel) {
 		this.colorIndex++;
@@ -75,17 +74,21 @@ public class RotateColor extends JPanel {
 		}
 		this.setBackground(this.colors[this.colorIndex]);
 	}
+
 	/**
-	 * @param an integer specifying the position of the color to rotate to
-	 * @return void */
-	public void rotateColor(int i){
+	 * @param an
+	 *            integer specifying the position of the color to rotate to
+	 * @return void
+	 */
+	public void rotateColor(int i) {
 		this.setBackground(this.colors[i]);
 	}
+
 	/**
 	 * */
-	public void rotateColor(Color c){
-		for(int i = 0; i < colors.length; i ++){
-			if(c.equals(colors[i])){
+	public void rotateColor(Color c) {
+		for (int i = 0; i < colors.length; i++) {
+			if (c.equals(colors[i])) {
 				this.setBackground(colors[i]);
 			}
 		}
@@ -96,29 +99,33 @@ public class RotateColor extends JPanel {
 		this.colors[0] = new Color(255, 255, 255);
 		this.colors[1] = new Color(233, 71, 153);
 		this.colors[2] = new Color(233, 100, 160);
-		this.colors[3] = new Color(255, 255, 0);
-		this.colors[4] = new Color(255, 255, 255);
-		this.colors[5] = new Color(0, 0, 0);
-		this.colors[6] = new Color(247, 77, 0);
-		this.colors[7] = new Color(0, 0, 200);
-		this.colors[8] = new Color(202, 0, 233);
-		this.colors[9] = new Color(204, 77, 233);
-		this.colors[10] = new Color(250, 0, 0);
-		this.colors[11] = new Color(0, 250, 0);
 		return this.colors;
 	}
+/**
+ * col must be == BOARD_SIZE*/
+	protected boolean setArrayColors(Color[] col) {
+
+		if (colors.length == col.length) {
+			this.colors = new Color[col.length];
+			for (int i = 0; i < col.length; i++) {
+				this.colors[i] = col[i];
+			}
+			return true;
+		}
+		return false;
+	}
+
 	protected Color[] loadColors(Color[] col) {
 		this.colors = new Color[col.length];
-		for(int i = 0; i < col.length; i++){
+		for (int i = 0; i < col.length; i++) {
 			this.colors[i] = col[i];
 		}
 		return this.colors;
 	}
 
 	/**
-	 
-
-	/**
+	 * /**
+	 * 
 	 * @return the colors
 	 */
 	public Color[] getColors() {
@@ -132,6 +139,7 @@ public class RotateColor extends JPanel {
 	public void setColors(Color[] colors) {
 		this.colors = colors;
 	}
+
 	/**
 	 * @return the colorIndex
 	 */

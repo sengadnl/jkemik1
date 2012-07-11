@@ -30,7 +30,6 @@ public class SaveButtonListener implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-
 		Color c1, c2;
 		c1 = BoardFrame.pColor1.getBackground();
 		c2 = BoardFrame.pColor2.getBackground();
@@ -39,7 +38,7 @@ public class SaveButtonListener implements MouseListener {
 		str1 = BoardFrame.label1.getText();
 		str2 = BoardFrame.label2.getText();
 
-		//JKemik.template = new GTemplate();
+		// JKemik.template = new GTemplate();
 		GTemplate t = JKemik.template;
 		Player p1 = null, p2 = null;
 		Game game = null;
@@ -56,9 +55,9 @@ public class SaveButtonListener implements MouseListener {
 			p2 = new Player(c2, str2);
 			game = new Game(p1, p2);
 			JKemik.game = game;
-		
+
 			JKemik.game.setMaxScore(JKemik.settings_t.getMaxWinVal());
-			
+
 			BoardFrame.desableGameControlPanel();
 			BoardFrame.pColor1.removeMouseListener(ViewEvents.p1Listener);
 			BoardFrame.pColor2.removeMouseListener(ViewEvents.p2Listener);
@@ -69,7 +68,7 @@ public class SaveButtonListener implements MouseListener {
 			BoardFrame.settings.removeMouseListener(ViewEvents.saveSettings);
 			BoardFrame.Game_status.setText("END");
 			BoardFrame.Game_status.setForeground(Color.RED);
-			
+
 			BoardFrame.fadeLabel(BoardFrame.settings);
 			BoardFrame.fadeButton(BoardFrame.save);
 			BoardFrame.boostButton(BoardFrame.pass_turn);
@@ -84,28 +83,27 @@ public class SaveButtonListener implements MouseListener {
 			BoardFrame.p1panel.initPanelForNewGame(p1n, p1c);
 			BoardFrame.p2panel.initPanelForNewGame(p2n, p2c);
 			BoardFrame.save.removeMouseListener(ViewEvents.saveListener);
-			
+
 			int response = JOptionPane.showConfirmDialog(null, "Will " + str1
-					+ " play first?\n", "Question",
-					JOptionPane.YES_NO_OPTION);
+					+ " play first?\n", "Question", JOptionPane.YES_NO_OPTION);
 			if (response == 1) {
 				game.switchPlayTurns();
 				Grid.setCcolor(game.getCurrentP().getColor());
 			} else {
-				
+
 			}
 			BoardFrame.grid.addMouseListener(ViewEvents.gridListener);
 			BoardFrame.grid.addMouseMotionListener(ViewEvents.gridListener);
-			if(JKemik.settings_t.isAutoCapture()){
+			if (JKemik.settings_t.isAutoCapture()) {
 				BoardFrame.capture.setVisible(false);
-			}else{
+			} else {
 				BoardFrame.capture.setVisible(true);
 			}
-			
-			if(JKemik.settings_t.isAutoPass()){
+
+			if (JKemik.settings_t.isAutoPass()) {
 				BoardFrame.undo.setVisible(false);
 				BoardFrame.pass_turn.setVisible(false);
-			}else{
+			} else {
 				BoardFrame.undo.setVisible(true);
 				BoardFrame.pass_turn.setVisible(true);
 			}

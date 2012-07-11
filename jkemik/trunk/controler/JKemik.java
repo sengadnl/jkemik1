@@ -40,6 +40,7 @@ public class JKemik extends Application {
 	public static Load load;
 	static File s_object = new File(Globals.settingsTemplateObjectFile);
 	static File t_object = new File(Globals.templateObjectFile);
+	static File g_object = new File(Globals.gameObjectFile);
 
 	protected void init() {
 		try {
@@ -116,6 +117,22 @@ public class JKemik extends Application {
 		}
 
 	}
+	
+	public static void writeGame() {
+		try {
+			ObjectOutputStream out = new ObjectOutputStream(
+					new FileOutputStream(g_object));
+			out.writeObject(game);
+
+		} catch (FileNotFoundException exception1) {
+			System.out.println("JKemik: writeGame "
+					+ exception1.getMessage());
+		} catch (IOException exception2) {
+			System.out.println("JKemik: writeGame "
+					+ exception2.getMessage());
+		}
+
+	}
 
 	public static void updateSettingsPanel() {
 		settings.setAutoCap(settings_t.getAutoCaptureStatus());
@@ -123,6 +140,31 @@ public class JKemik extends Application {
 		settings.setMaxWinVal(settings_t.getMaxWinVal());
 		String str = "" + settings_t.getMaxWinVal();
 		SettingsPanel.setMax_win(str);
+	}
+	public static void readGameObj() {
+		try {
+
+			if (g_object.exists()) {
+				ObjectInputStream input = new ObjectInputStream(
+						new FileInputStream(g_object));
+				game = (Game)input.readObject();
+				// updateSettingsPanel();
+				input.close();
+			} else {
+				game = new Game(new Player(Color.WHITE, "Dany"), new Player(
+						Color.WHITE, "Sarah"));
+			}
+		} catch (FileNotFoundException exception1) {
+			System.out.println("JKemik: readGame "
+					+ exception1.getMessage());
+		} catch (IOException exception2) {
+			System.out.println("JKemik: readGame "
+					+ exception2.getMessage());
+		} catch (ClassNotFoundException exception3) {
+			System.out.println("JKemik: readGame "
+					+ exception3.getMessage());
+		}
+
 	}
 
 	public static void readTemplate() {
