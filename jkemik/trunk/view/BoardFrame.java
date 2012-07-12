@@ -537,7 +537,8 @@ public class BoardFrame extends JFrame {
 			pColor1.rotateColor(1);
 			pColor1.setBackground(Globals.CHEMIK_COLOR[1]);
 			pColor2.setBackground(Globals.CHEMIK_COLOR[0]);
-			
+//			p1panel.getHolder().setBackground(BOARD_COLOR);
+//			p2panel.getHolder().setBackground(BOARD_COLOR);
 			
 		} else if (str.equals("Origins")) {
 			setSkin(new Color(0, 30, 0), new Color(10, 30, 0), new Color(60,
@@ -547,6 +548,8 @@ public class BoardFrame extends JFrame {
 			pColor1.rotateColor(1);
 			pColor1.setBackground(Globals.ORIGINE_COLOR[1]);
 			pColor2.setBackground(Globals.ORIGINE_COLOR[0]);
+//			p1panel.getHolder().setBackground(BOARD_COLOR);
+//			p2panel.getHolder().setBackground(BOARD_COLOR);
 		} else if (str.equals("Geeky")) {
 			setSkin(new Color(0, 0, 0), new Color(0, 0, 0), new Color(40,
 					60, 40));
@@ -555,6 +558,8 @@ public class BoardFrame extends JFrame {
 			pColor1.rotateColor(1);
 			pColor1.setBackground(Globals.CLASSIC_COLOR[1]);
 			pColor2.setBackground(Globals.CLASSIC_COLOR[0]);
+//			p1panel.getHolder().setBackground(BOARD_COLOR);
+//			p2panel.getHolder().setBackground(BOARD_COLOR);
 		} else {
 			setSkin(new Color(50, 50, 50), new Color(90, 90, 90), new Color(
 					100, 100, 100));
@@ -563,6 +568,8 @@ public class BoardFrame extends JFrame {
 			pColor1.rotateColor(1);
 			pColor1.setBackground(Globals.GEECKY_COLOR[1]);
 			pColor2.setBackground(Globals.GEECKY_COLOR[0]);
+//			p1panel.getHolder().setBackground(BOARD_COLOR);
+//			p2panel.getHolder().setBackground(BOARD_COLOR);
 		}
 	}
 
