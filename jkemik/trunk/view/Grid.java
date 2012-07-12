@@ -186,7 +186,7 @@ public class Grid extends JPanel {
 					System.out.println("Cell was not NULL");
 					if (drawCell(cell)) {
 						game.getCurrentP().setSelected(new ArrayList<Point>());
-						i = -1;
+						//i = -1;
 
 						return true;
 					}

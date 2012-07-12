@@ -67,6 +67,12 @@ public class PlayerPanel extends JPanel {
 		createPlayerPanel();
 	}
 
+	public JPanel getHolder() {
+		return holder;
+	}
+	public void setHolder(JPanel holder) {
+		this.holder = holder;
+	}
 	public void createPlayerPanel() {
 		setBackground(Color.BLACK);
 		setLayout(new BorderLayout());
@@ -119,10 +125,10 @@ public class PlayerPanel extends JPanel {
 				this.FONT_SIZE);
 		this.scorev.setFont(scvfont);
 
-		final JLabel plotted = new JLabel("  Plt:");
-		final JLabel captured = new JLabel("  Cap:");
-		final JLabel cptcells = new JLabel("  Cce:");
-		final JLabel cells = new JLabel("  Cel:");
+		final JLabel plotted = new JLabel("  Plt Pt:");
+		final JLabel captured = new JLabel("  Cp Pt:");
+		final JLabel cptcells = new JLabel("  Cp Cll:");
+		final JLabel cells = new JLabel("  Cll:");
 		final JLabel score = new JLabel("  Scr:");
 
 		// JKIcon p = new JKIcon("media/yellow.gif", "");
