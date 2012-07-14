@@ -290,21 +290,7 @@ public class Game implements Serializable {
 		return false;
 	}
 
-	/**
-	 * @param p
-	 *            , origin of the path to capture's contour
-	 * @return true if p belongs to the path and false if not
-	 */
-	public static boolean isPath2(Point p) {
-		if (Tools.containPoint(p, currentP.getPloted())) {
-			if (!p.isFlag_dead()
-					&& !Tools.containPoint(p, guest.getCapturedDots())) {
-				return true;
-			}
-		}
-		return false;
-	}
-
+	
 	/**
 	 * @return the deadDots
 	 */

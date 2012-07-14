@@ -50,6 +50,7 @@ abstract class AbstractPlayer implements Serializable {
 		
 		/* Find the point in this box that belongs to the path */
 		for (int i = 0; i < box.length; i++) {
+			//System.out.println("box[" + i + "]\n");
 			/* Stop recursive call here if a path was already found */
 			if (this.successful) {
 				return true;
@@ -64,7 +65,7 @@ abstract class AbstractPlayer implements Serializable {
 								&& this.selected.size() > 3) {
 							this.successful = true;/* Set recursive call stop */
 							this.origin = null;/* Reset the origin */
-							System.out.println("A cell was found: \n");
+							System.out.println("A cell was found: \n" + "box[" + i + "]\n");
 							return true;/* Capture was found */
 						}
 						/* This adjacent Point was a dead end */

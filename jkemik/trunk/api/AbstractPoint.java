@@ -110,5 +110,4 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable{
 	// return true;
 	// }
 	// }
-
 }

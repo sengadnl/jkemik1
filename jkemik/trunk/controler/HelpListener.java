@@ -16,7 +16,7 @@ public class HelpListener implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
-		Manual.openUrl("http://code.google.com/p/jkemik/");
+		Manual.openUrl("http://code.google.com/p/jkemik/wiki/GetStarted?tm=6");
 	}
 
 	public void mouseExited(MouseEvent arg0) {
