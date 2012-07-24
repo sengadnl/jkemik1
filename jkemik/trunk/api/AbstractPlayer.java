@@ -46,8 +46,8 @@ abstract class AbstractPlayer implements Serializable {
 			return true;
 		}
 		/* Get all adjacent Points */
-		Point[] box = Tools.boxCoord(o, this.plotted, squareSize);
-		
+		//Point[] box = Tools.boxCoord(o, this.plotted, squareSize);
+		Point[] box = Tools.boxCoord(o, squareSize);
 		/* Find the point in this box that belongs to the path */
 		for (int i = 0; i < box.length; i++) {
 			//System.out.println("box[" + i + "]\n");
