@@ -54,6 +54,12 @@ public class STemplate implements Serializable {
 		}
 		return "OFF";
 	}
+	public String getManualCaptureStatus() {
+		if(manualCapture){
+			return "ON";
+		}
+		return "OFF";
+	}
 
 	public boolean isAutoCapture() {
 		return autoCapture;

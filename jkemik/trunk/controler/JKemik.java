@@ -60,7 +60,7 @@ public class JKemik extends Application {
 			}
 			game = new Game(new Player(Color.WHITE, "Dany"), new Player(
 					Color.WHITE, "Sarah"));
-			settings = new SettingsPanel(250, 200);
+			settings = new SettingsPanel(300, 200);
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 		}
