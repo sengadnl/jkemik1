@@ -88,6 +88,7 @@ public class BoardFrame extends JFrame {
 		ViewEvents.saveSettingsAction();
 		ViewEvents.onAutoCaptureAction();
 		ViewEvents.onAutoPassTurnAction();
+		ViewEvents.onManualCaptureAction();
 		ViewEvents.exitListener();
 		ViewEvents.helpListener();
 
@@ -255,11 +256,16 @@ public class BoardFrame extends JFrame {
 		panel33.add(capture);
 		capture.setVisible(false);
 		
+		manual_c = new JButton("MANUAL CAPTURE");
+		manual_c.setBackground(new Color(0, 200, 0));
+		manual_c.setForeground(new Color(255, 255, 255));
+		panel33.add(manual_c);
+		//manual_c.setVisible(true);
+		
 		debug = new JButton("DEBUG");
 		debug.setBackground(new Color(0, 0, 200));
 		debug.setForeground(new Color(255, 200, 255));
 		panel33.add(debug);
-		undo.setVisible(false);
 		
 		panel3.add(panel33, BorderLayout.EAST);
 	}
@@ -270,19 +276,22 @@ public class BoardFrame extends JFrame {
 		AutoCap.setForeground(Color.WHITE);
 		AutoPass = new JLabel(JKemik.settings_t.getAutoPassStatus());
 		AutoPass.setForeground(Color.WHITE);
-		// System.out.println("....... win--" +
-		// JKemik.settings_t.getMaxWinVal());
+		ManualCap = new JLabel(JKemik.settings_t.getManualCaptureStatus());
+		ManualCap.setForeground(Color.WHITE);
 		Win = new JLabel("" + JKemik.settings_t.getMaxWinVal());
 		Win.setForeground(Color.WHITE);
 
-		JLabel la = new JLabel("Auto Capture");
+		JLabel la = new JLabel("Auto Capture:");
 		la.setForeground(Color.ORANGE);
 
-		JLabel lb = new JLabel("Auto Pass");
+		JLabel lb = new JLabel(" Auto Pass:");
 		lb.setForeground(Color.ORANGE);
 
-		JLabel lc = new JLabel("Win");
+		JLabel lc = new JLabel(" Win:");
 		lc.setForeground(Color.ORANGE);
+		
+		JLabel lm = new JLabel(" Manual Capture:");
+		lm.setForeground(Color.ORANGE);
 
 		panel31.add(la);
 		panel31.add(AutoCap);
@@ -290,9 +299,11 @@ public class BoardFrame extends JFrame {
 		panel31.add(AutoPass);
 		panel31.add(lc);
 		panel31.add(Win);
+		panel31.add(lm);
+		panel31.add(ManualCap);
 	}
 
-	public void createPanel32() {
+	private void createPanel32() {
 		blank1 = new JLabel(" ");
 		blank2 = new JLabel(" ");
 		blank3 = new JLabel(" ");
@@ -587,6 +598,14 @@ public class BoardFrame extends JFrame {
 			} else {
 				BoardFrame.AutoPass.setText("OFF");
 			}
+			
+			if (JKemik.settings_t.isManualCapture()) {
+				BoardFrame.ManualCap.setText("ON");
+				BoardFrame.manual_c.setVisible(true);
+			} else {
+				BoardFrame.ManualCap.setText("OFF");
+				BoardFrame.manual_c.setVisible(false);
+			}
 			String str = "" + JKemik.settings_t.getMaxWinVal();
 			BoardFrame.Win.setText(str);
 		} catch (Exception e) {
@@ -661,8 +680,9 @@ public class BoardFrame extends JFrame {
 	public static JButton save;
 	public static JButton undo;
 	public static JButton capture;
+	public static JButton manual_c;
 	public static JButton pass_turn;
-
+	
 	public static JLabel blank1;
 	public static JLabel blank2;
 	public static JLabel blank3;
@@ -675,6 +695,7 @@ public class BoardFrame extends JFrame {
 
 	public static JLabel AutoCap;
 	public static JLabel AutoPass;
+	public static JLabel ManualCap;
 	public static JLabel Win;
 	public static JLabel exit;
 

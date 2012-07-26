@@ -35,6 +35,7 @@ public class Grid extends JPanel {
 	public static double half_squareSize = 32;
 	public boolean mouseclicked = false;
 	public static boolean debug = false;
+	public static boolean manualc = false;
 	public static boolean mouseMove = false;
 	public static boolean undo = false;
 	public static boolean saveSettings = false;
@@ -637,5 +638,12 @@ public class Grid extends JPanel {
 	public void setDrawn(boolean drawn) {
 		this.drawn = drawn;
 	}
-	
+
+	public static boolean isManualc() {
+		return manualc;
+	}
+
+	public static void setManualc(boolean manualc) {
+		Grid.manualc = manualc;
+	}
 }

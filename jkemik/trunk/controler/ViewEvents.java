@@ -30,6 +30,7 @@ public class ViewEvents {
 	public static PassTurnListener passTurnListener = new PassTurnListener(BoardFrame.pass_turn);
 	public static AutoCaptureListener autoCaptureListener = new AutoCaptureListener(SettingsPanel.auto_capture);
 	public static AutoTurnPassAction autoTurnPassListener = new AutoTurnPassAction(SettingsPanel.auto_turn_pass);
+	public static ManualCaptureListener manualCaptureListener = new ManualCaptureListener(SettingsPanel.manual_capture);
 	public static ExitListener exitlistener = new ExitListener(BoardFrame.exit);
 	public static HelpListener helpListener = new HelpListener(BoardFrame.help);
 	public static DebugListener debugListener = new DebugListener(BoardFrame.debug);
@@ -50,7 +51,9 @@ public class ViewEvents {
 	public static void onAutoPassTurnAction(){
 		SettingsPanel.auto_turn_pass.addMouseListener(autoTurnPassListener);
 	}
-	
+	public static void onManualCaptureAction(){
+		SettingsPanel.manual_capture.addMouseListener(manualCaptureListener);//
+	}
 	public static void passTurnAction(JButton pass){
 		pass.addMouseListener(passTurnListener);
 	}
