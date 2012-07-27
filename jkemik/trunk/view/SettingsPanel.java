@@ -89,6 +89,14 @@ public class SettingsPanel extends JFrame {
 		}
 	}
 
+	public static RotateLabel getManual_capture() {
+		return manual_capture;
+	}
+
+	public static void setManual_capture(String manualCapture) {
+		manual_capture.setText(manualCapture);
+	}
+
 	public void buildPane() {
 		JKIcon icon = new JKIcon("media/jkemik-logo-small.gif", "");
 		save = new JButton("Done");

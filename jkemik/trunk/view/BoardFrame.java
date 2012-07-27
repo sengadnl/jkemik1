@@ -334,7 +334,9 @@ public class BoardFrame extends JFrame {
 		pColor2.rotateColor(JKemik.template.getP2_c());
 
 		l1 = new RotateLabel(this.gridsize);
+		l1.setText(JKemik.template.gridSizeToString());
 		l2 = new RotateLabel(this.gameType);
+		l2.setText(JKemik.settings_t.getTheme());
 
 		save = new JButton("SAVE");
 		save.setBackground(new Color(200, 0, 0));
@@ -542,8 +544,8 @@ public class BoardFrame extends JFrame {
 
 	public void setTheme(String str) {
 		if (str.equals("Jkemik")) {
-			setSkin(new Color(70, 70, 0), new Color(90, 90, 0), new Color(150,
-					150, 0));
+			setSkin(new Color(135, 118, 23), new Color(90, 90, 0), new Color(184,
+					160, 26));
 			pColor1.setArrayColors(Globals.CHEMIK_COLOR);
 			pColor2.setArrayColors(Globals.CHEMIK_COLOR);
 			pColor1.rotateColor(1);
@@ -720,8 +722,8 @@ public class BoardFrame extends JFrame {
 	public static final double PLAYER_PNL_H_SCALAR = .25;
 	public static final double P2_W = .34;
 
-	public static final double BOTTOM_COLOR_P_W = 120;
-	public static final double BOTTOM_COLOR_P_H = 14;
+	public static final double BOTTOM_COLOR_P_W = 118;
+	public static final double BOTTOM_COLOR_P_H = 16;
 
 	public static Grid grid;
 
