@@ -138,6 +138,7 @@ public class JKemik extends Application {
 		settings.setAutoCap(settings_t.getAutoCaptureStatus());
 		settings.setAutoPass(settings_t.getAutoPassStatus());
 		settings.setMaxWinVal(settings_t.getMaxWinVal());
+		SettingsPanel.setManual_capture(settings_t.getManualCaptureStatus());
 		String str = "" + settings_t.getMaxWinVal();
 		SettingsPanel.setMax_win(str);
 	}

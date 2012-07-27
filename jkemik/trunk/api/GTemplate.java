@@ -137,14 +137,14 @@ public class GTemplate implements Serializable{
 		}
 	}
 	public String gridSizeToString(){
-		if(this.G_size == (double)8){
-			return "8x5";
-		}else if(this.G_size == (double)16){
-			return "16x10";
-		}else if(this.G_size == (double)32){
-			return "32x20";
-		}else{
+		if(this.G_size == ((this.dimension.getWidth() * this.GRID_PERCENT) / this.SMALL_SCALAR)){
 			return "64x40";
+		}else if(this.G_size == ((this.dimension.getWidth() * this.GRID_PERCENT) / this.MIDIUM_SCALAR)){
+			return "32x20";
+		}else if(this.G_size == ((this.dimension.getWidth() * this.GRID_PERCENT) / this.LARGE_SCALAR)){
+			return "16x10";
+		}else{
+			return "8x5";
 		}
 	}
 	public String gameTypeToString(){
