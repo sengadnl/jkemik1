@@ -15,7 +15,6 @@ import view.*;
 public class ViewEvents {
 	public static ColorChangeListenerA p1Listener = new ColorChangeListenerA(BoardFrame.pColor1);
 	public static ColorChangeListenerB p2Listener = new ColorChangeListenerB(BoardFrame.pColor2);
-	
 	public static NameListener n1Listener = new NameListener(BoardFrame.label1, 1);
 	public static NameListener n2Listener = new NameListener(BoardFrame.label2, 2);
 	public static NewGameListener newGameListener = new NewGameListener(BoardFrame.Game_status);
@@ -34,6 +33,11 @@ public class ViewEvents {
 	public static ExitListener exitlistener = new ExitListener(BoardFrame.exit);
 	public static HelpListener helpListener = new HelpListener(BoardFrame.help);
 	public static DebugListener debugListener = new DebugListener(BoardFrame.debug);
+	public static WindowEvents windowListener = new WindowEvents(JKemik.view);
+	
+	public static void windowActionListener(){
+		JKemik.view.addComponentListener(windowListener);
+	}
 	
 	public static void debugListener(){
 		BoardFrame.debug.addMouseListener(debugListener);
