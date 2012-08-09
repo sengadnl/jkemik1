@@ -16,7 +16,7 @@ http://jkemik.googlecode.com/files/jkemik-Dashboard.png
 
 On the *Dashboard*: 
 
-  # Players can decide on a aboard _theme_. 
+  # Players can choose a board _theme_. 
   # They can select their respective _colors_. 
   # They can decide on the _grid size_.
   # They can register their _names_. 
