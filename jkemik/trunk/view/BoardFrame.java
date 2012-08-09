@@ -91,7 +91,7 @@ public class BoardFrame extends JFrame {
 		ViewEvents.onManualCaptureAction();
 		ViewEvents.exitListener();
 		ViewEvents.helpListener();
-		ViewEvents.windowActionListener();
+		//ViewEvents.windowActionListener();
 
 		fadeButton(pass_turn);
 		fadeButton(capture);
