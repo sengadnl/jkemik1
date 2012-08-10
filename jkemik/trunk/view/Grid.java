@@ -52,6 +52,8 @@ public class Grid extends JPanel {
 	public static double Columns = 0.0, rows = 0.0;
 	public static double x = 0, y = 0, hl_x = 0, hl_y = 0;
 	public static int position_count = 0;
+	private static Point lastPoint = new Point(999999,99999);
+	private static Point firstPoint = new Point(997999,99899);
 
 	public Grid(int squareSize) {
 		setPreferredSize(new Dimension((int) Width, (int) Height));
@@ -646,4 +648,5 @@ public class Grid extends JPanel {
 	public static void setManualc(boolean manualc) {
 		Grid.manualc = manualc;
 	}
+	
 }
