@@ -545,8 +545,8 @@ public class BoardFrame extends JFrame {
 
 	public void setTheme(String str) {
 		if (str.equals("Jkemik")) {
-			setSkin(new Color(135, 118, 23), new Color(90, 90, 0), new Color(184,
-					160, 26));
+			setSkin(new Color(90, 73, 23), new Color(90, 90, 0), new Color(194,
+					170, 36));
 			pColor1.setArrayColors(Globals.CHEMIK_COLOR);
 			pColor2.setArrayColors(Globals.CHEMIK_COLOR);
 			pColor1.rotateColor(1);
