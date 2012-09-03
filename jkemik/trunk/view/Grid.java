@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import controler.JKemik;
-import utilities.Tools;
 import api.Cell;
 import api.Game;
 import api.Player;
@@ -26,14 +25,15 @@ public class Grid extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static Graphics2D g2;
-	private static Color gridLineCol = new Color(10,60,30);
+	private static Color gridLineCol = new Color(10, 60, 30);
 	private static int gridLineStroke = 2;
 	private static int CURSOR_VARIANT_STROKE = 6;
 	public static double CIRCLE_DIAMETER = 10.0;
 	public static double HALF_DIAMETER = 5.0;
 	public static double squareSize = 64;
 	public static double half_squareSize = 32;
-	public boolean mouseclicked = false;
+	public static boolean mouseclicked = false;
+	public static boolean plotPoint = false;
 	public static boolean debug = false;
 	public static boolean manualc = false;
 	public static boolean mouseMove = false;
@@ -51,9 +51,10 @@ public class Grid extends JPanel {
 
 	public static double Columns = 0.0, rows = 0.0;
 	public static double x = 0, y = 0, hl_x = 0, hl_y = 0;
+	private static Cell cell = null;
 	public static int position_count = 0;
-	private static Point lastPoint = new Point(999999,99999);
-	private static Point firstPoint = new Point(997999,99899);
+//	private static Point lastPoint = new Point(999999, 99999);
+//	private static Point firstPoint = new Point(997999, 99899);
 
 	public Grid(int squareSize) {
 		setPreferredSize(new Dimension((int) Width, (int) Height));
@@ -74,7 +75,7 @@ public class Grid extends JPanel {
 		}
 	}
 
-	public Point makeDrawable(double x, double y) {
+	public static Point makeDrawable(double x, double y) {
 		return new Point(Grid.x - HALF_DIAMETER, Grid.y - HALF_DIAMETER);
 	}
 
@@ -82,62 +83,42 @@ public class Grid extends JPanel {
 		return new Point(p.getXC() - HALF_DIAMETER, p.getYC() - HALF_DIAMETER);
 	}
 
-	public Point undoMakeDrawable(Point drawable) {
+	public static Point undoMakeDrawable(Point drawable) {
 		return new Point(drawable.getXC() + HALF_DIAMETER, drawable.getYC()
 				+ HALF_DIAMETER);
 	}
 
 	public void paintComponent(Graphics g) {
 		Grid.g2 = (Graphics2D) g;
-		//super.paintComponent(g2);
+		// super.paintComponent(g2);
 		try {
 			drawCursor(hl_x, hl_y, gridLineCol);
-
-			/* Find the closest point to the cursor */
-			closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
-			Point temp = makeDrawable(Grid.x, Grid.y);
-			BoardFrame.print_point.setText(""
-					+ (new Point(hl_x, hl_y)).toString());
 			highLightDot(ccolor);
 			Game game = JKemik.game;
-			if (this.mouseclicked && game.getCurrentP().isTurn()) {
-				if (!Tools.containPoint(temp, game.getCurrentP().getPloted())
-						&& !Tools.containPoint(temp, game.getGuest()
-								.getPloted())
-						&& !Tools.containPoint(temp, game.getDeadDots())) {
-
-					drawCircle(temp, game.getCurrentP().getColor());
-					game.getCurrentP().getPloted().add(temp);
-					game.setEmbuche_on(true);
-					game.setPlayFlag();
-					game.getCurrentP().setTurn(false);
-
-					BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
-					BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
-					mouseMove = false;
-				}
-				this.mouseclicked = false;
+			if (mouseclicked && plotPoint) {
+				drawCircle(new Point(x, y), game.getCurrentP().getColor());
+				plotPoint = false;
+				mouseclicked = false;
+			}
+			if (drawCell(cell)) {
+				cell = null;
 			}
 
 			if (undo) {
 				if (game.undo()) {
 					unDraw(game.getLastp());
-					BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
-					BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
 				}
 				undo = false;
 			}
-			if (game.isEmbuche_on()) {
-				embush();
-			}
-			
+
+			//			
 			if (JKemik.settings_t.isAutoPass()
 					&& game.getCurrentP().getPlay_flag() == 1) {
 				game.switchPlayTurns();
 				Grid.setCcolor(game.getCurrentP().getColor());
 			}
-			
-			if(Grid.debug){
+
+			if (Grid.debug) {
 				drawGame(game);
 				Grid.debug = false;
 			}
@@ -153,25 +134,17 @@ public class Grid extends JPanel {
 	}
 
 	public void highLightDot(Color c) {
-		Game game = JKemik.game;
-
+		BoardFrame.print_point.setText("" + (new Point(hl_x, hl_y)).toString());
 		if (mouseMove) {
-			g2.setColor(c);
-			Point temp = makeDrawable(x, y);
-			if (Tools.containPoint(temp, game.getCurrentP().getPloted())
-					|| Tools.containPoint(temp, game.getGuest().getPloted())
-					|| Tools.containPoint(temp, game.getDeadDots())) {
-
-			} else {
-				drawCursor(x, y);
-			}
+			g2.setColor(ccolor);
+			drawCursor(x, y);
 			hl_x = x;
 			hl_y = y;
-			mouseMove = false;
 		}
+		mouseMove = false;
 	}
 
-	public boolean connectDots() {
+	public static boolean connectDots() {
 
 		Game game = JKemik.game;
 		game.getCurrentP().setSuccessful(false);
@@ -184,15 +157,16 @@ public class Grid extends JPanel {
 			game.getCurrentP().setOrigin(currentPP);
 			try {
 
-				Cell cell = game.capture(currentPP, squareSize);
+				cell = game.capture(currentPP, squareSize);
 				if (cell != null) {
 					System.out.println("Cell was not NULL");
-					if (drawCell(cell)) {
-						game.getCurrentP().setSelected(new ArrayList<Point>());
-						//i = -1;
-
-						return true;
-					}
+					// if (drawCell(cell)) {
+					// game.getCurrentP().setSelected(new ArrayList<Point>());
+					// // i = -1;
+					//
+					// return true;
+					// }
+					return true;
 				} else {
 					continue;
 				}
@@ -209,14 +183,12 @@ public class Grid extends JPanel {
 		return false;
 	}
 
-	public void embush() {
+	public static boolean embush() {
 		Game game = JKemik.game;
 		if (JKemik.settings_t.isAutoCapture()) {
 			try {
 				if (connectDots()) {
-					BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
-					BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
-
+					return true;
 				} else {
 					game.setEmbuche_on(false);
 				}
@@ -228,10 +200,8 @@ public class Grid extends JPanel {
 			if (JKemik.settings_t.isManualCapture()) {
 				try {
 					if (connectDots()) {
-						BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
-						BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
-
 						game.setEmbuche_on(false);
+						return true;
 					} else {
 						game.setEmbuche_on(false);
 					}
@@ -243,9 +213,10 @@ public class Grid extends JPanel {
 
 			}
 		}
+		return false;
 	}
 
-	private boolean drawCell(Cell cell) {
+	private static boolean drawCell(Cell cell) {
 		Game game = JKemik.game;
 		try {
 			ArrayList<Point> contour = cell.getCellContour();
@@ -258,20 +229,18 @@ public class Grid extends JPanel {
 			game.getCurrentP().getConnectedPoints().addAll(contour);
 			/* set color */
 			g2.setColor(game.getCurrentP().getColor());
-			g2.setStroke(new BasicStroke(gridLineStroke
-					+ CURSOR_VARIANT_STROKE));
+			g2
+					.setStroke(new BasicStroke(gridLineStroke
+							+ CURSOR_VARIANT_STROKE));
 
 			/* draw cell contour */
 			drawLine(contour.get(0), contour.get(contour.size() - 1));
 			for (int i = 0; i < contour.size() - 1; i++) {
 				drawLine(contour.get(i), contour.get(i + 1));
 
-				Point p1 = undoMakeDrawable(contour.get(i));
-				Point p2 = undoMakeDrawable(contour.get(i + 1));
-
 				// draw intersection
-				drawCursor(p1, gridLineCol);
-				drawCursor(p2, gridLineCol);
+				drawCursor(contour.get(i), gridLineCol);
+				drawCursor(contour.get(i + 1), gridLineCol);
 				g2.setColor(game.getCurrentP().getColor());
 				g2.setStroke(new BasicStroke(gridLineStroke
 						+ CURSOR_VARIANT_STROKE));
@@ -288,17 +257,19 @@ public class Grid extends JPanel {
 		}
 		return true;
 	}
+
 	/**
-	 * @param Arraylist of pl1 cells, pl1, pl2
-	 * @return void
-	 * Draws a cell with all its content.
- 	* */
-	private boolean drawCell(ArrayList<Cell> cells, Player pl1, Player pl2) {
+	 * @param Arraylist
+	 *            of pl1 cells, pl1, pl2
+	 * @return void Draws a cell with all its content.
+	 * */
+	private static boolean drawCell(ArrayList<Cell> cells, Player pl1,
+			Player pl2) {
 
 		try {
 			for (Cell c : cells) {
 				ArrayList<Point> contour = c.getCellContour();
-				
+
 				/* set color */
 				g2.setColor(pl1.getColor());
 				g2.setStroke(new BasicStroke(gridLineStroke
@@ -309,17 +280,16 @@ public class Grid extends JPanel {
 				for (int i = 0; i < contour.size() - 1; i++) {
 					drawLine(contour.get(i), contour.get(i + 1));
 
-					Point p1 = undoMakeDrawable(contour.get(i));
-					Point p2 = undoMakeDrawable(contour.get(i + 1));
 
 					// draw intersection
-					drawCursor(p1, gridLineCol);
-					drawCursor(p2, gridLineCol);
+					drawCursor(contour.get(i), gridLineCol);
+					drawCursor(contour.get(i + 1), gridLineCol);
 					g2.setColor(pl1.getColor());
 					g2.setStroke(new BasicStroke(gridLineStroke
 							+ CURSOR_VARIANT_STROKE));
 				}
-				if (drawCell(c.getCellsInCell(), pl2, pl1)) {}
+				if (drawCell(c.getCellsInCell(), pl2, pl1)) {
+				}
 			}
 
 		} catch (NullPointerException e) {
@@ -334,20 +304,25 @@ public class Grid extends JPanel {
 		Player p1 = g.getPlayer1();
 		Player p2 = g.getPlayer2();
 		// draw p1 points
-		for (Point p : p1.getPloted()) {drawCircle(p, p1.getColor());}
+		for (Point p : p1.getPloted()) {
+			drawCircle(p, p1.getColor());
+		}
 		// draw p1 points
-		for (Point p : p2.getPloted()) {drawCircle(p, p2.getColor());}
+		for (Point p : p2.getPloted()) {
+			drawCircle(p, p2.getColor());
+		}
 		// draw p1 cells
-		if (drawCell(p1c, p1, p2)) {}
+		if (drawCell(p1c, p1, p2)) {
+		}
 		// draw p1 cells
-		if (drawCell(p2c, p2, p1)) {}
+		if (drawCell(p2c, p2, p1)) {
+		}
 	}
 
-	private void drawLine(Point from, Point to) {
-		g2.drawLine((int) (from.getXC() + HALF_DIAMETER),
-				(int) (from.getYC() + HALF_DIAMETER),
-				(int) (to.getXC() + HALF_DIAMETER),
-				(int) (to.getYC() + HALF_DIAMETER));
+	private static void drawLine(Point from, Point to) {
+
+		g2.drawLine((int) (from.getXC()), (int) (from.getYC()), (int) (to
+				.getXC()), (int) (to.getYC()));
 
 	}
 
@@ -367,15 +342,13 @@ public class Grid extends JPanel {
 		try {
 			double px = p.getXC();
 			double py = p.getYC();
-			this.circle = new Ellipse2D.Double(px, py, Grid.CIRCLE_DIAMETER,
+			this.circle = new Ellipse2D.Double(px - HALF_DIAMETER, py - HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 					Grid.CIRCLE_DIAMETER);
 			g2.setColor(BoardFrame.BOARD_COLOR);
 			g2.fill(this.circle);
 			g2.draw(this.circle);
 			g2.setColor(gridLineCol);
 
-			px = px + HALF_DIAMETER;
-			py = py + HALF_DIAMETER;
 
 			g2.draw(new Line2D.Double(px, py + half_squareSize, px, py
 					- half_squareSize));
@@ -396,7 +369,6 @@ public class Grid extends JPanel {
 	}
 
 	public void drawCursor(double x, double y, Color c) {
-
 		g2.setColor(c);
 		g2.setStroke(new BasicStroke(gridLineStroke));
 		g2.draw(new Line2D.Double(x, y + half_squareSize, x, y
@@ -407,7 +379,7 @@ public class Grid extends JPanel {
 
 	}
 
-	public void drawCursor(Point p, Color c) {
+	public static void drawCursor(Point p, Color c) {
 		g2.setColor(c);
 		g2.setStroke(new BasicStroke(gridLineStroke));
 		g2.draw(new Line2D.Double(p.getXC(), p.getYC() + half_squareSize, p
@@ -418,7 +390,7 @@ public class Grid extends JPanel {
 		g2.setColor(pcolor);
 	}
 
-	public void drawCursor(Point p, Color c, Color set_back) {
+	public static void drawCursor(Point p, Color c, Color set_back) {
 		g2.setColor(c);
 		g2.setStroke(new BasicStroke(gridLineStroke));
 		g2.draw(new Line2D.Double(p.getXC(), p.getYC() + half_squareSize, p
@@ -561,7 +533,7 @@ public class Grid extends JPanel {
 		return sqrSize;
 	}
 
-	public void closestTo(double xcoor, double ycoor, int square) {
+	public static void closestTo(double xcoor, double ycoor, int square) {
 		int deltax = 0, deltay = 0;
 		int xc = 0, yc = 0;
 		deltax = (int) (xcoor % square);
@@ -587,7 +559,7 @@ public class Grid extends JPanel {
 	 * @return the mouse clicked
 	 */
 	public boolean isMouseclicked() {
-		return this.mouseclicked;
+		return mouseclicked;
 	}
 
 	/**
@@ -595,12 +567,14 @@ public class Grid extends JPanel {
 	 *            the mouse clicked to set
 	 */
 	public void setMouseclicked(boolean mouseclicked) {
-		this.mouseclicked = mouseclicked;
+		Grid.mouseclicked = mouseclicked;
 	}
 
 	public void drawCircle(Point p, Color c) {
-		this.circle = new Ellipse2D.Double(p.getXC(), p.getYC(),
-				Grid.CIRCLE_DIAMETER, Grid.CIRCLE_DIAMETER);
+		Point recenter = new Point(p.getXC() - HALF_DIAMETER, p.getYC()
+				- HALF_DIAMETER);
+		this.circle = new Ellipse2D.Double(recenter.getXC(), recenter.getYC(),
+				CIRCLE_DIAMETER, CIRCLE_DIAMETER);
 		g2.setColor(c);
 		g2.fill(this.circle);
 		g2.draw(this.circle);
@@ -610,6 +584,7 @@ public class Grid extends JPanel {
 		hl_x = 0;
 		hl_y = 0;
 	}
+
 	public static Color getGridLineCol() {
 		return gridLineCol;
 	}
@@ -617,6 +592,7 @@ public class Grid extends JPanel {
 	public static void setGridLineCol(Color gridLineCol) {
 		Grid.gridLineCol = gridLineCol;
 	}
+
 	public static int getGridLineStroke() {
 		return gridLineStroke;
 	}
@@ -648,5 +624,4 @@ public class Grid extends JPanel {
 	public static void setManualc(boolean manualc) {
 		Grid.manualc = manualc;
 	}
-	
 }
