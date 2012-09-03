@@ -263,7 +263,7 @@ public class BoardFrame extends JFrame {
 		panel33.add(manual_c);
 		//manual_c.setVisible(true);
 		
-		debug = new JButton("DEBUG");
+		debug = new JButton("REFRESH");
 		debug.setBackground(new Color(0, 0, 200));
 		debug.setForeground(new Color(255, 200, 255));
 		panel33.add(debug);

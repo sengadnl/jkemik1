@@ -13,7 +13,7 @@ import view.Grid;
 public class WindowEvents implements WindowListener, ComponentListener{
 	private JFrame frame;
 	public WindowEvents(JFrame frame){
-		this.frame = frame;
+		this.setFrame(frame);
 	}
 
 	@Override
@@ -81,6 +81,14 @@ public class WindowEvents implements WindowListener, ComponentListener{
 	public void componentShown(ComponentEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
+
+	public JFrame getFrame() {
+		return frame;
 	}
 
 }

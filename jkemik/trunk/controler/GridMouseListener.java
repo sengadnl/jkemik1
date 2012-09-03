@@ -7,9 +7,14 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import api.Game;
+import api.Point;
+
+import utilities.Tools;
 import view.BoardFrame;
 import view.Grid;
 
@@ -26,9 +31,38 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
+		Grid.mouseclicked = true;
 		Grid.x = e.getX();
 		Grid.y = e.getY();
-		BoardFrame.repaintGrid();
+		Game game = JKemik.game;
+		Grid.closestTo(Grid.x, Grid.y, (int)Grid.squareSize);
+		Point temp = new Point(Grid.x, Grid.y);
+		if (game.getCurrentP().isTurn()) {
+			if (!Tools.containPoint(temp, game.getCurrentP().getPloted())
+					&& !Tools.containPoint(temp, game.getGuest()
+							.getPloted())
+					&& !Tools.containPoint(temp, game.getDeadDots())) {
+				Grid.plotPoint = true;
+				BoardFrame.grid.repaint();
+				
+				game.getCurrentP().getPloted().add(temp);
+				game.setEmbuche_on(true);
+				game.setPlayFlag();
+				game.getCurrentP().setTurn(false);
+				Grid.mouseMove = false;
+			}
+		}
+		
+		if (game.isEmbuche_on() && Grid.embush()) {
+			BoardFrame.grid.repaint();
+			game.getCurrentP().setSelected(new ArrayList<Point>());
+		}
+		
+//		if (JKemik.settings_t.isAutoPass()
+//				&& game.getCurrentP().getPlay_flag() == 1) {
+//			game.switchPlayTurns();
+//		}
+		//BoardFrame.repaintGrid();
 		if (JKemik.game.getCurrentP().isTurn()) {
 			this.grid.setMouseclicked(true);
 		}
@@ -61,6 +95,19 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		Grid.mouseMove = true;
 		Grid.x = e.getX();
 		Grid.y = e.getY();
+		
+		Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
+		Point temp = Grid.makeDrawable(Grid.x, Grid.y);
+		Game game = JKemik.game;
+		if (Tools.containPoint(temp, game.getCurrentP().getPloted())
+				|| Tools.containPoint(temp, game.getGuest().getPloted())
+				|| Tools.containPoint(temp, game.getDeadDots())) {
+
+		} else {
+			BoardFrame.grid.repaint();
+			Grid.mouseMove = true;
+		}
+		
 		if (JKemik.game.checkEndGame()) {
 			JOptionPane.showMessageDialog(null, ""
 					+ JKemik.game.getGuest().getName() + " WINS !!!", " Win",
