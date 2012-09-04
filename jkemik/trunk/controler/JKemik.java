@@ -69,7 +69,7 @@ public class JKemik extends Application {
 	protected void idle() {
 		try {
 			if (screenResolutionCheck()) {
-				view = new BoardFrame(Globals.FRAME_WIDTH, Globals.FRAME_HEIGHT);
+				view = BoardFrame.getInstance(Globals.FRAME_WIDTH, Globals.FRAME_HEIGHT);
 			} else {
 				System.out.println("Exiting ...");
 				System.exit(0);
