@@ -25,7 +25,9 @@ public class BoardFrame extends JFrame {
 	 * @throws InterruptedException
 	 * @since August 2011
 	 **/
-	public BoardFrame(double width, double height) {
+	private static volatile BoardFrame instance = null;
+
+	private BoardFrame(double width, double height) {
 
 		this.width = width;
 		this.height = height;
@@ -54,6 +56,17 @@ public class BoardFrame extends JFrame {
 		setTitle("J-Kemik " + Globals.VERSION);
 		setVisible(true);
 		pack();
+	}
+
+	public static BoardFrame getInstance(double width, double height) {
+		if (instance == null) {
+			synchronized (BoardFrame.class) {
+				if (instance == null) {
+					instance = new BoardFrame(width, height);
+				}
+			}
+		}
+		return instance;
 	}
 
 	private void initializeEvents() {
@@ -91,7 +104,7 @@ public class BoardFrame extends JFrame {
 		ViewEvents.onManualCaptureAction();
 		ViewEvents.exitListener();
 		ViewEvents.helpListener();
-		//ViewEvents.windowActionListener();
+		// ViewEvents.windowActionListener();
 
 		fadeButton(pass_turn);
 		fadeButton(capture);
@@ -256,18 +269,18 @@ public class BoardFrame extends JFrame {
 		capture.setForeground(new Color(255, 255, 255));
 		panel33.add(capture);
 		capture.setVisible(false);
-		
+
 		manual_c = new JButton("MANUAL CAPTURE");
 		manual_c.setBackground(new Color(0, 200, 0));
 		manual_c.setForeground(new Color(255, 255, 255));
 		panel33.add(manual_c);
-		//manual_c.setVisible(true);
-		
+		// manual_c.setVisible(true);
+
 		debug = new JButton("REFRESH");
 		debug.setBackground(new Color(0, 0, 200));
 		debug.setForeground(new Color(255, 200, 255));
 		panel33.add(debug);
-		
+
 		panel3.add(panel33, BorderLayout.EAST);
 	}
 
@@ -290,7 +303,7 @@ public class BoardFrame extends JFrame {
 
 		JLabel lc = new JLabel(" Win:");
 		lc.setForeground(Color.ORANGE);
-		
+
 		JLabel lm = new JLabel(" Manual Capture:");
 		lm.setForeground(Color.ORANGE);
 
@@ -552,9 +565,9 @@ public class BoardFrame extends JFrame {
 			pColor1.rotateColor(1);
 			pColor1.setBackground(Globals.CHEMIK_COLOR[1]);
 			pColor2.setBackground(Globals.CHEMIK_COLOR[0]);
-//			p1panel.getHolder().setBackground(BOARD_COLOR);
-//			p2panel.getHolder().setBackground(BOARD_COLOR);
-			
+			// p1panel.getHolder().setBackground(BOARD_COLOR);
+			// p2panel.getHolder().setBackground(BOARD_COLOR);
+
 		} else if (str.equals("Origins")) {
 			setSkin(new Color(0, 30, 0), new Color(10, 30, 0), new Color(60,
 					90, 60));
@@ -563,18 +576,18 @@ public class BoardFrame extends JFrame {
 			pColor1.rotateColor(1);
 			pColor1.setBackground(Globals.ORIGINE_COLOR[1]);
 			pColor2.setBackground(Globals.ORIGINE_COLOR[0]);
-//			p1panel.getHolder().setBackground(BOARD_COLOR);
-//			p2panel.getHolder().setBackground(BOARD_COLOR);
+			// p1panel.getHolder().setBackground(BOARD_COLOR);
+			// p2panel.getHolder().setBackground(BOARD_COLOR);
 		} else if (str.equals("Geeky")) {
-			setSkin(new Color(0, 0, 0), new Color(0, 0, 0), new Color(40,
-					60, 40));
+			setSkin(new Color(0, 0, 0), new Color(0, 0, 0), new Color(40, 60,
+					40));
 			pColor1.setArrayColors(Globals.CLASSIC_COLOR);
 			pColor2.setArrayColors(Globals.CLASSIC_COLOR);
 			pColor1.rotateColor(1);
 			pColor1.setBackground(Globals.CLASSIC_COLOR[1]);
 			pColor2.setBackground(Globals.CLASSIC_COLOR[0]);
-//			p1panel.getHolder().setBackground(BOARD_COLOR);
-//			p2panel.getHolder().setBackground(BOARD_COLOR);
+			// p1panel.getHolder().setBackground(BOARD_COLOR);
+			// p2panel.getHolder().setBackground(BOARD_COLOR);
 		} else {
 			setSkin(new Color(50, 50, 50), new Color(90, 90, 90), new Color(
 					100, 100, 100));
@@ -583,8 +596,8 @@ public class BoardFrame extends JFrame {
 			pColor1.rotateColor(1);
 			pColor1.setBackground(Globals.GEECKY_COLOR[1]);
 			pColor2.setBackground(Globals.GEECKY_COLOR[0]);
-//			p1panel.getHolder().setBackground(BOARD_COLOR);
-//			p2panel.getHolder().setBackground(BOARD_COLOR);
+			// p1panel.getHolder().setBackground(BOARD_COLOR);
+			// p2panel.getHolder().setBackground(BOARD_COLOR);
 		}
 	}
 
@@ -601,7 +614,7 @@ public class BoardFrame extends JFrame {
 			} else {
 				BoardFrame.AutoPass.setText("OFF");
 			}
-			
+
 			if (JKemik.settings_t.isManualCapture()) {
 				BoardFrame.ManualCap.setText("ON");
 				BoardFrame.manual_c.setVisible(true);
@@ -623,7 +636,8 @@ public class BoardFrame extends JFrame {
 	public static void setMakingGame(boolean inOptions) {
 		BoardFrame.makingGame = inOptions;
 	}
-	public static void newGameGuiUpdate(){
+
+	public static void newGameGuiUpdate() {
 		BoardFrame.desableGameControlPanel();
 		BoardFrame.pColor1.removeMouseListener(ViewEvents.p1Listener);
 		BoardFrame.pColor2.removeMouseListener(ViewEvents.p2Listener);
@@ -641,8 +655,8 @@ public class BoardFrame extends JFrame {
 		BoardFrame.boostButton(BoardFrame.capture);
 		BoardFrame.boostButton(BoardFrame.undo);
 		BoardFrame.print_point.setText("" + (new Point(0, 0)).toString());
-//		BoardFrame.p1panel.initPanelForNewGame(p1n, p1c);
-//		BoardFrame.p2panel.initPanelForNewGame(p2n, p2c);
+		// BoardFrame.p1panel.initPanelForNewGame(p1n, p1c);
+		// BoardFrame.p2panel.initPanelForNewGame(p2n, p2c);
 		BoardFrame.save.removeMouseListener(ViewEvents.saveListener);
 	}
 
@@ -685,7 +699,7 @@ public class BoardFrame extends JFrame {
 	public static JButton capture;
 	public static JButton manual_c;
 	public static JButton pass_turn;
-	
+
 	public static JLabel blank1;
 	public static JLabel blank2;
 	public static JLabel blank3;
