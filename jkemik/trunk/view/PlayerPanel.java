@@ -33,18 +33,18 @@ public class PlayerPanel extends JPanel {
 	private JLabel player_name;
 
 	// private JLabel plotted;
-	private JLabel plottedv;
+	private static JLabel plottedv;
 
 	// private JLabel captured;
-	private JLabel capturedv;
+	private static JLabel capturedv;
 
 	// private JLabel cells;
-	private JLabel cellsv;
+	private static JLabel cellsv;
 
 	// private JLabel plotted;
-	private JLabel captCellsv;
+	private static JLabel captCellsv;
 
-	private JLabel scorev;
+	private static JLabel scorev;
 	private final int FONT_SIZE = 9;
 
 	public PlayerPanel() {
@@ -88,11 +88,11 @@ public class PlayerPanel extends JPanel {
 		this.player_name = new JLabel("PName");
 		this.player_name.setHorizontalAlignment(SwingConstants.CENTER);
 
-		this.plottedv = new JLabel();
-		this.capturedv = new JLabel();
-		this.cellsv = new JLabel();
-		this.captCellsv = new JLabel();
-		this.scorev = new JLabel();
+		plottedv = new JLabel();
+		capturedv = new JLabel();
+		cellsv = new JLabel();
+		captCellsv = new JLabel();
+		scorev = new JLabel();
 
 		//this.player_name.setForeground(new Color(250, 250, 250));
 //		 player_name.setBorder(BorderFactory.createLineBorder(Color.BLACK,
@@ -100,30 +100,30 @@ public class PlayerPanel extends JPanel {
 		Font pfont = new Font("Arial", Font.BOLD, this.FONT_SIZE + 1);
 		this.player_name.setFont(pfont);
 
-		this.plottedv.setForeground(new Color(204, 255, 100));
-		Font pttvfont = new Font("Arial", this.plottedv.getFont().getStyle(),
+		plottedv.setForeground(new Color(204, 255, 100));
+		Font pttvfont = new Font("Arial", plottedv.getFont().getStyle(),
 				this.FONT_SIZE);
-		this.plottedv.setFont(pttvfont);
+		plottedv.setFont(pttvfont);
 
-		this.capturedv.setForeground(new Color(255, 51, 100));
-		Font cvfont = new Font("Arial", this.capturedv.getFont().getStyle(),
+		capturedv.setForeground(new Color(255, 51, 100));
+		Font cvfont = new Font("Arial", capturedv.getFont().getStyle(),
 				this.FONT_SIZE);
-		this.capturedv.setFont(cvfont);
+		capturedv.setFont(cvfont);
 
-		this.cellsv.setForeground(new Color(179, 100, 255));
-		Font clvfont = new Font("Arial", this.cellsv.getFont().getStyle(),
+		cellsv.setForeground(new Color(179, 100, 255));
+		Font clvfont = new Font("Arial", cellsv.getFont().getStyle(),
 				this.FONT_SIZE);
-		this.cellsv.setFont(clvfont);
+		cellsv.setFont(clvfont);
 
-		this.captCellsv.setForeground(new Color(255, 150, 100));
-		Font cplvfont = new Font("Arial", this.captCellsv.getFont().getStyle(),
+		captCellsv.setForeground(new Color(255, 150, 100));
+		Font cplvfont = new Font("Arial", captCellsv.getFont().getStyle(),
 				this.FONT_SIZE);
-		this.captCellsv.setFont(cplvfont);
+		captCellsv.setFont(cplvfont);
 
-		this.scorev.setForeground(new Color(0, 255, 0));
-		Font scvfont = new Font("Arial", this.scorev.getFont().getStyle(),
+		scorev.setForeground(new Color(0, 255, 0));
+		Font scvfont = new Font("Arial", scorev.getFont().getStyle(),
 				this.FONT_SIZE);
-		this.scorev.setFont(scvfont);
+		scorev.setFont(scvfont);
 
 		final JLabel plotted = new JLabel("  Plt Pt:");
 		final JLabel captured = new JLabel("  Cp Pt:");
@@ -165,15 +165,15 @@ public class PlayerPanel extends JPanel {
 
 		// add(new JLabel("  "));
 		this.holder.add(plotted);
-		this.holder.add(this.plottedv);
+		this.holder.add(plottedv);
 		this.holder.add(captured);
-		this.holder.add(this.capturedv);
+		this.holder.add(capturedv);
 		this.holder.add(cells);
-		this.holder.add(this.cellsv);
+		this.holder.add(cellsv);
 		this.holder.add(cptcells);
-		this.holder.add(this.captCellsv);
+		this.holder.add(captCellsv);
 		this.holder.add(score);
-		this.holder.add(this.scorev);
+		this.holder.add(scorev);
 		add(add(this.player_name), BorderLayout.NORTH);
 		add(add(this.holder), BorderLayout.SOUTH);
 		initPanel();
@@ -273,24 +273,29 @@ public class PlayerPanel extends JPanel {
 	// }
 	// }
 
-	public void updatePlayerPanel(Player p) {
+	public static void updatePlayerPanel(Player p) {
 		try {
-			setPlottedv("" + p.getPloted().size());
-			setCapturedv("" + p.getCapturedDots().size());
-			setCellsv("" + p.getCells().size());
-			setCaptCellsv("" + p.getCapturedCells().size());
-			setScorev("" + p.getScore());
+//			setPlottedv("" + p.getPloted().size());
+//			setCapturedv("" + p.getCapturedDots().size());
+//			setCellsv("" + p.getCells().size());
+//			setCaptCellsv("" + p.getCapturedCells().size());
+//			setScorev("" + p.getScore());
+			plottedv.setText("" + p.getPloted().size());
+			capturedv.setText("" + p.getCapturedDots().size());
+			cellsv.setText("" + p.getCells().size());
+			captCellsv.setText("" + p.getCapturedCells().size());
+			scorev.setText("" + p.getScore());
 		} catch (Exception e) {
 			System.out.println(" In PlayerPanel " + e.getMessage());
 		}
 	}
 
 	public void initPanel() {
-		this.plottedv.setText("0");
-		this.capturedv.setText("0");
-		this.cellsv.setText("0");
-		this.captCellsv.setText("0");
-		this.scorev.setText("0");
+		plottedv.setText("0");
+		capturedv.setText("0");
+		cellsv.setText("0");
+		captCellsv.setText("0");
+		scorev.setText("0");
 
 	}
 
@@ -301,11 +306,11 @@ public class PlayerPanel extends JPanel {
 			setPlayer("  " + pname);
 			setBg(pcolor);
 			this.player_name.setForeground(pcolor);
-			this.plottedv.setText("0");
-			this.capturedv.setText("0");
-			this.cellsv.setText("0");
-			this.captCellsv.setText("0");
-			this.scorev.setText("0");
+			plottedv.setText("0");
+			capturedv.setText("0");
+			cellsv.setText("0");
+			captCellsv.setText("0");
+			scorev.setText("0");
 		} catch (Exception e) {
 			System.err.println(" in PlayerPanel " + e.getMessage());
 		}
@@ -315,7 +320,7 @@ public class PlayerPanel extends JPanel {
 	 * @return the plottedv
 	 */
 	public JLabel getPlottedv() {
-		return this.plottedv;
+		return plottedv;
 	}
 
 	/**
@@ -338,7 +343,7 @@ public class PlayerPanel extends JPanel {
 	 *            the capturedv to set
 	 */
 	public void setCapturedv(String str) {
-		this.capturedv.setText(str);
+		capturedv.setText(str);
 	}
 
 	/**
@@ -353,7 +358,7 @@ public class PlayerPanel extends JPanel {
 	 *            the cellsv to set
 	 */
 	public void setCellsv(String str) {
-		this.cellsv.setText(str);
+		cellsv.setText(str);
 	}
 
 	/**
@@ -368,7 +373,7 @@ public class PlayerPanel extends JPanel {
 	 *            the captCellsv to set
 	 */
 	public void setCaptCellsv(String str) {
-		this.captCellsv.setText(str);
+		captCellsv.setText(str);
 	}
 
 	/**
@@ -383,7 +388,7 @@ public class PlayerPanel extends JPanel {
 	 *            the scorev to set
 	 */
 	public void setScorev(String str) {
-		this.scorev.setText(str);
+		scorev.setText(str);
 	}
 
 	// public void setPlayerName(String name) {
