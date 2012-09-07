@@ -34,7 +34,11 @@ public class ViewEvents {
 	public static HelpListener helpListener = new HelpListener(BoardFrame.help);
 	public static DebugListener debugListener = new DebugListener(BoardFrame.debug);
 	public static WindowEvents windowListener = new WindowEvents(JKemik.view);
+	public static ManualCaptureButtonListener manualCaptureButtonListener = new ManualCaptureButtonListener(BoardFrame.manual_c);	
 	
+	public static void manualCaptureButtonActionListener(JButton manual){
+		manual.addMouseListener(manualCaptureButtonListener);
+	}
 	public static void windowActionListener(){
 		JKemik.view.addComponentListener(windowListener);
 	}

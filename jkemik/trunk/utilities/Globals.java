@@ -29,9 +29,9 @@ public class Globals {
 	public static final double FRAME_WIDTH = 1280;
 	public static final double FRAME_HEIGHT = 800;
 	public static final Color[] CHEMIK_COLOR = {
-		new Color(255, 255, 255),
-		new Color(0, 0, 0),
-		new Color(255, 255, 0)};
+		new Color(250, 0, 255),
+		new Color(170, 200, 190),
+		new Color(255, 255, 100)};
 	public static final Color[] ORIGINE_COLOR = {
 		new Color(200, 50, 100),
 		new Color(0, 45, 200),
@@ -43,7 +43,7 @@ public class Globals {
 		new Color(100, 250, 110)};
 	public static final Color[] GEECKY_COLOR = {
 		new Color(125, 245, 185),
-		new Color(193, 245, 125),
+		new Color(130, 255, 125),
 		new Color(224, 24, 242)};
 	
 }

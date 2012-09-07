@@ -2,10 +2,7 @@ package controler;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.JButton;
-
-import view.BoardFrame;
 import view.Grid;
 
 public class ManualCaptureButtonListener implements MouseListener{
@@ -17,7 +14,7 @@ public class ManualCaptureButtonListener implements MouseListener{
 
 	public void mouseClicked(MouseEvent arg0) {
 		Grid.setManualc(true);
-		BoardFrame.repaintGrid();
+		//Grid.setLastPoint(new Point(Grid.x, Grid.y));
 	}
 
 	public void mouseEntered(MouseEvent arg0) {

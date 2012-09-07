@@ -34,6 +34,7 @@ public class Grid extends JPanel {
 	public static double half_squareSize = 32;
 	public static boolean mouseclicked = false;
 	public static boolean plotPoint = false;
+	public static boolean selectPoint = false;
 	public static boolean debug = false;
 	public static boolean manualc = false;
 	public static boolean mouseMove = false;
@@ -51,10 +52,8 @@ public class Grid extends JPanel {
 
 	public static double Columns = 0.0, rows = 0.0;
 	public static double x = 0, y = 0, hl_x = 0, hl_y = 0;
-	private static Cell cell = null;
+	public static Cell cell = null;
 	public static int position_count = 0;
-//	private static Point lastPoint = new Point(999999, 99999);
-//	private static Point firstPoint = new Point(997999, 99899);
 
 	public Grid(int squareSize) {
 		setPreferredSize(new Dimension((int) Width, (int) Height));
@@ -100,6 +99,14 @@ public class Grid extends JPanel {
 				plotPoint = false;
 				mouseclicked = false;
 			}
+			
+			if(selectPoint){
+				Color fade = game.getCurrentP().getFadedColor();
+				drawCircle(new Point(x, y), fade);
+				g2.setColor(fade);
+				selectPoint = false;
+			}
+			
 			if (drawCell(cell)) {
 				cell = null;
 			}
@@ -142,78 +149,6 @@ public class Grid extends JPanel {
 			hl_y = y;
 		}
 		mouseMove = false;
-	}
-
-	public static boolean connectDots() {
-
-		Game game = JKemik.game;
-		game.getCurrentP().setSuccessful(false);
-
-		ArrayList<Point> currentPPoints = game.getCurrentP().getPloted();
-
-		int start = currentPPoints.size() - 1;
-		for (int i = start; i >= 0; i--) {
-			Point currentPP = currentPPoints.get(i);
-			game.getCurrentP().setOrigin(currentPP);
-			try {
-
-				cell = game.capture(currentPP, squareSize);
-				if (cell != null) {
-					System.out.println("Cell was not NULL");
-					// if (drawCell(cell)) {
-					// game.getCurrentP().setSelected(new ArrayList<Point>());
-					// // i = -1;
-					//
-					// return true;
-					// }
-					return true;
-				} else {
-					continue;
-				}
-			} catch (IndexOutOfBoundsException e) {
-				game.getCurrentP().setSelected(new ArrayList<Point>());
-				System.out.println("In connectDots(): Area out of bounds"
-						+ e.getMessage());
-				continue;
-			} catch (NullPointerException e) {
-				System.out.println("In connectDots(): " + e.getMessage());
-				continue;
-			}
-		}
-		return false;
-	}
-
-	public static boolean embush() {
-		Game game = JKemik.game;
-		if (JKemik.settings_t.isAutoCapture()) {
-			try {
-				if (connectDots()) {
-					return true;
-				} else {
-					game.setEmbuche_on(false);
-				}
-			} catch (Exception e) {
-				System.out.println("Error in PaintComponent: capture "
-						+ e.getMessage());
-			}
-		} else {
-			if (JKemik.settings_t.isManualCapture()) {
-				try {
-					if (connectDots()) {
-						game.setEmbuche_on(false);
-						return true;
-					} else {
-						game.setEmbuche_on(false);
-					}
-				} catch (Exception e) {
-					System.out.println("Error in PaintComponent: capture "
-							+ e.getMessage());
-				}
-				JKemik.settings_t.setManualCapture(false);
-
-			}
-		}
-		return false;
 	}
 
 	private static boolean drawCell(Cell cell) {
@@ -624,4 +559,13 @@ public class Grid extends JPanel {
 	public static void setManualc(boolean manualc) {
 		Grid.manualc = manualc;
 	}
+
+//	public static Point getLastPoint() {
+//		return lastPoint;
+//	}
+//
+//	public static void setLastPoint(Point lastPoint) {
+//		Grid.lastPoint = lastPoint;
+//	}
+	
 }
