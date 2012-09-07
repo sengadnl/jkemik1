@@ -81,8 +81,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		if (JKemik.game.getCurrentP().isTurn()) {
 			this.grid.setMouseclicked(true);
 		}
-		BoardFrame.p1panel.updatePlayerPanel(JKemik.game.getPlayer1());
-		BoardFrame.p2panel.updatePlayerPanel(JKemik.game.getPlayer2());
+//		BoardFrame.p1panel.updatePlayerPanel(JKemik.game.getPlayer1());
+//		BoardFrame.p2panel.updatePlayerPanel(JKemik.game.getPlayer2());
 
 	}
 
