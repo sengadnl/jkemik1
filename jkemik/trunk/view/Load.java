@@ -51,7 +51,7 @@ public class Load extends JFrame {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		add(label, BorderLayout.NORTH);
 		
-		JKIcon icon = new JKIcon("media/jkemik-logo.gif", "");
+		JKIcon icon = new JKIcon("media/jkemik-logo.PNG", "");
 		add(icon.createIcon(), BorderLayout.CENTER);
 
 		progressBar = new JProgressBar(0, MAX_VAL);
@@ -62,17 +62,17 @@ public class Load extends JFrame {
 
 	}
 
-//	public static void increment() {
-//		long num = 700;
-//		try {
-//			for (int i = 1; i <= MAX_VAL; i++) {
-//				progressBar.setValue(i);
-//				Thread.sleep(num);
-//			}
-//		} catch (Exception e) {
-//
-//		}
-//	}
+	public static void increment() {
+		long num = 700;
+		try {
+			for (int i = 1; i <= MAX_VAL; i++) {
+				progressBar.setValue(i);
+				Thread.sleep(num);
+			}
+		} catch (Exception e) {
+
+		}
+	}
 
 	/**
 	 * @return the progressBar
@@ -111,9 +111,9 @@ public class Load extends JFrame {
 	}
 
 //	public static void main(String[] args) throws InterruptedException {
-//		Load frame = new Load(250, 80);
-//		//increment();
-//		// frame.count();
-//		// System.exit(0);
+//		Load frame = new Load(360, 200);
+//		increment();
+//		//frame.count();
+//		//System.exit(0);
 //	}
 }

@@ -44,7 +44,7 @@ public class JKemik extends Application {
 
 	protected void init() {
 		try {
-			load = new Load(400, 210);
+			load = new Load(360, 200);
 			System.out.println("Before checking tmp");
 			File tmp = new File(Globals.tempFile);
 			if (tmp.exists()) {
@@ -102,12 +102,13 @@ public class JKemik extends Application {
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(
 					new FileOutputStream(s_object));
-			out.writeObject(settings_t);
-
 			ObjectOutputStream out1 = new ObjectOutputStream(
 					new FileOutputStream(t_object));
+			
+			out.writeObject(settings_t);
 			out1.writeObject(template);
-
+			out.close();
+			out1.close();
 		} catch (FileNotFoundException exception1) {
 			System.out.println("JKemik: writeSettings "
 					+ exception1.getMessage());
@@ -115,7 +116,6 @@ public class JKemik extends Application {
 			System.out.println("JKemik: writeSettings "
 					+ exception2.getMessage());
 		}
-
 	}
 	
 	public static void writeGame() {
@@ -123,7 +123,7 @@ public class JKemik extends Application {
 			ObjectOutputStream out = new ObjectOutputStream(
 					new FileOutputStream(g_object));
 			out.writeObject(game);
-
+			out.close();
 		} catch (FileNotFoundException exception1) {
 			System.out.println("JKemik: writeGame "
 					+ exception1.getMessage());
@@ -131,7 +131,6 @@ public class JKemik extends Application {
 			System.out.println("JKemik: writeGame "
 					+ exception2.getMessage());
 		}
-
 	}
 
 	public static void updateSettingsPanel() {
