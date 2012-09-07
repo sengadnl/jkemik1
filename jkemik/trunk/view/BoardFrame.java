@@ -104,7 +104,7 @@ public class BoardFrame extends JFrame {
 		ViewEvents.onManualCaptureAction();
 		ViewEvents.exitListener();
 		ViewEvents.helpListener();
-		// ViewEvents.windowActionListener();
+		ViewEvents.manualCaptureButtonActionListener(manual_c);
 
 		fadeButton(pass_turn);
 		fadeButton(capture);
@@ -183,7 +183,7 @@ public class BoardFrame extends JFrame {
 		Game_status = new JLabel("NEW");
 		Game_status.setForeground(Color.GREEN);
 
-		settings = new JLabel("OPTIONS");
+		settings = new JLabel("SETTINGS");
 		settings.setForeground(new Color(150, 150, 255));
 
 		exit = new JLabel("EXIT");
@@ -264,7 +264,7 @@ public class BoardFrame extends JFrame {
 		panel33.add(undo);
 		undo.setVisible(false);
 
-		capture = new JButton("AMBUSH");
+		capture = new JButton("CAPTURE");
 		capture.setBackground(new Color(0, 200, 0));
 		capture.setForeground(new Color(255, 255, 255));
 		panel33.add(capture);
@@ -274,7 +274,7 @@ public class BoardFrame extends JFrame {
 		manual_c.setBackground(new Color(0, 200, 0));
 		manual_c.setForeground(new Color(255, 255, 255));
 		panel33.add(manual_c);
-		// manual_c.setVisible(true);
+		//manual_c.setVisible(true);
 
 		debug = new JButton("REFRESH");
 		debug.setBackground(new Color(0, 0, 200));
@@ -558,26 +558,23 @@ public class BoardFrame extends JFrame {
 
 	public void setTheme(String str) {
 		if (str.equals("Jkemik")) {
-			setSkin(new Color(90, 73, 23), new Color(90, 90, 0), new Color(194,
-					170, 36));
+			setSkin(new Color(0, 0, 0), new Color(0, 0, 0), new Color(111,
+					53, 70));
 			pColor1.setArrayColors(Globals.CHEMIK_COLOR);
 			pColor2.setArrayColors(Globals.CHEMIK_COLOR);
 			pColor1.rotateColor(1);
 			pColor1.setBackground(Globals.CHEMIK_COLOR[1]);
 			pColor2.setBackground(Globals.CHEMIK_COLOR[0]);
-			// p1panel.getHolder().setBackground(BOARD_COLOR);
-			// p2panel.getHolder().setBackground(BOARD_COLOR);
 
 		} else if (str.equals("Origins")) {
-			setSkin(new Color(0, 30, 0), new Color(10, 30, 0), new Color(60,
-					90, 60));
+			setSkin(new Color(0, 0, 0), new Color(0, 0, 0), new Color(110,
+					56, 27));
 			pColor1.setArrayColors(Globals.ORIGINE_COLOR);
 			pColor2.setArrayColors(Globals.ORIGINE_COLOR);
 			pColor1.rotateColor(1);
 			pColor1.setBackground(Globals.ORIGINE_COLOR[1]);
 			pColor2.setBackground(Globals.ORIGINE_COLOR[0]);
-			// p1panel.getHolder().setBackground(BOARD_COLOR);
-			// p2panel.getHolder().setBackground(BOARD_COLOR);
+	
 		} else if (str.equals("Geeky")) {
 			setSkin(new Color(0, 0, 0), new Color(0, 0, 0), new Color(40, 60,
 					40));
@@ -586,21 +583,19 @@ public class BoardFrame extends JFrame {
 			pColor1.rotateColor(1);
 			pColor1.setBackground(Globals.CLASSIC_COLOR[1]);
 			pColor2.setBackground(Globals.CLASSIC_COLOR[0]);
-			// p1panel.getHolder().setBackground(BOARD_COLOR);
-			// p2panel.getHolder().setBackground(BOARD_COLOR);
+		
 		} else {
-			setSkin(new Color(50, 50, 50), new Color(90, 90, 90), new Color(
-					100, 100, 100));
+			setSkin(new Color(0, 0, 0), new Color(0, 0, 0), new Color(
+					70, 70, 20));
 			pColor1.setArrayColors(Globals.GEECKY_COLOR);
 			pColor2.setArrayColors(Globals.GEECKY_COLOR);
 			pColor1.rotateColor(1);
 			pColor1.setBackground(Globals.GEECKY_COLOR[1]);
 			pColor2.setBackground(Globals.GEECKY_COLOR[0]);
-			// p1panel.getHolder().setBackground(BOARD_COLOR);
-			// p2panel.getHolder().setBackground(BOARD_COLOR);
+			
 		}
 	}
-
+	
 	public static void upDateSetting() {
 		try {
 			if (JKemik.settings_t.isAutoCapture()) {

@@ -20,55 +20,46 @@ public class WindowEvents implements WindowListener, ComponentListener{
 	public void windowActivated(WindowEvent arg0) {
 		Grid.setDebug(true);
 		BoardFrame.repaintGrid();
-		
 	}
 
 	@Override
 	public void windowClosed(WindowEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void windowClosing(WindowEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void windowDeactivated(WindowEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void windowDeiconified(WindowEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void windowIconified(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void windowOpened(WindowEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void componentHidden(ComponentEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void componentMoved(ComponentEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -80,7 +71,6 @@ public class WindowEvents implements WindowListener, ComponentListener{
 	@Override
 	public void componentShown(ComponentEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public void setFrame(JFrame frame) {

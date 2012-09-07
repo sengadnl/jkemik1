@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import api.Game;
+import api.Player;
 import api.Point;
 
 import utilities.Tools;
@@ -25,7 +26,6 @@ import view.Grid;
 public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 	private Grid grid;
-
 	public GridMouseListener(Grid grid) {
 		this.grid = grid;
 	}
@@ -35,40 +35,55 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		Grid.x = e.getX();
 		Grid.y = e.getY();
 		Game game = JKemik.game;
-		Grid.closestTo(Grid.x, Grid.y, (int)Grid.squareSize);
+		Player current = game.getCurrentP();
+		Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
 		Point temp = new Point(Grid.x, Grid.y);
-		if (game.getCurrentP().isTurn()) {
-			if (!Tools.containPoint(temp, game.getCurrentP().getPloted())
-					&& !Tools.containPoint(temp, game.getGuest()
-							.getPloted())
+		if (Grid.manualc) {
+			
+			if (Tools.containPoint(temp, game.getCurrentP().getPloted())
 					&& !Tools.containPoint(temp, game.getDeadDots())) {
-				Grid.plotPoint = true;
+				Grid.selectPoint = true;
+				current.getSelected().add(temp);
+//				if(current.getSelected().size() == 1){
+//					current.setOrigin(temp);
+//				}
+//				if (temp.compareTo(current.getOrigin()) == 0
+//						&& current.getSelected().size() > 3) {
+//					current.setOrigin(null);/* Reset the origin */
+//					Grid.cell = game.capture((int)Grid.squareSize);
+//				}
 				BoardFrame.grid.repaint();
-				
-				game.getCurrentP().getPloted().add(temp);
-				game.setEmbuche_on(true);
-				game.setPlayFlag();
-				game.getCurrentP().setTurn(false);
-				Grid.mouseMove = false;
+			}
+		} else {
+			if (game.getCurrentP().isTurn()) {
+				if (!Tools.containPoint(temp, game.getCurrentP().getPloted())
+						&& !Tools.containPoint(temp, game.getGuest()
+								.getPloted())
+						&& !Tools.containPoint(temp, game.getDeadDots())) {
+					Grid.plotPoint = true;
+					BoardFrame.grid.repaint();
+
+					game.getCurrentP().getPloted().add(temp);
+					game.setEmbuche_on(true);
+					game.setPlayFlag();
+					game.getCurrentP().setTurn(false);
+					Grid.mouseMove = false;
+				}
 			}
 		}
-		
-		if (game.isEmbuche_on() && Grid.embush()) {
+
+		if (game.isEmbuche_on()) {
+			 Grid.cell = game.embush(Grid.squareSize);// new line
 			BoardFrame.grid.repaint();
 			game.getCurrentP().setSelected(new ArrayList<Point>());
 		}
-		
-//		if (JKemik.settings_t.isAutoPass()
-//				&& game.getCurrentP().getPlay_flag() == 1) {
-//			game.switchPlayTurns();
-//		}
-		//BoardFrame.repaintGrid();
+
 		if (JKemik.game.getCurrentP().isTurn()) {
 			this.grid.setMouseclicked(true);
 		}
 		BoardFrame.p1panel.updatePlayerPanel(JKemik.game.getPlayer1());
 		BoardFrame.p2panel.updatePlayerPanel(JKemik.game.getPlayer2());
-		
+
 	}
 
 	public void mouseEntered(MouseEvent e) {
@@ -95,7 +110,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		Grid.mouseMove = true;
 		Grid.x = e.getX();
 		Grid.y = e.getY();
-		
+
 		Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
 		Point temp = Grid.makeDrawable(Grid.x, Grid.y);
 		Game game = JKemik.game;
@@ -107,12 +122,12 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			BoardFrame.grid.repaint();
 			Grid.mouseMove = true;
 		}
-		
+
 		if (JKemik.game.checkEndGame()) {
 			JOptionPane.showMessageDialog(null, ""
 					+ JKemik.game.getGuest().getName() + " WINS !!!", " Win",
 					JOptionPane.OK_OPTION);
-			
+
 			BoardFrame.pColor1.addMouseListener(ViewEvents.p1Listener);
 			BoardFrame.pColor2.addMouseListener(ViewEvents.p2Listener);
 			BoardFrame.label1.addMouseListener(ViewEvents.n1Listener);
@@ -141,7 +156,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 			BoardFrame.p1panel.initPanelForNewGame("P1", Color.WHITE);
 			BoardFrame.p2panel.initPanelForNewGame("P2", Color.WHITE);
-		} 		
+		}
 
 		BoardFrame.grid.repaint();
 	}

@@ -6,6 +6,8 @@ package api;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+
+import controler.JKemik;
 import utilities.Tools;
 
 /**
@@ -89,7 +91,8 @@ public class Game implements Serializable {
 				} else if (!Tools.containPoint(p, getDeadDots())
 						&& !Tools.containPoint(p, current)
 						&& !Tools.containPoint(p, guestP)) {//
-					getDeadDots().add(p);//
+//					getDeadDots().add(p);//
+					deadDots.add(p);
 
 				}/* end first if else */
 			}/* end of second for loop */
@@ -104,6 +107,111 @@ public class Game implements Serializable {
 		}
 
 		return cell;
+	}
+
+	public Cell capture(int squareSize) {
+		Cell cell = null; /* cell to be returned */
+
+		ArrayList<Point> guestP = guest.getPloted();
+		ArrayList<Point> current = currentP.getPloted();
+		ArrayList<Point> currPlayerCaptures = currentP.getCapturedDots();
+		ArrayList<Point> captured = new ArrayList<Point>();
+		ArrayList<Point> TempArea = Tools.getArea(currentP.getSelected(),
+				squareSize);
+
+		ArrayList<Point> area = getTrueArea(current, TempArea);
+
+		if (isAreaEmpty(area, guestP)) {
+			currentP.setSelected(new ArrayList<Point>());
+			return null;
+		}
+
+		/* Go through all selected dots from recursion */
+		for (Point p : area) {
+			if (Tools.containPoint(p, guestP)
+					&& !Tools.containPoint(p, currPlayerCaptures)) {
+
+				/* keep track of captures for this cell */
+				captured.add(p);
+
+				/* keep track of total captures for this player */
+				currPlayerCaptures.add(p);
+				getDeadDots().add(p);//
+				guestP.remove(p);
+
+			} else if (!Tools.containPoint(p, getDeadDots())
+					&& !Tools.containPoint(p, current)
+					&& !Tools.containPoint(p, guestP)) {//
+				getDeadDots().add(p);//
+
+			}/* end first if else */
+		}/* end of second for loop */
+		currentP.getConnectedPoints().addAll(currentP.getSelected());
+		cell = new Cell(currentP.getSelected(), area, captured, null);// Engine.getGame().
+
+		calculateScore(cell);
+		return cell;
+	}
+	
+	public boolean connectDots(double squareSize) {
+		currentP.setSuccessful(false);
+
+		ArrayList<Point> currentPPoints = currentP.getPloted();
+
+		int start = currentPPoints.size() - 1;
+		for (int i = start; i >= 0; i--) {
+			Point currentPP = currentPPoints.get(i);
+			currentP.setOrigin(currentPP);
+			try {
+
+				tempCell = capture(currentPP, squareSize);
+				if (tempCell != null) {
+					System.out.println("Cell was not NULL");
+					return true;
+				} else {
+					continue;
+				}
+			} catch (IndexOutOfBoundsException e) {
+				currentP.setSelected(new ArrayList<Point>());
+				System.out.println("In connectDots(): Area out of bounds"
+						+ e.getMessage());
+				continue;
+			} catch (NullPointerException e) {
+				System.out.println("In connectDots(): " + e.getMessage());
+				continue;
+			}
+		}
+		return false;
+	}
+	public Cell embush(double squareSize) {
+		if (JKemik.settings_t.isAutoCapture()) {
+			try {
+				if (connectDots(squareSize)) {
+					return tempCell;
+				} else {
+					embuche_on = false;
+				}
+			} catch (Exception e) {
+				System.out.println("Error in PaintComponent: capture "
+						+ e.getMessage());
+			}
+		} else {
+			if (JKemik.settings_t.isManualCapture()) {
+				try {
+					if (connectDots(squareSize)) {
+						embuche_on = false;
+						return tempCell;
+					} else {
+						embuche_on = false;
+					}
+				} catch (Exception e) {
+					System.out.println("Error in PaintComponent: capture "
+							+ e.getMessage());
+				}
+				JKemik.settings_t.setManualCapture(false);
+			}
+		}
+		return null;
 	}
 
 	public boolean isPlottable(Point p) {
@@ -290,7 +398,6 @@ public class Game implements Serializable {
 		return false;
 	}
 
-	
 	/**
 	 * @return the deadDots
 	 */
@@ -503,7 +610,15 @@ public class Game implements Serializable {
 	public void setMaxScore(int max) {
 		this.maxScore = max;
 	}
-	
+
+	public Cell getTempCell() {
+		return tempCell;
+	}
+
+	public void setTempCell(Cell tempCell) {
+		this.tempCell = tempCell;
+	}
+
 	/* Connecting dots utilities */
 	public Point origin = new Point(1000.0, 1000.0);
 	public Point from = new Point(553355, 7798979);
@@ -511,8 +626,8 @@ public class Game implements Serializable {
 	public boolean connect = false;
 	public boolean embuche_on = false;
 	public boolean see_wall = false;
-	
-	
+	private Cell tempCell = null;
+
 	public Point lastp = new Point(553355, 7798979);
 	private double curX = 0.0;
 	private double curY = 0.0;
