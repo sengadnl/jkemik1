@@ -63,7 +63,6 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 						&& !Tools.containPoint(temp, game.getDeadDots())) {
 					Grid.plotPoint = true;
 					BoardFrame.grid.repaint();
-
 					game.getCurrentP().getPloted().add(temp);
 					game.setEmbuche_on(true);
 					game.setPlayFlag();
@@ -82,11 +81,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		if (JKemik.game.getCurrentP().isTurn()) {
 			this.grid.setMouseclicked(true);
 		}
-//		BoardFrame.p1panel.updatePlayerPanel(JKemik.game.getPlayer1());
-//		BoardFrame.p2panel.updatePlayerPanel(JKemik.game.getPlayer2());
-		PlayerPanel.updatePlayerPanel(JKemik.game.getPlayer1());
-		PlayerPanel.updatePlayerPanel(JKemik.game.getPlayer2());
-
+		//PlayerPanel.updatePlayerPanel(JKemik.game.getCurrentP());
 	}
 
 	public void mouseEntered(MouseEvent e) {
@@ -153,12 +148,13 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			BoardFrame.fadeButton(BoardFrame.undo);
 
 			// Reset grid
-			BoardFrame.panel2.repaint();
+//			BoardFrame.panel2.repaint();
+//			BoardFrame.panel1.repaint();
 			BoardFrame.grid.drawn = false;
 			BoardFrame.grid.repaint();
 
-			BoardFrame.p1panel.initPanelForNewGame("P1", Color.WHITE);
-			BoardFrame.p2panel.initPanelForNewGame("P2", Color.WHITE);
+//			BoardFrame.p1panel.initPanelForNewGame("P1", Color.WHITE);
+//			BoardFrame.p2panel.initPanelForNewGame("P2", Color.WHITE);
 		}
 
 		BoardFrame.grid.repaint();

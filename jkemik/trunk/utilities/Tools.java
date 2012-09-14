@@ -231,49 +231,6 @@ public class Tools {
 		return odd;
 	}
 
-	/**
-	 * This function checks the previous and the next point of the parameter
-	 * point to see if the are on the same x axis.
-	 */
-	public static boolean isHill(Point p, ArrayList<Point> list) {
-		boolean ret = false;
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).compareTo(p) == 0) {
-				if (list.get(i - 1).getXC() == list.get(i + 1).getXC()) {
-					ret = true;
-					break;
-				}
-			}
-		}
-		return ret;
-	}
-
-	// public static void filterX(Point p, ArrayList<Point> area,
-	// ArrayList<Point> selected, int squareSize) {
-	// double left = p.getXC(), right = p.getXC();
-	// left = left + squareSize;
-	// while (true) {
-	// Point newPoint = new Point(left, p.getYC());
-	// if (containPoint(newPoint, selected) || newPoint.getXC() > 0.0) {
-	// break;
-	// }
-	// if (containPoint(newPoint, area)) {
-	// area.remove(newPoint);
-	// }
-	// left = left - squareSize;
-	// }
-	//
-	// while (true) {
-	// Point newPoint = new Point(right, p.getYC());
-	// if (containPoint(newPoint, selected) || newPoint.getXC() > 1000.0) {
-	// break;
-	// }
-	// if (containPoint(newPoint, area)) {
-	// area.remove(newPoint);
-	// }
-	// right = right + squareSize;
-	// }
-	// }
 
 	/**
 	 * this function filters the Area

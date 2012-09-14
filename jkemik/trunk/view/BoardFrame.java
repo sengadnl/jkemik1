@@ -156,7 +156,8 @@ public class BoardFrame extends JFrame {
 
 		panel11.setLayout(new BorderLayout());
 
-		JKIcon icon = new JKIcon("media/jkemik-logo-small.gif", "");
+		//JKIcon icon = new JKIcon("media/jkemik-logo-small.gif", "");
+		JKIcon icon = new JKIcon("media/jkemik-small.png", "");
 		panel11.add(icon.createIcon(), BorderLayout.LINE_START);
 		panel1.add(panel11, BorderLayout.WEST);
 
