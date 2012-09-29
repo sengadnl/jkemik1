@@ -209,7 +209,7 @@ public class BoardFrame extends JFrame {
 		p1panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (PLAYER_PNL_H_SCALAR * SIDE_HEIGHT * this.height));
 		panel21.add(p1panel);
-		p1panel.initPanelForNewGame(JKemik.template.getP2_name(), Color.WHITE);
+		p1panel.initPanelForNewGame(JKemik.template.getP1_name(), Color.WHITE);
 
 		grid = new Grid((int) JKemik.template.getG_size());
 		Tools.resetMaxWin(Grid.squareCount(), JKemik.settings_t);

@@ -18,7 +18,6 @@ import api.Point;
 import utilities.Tools;
 import view.BoardFrame;
 import view.Grid;
-import view.PlayerPanel;
 
 /**
  * @author dalet
@@ -81,7 +80,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		if (JKemik.game.getCurrentP().isTurn()) {
 			this.grid.setMouseclicked(true);
 		}
-		//PlayerPanel.updatePlayerPanel(JKemik.game.getCurrentP());
+		BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
+		BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
 	}
 
 	public void mouseEntered(MouseEvent e) {
