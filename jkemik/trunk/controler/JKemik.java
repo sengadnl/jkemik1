@@ -69,11 +69,12 @@ public class JKemik extends Application {
 	protected void idle() {
 		try {
 			if (screenResolutionCheck()) {
-				view = BoardFrame.getInstance(Globals.FRAME_WIDTH, Globals.FRAME_HEIGHT);
+				view = BoardFrame.getInstance(Globals.FRAME_WIDTH,
+						Globals.FRAME_HEIGHT);
 			} else {
 				System.out.println("Exiting ...");
 				System.exit(0);
-				//setDone();
+				// setDone();
 			}
 		} catch (Exception e) {
 		}
@@ -104,7 +105,7 @@ public class JKemik extends Application {
 					new FileOutputStream(s_object));
 			ObjectOutputStream out1 = new ObjectOutputStream(
 					new FileOutputStream(t_object));
-			
+
 			out.writeObject(settings_t);
 			out1.writeObject(template);
 			out.close();
@@ -117,7 +118,7 @@ public class JKemik extends Application {
 					+ exception2.getMessage());
 		}
 	}
-	
+
 	public static void writeGame() {
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(
@@ -125,11 +126,9 @@ public class JKemik extends Application {
 			out.writeObject(game);
 			out.close();
 		} catch (FileNotFoundException exception1) {
-			System.out.println("JKemik: writeGame "
-					+ exception1.getMessage());
+			System.out.println("JKemik: writeGame " + exception1.getMessage());
 		} catch (IOException exception2) {
-			System.out.println("JKemik: writeGame "
-					+ exception2.getMessage());
+			System.out.println("JKemik: writeGame " + exception2.getMessage());
 		}
 	}
 
@@ -141,13 +140,14 @@ public class JKemik extends Application {
 		String str = "" + settings_t.getMaxWinVal();
 		SettingsPanel.setMax_win(str);
 	}
+
 	public static void readGameObj() {
 		try {
 
 			if (g_object.exists()) {
 				ObjectInputStream input = new ObjectInputStream(
 						new FileInputStream(g_object));
-				game = (Game)input.readObject();
+				game = (Game) input.readObject();
 				// updateSettingsPanel();
 				input.close();
 			} else {
@@ -155,14 +155,11 @@ public class JKemik extends Application {
 						Color.WHITE, "Sarah"));
 			}
 		} catch (FileNotFoundException exception1) {
-			System.out.println("JKemik: readGame "
-					+ exception1.getMessage());
+			System.out.println("JKemik: readGame " + exception1.getMessage());
 		} catch (IOException exception2) {
-			System.out.println("JKemik: readGame "
-					+ exception2.getMessage());
+			System.out.println("JKemik: readGame " + exception2.getMessage());
 		} catch (ClassNotFoundException exception3) {
-			System.out.println("JKemik: readGame "
-					+ exception3.getMessage());
+			System.out.println("JKemik: readGame " + exception3.getMessage());
 		}
 
 	}
@@ -222,8 +219,9 @@ public class JKemik extends Application {
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		if (Globals.FRAME_HEIGHT > dimension.getHeight()
 				&& Globals.FRAME_WIDTH > dimension.getWidth()) {
-			JOptionPane.showMessageDialog(null,
-					"JKemik only supports 1280 X 800 screen resolution and greater.");
+			JOptionPane
+					.showMessageDialog(null,
+							"JKemik only supports 1280 X 800 screen resolution and greater.");
 			return false;
 		}
 		return true;

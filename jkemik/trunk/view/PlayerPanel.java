@@ -33,18 +33,18 @@ public class PlayerPanel extends JPanel {
 	private JLabel player_name;
 
 	// private JLabel plotted;
-	private static JLabel plottedv;
+	private JLabel plottedv;
 
 	// private JLabel captured;
-	private static JLabel capturedv;
+	private JLabel capturedv;
 
 	// private JLabel cells;
-	private static JLabel cellsv;
+	private JLabel cellsv;
 
 	// private JLabel plotted;
-	private static JLabel captCellsv;
+	private JLabel captCellsv;
 
-	private static JLabel scorev;
+	private JLabel scorev;
 	private final int FONT_SIZE = 9;
 
 	public PlayerPanel() {
@@ -273,7 +273,7 @@ public class PlayerPanel extends JPanel {
 	// }
 	// }
 
-	public static void updatePlayerPanel(Player p) {
+	public void updatePlayerPanel(Player p) {
 		try {
 //			setPlottedv("" + p.getPloted().size());
 //			setCapturedv("" + p.getCapturedDots().size());
