@@ -74,6 +74,8 @@ public class SaveButtonListener implements MouseListener {
 			BoardFrame.boostButton(BoardFrame.pass_turn);
 			BoardFrame.boostButton(BoardFrame.capture);
 			BoardFrame.boostButton(BoardFrame.undo);
+			BoardFrame.boostButton(BoardFrame.manual_c);
+			BoardFrame.boostButton(BoardFrame.debug);
 			BoardFrame.print_point.setText("" + (new Point(0, 0)).toString());
 			String p1n = t.getP1_name();
 			String p2n = t.getP2_name();
@@ -94,19 +96,7 @@ public class SaveButtonListener implements MouseListener {
 			}
 			BoardFrame.grid.addMouseListener(ViewEvents.gridListener);
 			BoardFrame.grid.addMouseMotionListener(ViewEvents.gridListener);
-			if (JKemik.settings_t.isAutoCapture()) {
-				BoardFrame.capture.setVisible(false);
-			} else {
-				BoardFrame.capture.setVisible(true);
-			}
 
-			if (JKemik.settings_t.isAutoPass()) {
-				BoardFrame.undo.setVisible(false);
-				BoardFrame.pass_turn.setVisible(false);
-			} else {
-				BoardFrame.undo.setVisible(true);
-				BoardFrame.pass_turn.setVisible(true);
-			}
 			BoardFrame.setMakingGame(false);
 			JKemik.settings.setVisible(false);
 			JKemik.writeSettings();

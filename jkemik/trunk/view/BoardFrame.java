@@ -230,17 +230,7 @@ public class BoardFrame extends JFrame {
 	}
 
 	private void designPanel3() {
-		panel31 = new JPanel();
-		panel33 = new JPanel();
-		panel31.setPreferredSize(new Dimension(
-				(int) (CORNER_WIDTH * this.width),
-				(int) (CORNER_HEIGHT * this.height)));
 		createPanel31();
-		panel3.add(panel31, BorderLayout.WEST);
-
-		System.out.println("Panel31: " + (CORNER_WIDTH * this.width) + " X "
-				+ (CORNER_HEIGHT * this.height));
-
 		createPanel32();
 		createPanel33();
 
@@ -249,6 +239,7 @@ public class BoardFrame extends JFrame {
 	}
 
 	private void createPanel33() {
+		panel33 = new JPanel();
 		panel33.setPreferredSize(new Dimension(
 				(int) (CORNER_WIDTH * this.width),
 				(int) (CORNER_HEIGHT * this.height)));
@@ -271,11 +262,11 @@ public class BoardFrame extends JFrame {
 		panel33.add(capture);
 		capture.setVisible(false);
 
-		manual_c = new JButton("MANUAL CAPTURE");
+		manual_c = new JButton("CAPTURE");
 		manual_c.setBackground(new Color(0, 200, 0));
 		manual_c.setForeground(new Color(255, 255, 255));
 		panel33.add(manual_c);
-		//manual_c.setVisible(true);
+		manual_c.setVisible(false);
 
 		debug = new JButton("REFRESH");
 		debug.setBackground(new Color(0, 0, 200));
@@ -286,27 +277,30 @@ public class BoardFrame extends JFrame {
 	}
 
 	private void createPanel31() {
-
+		panel31 = new JPanel();
+		panel31.setPreferredSize(new Dimension(
+				(int) (CORNER_WIDTH * this.width),
+				(int) (CORNER_HEIGHT * this.height)));
 		AutoCap = new JLabel(JKemik.settings_t.getAutoCaptureStatus());
 		AutoCap.setForeground(Color.WHITE);
 		AutoPass = new JLabel(JKemik.settings_t.getAutoPassStatus());
 		AutoPass.setForeground(Color.WHITE);
-		ManualCap = new JLabel(JKemik.settings_t.getManualCaptureStatus());
-		ManualCap.setForeground(Color.WHITE);
+//		ManualCap = new JLabel(JKemik.settings_t.getManualCaptureStatus());
+//		ManualCap.setForeground(Color.WHITE);
 		Win = new JLabel("" + JKemik.settings_t.getMaxWinVal());
 		Win.setForeground(Color.WHITE);
 
-		JLabel la = new JLabel("Auto Capture:");
+		JLabel la = new JLabel(" Capture:");
 		la.setForeground(Color.ORANGE);
 
-		JLabel lb = new JLabel(" Auto Pass:");
+		JLabel lb = new JLabel(" Pass Turn:");
 		lb.setForeground(Color.ORANGE);
 
 		JLabel lc = new JLabel(" Win:");
 		lc.setForeground(Color.ORANGE);
-
-		JLabel lm = new JLabel(" Manual Capture:");
-		lm.setForeground(Color.ORANGE);
+//
+//		JLabel lm = new JLabel(" Manual Capture:");
+//		lm.setForeground(Color.ORANGE);
 
 		panel31.add(la);
 		panel31.add(AutoCap);
@@ -314,8 +308,9 @@ public class BoardFrame extends JFrame {
 		panel31.add(AutoPass);
 		panel31.add(lc);
 		panel31.add(Win);
-		panel31.add(lm);
-		panel31.add(ManualCap);
+		//panel31.add(lm);
+		panel3.add(panel31, BorderLayout.WEST);
+		//panel31.add(ManualCap);
 	}
 
 	private void createPanel32() {
@@ -600,23 +595,23 @@ public class BoardFrame extends JFrame {
 	public static void upDateSetting() {
 		try {
 			if (JKemik.settings_t.isAutoCapture()) {
-				BoardFrame.AutoCap.setText("ON");
+				AutoCap.setText("AUTO");
+				capture.setVisible(true);
+				manual_c.setVisible(false);
 			} else {
-				BoardFrame.AutoCap.setText("OFF");
+				AutoCap.setText("MANUAL");
+				manual_c.setVisible(true);
+				capture.setVisible(false);
 			}
 
 			if (JKemik.settings_t.isAutoPass()) {
-				BoardFrame.AutoPass.setText("ON");
+				AutoPass.setText("AUTO");
+				undo.setVisible(false);
+				pass_turn.setVisible(false);
 			} else {
-				BoardFrame.AutoPass.setText("OFF");
-			}
-
-			if (JKemik.settings_t.isManualCapture()) {
-				BoardFrame.ManualCap.setText("ON");
-				BoardFrame.manual_c.setVisible(true);
-			} else {
-				BoardFrame.ManualCap.setText("OFF");
-				BoardFrame.manual_c.setVisible(false);
+				AutoPass.setText("MANUAL");
+				undo.setVisible(true);
+				pass_turn.setVisible(true);
 			}
 			String str = "" + JKemik.settings_t.getMaxWinVal();
 			BoardFrame.Win.setText(str);
@@ -708,7 +703,7 @@ public class BoardFrame extends JFrame {
 
 	public static JLabel AutoCap;
 	public static JLabel AutoPass;
-	public static JLabel ManualCap;
+	//public static JLabel ManualCap;
 	public static JLabel Win;
 	public static JLabel exit;
 

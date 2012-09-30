@@ -42,7 +42,6 @@ public class Game implements Serializable {
 		System.out.println("entering undo...");
 		int index = currentP.getPloted().size();
 		lastp = currentP.getPloted().get(index - 1);
-
 		if (Tools.containPoint(lastp, currentP.getConnectedPoints())) {
 			return false;
 		}
