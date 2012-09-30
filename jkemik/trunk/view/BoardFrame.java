@@ -101,7 +101,7 @@ public class BoardFrame extends JFrame {
 		ViewEvents.saveSettingsAction();
 		ViewEvents.onAutoCaptureAction();
 		ViewEvents.onAutoPassTurnAction();
-		ViewEvents.onManualCaptureAction();
+		//ViewEvents.onManualCaptureAction();
 		ViewEvents.exitListener();
 		ViewEvents.helpListener();
 		ViewEvents.manualCaptureButtonActionListener(manual_c);

@@ -52,6 +52,7 @@ public class Grid extends JPanel {
 
 	public static double Columns = 0.0, rows = 0.0;
 	public static double x = 0, y = 0, hl_x = 0, hl_y = 0;
+	public static Point selectedP = new Point(0, 0);
 	public static Cell cell = null;
 	public static int position_count = 0;
 
@@ -91,25 +92,30 @@ public class Grid extends JPanel {
 		Grid.g2 = (Graphics2D) g;
 		// super.paintComponent(g2);
 		try {
-			drawCursor(hl_x, hl_y, gridLineCol);
-			highLightDot(ccolor);
+			if (!selectPoint) {
+				drawCursor(hl_x, hl_y, gridLineCol);
+				highLightDot(ccolor);
+			}
 			Game game = JKemik.game;
 			if (mouseclicked && plotPoint) {
 				drawCircle(new Point(x, y), game.getCurrentP().getColor());
 				plotPoint = false;
 				mouseclicked = false;
 			}
-			
-			if(selectPoint){
+
+			if (selectPoint) {
 				Color fade = game.getCurrentP().getFadedColor();
-				Point p = new Point(x, y);
-				drawCircle(p, fade);
-				drawLine(game.getLastp(), p);
-				game.setLastp(p);
+				// Point p = new Point(x, y);
+				// drawCircle(p, fade);
+				drawCircle(selectedP, fade);
+				// drawLine(game.getLastp(), p);
+				drawLine(game.getLastp(), selectedP);
+				// game.setLastp(p);
+				game.setLastp(selectedP);
 				g2.setColor(fade);
 				selectPoint = false;
 			}
-			
+
 			if (drawCell(cell)) {
 				cell = null;
 			}
@@ -218,7 +224,6 @@ public class Grid extends JPanel {
 				for (int i = 0; i < contour.size() - 1; i++) {
 					drawLine(contour.get(i), contour.get(i + 1));
 
-
 					// draw intersection
 					drawCursor(contour.get(i), gridLineCol);
 					drawCursor(contour.get(i + 1), gridLineCol);
@@ -280,13 +285,12 @@ public class Grid extends JPanel {
 		try {
 			double px = p.getXC();
 			double py = p.getYC();
-			this.circle = new Ellipse2D.Double(px - HALF_DIAMETER, py - HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-					Grid.CIRCLE_DIAMETER);
+			this.circle = new Ellipse2D.Double(px - HALF_DIAMETER, py
+					- HALF_DIAMETER, Grid.CIRCLE_DIAMETER, Grid.CIRCLE_DIAMETER);
 			g2.setColor(BoardFrame.BOARD_COLOR);
 			g2.fill(this.circle);
 			g2.draw(this.circle);
 			g2.setColor(gridLineCol);
-
 
 			g2.draw(new Line2D.Double(px, py + half_squareSize, px, py
 					- half_squareSize));
@@ -563,12 +567,19 @@ public class Grid extends JPanel {
 		Grid.manualc = manualc;
 	}
 
-//	public static Point getLastPoint() {
-//		return lastPoint;
-//	}
-//
-//	public static void setLastPoint(Point lastPoint) {
-//		Grid.lastPoint = lastPoint;
-//	}
-	
+	public static boolean isSelectPoint() {
+		return selectPoint;
+	}
+
+	public static void setSelectPoint(boolean selectPoint) {
+		Grid.selectPoint = selectPoint;
+	}
+
+	public static Point getSelectedP() {
+		return selectedP;
+	}
+
+	public static void setSelectedP(Point selectedP) {
+		Grid.selectedP = selectedP;
+	}
 }

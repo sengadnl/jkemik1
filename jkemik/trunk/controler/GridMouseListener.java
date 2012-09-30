@@ -44,17 +44,18 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					&& !Tools.containPoint(temp, game.getDeadDots())) {
 				Grid.selectPoint = true;
 				current.getSelected().add(temp);
-				if(current.getSelected().size() == 1){
-					current.setOrigin(temp);
-				}
+				Grid.setSelectedP(temp);
+				System.out.println("Selected: " + temp);
 				if (temp.compareTo(current.getOrigin()) == 0
-						&& current.getSelected().size() > 3) {
-					current.setOrigin(null);/* Reset the origin */
+						&& current.getSelected().size() >= 4) {
+					
+					System.out.println("Selected: " + temp + "is equal to " + current);
+					//current.setOrigin(null);/* Reset the origin */
 					//Grid.cell = game.capture((int)Grid.squareSize);
-					JOptionPane.showMessageDialog(null, "Capture");
+					
+					System.out.println("Yahoo Capture");
 				}
 				BoardFrame.grid.repaint();
-				
 			}
 		} else {
 			if (game.getCurrentP().isTurn()) {
