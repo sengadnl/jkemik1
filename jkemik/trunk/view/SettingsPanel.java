@@ -26,15 +26,12 @@ public class SettingsPanel extends JFrame {
 	static JLabel label;
 	protected static int COUNTER = 1;
 	protected static int MAX_VAL = 33;
-
 	public static JButton save;
-
 	private static JPanel l1;
 	private static JPanel l2;
 	private static JPanel l3;
 
 	public static RotateLabel auto_capture;
-	public static RotateLabel manual_capture;
 	public static RotateLabel auto_turn_pass;
 	public static RotateColor left_color;
 	public static RotateColor right_color;
@@ -43,8 +40,6 @@ public class SettingsPanel extends JFrame {
 
 	private String[] auto_cap = { "ON", "OFF" };
 	private String[] auto_t_p = { "ON", "OFF" };
-	private String[] manual_cpt = { "OFF", "ON" };
-
 	private static java.awt.Container container;
 
 	public SettingsPanel(int w, int h) {
@@ -88,15 +83,6 @@ public class SettingsPanel extends JFrame {
 			auto_turn_pass.rotateLabel();
 		}
 	}
-
-	public static RotateLabel getManual_capture() {
-		return manual_capture;
-	}
-
-	public static void setManual_capture(String manualCapture) {
-		manual_capture.setText(manualCapture);
-	}
-
 	public void buildPane() {
 		JKIcon icon = new JKIcon("media/jkemik-logo-small.gif", "");
 		save = new JButton("Done");
@@ -106,14 +92,12 @@ public class SettingsPanel extends JFrame {
 		l1.setBackground(BoardFrame.BOARD_COLOR);
 		l2 = new JPanel();
 		l2.setBackground(BoardFrame.BOARD_COLOR);
-		l2.setLayout(new GridLayout(4, 3));
+		l2.setLayout(new GridLayout(3, 2));
 		l3 = new JPanel();
 		l3.setBackground(BoardFrame.BOARD_COLOR);
 
 		auto_capture = new RotateLabel(auto_cap);
 		auto_turn_pass = new RotateLabel(auto_t_p);
-		manual_capture = new RotateLabel(manual_cpt);
-		//manual_capture.rotateLabel();
 		max_win = new JTextField("" + JKemik.settings_t.getMaxWinVal());
 		max_win.setBackground(Color.GRAY);
 		max_win.setForeground(Color.WHITE);
@@ -136,19 +120,12 @@ public class SettingsPanel extends JFrame {
 		add(l3, BorderLayout.SOUTH);
 
 		l1.add(icon.createIcon());
-
 		l2.add(label1);
 		l2.add(auto_capture);
-		//l2.add(label5);
 		l2.add(label2);
 		l2.add(auto_turn_pass);
-		//l2.add(label6);
-		l2.add(label3);
-		l2.add(manual_capture);
-		//l2.add(label7);
 		l2.add(label4);
 		l2.add(max_win);
-		//l2.add(label8);
 		l3.add(save);
 
 	}
