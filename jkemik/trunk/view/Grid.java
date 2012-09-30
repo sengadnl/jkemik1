@@ -102,7 +102,10 @@ public class Grid extends JPanel {
 			
 			if(selectPoint){
 				Color fade = game.getCurrentP().getFadedColor();
-				drawCircle(new Point(x, y), fade);
+				Point p = new Point(x, y);
+				drawCircle(p, fade);
+				drawLine(game.getLastp(), p);
+				game.setLastp(p);
 				g2.setColor(fade);
 				selectPoint = false;
 			}

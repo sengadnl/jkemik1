@@ -44,15 +44,17 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					&& !Tools.containPoint(temp, game.getDeadDots())) {
 				Grid.selectPoint = true;
 				current.getSelected().add(temp);
-//				if(current.getSelected().size() == 1){
-//					current.setOrigin(temp);
-//				}
-//				if (temp.compareTo(current.getOrigin()) == 0
-//						&& current.getSelected().size() > 3) {
-//					current.setOrigin(null);/* Reset the origin */
-//					Grid.cell = game.capture((int)Grid.squareSize);
-//				}
+				if(current.getSelected().size() == 1){
+					current.setOrigin(temp);
+				}
+				if (temp.compareTo(current.getOrigin()) == 0
+						&& current.getSelected().size() > 3) {
+					current.setOrigin(null);/* Reset the origin */
+					//Grid.cell = game.capture((int)Grid.squareSize);
+					JOptionPane.showMessageDialog(null, "Capture");
+				}
 				BoardFrame.grid.repaint();
+				
 			}
 		} else {
 			if (game.getCurrentP().isTurn()) {
@@ -63,6 +65,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					Grid.plotPoint = true;
 					BoardFrame.grid.repaint();
 					game.getCurrentP().getPloted().add(temp);
+					game.lastp = temp;
 					game.setEmbuche_on(true);
 					game.setPlayFlag();
 					game.getCurrentP().setTurn(false);
