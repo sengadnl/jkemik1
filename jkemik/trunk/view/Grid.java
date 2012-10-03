@@ -105,12 +105,10 @@ public class Grid extends JPanel {
 
 			if (selectPoint) {
 				Color fade = game.getCurrentP().getFadedColor();
-				// Point p = new Point(x, y);
-				// drawCircle(p, fade);
+				g2.setStroke(new BasicStroke(gridLineStroke
+						+ CURSOR_VARIANT_STROKE));
 				drawCircle(selectedP, fade);
-				// drawLine(game.getLastp(), p);
 				drawLine(game.getLastp(), selectedP);
-				// game.setLastp(p);
 				game.setLastp(selectedP);
 				g2.setColor(fade);
 				selectPoint = false;
@@ -163,6 +161,9 @@ public class Grid extends JPanel {
 	private static boolean drawCell(Cell cell) {
 		Game game = JKemik.game;
 		try {
+			if(cell == null){
+				return false;
+			}
 			ArrayList<Point> contour = cell.getCellContour();
 			ArrayList<Point> captured = cell.getCapturedPoints();
 			ArrayList<Point> area = cell.getAreaIncell();
@@ -173,8 +174,7 @@ public class Grid extends JPanel {
 			game.getCurrentP().getConnectedPoints().addAll(contour);
 			/* set color */
 			g2.setColor(game.getCurrentP().getColor());
-			g2
-					.setStroke(new BasicStroke(gridLineStroke
+			g2.setStroke(new BasicStroke(gridLineStroke
 							+ CURSOR_VARIANT_STROKE));
 
 			/* draw cell contour */

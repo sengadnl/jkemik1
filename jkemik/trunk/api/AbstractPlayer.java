@@ -332,7 +332,7 @@ abstract class AbstractPlayer implements Serializable {
 	private double score = 0.0;
 	private Color color;
 	private Color fadedColor;
-	private Point origin = null;
+	private Point origin = new Point(553355, 7798979);
 	private Point from = new Point(553355, 7798979);
 	private ArrayList<Cell> Cells = null;
 	private ArrayList<Cell> CapturedCells = null;
