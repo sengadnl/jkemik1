@@ -182,6 +182,19 @@ public class Game implements Serializable {
 		}
 		return false;
 	}
+//	public boolean connectDots2(double squareSize) {
+//		
+//			try {
+//				tempCell = capture((int)squareSize);
+//				if (tempCell != null) {
+//					System.out.println("Cell was not NULL");
+//					return true;
+//				} 
+//			} catch (Exception e) {
+//				System.out.println("In connectDots(): " + e.getMessage());
+//			}
+//		return false;
+//	}
 	public Cell embush(double squareSize) {
 		if (JKemik.settings_t.isAutoCapture()) {
 			try {

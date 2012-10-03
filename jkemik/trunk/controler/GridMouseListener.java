@@ -45,17 +45,14 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 				Grid.selectPoint = true;
 				current.getSelected().add(temp);
 				Grid.setSelectedP(temp);
-				System.out.println("Selected: " + temp);
 				if (temp.compareTo(current.getOrigin()) == 0
 						&& current.getSelected().size() >= 4) {
-					
-					System.out.println("Selected: " + temp + "is equal to " + current);
-					//current.setOrigin(null);/* Reset the origin */
-					//Grid.cell = game.capture((int)Grid.squareSize);
-					
-					System.out.println("Yahoo Capture");
+					Grid.cell = game.capture((int)Grid.squareSize);// new line
+					BoardFrame.grid.repaint();
+					game.getCurrentP().setSelected(new ArrayList<Point>());
+					Grid.manualc = false;
 				}
-				BoardFrame.grid.repaint();
+				//BoardFrame.grid.repaint();
 			}
 		} else {
 			if (game.getCurrentP().isTurn()) {
@@ -75,13 +72,15 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			}
 		}
 
-		if (game.isEmbuche_on()) {
+		if (game.isEmbuche_on() && !Grid.manualc) {
 			 Grid.cell = game.embush(Grid.squareSize);// new line
 			BoardFrame.grid.repaint();
+			System.out.println("in 1");
 			game.getCurrentP().setSelected(new ArrayList<Point>());
 		}
 
 		if (JKemik.game.getCurrentP().isTurn()) {
+			System.out.println("in 2");
 			this.grid.setMouseclicked(true);
 		}
 		BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
