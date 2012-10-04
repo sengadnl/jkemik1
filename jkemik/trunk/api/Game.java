@@ -121,8 +121,8 @@ public class Game implements Serializable {
 		ArrayList<Point> area = getTrueArea(current, TempArea);
 
 		if (isAreaEmpty(area, guestP)) {
-			currentP.setSelected(new ArrayList<Point>());
-			return null;
+			//currentP.setSelected(new ArrayList<Point>());
+			return new Cell(currentP.getSelected(), area, captured, null);
 		}
 
 		/* Go through all selected dots from recursion */
