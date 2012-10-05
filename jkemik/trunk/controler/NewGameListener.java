@@ -55,7 +55,8 @@ public class NewGameListener implements MouseListener{
 			BoardFrame.fadeButton(BoardFrame.capture);
 			BoardFrame.fadeButton(BoardFrame.undo);
 			BoardFrame.fadeButton(BoardFrame.manual_c);
-			BoardFrame.fadeButton(BoardFrame.debug);
+			BoardFrame.fadeButton(BoardFrame.refresh);
+			BoardFrame.makeButtonsInvisible();
 			BoardFrame.grid.initCursorLocation();
 			//Reset grid
 			BoardFrame.panel2.repaint();

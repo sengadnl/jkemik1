@@ -75,7 +75,8 @@ public class SaveButtonListener implements MouseListener {
 			BoardFrame.boostButton(BoardFrame.capture);
 			BoardFrame.boostButton(BoardFrame.undo);
 			BoardFrame.boostButton(BoardFrame.manual_c);
-			BoardFrame.boostButton(BoardFrame.debug);
+			BoardFrame.boostButton(BoardFrame.refresh);
+			BoardFrame.upDateSetting();
 			BoardFrame.print_point.setText("" + (new Point(0, 0)).toString());
 			String p1n = t.getP1_name();
 			String p2n = t.getP2_name();
