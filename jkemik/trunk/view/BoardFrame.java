@@ -50,7 +50,7 @@ public class BoardFrame extends JFrame {
 		setTheme(JKemik.settings_t.getTheme());
 
 		makingGame = true;
-		upDateSetting();
+		makeButtonsInvisible();
 
 		initializeEvents();
 		setTitle("J-Kemik " + Globals.VERSION);
@@ -268,10 +268,10 @@ public class BoardFrame extends JFrame {
 		panel33.add(manual_c);
 		manual_c.setVisible(false);
 
-		debug = new JButton("REFRESH");
-		debug.setBackground(new Color(0, 0, 200));
-		debug.setForeground(new Color(255, 200, 255));
-		panel33.add(debug);
+		refresh = new JButton("REFRESH");
+		refresh.setBackground(new Color(0, 0, 200));
+		refresh.setForeground(new Color(255, 200, 255));
+		panel33.add(refresh);
 
 		panel3.add(panel33, BorderLayout.EAST);
 	}
@@ -615,6 +615,7 @@ public class BoardFrame extends JFrame {
 			}
 			String str = "" + JKemik.settings_t.getMaxWinVal();
 			BoardFrame.Win.setText(str);
+			BoardFrame.refresh.setVisible(true);
 		} catch (Exception e) {
 
 		}
@@ -626,6 +627,13 @@ public class BoardFrame extends JFrame {
 
 	public static void setMakingGame(boolean inOptions) {
 		BoardFrame.makingGame = inOptions;
+	}
+	public static void makeButtonsInvisible(){
+		BoardFrame.manual_c.setVisible(false);
+		BoardFrame.capture.setVisible(false);
+		BoardFrame.refresh.setVisible(false);
+		BoardFrame.pass_turn.setVisible(false);
+		BoardFrame.undo.setVisible(false);
 	}
 
 	public static void newGameGuiUpdate() {
@@ -684,7 +692,7 @@ public class BoardFrame extends JFrame {
 	public static JLabel label2;
 	public static JLabel help;
 
-	public static JButton debug;
+	public static JButton refresh;
 	public static JButton save;
 	public static JButton undo;
 	public static JButton capture;

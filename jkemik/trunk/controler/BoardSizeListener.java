@@ -34,7 +34,6 @@ public class BoardSizeListener implements MouseListener{
 		}
 		STemplate st = JKemik.settings_t;
 		Tools.resetMaxWin(Grid.squareCount(), st);
-		BoardFrame.upDateSetting();
 	}
 
 	
