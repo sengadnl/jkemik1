@@ -26,6 +26,7 @@ import view.Grid;
 public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 	private Grid grid;
+
 	public GridMouseListener(Grid grid) {
 		this.grid = grid;
 	}
@@ -39,16 +40,19 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
 		Point temp = new Point(Grid.x, Grid.y);
 		if (Grid.manualc) {
-			
+
 			if (Tools.containPoint(temp, game.getCurrentP().getPloted())
-					&& !Tools.containPoint(temp, game.getDeadDots())) {
+					&& !Tools.containPoint(temp, game.getDeadDots())
+					&& game.getLastp().adjacentTo(temp, Grid.squareSize)
+					&& !Tools.containPoint(temp, current.getSelected())) {//TODO
 				Grid.selectPoint = true;
 				current.getSelected().add(temp);
 				Grid.setSelectedP(temp);
-				if (temp.compareTo(current.getOrigin()) == 0
+				if (temp.adjacentTo(current.getOrigin(),Grid.squareSize)
 						&& current.getSelected().size() >= 4) {
-					Grid.cell = game.capture((int)Grid.squareSize);//
+					Grid.cell = game.capture((int) Grid.squareSize);//
 					game.getCurrentP().setSelected(new ArrayList<Point>());
+					System.out.println(current.getSelected().size() + " were selected");
 					Grid.manualc = false;
 				}
 				BoardFrame.grid.repaint();
@@ -72,14 +76,15 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		}
 
 		if (game.isEmbuche_on() && !Grid.manualc) {
-			 Grid.cell = game.embush(Grid.squareSize);// new line
+			Grid.cell = game.embush(Grid.squareSize);// new line
 			BoardFrame.grid.repaint();
-			System.out.println("in 1");
+			System.out.println("Embush attempt");
 			game.getCurrentP().setSelected(new ArrayList<Point>());
 		}
 
-		if (JKemik.game.getCurrentP().isTurn()) {
-			System.out.println("in 2");
+		if (game.getCurrentP().isTurn()) {
+			System.out
+					.println("Marking " + game.getCurrentP() + " end of turn");
 			this.grid.setMouseclicked(true);
 		}
 		BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
@@ -150,13 +155,13 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			BoardFrame.fadeButton(BoardFrame.undo);
 
 			// Reset grid
-//			BoardFrame.panel2.repaint();
-//			BoardFrame.panel1.repaint();
+			// BoardFrame.panel2.repaint();
+			// BoardFrame.panel1.repaint();
 			BoardFrame.grid.drawn = false;
 			BoardFrame.grid.repaint();
 
-//			BoardFrame.p1panel.initPanelForNewGame("P1", Color.WHITE);
-//			BoardFrame.p2panel.initPanelForNewGame("P2", Color.WHITE);
+			// BoardFrame.p1panel.initPanelForNewGame("P1", Color.WHITE);
+			// BoardFrame.p2panel.initPanelForNewGame("P2", Color.WHITE);
 		}
 
 		BoardFrame.grid.repaint();

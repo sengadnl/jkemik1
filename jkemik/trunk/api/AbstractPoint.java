@@ -6,6 +6,7 @@ package api;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
 import java.io.Serializable;
 
 /**
@@ -83,18 +84,7 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable{
 
 	public double distanceTo(AbstractPoint other) 
 	{
-		return Math.sqrt((y - other.y) * (y - other.y) + (x - other.x)
-				* (x - other.x));
-	}
-
-	public double slope(AbstractPoint other) {
-		double slope = 0.0;
-		try {
-			slope = (other.y - y) / (other.x - x);
-		} catch (Exception e) {
-
-		}
-		return slope;
+		return Point2D.distance(x, y, other.x, other.y);
 	}
 
 	public int compareTo(Point p) {
@@ -103,11 +93,16 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable{
 		}
 		return -1;
 	}
-	// public boolean adjacentTo(Point p, int squareSize) {
-	// Point box[] = Tools.boxCoord((Point)this, squareSize);
-	// for(int i = 0; i < box.length; i++){
-	// if(p.compareTo(box[i]) == 0){
-	// return true;
-	// }
-	// }
+	/**
+	 * @param a point object and the grid square size
+	 * @return true is the distance between this point and the other is equal to 
+	 * the square size or if it is equal to the Hypotenuse */
+	public boolean adjacentTo(AbstractPoint other, double squareSize) {
+	 double distance = this.distanceTo(other); 
+	 double hypothenus = Math.hypot(squareSize, squareSize);
+	 if(distance == squareSize || distance == hypothenus){
+		 return true;
+	 }
+	 return false;
+	}
 }
