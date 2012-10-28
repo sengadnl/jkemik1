@@ -40,23 +40,19 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
 		Point temp = new Point(Grid.x, Grid.y);
 		if (Grid.manualc) {
-
-			if (Tools.containPoint(temp, game.getCurrentP().getPloted())
-					&& !Tools.containPoint(temp, game.getDeadDots())
-					&& game.getLastp().adjacentTo(temp, Grid.squareSize)
-					&& !Tools.containPoint(temp, current.getSelected())) {//TODO
+			if (game.select(temp, Grid.squareSize)) {
 				Grid.selectPoint = true;
-				current.getSelected().add(temp);
 				Grid.setSelectedP(temp);
-				if (temp.adjacentTo(current.getOrigin(),Grid.squareSize)
+				if (temp.adjacentTo(current.getOrigin(), Grid.squareSize)
 						&& current.getSelected().size() >= 4) {
 					Grid.cell = game.capture((int) Grid.squareSize);//
 					game.getCurrentP().setSelected(new ArrayList<Point>());
-					System.out.println(current.getSelected().size() + " were selected");
+					System.out.println(current.getSelected().size()
+							+ " were selected");
 					Grid.manualc = false;
 				}
 				BoardFrame.grid.repaint();
-			}
+			}			
 		} else {
 			if (game.getCurrentP().isTurn()) {
 				if (!Tools.containPoint(temp, game.getCurrentP().getPloted())
