@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 
 import controler.JKemik;
 import utilities.Tools;
+import view.BoardFrame;
+import view.Grid;
 
 /**
  * @author dalet
@@ -182,19 +184,7 @@ public class Game implements Serializable {
 		}
 		return false;
 	}
-//	public boolean connectDots2(double squareSize) {
-//		
-//			try {
-//				tempCell = capture((int)squareSize);
-//				if (tempCell != null) {
-//					System.out.println("Cell was not NULL");
-//					return true;
-//				} 
-//			} catch (Exception e) {
-//				System.out.println("In connectDots(): " + e.getMessage());
-//			}
-//		return false;
-//	}
+
 	public Cell embush(double squareSize) {
 		if (JKemik.settings_t.isAutoCapture()) {
 			try {
@@ -225,6 +215,17 @@ public class Game implements Serializable {
 		}
 		return null;
 	}
+	public boolean select(Point p, double squareSize){
+		if (Tools.containPoint(p, getCurrentP().getPloted())
+				&& !Tools.containPoint(p, getDeadDots())
+				&& getLastp().adjacentTo(p, squareSize)
+				&& !Tools.containPoint(p, currentP.getSelected())) {//TODO
+			currentP.getSelected().add(p);
+			return true;
+		}
+		return false;
+	}
+	
 
 	public boolean isPlottable(Point p) {
 		if (!Tools.containPoint(p, currentP.getPloted())
