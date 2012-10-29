@@ -50,7 +50,7 @@ public class BoardFrame extends JFrame {
 		setTheme(JKemik.settings_t.getTheme());
 
 		makingGame = true;
-		makeButtonsInvisible();
+		makeButtonsvisible(false);
 
 		initializeEvents();
 		setTitle("J-Kemik " + Globals.VERSION);
@@ -104,7 +104,7 @@ public class BoardFrame extends JFrame {
 		//ViewEvents.onManualCaptureAction();
 		ViewEvents.exitListener();
 		ViewEvents.helpListener();
-		ViewEvents.manualCaptureButtonActionListener(manual_c);
+		ViewEvents.manualSelectionActionListener(manual_c);
 
 		fadeButton(pass_turn);
 		fadeButton(capture);
@@ -262,7 +262,7 @@ public class BoardFrame extends JFrame {
 		panel33.add(capture);
 		capture.setVisible(false);
 
-		manual_c = new JButton("CAPTURE");
+		manual_c = new JCheckBox("Selection Mode");
 		manual_c.setBackground(new Color(0, 200, 0));
 		manual_c.setForeground(new Color(255, 255, 255));
 		panel33.add(manual_c);
@@ -480,7 +480,6 @@ public class BoardFrame extends JFrame {
 		label.setForeground(Tools.fade(fore));
 		label.setBackground(Tools.fade(back));
 	}
-
 	/**
 	 * Boosts the back and Foreground colors of b
 	 */
@@ -489,6 +488,18 @@ public class BoardFrame extends JFrame {
 		Color back = label.getBackground();
 		label.setForeground(Tools.boost(fore));
 		label.setBackground(Tools.boost(back));
+	}
+	public static void fadeCheckBox(JCheckBox checkbox) {
+		Color fore = checkbox.getForeground();
+		Color back = checkbox.getBackground();
+		checkbox.setForeground(Tools.fade(fore));
+		checkbox.setBackground(Tools.fade(back));
+	}
+	public static void boostCheckBox(JCheckBox checkbox) {
+		Color fore = checkbox.getForeground();
+		Color back = checkbox.getBackground();
+		checkbox.setForeground(Tools.boost(fore));
+		checkbox.setBackground(Tools.boost(back));
 	}
 
 	/**
@@ -591,30 +602,42 @@ public class BoardFrame extends JFrame {
 			
 		}
 	}
-	
-	public static void upDateSetting() {
+	public static void updateSettingPanel() {
 		try {
 			if (JKemik.settings_t.isAutoCapture()) {
 				AutoCap.setText("AUTO");
+			} else {
+				AutoCap.setText("MANUAL");
+			}
+
+			if (JKemik.settings_t.isAutoPass()) {
+				AutoPass.setText("AUTO");
+			} else {
+				AutoPass.setText("MANUAL");
+			}
+			String str = "" + JKemik.settings_t.getMaxWinVal();
+			BoardFrame.Win.setText(str);
+		} catch (Exception e) {
+
+		}
+	}
+	public static void showControlButtons() {
+		try {
+			if (JKemik.settings_t.isAutoCapture()) {
 				capture.setVisible(true);
 				manual_c.setVisible(false);
 			} else {
-				AutoCap.setText("MANUAL");
 				manual_c.setVisible(true);
 				capture.setVisible(false);
 			}
 
 			if (JKemik.settings_t.isAutoPass()) {
-				AutoPass.setText("AUTO");
 				undo.setVisible(false);
 				pass_turn.setVisible(false);
 			} else {
-				AutoPass.setText("MANUAL");
 				undo.setVisible(true);
 				pass_turn.setVisible(true);
 			}
-			String str = "" + JKemik.settings_t.getMaxWinVal();
-			BoardFrame.Win.setText(str);
 			BoardFrame.refresh.setVisible(true);
 		} catch (Exception e) {
 
@@ -628,12 +651,12 @@ public class BoardFrame extends JFrame {
 	public static void setMakingGame(boolean inOptions) {
 		BoardFrame.makingGame = inOptions;
 	}
-	public static void makeButtonsInvisible(){
-		BoardFrame.manual_c.setVisible(false);
-		BoardFrame.capture.setVisible(false);
-		BoardFrame.refresh.setVisible(false);
-		BoardFrame.pass_turn.setVisible(false);
-		BoardFrame.undo.setVisible(false);
+	public static void makeButtonsvisible(Boolean value){
+		BoardFrame.manual_c.setVisible(value);
+		BoardFrame.capture.setVisible(value);
+		BoardFrame.refresh.setVisible(value);
+		BoardFrame.pass_turn.setVisible(value);
+		BoardFrame.undo.setVisible(value);
 	}
 
 	public static void newGameGuiUpdate() {
@@ -696,7 +719,7 @@ public class BoardFrame extends JFrame {
 	public static JButton save;
 	public static JButton undo;
 	public static JButton capture;
-	public static JButton manual_c;
+	public static JCheckBox manual_c;
 	public static JButton pass_turn;
 
 	public static JLabel blank1;

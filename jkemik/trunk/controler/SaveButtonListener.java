@@ -74,9 +74,9 @@ public class SaveButtonListener implements MouseListener {
 			BoardFrame.boostButton(BoardFrame.pass_turn);
 			BoardFrame.boostButton(BoardFrame.capture);
 			BoardFrame.boostButton(BoardFrame.undo);
-			BoardFrame.boostButton(BoardFrame.manual_c);
+			BoardFrame.boostCheckBox(BoardFrame.manual_c);
 			BoardFrame.boostButton(BoardFrame.refresh);
-			BoardFrame.upDateSetting();
+			BoardFrame.showControlButtons();
 			BoardFrame.print_point.setText("" + (new Point(0, 0)).toString());
 			String p1n = t.getP1_name();
 			String p2n = t.getP2_name();
@@ -93,7 +93,7 @@ public class SaveButtonListener implements MouseListener {
 				game.switchPlayTurns();
 				Grid.setCcolor(game.getCurrentP().getColor());
 			} else {
-
+				
 			}
 			BoardFrame.grid.addMouseListener(ViewEvents.gridListener);
 			BoardFrame.grid.addMouseMotionListener(ViewEvents.gridListener);

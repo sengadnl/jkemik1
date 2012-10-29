@@ -33,9 +33,9 @@ public class ViewEvents {
 	public static HelpListener helpListener = new HelpListener(BoardFrame.help);
 	public static DebugListener debugListener = new DebugListener(BoardFrame.refresh);
 	public static WindowEvents windowListener = new WindowEvents(JKemik.view);
-	public static ManualCaptureButtonListener manualCaptureButtonListener = new ManualCaptureButtonListener(BoardFrame.manual_c);	
+	public static ManualSelectionListener manualCaptureButtonListener = new ManualSelectionListener(BoardFrame.manual_c);	
 	
-	public static void manualCaptureButtonActionListener(JButton manual){
+	public static void manualSelectionActionListener(JCheckBox manual){
 		manual.addMouseListener(manualCaptureButtonListener);
 	}
 	public static void windowActionListener(){

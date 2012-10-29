@@ -8,6 +8,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import javax.swing.*;
+
 import controler.JKemik;
 import api.Cell;
 import api.Game;
@@ -104,8 +105,7 @@ public class Grid extends JPanel {
 
 			if (selectPoint) {
 				Color fade = game.getCurrentP().getFadedColor();
-				g2.setStroke(new BasicStroke(gridLineStroke
-						+ CURSOR_VARIANT_STROKE));
+				g2.setStroke(new BasicStroke(gridLineStroke));
 				drawCircle(selectedP, fade);
 				drawLine(game.getLastp(), selectedP);
 				game.setLastp(selectedP);
@@ -118,8 +118,23 @@ public class Grid extends JPanel {
 			}
 
 			if (undo) {
-				if (game.undo()) {
-					unDraw(game.getLastp());
+				if (manualc) {
+					if (game.getCurrentP().getSelected().size() > 1) {
+						unDrawSelection(game.getCurrentP().getSelected());
+						System.out.println("current size of select = "
+								+ game.getCurrentP().getSelected().size() 
+								+ "\nLast point = " + game.getLastp());
+					}else{
+						BoardFrame.print_point.setForeground(Color.RED);
+						BoardFrame.print_point.setText("NOTHING TO UNDO!!!");
+					}
+//					 if(game.getCurrentP().getSelected().size() < 1){
+//							simplyUndrawSelection(game.getCurrentP().getSelected());
+//						}else
+				} else {
+					if (game.undo()) {
+						unDraw(game.getLastp());
+					}
 				}
 				undo = false;
 			}
@@ -127,6 +142,7 @@ public class Grid extends JPanel {
 			//			
 			if (JKemik.settings_t.isAutoPass()
 					&& game.getCurrentP().getPlay_flag() == 1) {
+				System.out.println("Automatic pass is true...");
 				game.switchPlayTurns();
 				Grid.setCcolor(game.getCurrentP().getColor());
 			}
@@ -138,12 +154,10 @@ public class Grid extends JPanel {
 		} catch (Exception e) {
 			System.out.println("Error in paint: " + e.getMessage());
 		}
-
 		if (!this.drawn) {
 			drawGrid();
 			this.drawn = true;
 		}
-
 	}
 
 	public void highLightDot(Color c) {
@@ -160,7 +174,7 @@ public class Grid extends JPanel {
 	private boolean drawCell(Cell cell) {
 		Game game = JKemik.game;
 		try {
-			if(cell == null){
+			if (cell == null) {
 				return false;
 			}
 			ArrayList<Point> contour = cell.getCellContour();
@@ -169,7 +183,7 @@ public class Grid extends JPanel {
 			if (area.isEmpty()) {
 				return false;
 			}
-			if(captured.isEmpty()){
+			if (captured.isEmpty()) {
 				System.out.println("About to undraw a cell");
 				return unDrawCell(cell);
 			}
@@ -177,22 +191,21 @@ public class Grid extends JPanel {
 			game.getCurrentP().getConnectedPoints().addAll(contour);
 			/* set color */
 			g2.setColor(game.getCurrentP().getColor());
-			g2.setStroke(new BasicStroke(gridLineStroke
-							+ CURSOR_VARIANT_STROKE));
+			g2.setStroke(new BasicStroke(gridLineStroke + CURSOR_VARIANT_STROKE));
 
 			/* draw cell contour */
 			drawLine(contour.get(0), contour.get(contour.size() - 1));
-			
+
 			for (int i = 0; i < contour.size() - 1; i++) {
-				drawCircle(contour.get(i),game.getCurrentP().getColor());
+				drawCircle(contour.get(i), game.getCurrentP().getColor());
 				drawLine(contour.get(i), contour.get(i + 1));
 				drawCircle(contour.get(i + 1), game.getCurrentP().getColor());
 				// draw intersection
 				drawCursor(contour.get(i), gridLineCol);
 				drawCursor(contour.get(i + 1), gridLineCol);
 				g2.setColor(game.getCurrentP().getColor());
-				g2.setStroke(new BasicStroke(gridLineStroke
-						+ CURSOR_VARIANT_STROKE));
+				g2.setStroke(new BasicStroke(gridLineStroke + CURSOR_VARIANT_STROKE));// +
+				// CURSOR_VARIANT_STROKE
 			}
 
 			/* Mark empty dots */
@@ -206,36 +219,72 @@ public class Grid extends JPanel {
 		}
 		return true;
 	}
-	public boolean unDrawCell(Cell cell){
+
+	public boolean unDrawCell(Cell cell) {
 		try {
 			ArrayList<Point> contour = cell.getCellContour();
 
 			/* set color */
 			g2.setColor(BoardFrame.BOARD_COLOR);
-			g2.setStroke(new BasicStroke(gridLineStroke
-							+ CURSOR_VARIANT_STROKE));
+			g2.setStroke(new BasicStroke(gridLineStroke + CURSOR_VARIANT_STROKE));// +
+			// CURSOR_VARIANT_STROKE
 
 			/* Erase cell contour */
 			drawLine(contour.get(0), contour.get(contour.size() - 1));
 			for (int i = 0; i < contour.size() - 1; i++) {
 				drawLine(contour.get(i), contour.get(i + 1));
 				g2.setColor(BoardFrame.BOARD_COLOR);
-				g2.setStroke(new BasicStroke(gridLineStroke
-						+ CURSOR_VARIANT_STROKE));
+				g2.setStroke(new BasicStroke(gridLineStroke + CURSOR_VARIANT_STROKE));
 			}
-			
-			//Fix circle graphics
+
+			// Fix circle graphics
 			for (int e = 0; e < contour.size() - 1; e++) {
-				drawCircle(contour.get(e),JKemik.game.getCurrentP().getColor());
+				drawCircle(contour.get(e), JKemik.game.getCurrentP().getColor());
 				drawCursor(contour.get(e), gridLineCol);
 				g2.setColor(BoardFrame.BOARD_COLOR);
-				g2.setStroke(new BasicStroke(gridLineStroke
-						+ CURSOR_VARIANT_STROKE));
+				g2.setStroke(new BasicStroke(gridLineStroke + CURSOR_VARIANT_STROKE));
 			}
 		} catch (NullPointerException e) {
 			System.out.println("In drawCell: " + e.getMessage());
 		}
 		return true;
+	}
+	public void simplyUndrawSelection(ArrayList<Point> contour) {
+		Game game = JKemik.game;
+		try {
+			for(int i = 0; i < contour.size() - 1; i++){
+				drawCircle(contour.get(i), game.getCurrentP().getColor());
+			}
+			game.getCurrentP().setSelected(null);
+		} catch (NullPointerException e) {
+			System.out.println("In simplyUndrawSelection: " + e.getMessage());
+		}
+	}
+	public void unDrawSelection(ArrayList<Point> contour) {
+		Game game = JKemik.game;
+		try {
+			/* set color */
+			g2.setColor(BoardFrame.BOARD_COLOR);
+			g2.setStroke(new BasicStroke(gridLineStroke + CURSOR_VARIANT_STROKE));
+
+			/* Erase last line */
+			int index = contour.size() - 1;
+			Point lastp = contour.get(index);
+			Point before_lastp = contour.get(index - 1);
+			drawLine(lastp, before_lastp);
+			g2.setStroke(new BasicStroke(gridLineStroke + CURSOR_VARIANT_STROKE));
+			drawCircle(lastp, game.getCurrentP().getColor());
+			drawCursor(lastp, gridLineCol);
+			drawCircle(before_lastp, game.getCurrentP().getFadedColor());
+			drawCursor(before_lastp, gridLineCol);
+			if (!game.getCurrentP().getSelected().isEmpty()) {
+				game.setLastp(before_lastp);
+				game.getCurrentP().getSelected().remove(index);
+			}
+
+		} catch (NullPointerException e) {
+			System.out.println("In drawCell: " + e.getMessage());
+		}
 	}
 
 	/**
@@ -285,13 +334,16 @@ public class Grid extends JPanel {
 		// draw p1 points
 		for (Point p : p1.getPloted()) {
 			drawCircle(p, p1.getColor());
+			drawCursor(p, gridLineCol);
 		}
 		// draw p1 points
 		for (Point p : p2.getPloted()) {
 			drawCircle(p, p2.getColor());
+			drawCursor(p, gridLineCol);
 		}
 		// draw p1 cells
 		if (drawCell(p1c, p1, p2)) {
+			
 		}
 		// draw p1 cells
 		if (drawCell(p2c, p2, p1)) {
