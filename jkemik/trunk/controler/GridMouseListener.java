@@ -31,7 +31,6 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		this.grid = grid;
 	}
 
-	@SuppressWarnings("deprecation")
 	public void mouseClicked(MouseEvent e) {
 		Grid.mouseclicked = true;
 		Grid.x = e.getX();
@@ -50,10 +49,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					game.getCurrentP().setSelected(new ArrayList<Point>());
 					System.out.println(current.getSelected().size()
 							+ " were selected");
-					BoardFrame.manual_c.setSelected(false);
-					BoardFrame.manual_c.disable();
-//					BoardFrame.manual_c.removeMouseListener(ViewEvents.manualCaptureButtonListener);
-					BoardFrame.fadeCheckBox(BoardFrame.manual_c);
+					BoardFrame.manual_c.setSelected(false);;
 					Grid.manualc = false;
 				}
 				BoardFrame.grid.repaint();
@@ -70,9 +66,6 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					game.lastp = temp;
 					game.setEmbuche_on(true);
 					game.setPlayFlag();
-					BoardFrame.manual_c.enable();
-//					BoardFrame.manual_c.addMouseListener(ViewEvents.manualCaptureButtonListener);
-					BoardFrame.boostCheckBox(BoardFrame.manual_c);
 					game.getCurrentP().setTurn(false);
 					Grid.mouseMove = false;
 				}
