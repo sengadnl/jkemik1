@@ -9,9 +9,6 @@ import javax.swing.JOptionPane;
 
 import controler.JKemik;
 import utilities.Tools;
-import view.BoardFrame;
-import view.Grid;
-
 /**
  * @author dalet
  * 

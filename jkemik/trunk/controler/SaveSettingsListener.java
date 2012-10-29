@@ -31,7 +31,7 @@ public class SaveSettingsListener implements MouseListener {
 				int size = Grid.squareCount()/2; //Half the number of squares on the board
 				if(Tools.isMaxWinLessThanGrid(size, maxw)){
 					JKemik.settings_t.setMaxWinVal(maxw);
-					BoardFrame.upDateSetting();
+					BoardFrame.updateSettingPanel();
 					JKemik.settings.setVisible(false);
 				}else{
 					JOptionPane.showMessageDialog(null, "The maximum win must be <= " 

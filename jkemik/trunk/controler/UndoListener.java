@@ -19,26 +19,32 @@ import view.Grid;
  * 
  */
 public class UndoListener implements MouseListener {
+	
 	private JButton undo;
-
+	
 	public UndoListener(JButton undo) {
 		this.setUndo(undo);
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
 		Game game = JKemik.game;
-		if(JKemik.game.getCurrentP().getPlay_flag() == 1){
-			if (!JKemik.game.getCurrentP().isTurn()) {
+		System.out.println("entering undo > flag = " 
+				+ game.getCurrentP().getPlay_flag() + "\nturn = " + 
+				game.getCurrentP().isTurn());
+		if(game.getCurrentP().getPlay_flag() == 1){
+			if (!game.getCurrentP().isTurn()) {
 				Grid.undo = true;
 				BoardFrame.repaintGrid();
-				
 				BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
 				BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
-				JKemik.game.getCurrentP().setTurn(true);
+				if(!Grid.manualc){
+					game.getCurrentP().setTurn(true);
+				}
+				
 			}
 		}else{
 			JOptionPane.showMessageDialog(null, "YOU MUST DO SOMETHING BEFORE UNDOING IT\n" +
-					"PLEASE PLAY FIRST!!!", "Ellegal", JOptionPane.WARNING_MESSAGE);
+					"PLEASE PLAY FIRST!!!","Illegal", JOptionPane.WARNING_MESSAGE);
 		}
 	}
 
