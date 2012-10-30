@@ -243,36 +243,42 @@ public class BoardFrame extends JFrame {
 		panel33.setPreferredSize(new Dimension(
 				(int) (CORNER_WIDTH * this.width),
 				(int) (CORNER_HEIGHT * this.height)));
+		
+		panel331 = new JPanel();
+		panel332 = new JPanel();
 
 		pass_turn = new JButton("PASS");
-		pass_turn.setBackground(new Color(255, 150, 0));
-		pass_turn.setForeground(new Color(255, 255, 200));
-		panel33.add(pass_turn);
+		pass_turn.setBackground(Globals.BTN_BGD_COLOR);
+		pass_turn.setForeground(Globals.BTN_FRD_COLOR);
+		panel331.add(pass_turn);
 		pass_turn.setVisible(false);
 
 		undo = new JButton("UNDO");
-		undo.setBackground(new Color(0, 0, 200));
-		undo.setForeground(new Color(255, 255, 255));
-		panel33.add(undo);
+		undo.setBackground(Globals.BTN_BGD_COLOR);
+		undo.setForeground(Globals.BTN_FRD_COLOR);
+		panel331.add(undo);
 		undo.setVisible(false);
 
 		capture = new JButton("CAPTURE");
-		capture.setBackground(new Color(0, 200, 0));
-		capture.setForeground(new Color(255, 255, 255));
-		panel33.add(capture);
+		capture.setBackground(Globals.BTN_BGD_COLOR);
+		capture.setForeground(Globals.BTN_FRD_COLOR);
+		panel331.add(capture);
 		capture.setVisible(false);
 
-		manual_c = new JCheckBox("Selection Mode");
-		manual_c.setBackground(new Color(0, 200, 0));
+		refresh = new JButton("REFRESH");
+		refresh.setBackground(Globals.BTN_BGD_COLOR);
+		refresh.setForeground(Globals.BTN_FRD_COLOR);
+		panel332.add(refresh);
+		
+		manual_c = new JCheckBox("Manual");
+		manual_c.setBackground(new Color(0, 0, 0));
 		manual_c.setForeground(new Color(255, 255, 255));
-		panel33.add(manual_c);
+		panel332.add(manual_c);
 		manual_c.setVisible(false);
 
-		refresh = new JButton("REFRESH");
-		refresh.setBackground(new Color(0, 0, 200));
-		refresh.setForeground(new Color(255, 200, 255));
-		panel33.add(refresh);
-
+		panel33.add(panel331);
+		panel33.add(panel332);
+		
 		panel3.add(panel33, BorderLayout.EAST);
 	}
 
@@ -554,6 +560,8 @@ public class BoardFrame extends JFrame {
 		panel3.setBackground(BoardFrame.THEME_COLOR);
 		panel31.setBackground(BoardFrame.THEME_COLOR);
 		panel33.setBackground(BoardFrame.THEME_COLOR);
+		panel331.setBackground(BoardFrame.THEME_COLOR);
+		panel332.setBackground(BoardFrame.THEME_COLOR);
 
 		blank1.setBackground(BoardFrame.THEME_COLOR);
 		blank3.setBackground(BoardFrame.THEME_COLOR);
@@ -706,6 +714,8 @@ public class BoardFrame extends JFrame {
 	public static JPanel panel31;
 	public static JPanel panel32;
 	public static JPanel panel33;
+	public static JPanel panel331;
+	public static JPanel panel332;
 
 	public static JPanel Holder1;
 	public static JPanel Holder2;
