@@ -6,6 +6,7 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 
+
 /**
  * @author dalet
  * 
@@ -31,10 +32,9 @@ public class RotateColor extends JPanel {
 		this.H = h;
 		setPreferredSize(new Dimension(this.W, this.H));
 		loadColors();
-		setBackground(new Color(100, 0, 0));
 		setBackground(this.colors[this.colorIndex]);
-		this.setBorder(BorderFactory
-				.createLineBorder(new Color(150, 150, 0), 2));
+//		this.setBorder(BorderFactory
+//				.createLineBorder(Tools.fade(this.colors[this.colorIndex]), 2));
 	}
 
 	/**
