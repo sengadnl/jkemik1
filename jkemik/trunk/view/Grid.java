@@ -128,9 +128,6 @@ public class Grid extends JPanel {
 						BoardFrame.print_point.setForeground(Color.RED);
 						BoardFrame.print_point.setText("NOTHING TO UNDO!!!");
 					}
-//					 if(game.getCurrentP().getSelected().size() < 1){
-//							simplyUndrawSelection(game.getCurrentP().getSelected());
-//						}else
 				} else {
 					if (game.undo()) {
 						unDraw(game.getLastp());
@@ -265,14 +262,14 @@ public class Grid extends JPanel {
 		try {
 			/* set color */
 			g2.setColor(BoardFrame.BOARD_COLOR);
-			g2.setStroke(new BasicStroke(gridLineStroke + CURSOR_VARIANT_STROKE));
+			g2.setStroke(new BasicStroke(gridLineStroke));// + CURSOR_VARIANT_STROKE
 
 			/* Erase last line */
 			int index = contour.size() - 1;
 			Point lastp = contour.get(index);
 			Point before_lastp = contour.get(index - 1);
 			drawLine(lastp, before_lastp);
-			g2.setStroke(new BasicStroke(gridLineStroke + CURSOR_VARIANT_STROKE));
+			//g2.setStroke(new BasicStroke(gridLineStroke));
 			drawCircle(lastp, game.getCurrentP().getColor());
 			drawCursor(lastp, gridLineCol);
 			drawCircle(before_lastp, game.getCurrentP().getFadedColor());

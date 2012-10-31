@@ -101,7 +101,6 @@ public class BoardFrame extends JFrame {
 		ViewEvents.saveSettingsAction();
 		ViewEvents.onAutoCaptureAction();
 		ViewEvents.onAutoPassTurnAction();
-		//ViewEvents.onManualCaptureAction();
 		ViewEvents.exitListener();
 		ViewEvents.helpListener();
 		ViewEvents.manualSelectionActionListener(manual_c);
@@ -156,7 +155,6 @@ public class BoardFrame extends JFrame {
 
 		panel11.setLayout(new BorderLayout());
 
-		//JKIcon icon = new JKIcon("media/jkemik-logo-small.gif", "");
 		JKIcon icon = new JKIcon("media/jkemik-small.png", "");
 		panel11.add(icon.createIcon(), BorderLayout.LINE_START);
 		panel1.add(panel11, BorderLayout.WEST);
@@ -247,25 +245,25 @@ public class BoardFrame extends JFrame {
 		panel331 = new JPanel();
 		panel332 = new JPanel();
 
-		pass_turn = new JButton("PASS");
+		pass_turn = new JButton("Pass");
 		pass_turn.setBackground(Globals.BTN_BGD_COLOR);
 		pass_turn.setForeground(Globals.BTN_FRD_COLOR);
 		panel331.add(pass_turn);
 		pass_turn.setVisible(false);
 
-		undo = new JButton("UNDO");
+		undo = new JButton("Undo");
 		undo.setBackground(Globals.BTN_BGD_COLOR);
 		undo.setForeground(Globals.BTN_FRD_COLOR);
 		panel331.add(undo);
 		undo.setVisible(false);
 
-		capture = new JButton("CAPTURE");
+		capture = new JButton("Capture");
 		capture.setBackground(Globals.BTN_BGD_COLOR);
 		capture.setForeground(Globals.BTN_FRD_COLOR);
 		panel331.add(capture);
 		capture.setVisible(false);
 
-		refresh = new JButton("REFRESH");
+		refresh = new JButton("Refresh");
 		refresh.setBackground(Globals.BTN_BGD_COLOR);
 		refresh.setForeground(Globals.BTN_FRD_COLOR);
 		panel332.add(refresh);
