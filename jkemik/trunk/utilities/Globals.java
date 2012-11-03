@@ -6,11 +6,12 @@ package utilities;
 import java.awt.Color;
 
 /**
- * @author dalet
+ * @author Daniel Senga
  *
  */
 public class Globals {
 	public static final double FADE_VARIANT = .35;//for fading colors
+	public static final double LABEL_VARIANT = 80;//for fading colors
 	public static final int FADE_THRESHOLD = 50;
 	public static final Color BTN_FRD_COLOR = new Color(220,220,10);
 	public static final Color BTN_BGD_COLOR = new Color(60,0,0);
@@ -33,17 +34,17 @@ public class Globals {
 		new Color(170, 200, 190),
 		new Color(255, 255, 100)};
 	public static final Color[] ORIGINE_COLOR = {
-		new Color(200, 50, 100),
-		new Color(0, 45, 200),
-		new Color(100, 0, 233),
+		new Color(232, 216, 37),
+		new Color(99, 196, 235),
+		new Color(45, 214, 68),
 		};
 	public static final Color[] CLASSIC_COLOR = {
 		new Color(0, 255, 0),
 		new Color(250, 50, 50),
 		new Color(100, 250, 110)};
 	public static final Color[] GEECKY_COLOR = {
-		new Color(125, 245, 185),
-		new Color(130, 255, 125),
-		new Color(224, 24, 242)};
+		new Color(97, 237, 135),
+		new Color(247, 174, 101),
+		new Color(170, 85, 173)};
 	
 }
