@@ -49,7 +49,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					game.getCurrentP().setSelected(new ArrayList<Point>());
 					System.out.println(current.getSelected().size()
 							+ " were selected");
-					BoardFrame.manual_c.setSelected(false);;
+					BoardFrame.manual_c.setSelected(false);
 					Grid.manualc = false;
 				}
 				BoardFrame.grid.repaint();

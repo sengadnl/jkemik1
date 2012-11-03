@@ -92,10 +92,10 @@ public class Grid extends JPanel {
 		Grid.g2 = (Graphics2D) g;
 		// super.paintComponent(g2);
 		try {
-			if (!selectPoint) {
+			//if (!selectPoint) {
 				drawCursor(hl_x, hl_y, gridLineCol);
 				highLightDot(ccolor);
-			}
+			//}
 			Game game = JKemik.game;
 			if (mouseclicked && plotPoint) {
 				drawCircle(new Point(x, y), game.getCurrentP().getColor());
@@ -103,7 +103,7 @@ public class Grid extends JPanel {
 				mouseclicked = false;
 			}
 
-			if (selectPoint) {
+			if (selectPoint && game.getCurrentP().getSelected().size() >= 1) {
 				Color fade = game.getCurrentP().getFadedColor();
 				g2.setStroke(new BasicStroke(gridLineStroke));
 				drawCircle(selectedP, fade);
@@ -121,11 +121,11 @@ public class Grid extends JPanel {
 				if (manualc) {
 					if (game.getCurrentP().getSelected().size() > 1) {
 						unDrawSelection(game.getCurrentP().getSelected());
-						System.out.println("current size of select = "
+						System.out.println("Current size of select = "
 								+ game.getCurrentP().getSelected().size() 
 								+ "\nLast point = " + game.getLastp());
 					}else{
-						BoardFrame.print_point.setForeground(Color.RED);
+						//BoardFrame.print_point.setForeground(Color.RED);
 						BoardFrame.print_point.setText("NOTHING TO UNDO!!!");
 					}
 				} else {
@@ -224,7 +224,6 @@ public class Grid extends JPanel {
 			/* set color */
 			g2.setColor(BoardFrame.BOARD_COLOR);
 			g2.setStroke(new BasicStroke(gridLineStroke + CURSOR_VARIANT_STROKE));// +
-			// CURSOR_VARIANT_STROKE
 
 			/* Erase cell contour */
 			drawLine(contour.get(0), contour.get(contour.size() - 1));
@@ -269,7 +268,6 @@ public class Grid extends JPanel {
 			Point lastp = contour.get(index);
 			Point before_lastp = contour.get(index - 1);
 			drawLine(lastp, before_lastp);
-			//g2.setStroke(new BasicStroke(gridLineStroke));
 			drawCircle(lastp, game.getCurrentP().getColor());
 			drawCursor(lastp, gridLineCol);
 			drawCircle(before_lastp, game.getCurrentP().getFadedColor());

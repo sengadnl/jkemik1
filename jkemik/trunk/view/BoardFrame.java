@@ -289,8 +289,6 @@ public class BoardFrame extends JFrame {
 		AutoCap.setForeground(Color.WHITE);
 		AutoPass = new JLabel(JKemik.settings_t.getAutoPassStatus());
 		AutoPass.setForeground(Color.WHITE);
-//		ManualCap = new JLabel(JKemik.settings_t.getManualCaptureStatus());
-//		ManualCap.setForeground(Color.WHITE);
 		Win = new JLabel("" + JKemik.settings_t.getMaxWinVal());
 		Win.setForeground(Color.WHITE);
 
@@ -302,9 +300,6 @@ public class BoardFrame extends JFrame {
 
 		JLabel lc = new JLabel(" Win:");
 		lc.setForeground(Color.ORANGE);
-//
-//		JLabel lm = new JLabel(" Manual Capture:");
-//		lm.setForeground(Color.ORANGE);
 
 		panel31.add(la);
 		panel31.add(AutoCap);
