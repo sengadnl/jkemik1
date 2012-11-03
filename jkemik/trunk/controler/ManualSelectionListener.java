@@ -22,11 +22,11 @@ public class ManualSelectionListener implements MouseListener {
 		if (capture.isSelected()) {
 			Grid.setManualc(true);
 			Grid.selectPoint = true;
-			JKemik.game.getCurrentP().setOrigin(JKemik.game.getLastp());
-			JKemik.game.getCurrentP().getSelected().add(JKemik.game.getLastp());
-			Grid.setSelectedP(JKemik.game.getLastp());
+			//JKemik.game.getCurrentP().setOrigin(JKemik.game.getLastp());
+			//JKemik.game.getCurrentP().getSelected().add(JKemik.game.getLastp());
+			//Grid.setSelectedP(JKemik.game.getLastp());
 			JKemik.game.setEmbuche_on(false);
-			BoardFrame.grid.repaint();
+			//BoardFrame.grid.repaint();
 		} else {
 			JKemik.game.getCurrentP().setSelected(new ArrayList<Point>());
 			BoardFrame.panel2.setBackground(BoardFrame.BOARD_COLOR);

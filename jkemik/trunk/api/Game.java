@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import controler.JKemik;
 import utilities.Tools;
+
 /**
  * @author dalet
  * 
@@ -89,7 +90,7 @@ public class Game implements Serializable {
 				} else if (!Tools.containPoint(p, getDeadDots())
 						&& !Tools.containPoint(p, current)
 						&& !Tools.containPoint(p, guestP)) {//
-//					getDeadDots().add(p);//
+				// getDeadDots().add(p);//
 					deadDots.add(p);
 
 				}/* end first if else */
@@ -120,7 +121,7 @@ public class Game implements Serializable {
 		ArrayList<Point> area = getTrueArea(current, TempArea);
 
 		if (isAreaEmpty(area, guestP)) {
-			//currentP.setSelected(new ArrayList<Point>());
+			// currentP.setSelected(new ArrayList<Point>());
 			return new Cell(currentP.getSelected(), area, captured, null);
 		}
 
@@ -150,7 +151,7 @@ public class Game implements Serializable {
 		calculateScore(cell);
 		return cell;
 	}
-	
+
 	public boolean connectDots(double squareSize) {
 		currentP.setSuccessful(false);
 
@@ -212,17 +213,27 @@ public class Game implements Serializable {
 		}
 		return null;
 	}
-	public boolean select(Point p, double squareSize){
-		if (Tools.containPoint(p, getCurrentP().getPloted())
-				&& !Tools.containPoint(p, getDeadDots())
-				&& getLastp().adjacentTo(p, squareSize)
-				&& !Tools.containPoint(p, currentP.getSelected())) {//TODO
+
+	public boolean select(Point p, double squareSize) {
+
+		if (currentP.getSelected().isEmpty()
+				&& Tools.containPoint(p, getCurrentP().getPloted())
+				&& !Tools.containPoint(p, getDeadDots())) {
+			currentP.setOrigin(p);
 			currentP.getSelected().add(p);
+			this.lastp = p;
 			return true;
+		} else {
+			if (Tools.containPoint(p, getCurrentP().getPloted())
+					&& !Tools.containPoint(p, getDeadDots())
+					&& getLastp().adjacentTo(p, squareSize)
+					&& !Tools.containPoint(p, currentP.getSelected())) {
+				currentP.getSelected().add(p);
+				return true;
+			}
 		}
 		return false;
 	}
-	
 
 	public boolean isPlottable(Point p) {
 		if (!Tools.containPoint(p, currentP.getPloted())

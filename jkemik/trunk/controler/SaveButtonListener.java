@@ -71,6 +71,7 @@ public class SaveButtonListener implements MouseListener {
 
 			BoardFrame.fadeLabel(BoardFrame.settings);
 			BoardFrame.fadeButton(BoardFrame.save);
+			
 			BoardFrame.boostButton(BoardFrame.pass_turn);
 			BoardFrame.boostButton(BoardFrame.capture);
 			BoardFrame.boostButton(BoardFrame.undo);
