@@ -79,8 +79,7 @@ public class Tools {
 		if (b > Globals.FADE_THRESHOLD) {
 			b = b - (b * Globals.FADE_VARIANT);
 		}
-		// System.out.println("Faded: \n" + "\nr = " + (int) r + "\ng = "
-		// + (int) g + "\nb = " + (int)b);
+		
 		return new Color((int) r, (int) g, (int) b);
 	}
 
@@ -111,6 +110,23 @@ public class Tools {
 		}
 		return new Color((int) r, (int) g, (int) b);
 	}
+	public static Color boost(Color c, double percent) {
+		double r = c.getRed();
+		double g = c.getGreen();
+		double b = c.getBlue();
+		try {
+			r = r + percent;
+			g = g + percent;
+			b = b + percent;
+			if (r > 255){r = 255;} if(g > 255){g = 255;} if(b > 255) {b = 255;}
+			if (r < 0){r = 0;} if(g < 0){g = 0;} if(b < 0) {b = 0;}
+
+		} catch (Exception e) {
+			System.err.println("In Tools.boost: " + e.getMessage());
+		}
+		return new Color((int) r, (int) g, (int) b);
+	}
+
 
 	public static double freeGridInPercent(double occupied, double gridSize) {
 		return (((gridSize - occupied) * 100) / gridSize);
