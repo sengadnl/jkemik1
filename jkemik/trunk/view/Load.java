@@ -51,7 +51,7 @@ public class Load extends JFrame {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		add(label, BorderLayout.NORTH);
 		
-		JKIcon icon = new JKIcon("media/jkemik-load.png", "");
+		JKIcon icon = new JKIcon("media/jkemik-loader.png", "");
 		add(icon.createIcon(), BorderLayout.CENTER);
 
 		progressBar = new JProgressBar(0, MAX_VAL);
