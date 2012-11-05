@@ -17,7 +17,7 @@ import utilities.ValidateInput;
 
 /**
  * @author Daniel Senga
- * 
+ * Color: F7AD0C Green: 20d502 and 247, 173, 12
  */
 public class BoardFrame extends JFrame {
 	/**

@@ -44,7 +44,7 @@ public class JKemik extends Application {
 
 	protected void init() {
 		try {
-			load = new Load(360, 200);
+			load = new Load(362, 183);
 			System.out.println("Before checking tmp");
 			File tmp = new File(Globals.tempFile);
 			if (tmp.exists()) {

@@ -48,7 +48,6 @@ public class SettingsPanel extends JFrame {
 		maxWinVal = 2;
 		setLayout(new BorderLayout());
 		setSize(w, h);
-		//setUndecorated(true);
 		setLocation(500, 300);
 		buildPane();
 		setVisible(false);
