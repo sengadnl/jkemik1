@@ -16,6 +16,7 @@ public class SettingsLabelListener implements MouseListener {
 	public void mouseClicked(MouseEvent arg0) {
 		JKemik.updateSettingsPanel();
 		JKemik.settings.setVisible(true);
+		JKemik.settings.requestFocus();
 	}
 
 	public void mouseExited(MouseEvent arg0) {
