@@ -1,4 +1,4 @@
-#labels Phase-Deploy
+#labels Featured
 =Getting started=
 
 ==Installing and Running Jkemik==
