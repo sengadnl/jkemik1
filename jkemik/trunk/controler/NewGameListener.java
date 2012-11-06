@@ -51,7 +51,8 @@ public class NewGameListener implements MouseListener{
 			BoardFrame.Game_status.setForeground(Color.GREEN);
 			
 			BoardFrame.boostLabel(BoardFrame.settings);
-			BoardFrame.makeButtonsvisible(false);
+			//BoardFrame.makeButtonsvisible(false);
+			BoardFrame.showControlButtons();
 			BoardFrame.grid.initCursorLocation();
 			//Reset grid
 			BoardFrame.panel2.repaint();

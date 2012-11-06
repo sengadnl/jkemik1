@@ -147,18 +147,10 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			BoardFrame.Game_status.setForeground(Color.GREEN);
 
 			BoardFrame.boostLabel(BoardFrame.settings);
-			BoardFrame.fadeButton(BoardFrame.pass_turn);
-			BoardFrame.fadeButton(BoardFrame.capture);
-			BoardFrame.fadeButton(BoardFrame.undo);
-
-			// Reset grid
-			// BoardFrame.panel2.repaint();
-			// BoardFrame.panel1.repaint();
+			
 			BoardFrame.grid.drawn = false;
 			BoardFrame.grid.repaint();
 
-			// BoardFrame.p1panel.initPanelForNewGame("P1", Color.WHITE);
-			// BoardFrame.p2panel.initPanelForNewGame("P2", Color.WHITE);
 		}
 
 		BoardFrame.grid.repaint();

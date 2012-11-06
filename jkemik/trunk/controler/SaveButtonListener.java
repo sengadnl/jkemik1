@@ -70,13 +70,7 @@ public class SaveButtonListener implements MouseListener {
 			BoardFrame.Game_status.setForeground(Color.RED);
 
 			BoardFrame.fadeLabel(BoardFrame.settings);
-			BoardFrame.fadeButton(BoardFrame.save);
 			
-			BoardFrame.boostButton(BoardFrame.pass_turn);
-			BoardFrame.boostButton(BoardFrame.capture);
-			BoardFrame.boostButton(BoardFrame.undo);
-			BoardFrame.boostCheckBox(BoardFrame.manual_c);
-			BoardFrame.boostButton(BoardFrame.refresh);
 			BoardFrame.showControlButtons();
 			BoardFrame.print_point.setText("" + (new Point(0, 0)).toString());
 			String p1n = t.getP1_name();

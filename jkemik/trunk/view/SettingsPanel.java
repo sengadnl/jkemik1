@@ -83,7 +83,7 @@ public class SettingsPanel extends JFrame {
 		}
 	}
 	public void buildPane() {
-		JKIcon icon = new JKIcon("media/jkemik-logo-small.gif", "");
+		JKIcon icon = new JKIcon("media/jkemik-small.png", "");
 		save = new JButton("Done");
 		save.setBackground(Globals.BTN_BGD_COLOR);
 		save.setForeground(Globals.BTN_FRD_COLOR);
