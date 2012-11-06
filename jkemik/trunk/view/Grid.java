@@ -126,7 +126,7 @@ public class Grid extends JPanel {
 								+ "\nLast point = " + game.getLastp());
 					}else{
 						//BoardFrame.print_point.setForeground(Color.RED);
-						BoardFrame.print_point.setText("NOTHING TO UNDO!!!");
+						//BoardFrame.print_point.setText("NOTHING TO UNDO!!!");
 					}
 				} else {
 					if (game.undo()) {

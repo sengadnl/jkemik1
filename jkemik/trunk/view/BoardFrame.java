@@ -6,9 +6,6 @@ package view;
 import java.awt.*;
 
 import javax.swing.*;
-
-import api.Point;
-
 import controler.JKemik;
 import controler.ViewEvents;
 import utilities.Globals;
@@ -50,7 +47,8 @@ public class BoardFrame extends JFrame {
 		setTheme(JKemik.settings_t.getTheme());
 
 		makingGame = true;
-		makeButtonsvisible(false);
+		//makeButtonsvisible(false);
+		showControlButtons();
 
 		initializeEvents();
 		setTitle("J-Kemik " + Globals.VERSION);
@@ -105,9 +103,9 @@ public class BoardFrame extends JFrame {
 		ViewEvents.helpListener();
 		ViewEvents.manualSelectionActionListener(manual_c);
 
-		fadeButton(pass_turn);
-		fadeButton(capture);
-		fadeButton(undo);
+//		fadeButton(pass_turn);
+//		fadeButton(capture);
+//		fadeButton(undo);
 
 	}
 
@@ -255,6 +253,7 @@ public class BoardFrame extends JFrame {
 		panel331.add(pass_turn);
 		panel331.add(undo);
 		panel331.add(capture);
+		
 		panel332.add(refresh);
 		panel332.add(manual_c);
 		
@@ -392,6 +391,7 @@ public class BoardFrame extends JFrame {
 		label2.setForeground(Tools.fade(Color.WHITE));
 		pColor1.setBackground(Tools.fade(pColor1.getBackground()));
 		pColor2.setBackground(Tools.fade(pColor2.getBackground()));
+		fadeButton(save);
 	}
 
 	public static void enableGameControlPanel() {
@@ -660,36 +660,7 @@ public class BoardFrame extends JFrame {
 	public static void setMakingGame(boolean inOptions) {
 		BoardFrame.makingGame = inOptions;
 	}
-	public static void makeButtonsvisible(Boolean value){
-		BoardFrame.manual_c.setVisible(value);
-		BoardFrame.capture.setVisible(value);
-		BoardFrame.refresh.setVisible(value);
-		BoardFrame.pass_turn.setVisible(value);
-		BoardFrame.undo.setVisible(value);
-	}
 
-	public static void newGameGuiUpdate() {
-		BoardFrame.desableGameControlPanel();
-		BoardFrame.pColor1.removeMouseListener(ViewEvents.p1Listener);
-		BoardFrame.pColor2.removeMouseListener(ViewEvents.p2Listener);
-		BoardFrame.label1.removeMouseListener(ViewEvents.n1Listener);
-		BoardFrame.label2.removeMouseListener(ViewEvents.n2Listener);
-		BoardFrame.l1.removeMouseListener(ViewEvents.gridSizeListener);
-		BoardFrame.l2.removeMouseListener(ViewEvents.gameThemeListener);
-		BoardFrame.settings.removeMouseListener(ViewEvents.saveSettings);
-		BoardFrame.Game_status.setText("END");
-		BoardFrame.Game_status.setForeground(Color.RED);
-
-		BoardFrame.fadeLabel(BoardFrame.settings);
-		BoardFrame.fadeButton(BoardFrame.save);
-		BoardFrame.boostButton(BoardFrame.pass_turn);
-		BoardFrame.boostButton(BoardFrame.capture);
-		BoardFrame.boostButton(BoardFrame.undo);
-		BoardFrame.print_point.setText("" + (new Point(0, 0)).toString());
-		// BoardFrame.p1panel.initPanelForNewGame(p1n, p1c);
-		// BoardFrame.p2panel.initPanelForNewGame(p2n, p2c);
-		BoardFrame.save.removeMouseListener(ViewEvents.saveListener);
-	}
 
 	public double height = 0.0;
 	public double width = 0.0;
@@ -748,13 +719,12 @@ public class BoardFrame extends JFrame {
 
 	public static JLabel AutoCap;
 	public static JLabel AutoPass;
-	//public static JLabel ManualCap;
+
 	public static JLabel Win;
 	public static JLabel exit;
 
 	public static RotateLabel l1;
 	public static RotateLabel l2;
-	// public static RotateLabel l3;
 
 	public static PlayerPanel p1panel;
 	public static PlayerPanel p2panel;
