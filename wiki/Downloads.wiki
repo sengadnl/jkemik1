@@ -1,0 +1,9 @@
+=AVAILABLE DOWNLOADS=
+
+===Release Candidate:===
+[http://jkemik.googlecode.com/files/jkemik-linux-rc-3.0.135.tar.gz Jkemik-linux-rc-3.0.135.tar.gz] 
+
+===Current Release:===
+[http://jkemik.googlecode.com/files/jkemik-linux-bin-2.0.74.tar.gz Jkemik-linux-bin-2.0.74.tar.gz]
+
+Please visit the [GetStarted Getting Started] page for a quick guide.
