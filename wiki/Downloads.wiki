@@ -7,4 +7,12 @@
 ===Current Release:===
 [http://jkemik.googlecode.com/files/jkemik-linux-bin-2.0.74.tar.gz Jkemik-linux-bin-2.0.74.tar.gz]
 
+==System Requirements==
+
+*Java 6.0 or greater
+*RAM 2GB
+*Processor:2GHz
+*OS: 
+Windows xp +/Linux/Mac OS
+
 Please visit the [GetStarted Getting Started] page for a quick guide.
