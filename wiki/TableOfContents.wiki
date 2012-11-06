@@ -4,4 +4,6 @@
 
 [GetStarted Getting Started]
 
+[Downloads Available Downloads]
+
 [Faqs FAQs]
