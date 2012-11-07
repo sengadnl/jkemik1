@@ -2,8 +2,18 @@
 =Getting started=
 
 ==Installing and Running Jkemik==
- * Click [http://code.google.com/p/jkemik/downloads/detail?name=jkemik-linux-bin-2.0.74.tar.gz&can=2&q=#makechanges here] to download the latest Jkemik update.
- * To run:
+
+===Windows=== 
+
+# Click [Downloads here] to download the latest update. 
+# Unzip the jkemik_ file. 
+# Place the extracted folder where you like the application to run from.
+# From the extracted folder, right click on the J-kemik icon and creates a desktop shortcut.
+# You should now be able to click the desktop shortcut to run J-kemik.  
+
+===Linux===
+Click [Downloads here] to download the latest update.
+* To run:
   # Open a terminal.
   # Navigate to the location of the downloaded zip file.
   # Run *tar xvfz filename.tar.gz*
