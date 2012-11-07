@@ -5,11 +5,11 @@
 
 ===Windows=== 
 
-# Click [Downloads here] to download the latest update. 
-# Unzip the jkemik_ file. 
-# Place the extracted folder where you like the application to run from.
-# From the extracted folder, right click on the J-kemik icon and creates a desktop shortcut.
-# You should now be able to click the desktop shortcut to run J-kemik.  
+ # Click [Downloads here] to download the latest update. 
+ # Unzip the file. 
+ # Place the extracted folder where you like the application to run from.
+ # From the extracted folder, right click on the *J-kemik* icon and creates a desktop shortcut.
+ # You should now be able to click the desktop shortcut to run *J-kemik*.  
 
 ===Linux===
 Click [Downloads here] to download the latest update.
