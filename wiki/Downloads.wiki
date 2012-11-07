@@ -1,7 +1,9 @@
-#labels Featured
+#labels Featured,Phase-Requirements
 =AVAILABLE DOWNLOADS=
 
 ===Release Candidate:===
+[http://jkemik.googlecode.com/files/jkemik-windows-rc-3.0.135.zip Jkemik-windows-rc-3.0.135.zip]
+
 [http://jkemik.googlecode.com/files/jkemik-linux-rc-3.0.135.tar.gz Jkemik-linux-rc-3.0.135.tar.gz] 
 
 ===Current Release:===
@@ -9,10 +11,10 @@
 
 ==System Requirements==
 
-*Java 6.0 or greater
-*RAM 2GB
-*Processor:2GHz
-*OS: 
+Java 6.0 or greater
+
+4GB RAM 2GHz
+
 Windows xp +/Linux/Mac OS
 
 Please visit the [GetStarted Getting Started] page for a quick guide.
