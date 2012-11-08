@@ -103,10 +103,6 @@ public class BoardFrame extends JFrame {
 		ViewEvents.helpListener();
 		ViewEvents.manualSelectionActionListener(manual_c);
 
-//		fadeButton(pass_turn);
-//		fadeButton(capture);
-//		fadeButton(undo);
-
 	}
 
 	/**
@@ -247,7 +243,7 @@ public class BoardFrame extends JFrame {
 		undo = new JButton("Undo");
 		capture = new JButton("Capture");
 		refresh = new JButton("Refresh");
-		manual_c = new JCheckBox("Manual");
+		manual_c = new JCheckBox("Capture Mode");
 		decoratebuttons(Globals.BTN_BGD_COLOR, Globals.BTN_FRD_COLOR);
 		
 		panel331.add(pass_turn);
