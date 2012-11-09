@@ -47,7 +47,7 @@ public class BoardFrame extends JFrame {
 		setTheme(JKemik.settings_t.getTheme());
 
 		makingGame = true;
-		//makeButtonsvisible(false);
+
 		showControlButtons();
 
 		initializeEvents();

@@ -9,6 +9,8 @@ import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import javax.swing.*;
 
+import utilities.Tools;
+
 import controler.JKemik;
 import api.Cell;
 import api.Game;
@@ -602,7 +604,9 @@ public class Grid extends JPanel {
 				CIRCLE_DIAMETER, CIRCLE_DIAMETER);
 		g2.setColor(c);
 		g2.fill(this.circle);
+		g2.setColor(Tools.fade(c));
 		g2.draw(this.circle);
+		g2.setColor(c);
 	}
 
 	public void initCursorLocation() {
