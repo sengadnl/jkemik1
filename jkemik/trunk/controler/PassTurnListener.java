@@ -39,7 +39,7 @@ public class PassTurnListener implements MouseListener {
 
 			} else {
 				JOptionPane.showMessageDialog(null,
-						"YOU MUST PLAY BEFORE PASSING A TURN!!!",
+						"YOU HAVE NOT PLAYED YET!!!",
 						"Ellegal Action", JOptionPane.WARNING_MESSAGE);
 			}
 		}

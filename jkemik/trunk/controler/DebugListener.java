@@ -16,7 +16,6 @@ public class DebugListener implements MouseListener{
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
-		
 		Grid.setDebug(true);
 		BoardFrame.repaintGrid();
 	}

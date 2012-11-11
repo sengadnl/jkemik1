@@ -43,8 +43,7 @@ public class UndoListener implements MouseListener {
 				
 			}
 		}else{
-			JOptionPane.showMessageDialog(null, "YOU MUST DO SOMETHING BEFORE UNDOING IT\n" +
-					"PLEASE PLAY FIRST!!!","Illegal", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "NOTHING TO UNDOING IT\n","Illegal Action", JOptionPane.WARNING_MESSAGE);
 		}
 	}
 
