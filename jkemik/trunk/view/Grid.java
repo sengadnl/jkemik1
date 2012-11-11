@@ -29,6 +29,7 @@ public class Grid extends JPanel {
 	private static Graphics2D g2;
 	private static Color gridLineCol = new Color(10, 60, 30);
 	private static int gridLineStroke = 2;
+	private static int squareFadeVariant = 4;
 	private static int CURSOR_VARIANT_STROKE = 6;
 	public static double CIRCLE_DIAMETER = 10.0;
 	public static double HALF_DIAMETER = 5.0;
@@ -107,9 +108,8 @@ public class Grid extends JPanel {
 
 			if (selectPoint && game.getCurrentP().getSelected().size() >= 1) {
 				Color fade = game.getCurrentP().getFadedColor();
-				g2.setStroke(new BasicStroke(gridLineStroke));
 				drawCircle(selectedP, fade);
-				drawLine(game.getLastp(), selectedP);
+				drawLine(game.getLastp(), selectedP, gridLineStroke);
 				game.setLastp(selectedP);
 				g2.setColor(fade);
 				selectPoint = false;
@@ -145,18 +145,19 @@ public class Grid extends JPanel {
 				game.switchPlayTurns();
 				Grid.setCcolor(game.getCurrentP().getColor());
 			}
-
-			if (Grid.debug) {
-				drawGame(game);
-				Grid.debug = false;
+			
+			if (!this.drawn) {
+				drawGrid();
+				if (Grid.debug) {
+					drawGame(game);
+					Grid.debug = false;
+				}
+				this.drawn = true;
 			}
 		} catch (Exception e) {
 			System.out.println("Error in paint: " + e.getMessage());
 		}
-		if (!this.drawn) {
-			drawGrid();
-			this.drawn = true;
-		}
+		
 	}
 
 	public void highLightDot(Color c) {
@@ -186,31 +187,24 @@ public class Grid extends JPanel {
 				System.out.println("About to undraw a cell");
 				return unDrawCell(cell);
 			}
-			System.out.println("I didn't undraw a cell");
 			game.getCurrentP().getConnectedPoints().addAll(contour);
 			/* set color */
 			g2.setColor(game.getCurrentP().getColor());
 			g2.setStroke(new BasicStroke(gridLineStroke + CURSOR_VARIANT_STROKE));
-
 			/* draw cell contour */
 			drawLine(contour.get(0), contour.get(contour.size() - 1));
 			for (int i = 0; i < contour.size() - 1; i++) {
 				drawLine(contour.get(i), contour.get(i + 1));
-				// draw intersection
-				g2.setColor(game.getCurrentP().getColor());
-				g2.setStroke(new BasicStroke(gridLineStroke
-						+ CURSOR_VARIANT_STROKE));// +
-				// CURSOR_VARIANT_STROKE
 			}
 			
 			//draw positions
+			g2.setColor(game.getCurrentP().getColor());
+			g2.setStroke(new BasicStroke(gridLineStroke));// +
 			for (Point p: contour) {
 				drawCircle(p, game.getCurrentP().getColor());
 				drawCursor(p, gridLineCol);
 				g2.setColor(game.getCurrentP().getColor());
-				g2.setStroke(new BasicStroke(gridLineStroke
-						+ CURSOR_VARIANT_STROKE));// +
-				// CURSOR_VARIANT_STROKE
+				g2.setStroke(new BasicStroke(gridLineStroke));// +
 			}
 			
 
@@ -361,10 +355,19 @@ public class Grid extends JPanel {
 	}
 
 	private static void drawLine(Point from, Point to) {
-
+		g2.drawLine((int) (from.getXC()), (int) (from.getYC()),
+				(int) (to.getXC()), (int) (to.getYC()));
+	}
+	private static void drawLine(Point from, Point to, int stroke) {
+		g2.setStroke(new BasicStroke(stroke));
 		g2.drawLine((int) (from.getXC()), (int) (from.getYC()),
 				(int) (to.getXC()), (int) (to.getYC()));
 
+	}
+	private static void drawLine(double x1, double y1, double x2, double y2, int stroke) {
+		g2.setStroke(new BasicStroke(stroke));
+		g2.drawLine((int) x1, (int) y1,
+				(int) x2, (int) y2);
 	}
 
 	public void switchTurn() {
@@ -472,49 +475,78 @@ public class Grid extends JPanel {
 			CIRCLE_DIAMETER = 12;
 			HALF_DIAMETER = CIRCLE_DIAMETER / 2;
 			gridLineStroke = 2;
+			squareFadeVariant = 6;
 		}
 
 		if (Grid.squareSize == 32.0) {
 			CIRCLE_DIAMETER = 18;
 			HALF_DIAMETER = CIRCLE_DIAMETER / 2;
 			gridLineStroke = 4;
+			squareFadeVariant = 8;
 		}
 
 		if (Grid.squareSize == 64.0) {
 			CIRCLE_DIAMETER = 24;
 			HALF_DIAMETER = CIRCLE_DIAMETER / 2;
 			gridLineStroke = 6;
+			squareFadeVariant = 14;
 		}
 
 		if (Grid.squareSize == 128.0) {
 			CIRCLE_DIAMETER = 32;
 			HALF_DIAMETER = CIRCLE_DIAMETER / 2;
 			gridLineStroke = 8;
+			squareFadeVariant = 20;
 		}
 	}
 
 	public static void drawGrid() {
 		calColAndRows((int) Grid.squareSize);
-		g2.setColor(Grid.gridLineCol);
-		g2.setStroke(new BasicStroke(gridLineStroke));
+//		g2.setColor(Grid.gridLineCol);
+//		g2.setStroke(new BasicStroke(gridLineStroke));
+		
 		int currentposition = 0;
 		int index = 0;
 		while (index < Columns + 1) {
 			// draw columns
 			if (currentposition <= Width) {
-				g2.draw(new Line2D.Double(squareSize * index, 0,
-						Grid.squareSize * index, Grid.Height));
+			//	g2.draw(new Line2D.Double(squareSize * index, 0, Grid.squareSize * index, Grid.Height));
+				g2.setColor(Tools.fade(BoardFrame.BOARD_COLOR));
+				drawLine(squareSize * index, 0, Grid.squareSize * index, Grid.Height, squareFadeVariant);
+				g2.setColor(Grid.gridLineCol);
+				drawLine(squareSize * index, 0, Grid.squareSize * index, Grid.Height, gridLineStroke);
 				position_count++;
 			}
 			// draw rows
 			if (currentposition <= Grid.Height) {
-				g2.draw(new Line2D.Double(0, Grid.squareSize * index,
-						Grid.Width, Grid.squareSize * index));
+				//g2.draw(new Line2D.Double(0, Grid.squareSize * index, Grid.Width, Grid.squareSize * index));
+				g2.setColor(Tools.fade(BoardFrame.BOARD_COLOR));
+				drawLine(0, Grid.squareSize * index, Grid.Width, Grid.squareSize * index,squareFadeVariant);
+				g2.setColor(Grid.gridLineCol);
+				drawLine(0, Grid.squareSize * index, Grid.Width, Grid.squareSize * index,gridLineStroke);
 				position_count++;
 			}
 			currentposition += Grid.squareSize;
 			index++;
 		}
+		
+		calColAndRows((int) Grid.squareSize);
+		g2.setColor(Grid.gridLineCol);
+		int index2 = 0;int currentposition2 = 0;
+		while (index2 < Columns + 1) {
+			// draw columns
+			if (currentposition2 <= Width) {
+				drawLine(squareSize * index2, 0, Grid.squareSize * index2, Grid.Height, gridLineStroke);
+			}
+			// draw rows
+			if (currentposition2 <= Grid.Height) {
+				drawLine(0, Grid.squareSize * index2, Grid.Width, Grid.squareSize * index2,gridLineStroke);
+			}
+			currentposition2 += Grid.squareSize;
+			index2++;
+		}
+		
+		
 	}
 
 	/**
@@ -609,6 +641,7 @@ public class Grid extends JPanel {
 	}
 
 	public void drawCircle(Point p, Color c) {
+		g2.setStroke(new BasicStroke(gridLineStroke));
 		Point recenter = new Point(p.getXC() - HALF_DIAMETER, p.getYC()
 				- HALF_DIAMETER);
 		this.circle = new Ellipse2D.Double(recenter.getXC(), recenter.getYC(),

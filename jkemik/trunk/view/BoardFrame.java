@@ -389,6 +389,9 @@ public class BoardFrame extends JFrame {
 		pColor2.setBackground(Tools.fade(pColor2.getBackground()));
 		fadeButton(save);
 	}
+	public static void desableGameControlButtons() {
+		
+	}
 
 	public static void enableGameControlPanel() {
 		l1.setForeground(Tools.boost(l1.getBackground()));
