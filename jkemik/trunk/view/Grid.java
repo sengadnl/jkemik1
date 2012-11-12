@@ -130,8 +130,7 @@ public class Grid extends JPanel {
 								+ game.getCurrentP().getSelected().size()
 								+ "\nLast point = " + game.getLastp());
 					} else {
-						// BoardFrame.print_point.setForeground(Color.RED);
-						// BoardFrame.print_point.setText("NOTHING TO UNDO!!!");
+						
 					}
 				} else {
 					if (game.undo()) {
@@ -271,8 +270,7 @@ public class Grid extends JPanel {
 		try {
 			/* set color */
 			g2.setColor(BoardFrame.BOARD_COLOR);
-			g2.setStroke(new BasicStroke(gridLineStroke));// +
-															// CURSOR_VARIANT_STROKE
+			g2.setStroke(new BasicStroke(gridLineStroke + CURSOR_VARIANT_STROKE));// 
 
 			/* Erase last line */
 			int index = contour.size() - 1;
@@ -354,6 +352,12 @@ public class Grid extends JPanel {
 		for (Point p : p2.getPloted()) {
 			drawCircle(p, p2.getColor());
 			drawCursor(p, gridLineCol);
+		}
+		if(Grid.manualc){
+			for(Point p: g.getCurrentP().getSelected()){
+				drawCircle(p, g.getCurrentP().getFadedColor());
+				drawCursor(p, gridLineCol);
+			}
 		}
 	}
 
@@ -715,5 +719,8 @@ public class Grid extends JPanel {
 
 	public static void setSelectedP(Point selectedP) {
 		Grid.selectedP = selectedP;
+	}
+	public void repaintGrid(){
+		this.repaint();
 	}
 }
