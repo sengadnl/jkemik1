@@ -420,7 +420,8 @@ public class Grid extends JPanel {
 
 	public void drawCursor(double x, double y, Color c) {
 		g2.setColor(c);
-		g2.setStroke(new BasicStroke(gridLineStroke));
+		BasicStroke bs = new BasicStroke(gridLineStroke, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
+		g2.setStroke(bs);
 		g2.draw(new Line2D.Double(x, y + half_squareSize, x, y
 				- half_squareSize));
 		g2.draw(new Line2D.Double(x - half_squareSize, y, x + half_squareSize,
