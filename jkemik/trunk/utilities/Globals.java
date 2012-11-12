@@ -11,7 +11,7 @@ import java.awt.Color;
  */
 public class Globals {
 	public static final double FADE_VARIANT = .35;//for fading colors
-	public static final double LABEL_VARIANT = 80;//for fading colors
+	public static final double LABEL_VARIANT = 120;//for fading colors
 	public static final int FADE_THRESHOLD = 50;
 	public static final Color BTN_FRD_COLOR = new Color(220,220,10);
 	public static final Color BTN_BGD_COLOR = new Color(60,0,0);

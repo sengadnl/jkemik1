@@ -34,7 +34,7 @@ public class UndoListener implements MouseListener {
 		if(game.getCurrentP().getPlay_flag() == 1){
 			if (!game.getCurrentP().isTurn()) {
 				Grid.undo = true;
-				BoardFrame.repaintGrid();
+				BoardFrame.grid.repaint();
 				BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
 				BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
 				if(!Grid.manualc){
