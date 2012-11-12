@@ -95,10 +95,9 @@ public class Grid extends JPanel {
 		Grid.g2 = (Graphics2D) g;
 		// super.paintComponent(g2);
 		try {
-			// if (!selectPoint) {
 			drawCursor(hl_x, hl_y, gridLineCol);
 			highLightDot(ccolor);
-			// }
+
 			Game game = JKemik.game;
 			if (mouseclicked && plotPoint) {
 				drawCircle(new Point(x, y), game.getCurrentP().getColor());
@@ -108,8 +107,12 @@ public class Grid extends JPanel {
 
 			if (selectPoint && game.getCurrentP().getSelected().size() >= 1) {
 				Color fade = game.getCurrentP().getFadedColor();
+				g2.setColor(fade);
+				drawLine(game.getLastp(), selectedP, gridLineStroke + CURSOR_VARIANT_STROKE);
+				drawCircle(game.getLastp(), fade);
+				drawCursor(game.getLastp(), gridLineCol);
 				drawCircle(selectedP, fade);
-				drawLine(game.getLastp(), selectedP, gridLineStroke);
+				drawCursor(selectedP, gridLineCol);
 				game.setLastp(selectedP);
 				g2.setColor(fade);
 				selectPoint = false;
