@@ -44,6 +44,14 @@ public class NewGameListener implements MouseListener{
 			BoardFrame.settings.addMouseListener(ViewEvents.saveSettings);
 			BoardFrame.grid.removeMouseListener(ViewEvents.gridListener);
 			BoardFrame.grid.removeMouseMotionListener(ViewEvents.gridListener);
+			
+			//Disable control buttons
+			BoardFrame.refresh.removeMouseListener(ViewEvents.debugListener);
+			BoardFrame.manual_c.removeMouseListener(ViewEvents.manualCaptureButtonListener);
+			BoardFrame.undo.removeMouseListener(ViewEvents.undoListener);
+			BoardFrame.pass_turn.removeMouseListener(ViewEvents.passTurnListener);
+			BoardFrame.capture.removeMouseListener(ViewEvents.captureListener);
+			
 			BoardFrame.enableGameControlPanel();
 			
 			//Reset game exit label
@@ -51,7 +59,7 @@ public class NewGameListener implements MouseListener{
 			BoardFrame.Game_status.setForeground(Color.GREEN);
 			
 			BoardFrame.boostLabel(BoardFrame.settings);
-			//BoardFrame.makeButtonsvisible(false);
+			
 			BoardFrame.showControlButtons();
 			BoardFrame.grid.initCursorLocation();
 			//Reset grid

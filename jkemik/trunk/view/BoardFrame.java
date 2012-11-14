@@ -48,9 +48,9 @@ public class BoardFrame extends JFrame {
 
 		makingGame = true;
 
-		showControlButtons();
+		
 
-		initializeEvents();
+		init();
 		setTitle("J-Kemik " + Globals.VERSION);
 		setVisible(true);
 		pack();
@@ -67,7 +67,9 @@ public class BoardFrame extends JFrame {
 		return instance;
 	}
 
-	private void initializeEvents() {
+	private void init() {
+		JKemik.load.plus("Initializing jkemik..."); // 21
+		showControlButtons();
 		JKemik.load.plus("Adding color picker 1 event...");
 		ViewEvents.changeColorPanel1Action(pColor1);
 		JKemik.load.plus("Adding color picker 2 event...");
@@ -80,29 +82,22 @@ public class BoardFrame extends JFrame {
 		ViewEvents.addPlayer1NameAction(label1);
 		JKemik.load.plus("Adding player 2 name prompt ...");
 		ViewEvents.addPlayer2NameAction(label2);
+		JKemik.load.plus("Adding save event listener...");
 		ViewEvents.saveAction(save);
-		JKemik.load.plus("Adding undo event listener...");
-		ViewEvents.undoAction(undo);
-		JKemik.load.plus("Adding capture event listener..."); // 21
-		ViewEvents.captureAction(capture);
+		
 		JKemik.load.plus("Setting Grid initial state...");
-		grid.removeMouseListener(ViewEvents.gridListener);
 		JKemik.load.plus("Setting cursor initial state...");// 24
-		grid.removeMouseMotionListener(ViewEvents.gridListener);
 		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
+		
 		ViewEvents.ExitGameEvent();
 		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
 		ViewEvents.settingsLabelAction();
-
-		ViewEvents.passTurnAction(pass_turn);
-		ViewEvents.debugListener();
+		
 		ViewEvents.saveSettingsAction();
 		ViewEvents.onAutoCaptureAction();
 		ViewEvents.onAutoPassTurnAction();
 		ViewEvents.exitListener();
 		ViewEvents.helpListener();
-		ViewEvents.manualSelectionActionListener(manual_c);
-
 	}
 
 	/**
@@ -205,7 +200,6 @@ public class BoardFrame extends JFrame {
 
 		grid = new Grid((int) JKemik.template.getG_size());
 		Tools.resetMaxWin(Grid.squareCount(), JKemik.settings_t);
-		ViewEvents.gridMouseAction(grid);
 
 		panel23 = new JPanel();
 		panel23.setPreferredSize(new Dimension((int) (SIDE_WIDTH * this.width),
@@ -380,7 +374,7 @@ public class BoardFrame extends JFrame {
 		lc.setForeground(fg);
 	}
 
-	public static void desableGameControlPanel() {
+	public static void disableGameControlPanel() {
 		l1.setForeground(Tools.fade(Color.WHITE));
 		l2.setForeground(Tools.fade(Color.WHITE));
 		label1.setForeground(Tools.fade(Color.WHITE));
@@ -388,9 +382,6 @@ public class BoardFrame extends JFrame {
 		pColor1.setBackground(Tools.fade(pColor1.getBackground()));
 		pColor2.setBackground(Tools.fade(pColor2.getBackground()));
 		fadeButton(save);
-	}
-	public static void desableGameControlButtons() {
-		
 	}
 
 	public static void enableGameControlPanel() {

@@ -44,21 +44,21 @@ public class STemplate implements Serializable {
 
 	public String getAutoCaptureStatus() {
 		if(autoCapture){
-			return "ON";
+			return "AUTO";
 		}
-		return "OFF";
+		return "MANUAL";
 	}
 	public String getAutoPassStatus() {
 		if(autoPass){
-			return "ON";
+			return "AUTO";
 		}
-		return "OFF";
+		return "MANUAL";
 	}
 	public String getManualCaptureStatus() {
 		if(manualCapture){
-			return "ON";
+			return "AUTO";
 		}
-		return "OFF";
+		return "MANUAL";
 	}
 
 	public boolean isAutoCapture() {
