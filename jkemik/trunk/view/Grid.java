@@ -108,7 +108,8 @@ public class Grid extends JPanel {
 			if (selectPoint && game.getCurrentP().getSelected().size() >= 1) {
 				Color fade = game.getCurrentP().getFadedColor();
 				g2.setColor(fade);
-				drawLine(game.getLastp(), selectedP, gridLineStroke + CURSOR_VARIANT_STROKE);
+				drawLine(game.getLastp(), selectedP, gridLineStroke
+						+ CURSOR_VARIANT_STROKE);
 				drawCircle(game.getLastp(), fade);
 				drawCursor(game.getLastp(), gridLineCol);
 				drawCircle(selectedP, fade);
@@ -124,13 +125,13 @@ public class Grid extends JPanel {
 
 			if (undo) {
 				if (manualc) {
-					if (game.getCurrentP().getSelected().size() > 1) {
+					if (game.getCurrentP().getSelected().size() >= 1) {
 						unDrawSelection(game.getCurrentP().getSelected());
 						System.out.println("Current size of select = "
 								+ game.getCurrentP().getSelected().size()
 								+ "\nLast point = " + game.getLastp());
 					} else {
-						
+
 					}
 				} else {
 					if (game.undo()) {
@@ -147,7 +148,7 @@ public class Grid extends JPanel {
 				game.switchPlayTurns();
 				Grid.setCcolor(game.getCurrentP().getColor());
 			}
-			
+
 			if (!this.drawn) {
 				drawGrid();
 				if (Grid.debug) {
@@ -159,7 +160,7 @@ public class Grid extends JPanel {
 		} catch (Exception e) {
 			System.out.println("Error in paint: " + e.getMessage());
 		}
-		
+
 	}
 
 	public void highLightDot(Color c) {
@@ -192,23 +193,24 @@ public class Grid extends JPanel {
 			game.getCurrentP().getConnectedPoints().addAll(contour);
 			/* set color */
 			g2.setColor(game.getCurrentP().getColor());
-			g2.setStroke(new BasicStroke(gridLineStroke + CURSOR_VARIANT_STROKE));
+			g2
+					.setStroke(new BasicStroke(gridLineStroke
+							+ CURSOR_VARIANT_STROKE));
 			/* draw cell contour */
 			drawLine(contour.get(0), contour.get(contour.size() - 1));
 			for (int i = 0; i < contour.size() - 1; i++) {
 				drawLine(contour.get(i), contour.get(i + 1));
 			}
-			
-			//draw positions
+
+			// draw positions
 			g2.setColor(game.getCurrentP().getColor());
 			g2.setStroke(new BasicStroke(gridLineStroke));// +
-			for (Point p: contour) {
+			for (Point p : contour) {
 				drawCircle(p, game.getCurrentP().getColor());
 				drawCursor(p, gridLineCol);
 				g2.setColor(game.getCurrentP().getColor());
 				g2.setStroke(new BasicStroke(gridLineStroke));// +
 			}
-			
 
 			/* Mark empty dots */
 			ArrayList<Point> free_dots = new ArrayList<Point>();
@@ -228,7 +230,9 @@ public class Grid extends JPanel {
 
 			/* set color */
 			g2.setColor(BoardFrame.BOARD_COLOR);
-			g2.setStroke(new BasicStroke(gridLineStroke + CURSOR_VARIANT_STROKE));// +
+			g2
+					.setStroke(new BasicStroke(gridLineStroke
+							+ CURSOR_VARIANT_STROKE));// +
 
 			/* Erase cell contour */
 			drawLine(contour.get(0), contour.get(contour.size() - 1));
@@ -270,20 +274,33 @@ public class Grid extends JPanel {
 		try {
 			/* set color */
 			g2.setColor(BoardFrame.BOARD_COLOR);
-			g2.setStroke(new BasicStroke(gridLineStroke + CURSOR_VARIANT_STROKE));// 
+			g2
+					.setStroke(new BasicStroke(gridLineStroke
+							+ CURSOR_VARIANT_STROKE));// 
 
 			/* Erase last line */
 			int index = contour.size() - 1;
-			Point lastp = contour.get(index);
-			Point before_lastp = contour.get(index - 1);
+			Point lastp = null, before_lastp = null;
+			if(contour.size() > 1){
+				lastp = contour.get(index);
+				before_lastp = contour.get(index - 1);
+			}else if(contour.size() == 1){
+				lastp = contour.get(index);
+				drawCircle(lastp, game.getCurrentP().getColor());
+				drawCursor(lastp, gridLineCol);
+				contour.remove(index);
+				return;
+			}else{return;}
+		
 			drawLine(lastp, before_lastp);
 			drawCircle(lastp, game.getCurrentP().getColor());
 			drawCursor(lastp, gridLineCol);
 			drawCircle(before_lastp, game.getCurrentP().getFadedColor());
 			drawCursor(before_lastp, gridLineCol);
-			if (!game.getCurrentP().getSelected().isEmpty()) {
+			
+			if (!contour.isEmpty()) {
 				game.setLastp(before_lastp);
-				game.getCurrentP().getSelected().remove(index);
+				contour.remove(index);
 			}
 
 		} catch (NullPointerException e) {
@@ -353,8 +370,8 @@ public class Grid extends JPanel {
 			drawCircle(p, p2.getColor());
 			drawCursor(p, gridLineCol);
 		}
-		if(Grid.manualc){
-			for(Point p: g.getCurrentP().getSelected()){
+		if (Grid.manualc) {
+			for (Point p : g.getCurrentP().getSelected()) {
 				drawCircle(p, g.getCurrentP().getFadedColor());
 				drawCursor(p, gridLineCol);
 			}
@@ -362,19 +379,21 @@ public class Grid extends JPanel {
 	}
 
 	private static void drawLine(Point from, Point to) {
-		g2.drawLine((int) (from.getXC()), (int) (from.getYC()),
-				(int) (to.getXC()), (int) (to.getYC()));
+		g2.drawLine((int) (from.getXC()), (int) (from.getYC()), (int) (to
+				.getXC()), (int) (to.getYC()));
 	}
+
 	private static void drawLine(Point from, Point to, int stroke) {
 		g2.setStroke(new BasicStroke(stroke));
-		g2.drawLine((int) (from.getXC()), (int) (from.getYC()),
-				(int) (to.getXC()), (int) (to.getYC()));
+		g2.drawLine((int) (from.getXC()), (int) (from.getYC()), (int) (to
+				.getXC()), (int) (to.getYC()));
 
 	}
-	private static void drawLine(double x1, double y1, double x2, double y2, int stroke) {
+
+	private static void drawLine(double x1, double y1, double x2, double y2,
+			int stroke) {
 		g2.setStroke(new BasicStroke(stroke));
-		g2.drawLine((int) x1, (int) y1,
-				(int) x2, (int) y2);
+		g2.drawLine((int) x1, (int) y1, (int) x2, (int) y2);
 	}
 
 	public void switchTurn() {
@@ -399,11 +418,8 @@ public class Grid extends JPanel {
 			g2.fill(this.circle);
 			g2.draw(this.circle);
 			g2.setColor(gridLineCol);
-
-			g2.draw(new Line2D.Double(px, py + half_squareSize, px, py
-					- half_squareSize));
-			g2.draw(new Line2D.Double(px - half_squareSize, py, px
-					+ half_squareSize, py));
+			drawCursor(p, squareFadeVariant, Tools.fade(BoardFrame.BOARD_COLOR));
+			drawLongCursor(p,Grid.gridLineStroke ,gridLineCol);
 		} catch (Exception e) {
 			System.err.println("Error in unDraw: " + e.getMessage());
 		}
@@ -420,8 +436,9 @@ public class Grid extends JPanel {
 
 	public void drawCursor(double x, double y, Color c) {
 		g2.setColor(c);
-		BasicStroke bs = new BasicStroke(gridLineStroke, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
-		g2.setStroke(bs);
+		// BasicStroke bs = new BasicStroke(gridLineStroke,
+		// BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
+		g2.setStroke(new BasicStroke(gridLineStroke));
 		g2.draw(new Line2D.Double(x, y + half_squareSize, x, y
 				- half_squareSize));
 		g2.draw(new Line2D.Double(x - half_squareSize, y, x + half_squareSize,
@@ -430,13 +447,25 @@ public class Grid extends JPanel {
 
 	}
 
+	public static void drawCursor(Point p, int stroke, Color c) {
+		g2.setColor(c);
+		g2.setStroke(new BasicStroke(stroke));
+		g2.draw(new Line2D.Double(p.getXC(), p.getYC() + half_squareSize, p
+				.getXC(), p.getYC() - half_squareSize));
+		g2.draw(new Line2D.Double(p.getXC() - half_squareSize, p.getYC(), p
+				.getXC()
+				+ half_squareSize, p.getYC()));
+		g2.setColor(pcolor);
+	}
+
 	public static void drawCursor(Point p, Color c) {
 		g2.setColor(c);
 		g2.setStroke(new BasicStroke(gridLineStroke));
 		g2.draw(new Line2D.Double(p.getXC(), p.getYC() + half_squareSize, p
 				.getXC(), p.getYC() - half_squareSize));
 		g2.draw(new Line2D.Double(p.getXC() - half_squareSize, p.getYC(), p
-				.getXC() + half_squareSize, p.getYC()));
+				.getXC()
+				+ half_squareSize, p.getYC()));
 		g2.setColor(pcolor);
 	}
 
@@ -446,8 +475,19 @@ public class Grid extends JPanel {
 		g2.draw(new Line2D.Double(p.getXC(), p.getYC() + half_squareSize, p
 				.getXC(), p.getYC() - half_squareSize));
 		g2.draw(new Line2D.Double(p.getXC() - half_squareSize, p.getYC(), p
-				.getXC() + half_squareSize, p.getYC()));
+				.getXC()
+				+ half_squareSize, p.getYC()));
 		g2.setColor(set_back);
+	}
+	public static void drawLongCursor(Point p, int stroke ,Color c) {
+		g2.setColor(c);
+		g2.setStroke(new BasicStroke(stroke));
+		g2.draw(new Line2D.Double(p.getXC(), p.getYC() + squareSize, p
+				.getXC(), p.getYC() - squareSize));
+		g2.draw(new Line2D.Double(p.getXC() - squareSize, p.getYC(), p
+				.getXC()
+				+ squareSize, p.getYC()));
+		g2.setColor(pcolor);
 	}
 
 	/**
@@ -510,51 +550,59 @@ public class Grid extends JPanel {
 
 	public static void drawGrid() {
 		calColAndRows((int) Grid.squareSize);
-//		g2.setColor(Grid.gridLineCol);
-//		g2.setStroke(new BasicStroke(gridLineStroke));
-		
+		// g2.setColor(Grid.gridLineCol);
+		// g2.setStroke(new BasicStroke(gridLineStroke));
+
 		int currentposition = 0;
 		int index = 0;
 		while (index < Columns + 1) {
 			// draw columns
 			if (currentposition <= Width) {
-			//	g2.draw(new Line2D.Double(squareSize * index, 0, Grid.squareSize * index, Grid.Height));
+				// g2.draw(new Line2D.Double(squareSize * index, 0,
+				// Grid.squareSize * index, Grid.Height));
 				g2.setColor(Tools.fade(BoardFrame.BOARD_COLOR));
-				drawLine(squareSize * index, 0, Grid.squareSize * index, Grid.Height, squareFadeVariant);
+				drawLine(squareSize * index, 0, Grid.squareSize * index,
+						Grid.Height, squareFadeVariant);
 				g2.setColor(Grid.gridLineCol);
-				drawLine(squareSize * index, 0, Grid.squareSize * index, Grid.Height, gridLineStroke);
+				drawLine(squareSize * index, 0, Grid.squareSize * index,
+						Grid.Height, gridLineStroke);
 				position_count++;
 			}
 			// draw rows
 			if (currentposition <= Grid.Height) {
-				//g2.draw(new Line2D.Double(0, Grid.squareSize * index, Grid.Width, Grid.squareSize * index));
+				// g2.draw(new Line2D.Double(0, Grid.squareSize * index,
+				// Grid.Width, Grid.squareSize * index));
 				g2.setColor(Tools.fade(BoardFrame.BOARD_COLOR));
-				drawLine(0, Grid.squareSize * index, Grid.Width, Grid.squareSize * index,squareFadeVariant);
+				drawLine(0, Grid.squareSize * index, Grid.Width,
+						Grid.squareSize * index, squareFadeVariant);
 				g2.setColor(Grid.gridLineCol);
-				drawLine(0, Grid.squareSize * index, Grid.Width, Grid.squareSize * index,gridLineStroke);
+				drawLine(0, Grid.squareSize * index, Grid.Width,
+						Grid.squareSize * index, gridLineStroke);
 				position_count++;
 			}
 			currentposition += Grid.squareSize;
 			index++;
 		}
-		
+
 		calColAndRows((int) Grid.squareSize);
 		g2.setColor(Grid.gridLineCol);
-		int index2 = 0;int currentposition2 = 0;
+		int index2 = 0;
+		int currentposition2 = 0;
 		while (index2 < Columns + 1) {
 			// draw columns
 			if (currentposition2 <= Width) {
-				drawLine(squareSize * index2, 0, Grid.squareSize * index2, Grid.Height, gridLineStroke);
+				drawLine(squareSize * index2, 0, Grid.squareSize * index2,
+						Grid.Height, gridLineStroke);
 			}
 			// draw rows
 			if (currentposition2 <= Grid.Height) {
-				drawLine(0, Grid.squareSize * index2, Grid.Width, Grid.squareSize * index2,gridLineStroke);
+				drawLine(0, Grid.squareSize * index2, Grid.Width,
+						Grid.squareSize * index2, gridLineStroke);
 			}
 			currentposition2 += Grid.squareSize;
 			index2++;
 		}
-		
-		
+
 	}
 
 	/**
@@ -721,7 +769,8 @@ public class Grid extends JPanel {
 	public static void setSelectedP(Point selectedP) {
 		Grid.selectedP = selectedP;
 	}
-	public void repaintGrid(){
+
+	public void repaintGrid() {
 		this.repaint();
 	}
 }
