@@ -45,7 +45,7 @@ public class PlayerPanel extends JPanel {
 	private JLabel captCellsv;
 
 	private JLabel scorev;
-	private final int FONT_SIZE = 9;
+	private final int FONT_SIZE = 11;
 
 	public PlayerPanel() {
 		
@@ -125,35 +125,24 @@ public class PlayerPanel extends JPanel {
 				this.FONT_SIZE);
 		scorev.setFont(scvfont);
 
-		final JLabel plotted = new JLabel("  Plt Pt:");
-		final JLabel captured = new JLabel("  Cp Pt:");
-		final JLabel cptcells = new JLabel("  Cp Cll:");
-		final JLabel cells = new JLabel("  Cll:");
-		final JLabel score = new JLabel("  Scr:");
+		 final JLabel plotted = new JLabel(" Plt Pt: ");
+		final JLabel captured = new JLabel(" Cp Pt: ");
+		final JLabel cptcells = new JLabel(" Cp Cll: ");
+		   final JLabel cells = new JLabel(" Cll: ");
+		   final JLabel score = new JLabel(" Scr: ");
 
-		// JKIcon p = new JKIcon("media/yellow.gif", "");
-		// plotted = p.createIcon();
 
 		plotted.setForeground(new Color(255, 204, 51));
 		Font pttfont = new Font("Arial", Font.BOLD, this.FONT_SIZE);
 		plotted.setFont(pttfont);
 
-		// final JKIcon c = new JKIcon("media/capt_dot.gif", "");
-		// captured = c.createIcon();
-
 		captured.setForeground(new Color(255, 204, 51));
 		Font cfont = new Font("Arial", Font.BOLD, this.FONT_SIZE);
 		captured.setFont(cfont);
 
-		// final JKIcon cl = new JKIcon("media/cell.gif", "");
-		// cells = cl.createIcon();
-
 		cells.setForeground(new Color(255, 204, 51));
 		Font clfont = new Font("Arial", Font.BOLD, this.FONT_SIZE);
 		cells.setFont(clfont);
-
-		// final JKIcon cc = new JKIcon("media/capt_cell.gif", "");
-		// cptcells = cc.createIcon();
 
 		cptcells.setForeground(new Color(255, 204, 51));
 		Font ctcellsf = new Font("Arial", Font.BOLD, this.FONT_SIZE);

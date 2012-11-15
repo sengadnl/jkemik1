@@ -48,6 +48,13 @@ public class RotateLabel extends JLabel {
 			this.setText(this.list[this.index]);
 		}
 	}
+	public void rotateLabel(String str) {
+		for(int i = 0; i < list.length; i++){
+			if(str.equals(list[i])){
+				this.setText(this.list[i]);
+			}
+		}
+	}
 
 	public void highlight() {
 		setForeground(new Color(250,0,250));
@@ -69,6 +76,16 @@ public class RotateLabel extends JLabel {
 	 */
 	public void setList(String[] list) {
 		this.list = list;
+	}
+	/**
+	 * @return the index
+	 */
+	public int getIndex(String str) {
+		for(int i = 0; i < list.length; i++){
+			
+		}
+		
+		return this.index;
 	}
 
 	/**
