@@ -12,7 +12,6 @@ import javax.swing.JTextField;
 
 import controler.JKemik;
 
-
 import utilities.Globals;
 
 public class SettingsPanel extends JFrame {
@@ -57,6 +56,10 @@ public class SettingsPanel extends JFrame {
 		return max_win;
 	}
 
+	public static void setMax_win(int maxWin) {
+		max_win.setText(maxWin + "");
+	}
+
 	public static void setMax_win(String maxWin) {
 		max_win.setText(maxWin);
 	}
@@ -69,19 +72,34 @@ public class SettingsPanel extends JFrame {
 		this.maxWinVal = maxWinVal;
 	}
 
+	public void setAutoCap(boolean value) {
+		if (value) {
+			auto_capture.rotateLabel("ON");
+		} else {
+			auto_capture.rotateLabel("OFF");
+		}
+	}
+
 	public void setAutoCap(String ac) {
 		ac = ac.toUpperCase();
 		if (!auto_capture.getText().equals(ac)) {
 			auto_capture.rotateLabel();
 		}
 	}
-
+	public void setAutoPass(boolean value) {
+		if (value) {
+			auto_turn_pass.rotateLabel("ON");
+		} else {
+			auto_turn_pass.rotateLabel("OFF");
+		}
+	}
 	public void setAutoPass(String ap) {
 		ap = ap.toUpperCase();
 		if (!auto_turn_pass.getText().equals(ap)) {
 			auto_turn_pass.rotateLabel();
 		}
 	}
+
 	public void buildPane() {
 		JKIcon icon = new JKIcon("media/jkemik-small.png", "");
 		save = new JButton("Done");
@@ -104,13 +122,13 @@ public class SettingsPanel extends JFrame {
 
 		JLabel label1 = new JLabel("  Auto capture:");
 		label1.setForeground(Color.YELLOW);
-		
+
 		JLabel label2 = new JLabel("  Auto turn pass:");
 		label2.setForeground(Color.YELLOW);
-		
+
 		JLabel label3 = new JLabel("  Manual Capture:");
 		label3.setForeground(Color.YELLOW);
-		
+
 		JLabel label4 = new JLabel("  Max Win:");
 		label4.setForeground(Color.YELLOW);
 

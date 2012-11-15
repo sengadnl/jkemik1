@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
+
+import utilities.Globals;
 import utilities.Tools;
 
 public class SettingsLabelListener implements MouseListener {
@@ -15,6 +17,10 @@ public class SettingsLabelListener implements MouseListener {
 
 	public void mouseClicked(MouseEvent arg0) {
 	
+		JKemik.settings.setAutoCap(JKemik.settings_t.isAutoCapture());
+		JKemik.settings.setAutoPass(JKemik.settings_t.isAutoPass());
+		int maxWin = (int)(JKemik.settings_t.getMaxWinVal() * Globals.MAX_WIN);
+		JKemik.settings.setMaxWinVal(maxWin);
 		JKemik.settings.setVisible(true);
 		
 	}
