@@ -33,7 +33,7 @@ public class ManualSelectionListener implements MouseListener {
 			JKemik.view.repaint();
 			BoardFrame.grid.drawn = false;
 			Grid.manualc = false;
-			Grid.debug = true;
+			Grid.refresh = true;
 			BoardFrame.repaintGrid();
 		}
 	}
