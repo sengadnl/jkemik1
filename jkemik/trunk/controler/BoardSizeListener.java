@@ -5,13 +5,12 @@ package controler;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import api.GTemplate;
-import api.STemplate;
-import utilities.Tools;
+import utilities.Globals;
 import view.BoardFrame;
 import view.Grid;
 import view.RotateLabel;
 /**
- * @author dalet
+ * @author Dalet
  *
  */
 public class BoardSizeListener implements MouseListener{
@@ -21,19 +20,20 @@ public class BoardSizeListener implements MouseListener{
 		this.label = label;
 	}
 	public void mouseClicked(MouseEvent e) {
-		this.label.rotateLabel();
 		GTemplate t = JKemik.template;
+		this.label.rotateLabel();
 		String s = this.label.getActiveLabel();
 		Grid.setSquareSize(Grid.getSqrSize(s));
 		t.setG_size(Grid.getSquareSize());
 		BoardFrame.panel2.repaint();
+		
 		// change the grid size
 		if (BoardFrame.grid.drawn) {
 			BoardFrame.grid.drawn = false;
 			BoardFrame.grid.repaint();
 		}
-		STemplate st = JKemik.settings_t;
-		Tools.resetMaxWin(Grid.squareCount(), st);
+		BoardFrame.Win.setText((int)(Grid.getBoardSize()* Globals.MAX_WIN) + "");
+		JKemik.settings_t.setMaxWinVal((int)(Grid.getBoardSize() * Globals.MAX_WIN));
 	}
 
 	

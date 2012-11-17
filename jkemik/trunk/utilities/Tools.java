@@ -20,8 +20,8 @@ public class Tools {
 		return true;
 	}
 
-	public static void resetMaxWin(int GridSqrCount, STemplate t) {
-		int defaultMaxWin = GridSqrCount/2;
+	public static void resetMaxWin(int positionsCount, STemplate t) {
+		int defaultMaxWin = (int)(positionsCount * Globals.MAX_WIN);
 		t.setMaxWinVal(defaultMaxWin);
 	}
 

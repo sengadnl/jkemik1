@@ -88,6 +88,7 @@ public class SaveButtonListener implements MouseListener {
 
 			BoardFrame.p1panel.initPanelForNewGame(p1n, p1c);
 			BoardFrame.p2panel.initPanelForNewGame(p2n, p2c);
+			BoardFrame.Win.setText(JKemik.settings_t.getMaxWinVal() + "");
 			BoardFrame.save.removeMouseListener(ViewEvents.saveListener);
 
 			int response = JOptionPane.showConfirmDialog(null, "Will " + str1

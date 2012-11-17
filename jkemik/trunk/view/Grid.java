@@ -38,7 +38,7 @@ public class Grid extends JPanel {
 	public static boolean mouseclicked = false;
 	public static boolean plotPoint = false;
 	public static boolean selectPoint = false;
-	public static boolean debug = false;
+	public static boolean refresh = false;
 	public static boolean manualc = false;
 	public static boolean mouseMove = false;
 	public static boolean undo = false;
@@ -58,6 +58,7 @@ public class Grid extends JPanel {
 	public static Point selectedP = new Point(0, 0);
 	public static Cell cell = null;
 	public static int position_count = 0;
+	private static int size;
 
 	public Grid(int squareSize) {
 		setPreferredSize(new Dimension((int) Width, (int) Height));
@@ -151,9 +152,10 @@ public class Grid extends JPanel {
 
 			if (!this.drawn) {
 				drawGrid();
-				if (Grid.debug) {
+				size = (int) (Columns * rows);
+				if (Grid.refresh) {
 					drawGame(game);
-					Grid.debug = false;
+					Grid.refresh = false;
 				}
 				this.drawn = true;
 			}
@@ -281,23 +283,25 @@ public class Grid extends JPanel {
 			/* Erase last line */
 			int index = contour.size() - 1;
 			Point lastp = null, before_lastp = null;
-			if(contour.size() > 1){
+			if (contour.size() > 1) {
 				lastp = contour.get(index);
 				before_lastp = contour.get(index - 1);
-			}else if(contour.size() == 1){
+			} else if (contour.size() == 1) {
 				lastp = contour.get(index);
 				drawCircle(lastp, game.getCurrentP().getColor());
 				drawCursor(lastp, gridLineCol);
 				contour.remove(index);
 				return;
-			}else{return;}
-		
+			} else {
+				return;
+			}
+
 			drawLine(lastp, before_lastp);
 			drawCircle(lastp, game.getCurrentP().getColor());
 			drawCursor(lastp, gridLineCol);
 			drawCircle(before_lastp, game.getCurrentP().getFadedColor());
 			drawCursor(before_lastp, gridLineCol);
-			
+
 			if (!contour.isEmpty()) {
 				game.setLastp(before_lastp);
 				contour.remove(index);
@@ -419,7 +423,7 @@ public class Grid extends JPanel {
 			g2.draw(this.circle);
 			g2.setColor(gridLineCol);
 			drawCursor(p, squareFadeVariant, Tools.fade(BoardFrame.BOARD_COLOR));
-			drawLongCursor(p,Grid.gridLineStroke ,gridLineCol);
+			drawLongCursor(p, Grid.gridLineStroke, gridLineCol);
 		} catch (Exception e) {
 			System.err.println("Error in unDraw: " + e.getMessage());
 		}
@@ -479,13 +483,13 @@ public class Grid extends JPanel {
 				+ half_squareSize, p.getYC()));
 		g2.setColor(set_back);
 	}
-	public static void drawLongCursor(Point p, int stroke ,Color c) {
+
+	public static void drawLongCursor(Point p, int stroke, Color c) {
 		g2.setColor(c);
 		g2.setStroke(new BasicStroke(stroke));
-		g2.draw(new Line2D.Double(p.getXC(), p.getYC() + squareSize, p
-				.getXC(), p.getYC() - squareSize));
-		g2.draw(new Line2D.Double(p.getXC() - squareSize, p.getYC(), p
-				.getXC()
+		g2.draw(new Line2D.Double(p.getXC(), p.getYC() + squareSize, p.getXC(),
+				p.getYC() - squareSize));
+		g2.draw(new Line2D.Double(p.getXC() - squareSize, p.getYC(), p.getXC()
 				+ squareSize, p.getYC()));
 		g2.setColor(pcolor);
 	}
@@ -524,6 +528,8 @@ public class Grid extends JPanel {
 			HALF_DIAMETER = CIRCLE_DIAMETER / 2;
 			gridLineStroke = 2;
 			squareFadeVariant = 6;
+			size = ((int) (Width / Grid.squareSize) * (int) (Height / Grid.squareSize))
+			+ ((int) (Width / Grid.squareSize) + (int) (Height / Grid.squareSize));
 		}
 
 		if (Grid.squareSize == 32.0) {
@@ -531,6 +537,8 @@ public class Grid extends JPanel {
 			HALF_DIAMETER = CIRCLE_DIAMETER / 2;
 			gridLineStroke = 4;
 			squareFadeVariant = 8;
+			size = ((int) (Width / Grid.squareSize) * (int) (Height / Grid.squareSize))
+			+ ((int) (Width / Grid.squareSize) + (int) (Height / Grid.squareSize));
 		}
 
 		if (Grid.squareSize == 64.0) {
@@ -538,6 +546,8 @@ public class Grid extends JPanel {
 			HALF_DIAMETER = CIRCLE_DIAMETER / 2;
 			gridLineStroke = 6;
 			squareFadeVariant = 14;
+			size = ((int) (Width / Grid.squareSize) * (int) (Height / Grid.squareSize))
+			+ ((int) (Width / Grid.squareSize) + (int) (Height / Grid.squareSize));
 		}
 
 		if (Grid.squareSize == 128.0) {
@@ -545,21 +555,19 @@ public class Grid extends JPanel {
 			HALF_DIAMETER = CIRCLE_DIAMETER / 2;
 			gridLineStroke = 8;
 			squareFadeVariant = 20;
+			size = ((int) (Width / Grid.squareSize) * (int) (Height / Grid.squareSize))
+					+ ((int) (Width / Grid.squareSize) + (int) (Height / Grid.squareSize));
 		}
 	}
 
 	public static void drawGrid() {
 		calColAndRows((int) Grid.squareSize);
-		// g2.setColor(Grid.gridLineCol);
-		// g2.setStroke(new BasicStroke(gridLineStroke));
 
 		int currentposition = 0;
 		int index = 0;
 		while (index < Columns + 1) {
 			// draw columns
 			if (currentposition <= Width) {
-				// g2.draw(new Line2D.Double(squareSize * index, 0,
-				// Grid.squareSize * index, Grid.Height));
 				g2.setColor(Tools.fade(BoardFrame.BOARD_COLOR));
 				drawLine(squareSize * index, 0, Grid.squareSize * index,
 						Grid.Height, squareFadeVariant);
@@ -570,8 +578,6 @@ public class Grid extends JPanel {
 			}
 			// draw rows
 			if (currentposition <= Grid.Height) {
-				// g2.draw(new Line2D.Double(0, Grid.squareSize * index,
-				// Grid.Width, Grid.squareSize * index));
 				g2.setColor(Tools.fade(BoardFrame.BOARD_COLOR));
 				drawLine(0, Grid.squareSize * index, Grid.Width,
 						Grid.squareSize * index, squareFadeVariant);
@@ -584,8 +590,8 @@ public class Grid extends JPanel {
 			index++;
 		}
 
-		calColAndRows((int) Grid.squareSize);
-		g2.setColor(Grid.gridLineCol);
+		// calColAndRows((int) Grid.squareSize);
+		// g2.setColor(Grid.gridLineCol);
 		int index2 = 0;
 		int currentposition2 = 0;
 		while (index2 < Columns + 1) {
@@ -602,7 +608,6 @@ public class Grid extends JPanel {
 			currentposition2 += Grid.squareSize;
 			index2++;
 		}
-
 	}
 
 	/**
@@ -731,11 +736,11 @@ public class Grid extends JPanel {
 	}
 
 	public static boolean isDebug() {
-		return debug;
+		return refresh;
 	}
 
 	public static void setDebug(boolean debug) {
-		Grid.debug = debug;
+		Grid.refresh = debug;
 	}
 
 	public boolean isDrawn() {
@@ -773,4 +778,13 @@ public class Grid extends JPanel {
 	public void repaintGrid() {
 		this.repaint();
 	}
+
+	public static int getBoardSize() {
+		return size;
+	}
+
+	public static void setBoardSize(int size) {
+		Grid.size = size;
+	}
+
 }
