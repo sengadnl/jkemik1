@@ -255,8 +255,7 @@ public class Game implements Serializable {
 
 	public boolean checkEndGame() {
 		if ((guest.getScore()) >= this.getMaxScore()) {
-			System.out.println(guest.getName() + " : " + currentP.getScore()
-					+ "");
+			
 			return true;
 		}
 		return false;

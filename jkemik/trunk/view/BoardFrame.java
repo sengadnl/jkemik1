@@ -47,9 +47,7 @@ public class BoardFrame extends JFrame {
 		setTheme(JKemik.settings_t.getTheme());
 
 		makingGame = true;
-
 		
-
 		init();
 		setTitle("J-Kemik " + Globals.VERSION);
 		setVisible(true);
@@ -98,6 +96,7 @@ public class BoardFrame extends JFrame {
 		ViewEvents.onAutoPassTurnAction();
 		ViewEvents.exitListener();
 		ViewEvents.helpListener();
+		ViewEvents.debugListener();
 	}
 
 	/**
