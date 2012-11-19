@@ -38,7 +38,6 @@ public class SaveButtonListener implements MouseListener {
 		str1 = BoardFrame.label1.getText();
 		str2 = BoardFrame.label2.getText();
 
-		// JKemik.template = new GTemplate();
 		GTemplate t = JKemik.template;
 		Player p1 = null, p2 = null;
 		Game game = null;
@@ -55,8 +54,8 @@ public class SaveButtonListener implements MouseListener {
 			p2 = new Player(c2, str2);
 			game = new Game(p1, p2);
 			JKemik.game = game;
-
-			JKemik.game.setMaxScore(JKemik.settings_t.getMaxWinVal());
+			
+			JKemik.game.setMaxScore(JKemik.settings_t.getMaxWinVal());//TODO
 
 			BoardFrame.disableGameControlPanel();
 			BoardFrame.pColor1.removeMouseListener(ViewEvents.p1Listener);
