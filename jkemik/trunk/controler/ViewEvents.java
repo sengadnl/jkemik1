@@ -31,7 +31,7 @@ public class ViewEvents {
 	public static AutoTurnPassAction autoTurnPassListener = new AutoTurnPassAction(SettingsPanel.auto_turn_pass);
 	public static ExitListener exitlistener = new ExitListener(BoardFrame.exit);
 	public static HelpListener helpListener = new HelpListener(BoardFrame.help);
-	public static DebugListener debugListener = new DebugListener(BoardFrame.refresh);
+	public static RefreshListener refreshListener = new RefreshListener(BoardFrame.refresh);
 	public static WindowEvents windowListener = new WindowEvents(JKemik.view);
 	public static ManualSelectionListener manualCaptureButtonListener = new ManualSelectionListener(BoardFrame.manual_c);	
 	
@@ -42,8 +42,8 @@ public class ViewEvents {
 		JKemik.view.addComponentListener(windowListener);
 	}
 	
-	public static void debugListener(){
-		BoardFrame.refresh.addMouseListener(debugListener);
+	public static void refreshListener(){
+		BoardFrame.refresh.addMouseListener(refreshListener);
 	}
 	public static void helpListener(){
 		BoardFrame.help.addMouseListener(helpListener);

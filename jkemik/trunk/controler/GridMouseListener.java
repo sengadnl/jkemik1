@@ -70,13 +70,12 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					Grid.mouseMove = false;
 				}
 			}
-		}
-
-		if (game.isEmbuche_on() && !Grid.manualc) {
-			Grid.cell = game.embush(Grid.squareSize);// new line
-			BoardFrame.grid.repaint();
-			System.out.println("Embush attempt");
-			game.getCurrentP().setSelected(new ArrayList<Point>());
+			if (game.isEmbuche_on() && JKemik.settings_t.isAutoCapture()) {
+				Grid.cell = game.embush(Grid.squareSize);// new line
+				BoardFrame.grid.repaint();
+				System.out.println("Embush attempt");
+				game.getCurrentP().setSelected(new ArrayList<Point>());
+			}
 		}
 
 		if (game.getCurrentP().isTurn()) {

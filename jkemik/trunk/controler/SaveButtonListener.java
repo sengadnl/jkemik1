@@ -73,7 +73,7 @@ public class SaveButtonListener implements MouseListener {
 			BoardFrame.showControlButtons();
 			
 			//Enable control buttons
-			BoardFrame.refresh.addMouseListener(ViewEvents.debugListener);
+			BoardFrame.refresh.addMouseListener(ViewEvents.refreshListener);
 			BoardFrame.manual_c.addMouseListener(ViewEvents.manualCaptureButtonListener);
 			BoardFrame.undo.addMouseListener(ViewEvents.undoListener);
 			BoardFrame.pass_turn.addMouseListener(ViewEvents.passTurnListener);

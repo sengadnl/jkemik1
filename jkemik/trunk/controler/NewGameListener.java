@@ -46,7 +46,7 @@ public class NewGameListener implements MouseListener{
 			BoardFrame.grid.removeMouseMotionListener(ViewEvents.gridListener);
 			
 			//Disable control buttons
-			BoardFrame.refresh.removeMouseListener(ViewEvents.debugListener);
+			BoardFrame.refresh.removeMouseListener(ViewEvents.refreshListener);
 			BoardFrame.manual_c.removeMouseListener(ViewEvents.manualCaptureButtonListener);
 			BoardFrame.undo.removeMouseListener(ViewEvents.undoListener);
 			BoardFrame.pass_turn.removeMouseListener(ViewEvents.passTurnListener);
