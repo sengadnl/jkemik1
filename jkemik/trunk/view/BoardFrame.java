@@ -96,7 +96,7 @@ public class BoardFrame extends JFrame {
 		ViewEvents.onAutoPassTurnAction();
 		ViewEvents.exitListener();
 		ViewEvents.helpListener();
-		ViewEvents.debugListener();
+		ViewEvents.refreshListener();
 	}
 
 	/**

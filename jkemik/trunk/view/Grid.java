@@ -128,9 +128,6 @@ public class Grid extends JPanel {
 				if (manualc) {
 					if (game.getCurrentP().getSelected().size() >= 1) {
 						unDrawSelection(game.getCurrentP().getSelected());
-						System.out.println("Current size of select = "
-								+ game.getCurrentP().getSelected().size()
-								+ "\nLast point = " + game.getLastp());
 					} else {
 
 					}
