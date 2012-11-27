@@ -49,6 +49,7 @@ public class BoardFrame extends JFrame {
 		makingGame = true;
 		
 		init();
+		BoardFrame.manual.setVisible(false);
 		setTitle("J-Kemik " + Globals.VERSION);
 		setVisible(true);
 		pack();
@@ -97,6 +98,7 @@ public class BoardFrame extends JFrame {
 		ViewEvents.exitListener();
 		ViewEvents.helpListener();
 		ViewEvents.refreshListener();
+		ViewEvents.modeToggleActionListener();
 	}
 
 	/**
@@ -191,11 +193,12 @@ public class BoardFrame extends JFrame {
 		panel21 = new JPanel();
 		panel21.setPreferredSize(new Dimension((int) (SIDE_WIDTH * this.width),
 				(int) (SIDE_HEIGHT * this.height)));
-
+		panel21.setLayout(new BorderLayout(10,10));
 		p1panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (PLAYER_PNL_H_SCALAR * SIDE_HEIGHT * this.height));
-		panel21.add(p1panel);
-		p1panel.initPanelForNewGame(JKemik.template.getP1_name(), Color.WHITE);
+		panel21.add(p1panel, BorderLayout.NORTH);
+		
+		p1panel.initPanelForNewGame(JKemik.template.getP1_name(), JKemik.template.getP1_c());
 
 		grid = new Grid((int) JKemik.template.getG_size());
 		Tools.resetMaxWin(Grid.squareCount(), JKemik.settings_t);
@@ -203,11 +206,19 @@ public class BoardFrame extends JFrame {
 		panel23 = new JPanel();
 		panel23.setPreferredSize(new Dimension((int) (SIDE_WIDTH * this.width),
 				(int) (SIDE_HEIGHT * this.height)));
+		panel23.setLayout(new BorderLayout(10,10));
+		
+		//TODO auto stuff
+		manual = new JCheckBox("Manual");
 
 		p2panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (.25 * SIDE_HEIGHT * this.height));
-		panel23.add(p2panel);
-		p2panel.initPanelForNewGame(JKemik.template.getP2_name(), Color.WHITE);
+		panel23.add(p2panel, BorderLayout.NORTH);
+		panel23.add(manual, BorderLayout.SOUTH);
+//		panel23.add(p2panel);
+//		panel23.add(manual);
+		
+		p2panel.initPanelForNewGame(JKemik.template.getP2_name(), JKemik.template.getP2_c());
 
 		panel2.add(panel21, BorderLayout.WEST);
 		panel2.add(grid, BorderLayout.CENTER);
@@ -251,8 +262,11 @@ public class BoardFrame extends JFrame {
 		capture.setVisible(false);
 		manual_c.setVisible(false);
 
-		manual_c.setBackground(new Color(0, 0, 0));
-		manual_c.setForeground(new Color(255, 255, 255));
+//		manual_c.setBackground(new Color(0, 0, 0));
+//		manual_c.setForeground(new Color(255, 255, 255));
+		
+//		manual.setBackground(new Color(0, 0, 0));
+//		manual.setForeground(new Color(255, 255, 255));
 	
 		panel33.add(panel331);
 		panel33.add(panel332);
@@ -366,6 +380,7 @@ public class BoardFrame extends JFrame {
 		
 		refresh.setBackground(bg);
 		refresh.setForeground(fg);
+
 	}
 	public static void decorateLabelss(Color fg){
 		la.setForeground(fg);
@@ -556,6 +571,9 @@ public class BoardFrame extends JFrame {
 		Holder1.setBackground(BoardFrame.CPANEL_COLOR);
 		Holder2.setBackground(BoardFrame.CPANEL_COLOR);
 		Holder3.setBackground(BoardFrame.CPANEL_COLOR);
+		
+		manual_c.setBackground(BoardFrame.THEME_COLOR);
+		manual.setBackground(BoardFrame.THEME_COLOR);
 	}
 
 	public void setTheme(String str) {
@@ -691,6 +709,7 @@ public class BoardFrame extends JFrame {
 	public static JButton undo;
 	public static JButton capture;
 	public static JCheckBox manual_c;
+	public static JCheckBox manual;
 	public static JButton pass_turn;
 
 	public static JLabel blank1;

@@ -82,6 +82,25 @@ public class Tools {
 		
 		return new Color((int) r, (int) g, (int) b);
 	}
+	/**
+	 * fades color
+	 */
+	public static Color fade(Color c, int f_th, double f_var) {
+		double r = c.getRed();
+		double g = c.getGreen();
+		double b = c.getBlue();
+		if (r > f_th) {
+			r = r - (r * f_var);
+		}
+		if (g > f_th) {
+			g = g - (g * f_var);
+		}
+		if (b > f_th) {
+			b = b - (b * f_var);
+		}
+		
+		return new Color((int) r, (int) g, (int) b);
+	}
 
 	/**
 	 * boosts color
