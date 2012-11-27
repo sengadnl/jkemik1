@@ -5,7 +5,6 @@ package controler;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import view.BoardFrame;
 import view.RotateLabel;
 
@@ -31,6 +30,7 @@ public class GameThemeListener implements MouseListener{
 			BoardFrame.grid.drawn = false;
 			BoardFrame.grid.repaint();
 		}
+
 	}
 	public void mouseEntered(MouseEvent e) {
 		this.label.highlight();

@@ -34,7 +34,11 @@ public class ViewEvents {
 	public static RefreshListener refreshListener = new RefreshListener(BoardFrame.refresh);
 	public static WindowEvents windowListener = new WindowEvents(JKemik.view);
 	public static ManualSelectionListener manualCaptureButtonListener = new ManualSelectionListener(BoardFrame.manual_c);	
+	public static ModeToggleListener modeToggleListener = new ModeToggleListener(BoardFrame.manual);
 	
+	public static void modeToggleActionListener(){
+		BoardFrame.manual.addMouseListener(modeToggleListener);
+	}
 	public static void manualSelectionActionListener(JCheckBox manual){
 		manual.addMouseListener(manualCaptureButtonListener);
 	}

@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 
 import api.STemplate;
 import utilities.Tools;
+//import view.BoardFrame;
 import view.SettingsPanel;
 
 public class SettingsLabelListener implements MouseListener {
@@ -18,11 +19,11 @@ public class SettingsLabelListener implements MouseListener {
 
 	public void mouseClicked(MouseEvent arg0) {
 		STemplate t = JKemik.settings_t;
-		
 		JKemik.settings.setAutoCap(t.isAutoCapture());
 		JKemik.settings.setAutoPass(t.isAutoPass());
 		SettingsPanel.setMax_win(t.getMaxWinVal());
 		JKemik.settings.setVisible(true);
+		//BoardFrame.manual.setVisible(false);
 		
 	}
 

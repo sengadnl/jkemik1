@@ -67,8 +67,8 @@ public class NewGameListener implements MouseListener{
 			BoardFrame.grid.drawn = false;
 			BoardFrame.grid.repaint();
 			
-			BoardFrame.p1panel.initPanelForNewGame("P1", Color.WHITE);
-			BoardFrame.p2panel.initPanelForNewGame("P2", Color.WHITE);
+			BoardFrame.p1panel.initPanelForNewGame(JKemik.template.getP1_name(), JKemik.template.getP1_c());
+			BoardFrame.p2panel.initPanelForNewGame(JKemik.template.getP2_name(), JKemik.template.getP2_c());
 
 		} else if (response == 1) {
 			int res = JOptionPane.showConfirmDialog(null,
@@ -83,6 +83,7 @@ public class NewGameListener implements MouseListener{
 				BoardFrame.setMakingGame(false);
 			}
 		}
+		BoardFrame.manual.setVisible(false);
 	}
 	
 	public void mouseExited(MouseEvent arg0) {

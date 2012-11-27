@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import utilities.Tools;
+
 import api.Player;
 
 /**
@@ -46,11 +48,14 @@ public class PlayerPanel extends JPanel {
 
 	private JLabel scorev;
 	private final int FONT_SIZE = 11;
+	private final int LINE_BORDER_STOKE = 6;
+	private final double LB_FADE_VAR = .60;
+	private final int FADE_TH = 10;// fade threshold
 
 	public PlayerPanel() {
 		
 		setPreferredSize(new Dimension(this.WIDTH, this.HEIGHT));
-		// setPreferredSize(new Dimension(w, h));
+
 		System.out.println("PlayerPanel -- Width = " + this.WIDTH
 				+ " Height = " + this.HEIGHT);
 		createPlayerPanel();
@@ -61,7 +66,6 @@ public class PlayerPanel extends JPanel {
 		 this.WIDTH = w;
 		 this.HEIGHT = h;
 		setPreferredSize(new Dimension(this.WIDTH, this.HEIGHT));
-		// setPreferredSize(new Dimension(w, h));
 		System.out.println("PlayerPanel -- Width = " + this.WIDTH
 				+ " Height = " + this.HEIGHT);
 		createPlayerPanel();
@@ -84,7 +88,7 @@ public class PlayerPanel extends JPanel {
 
 		this.holder.setLayout(new GridLayout(6, 2));
 
-		setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
+		setBorder(BorderFactory.createLineBorder(Color.WHITE, LINE_BORDER_STOKE));
 		this.player_name = new JLabel("PName");
 		this.player_name.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -94,9 +98,6 @@ public class PlayerPanel extends JPanel {
 		captCellsv = new JLabel();
 		scorev = new JLabel();
 
-		//this.player_name.setForeground(new Color(250, 250, 250));
-//		 player_name.setBorder(BorderFactory.createLineBorder(Color.BLACK,
-//		 2));
 		Font pfont = new Font("Arial", Font.BOLD, this.FONT_SIZE + 1);
 		this.player_name.setFont(pfont);
 
@@ -170,72 +171,6 @@ public class PlayerPanel extends JPanel {
 	}
 
 	/**
-	 * This function determines the predominant color between R,G,B
-	 * 
-	 * @return 1 if R, 2 if G and 3 if B
-	 */
-	public int compareRGB(Color c) {
-		int ret = 3;
-		int r = c.getRed(), g = c.getGreen(), b = c.getBlue();
-		if (r > c.getGreen() && r >= b) {
-			return 1;
-		}
-
-		if (g > r && r >= b) {
-			return 2;
-		}
-
-		if (b > r && r >= g) {
-			return 3;
-		}
-
-		if (b < r && r == g) {
-			ret = 4;
-		}
-
-		if (b == r && r == g && b > 200) {
-			ret = 5;
-		}
-		return ret;
-	}
-
-	/**
-	 * @param bg
-	 *            the bg to set
-	 */
-	public void setBg(Color bg) {
-		int c = compareRGB(bg);
-		if (c == 1) {
-			setBackground(new Color(40, 10, 10));
-			//setBackground(new Color(250, 220, 220));
-			// JKIcon r = new JKIcon("media/red.gif","");
-			// plotted = r.createIcon();
-			// plotted.setLabelFor(r.createIcon());
-		}
-		if (c == 2) {
-			setBackground(new Color(10, 40, 10));
-			//setBackground(new Color(220, 250, 220));
-			// plotted = new JKIcon("media/green.gif","");
-		}
-		if (c == 3) {
-			setBackground(new Color(10, 10, 40));
-			//setBackground(new Color(220, 220, 250));
-			// plotted = new JKIcon("media/blue.gif","");
-		}
-
-		if (c == 4) {
-			setBackground(new Color(40, 40, 10));
-			//setBackground(new Color(250, 250, 220));
-			// plotted = new JKIcon("media/yellow.gif","");
-		}
-		if (c == 5) {
-			setBackground(new Color(40, 40, 40));
-			//setBackground(new Color(220, 220, 220));
-			// plotted = new JKIcon("media/yellow.gif","");
-		}
-	}
-
-	/**
 	 * @return the player
 	 */
 	public JLabel getPlayer() {
@@ -250,25 +185,9 @@ public class PlayerPanel extends JPanel {
 		this.player_name.setText(pname);
 	}
 
-	// public void updatePlayerPanel(double score, Player p) {
-	// try {
-	// setPlottedv("" + p.getPloted().size());
-	// setCapturedv("" + p.getCapturedDots().size());
-	// setCellsv("" + p.getCells().size());
-	// setCaptCellsv("" + p.getCapturedCells().size());
-	// setScorev("" + p.getScore());
-	// } catch (Exception e) {
-	// System.out.println(" in PlayerPanel " + e.getMessage());
-	// }
-	// }
 
 	public void updatePlayerPanel(Player p) {
 		try {
-//			setPlottedv("" + p.getPloted().size());
-//			setCapturedv("" + p.getCapturedDots().size());
-//			setCellsv("" + p.getCells().size());
-//			setCaptCellsv("" + p.getCapturedCells().size());
-//			setScorev("" + p.getScore());
 			plottedv.setText("" + p.getPloted().size());
 			capturedv.setText("" + p.getCapturedDots().size());
 			cellsv.setText("" + p.getCells().size());
@@ -290,10 +209,10 @@ public class PlayerPanel extends JPanel {
 
 	public void initPanelForNewGame(String pname, Color pcolor) {
 		try {
-			setBorder(BorderFactory.createLineBorder(pcolor, 1));
+			setBorder(BorderFactory.createLineBorder(Tools.fade(pcolor, FADE_TH, LB_FADE_VAR), LINE_BORDER_STOKE));
 			pname = pname.toUpperCase();
 			setPlayer("  " + pname);
-			setBg(pcolor);
+			setBackground(Tools.fade(pcolor, FADE_TH, LB_FADE_VAR));
 			this.player_name.setForeground(pcolor);
 			plottedv.setText("0");
 			capturedv.setText("0");
