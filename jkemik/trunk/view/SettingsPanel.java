@@ -163,9 +163,9 @@ public class SettingsPanel extends JFrame {
 		auto_turn_pass = autoTurnPass;
 	}
 
-	public static void main(String[] args) {
-		SettingsPanel settings = new SettingsPanel(300, 300);
-		settings.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		settings.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		SettingsPanel settings = new SettingsPanel(300, 300);
+//		settings.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		settings.setVisible(true);
+//	}
 }

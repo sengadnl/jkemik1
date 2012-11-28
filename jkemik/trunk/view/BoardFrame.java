@@ -215,8 +215,6 @@ public class BoardFrame extends JFrame {
 				(int) (.25 * SIDE_HEIGHT * this.height));
 		panel23.add(p2panel, BorderLayout.NORTH);
 		panel23.add(manual, BorderLayout.SOUTH);
-//		panel23.add(p2panel);
-//		panel23.add(manual);
 		
 		p2panel.initPanelForNewGame(JKemik.template.getP2_name(), JKemik.template.getP2_c());
 
@@ -573,7 +571,9 @@ public class BoardFrame extends JFrame {
 		Holder3.setBackground(BoardFrame.CPANEL_COLOR);
 		
 		manual_c.setBackground(BoardFrame.THEME_COLOR);
+		manual_c.setForeground(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
 		manual.setBackground(BoardFrame.THEME_COLOR);
+		manual.setForeground(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
 	}
 
 	public void setTheme(String str) {
