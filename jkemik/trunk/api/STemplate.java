@@ -14,29 +14,29 @@ public class STemplate implements Serializable {
 	private String theme = "Geeky";
 	private int maxWinVal = 4;
 
-	private int[] memo = { 1, 0 };// new boolean[2];
+	private boolean[] memo = {true,false};
 
 	public STemplate() {
-		//setMemo(autoCapture, autoPass);
+		
 	}
 
-	public int[] getMemo() {
+	public boolean[] getMemo() {
 		return memo;
 	}
 
 	public void setMemo(boolean c, boolean p) {
-		if(c){this.memo[0] = 1;}else{this.memo[0] = 0;}
-		if(p){this.memo[1] = 1;}else{this.memo[1] = 0;}
+		if(c){this.memo[0] = true;}else{this.memo[0] = false;}
+		if(p){this.memo[1] = true;}else{this.memo[1] = false;}
 	}
 
 	public void restaureMemo() {
-		if (this.memo[0] == 1) {
+		if (this.memo[0]) {
 			this.autoCapture = true;
 		} else {
 			this.autoCapture = false;
 		}
 
-		if (this.memo[1] == 1) {
+		if (this.memo[1]) {
 			this.autoPass = true;
 		} else {
 			this.autoPass = false;
