@@ -243,21 +243,21 @@ public class BoardFrame extends JFrame {
 
 		pass_turn = new JButton("Pass");
 		undo = new JButton("Undo");
-		capture = new JButton("Capture");
+		//capture = new JButton("Capture");
 		refresh = new JButton("Refresh");
 		manual_c = new JCheckBox("Capture Mode");
 		decoratebuttons(Globals.BTN_BGD_COLOR, Globals.BTN_FRD_COLOR);
 		
 		panel331.add(pass_turn);
 		panel331.add(undo);
-		panel331.add(capture);
+		//panel331.add(capture);
 		
 		panel332.add(refresh);
 		panel332.add(manual_c);
 		
 		pass_turn.setVisible(false);
 		undo.setVisible(false);
-		capture.setVisible(false);
+		//capture.setVisible(false);
 		manual_c.setVisible(false);
 
 //		manual_c.setBackground(new Color(0, 0, 0));
@@ -373,8 +373,8 @@ public class BoardFrame extends JFrame {
 		undo.setBackground(bg);
 		undo.setForeground(fg);
 		
-		capture.setBackground(bg);
-		capture.setForeground(fg);
+//		capture.setBackground(bg);
+//		capture.setForeground(fg);
 		
 		refresh.setBackground(bg);
 		refresh.setForeground(fg);
@@ -640,11 +640,11 @@ public class BoardFrame extends JFrame {
 	public static void showControlButtons() {
 		try {
 			if (JKemik.settings_t.isAutoCapture()) {
-				capture.setVisible(true);
+				//capture.setVisible(true);
 				manual_c.setVisible(false);
 			} else {
 				manual_c.setVisible(true);
-				capture.setVisible(false);
+			//	capture.setVisible(false);
 			}
 
 			if (JKemik.settings_t.isAutoPass()) {
@@ -707,7 +707,7 @@ public class BoardFrame extends JFrame {
 	public static JButton refresh;
 	public static JButton save;
 	public static JButton undo;
-	public static JButton capture;
+	//public static JButton capture;
 	public static JCheckBox manual_c;
 	public static JCheckBox manual;
 	public static JButton pass_turn;

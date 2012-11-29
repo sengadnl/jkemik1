@@ -77,7 +77,7 @@ public class SaveButtonListener implements MouseListener {
 			BoardFrame.manual_c.addMouseListener(ViewEvents.manualCaptureButtonListener);
 			BoardFrame.undo.addMouseListener(ViewEvents.undoListener);
 			BoardFrame.pass_turn.addMouseListener(ViewEvents.passTurnListener);
-			BoardFrame.capture.addMouseListener(ViewEvents.captureListener);
+			//BoardFrame.capture.addMouseListener(ViewEvents.captureListener);
 			
 			BoardFrame.print_point.setText("" + (new Point(0, 0)).toString());
 			String p1n = t.getP1_name();

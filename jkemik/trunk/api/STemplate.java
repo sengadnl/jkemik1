@@ -14,8 +14,33 @@ public class STemplate implements Serializable {
 	private String theme = "Geeky";
 	private int maxWinVal = 4;
 
-	public STemplate() {
+	private int[] memo = { 1, 0 };// new boolean[2];
 
+	public STemplate() {
+		//setMemo(autoCapture, autoPass);
+	}
+
+	public int[] getMemo() {
+		return memo;
+	}
+
+	public void setMemo(boolean c, boolean p) {
+		if(c){this.memo[0] = 1;}else{this.memo[0] = 0;}
+		if(p){this.memo[1] = 1;}else{this.memo[1] = 0;}
+	}
+
+	public void restaureMemo() {
+		if (this.memo[0] == 1) {
+			this.autoCapture = true;
+		} else {
+			this.autoCapture = false;
+		}
+
+		if (this.memo[1] == 1) {
+			this.autoPass = true;
+		} else {
+			this.autoPass = false;
+		}
 	}
 
 	public String getTheme() {
@@ -43,19 +68,21 @@ public class STemplate implements Serializable {
 	}
 
 	public String getAutoCaptureStatus() {
-		if(autoCapture){
+		if (autoCapture) {
 			return "AUTO";
 		}
 		return "MANUAL";
 	}
+
 	public String getAutoPassStatus() {
-		if(autoPass){
+		if (autoPass) {
 			return "AUTO";
 		}
 		return "MANUAL";
 	}
+
 	public String getManualCaptureStatus() {
-		if(manualCapture){
+		if (manualCapture) {
 			return "AUTO";
 		}
 		return "MANUAL";
