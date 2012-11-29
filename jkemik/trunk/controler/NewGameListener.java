@@ -50,7 +50,7 @@ public class NewGameListener implements MouseListener{
 			BoardFrame.manual_c.removeMouseListener(ViewEvents.manualCaptureButtonListener);
 			BoardFrame.undo.removeMouseListener(ViewEvents.undoListener);
 			BoardFrame.pass_turn.removeMouseListener(ViewEvents.passTurnListener);
-			BoardFrame.capture.removeMouseListener(ViewEvents.captureListener);
+			//BoardFrame.capture.removeMouseListener(ViewEvents.captureListener);
 			
 			BoardFrame.enableGameControlPanel();
 			

@@ -5,6 +5,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+
+import api.STemplate;
 import utilities.Tools;
 import view.BoardFrame;
 import view.Grid;
@@ -25,11 +27,13 @@ public class SaveSettingsListener implements MouseListener {
 						+ "\nwhen automatic turn pass is ON", "Ellegal Action",
 						JOptionPane.WARNING_MESSAGE);
 			} else {
+				STemplate t = JKemik.settings_t;
 				String str = SettingsPanel.max_win.getText();
 				int maxw = Integer.parseInt(str);
 				if(Tools.isMaxWinLessThanGrid(Grid.getBoardSize(), maxw)){
-					JKemik.settings_t.setMaxWinVal(maxw);
+					t.setMaxWinVal(maxw);
 					BoardFrame.updateSettingPanel();
+					//t.setMemo(t.isAutoCapture(), t.isAutoPass());
 					JKemik.settings.setVisible(false);
 				}else{
 					JOptionPane.showMessageDialog(null, "The maximum win must be <= " 
