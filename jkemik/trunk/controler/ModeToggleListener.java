@@ -18,8 +18,9 @@ public class ModeToggleListener implements MouseListener{
 			JKemik.settings_t.setAutoPass(false);
 			BoardFrame.showControlButtons();
 		}else{
-			JKemik.settings_t.setAutoCapture(true);
-			JKemik.settings_t.setAutoPass(true);
+//			JKemik.settings_t.setAutoCapture(true);
+//			JKemik.settings_t.setAutoPass(true);
+			JKemik.settings_t.restaureMemo();
 			BoardFrame.showControlButtons();
 		}
 		
