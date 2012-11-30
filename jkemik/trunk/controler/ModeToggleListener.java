@@ -14,14 +14,16 @@ public class ModeToggleListener implements MouseListener{
 
 	public void mouseClicked(MouseEvent arg0) {
 		if(BoardFrame.manual.isSelected()){
+			System.out.println("Manual is selected");
 			JKemik.settings_t.setAutoCapture(false);
 			JKemik.settings_t.setAutoPass(false);
 			BoardFrame.showControlButtons();
+			BoardFrame.updateSettingPanel();
 		}else{
-//			JKemik.settings_t.setAutoCapture(true);
-//			JKemik.settings_t.setAutoPass(true);
+			System.out.println("Manual is NOT selected");
 			JKemik.settings_t.restaureMemo();
 			BoardFrame.showControlButtons();
+			BoardFrame.updateSettingPanel();
 		}
 		
 	}

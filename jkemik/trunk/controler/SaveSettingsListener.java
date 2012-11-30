@@ -33,7 +33,7 @@ public class SaveSettingsListener implements MouseListener {
 				if(Tools.isMaxWinLessThanGrid(Grid.getBoardSize(), maxw)){
 					t.setMaxWinVal(maxw);
 					BoardFrame.updateSettingPanel();
-					//t.setMemo(t.isAutoCapture(), t.isAutoPass());
+					t.setMemo(t.isAutoCapture(), t.isAutoPass());
 					JKemik.settings.setVisible(false);
 				}else{
 					JOptionPane.showMessageDialog(null, "The maximum win must be <= " 

@@ -5,6 +5,8 @@ package controler;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import api.GTemplate;
 import view.BoardFrame;
 import view.RotateLabel;
 
@@ -30,6 +32,11 @@ public class GameThemeListener implements MouseListener{
 			BoardFrame.grid.drawn = false;
 			BoardFrame.grid.repaint();
 		}
+		
+		GTemplate t = JKemik.template;
+		BoardFrame.p1panel.initPanelForNewGame(t.getP1_name(), BoardFrame.BOARD_COLOR);
+		BoardFrame.p2panel.initPanelForNewGame(t.getP2_name(), BoardFrame.BOARD_COLOR);
+		JKemik.view.repaint();
 
 	}
 	public void mouseEntered(MouseEvent e) {

@@ -13,7 +13,6 @@ public class AutoCaptureListener implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		this.label.rotateLabel();
 		String str = this.label.getActiveLabel();
-		System.out.println("Auto Cap: active label is: " + str);
 		if (str.equals("ON")) {
 			JKemik.settings_t.setAutoCapture(true);
 		} else {
