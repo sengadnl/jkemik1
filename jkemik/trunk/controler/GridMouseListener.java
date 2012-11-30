@@ -52,9 +52,9 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					BoardFrame.manual_c.setSelected(false);
 					if(BoardFrame.manual.isSelected()){
 						BoardFrame.manual.setSelected(false);
-						JKemik.settings_t.setAutoCapture(true);
-						JKemik.settings_t.setAutoPass(true);
+						JKemik.settings_t.restaureMemo();
 						BoardFrame.showControlButtons();
+						BoardFrame.updateSettingPanel();
 					}
 					Grid.manualc = false;
 				}

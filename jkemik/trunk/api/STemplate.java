@@ -14,10 +14,10 @@ public class STemplate implements Serializable {
 	private String theme = "Geeky";
 	private int maxWinVal = 4;
 
-	private boolean[] memo = {true,false};
+	private boolean[] memo = { true, false };
 
 	public STemplate() {
-		
+
 	}
 
 	public boolean[] getMemo() {
@@ -25,8 +25,16 @@ public class STemplate implements Serializable {
 	}
 
 	public void setMemo(boolean c, boolean p) {
-		if(c){this.memo[0] = true;}else{this.memo[0] = false;}
-		if(p){this.memo[1] = true;}else{this.memo[1] = false;}
+		if (c) {
+			this.memo[0] = true;
+		} else {
+			this.memo[0] = false;
+		}
+		if (p) {
+			this.memo[1] = true;
+		} else {
+			this.memo[1] = false;
+		}
 	}
 
 	public void restaureMemo() {
