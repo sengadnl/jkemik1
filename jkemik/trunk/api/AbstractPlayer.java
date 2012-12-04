@@ -337,7 +337,7 @@ abstract class AbstractPlayer implements Serializable {
 				"\nSelected: " + this.selected +
 				"\nPlay Flag: " + this.play_flag + 
 				"\nCapture successfull: " + this.successful + 
-				"\nFade variant: " + this.FADE_VARIANT ;
+				"\nFade variant: " + this.FADE_VARIANT + "\n";
 	}
 	private String name = "player";
 	private boolean turn = false;

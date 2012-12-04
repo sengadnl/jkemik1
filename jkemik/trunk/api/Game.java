@@ -27,12 +27,7 @@ public class Game implements Serializable {
 		guest = player2;
 		currentP.setTurn(true);
 		deadDots = new ArrayList<Point>();
-		this.selectedPoints = new ArrayList<Point>();
-		this.origin = new Point(1000.0, 1000.0);
-		this.from = new Point(553355, 7798979);
-		this.breaker = false;
-		this.connect = false;
-		this.see_wall = false;
+		// this.selectedPoints = new ArrayList<Point>();
 	}
 
 	/**
@@ -50,10 +45,6 @@ public class Game implements Serializable {
 			return true;
 		}
 		return false;
-	}
-
-	public String toString() {
-		return "" + this.player1 + "" + this.player2;
 	}
 
 	public Cell capture(Point o, double squareSize) {
@@ -90,7 +81,7 @@ public class Game implements Serializable {
 				} else if (!Tools.containPoint(p, getDeadDots())
 						&& !Tools.containPoint(p, current)
 						&& !Tools.containPoint(p, guestP)) {//
-				// getDeadDots().add(p);//
+					// getDeadDots().add(p);//
 					deadDots.add(p);
 
 				}/* end first if else */
@@ -255,7 +246,7 @@ public class Game implements Serializable {
 
 	public boolean checkEndGame() {
 		if ((guest.getScore()) >= this.getMaxScore()) {
-			
+
 			return true;
 		}
 		return false;
@@ -280,8 +271,8 @@ public class Game implements Serializable {
 			}
 			currentP.setTurn(true);
 		} catch (NullPointerException e) {
-			JOptionPane.showMessageDialog(null, "in switchPlayTurns: "
-					+ e.getMessage());
+			JOptionPane.showMessageDialog(null,
+					"in switchPlayTurns: " + e.getMessage());
 		}
 	}
 
@@ -434,21 +425,6 @@ public class Game implements Serializable {
 	}
 
 	/**
-	 * @return the selectedPoints
-	 */
-	public ArrayList<Point> getSelectedPoints() {
-		return selectedPoints;
-	}
-
-	/**
-	 * @param selectedPoints
-	 *            the selectedPoints to set
-	 */
-	public void setSelectedPoints(ArrayList<Point> selectedPoints) {
-		this.selectedPoints = selectedPoints;
-	}
-
-	/**
 	 * @return the player1
 	 */
 	public Player getPlayer1() {
@@ -476,123 +452,6 @@ public class Game implements Serializable {
 	 */
 	public void setPlayer2(Player player2) {
 		this.player2 = player2;
-	}
-
-	/**
-	 * @return the origin
-	 */
-	public Point getOrigin() {
-		return origin;
-	}
-
-	/**
-	 * @param origin
-	 *            the origin to set
-	 */
-	public void setOrigin(Point origin) {
-		this.origin = origin;
-	}
-
-	/**
-	 * @return the from
-	 */
-	public Point getFrom() {
-		return from;
-	}
-
-	/**
-	 * @param from
-	 *            the from to set
-	 */
-	public void setFrom(Point from) {
-		this.from = from;
-	}
-
-	/**
-	 * @return the breaker
-	 */
-	public boolean isBreaker() {
-		return breaker;
-	}
-
-	/**
-	 * @param breaker
-	 *            the breaker to set
-	 */
-	public void setBreaker(boolean breaker) {
-		this.breaker = breaker;
-	}
-
-	/**
-	 * @return the connect
-	 */
-	public boolean isConnect() {
-		return connect;
-	}
-
-	/**
-	 * @param connect
-	 *            the connect to set
-	 */
-	public void setConnect(boolean connect) {
-		this.connect = connect;
-	}
-
-	/**
-	 * @return the see_wall
-	 */
-	public boolean isSee_wall() {
-		return see_wall;
-	}
-
-	/**
-	 * @param seeWall
-	 *            the see_wall to set
-	 */
-	public void setSee_wall(boolean seeWall) {
-		see_wall = seeWall;
-	}
-
-	/**
-	 * This method re-initializes a player for a new game
-	 */
-	public Player newPlayer(Player p) {
-		p.setCapturedDots(new ArrayList<Point>());
-		p.setCells(new ArrayList<Cell>());
-		p.setConnectedPoints(new ArrayList<Point>());
-		p.setPloted(new ArrayList<Point>());
-		p.setScore(0.0);
-		return p;
-	}
-
-	/**
-	 * @return the curX
-	 */
-	public double getCurX() {
-		return curX;
-	}
-
-	/**
-	 * @param curX
-	 *            the curX to set
-	 */
-	public void setCurX(double curX) {
-		this.curX = curX;
-	}
-
-	/**
-	 * @return the curY
-	 */
-	public double getCurY() {
-		return curY;
-	}
-
-	/**
-	 * @param curY
-	 *            the curY to set
-	 */
-	public void setCurY(double curY) {
-		this.curY = curY;
 	}
 
 	/**
@@ -639,24 +498,25 @@ public class Game implements Serializable {
 		this.tempCell = tempCell;
 	}
 
+	public String toString() {
+		return "GAME\n-------------" + this.player1 + "\nVS\n" + this.player2
+				+ "-----------------------------------------"
+				+ "\nCurrent Player: " + currentP.getName()
+				+ "\nGuest Player: " + guest.getName() + "\nEmbush: "
+				+ this.embuche_on + "\nLast Point: " + this.lastp
+				+ "\nMaximum score: " + this.maxScore;
+	}
+
 	/* Connecting dots utilities */
-	public Point origin = new Point(1000.0, 1000.0);
-	public Point from = new Point(553355, 7798979);
-	public boolean breaker = false;
-	public boolean connect = false;
+
 	public boolean embuche_on = false;
-	public boolean see_wall = false;
 	private Cell tempCell = null;
 
 	public Point lastp = new Point(553355, 7798979);
-	private double curX = 0.0;
-	private double curY = 0.0;
-
 	private int maxScore = 2;
 
 	/* keeps track of all captured points */
 	public static ArrayList<Point> deadDots;
-	public ArrayList<Point> selectedPoints;
 	private Player player1;
 	private Player player2;
 	private static Player currentP = new Player(null, "");
