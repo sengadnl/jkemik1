@@ -238,15 +238,6 @@ abstract class AbstractPlayer implements Serializable {
 	}
 
 	/**
-	 * @param cells
-	 *            the cells to set
-	 */
-
-	public String toString() {
-		return "" + this.score + "" + this.plotted + "";
-	}
-
-	/**
 	 * @return the name
 	 */
 	public String getName() {
@@ -327,6 +318,27 @@ abstract class AbstractPlayer implements Serializable {
 	public void setPlay_flag(int playFlag) {
 		play_flag = playFlag;
 	}
+	/**
+	 * @param cells
+	 *            the cells to set
+	 */
+
+	public String toString() {
+		return "\nName: " + this.name +  
+				"\nColor: " + this.color.toString() + 
+				"\nFaded Color: " + this.fadedColor.toString() + 
+				"\nScore: " + this.score + 
+				"\nMy turn: " + this.turn +
+				"\nPlotted: "  + this.plotted + 
+				"\nCells: " + this.Cells +
+				"\nCapturedCells: " + this.CapturedCells + 
+				"\nCapturedDots: " + this.capturedDots + 
+				"\nConnectedPoints: " + this.connectedPoints + 
+				"\nSelected: " + this.selected +
+				"\nPlay Flag: " + this.play_flag + 
+				"\nCapture successfull: " + this.successful + 
+				"\nFade variant: " + this.FADE_VARIANT ;
+	}
 	private String name = "player";
 	private boolean turn = false;
 	private double score = 0.0;
@@ -343,5 +355,4 @@ abstract class AbstractPlayer implements Serializable {
 	private boolean successful = false;
 	private int FADE_VARIANT = 70;
 	private int play_flag = 0;
-	
 }
