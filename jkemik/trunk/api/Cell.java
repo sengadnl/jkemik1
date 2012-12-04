@@ -28,7 +28,7 @@ public class Cell implements Comparable<Cell>, Serializable {
 		evaluateCell();
 	}
 	public String toString() {
-		return "" + this.cellContour + "\n";
+		return "" + this.cellContour;
 	}
 
 	/** Calculates what this cell is worth */
