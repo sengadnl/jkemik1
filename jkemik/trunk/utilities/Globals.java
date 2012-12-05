@@ -18,7 +18,7 @@ public class Globals {
 	public static final Color PENALTY_COL = new Color(224,27,208);
 	public static final String templateObjectFile = "/tmp/template.obj";
 	public static final String tempFile = "tmp";
-	public static final String gameObjectFile = "../tmp/game.obj";
+	public static final String gameObjectFile = "/tmp/game.obj";
 	public static final String settingsTemplateObjectFile = "/tmp/stemplate.obj";
 	public static final String VERSION = "RC-3.0.135";
 	public static final int RED_INDEX = 0;

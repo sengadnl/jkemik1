@@ -261,11 +261,9 @@ public class Game implements Serializable {
 	public void switchPlayTurns() {
 		try {
 			if (this.player1.compareTo(currentP) == 0) {
-				this.player1.setFadedColor(this.player1.getColor());
 				currentP = this.player2;
 				guest = this.player1;
 			} else {
-				this.player2.setFadedColor(this.player2.getColor());
 				currentP = this.player1;
 				guest = this.player2;
 			}

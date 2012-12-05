@@ -8,6 +8,7 @@ import utilities.Tools;
 /**
  * COPYRIGHT(c)2010 Daniel Senga. All Right Reserved. This class is a parent to
  * all Player Objects and their subclasses.
+ * 
  * @author Daniel Senga Version 0.02010
  * @version 10.0
  */
@@ -17,6 +18,7 @@ abstract class AbstractPlayer implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	public AbstractPlayer(Color color, String name) {
 		super();
 		this.color = color;
@@ -36,8 +38,10 @@ abstract class AbstractPlayer implements Serializable {
 	 * valid path. Reverts when a dead end has been reached. a valid capture
 	 * must have at least 4 Point Objects.
 	 * 
-	 * @param o Point where to start
-	 * @param squareSize integer length of the sides of a grid square
+	 * @param o
+	 *            Point where to start
+	 * @param squareSize
+	 *            integer length of the sides of a grid square
 	 * @return true when a valid capture was found, and false otherwise.
 	 * @throws InterruptedException
 	 */
@@ -46,11 +50,11 @@ abstract class AbstractPlayer implements Serializable {
 			return true;
 		}
 		/* Get all adjacent Points */
-		//Point[] box = Tools.boxCoord(o, this.plotted, squareSize);
+		// Point[] box = Tools.boxCoord(o, this.plotted, squareSize);
 		Point[] box = Tools.boxCoord(o, squareSize);
 		/* Find the point in this box that belongs to the path */
 		for (int i = 0; i < box.length; i++) {
-			//System.out.println("box[" + i + "]\n");
+			// System.out.println("box[" + i + "]\n");
 			/* Stop recursive call here if a path was already found */
 			if (this.successful) {
 				return true;
@@ -65,7 +69,8 @@ abstract class AbstractPlayer implements Serializable {
 								&& this.selected.size() > 3) {
 							this.successful = true;/* Set recursive call stop */
 							this.origin = null;/* Reset the origin */
-							System.out.println("A cell was found: \n" + "box[" + i + "]\n");
+							System.out.println("A cell was found: \n" + "box["
+									+ i + "]\n");
 							return true;/* Capture was found */
 						}
 						/* This adjacent Point was a dead end */
@@ -79,7 +84,7 @@ abstract class AbstractPlayer implements Serializable {
 		}
 		return false;/* No path */
 	}
-	
+
 	/**
 	 * @return the selected
 	 */
@@ -116,7 +121,7 @@ abstract class AbstractPlayer implements Serializable {
 		// Add what this cell is worth to this player'score
 		this.Cells.add(c);
 		this.score += c.getValue();
-		
+
 	}
 
 	/** Adds a captured cell to this player */
@@ -125,7 +130,7 @@ abstract class AbstractPlayer implements Serializable {
 		// Add what this cell is worth to this player'score
 		this.Cells.remove(c);
 		this.score -= c.getValue();
-		
+
 	}
 
 	public void addCapturedCells(Cell c) {
@@ -136,14 +141,6 @@ abstract class AbstractPlayer implements Serializable {
 	 * @return the fadedColor
 	 */
 	public Color getFadedColor() {
-		return this.fadedColor;
-	}
-
-	/**
-	 * @param currentColor
-	 *            the fadedColor to set
-	 */
-	public void setFadedColor(Color currentColor) {
 		int red = this.color.getRed(), green = this.color.getGreen(), blue = this.color
 				.getBlue();
 
@@ -158,8 +155,7 @@ abstract class AbstractPlayer implements Serializable {
 		if (green > this.FADE_VARIANT) {
 			green = Math.abs(green - this.FADE_VARIANT);
 		}
-		currentColor = new Color(red, green, blue);
-		this.fadedColor = currentColor;
+		return new Color(red, green, blue);
 	}
 
 	/**
@@ -294,16 +290,19 @@ abstract class AbstractPlayer implements Serializable {
 	 *            the color to set
 	 */
 	public void setColor(Color color) {
+		System.out.println("setting color" + color);
 		this.color = color;
 	}
+
 	/**
 	 * @return void
 	 * @param none
-	 * Initializes selected*/
-	public void initSelected(){
+	 *            Initializes selected
+	 */
+	public void initSelected() {
 		this.selected = new ArrayList<Point>();
 	}
-	
+
 	public boolean isTurn() {
 		return turn;
 	}
@@ -311,6 +310,7 @@ abstract class AbstractPlayer implements Serializable {
 	public void setTurn(boolean turn) {
 		this.turn = turn;
 	}
+
 	public int getPlay_flag() {
 		return play_flag;
 	}
@@ -318,32 +318,28 @@ abstract class AbstractPlayer implements Serializable {
 	public void setPlay_flag(int playFlag) {
 		play_flag = playFlag;
 	}
+
 	/**
 	 * @param cells
 	 *            the cells to set
 	 */
 
 	public String toString() {
-		return "\nName: " + this.name +  
-				"\nColor: " + this.color.toString() + 
-				"\nFaded Color: " + this.fadedColor.toString() + 
-				"\nScore: " + this.score + 
-				"\nMy turn: " + this.turn +
-				"\nPlotted: "  + this.plotted + 
-				"\nCells: " + this.Cells +
-				"\nCapturedCells: " + this.CapturedCells + 
-				"\nCapturedDots: " + this.capturedDots + 
-				"\nConnectedPoints: " + this.connectedPoints + 
-				"\nSelected: " + this.selected +
-				"\nPlay Flag: " + this.play_flag + 
-				"\nCapture successfull: " + this.successful + 
-				"\nFade variant: " + this.FADE_VARIANT + "\n";
+		return "\nName: " + this.name + "\nColor: " + this.color.toString()
+				+ "\nFaded Color: " + this.getFadedColor() + "\nScore: "
+				+ this.score + "\nMy turn: " + this.turn + "\nPlotted: "
+				+ this.plotted + "\nCells: " + this.Cells + "\nCapturedCells: "
+				+ this.CapturedCells + "\nCapturedDots: " + this.capturedDots
+				+ "\nConnectedPoints: " + this.connectedPoints + "\nSelected: "
+				+ this.selected + "\nPlay Flag: " + this.play_flag
+				+ "\nCapture successfull: " + this.successful
+				+ "\nFade variant: " + this.FADE_VARIANT + "\n";
 	}
+
 	private String name = "player";
 	private boolean turn = false;
 	private double score = 0.0;
 	private Color color;
-	private Color fadedColor;
 	private Point origin = new Point(444444, 7798979);
 	private Point from = new Point(553355, 7798979);
 	private ArrayList<Cell> Cells = null;

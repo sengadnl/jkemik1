@@ -20,7 +20,6 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable{
 	private static final long serialVersionUID = 1L;
 	protected double x;
 	protected double y;
-	
 	protected boolean flag_dead;
 
 	public AbstractPoint(double x, double y)// constructor

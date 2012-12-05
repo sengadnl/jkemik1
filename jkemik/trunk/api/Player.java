@@ -27,12 +27,12 @@ public class Player extends AbstractPlayer implements Comparable<Player>,
 
 	}
 
-	public String toString() {
-		return "" + this.getName() + "\nSelected: " + 
-		this.getSelected().size() + "\nPlotted: "
-				+ this.getPloted().size() + "\ncapturedDots: " +
-						this.getCapturedDots().size() + "\n\n";
-	}
+//	public String toString() {
+//		return "" + this.getName() + "\nSelected: " + 
+//		this.getSelected().size() + "\nPlotted: "
+//				+ this.getPloted().size() + "\ncapturedDots: " +
+//						this.getCapturedDots().size() + "\n\n";
+//	}
 
 	/*
 	 * (non-Javadoc)

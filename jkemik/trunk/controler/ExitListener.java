@@ -26,7 +26,7 @@ public class ExitListener implements MouseListener{
 				JOptionPane.YES_OPTION);
 		if (response == 0) {
 			// Save settings
-			JKemik.writeGame();
+			//JKemik.writeGame();
 			JKemik.writeSettings();
 			// Save current Game
 			System.exit(0);
