@@ -6,6 +6,8 @@ package view;
 import java.awt.*;
 
 import javax.swing.*;
+
+import api.Point;
 import controler.JKemik;
 import controler.ViewEvents;
 import utilities.Globals;
@@ -67,30 +69,31 @@ public class BoardFrame extends JFrame {
 
 	private void init() {
 		JKemik.load.plus("Initializing jkemik..."); // 21
-		showControlButtons();
 		JKemik.load.plus("Adding color picker 1 event...");
-		ViewEvents.changeColorPanel1Action(pColor1);
 		JKemik.load.plus("Adding color picker 2 event...");
-		ViewEvents.changeColorPanel2Action(pColor2);
 		JKemik.load.plus("Adding board size event...");
-		ViewEvents.setBoardSizeAction(l1);
 		JKemik.load.plus("Setting type event...");
-		ViewEvents.setGameThemeAction(l2);
 		JKemik.load.plus("Adding player 1 name prompt ...");
-		ViewEvents.addPlayer1NameAction(label1);
 		JKemik.load.plus("Adding player 2 name prompt ...");
-		ViewEvents.addPlayer2NameAction(label2);
 		JKemik.load.plus("Adding save event listener...");
-		ViewEvents.saveAction(save);
-
 		JKemik.load.plus("Setting Grid initial state...");
 		JKemik.load.plus("Setting cursor initial state...");// 24
 		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
-
-		ViewEvents.ExitGameEvent();
 		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
-		ViewEvents.settingsLabelAction();
 
+//		if (BoardFrame.getThereIsSavedGame() == 0) {
+//		} else {
+//		}
+		ViewEvents.changeColorPanel1Action(pColor1);
+		ViewEvents.changeColorPanel2Action(pColor2);
+		ViewEvents.setBoardSizeAction(l1);
+		ViewEvents.setGameThemeAction(l2);
+		ViewEvents.addPlayer1NameAction(label1);
+		ViewEvents.addPlayer2NameAction(label2);
+		ViewEvents.saveAction(save);
+		showControlButtons();
+		ViewEvents.newGameEvent();
+		ViewEvents.settingsLabelAction();
 		ViewEvents.saveSettingsAction();
 		ViewEvents.onAutoCaptureAction();
 		ViewEvents.onAutoPassTurnAction();
@@ -109,7 +112,6 @@ public class BoardFrame extends JFrame {
 	}
 
 	private void setFrameSize(int w, int h) {
-
 		if (ValidateInput.validateScreenResolution(w, h)) {
 			setSize(w, h);
 		}
@@ -197,8 +199,8 @@ public class BoardFrame extends JFrame {
 				(int) (PLAYER_PNL_H_SCALAR * SIDE_HEIGHT * this.height));
 		panel21.add(p1panel, BorderLayout.NORTH);
 
-		p1panel.initPanelForNewGame(JKemik.template.getP1_name(),
-				JKemik.template.getP1_c());
+		p1panel.initPanelForNewGame(JKemik.game.getPlayer1().getName(),
+				JKemik.game.getPlayer1().getColor());
 
 		grid = new Grid((int) JKemik.template.getG_size());
 		Tools.resetMaxWin(Grid.squareCount(), JKemik.settings_t);
@@ -215,8 +217,8 @@ public class BoardFrame extends JFrame {
 		panel23.add(p2panel, BorderLayout.NORTH);
 		panel23.add(manual, BorderLayout.SOUTH);
 
-		p2panel.initPanelForNewGame(JKemik.template.getP2_name(),
-				JKemik.template.getP2_c());
+		p2panel.initPanelForNewGame(JKemik.game.getPlayer2().getName(),
+				JKemik.game.getPlayer2().getColor());
 
 		panel2.add(panel21, BorderLayout.WEST);
 		panel2.add(grid, BorderLayout.CENTER);
@@ -669,7 +671,7 @@ public class BoardFrame extends JFrame {
 				undo.setVisible(true);
 				pass_turn.setVisible(true);
 			}
-			
+
 			BoardFrame.refresh.setVisible(true);
 		} catch (Exception e) {
 
@@ -682,6 +684,14 @@ public class BoardFrame extends JFrame {
 
 	public static void setMakingGame(boolean inOptions) {
 		BoardFrame.makingGame = inOptions;
+	}
+
+	public static int getThereIsSavedGame() {
+		return thereIsSavedGame;
+	}
+
+	public static void setThereIsSavedGame(int thereIsSavedGame) {
+		BoardFrame.thereIsSavedGame = thereIsSavedGame;
 	}
 
 	public double height = 0.0;
@@ -779,6 +789,7 @@ public class BoardFrame extends JFrame {
 	public static Color BOARD_COLOR;
 
 	public static boolean makingGame;
+	public static int thereIsSavedGame = 1;
 	public static int COUNTER = 0;
 	public static int MAX_VAL = 0;
 	public static final int THEME_JKEMIK = 0;

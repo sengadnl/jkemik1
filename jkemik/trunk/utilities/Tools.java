@@ -4,6 +4,8 @@
 package utilities;
 
 import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import api.Point;
 import api.STemplate;
@@ -13,6 +15,16 @@ import api.STemplate;
  * 
  */
 public class Tools {
+	public static String fullPath() {
+		String path = "";
+		try {
+			File f = new java.io.File(".");
+			path = f.getCanonicalPath();
+		} catch (IOException e) {
+			 e.printStackTrace();
+		}
+		return path;
+	}
 	public static boolean isMaxWinLessThanGrid(int gridSize, int maxWin) {
 		if (maxWin > gridSize) {
 			return false;

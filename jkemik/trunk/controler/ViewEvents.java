@@ -110,7 +110,7 @@ public class ViewEvents {
 		labe1.addMouseListener(n2Listener);
 	}
 
-	public static void ExitGameEvent() {
+	public static void newGameEvent() {
 		BoardFrame.Game_status.addMouseListener(newGameListener);
 	}
 }

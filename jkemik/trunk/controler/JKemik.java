@@ -2,8 +2,6 @@
  * 
  */
 package controler;
-
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
@@ -13,10 +11,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
 import javax.swing.JOptionPane;
-
 import utilities.Globals;
+import utilities.Tools;
 import view.BoardFrame;
 import view.Load;
 import view.SettingsPanel;
@@ -38,9 +35,9 @@ public class JKemik extends Application {
 	public static SettingsPanel settings;
 	private static boolean isStarted = false;
 	public static Load load;
-	static File s_object = new File(Globals.settingsTemplateObjectFile);
-	static File t_object = new File(Globals.templateObjectFile);
-	static File g_object = new File(Globals.gameObjectFile);
+	static File s_object = new File(Tools.fullPath() + Globals.settingsTemplateObjectFile);
+	static File t_object = new File(Tools.fullPath() + Globals.templateObjectFile);
+	static File g_object = new File(Tools.fullPath() + Globals.gameObjectFile);
 
 	protected void init() {
 		try {
@@ -51,16 +48,20 @@ public class JKemik extends Application {
 				System.out.println("tmp exists");
 				readTemplate();
 				readSettings();
+				//readGameObj();
 			} else {
 				if (tmp.mkdir()) {
 					System.out.println(tmp + " created...");
 					template = new GTemplate();
 					settings_t = new STemplate();
+					game = new Game(new Player(template.getP1_c(), template.getP1_name()), new Player(
+							template.getP1_c(),template.getP2_name()));
 				}
 			}
-			game = new Game(new Player(Color.WHITE, "Dany"), new Player(
-					Color.WHITE, "Sarah"));
 			settings = new SettingsPanel(300, 200);
+			game = new Game(new Player(template.getP1_c(), template.getP1_name()), new Player(
+					template.getP1_c(),template.getP2_name()));
+			System.out.println(game + "\n\n");
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 		}
@@ -119,49 +120,47 @@ public class JKemik extends Application {
 		}
 	}
 
-	public static void writeGame() {
-		try {
-			ObjectOutputStream out = new ObjectOutputStream(
-					new FileOutputStream(g_object));
-			out.writeObject(game);
-			out.close();
-		} catch (FileNotFoundException exception1) {
-			System.out.println("JKemik: writeGame " + exception1.getMessage());
-		} catch (IOException exception2) {
-			System.out.println("JKemik: writeGame " + exception2.getMessage());
-		}
-	}
+//	public static void writeGame() {
+//		try {
+//			ObjectOutputStream out = new ObjectOutputStream(
+//					new FileOutputStream(g_object));
+//			out.writeObject(game);
+//			out.close();
+//		} catch (FileNotFoundException exception1) {
+//			System.out.println("JKemik: writeGame " + exception1.getMessage());
+//		} catch (IOException exception2) {
+//			System.out.println("JKemik: writeGame " + exception2.getMessage());
+//		}
+//	}
 
-	public static void updateSettingsPanel() {
-		settings.setAutoCap(settings_t.getAutoCaptureStatus());
-		settings.setAutoPass(settings_t.getAutoPassStatus());
-		settings.setMaxWinVal(settings_t.getMaxWinVal());
-		String str = "" + settings_t.getMaxWinVal();
-		SettingsPanel.setMax_win(str);
-	}
-
-	public static void readGameObj() {
-		try {
-
-			if (g_object.exists()) {
-				ObjectInputStream input = new ObjectInputStream(
-						new FileInputStream(g_object));
-				game = (Game) input.readObject();
-				// updateSettingsPanel();
-				input.close();
-			} else {
-				game = new Game(new Player(Color.WHITE, "Dany"), new Player(
-						Color.WHITE, "Sarah"));
-			}
-		} catch (FileNotFoundException exception1) {
-			System.out.println("JKemik: readGame " + exception1.getMessage());
-		} catch (IOException exception2) {
-			System.out.println("JKemik: readGame " + exception2.getMessage());
-		} catch (ClassNotFoundException exception3) {
-			System.out.println("JKemik: readGame " + exception3.getMessage());
-		}
-
-	}
+//	public static void readGameObj() {
+//		try {
+//
+//			if (g_object.exists()) {
+//				ObjectInputStream input = new ObjectInputStream(
+//						new FileInputStream(g_object));
+//				game = (Game) input.readObject();
+//				int response = JOptionPane.showConfirmDialog(null, "Continues with saved Game?\n", "Question", JOptionPane.YES_NO_OPTION);
+//				if (response == 0) {
+//					BoardFrame.setThereIsSavedGame(response);
+//					Grid.refresh = true;
+//					input.close();
+//				} else {
+//					BoardFrame.setThereIsSavedGame(response);
+//				}
+//			} else {
+//				game = new Game(new Player(template.getP1_c(), template.getP1_name()), new Player(
+//						template.getP2_c(), template.getP1_name()));
+//			}
+//		} catch (FileNotFoundException exception1) {
+//			System.out.println("JKemik: readGame " + exception1.getMessage());
+//		} catch (IOException exception2) {
+//			System.out.println("JKemik: readGame " + exception2.getMessage());
+//		} catch (ClassNotFoundException exception3) {
+//			System.out.println("JKemik: readGame " + exception3.getMessage());
+//		}
+//
+//	}
 
 	public static void readTemplate() {
 		try {

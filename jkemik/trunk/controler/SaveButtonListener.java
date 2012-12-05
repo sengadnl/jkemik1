@@ -55,7 +55,7 @@ public class SaveButtonListener implements MouseListener {
 			game = new Game(p1, p2);
 			JKemik.game = game;
 			
-			JKemik.game.setMaxScore(JKemik.settings_t.getMaxWinVal());//TODO
+			JKemik.game.setMaxScore(JKemik.settings_t.getMaxWinVal());//
 
 			BoardFrame.disableGameControlPanel();
 			BoardFrame.pColor1.removeMouseListener(ViewEvents.p1Listener);
@@ -103,6 +103,7 @@ public class SaveButtonListener implements MouseListener {
 			BoardFrame.setMakingGame(false);
 			BoardFrame.manual.setVisible(true);
 			JKemik.settings.setVisible(false);
+			System.out.println(game + "\n\n");
 			JKemik.writeSettings();
 		}
 	}

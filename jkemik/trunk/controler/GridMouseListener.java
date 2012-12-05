@@ -61,11 +61,14 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 				BoardFrame.grid.repaint();
 			}			
 		} else {
+			System.out.println("About to Plot ...");
 			if (game.getCurrentP().isTurn()) {
+				System.out.println("Saw turn ...");
 				if (!Tools.containPoint(temp, game.getCurrentP().getPloted())
 						&& !Tools.containPoint(temp, game.getGuest()
 								.getPloted())
 						&& !Tools.containPoint(temp, game.getDeadDots())) {
+					System.out.println("Plotting ...");
 					Grid.plotPoint = true;
 					BoardFrame.grid.repaint();
 					game.getCurrentP().getPloted().add(temp);
