@@ -6,8 +6,9 @@ package view;
 import java.awt.*;
 
 import javax.swing.*;
+
+import Events.ViewEvents;
 import controler.JKemik;
-import controler.ViewEvents;
 import utilities.Globals;
 import utilities.Tools;
 import utilities.ValidateInput;
