@@ -37,5 +37,6 @@ public class HelpListener implements MouseListener {
 		Color color;
 		color = Tools.fade(this.label.getForeground());
 		this.label.setForeground(color);
+		this.label.setToolTipText("Online Manual");
 	}
 }

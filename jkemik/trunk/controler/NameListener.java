@@ -65,6 +65,7 @@ public class NameListener implements MouseListener {
 		if(this.one == 1){
 		BoardFrame.highlightP1();
 		}else{BoardFrame.highlightP2();}
+		lab.setToolTipText("Click to change this player's name.");
 	}
 
 	public void mouseExited(MouseEvent e) {

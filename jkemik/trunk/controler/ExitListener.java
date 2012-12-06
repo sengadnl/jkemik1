@@ -25,6 +25,9 @@ public class ExitListener implements MouseListener{
 				"Are you sure you want to exit the Game?\n", "Question",
 				JOptionPane.YES_OPTION);
 		if (response == 0) {
+			//STemplate t = JKemik.settings_t;
+			//t.setMemo(t.isAutoCapture(), t.isAutoPass());
+			JKemik.settings_t.restaureMemo();
 			// Save settings
 			//JKemik.writeGame();
 			JKemik.writeSettings();
@@ -54,5 +57,6 @@ public class ExitListener implements MouseListener{
 		Color color;
 		color = Tools.fade(this.label.getForeground());
 		this.label.setForeground(color);
+		this.label.setToolTipText("Exit game");
 	}
 }

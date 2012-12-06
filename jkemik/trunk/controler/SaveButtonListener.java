@@ -109,7 +109,7 @@ public class SaveButtonListener implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent e) {
-
+		save.setToolTipText("Click here to save these settings.");
 	}
 
 	public void mouseExited(MouseEvent e) {

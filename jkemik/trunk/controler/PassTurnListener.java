@@ -46,7 +46,7 @@ public class PassTurnListener implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent e) {
-
+		pass.setToolTipText("Click to pass the turn.");
 	}
 
 	public void mouseExited(MouseEvent e) {

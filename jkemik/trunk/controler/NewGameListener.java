@@ -6,12 +6,16 @@ package controler;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import api.Point;
+
 import utilities.Tools;
 import view.BoardFrame;
+import view.Grid;
 
 /**
  * @author dalet
@@ -33,6 +37,15 @@ public class NewGameListener implements MouseListener{
 				JOptionPane.YES_NO_OPTION);
 		if (response == 0) {
 			// set listeners
+			if(BoardFrame.manual.isSelected()){
+				JKemik.game.getCurrentP().setSelected(new ArrayList<Point>());
+				Grid.manualc = false;
+				BoardFrame.manual.setSelected(false);
+				BoardFrame.manual_c.setSelected(false);
+				JKemik.settings_t.restaureMemo();
+				BoardFrame.updateSettingPanel();
+			}
+			
 			BoardFrame.pColor1.addMouseListener(ViewEvents.p1Listener);
 			BoardFrame.pColor2.addMouseListener(ViewEvents.p2Listener);
 			BoardFrame.label1.addMouseListener(ViewEvents.n1Listener);
@@ -49,7 +62,6 @@ public class NewGameListener implements MouseListener{
 			BoardFrame.manual_c.removeMouseListener(ViewEvents.manualCaptureButtonListener);
 			BoardFrame.undo.removeMouseListener(ViewEvents.undoListener);
 			BoardFrame.pass_turn.removeMouseListener(ViewEvents.passTurnListener);
-			//BoardFrame.capture.removeMouseListener(ViewEvents.captureListener);
 			
 			BoardFrame.enableGameControlPanel();
 			
@@ -103,5 +115,6 @@ public class NewGameListener implements MouseListener{
 		Color color;
 		color = Tools.fade(this.label.getForeground());
 		this.label.setForeground(color);
+		this.label.setToolTipText("Start new game.");
 	}
 }

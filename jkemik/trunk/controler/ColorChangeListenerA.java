@@ -25,11 +25,6 @@ public class ColorChangeListenerA implements MouseListener {
 
 	public void mouseClicked(MouseEvent e) {
 		((RotateColor) this.panel).rotateColor();
-//		Color color = this.panel.getBackground();
-//		BoardFrame.p1panel.setBorder(BorderFactory.createLineBorder(color, 1));
-//		BoardFrame.p1panel.setBg(color);
-//		BoardFrame.p1panel.getPlayer().setForeground(color);
-//		Color p1 = BoardFrame.pColor1.getBackground();
 		JKemik.template.setP1_c(this.panel.getBackground());
 	}
 
@@ -37,6 +32,7 @@ public class ColorChangeListenerA implements MouseListener {
 		Color c = this.panel.getBackground();
 		c = Tools.fade(c);
 		this.panel.setBackground(c);
+		panel.setToolTipText("Click to change the color.");
 	}
 
 	public void mouseExited(MouseEvent e) {

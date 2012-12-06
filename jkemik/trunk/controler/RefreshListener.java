@@ -9,10 +9,10 @@ import view.BoardFrame;
 import view.Grid;
 
 public class RefreshListener implements MouseListener{
-	private JButton debug;
+	private JButton refresh;
 
-	public RefreshListener(JButton debug) {
-		this.setDebug(debug);
+	public RefreshListener(JButton refresh) {
+		this.setDebug(refresh);
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
@@ -21,7 +21,7 @@ public class RefreshListener implements MouseListener{
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
-
+		refresh.setToolTipText("Click to refresh the board");
 	}
 
 	public void mouseExited(MouseEvent arg0) {
@@ -37,11 +37,11 @@ public class RefreshListener implements MouseListener{
 	}
 
 	public JButton getDebug() {
-		return debug;
+		return refresh;
 	}
 
 	public void setDebug(JButton debug) {
-		this.debug = debug;
+		this.refresh = debug;
 	}
 
 }
