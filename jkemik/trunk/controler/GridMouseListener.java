@@ -161,6 +161,6 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 		}
 		BoardFrame.grid.repaint();
-		BoardFrame.grid.setToolTipText("" + new Point(Grid.x, Grid.y));
+		//BoardFrame.grid.setToolTipText("" + new Point(Grid.x, Grid.y));
 	}
 }
