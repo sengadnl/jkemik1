@@ -27,7 +27,6 @@ public class Game implements Serializable {
 		guest = player2;
 		currentP.setTurn(true);
 		deadDots = new ArrayList<Point>();
-		// this.selectedPoints = new ArrayList<Point>();
 	}
 
 	/**
@@ -363,8 +362,10 @@ public class Game implements Serializable {
 			Point p = c.getCellContour().get(0);
 			if (Tools.containPoint(p, cell.getCapturedPoints())) {
 				currentP.addCapturedCells(c);
+				//currentP.getCapturedCells().add(c);
 				cell.setValue(cell.getValue() + c.getValue());
 				cell.addCellToCell(c);
+				//guest.getCells().remove(c);
 				guest.setScore(guest.getScore() - c.getValue());
 			}
 		}

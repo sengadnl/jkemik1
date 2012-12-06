@@ -8,8 +8,17 @@ import javax.swing.JCheckBox;
 import view.BoardFrame;
 
 public class ModeToggleListener implements MouseListener{
+	private JCheckBox manual;
 	public ModeToggleListener(JCheckBox manual){
-		
+		setManual(manual);
+	}
+
+	public JCheckBox getManual() {
+		return manual;
+	}
+
+	public void setManual(JCheckBox manual) {
+		this.manual = manual;
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
@@ -29,8 +38,7 @@ public class ModeToggleListener implements MouseListener{
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		manual.setToolTipText("Check to enable temporary manual mode.");
 	}
 
 	public void mouseExited(MouseEvent arg0) {

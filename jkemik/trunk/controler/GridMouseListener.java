@@ -97,7 +97,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 	}
 
 	public void mouseEntered(MouseEvent e) {
-
+		
 	}
 
 	public void mouseExited(MouseEvent e) {
@@ -113,7 +113,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 	}
 
 	public void mouseDragged(MouseEvent arg0) {
-
+		
 	}
 
 	public void mouseMoved(MouseEvent e) {
@@ -160,7 +160,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			BoardFrame.grid.repaint();
 
 		}
-
 		BoardFrame.grid.repaint();
+		BoardFrame.grid.setToolTipText("" + new Point(Grid.x, Grid.y));
 	}
 }

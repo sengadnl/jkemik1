@@ -47,7 +47,7 @@ public class UndoListener implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
-
+		undo.setToolTipText("Click to undo");
 	}
 
 	public void mouseExited(MouseEvent arg0) {
