@@ -1,4 +1,4 @@
-#labels Featured,Phase-Requirements
+#labels Phase-Requirements
 = RULES =
 
 http://jkemik.googlecode.com/files/jkemik-game.png
