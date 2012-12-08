@@ -2,7 +2,7 @@
 =AVAILABLE DOWNLOADS=
 
 ===Current Release:===
-[http://jkemik.googlecode.com/files/jkemik-windows-3.0.179.zip http://jkemik.googlecode.com/files/jkemik-windows-3.0.179.zip]
+[http://jkemik.googlecode.com/files/jkemik-windows-3.0.179.zip jkemik-windows-3.0.179.zip]
 
 [http://jkemik.googlecode.com/files/jkemik-linux-3.0.179.tar.gz jkemik-linux-3.0.179.tar.gz]
 
