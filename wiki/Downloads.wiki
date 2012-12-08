@@ -1,4 +1,3 @@
-#labels Featured,Phase-Requirements
 =AVAILABLE DOWNLOADS=
 
 ===Current Release:===
