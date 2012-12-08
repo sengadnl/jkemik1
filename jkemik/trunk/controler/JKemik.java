@@ -231,11 +231,6 @@ public class JKemik extends Application {
 		}
 	}
 
-	// private boolean createTempDir() {
-	// File tmp = new File(Globals.tempFile);
-	// return tmp.mkdir();
-	// }
-
 	public static void main(String[] args) {
 		if (args.length > 0) {
 			options(args);
