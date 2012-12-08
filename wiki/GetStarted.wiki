@@ -22,7 +22,11 @@ Click [Downloads here] to download the latest update.
 
 ==Starting a New Game==
 http://jkemik.googlecode.com/files/dashboard.PNG
- * On start, the application is in Game configuration mode. To start a game click on *NEW* in the main view and use the Jkemik Dashboard illustrated in the above image to customize the game. Simply click on what you want the change.
+ * The Dashboard allows you to configure a game. You can: 
+#_Set player names_
+#_Change the board size_
+#_Change the board's look or skin_
+#_Start a game._
 
 On the *Dashboard*: 
 
@@ -37,7 +41,7 @@ On the *Dashboard*:
 ==System Preferences==
 http://jkemik.googlecode.com/files/SysPrefs.png
  * Use the *OPTION* button in the main view to change other game settings.
-   * *Max Win*: Sets the maximum score. The player who reaches this score wins the game.
+   * *Max Win*: Sets the maximum score. The player who reaches this score first wins the game.
    * *Auto Capture*: Turns automatic capture on.
    * *Auto Pass Turn*: Turns automatic turn switching.
 
