@@ -21,7 +21,7 @@ Click [Downloads here] to download the latest update.
   # The next command will launch jkemik: *./jkemik* or you can also issue *java -jar .jkemik.jar*
 
 ==Starting a New Game==
-http://jkemik.googlecode.com/files/jkemik-Dashboard.png
+http://jkemik.googlecode.com/files/dashboard.PNG
  * On start, the application is in Game configuration mode. To start a game click on *NEW* in the main view and use the Jkemik Dashboard illustrated in the above image to customize the game. Simply click on what you want the change.
 
 On the *Dashboard*: 
