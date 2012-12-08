@@ -34,8 +34,8 @@ On the *Dashboard*:
 
  * Use the *END/NEW* buttons to end a current Game and start a new one.
 
-==Environment Customization==
-http://jkemik.googlecode.com/files/jkemik-settings-panel.png
+==System Preferences==
+http://jkemik.googlecode.com/files/SysPrefs.png
  * Use the *OPTION* button in the main view to change other game settings.
    * *Max Win*: Sets the maximum score. The player who reaches this score wins the game.
    * *Auto Capture*: Turns automatic capture on.
