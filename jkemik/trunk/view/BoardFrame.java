@@ -29,6 +29,7 @@ public class BoardFrame extends JFrame {
 		width = 1280.0;
 
 		setFrameSize((int) width, (int) height);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContainerAttributs();
 
 		System.out.println("Frame: " + width + " X " + height);
