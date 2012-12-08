@@ -37,7 +37,7 @@ http://jkemik.googlecode.com/files/SysPrefs.png
  * Use the *OPTION* button in the main view to change other game settings.
    * *Max Win*: Sets the maximum score. The player who reaches this score first wins the game.
    * *Auto Capture*: Turns automatic capture on.
-   * *Auto Pass Turn*: Turns automatic turn switching.
+   * *Auto Turn Pass*: Turns automatic turn switching.
 
 ==Exiting the game==
  * Use the *EXIT* button from the main view to exit the application.
