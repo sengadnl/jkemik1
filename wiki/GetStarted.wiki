@@ -23,9 +23,9 @@ Click [Downloads here] to download the latest update.
 ==Starting a New Game==
 http://jkemik.googlecode.com/files/dashboard.PNG
  * The Dashboard allows you to configure a game. You can: 
-#_Set player names_
-#_Change the board size_
-#_Change the board's look or skin_
+#_Set player names._
+#_Change the board size._
+#_Change the board's look or skin._
 #_Start a game._
 
 On the *Dashboard*: 
