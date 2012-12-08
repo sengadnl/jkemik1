@@ -1,7 +1,7 @@
 #labels Featured
 = RULES =
 
-http://jkemik.googlecode.com/files/jkemik-game.png
+http://jkemik.googlecode.com/files/board.png
 
 ==A. Play==
 
