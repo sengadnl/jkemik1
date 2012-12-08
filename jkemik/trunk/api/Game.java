@@ -6,12 +6,11 @@ package api;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-
 import controler.JKemik;
 import utilities.Tools;
 
 /**
- * @author dalet
+ * @author Daniel Senga
  * 
  */
 public class Game implements Serializable {

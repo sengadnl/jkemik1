@@ -6,12 +6,9 @@ package view;
 import java.awt.*;
 
 import javax.swing.*;
-
-import Events.ViewEvents;
-import controler.JKemik;
-import utilities.Globals;
-import utilities.Tools;
-import utilities.ValidateInput;
+import Events.*;
+import controler.*;
+import utilities.*;
 
 /**
  * @author Daniel Senga Color: F7AD0C Green: 20d502 and 247, 173, 12
@@ -334,7 +331,7 @@ public class BoardFrame extends JFrame {
 		l2 = new RotateLabel(this.gameType);
 		l2.setText(JKemik.settings_t.getTheme());
 
-		save = new JButton("SAVE");
+		save = new JButton("START GAME");
 		save.setBackground(new Color(200, 0, 0));
 		save.setForeground(new Color(255, 255, 255));
 
