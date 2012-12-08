@@ -1,6 +1,8 @@
 #labels Featured,Phase-Requirements
 =AVAILABLE DOWNLOADS=
 
+[http://jkemik.googlecode.com/files/jkemik-linux-3.0.179.tar.gz jkemik-linux-3.0.179.tar.gz]
+
 ===Release Candidate:===
 [http://jkemik.googlecode.com/files/jkemik-windows-rc-3.0.135.zip Jkemik-windows-rc-3.0.135.zip]
 
