@@ -44,6 +44,6 @@ http://jkemik.googlecode.com/files/SysPrefs.png
 
 ===ATTENTION:===
 
-*_The currently implementation of JKemik does nod restrict a player from playing for his opponent. Therefore switching turns relies on players integrity. I will hopefully come up with a remedy to this issue at some point._
+*_When turn passing is set to automatic there currently is no way of restricting a player from playing for his opponent. Therefore switching turns relies on players integrity. You can always turn auto pass off as a remedy._
 
 See [Rules Rules] for more details
