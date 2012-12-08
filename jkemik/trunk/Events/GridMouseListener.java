@@ -49,8 +49,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 						&& current.getSelected().size() >= 4) {
 					Grid.cell = game.capture((int) Grid.squareSize);//
 					game.getCurrentP().setSelected(new ArrayList<Point>());
-					System.out.println(current.getSelected().size()
-							+ " were selected");
+//					System.out.println(current.getSelected().size()
+//							+ " were selected");
 					BoardFrame.manual_c.setSelected(false);
 					if(BoardFrame.manual.isSelected()){
 						BoardFrame.manual.setSelected(false);
@@ -63,14 +63,14 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 				BoardFrame.grid.repaint();
 			}			
 		} else {
-			System.out.println("About to Plot ...");
+			//System.out.println("About to Plot ...");
 			if (game.getCurrentP().isTurn()) {
-				System.out.println("Saw turn ...");
+				//System.out.println("Saw turn ...");
 				if (!Tools.containPoint(temp, game.getCurrentP().getPloted())
 						&& !Tools.containPoint(temp, game.getGuest()
 								.getPloted())
 						&& !Tools.containPoint(temp, game.getDeadDots())) {
-					System.out.println("Plotting ...");
+					//System.out.println("Plotting ...");
 					Grid.plotPoint = true;
 					BoardFrame.grid.repaint();
 					game.getCurrentP().getPloted().add(temp);
