@@ -6,6 +6,8 @@
 
 [http://jkemik.googlecode.com/files/jkemik-linux-3.0.179.tar.gz jkemik-linux-3.0.179.tar.gz]
 
+[http://jkemik.googlecode.com/files/jkemik-mac-3.0.197.tar.gz http://jkemik.googlecode.com/files/jkemik-mac-3.0.197.tar.gz]
+
 ===Pre-releases:===
 [http://jkemik.googlecode.com/files/jkemik-windows-rc-3.0.135.zip Jkemik-windows-rc-3.0.135.zip]
 
