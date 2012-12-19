@@ -3,9 +3,6 @@
  */
 package controler;
 import javax.swing.*;
-
-import resrc.Translator;
-
 import java.awt.*;
 import java.io.*;
 
@@ -29,7 +26,6 @@ public class JKemik extends Application {
 	public static SettingsPanel settings;
 	private static boolean isStarted = false;
 	public static Load load;
-	public static Translator translate;
 	static File s_object = new File(Tools.fullPath() + Globals.settingsTemplateObjectFile);
 	static File t_object = new File(Tools.fullPath() + Globals.templateObjectFile);
 	static File g_object = new File(Tools.fullPath() + Globals.gameObjectFile);
@@ -51,7 +47,6 @@ public class JKemik extends Application {
 					settings_t = new STemplate();
 					game = new Game(new Player(template.getP1_c(), template.getP1_name()), new Player(
 							template.getP1_c(),template.getP2_name()));
-					//translate = new Translator("fr", "FR", "resrc.MessagesBundle_fr_FR");
 					System.out.println("Template:\n..................................................................." 
 							+ settings.toString());
 				}
