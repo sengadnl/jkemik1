@@ -2,7 +2,6 @@
  * 
  */
 package utilities;
-
 import java.awt.Color;
 
 /**
@@ -20,7 +19,7 @@ public class Globals {
 	public static final String tempFile = "tmp";
 	public static final String gameObjectFile = "/tmp/game.obj";
 	public static final String settingsTemplateObjectFile = "/tmp/stemplate.obj";
-	public static final String VERSION = "3.0.179";
+	public static final String VERSION = "Beta-4.0.179";
 	public static final int RED_INDEX = 0;
 	public static final int WHITE_INDEX = 4;
 	public static final int GREEN_INDEX = 5;
@@ -37,8 +36,7 @@ public class Globals {
 	public static final Color[] ORIGINE_COLOR = {
 		new Color(232, 216, 37),
 		new Color(99, 196, 235),
-		new Color(45, 214, 68),
-		};
+		new Color(45, 214, 68)};
 	public static final Color[] CLASSIC_COLOR = {
 		new Color(0, 255, 0),
 		new Color(250, 50, 50),
@@ -47,5 +45,7 @@ public class Globals {
 		new Color(97, 237, 135),
 		new Color(247, 174, 101),
 		new Color(170, 85, 173)};
+	public static final String[] code = {"en","fr","de"};
+	public static final String[] laguageNames = {"ENGLISH","FRANCAIS","DEUTCH"};
 	
 }

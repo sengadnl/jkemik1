@@ -5,13 +5,13 @@ import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controler.JKemik;
-
 import utilities.Globals;
 
 public class SettingsPanel extends JFrame {
@@ -35,6 +35,9 @@ public class SettingsPanel extends JFrame {
 	public static RotateColor left_color;
 	public static RotateColor right_color;
 	public static JTextField max_win;
+	public static JComboBox languageList;
+	
+	
 	private int maxWinVal;
 
 	private String[] auto_cap = { "ON", "OFF" };
@@ -50,6 +53,14 @@ public class SettingsPanel extends JFrame {
 		setLocation(500, 300);
 		buildPane();
 		setVisible(false);
+	}
+
+	public static JComboBox getLanguageList() {
+		return languageList;
+	}
+
+	public static void setLanguageList(JComboBox languageList) {
+		SettingsPanel.languageList = languageList;
 	}
 
 	public static JTextField getMax_win() {
@@ -109,16 +120,20 @@ public class SettingsPanel extends JFrame {
 		l1.setBackground(BoardFrame.BOARD_COLOR);
 		l2 = new JPanel();
 		l2.setBackground(BoardFrame.BOARD_COLOR);
-		l2.setLayout(new GridLayout(3, 2));
+		l2.setLayout(new GridLayout(4, 2,20,20));
+		
 		l3 = new JPanel();
 		l3.setBackground(BoardFrame.BOARD_COLOR);
 
 		auto_capture = new RotateLabel(auto_cap);
 		auto_turn_pass = new RotateLabel(auto_t_p);
 		max_win = new JTextField("" + JKemik.settings_t.getMaxWinVal());
+		//max_win = new JTextField(""); 
 		max_win.setBackground(Color.GRAY);
 		max_win.setForeground(Color.WHITE);
 		max_win.setCaretColor(Color.GREEN);
+		
+		languageList = new JComboBox(Globals.laguageNames);//TODO
 
 		JLabel label1 = new JLabel("  Auto capture:");
 		label1.setForeground(Color.YELLOW);
@@ -131,6 +146,9 @@ public class SettingsPanel extends JFrame {
 
 		JLabel label4 = new JLabel("  Max Win:");
 		label4.setForeground(Color.YELLOW);
+		
+		JLabel label5 = new JLabel("  Language:");
+		label5.setForeground(Color.YELLOW);
 
 		add(l1, BorderLayout.NORTH);
 		add(l2, BorderLayout.CENTER);
@@ -143,6 +161,9 @@ public class SettingsPanel extends JFrame {
 		l2.add(auto_turn_pass);
 		l2.add(label4);
 		l2.add(max_win);
+		l2.add(label5);
+		l2.add(languageList);
+		
 		l3.add(save);
 
 	}
@@ -163,9 +184,9 @@ public class SettingsPanel extends JFrame {
 		auto_turn_pass = autoTurnPass;
 	}
 
-//	public static void main(String[] args) {
-//		SettingsPanel settings = new SettingsPanel(300, 300);
-//		settings.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		settings.setVisible(true);
-//	}
+	public static void main(String[] args) {
+		SettingsPanel settings = new SettingsPanel(300, 300);
+		settings.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		settings.setVisible(true);
+	}
 }

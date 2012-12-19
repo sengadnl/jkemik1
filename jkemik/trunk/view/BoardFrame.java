@@ -4,6 +4,8 @@
 package view;
 
 import java.awt.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.*;
 import Events.*;
@@ -20,6 +22,8 @@ public class BoardFrame extends JFrame {
 	 * @since August 2011
 	 **/
 	private static volatile BoardFrame instance = null;
+	//Locale currentLocale;
+	public static ResourceBundle messages;
 
 	private BoardFrame(double width, double height) {
 
@@ -78,9 +82,9 @@ public class BoardFrame extends JFrame {
 		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
 		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
 
-//		if (BoardFrame.getThereIsSavedGame() == 0) {
-//		} else {
-//		}
+		// if (BoardFrame.getThereIsSavedGame() == 0) {
+		// } else {
+		// }
 		ViewEvents.changeColorPanel1Action(pColor1);
 		ViewEvents.changeColorPanel2Action(pColor2);
 		ViewEvents.setBoardSizeAction(l1);
@@ -115,24 +119,34 @@ public class BoardFrame extends JFrame {
 	}
 
 	private void createPanel123() {
-		panel1 = new JPanel();
-		panel1.setLayout(new BorderLayout());
-		panel1.setPreferredSize(new Dimension((int) this.width,
-				(int) (CORNER_HEIGHT * this.height)));
-		add(panel1, BorderLayout.NORTH);
+		try {
+			String code = Tools.languageKey(JKemik.settings_t.getLanguage());
+			String properties = Tools.propertiesFilename(code);
+			Locale currentLocale = new Locale(code.toLowerCase());
 
-		panel2 = new JPanel();
-		panel2.setLayout(new BorderLayout());
-		panel2.setPreferredSize(new Dimension((int) (.8 * this.width),
-				(int) (SIDE_HEIGHT * this.height)));
+			messages = ResourceBundle.getBundle(properties, currentLocale);
 
-		add(panel2, BorderLayout.CENTER);
+			panel1 = new JPanel();
+			panel1.setLayout(new BorderLayout());
+			panel1.setPreferredSize(new Dimension((int) this.width,
+					(int) (CORNER_HEIGHT * this.height)));
+			add(panel1, BorderLayout.NORTH);
 
-		panel3 = new JPanel();
-		panel3.setLayout(new BorderLayout());// 10,10
-		panel3.setPreferredSize(new Dimension((int) this.width,
-				(int) (CORNER_HEIGHT * this.height)));
-		add(panel3, BorderLayout.SOUTH);
+			panel2 = new JPanel();
+			panel2.setLayout(new BorderLayout());
+			panel2.setPreferredSize(new Dimension((int) (.8 * this.width),
+					(int) (SIDE_HEIGHT * this.height)));
+
+			add(panel2, BorderLayout.CENTER);
+
+			panel3 = new JPanel();
+			panel3.setLayout(new BorderLayout());// 10,10
+			panel3.setPreferredSize(new Dimension((int) this.width,
+					(int) (CORNER_HEIGHT * this.height)));
+			add(panel3, BorderLayout.SOUTH);
+		} catch (NullPointerException e) {
+			System.out.println("Exception: " + e.getMessage());
+		}
 	}
 
 	private void designPanel1() {
@@ -167,16 +181,20 @@ public class BoardFrame extends JFrame {
 
 		panel13.setBackground(BoardFrame.THEME_COLOR);
 
-		Game_status = new JLabel("NEW");
+		Game_status = new JLabel(messages.getString("newG"));
+		//Game_status = new JLabel("NEW");
 		Game_status.setForeground(Color.GREEN);
 
-		settings = new JLabel("SETTINGS");
+		//settings = new JLabel("SETTINGS");
+		settings = new JLabel(messages.getString("settings"));
 		settings.setForeground(new Color(150, 150, 255));
 
-		exit = new JLabel("EXIT");
+		//exit = new JLabel("EXIT");
+		exit = new JLabel(messages.getString("exit"));
 		exit.setForeground(Color.RED);
 
-		help = new JLabel("HELP");
+		//help = new JLabel("HELP");
+		help = new JLabel(messages.getString("help"));
 		help.setForeground(Color.WHITE);
 
 		panel13.add(Game_status);
@@ -207,7 +225,8 @@ public class BoardFrame extends JFrame {
 				(int) (SIDE_HEIGHT * this.height)));
 		panel23.setLayout(new BorderLayout(10, 10));
 
-		manual = new JCheckBox("Manual");
+		// manual = new JCheckBox("Manual");//messages.getString("startGameB")
+		manual = new JCheckBox(messages.getString("manualMode"));
 
 		p2panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (.25 * SIDE_HEIGHT * this.height));
@@ -240,11 +259,14 @@ public class BoardFrame extends JFrame {
 		panel331 = new JPanel();
 		panel332 = new JPanel();
 
-		pass_turn = new JButton("Pass");
-		undo = new JButton("Undo");
-		// capture = new JButton("Capture");
-		refresh = new JButton("Refresh");
-		manual_c = new JCheckBox("Capture Mode");
+		// pass_turn = new JButton("Pass");
+		pass_turn = new JButton(messages.getString("passB"));
+		// undo = new JButton("Undo");//messages.getString("captureMode")
+		undo = new JButton(messages.getString("undoB"));
+		//refresh = new JButton("Refresh");
+		refresh = new JButton(messages.getString("refreshB"));
+		// manual_c = new JCheckBox("Capture Mode");
+		manual_c = new JCheckBox(messages.getString("captureMode"));
 		decoratebuttons(Globals.BTN_BGD_COLOR, Globals.BTN_FRD_COLOR);
 
 		panel331.add(pass_turn);
@@ -256,14 +278,7 @@ public class BoardFrame extends JFrame {
 
 		pass_turn.setVisible(false);
 		undo.setVisible(false);
-		// capture.setVisible(false);
 		manual_c.setVisible(false);
-
-		// manual_c.setBackground(new Color(0, 0, 0));
-		// manual_c.setForeground(new Color(255, 255, 255));
-
-		// manual.setBackground(new Color(0, 0, 0));
-		// manual.setForeground(new Color(255, 255, 255));
 
 		panel33.add(panel331);
 		panel33.add(panel332);
@@ -283,9 +298,12 @@ public class BoardFrame extends JFrame {
 		Win = new JLabel("" + JKemik.settings_t.getMaxWinVal());
 		Win.setForeground(Color.WHITE);
 
-		la = new JLabel(" Capture:");
-		lb = new JLabel(" Pass Turn:");
-		lc = new JLabel(" Win:");
+//		la = new JLabel(" Capture:");
+//		lb = new JLabel(" Pass Turn:");
+//		lc = new JLabel(" Win:");
+		la = new JLabel(" " + messages.getString("capturel"));
+		lb = new JLabel(" " + messages.getString("passl"));
+		lc = new JLabel(" " + messages.getString("winl"));
 		decorateLabelss(Color.ORANGE);
 
 		panel31.add(la);
@@ -332,7 +350,9 @@ public class BoardFrame extends JFrame {
 		l2 = new RotateLabel(this.gameType);
 		l2.setText(JKemik.settings_t.getTheme());
 
-		save = new JButton("START GAME");
+		// save = new JButton("START GAME");
+		// System.out.println("Jbutton: " + );
+		save = new JButton(messages.getString("startGameB"));
 		save.setBackground(new Color(200, 0, 0));
 		save.setForeground(new Color(255, 255, 255));
 
@@ -635,15 +655,19 @@ public class BoardFrame extends JFrame {
 	public static void updateSettingPanel() {
 		try {
 			if (JKemik.settings_t.isAutoCapture()) {
-				AutoCap.setText("AUTO");
+				//AutoCap.setText("AUTO");
+				AutoCap.setText(messages.getString("capturela"));
 			} else {
-				AutoCap.setText("MANUAL");
+				//AutoCap.setText("MANUAL");
+				AutoCap.setText(messages.getString("capturelm"));
 			}
 
 			if (JKemik.settings_t.isAutoPass()) {
-				AutoPass.setText("AUTO");
+				//AutoPass.setText("AUTO");
+				AutoPass.setText(messages.getString("passla"));
 			} else {
-				AutoPass.setText("MANUAL");
+				//AutoPass.setText("MANUAL");
+				AutoPass.setText(messages.getString("passlm"));
 			}
 			String str = "" + JKemik.settings_t.getMaxWinVal();
 			BoardFrame.Win.setText(str);
@@ -689,6 +713,14 @@ public class BoardFrame extends JFrame {
 
 	public static void setThereIsSavedGame(int thereIsSavedGame) {
 		BoardFrame.thereIsSavedGame = thereIsSavedGame;
+	}
+
+	public static ResourceBundle getMessages() {
+		return messages;
+	}
+
+	public static void setMessages(ResourceBundle messages) {
+		BoardFrame.messages = messages;
 	}
 
 	public double height = 0.0;

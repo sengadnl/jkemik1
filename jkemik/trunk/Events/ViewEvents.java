@@ -28,7 +28,7 @@ public class ViewEvents {
 	public static SettingsLabelListener saveSettings = new SettingsLabelListener(BoardFrame.settings);
 	public static SaveSettingsListener saveSetting = new SaveSettingsListener(SettingsPanel.save);
 	public static UndoListener undoListener = new UndoListener(BoardFrame.undo);
-	//public static EmbushListener captureListener = new EmbushListener(BoardFrame.capture);
+
 	public static PassTurnListener passTurnListener = new PassTurnListener(BoardFrame.pass_turn);
 	public static AutoCaptureListener autoCaptureListener = new AutoCaptureListener(SettingsPanel.auto_capture);
 	public static AutoTurnPassAction autoTurnPassListener = new AutoTurnPassAction(SettingsPanel.auto_turn_pass);
@@ -75,10 +75,7 @@ public class ViewEvents {
 	public static void settingsLabelAction(){
 		BoardFrame.settings.addMouseListener(saveSettings);
 	}
-	
-//	public static void captureAction(JButton capture){
-//		capture.addMouseListener(captureListener);
-//	}
+
 	public static void undoAction(JButton undo){
 		undo.addMouseListener(undoListener);
 	}
