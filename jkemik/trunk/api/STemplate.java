@@ -2,6 +2,7 @@ package api;
 
 import java.io.Serializable;
 
+
 public class STemplate implements Serializable {
 
 	/**
@@ -13,11 +14,28 @@ public class STemplate implements Serializable {
 	private boolean autoPass = true;
 	private String theme = "Geeky";
 	private int maxWinVal = 4;
-
+	private double MaxPointPerPlayer = 0.0;
+	private String language = "FRANCAIS";
 	private boolean[] memo = { true, false };
 
 	public STemplate() {
+		
+	}
 
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public double getMaxPointPerPlayer() {
+		return MaxPointPerPlayer;
+	}
+
+	public void setMaxPointPerPlayer(double maxPointPerPlayer) {
+		MaxPointPerPlayer = maxPointPerPlayer;
 	}
 
 	public boolean[] getMemo() {
@@ -110,6 +128,9 @@ public class STemplate implements Serializable {
 
 	public void setAutoPass(boolean autoPass) {
 		this.autoPass = autoPass;
+	}
+	public String toString(){
+		return "MaxPointPerPlayer: " + this.MaxPointPerPlayer + "\nMaxWinVal :" + this.maxWinVal;
 	}
 
 }

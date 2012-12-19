@@ -67,7 +67,7 @@ public class SaveButtonListener implements MouseListener {
 			BoardFrame.l1.removeMouseListener(ViewEvents.gridSizeListener);
 			BoardFrame.l2.removeMouseListener(ViewEvents.gameThemeListener);
 			BoardFrame.settings.removeMouseListener(ViewEvents.saveSettings);
-			BoardFrame.Game_status.setText("END");
+			BoardFrame.Game_status.setText(BoardFrame.messages.getString("endG"));
 			BoardFrame.Game_status.setForeground(Color.RED);
 
 			BoardFrame.fadeLabel(BoardFrame.settings);

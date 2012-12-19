@@ -68,7 +68,7 @@ public class NewGameListener implements MouseListener{
 			BoardFrame.enableGameControlPanel();
 			
 			//Reset game exit label
-			BoardFrame.Game_status.setText("NEW");
+			BoardFrame.Game_status.setText(BoardFrame.messages.getString("newG"));
 			BoardFrame.Game_status.setForeground(Color.GREEN);
 			
 			BoardFrame.boostLabel(BoardFrame.settings);

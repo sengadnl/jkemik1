@@ -2,28 +2,22 @@
  * 
  */
 package controler;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import javax.swing.JOptionPane;
-import utilities.Globals;
-import utilities.Tools;
-import view.BoardFrame;
-import view.Load;
-import view.SettingsPanel;
-import api.GTemplate;
-import api.Game;
-import api.Player;
-import api.STemplate;
+import javax.swing.*;
+
+import resrc.Translator;
+
+import java.awt.*;
+import java.io.*;
+
+import utilities.*;
+import view.*;
+import api.*;
 
 /**
+ * COPYRIGHT(C)2012 Daniel Senga. All Right Reserved
+ * Main class of Jkemik
  * @author Daniel Senga
+ * @version Beta 4.0 12-2012
  * 
  */
 public class JKemik extends Application {
@@ -35,11 +29,12 @@ public class JKemik extends Application {
 	public static SettingsPanel settings;
 	private static boolean isStarted = false;
 	public static Load load;
+	public static Translator translate;
 	static File s_object = new File(Tools.fullPath() + Globals.settingsTemplateObjectFile);
 	static File t_object = new File(Tools.fullPath() + Globals.templateObjectFile);
 	static File g_object = new File(Tools.fullPath() + Globals.gameObjectFile);
 
-	protected void init() {
+	protected void init(){
 		try {
 			load = new Load(362, 183);
 			System.out.println("Before checking tmp");
@@ -56,9 +51,16 @@ public class JKemik extends Application {
 					settings_t = new STemplate();
 					game = new Game(new Player(template.getP1_c(), template.getP1_name()), new Player(
 							template.getP1_c(),template.getP2_name()));
+					//translate = new Translator("fr", "FR", "resrc.MessagesBundle_fr_FR");
+					System.out.println("Template:\n..................................................................." 
+							+ settings.toString());
 				}
 			}
-			settings = new SettingsPanel(300, 200);
+//			ParamameterIn obj = new ParamameterIn();
+//			obj.readParam(Tools.fullPath() + "/trunk/conf/jk.ini");
+//			System.out.println("Template:\n..................................................................." 
+//					+ settings.toString());
+			settings = new SettingsPanel(300, 300);
 			game = new Game(new Player(template.getP1_c(), template.getP1_name()), new Player(
 					template.getP1_c(),template.getP2_name()));
 			System.out.println(game + "\n\n");
@@ -68,7 +70,7 @@ public class JKemik extends Application {
 	}
 
 	protected void idle() {
-		try {
+		//try {
 			if (screenResolutionCheck()) {
 				view = BoardFrame.getInstance(Globals.FRAME_WIDTH,
 						Globals.FRAME_HEIGHT);
@@ -77,8 +79,9 @@ public class JKemik extends Application {
 				System.exit(0);
 				// setDone();
 			}
-		} catch (Exception e) {
-		}
+//		} catch (Exception e) {
+//			System.err.println("Error: " + e.getMessage() +  "\nStack Trace: " + e.getStackTrace());
+//		}
 	}
 
 	protected void cleanup() {
@@ -100,7 +103,7 @@ public class JKemik extends Application {
 		JKemik.isStarted = isStarted;
 	}
 
-	public static void writeSettings() {
+	public static void writeSettings(){
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(
 					new FileOutputStream(s_object));
@@ -162,7 +165,7 @@ public class JKemik extends Application {
 //
 //	}
 
-	public static void readTemplate() {
+	public static void readTemplate(){
 		try {
 
 			if (t_object.exists()) {

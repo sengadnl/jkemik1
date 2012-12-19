@@ -15,16 +15,45 @@ import api.STemplate;
  * 
  */
 public class Tools {
+	public static String languageValue(String key) {
+		for (int i = 0; i < Globals.code.length; i++) {
+			if (key.equals(Globals.code[i])) {
+				return Globals.laguageNames[i];
+			}
+		}
+		return "";
+	}
+
+	public static String propertiesFilename(String key) {
+		if (key.equals("fr")) {
+			return "resrc.MessagesBundle_fr_FR";
+		} else if (key.equals("en")) {
+			return "resrc.MessagesBundle_en_US";
+		} else {
+			return "resrc.MessagesBundle";
+		}
+	}
+
+	public static String languageKey(String value) {
+		for (int i = 0; i < Globals.code.length; i++) {
+			if (value.equals(Globals.laguageNames[i])) {
+				return Globals.code[i];
+			}
+		}
+		return "";
+	}
+
 	public static String fullPath() {
 		String path = "";
 		try {
 			File f = new java.io.File(".");
 			path = f.getCanonicalPath();
 		} catch (IOException e) {
-			 e.printStackTrace();
+			e.printStackTrace();
 		}
 		return path;
 	}
+
 	public static boolean isMaxWinLessThanGrid(int gridSize, int maxWin) {
 		if (maxWin > gridSize) {
 			return false;
@@ -33,7 +62,7 @@ public class Tools {
 	}
 
 	public static void resetMaxWin(int positionsCount, STemplate t) {
-		int defaultMaxWin = (int)(positionsCount * Globals.MAX_WIN);
+		int defaultMaxWin = (int) (positionsCount * Globals.MAX_WIN);
 		t.setMaxWinVal(defaultMaxWin);
 	}
 
@@ -91,9 +120,10 @@ public class Tools {
 		if (b > Globals.FADE_THRESHOLD) {
 			b = b - (b * Globals.FADE_VARIANT);
 		}
-		
+
 		return new Color((int) r, (int) g, (int) b);
 	}
+
 	/**
 	 * fades color
 	 */
@@ -110,7 +140,7 @@ public class Tools {
 		if (b > f_th) {
 			b = b - (b * f_var);
 		}
-		
+
 		return new Color((int) r, (int) g, (int) b);
 	}
 
@@ -141,6 +171,7 @@ public class Tools {
 		}
 		return new Color((int) r, (int) g, (int) b);
 	}
+
 	public static Color boost(Color c, double percent) {
 		double r = c.getRed();
 		double g = c.getGreen();
@@ -149,15 +180,30 @@ public class Tools {
 			r = r + percent;
 			g = g + percent;
 			b = b + percent;
-			if (r > 255){r = 255;} if(g > 255){g = 255;} if(b > 255) {b = 255;}
-			if (r < 0){r = 0;} if(g < 0){g = 0;} if(b < 0) {b = 0;}
+			if (r > 255) {
+				r = 255;
+			}
+			if (g > 255) {
+				g = 255;
+			}
+			if (b > 255) {
+				b = 255;
+			}
+			if (r < 0) {
+				r = 0;
+			}
+			if (g < 0) {
+				g = 0;
+			}
+			if (b < 0) {
+				b = 0;
+			}
 
 		} catch (Exception e) {
 			System.err.println("In Tools.boost: " + e.getMessage());
 		}
 		return new Color((int) r, (int) g, (int) b);
 	}
-
 
 	public static double freeGridInPercent(double occupied, double gridSize) {
 		return (((gridSize - occupied) * 100) / gridSize);
@@ -277,7 +323,6 @@ public class Tools {
 		}
 		return odd;
 	}
-
 
 	/**
 	 * this function filters the Area
