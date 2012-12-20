@@ -324,7 +324,7 @@ public class BoardFrame extends JFrame {
 		blank6 = new JLabel(" ");
 
 		panel32 = new JPanel();
-		panel32.setLayout(new BorderLayout(5, 5));
+		panel32.setLayout(new BorderLayout(12, 12));
 
 		label1 = new JLabel(JKemik.template.getP1_name());
 		label1.setForeground(Color.WHITE);
@@ -797,16 +797,16 @@ public class BoardFrame extends JFrame {
 	private String[] gridsize = { "32x20", "64x40", "8x5", "16x10" };
 	private String[] gameType = { "Origins", "Jkemik", "Classic", "Geeky" };
 
-	public static final double CORNER_WIDTH = .33;
+	public static final double CORNER_WIDTH = .37;
 	public static final double CORNER_HEIGHT = .064;
 	public static final double SIDE_WIDTH = .0994;
 	public static final double SIDE_HEIGHT = .8;
 	public static final double PLAYER_PNL_W_SCALAR = .08;
 	public static final double PLAYER_PNL_H_SCALAR = .25;
-	public static final double P2_W = .34;
+	public static final double P2_W = .26;
 
-	public static final double BOTTOM_COLOR_P_W = 118;
-	public static final double BOTTOM_COLOR_P_H = 16;
+	public static final double BOTTOM_COLOR_P_W = 80;
+	public static final double BOTTOM_COLOR_P_H = 12;
 
 	public static Grid grid;
 
