@@ -35,7 +35,7 @@ public class SettingsPanel extends JFrame {
 	public static RotateColor left_color;
 	public static RotateColor right_color;
 	public static JTextField max_win;
-	public static JComboBox<String> languageList;
+	public static JComboBox languageList;
 	
 	
 	private int maxWinVal;
@@ -55,11 +55,11 @@ public class SettingsPanel extends JFrame {
 		setVisible(false);
 	}
 
-	public static JComboBox<String> getLanguageList() {
+	public static JComboBox getLanguageList() {
 		return languageList;
 	}
 
-	public static void setLanguageList(JComboBox<String> languageList) {
+	public static void setLanguageList(JComboBox languageList) {
 		SettingsPanel.languageList = languageList;
 	}
 
@@ -133,7 +133,7 @@ public class SettingsPanel extends JFrame {
 		max_win.setForeground(Color.WHITE);
 		max_win.setCaretColor(Color.GREEN);
 		
-		languageList = new JComboBox<String>(Globals.laguageNames);//TODO
+		languageList = new JComboBox(Globals.laguageNames);//TODO
 
 		JLabel label1 = new JLabel("  Auto capture:");
 		label1.setForeground(Color.YELLOW);

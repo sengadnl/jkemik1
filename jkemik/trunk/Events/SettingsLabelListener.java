@@ -10,6 +10,7 @@ import controler.JKemik;
 import api.STemplate;
 import utilities.Tools;
 //import view.BoardFrame;
+import view.BoardFrame;
 import view.SettingsPanel;
 
 public class SettingsLabelListener implements MouseListener {
@@ -48,6 +49,7 @@ public class SettingsLabelListener implements MouseListener {
 		Color color;
 		color = Tools.fade(this.label.getForeground());
 		this.label.setForeground(color);
-		this.label.setToolTipText("System Preferences.");
+		//this.label.setToolTipText("System Preferences.");
+		this.label.setToolTipText(BoardFrame.messages.getString("sysPrefHover"));
 	}
 }

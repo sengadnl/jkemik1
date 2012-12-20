@@ -56,7 +56,7 @@ public class SaveButtonListener implements MouseListener {
 			p2 = new Player(c2, str2);
 			game = new Game(p1, p2);
 			JKemik.game = game;
-			
+
 			JKemik.game.setMaxScore(JKemik.settings_t.getMaxWinVal());//
 
 			BoardFrame.disableGameControlPanel();
@@ -67,19 +67,21 @@ public class SaveButtonListener implements MouseListener {
 			BoardFrame.l1.removeMouseListener(ViewEvents.gridSizeListener);
 			BoardFrame.l2.removeMouseListener(ViewEvents.gameThemeListener);
 			BoardFrame.settings.removeMouseListener(ViewEvents.saveSettings);
-			BoardFrame.Game_status.setText(BoardFrame.messages.getString("endG"));
+			BoardFrame.Game_status.setText(BoardFrame.messages
+					.getString("endG"));
 			BoardFrame.Game_status.setForeground(Color.RED);
 
 			BoardFrame.fadeLabel(BoardFrame.settings);
-			
+
 			BoardFrame.showControlButtons();
-			
-			//Enable control buttons
+
+			// Enable control buttons
 			BoardFrame.refresh.addMouseListener(ViewEvents.refreshListener);
-			BoardFrame.manual_c.addMouseListener(ViewEvents.manualCaptureButtonListener);
+			BoardFrame.manual_c
+					.addMouseListener(ViewEvents.manualCaptureButtonListener);
 			BoardFrame.undo.addMouseListener(ViewEvents.undoListener);
 			BoardFrame.pass_turn.addMouseListener(ViewEvents.passTurnListener);
-			
+
 			BoardFrame.print_point.setText("" + (new Point(0, 0)).toString());
 			String p1n = t.getP1_name();
 			String p2n = t.getP2_name();
@@ -91,13 +93,19 @@ public class SaveButtonListener implements MouseListener {
 			BoardFrame.Win.setText(JKemik.settings_t.getMaxWinVal() + "");
 			BoardFrame.save.removeMouseListener(ViewEvents.saveListener);
 
-			int response = JOptionPane.showConfirmDialog(null, "Will " + str1
-					+ " play first?\n", "Question", JOptionPane.YES_NO_OPTION);
+			// int response = JOptionPane.showConfirmDialog(null, "Will " + str1
+			// + " play first?\n", "Question", JOptionPane.YES_NO_OPTION);
+			int response = JOptionPane.showConfirmDialog(null,
+					BoardFrame.messages.getString("startGameWill") + str1 +" "+
+							BoardFrame.messages.getString("starGameFirst")
+							+ "\n", BoardFrame.messages.getString("starGameQ"),
+					JOptionPane.YES_NO_OPTION);
+			// startGameWill
 			if (response == 1) {
 				game.switchPlayTurns();
 				Grid.setCcolor(game.getCurrentP().getColor());
 			} else {
-				
+
 			}
 			BoardFrame.grid.addMouseListener(ViewEvents.gridListener);
 			BoardFrame.grid.addMouseMotionListener(ViewEvents.gridListener);
@@ -111,7 +119,8 @@ public class SaveButtonListener implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		save.setToolTipText("Click here to save these settings.");
+		// save.setToolTipText("Click here to save these settings.");
+		save.setToolTipText(BoardFrame.messages.getString("startGameHover"));
 	}
 
 	public void mouseExited(MouseEvent e) {

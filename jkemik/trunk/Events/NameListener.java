@@ -33,7 +33,9 @@ public class NameListener implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		String name = JOptionPane.showInputDialog("Player Name <= 5 chars");
+		//String name = JOptionPane.showInputDialog("Player Name <= 5 letters");
+		String name = JOptionPane.showInputDialog(BoardFrame.messages.getString("validatePlayerName"));
+		//validatePlayerName
 		try{
 		this.lab.setText(name.toUpperCase());
 		name = BoardFrame.getLabel1().getText();
@@ -67,7 +69,8 @@ public class NameListener implements MouseListener {
 		if(this.one == 1){
 		BoardFrame.highlightP1();
 		}else{BoardFrame.highlightP2();}
-		lab.setToolTipText("Click to set this player's name.");
+		//lab.setToolTipText("Click to set this player's name.");
+		lab.setToolTipText(BoardFrame.messages.getString("playerNameHover"));
 	}
 
 	public void mouseExited(MouseEvent e) {

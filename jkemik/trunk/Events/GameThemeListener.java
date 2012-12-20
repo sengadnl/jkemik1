@@ -43,7 +43,8 @@ public class GameThemeListener implements MouseListener{
 	}
 	public void mouseEntered(MouseEvent e) {
 		this.label.highlight();
-		label.setToolTipText("Click to change the theme.");
+		//label.setToolTipText("Click to change the theme.");
+		label.setToolTipText(BoardFrame.messages.getString("themeHover"));
 	}
 
 	public void mouseExited(MouseEvent e) {

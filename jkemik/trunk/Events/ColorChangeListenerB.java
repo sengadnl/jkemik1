@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import controler.JKemik;
 
 import utilities.Tools;
+import view.BoardFrame;
 import view.RotateColor;
 
 /**
@@ -34,7 +35,8 @@ public class ColorChangeListenerB implements MouseListener{
 		Color c = this.panel.getBackground();
 		c = Tools.fade(c);
 		this.panel.setBackground(c);
-		panel.setToolTipText("Click to change the color.");
+		//panel.setToolTipText("Click to change the color.");
+		panel.setToolTipText(BoardFrame.messages.getString("changeColorHover"));
 	}
 
 	public void mouseExited(MouseEvent e) {

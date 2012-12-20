@@ -40,15 +40,19 @@ public class PassTurnListener implements MouseListener {
 				Grid.setCcolor(JKemik.game.getCurrentP().getColor());
 
 			} else {
+//				JOptionPane.showMessageDialog(null,
+//						"YOU HAVE NOT PLAYED YET!!!",
+//						"Ellegal Action", JOptionPane.WARNING_MESSAGE);
 				JOptionPane.showMessageDialog(null,
-						"YOU HAVE NOT PLAYED YET!!!",
-						"Ellegal Action", JOptionPane.WARNING_MESSAGE);
+						BoardFrame.messages.getString("ilPass"),
+						BoardFrame.messages.getString("ilAction"), JOptionPane.WARNING_MESSAGE);
 			}
 		}
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		pass.setToolTipText("Click to pass the turn.");
+		//pass.setToolTipText("Click to pass the turn.");
+		pass.setToolTipText(BoardFrame.messages.getString("passHover"));
 	}
 
 	public void mouseExited(MouseEvent e) {

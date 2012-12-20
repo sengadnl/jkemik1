@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import controler.JKemik;
 import utilities.Tools;
+import view.BoardFrame;
 
 
 /**
@@ -59,6 +60,7 @@ public class ExitListener implements MouseListener{
 		Color color;
 		color = Tools.fade(this.label.getForeground());
 		this.label.setForeground(color);
-		this.label.setToolTipText("Exit game");
+		//this.label.setToolTipText("Exit game");
+		this.label.setToolTipText(BoardFrame.messages.getString("exitGameHover"));
 	}
 }

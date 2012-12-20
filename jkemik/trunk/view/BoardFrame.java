@@ -226,8 +226,7 @@ public class BoardFrame extends JFrame {
 		panel23.setLayout(new BorderLayout(10, 10));
 
 		// manual = new JCheckBox("Manual");//messages.getString("startGameB")
-		manual = new JCheckBox(messages.getString("manualMode"));
-
+		manual = new JCheckBox(messages.getString("manualModel"));
 		p2panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (.25 * SIDE_HEIGHT * this.height));
 		panel23.add(p2panel, BorderLayout.NORTH);

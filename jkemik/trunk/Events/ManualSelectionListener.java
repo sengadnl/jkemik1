@@ -41,7 +41,8 @@ public class ManualSelectionListener implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
-		capture.setToolTipText("Check to select manually.");
+		//capture.setToolTipText("Check to select manually.");
+		capture.setToolTipText(BoardFrame.messages.getString("checkSelect"));
 	}
 
 	public void mouseExited(MouseEvent arg0) {
