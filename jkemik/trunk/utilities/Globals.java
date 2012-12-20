@@ -46,6 +46,6 @@ public class Globals {
 		new Color(247, 174, 101),
 		new Color(170, 85, 173)};
 	public static final String[] code = {"en","fr","de"};
-	public static final String[] laguageNames = {"ENGLISH","FRANCAIS","DEUTCH"};
+	public static final String[] laguageNames = {"ENGLISH","FRANCAIS","DEUTSCH"};
 	
 }
