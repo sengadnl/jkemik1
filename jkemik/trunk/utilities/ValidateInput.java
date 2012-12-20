@@ -7,6 +7,8 @@ import java.awt.Color;
 
 import javax.swing.JOptionPane;
 
+import view.BoardFrame;
+
 /**
  * @author dalet
  * 
@@ -15,14 +17,14 @@ public class ValidateInput {
 	private static boolean PlayerName(String name1, String name2) {
 		try {
 			if (name1.equals("") || name2.equals("")) {
-				JOptionPane.showMessageDialog(null, "Empty String error",
-						"Wrong Input", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, BoardFrame.messages.getString("emptyString"),
+						BoardFrame.messages.getString("wrongInput"), JOptionPane.ERROR_MESSAGE);
 				return false;
 			}
 			if (!(name1.length() <= 10) || !(name2.length() <= 10)) {
 				JOptionPane.showMessageDialog(null,
-						"Name must be < 5 characters",
-						"Wrong Input", JOptionPane.ERROR_MESSAGE);
+						BoardFrame.messages.getString("validatePlayerName"),
+						BoardFrame.messages.getString("wrongInput"), JOptionPane.ERROR_MESSAGE);
 				return false;
 			}
 		} catch (Exception e) {
@@ -38,8 +40,8 @@ public class ValidateInput {
 			return false;
 		}
 		if (name1.equals(name2)) {
-			JOptionPane.showMessageDialog(null, "Ellegal name combination!",
-					"Wrong Input", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, BoardFrame.messages.getString("ilNameCombination"),
+					BoardFrame.messages.getString("wrongInput"), JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		return true;
@@ -47,8 +49,8 @@ public class ValidateInput {
 
 	public static boolean validateColors(Color p1, Color p2) {
 		if (p1.equals(p2)) {
-			JOptionPane.showMessageDialog(null, "Ellegal color combination!",
-					"Wrong Input", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, BoardFrame.messages.getString("ilColorCombination"),
+					BoardFrame.messages.getString("wrongInput"), JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		return true;
@@ -56,9 +58,9 @@ public class ValidateInput {
 
 	public static boolean validateScreenResolution(int width, int height) {
 		if ((width < 1280) && (height < 800)) {
-			JOptionPane.showMessageDialog(null, "Your screen resolution must be "
-					+ width + "X" + height + " or greater.",
-					"Wrong Input", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, BoardFrame.messages.getString("screenResVal1")
+					+ width + "X" + height + BoardFrame.messages.getString("screenResVal2"),
+					BoardFrame.messages.getString("wrongInput"), JOptionPane.ERROR_MESSAGE);
 			System.exit(1);
 		}
 		return true;

@@ -40,7 +40,8 @@ public class ModeToggleListener implements MouseListener{
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
-		manual.setToolTipText("Check to enable temporary manual mode.");
+		//manual.setToolTipText("Check to enable temporary manual mode.");
+		manual.setToolTipText(BoardFrame.messages.getString("manualMode"));
 	}
 
 	public void mouseExited(MouseEvent arg0) {

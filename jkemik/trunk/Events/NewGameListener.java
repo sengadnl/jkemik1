@@ -117,6 +117,7 @@ public class NewGameListener implements MouseListener{
 		Color color;
 		color = Tools.fade(this.label.getForeground());
 		this.label.setForeground(color);
-		this.label.setToolTipText("Start new game.");
+		//this.label.setToolTipText("Start new game.");
+		this.label.setToolTipText(BoardFrame.messages.getString("startNewGamelHover"));
 	}
 }

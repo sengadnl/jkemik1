@@ -41,7 +41,9 @@ public class BoardSizeListener implements MouseListener{
 	
 	public void mouseEntered(MouseEvent e) {
 		this.label.highlight();
-		label.setToolTipText("Click to change board size.");
+		//label.setToolTipText("Click to change board size.");
+		label.setToolTipText(BoardFrame.messages.getString("boardSizeHover"));
+		//boardSizeHover
 	}
 	
 	public void mouseExited(MouseEvent e) {
