@@ -11,8 +11,9 @@ import javax.swing.JOptionPane;
 
 import controler.JKemik;
 
-
+import utilities.ValidateInput;
 import view.BoardFrame;
+
 /**
  * @author dalet
  * 
@@ -25,6 +26,7 @@ public class NameListener implements MouseListener {
 	public NameListener(JLabel label, int one) {
 		this.lab = label;
 		this.one = one;
+
 		if (one == 1) {
 			this.lab = BoardFrame.label1;
 		} else {
@@ -33,20 +35,21 @@ public class NameListener implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		//String name = JOptionPane.showInputDialog("Player Name <= 5 letters");
-		String name = JOptionPane.showInputDialog(BoardFrame.messages.getString("validatePlayerName"));
-		//validatePlayerName
-		try{
-		this.lab.setText(name.toUpperCase());
-		name = BoardFrame.getLabel1().getText();
-		
-		if (this.one == 1) {
-			JKemik.template.setP1_name(name);
-		} else {
-			JKemik.template.setP1_name(name);
-		}
-		}catch(Exception ex){
-			System.out.println("Exception in NameListener : " + ex.getMessage());
+		String name = JOptionPane.showInputDialog(BoardFrame.messages
+				.getString("validatePlayerName"));
+		try {
+			if (ValidateInput.nameLength(name)) {
+				this.lab.setText(name.toUpperCase());
+				name = BoardFrame.getLabel1().getText();
+				if (this.one == 1) {
+					JKemik.template.setP1_name(name);
+				} else {
+					JKemik.template.setP1_name(name);
+				}
+			}
+		} catch (Exception ex) {
+			System.out
+					.println("Exception in NameListener : " + ex.getMessage());
 		}
 	}
 
@@ -66,10 +69,12 @@ public class NameListener implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		if(this.one == 1){
-		BoardFrame.highlightP1();
-		}else{BoardFrame.highlightP2();}
-		//lab.setToolTipText("Click to set this player's name.");
+		if (this.one == 1) {
+			BoardFrame.highlightP1();
+		} else {
+			BoardFrame.highlightP2();
+		}
+		// lab.setToolTipText("Click to set this player's name.");
 		lab.setToolTipText(BoardFrame.messages.getString("playerNameHover"));
 	}
 

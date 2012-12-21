@@ -14,16 +14,19 @@ import view.BoardFrame;
  * 
  */
 public class ValidateInput {
+	public static boolean nameLength(String name){
+		if (!(name.length() <= 5)) {
+			JOptionPane.showMessageDialog(null,
+					BoardFrame.messages.getString("validatePlayerName"),
+					BoardFrame.messages.getString("wrongInput"), JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		return true;
+	}
 	private static boolean PlayerName(String name1, String name2) {
 		try {
 			if (name1.equals("") || name2.equals("")) {
 				JOptionPane.showMessageDialog(null, BoardFrame.messages.getString("emptyString"),
-						BoardFrame.messages.getString("wrongInput"), JOptionPane.ERROR_MESSAGE);
-				return false;
-			}
-			if (!(name1.length() <= 10) || !(name2.length() <= 10)) {
-				JOptionPane.showMessageDialog(null,
-						BoardFrame.messages.getString("validatePlayerName"),
 						BoardFrame.messages.getString("wrongInput"), JOptionPane.ERROR_MESSAGE);
 				return false;
 			}

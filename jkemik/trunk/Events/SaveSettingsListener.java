@@ -47,7 +47,7 @@ public class SaveSettingsListener implements MouseListener {
 					BoardFrame.setMessages(ResourceBundle.getBundle(properties, local));
 					
 					System.out.println("The language is : " + lang);
-					
+					BoardFrame.translateUI();
 					JKemik.settings.setVisible(false);
 				}else{
 					JOptionPane.showMessageDialog(null, "The maximum win must be <= " 

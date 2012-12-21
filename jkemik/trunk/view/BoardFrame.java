@@ -22,7 +22,7 @@ public class BoardFrame extends JFrame {
 	 * @since August 2011
 	 **/
 	private static volatile BoardFrame instance = null;
-	//Locale currentLocale;
+	// Locale currentLocale;
 	public static ResourceBundle messages;
 
 	private BoardFrame(double width, double height) {
@@ -182,18 +182,18 @@ public class BoardFrame extends JFrame {
 		panel13.setBackground(BoardFrame.THEME_COLOR);
 
 		Game_status = new JLabel(messages.getString("newG"));
-		//Game_status = new JLabel("NEW");
+		// Game_status = new JLabel("NEW");
 		Game_status.setForeground(Color.GREEN);
 
-		//settings = new JLabel("SETTINGS");
+		// settings = new JLabel("SETTINGS");
 		settings = new JLabel(messages.getString("settings"));
 		settings.setForeground(new Color(150, 150, 255));
 
-		//exit = new JLabel("EXIT");
+		// exit = new JLabel("EXIT");
 		exit = new JLabel(messages.getString("exit"));
 		exit.setForeground(Color.RED);
 
-		//help = new JLabel("HELP");
+		// help = new JLabel("HELP");
 		help = new JLabel(messages.getString("help"));
 		help.setForeground(Color.WHITE);
 
@@ -203,6 +203,8 @@ public class BoardFrame extends JFrame {
 		panel13.add(help);
 
 		panel1.add(panel13, BorderLayout.EAST);
+		
+		//-----------------------------
 	}
 
 	private void designPanel2() {
@@ -262,7 +264,7 @@ public class BoardFrame extends JFrame {
 		pass_turn = new JButton(messages.getString("passB"));
 		// undo = new JButton("Undo");//messages.getString("captureMode")
 		undo = new JButton(messages.getString("undoB"));
-		//refresh = new JButton("Refresh");
+		// refresh = new JButton("Refresh");
 		refresh = new JButton(messages.getString("refreshB"));
 		// manual_c = new JCheckBox("Capture Mode");
 		manual_c = new JCheckBox(messages.getString("captureMode"));
@@ -283,6 +285,7 @@ public class BoardFrame extends JFrame {
 		panel33.add(panel332);
 
 		panel3.add(panel33, BorderLayout.EAST);
+		//---------------------------
 	}
 
 	private void createPanel31() {
@@ -297,9 +300,6 @@ public class BoardFrame extends JFrame {
 		Win = new JLabel("" + JKemik.settings_t.getMaxWinVal());
 		Win.setForeground(Color.WHITE);
 
-//		la = new JLabel(" Capture:");
-//		lb = new JLabel(" Pass Turn:");
-//		lc = new JLabel(" Win:");
 		la = new JLabel(" " + messages.getString("capturel"));
 		lb = new JLabel(" " + messages.getString("passl"));
 		lc = new JLabel(" " + messages.getString("winl"));
@@ -654,18 +654,18 @@ public class BoardFrame extends JFrame {
 	public static void updateSettingPanel() {
 		try {
 			if (JKemik.settings_t.isAutoCapture()) {
-				//AutoCap.setText("AUTO");
+				// AutoCap.setText("AUTO");
 				AutoCap.setText(messages.getString("capturela"));
 			} else {
-				//AutoCap.setText("MANUAL");
+				// AutoCap.setText("MANUAL");
 				AutoCap.setText(messages.getString("capturelm"));
 			}
 
 			if (JKemik.settings_t.isAutoPass()) {
-				//AutoPass.setText("AUTO");
+				// AutoPass.setText("AUTO");
 				AutoPass.setText(messages.getString("passla"));
 			} else {
-				//AutoPass.setText("MANUAL");
+				// AutoPass.setText("MANUAL");
 				AutoPass.setText(messages.getString("passlm"));
 			}
 			String str = "" + JKemik.settings_t.getMaxWinVal();
@@ -673,6 +673,32 @@ public class BoardFrame extends JFrame {
 		} catch (Exception e) {
 
 		}
+	}
+
+	public static void translateUI() {
+		//panel 13
+		Game_status.setText(messages.getString("newG"));
+		settings.setText(messages.getString("settings"));
+		exit.setText(messages.getString("exit"));
+		help.setText(messages.getString("help"));
+		
+		//panel 33
+		pass_turn.setText(messages.getString("passB"));
+		undo.setText(messages.getString("undoB"));
+		refresh.setText(messages.getString("refreshB"));
+		manual_c.setText(messages.getString("captureMode"));
+		
+		//panel 23
+		manual.setText(messages.getString("manualModel"));
+		
+		//panel 32
+		save.setText(messages.getString("startGameB"));
+		
+		//panel 31
+		la.setText(" " + messages.getString("capturel"));
+		lb.setText(" " + messages.getString("passl"));
+		lc.setText(" " + messages.getString("winl"));
+		
 	}
 
 	public static void showControlButtons() {
