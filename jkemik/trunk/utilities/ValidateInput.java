@@ -15,7 +15,7 @@ import view.BoardFrame;
  */
 public class ValidateInput {
 	public static boolean nameLength(String name){
-		if (!(name.length() <= 5)) {
+		if (!(name.length() <= Globals.PLR_N_LEN)) {
 			JOptionPane.showMessageDialog(null,
 					BoardFrame.messages.getString("validatePlayerName"),
 					BoardFrame.messages.getString("wrongInput"), JOptionPane.ERROR_MESSAGE);

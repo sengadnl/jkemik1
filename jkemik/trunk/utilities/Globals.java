@@ -9,6 +9,7 @@ import java.awt.Color;
  *
  */
 public class Globals {
+	public static final double PLR_N_LEN = 5;
 	public static final double FADE_VARIANT = .35;//for fading colors
 	public static final double LABEL_VARIANT = 120;//for fading colors
 	public static final int FADE_THRESHOLD = 50;
@@ -29,6 +30,7 @@ public class Globals {
 	public static final int DARK_PURPPLE_INDEX = 9;
 	public static final double FRAME_WIDTH = 1280;
 	public static final double FRAME_HEIGHT = 800;
+	
 	public static final Color[] CHEMIK_COLOR = {
 		new Color(250, 0, 255),
 		new Color(170, 200, 190),
