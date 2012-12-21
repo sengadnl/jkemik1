@@ -3,6 +3,8 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,6 +15,7 @@ import javax.swing.JTextField;
 
 import controler.JKemik;
 import utilities.Globals;
+import utilities.Tools;
 
 public class SettingsPanel extends JFrame {
 	/**
@@ -112,6 +115,12 @@ public class SettingsPanel extends JFrame {
 	}
 
 	public void buildPane() {
+		String code = Tools.languageKey(JKemik.settings_t.getLanguage());
+		String properties = Tools.propertiesFilename(code);
+		Locale currentLocale = new Locale(code.toLowerCase());
+
+		ResourceBundle messages = ResourceBundle.getBundle(properties, currentLocale);
+		
 		JKIcon icon = new JKIcon("media/jkemik-small.png", "");
 		save = new JButton("Done");
 		save.setBackground(Globals.BTN_BGD_COLOR);
@@ -135,20 +144,23 @@ public class SettingsPanel extends JFrame {
 		
 		languageList = new JComboBox(Globals.laguageNames);//TODO
 
-		JLabel label1 = new JLabel("  Auto capture:");
+		//TODO
+		JLabel label1 = new JLabel("  " + messages.getString("autoCaptureL") + " : ");
 		label1.setForeground(Color.YELLOW);
 
-		JLabel label2 = new JLabel("  Auto turn pass:");
+		JLabel label2 = new JLabel("  " + messages.getString("autoPassL") + " : ");
 		label2.setForeground(Color.YELLOW);
 
-		JLabel label3 = new JLabel("  Manual Capture:");
+		JLabel label3 = new JLabel("  " + messages.getString("manualCapt") + " : ");
 		label3.setForeground(Color.YELLOW);
 
-		JLabel label4 = new JLabel("  Max Win:");
+		JLabel label4 = new JLabel("  " + messages.getString("maxWinl") + " : ");
 		label4.setForeground(Color.YELLOW);
 		
-		JLabel label5 = new JLabel("  Language:");
+		JLabel label5 = new JLabel("  " + messages.getString("language") + " : ");
 		label5.setForeground(Color.YELLOW);
+		
+		save.setText(messages.getString("saveB"));
 
 		add(l1, BorderLayout.NORTH);
 		add(l2, BorderLayout.CENTER);
