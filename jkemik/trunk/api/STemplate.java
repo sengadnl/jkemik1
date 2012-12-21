@@ -15,7 +15,7 @@ public class STemplate implements Serializable {
 	private String theme = "Geeky";
 	private int maxWinVal = 4;
 	private double MaxPointPerPlayer = 0.0;
-	private String language = "FRANCAIS";
+	private String language = "DEUTSCH";
 	private boolean[] memo = { true, false };
 
 	public STemplate() {

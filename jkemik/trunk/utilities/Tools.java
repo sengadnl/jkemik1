@@ -29,7 +29,7 @@ public class Tools {
 			return "resrc.MessagesBundle_fr_FR";
 		} else if (key.equals("en")) {
 			return "resrc.MessagesBundle_en_US";
-		}else if (key.equals("en")) {
+		}else if (key.equals("de")) {
 			return "resrc.MessagesBundle_de_DE";
 		}else {
 			return "resrc.MessagesBundle";
