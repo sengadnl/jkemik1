@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import api.STemplate;
+
 import controler.JKemik;
 import utilities.Globals;
 import utilities.Tools;
@@ -86,7 +88,7 @@ public class SettingsPanel extends JFrame {
 		this.maxWinVal = maxWinVal;
 	}
 
-	public void setAutoCap(boolean value) {
+	public static void setAutoCap(boolean value) {
 		if (value) {
 			auto_capture.rotateLabel("ON");
 		} else {
@@ -94,20 +96,20 @@ public class SettingsPanel extends JFrame {
 		}
 	}
 
-	public void setAutoCap(String ac) {
+	public static void setAutoCap(String ac) {
 		ac = ac.toUpperCase();
 		if (!auto_capture.getText().equals(ac)) {
 			auto_capture.rotateLabel();
 		}
 	}
-	public void setAutoPass(boolean value) {
+	public static void setAutoPass(boolean value) {
 		if (value) {
 			auto_turn_pass.rotateLabel("ON");
 		} else {
 			auto_turn_pass.rotateLabel("OFF");
 		}
 	}
-	public void setAutoPass(String ap) {
+	public static void setAutoPass(String ap) {
 		ap = ap.toUpperCase();
 		if (!auto_turn_pass.getText().equals(ap)) {
 			auto_turn_pass.rotateLabel();
@@ -144,7 +146,6 @@ public class SettingsPanel extends JFrame {
 		
 		languageList = new JComboBox(Globals.laguageNames);//TODO
 
-		//TODO
 		JLabel label1 = new JLabel("  " + messages.getString("autoCaptureL") + " : ");
 		label1.setForeground(Color.YELLOW);
 
@@ -178,6 +179,13 @@ public class SettingsPanel extends JFrame {
 		
 		l3.add(save);
 
+	}
+	public static void translateSettingsPanel(STemplate t){
+		getLanguageList().setSelectedItem(t.getLanguage());
+		setAutoCap(t.isAutoCapture());
+		setAutoPass(t.isAutoPass());
+		SettingsPanel.setMax_win(t.getMaxWinVal());
+		JKemik.settings.setVisible(true);
 	}
 
 	public static RotateLabel getAuto_capture() {
