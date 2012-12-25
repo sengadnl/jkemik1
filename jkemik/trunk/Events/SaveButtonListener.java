@@ -98,7 +98,7 @@ public class SaveButtonListener implements MouseListener {
 			int response = JOptionPane.showConfirmDialog(null,
 					BoardFrame.messages.getString("startGameWill") + str1 +" "+
 							BoardFrame.messages.getString("starGameFirst")
-							+ "\n", BoardFrame.messages.getString("starGameQ"),
+							+ "\n", BoardFrame.messages.getString("question"),
 					JOptionPane.YES_NO_OPTION);
 			// startGameWill
 			if (response == 1) {

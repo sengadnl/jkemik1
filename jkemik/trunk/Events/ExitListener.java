@@ -25,7 +25,7 @@ public class ExitListener implements MouseListener{
 	}
 	public void mouseClicked(MouseEvent arg0) {
 		int response = JOptionPane.showConfirmDialog(null,
-				"Are you sure you want to exit the Game?\n", "Question",
+				BoardFrame.messages.getString("exitMessage") + "\n", BoardFrame.messages.getString("question"),
 				JOptionPane.YES_OPTION);
 		if (response == 0) {
 			//STemplate t = JKemik.settings_t;
