@@ -23,11 +23,6 @@ public class SettingsLabelListener implements MouseListener {
 	public void mouseClicked(MouseEvent arg0) {
 		STemplate t = JKemik.settings_t;
 		SettingsPanel.translateSettingsPanel(t);
-//		SettingsPanel.getLanguageList().setSelectedItem(t.getLanguage());
-//		JKemik.settings.setAutoCap(t.isAutoCapture());
-//		JKemik.settings.setAutoPass(t.isAutoPass());
-//		SettingsPanel.setMax_win(t.getMaxWinVal());
-//		JKemik.settings.setVisible(true);
 	}
 
 	public void mouseExited(MouseEvent arg0) {

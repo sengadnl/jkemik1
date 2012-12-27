@@ -566,20 +566,28 @@ public class Grid extends JPanel {
 			// draw columns
 			if (currentposition <= Width) {
 				g2.setColor(Tools.fade(BoardFrame.BOARD_COLOR));
-				drawLine(squareSize * index, 0, Grid.squareSize * index,
-						Grid.Height, squareFadeVariant);
+//				drawLine(squareSize * index, 0, Grid.squareSize * index,
+//						Grid.Height, squareFadeVariant);
+				drawLine(squareSize * index, squareSize, Grid.squareSize * index,
+						Grid.Height - squareSize, squareFadeVariant);
 				g2.setColor(Grid.gridLineCol);
-				drawLine(squareSize * index, 0, Grid.squareSize * index,
-						Grid.Height, gridLineStroke);
+//				drawLine(squareSize * index, 0, Grid.squareSize * index,
+//						Grid.Height, gridLineStroke);
+				drawLine(squareSize * index, squareSize, Grid.squareSize * index,
+						Grid.Height - squareSize, gridLineStroke);
 				position_count++;
 			}
 			// draw rows
 			if (currentposition <= Grid.Height) {
 				g2.setColor(Tools.fade(BoardFrame.BOARD_COLOR));
-				drawLine(0, Grid.squareSize * index, Grid.Width,
+//				drawLine(0, Grid.squareSize * index, Grid.Width,
+//						Grid.squareSize * index, squareFadeVariant);
+				drawLine(squareSize, Grid.squareSize * index, Grid.Width - squareSize,
 						Grid.squareSize * index, squareFadeVariant);
 				g2.setColor(Grid.gridLineCol);
-				drawLine(0, Grid.squareSize * index, Grid.Width,
+//				drawLine(0, Grid.squareSize * index, Grid.Width,
+//						Grid.squareSize * index, gridLineStroke);
+				drawLine(squareSize, Grid.squareSize * index, Grid.Width - squareSize,
 						Grid.squareSize * index, gridLineStroke);
 				position_count++;
 			}
@@ -594,13 +602,17 @@ public class Grid extends JPanel {
 		while (index2 < Columns + 1) {
 			// draw columns
 			if (currentposition2 <= Width) {
-				drawLine(squareSize * index2, 0, Grid.squareSize * index2,
-						Grid.Height, gridLineStroke);
+				drawLine(squareSize * index2, squareSize, Grid.squareSize * index2,
+						Grid.Height - squareSize, gridLineStroke);//squareSize
+//				drawLine(squareSize * index2, 0, Grid.squareSize * index2,
+//						Grid.Height, gridLineStroke);
 			}
 			// draw rows
 			if (currentposition2 <= Grid.Height) {
-				drawLine(0, Grid.squareSize * index2, Grid.Width,
+				drawLine(squareSize, Grid.squareSize * index2, Grid.Width - squareSize,
 						Grid.squareSize * index2, gridLineStroke);
+//				drawLine(0, Grid.squareSize * index2, Grid.Width,
+//						Grid.squareSize * index2, gridLineStroke);
 			}
 			currentposition2 += Grid.squareSize;
 			index2++;
@@ -660,7 +672,7 @@ public class Grid extends JPanel {
 		}
 		return sqrSize;
 	}
-
+ //TODO to offset the board just add the offset value to the xcoor and ycoor
 	public static void closestTo(double xcoor, double ycoor, int square) {
 		int deltax = 0, deltay = 0;
 		int xc = 0, yc = 0;
