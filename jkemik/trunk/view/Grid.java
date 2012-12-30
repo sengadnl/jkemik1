@@ -59,11 +59,23 @@ public class Grid extends JPanel {
 	public static Cell cell = null;
 	public static int position_count = 0;
 	private static int size;
+	private static volatile Grid instance = null;
 
 	public Grid(int squareSize) {
 		setPreferredSize(new Dimension((int) Width, (int) Height));
 		setSquareSize(squareSize);
 		calColAndRows((int) squareSize);
+	}
+
+	public static Grid getInstance(int squareSize) {
+		if (instance == null) {
+			synchronized (Grid.class) {
+				if (instance == null) {
+					instance = new Grid(squareSize);
+				}
+			}
+		}
+		return instance;
 	}
 
 	public static int squareCount() {
@@ -566,13 +578,11 @@ public class Grid extends JPanel {
 			// draw columns
 			if (currentposition <= Width) {
 				g2.setColor(Tools.fade(BoardFrame.BOARD_COLOR));
-				// drawLine(squareSize * index, 0, Grid.squareSize * index,
-				// Grid.Height, squareFadeVariant);
+
 				drawLine(squareSize * index, squareSize, Grid.squareSize
 						* index, Grid.Height - squareSize, squareFadeVariant);
 				g2.setColor(Grid.gridLineCol);
-				// drawLine(squareSize * index, 0, Grid.squareSize * index,
-				// Grid.Height, gridLineStroke);
+
 				drawLine(squareSize * index, squareSize, Grid.squareSize
 						* index, Grid.Height - squareSize, gridLineStroke);
 				position_count++;
@@ -580,14 +590,12 @@ public class Grid extends JPanel {
 			// draw rows
 			if (currentposition <= Grid.Height) {
 				g2.setColor(Tools.fade(BoardFrame.BOARD_COLOR));
-				// drawLine(0, Grid.squareSize * index, Grid.Width,
-				// Grid.squareSize * index, squareFadeVariant);
+
 				drawLine(squareSize, Grid.squareSize * index, Grid.Width
 						- squareSize, Grid.squareSize * index,
 						squareFadeVariant);
 				g2.setColor(Grid.gridLineCol);
-				// drawLine(0, Grid.squareSize * index, Grid.Width,
-				// Grid.squareSize * index, gridLineStroke);
+
 				drawLine(squareSize, Grid.squareSize * index, Grid.Width
 						- squareSize, Grid.squareSize * index, gridLineStroke);
 				position_count++;
@@ -596,8 +604,6 @@ public class Grid extends JPanel {
 			index++;
 		}
 
-		// calColAndRows((int) Grid.squareSize);
-		// g2.setColor(Grid.gridLineCol);
 		int index2 = 0;
 		int currentposition2 = 0;
 		while (index2 < Columns + 1) {
@@ -605,15 +611,12 @@ public class Grid extends JPanel {
 			if (currentposition2 <= Width) {
 				drawLine(squareSize * index2, squareSize, Grid.squareSize
 						* index2, Grid.Height - squareSize, gridLineStroke);// squareSize
-				// drawLine(squareSize * index2, 0, Grid.squareSize * index2,
-				// Grid.Height, gridLineStroke);
+
 			}
 			// draw rows
 			if (currentposition2 <= Grid.Height) {
 				drawLine(squareSize, Grid.squareSize * index2, Grid.Width
 						- squareSize, Grid.squareSize * index2, gridLineStroke);
-				// drawLine(0, Grid.squareSize * index2, Grid.Width,
-				// Grid.squareSize * index2, gridLineStroke);
 			}
 			currentposition2 += Grid.squareSize;
 			index2++;
@@ -685,7 +688,7 @@ public class Grid extends JPanel {
 
 		deltay = (int) (ycoor % square);
 		yc = square - deltay;
-
+		// if (!outOfBoard(xcoor, ycoor, square)) {
 		if (deltax > xc) {
 			x = xcoor + xc;
 		} else {
@@ -697,26 +700,62 @@ public class Grid extends JPanel {
 		} else {
 			y = ycoor - deltay;
 		}
+		// }
 	}
 
 	public static boolean outOfBoard(double xcoor, double ycoor, int square) {
+		boolean ret = false;
+		
+		int deltax = 0, deltay = 0;
+		int xc = 0, yc = 0;
+		deltax = (int) (xcoor % square);
+		xc = square - deltax;
+
+		deltay = (int) (ycoor % square);
+		yc = square - deltay;
+	
 		if (ycoor < squareSize) {
-			y = y + squareSize;	
+			if (deltax > xc) {
+				x = xcoor + xc;
+			} else {
+				x = xcoor - deltax;
+			}
+			y = squareSize;
+			ret = true;
 		}
-		
+
 		if (ycoor > (Grid.Height - squareSize)) {
-			y = Grid.Height - squareSize;	
+			if (deltax > xc) {
+				x = xcoor + xc;
+			} else {
+				x = xcoor - deltax;
+			}
+			y = Grid.Height - squareSize;
+			ret = true;
+;
 		}
-		
+
 		if (xcoor < squareSize) {
-			x = x + squareSize;	
+			if (deltay > yc) {
+				y = ycoor + yc;
+			} else {
+				y = ycoor - deltay;
+			}
+			x = squareSize;
+			ret = true;
+
 		}
-		
-		if (xcoor > (Grid.Height - squareSize)) {
-			x = Grid.Height - squareSize;	
+
+		if (xcoor > (Grid.Width - squareSize)) {
+			if (deltay > yc) {
+				y = ycoor + yc;
+			} else {
+				y = ycoor - deltay;
+			}
+			x = Grid.Width - squareSize;
+			ret = true;
 		}
-		
-		return true;
+		return ret;
 	}
 
 	/**
