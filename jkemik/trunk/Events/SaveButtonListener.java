@@ -93,14 +93,11 @@ public class SaveButtonListener implements MouseListener {
 			BoardFrame.Win.setText(JKemik.settings_t.getMaxWinVal() + "");
 			BoardFrame.save.removeMouseListener(ViewEvents.saveListener);
 
-			// int response = JOptionPane.showConfirmDialog(null, "Will " + str1
-			// + " play first?\n", "Question", JOptionPane.YES_NO_OPTION);
 			int response = JOptionPane.showConfirmDialog(null,
 					BoardFrame.messages.getString("startGameWill") + str1 +" "+
 							BoardFrame.messages.getString("starGameFirst")
 							+ "\n", BoardFrame.messages.getString("question"),
 					JOptionPane.YES_NO_OPTION);
-			// startGameWill
 			if (response == 1) {
 				game.switchPlayTurns();
 				Grid.setCcolor(game.getCurrentP().getColor());
@@ -119,7 +116,6 @@ public class SaveButtonListener implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		// save.setToolTipText("Click here to save these settings.");
 		save.setToolTipText(BoardFrame.messages.getString("startGameHover"));
 	}
 

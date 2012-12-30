@@ -182,18 +182,14 @@ public class BoardFrame extends JFrame {
 		panel13.setBackground(BoardFrame.THEME_COLOR);
 
 		Game_status = new JLabel(messages.getString("newG"));
-		// Game_status = new JLabel("NEW");
 		Game_status.setForeground(Color.GREEN);
 
-		// settings = new JLabel("SETTINGS");
 		settings = new JLabel(messages.getString("settings"));
 		settings.setForeground(new Color(150, 150, 255));
 
-		// exit = new JLabel("EXIT");
 		exit = new JLabel(messages.getString("exit"));
 		exit.setForeground(Color.RED);
 
-		// help = new JLabel("HELP");
 		help = new JLabel(messages.getString("help"));
 		help.setForeground(Color.WHITE);
 
@@ -203,8 +199,6 @@ public class BoardFrame extends JFrame {
 		panel13.add(help);
 
 		panel1.add(panel13, BorderLayout.EAST);
-		
-		//-----------------------------
 	}
 
 	private void designPanel2() {
@@ -219,7 +213,7 @@ public class BoardFrame extends JFrame {
 		p1panel.initPanelForNewGame(JKemik.game.getPlayer1().getName(),
 				JKemik.game.getPlayer1().getColor());
 
-		grid = new Grid((int) JKemik.template.getG_size());
+		grid = Grid.getInstance((int) JKemik.template.getG_size());//
 		Tools.resetMaxWin(Grid.squareCount(), JKemik.settings_t);
 
 		panel23 = new JPanel();
@@ -227,7 +221,6 @@ public class BoardFrame extends JFrame {
 				(int) (SIDE_HEIGHT * this.height)));
 		panel23.setLayout(new BorderLayout(10, 10));
 
-		// manual = new JCheckBox("Manual");//messages.getString("startGameB")
 		manual = new JCheckBox(messages.getString("manualModel"));
 		p2panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (.25 * SIDE_HEIGHT * this.height));
