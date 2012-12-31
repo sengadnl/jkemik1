@@ -35,7 +35,7 @@ public class NewGameListener implements MouseListener{
 			BoardFrame.setMakingGame(true);
 		}
 		int response = JOptionPane.showConfirmDialog(null,
-				"Start new Game?\n", "Question",
+				BoardFrame.messages.getString("startNewGame") + "\n", BoardFrame.messages.getString("question"),
 				JOptionPane.YES_NO_OPTION);
 		if (response == 0) {
 			// set listeners
@@ -85,7 +85,7 @@ public class NewGameListener implements MouseListener{
 
 		} else if (response == 1) {
 			int res = JOptionPane.showConfirmDialog(null,
-					"Exit JKemik?\n", "Question",
+					BoardFrame.messages.getString("exitGame") + "\n", BoardFrame.messages.getString("question"),
 					JOptionPane.YES_NO_OPTION);
 			if(res == 0){
 				//JKemik.writeGame();
