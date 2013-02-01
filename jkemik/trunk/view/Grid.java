@@ -60,7 +60,6 @@ public class Grid extends JPanel {
 	public static int position_count = 0;
 	private static int size;
 	private static volatile Grid instance = null;
-
 	public Grid(int squareSize) {
 		setPreferredSize(new Dimension((int) Width, (int) Height));
 		setSquareSize(squareSize);
@@ -577,27 +576,35 @@ public class Grid extends JPanel {
 		while (index < Columns + 1) {
 			// draw columns
 			if (currentposition <= Width) {
-				g2.setColor(Tools.fade(BoardFrame.BOARD_COLOR));
-
-				drawLine(squareSize * index, 0, Grid.squareSize
-						* index, Grid.Height , squareFadeVariant);
-				g2.setColor(Grid.gridLineCol);
-
-				drawLine(squareSize * index, 0, Grid.squareSize
-						* index, Grid.Height, gridLineStroke);
+//				g2.setColor(Tools.fade(BoardFrame.BOARD_COLOR));
+//
+//				drawLine(squareSize * index, 0, Grid.squareSize
+//						* index, Grid.Height , squareFadeVariant);
+//				g2.setColor(Grid.gridLineCol);
+//
+//				drawLine(squareSize * index, 0, Grid.squareSize
+//						* index, Grid.Height, gridLineStroke);
+//				position_count++;
+				Point from = new Point(squareSize * index, 0);
+				Point to = new Point(Grid.squareSize * index, Grid.Height);
+				Artist.drawGridLine(from, to, Grid.gridLineCol,g2);
 				position_count++;
 			}
 			// draw rows
 			if (currentposition <= Grid.Height) {
-				g2.setColor(Tools.fade(BoardFrame.BOARD_COLOR));
-
-				drawLine(0, Grid.squareSize * index, Grid.Width
-						, Grid.squareSize * index,
-						squareFadeVariant);
-				g2.setColor(Grid.gridLineCol);
-
-				drawLine(0, Grid.squareSize * index, Grid.Width
-						, Grid.squareSize * index, gridLineStroke);
+//				g2.setColor(Tools.fade(BoardFrame.BOARD_COLOR));
+//
+//				drawLine(0, Grid.squareSize * index, Grid.Width
+//						, Grid.squareSize * index,
+//						squareFadeVariant);
+//				g2.setColor(Grid.gridLineCol);
+//
+//				drawLine(0, Grid.squareSize * index, Grid.Width
+//						, Grid.squareSize * index, gridLineStroke);
+//				position_count++;
+				Point from = new Point(0, Grid.squareSize * index);
+				Point to = new Point( Grid.Width , Grid.squareSize * index);
+				Artist.drawGridLine(from, to, Grid.gridLineCol, g2);
 				position_count++;
 			}
 			currentposition += Grid.squareSize;
