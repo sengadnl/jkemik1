@@ -13,7 +13,6 @@ import utilities.Tools;
 import controler.JKemik;
 import api.Cell;
 import api.Game;
-import api.Player;
 import api.Point;
 
 /**
@@ -108,13 +107,10 @@ public class Grid extends JPanel {
 		// super.paintComponent(g2);
 		try {
 			Artist.drawCursor(new Point(hl_x, hl_y), gridLineStroke, Grid.half_squareSize, gridLineCol, g2);
-			//drawCursor(new Point(hl_x, hl_y), gridLineCol);
 			highLightDot(ccolor);
 
 			Game game = JKemik.game;
 			if (mouseclicked && plotPoint) {
-				// drawCircle(new Point(x, y), game.getCurrentP().getColor());
-
 				Artist.drawCircle(new Point(x, y), game.getCurrentP()
 						.getColor(), Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 						gridLineStroke, g2);
@@ -124,19 +120,12 @@ public class Grid extends JPanel {
 
 			if (selectPoint && game.getCurrentP().getSelected().size() >= 1) {
 				Color fade = game.getCurrentP().getFadedColor();
-				//g2.setColor(fade);
-//				drawLine(game.getLastp(), selectedP, gridLineStroke
-//						+ CURSOR_VARIANT_STROKE);
 				Artist.drawLine(game.getLastp(), selectedP, gridLineStroke + CURSOR_VARIANT_STROKE, fade, g2);
-				//drawCircle(game.getLastp(), fade);
 				Artist.drawCircle(game.getLastp(), fade, Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 						gridLineStroke, g2);
-				//drawCursor(game.getLastp(), gridLineCol);
 				Artist.drawCursor(game.getLastp(), gridLineStroke, Grid.half_squareSize, gridLineCol, g2);
-				//drawCircle(selectedP, fade);
 				Artist.drawCircle(selectedP, fade, Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 						gridLineStroke, g2);
-				//drawCursor(selectedP, gridLineCol);
 				Artist.drawCursor(selectedP, gridLineStroke, Grid.half_squareSize, gridLineCol, g2);
 				game.setLastp(selectedP);
 				g2.setColor(fade);
@@ -150,13 +139,13 @@ public class Grid extends JPanel {
 			if (undo) {
 				if (manualc) {
 					if (game.getCurrentP().getSelected().size() >= 1) {
-						unDrawSelection(game.getCurrentP().getSelected());
+						unDrawSelection(game.getCurrentP().getSelected());//TODO
 					} else {
 
 					}
 				} else {
 					if (game.undo()) {
-						unDraw(game.getLastp());
+						unDraw(game.getLastp());//TODO
 					}
 				}
 				undo = false;
@@ -175,7 +164,7 @@ public class Grid extends JPanel {
 				
 				size = (int) (Columns * rows);
 				if (Grid.refresh) {
-					drawGame(game);
+					Artist.drawGame(game,g2);
 					Grid.refresh = false;
 				}
 				this.drawn = true;
@@ -247,90 +236,6 @@ public class Grid extends JPanel {
 
 		} catch (NullPointerException e) {
 			System.out.println("In drawCell: " + e.getMessage());
-		}
-	}
-
-	/**
-	 * @param Arraylist
-	 *            of pl1 cells, pl1, pl2
-	 * @return void Draws a cell with all its content.
-	 * */
-	private static boolean drawCell(ArrayList<Cell> cells, Player pl1,
-			Player pl2) {
-
-		try {
-			for (Cell c : cells) {
-				ArrayList<Point> contour = c.getCellContour();
-
-				/* set color */
-//				g2.setColor(pl1.getColor());
-//				g2.setStroke(new BasicStroke(gridLineStroke
-//						+ CURSOR_VARIANT_STROKE));
-
-				/* draw cell contour */
-				//drawLine(contour.get(0), contour.get(contour.size() - 1));
-				Artist.drawLine(contour.get(0), contour.get(contour.size() - 1), gridLineStroke
-						+ CURSOR_VARIANT_STROKE, pl1.getColor(), g2);
-				for (int i = 0; i < contour.size() - 1; i++) {
-					//drawLine(contour.get(i), contour.get(i + 1));
-					Artist.drawLine(contour.get(i), contour.get(i + 1), gridLineStroke
-							+ CURSOR_VARIANT_STROKE, pl1.getColor(), g2);
-					// draw intersection
-					//drawCursor(contour.get(i), gridLineCol);
-					Artist.drawCursor(contour.get(i), gridLineStroke, Grid.half_squareSize, gridLineCol, g2);
-					//drawCursor(contour.get(i + 1), gridLineCol);
-					Artist.drawCursor(contour.get(i + 1), gridLineStroke, Grid.half_squareSize, gridLineCol, g2);
-					g2.setColor(pl1.getColor());
-					g2.setStroke(new BasicStroke(gridLineStroke
-							+ CURSOR_VARIANT_STROKE));
-				}
-				if (drawCell(c.getCellsInCell(), pl2, pl1)) {
-				}
-			}
-
-		} catch (NullPointerException e) {
-			System.out.println("In drawCell: " + e.getMessage());
-		}
-		return true;
-	}
-
-	private void drawGame(Game g) {
-		ArrayList<Cell> p1c = g.getPlayer1().getCells();
-		ArrayList<Cell> p2c = g.getPlayer2().getCells();
-		Player p1 = g.getPlayer1();
-		Player p2 = g.getPlayer2();
-
-		// draw p1 cells
-		if (drawCell(p1c, p1, p2)) {
-
-		}
-		// draw p1 cells
-		if (drawCell(p2c, p2, p1)) {
-		}
-		// draw p1 points
-		for (Point p : p1.getPloted()) {
-			//drawCircle(p, p1.getColor());
-			Artist.drawCircle(p, p1.getColor(), Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-					gridLineStroke, g2);
-			//drawCursor(p, gridLineCol);
-			Artist.drawCursor(p, gridLineStroke, Grid.half_squareSize, gridLineCol, g2);
-		}
-		// draw p1 points
-		for (Point p : p2.getPloted()) {
-			//drawCircle(p, p2.getColor());
-			Artist.drawCircle(p, p2.getColor(), Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-					gridLineStroke, g2);
-			//drawCursor(p, gridLineCol);
-			Artist.drawCursor(p, gridLineStroke, Grid.half_squareSize, gridLineCol, g2);
-		}
-		if (Grid.manualc) {
-			for (Point p : g.getCurrentP().getSelected()) {
-				//drawCircle(p, g.getCurrentP().getFadedColor());
-				Artist.drawCircle(p, g.getCurrentP().getFadedColor(), Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-						gridLineStroke, g2);
-				//drawCursor(p, gridLineCol);
-				Artist.drawCursor(p, gridLineStroke, Grid.half_squareSize, gridLineCol, g2);
-			}
 		}
 	}
 
@@ -546,7 +451,6 @@ public class Grid extends JPanel {
 		return sqrSize;
 	}
 
-	// TODO to offset the board just add the offset value to the xcoor and ycoor
 	public static void closestTo(double xcoor, double ycoor, int square) {
 		// xcoor = xcoor + squareSize;
 		// ycoor = ycoor + squareSize;
