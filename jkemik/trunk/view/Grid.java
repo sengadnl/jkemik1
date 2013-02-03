@@ -4,8 +4,6 @@
 package view;
 
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -27,7 +25,7 @@ public class Grid extends JPanel {
 	private static Graphics2D g2;
 	protected static Color gridLineCol = new Color(10, 60, 30);
 	protected static int gridLineStroke = 2;
-	private static int squareFadeVariant = 4;
+	protected static int squareFadeVariant = 4;
 	protected static int CURSOR_VARIANT_STROKE = 6;
 	public static double CIRCLE_DIAMETER = 10.0;
 	public static double HALF_DIAMETER = 5.0;
@@ -44,9 +42,9 @@ public class Grid extends JPanel {
 	public static boolean ON = false;
 	public boolean drawn = false;
 
-	private Ellipse2D.Double circle;
-	private static Color pcolor = new Color(255, 255, 255);
-	private static Color ccolor = new Color(255, 255, 255);// Cursor color
+	//private Ellipse2D.Double circle;
+	protected static Color pcolor = new Color(255, 255, 255);
+	protected static Color ccolor = new Color(255, 255, 255);// Cursor color
 
 	public static double Height = 640;
 	public static double Width = 1024;
@@ -145,7 +143,8 @@ public class Grid extends JPanel {
 					}
 				} else {
 					if (game.undo()) {
-						unDraw(game.getLastp());//TODO
+						//unDraw(game.getLastp());//TODO
+						Artist.unDraw(game.getLastp(), g2);
 					}
 				}
 				undo = false;
@@ -248,35 +247,6 @@ public class Grid extends JPanel {
 			BoardFrame.p1panel.setLabelColor(game.getPlayer1().getColor());
 			BoardFrame.p2panel.setLabelColor(game.getPlayer2().getFadedColor());
 		}
-	}
-
-	private void unDraw(Point p) {
-
-		try {
-			double px = p.getXC();
-			double py = p.getYC();
-			this.circle = new Ellipse2D.Double(px - HALF_DIAMETER, py
-					- HALF_DIAMETER, Grid.CIRCLE_DIAMETER, Grid.CIRCLE_DIAMETER);
-			g2.setColor(BoardFrame.BOARD_COLOR);
-			g2.fill(this.circle);
-			g2.draw(this.circle);
-			g2.setColor(gridLineCol);
-			//drawCursor(p, squareFadeVariant, Tools.fade(BoardFrame.BOARD_COLOR));
-			Artist.drawCursor(p, squareFadeVariant, Grid.half_squareSize, Tools.fade(BoardFrame.BOARD_COLOR), g2);
-			drawLongCursor(p, Grid.gridLineStroke, gridLineCol);
-		} catch (Exception e) {
-			System.err.println("Error in unDraw: " + e.getMessage());
-		}
-	}
-
-	public static void drawLongCursor(Point p, int stroke, Color c) {
-		g2.setColor(c);
-		g2.setStroke(new BasicStroke(stroke));
-		g2.draw(new Line2D.Double(p.getXC(), p.getYC() + squareSize, p.getXC(),
-				p.getYC() - squareSize));
-		g2.draw(new Line2D.Double(p.getXC() - squareSize, p.getYC(), p.getXC()
-				+ squareSize, p.getYC()));
-		g2.setColor(pcolor);
 	}
 
 	/**

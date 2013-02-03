@@ -214,4 +214,31 @@ public class Artist {
 		}
 		return true;
 	}
+	protected static void unDraw(Point p, Graphics2D g2) {
+
+		try {
+			double px = p.getXC();
+			double py = p.getYC();
+			Ellipse2D.Double circle = new Ellipse2D.Double(px - Grid.HALF_DIAMETER, py
+					- Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER, Grid.CIRCLE_DIAMETER);
+			g2.setColor(BoardFrame.BOARD_COLOR);
+			g2.fill(circle);
+			g2.draw(circle);
+			g2.setColor(Grid.gridLineCol);
+			//drawCursor(p, squareFadeVariant, Tools.fade(BoardFrame.BOARD_COLOR));
+			Artist.drawCursor(p, Grid.squareFadeVariant, Grid.half_squareSize, Tools.fade(BoardFrame.BOARD_COLOR), g2);
+			drawLongCursor(p, Grid.gridLineStroke, Grid.gridLineCol, g2);
+		} catch (Exception e) {
+			System.err.println("Error in unDraw: " + e.getMessage());
+		}
+	}
+	protected static void drawLongCursor(Point p, int stroke, Color c,Graphics2D g2) {
+		g2.setColor(c);
+		g2.setStroke(new BasicStroke(stroke));
+		g2.draw(new Line2D.Double(p.getXC(), p.getYC() + Grid.squareSize, p.getXC(),
+				p.getYC() - Grid.squareSize));
+		g2.draw(new Line2D.Double(p.getXC() - Grid.squareSize, p.getYC(), p.getXC()
+				+ Grid.squareSize, p.getYC()));
+		g2.setColor(Grid.pcolor);
+	}
 }
