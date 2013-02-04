@@ -211,6 +211,7 @@ public class Game implements Serializable {
 			currentP.setOrigin(p);
 			currentP.getSelected().add(p);
 			this.lastp = p;
+			System.out.println("Selected returned true ");
 			return true;
 		} else {
 			if (Tools.containPoint(p, getCurrentP().getPloted())
@@ -218,9 +219,11 @@ public class Game implements Serializable {
 					&& getLastp().adjacentTo(p, squareSize)
 					&& !Tools.containPoint(p, currentP.getSelected())) {
 				currentP.getSelected().add(p);
+				System.out.println("Selected returned true ");
 				return true;
 			}
 		}
+		System.out.println("Selected returned false ");
 		return false;
 	}
 

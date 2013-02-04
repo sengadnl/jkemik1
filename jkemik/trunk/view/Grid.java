@@ -4,12 +4,11 @@
 package view;
 
 import java.awt.*;
-import java.util.ArrayList;
 import javax.swing.*;
 
-import utilities.Tools;
-import controler.JKemik;
-import api.Cell;
+import utilities.*;
+import controler.*;
+import api.*;
 import api.Game;
 import api.Point;
 
@@ -23,28 +22,21 @@ public class Grid extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static Graphics2D g2;
-	protected static Color gridLineCol = new Color(10, 60, 30);
-	protected static int gridLineStroke = 2;
-	protected static int squareFadeVariant = 4;
-	protected static int CURSOR_VARIANT_STROKE = 6;
-	public static double CIRCLE_DIAMETER = 10.0;
-	public static double HALF_DIAMETER = 5.0;
-	public static double squareSize = 64;
-	public static double half_squareSize = 32;
-	public static boolean mouseclicked = false;
-	public static boolean plotPoint = false;
-	public static boolean selectPoint = false;
-	public static boolean refresh = false;
-	public static boolean manualc = false;
-	public static boolean mouseMove = false;
-	public static boolean undo = false;
-	public static boolean saveSettings = false;
-	public static boolean ON = false;
+	
+	protected static int gridLineStroke = 2, squareFadeVariant = 4,
+			CURSOR_VARIANT_STROKE = 6;
+	public static double CIRCLE_DIAMETER = 10.0, HALF_DIAMETER = 5.0,
+			squareSize = 64, half_squareSize = 32;
+
+	public static boolean mouseclicked = false, plotPoint = false,
+			selectPoint = false, refresh = false, manualc = false,
+			mouseMove = false, undo = false, saveSettings = false, ON = false;
+	
 	public boolean drawn = false;
 
-	//private Ellipse2D.Double circle;
 	protected static Color pcolor = new Color(255, 255, 255);
 	protected static Color ccolor = new Color(255, 255, 255);// Cursor color
+	protected static Color gridLineCol = new Color(10, 60, 30);
 
 	public static double Height = 640;
 	public static double Width = 1024;
@@ -74,6 +66,97 @@ public class Grid extends JPanel {
 		return instance;
 	}
 
+	public void paintComponent(Graphics g) {
+		Grid.g2 = (Graphics2D) g;
+		// super.paintComponent(g2);
+		try {
+			Artist.drawCursor(new Point(hl_x, hl_y), gridLineStroke,
+					Grid.half_squareSize, gridLineCol, g2);
+			highLightDot(ccolor);
+
+			Game game = JKemik.game;
+			if (mouseclicked && plotPoint) {
+				Artist.drawCircle(new Point(x, y), game.getCurrentP()
+						.getColor(), Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
+						gridLineStroke, g2);
+				plotPoint = false;
+				mouseclicked = false;
+			}
+
+			if (selectPoint && game.getCurrentP().getSelected().size() >= 1) {
+				Color fade = game.getCurrentP().getFadedColor();
+				Artist.drawLine(game.getLastp(), selectedP, gridLineStroke
+						+ CURSOR_VARIANT_STROKE, fade, g2);
+				Artist.drawCircle(game.getLastp(), fade, Grid.HALF_DIAMETER,
+						Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
+				Artist.drawCursor(game.getLastp(), gridLineStroke,
+						Grid.half_squareSize, gridLineCol, g2);
+				Artist.drawCircle(selectedP, fade, Grid.HALF_DIAMETER,
+						Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
+				Artist.drawCursor(selectedP, gridLineStroke,
+						Grid.half_squareSize, gridLineCol, g2);
+				game.setLastp(selectedP);
+				g2.setColor(fade);
+				selectPoint = false;
+			}
+
+			if (Artist.drawCell(cell, g2)) {
+				cell = null;
+			}
+
+			if (undo) {
+				if (manualc) {
+					if (game.getCurrentP().getSelected().size() >= 1) {
+						Artist.unDrawSelection(
+								game.getCurrentP().getSelected(), g2);//
+					} else {
+
+					}
+				} else {
+					if (game.undo()) {
+						Artist.unDraw(game.getLastp(), g2);
+					}
+				}
+				undo = false;
+			}
+
+			//
+			if (JKemik.settings_t.isAutoPass()
+					&& game.getCurrentP().getPlay_flag() == 1) {
+				System.out.println("Automatic pass is true...");
+				game.switchPlayTurns();
+				Grid.setCcolor(game.getCurrentP().getColor());
+			}
+
+			if (!this.drawn) {
+				drawGrid();
+
+				size = (int) (Columns * rows);
+				if (Grid.refresh) {
+					Artist.drawGame(game, g2);
+					Grid.refresh = false;
+				}
+				this.drawn = true;
+			}
+		} catch (Exception e) {
+			System.out.println("Error in paint: " + e.getMessage());
+		}
+
+	}
+
+	public void highLightDot(Color c) {
+		BoardFrame.print_point.setText("" + (new Point(hl_x, hl_y)).toString());
+		if (mouseMove) {
+			// g2.setColor(ccolor);
+			// drawCursor(x, y);
+			Artist.drawCursor(new Point(x, y), gridLineStroke,
+					Grid.half_squareSize, ccolor, g2);
+			hl_x = x;
+			hl_y = y;
+		}
+		mouseMove = false;
+	}
+
 	public static int squareCount() {
 		return (int) ((Grid.Width / Grid.squareSize) * (Grid.Height / Grid.squareSize));
 	}
@@ -98,144 +181,6 @@ public class Grid extends JPanel {
 	public static Point undoMakeDrawable(Point drawable) {
 		return new Point(drawable.getXC() + HALF_DIAMETER, drawable.getYC()
 				+ HALF_DIAMETER);
-	}
-
-	public void paintComponent(Graphics g) {
-		Grid.g2 = (Graphics2D) g;
-		// super.paintComponent(g2);
-		try {
-			Artist.drawCursor(new Point(hl_x, hl_y), gridLineStroke, Grid.half_squareSize, gridLineCol, g2);
-			highLightDot(ccolor);
-
-			Game game = JKemik.game;
-			if (mouseclicked && plotPoint) {
-				Artist.drawCircle(new Point(x, y), game.getCurrentP()
-						.getColor(), Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-						gridLineStroke, g2);
-				plotPoint = false;
-				mouseclicked = false;
-			}
-
-			if (selectPoint && game.getCurrentP().getSelected().size() >= 1) {
-				Color fade = game.getCurrentP().getFadedColor();
-				Artist.drawLine(game.getLastp(), selectedP, gridLineStroke + CURSOR_VARIANT_STROKE, fade, g2);
-				Artist.drawCircle(game.getLastp(), fade, Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-						gridLineStroke, g2);
-				Artist.drawCursor(game.getLastp(), gridLineStroke, Grid.half_squareSize, gridLineCol, g2);
-				Artist.drawCircle(selectedP, fade, Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-						gridLineStroke, g2);
-				Artist.drawCursor(selectedP, gridLineStroke, Grid.half_squareSize, gridLineCol, g2);
-				game.setLastp(selectedP);
-				g2.setColor(fade);
-				selectPoint = false;
-			}
-
-			if (Artist.drawCell(cell,g2)) {
-				cell = null;
-			}
-
-			if (undo) {
-				if (manualc) {
-					if (game.getCurrentP().getSelected().size() >= 1) {
-						unDrawSelection(game.getCurrentP().getSelected());//TODO
-					} else {
-
-					}
-				} else {
-					if (game.undo()) {
-						//unDraw(game.getLastp());//TODO
-						Artist.unDraw(game.getLastp(), g2);
-					}
-				}
-				undo = false;
-			}
-
-			//
-			if (JKemik.settings_t.isAutoPass()
-					&& game.getCurrentP().getPlay_flag() == 1) {
-				System.out.println("Automatic pass is true...");
-				game.switchPlayTurns();
-				Grid.setCcolor(game.getCurrentP().getColor());
-			}
-
-			if (!this.drawn) {
-				drawGrid();
-				
-				size = (int) (Columns * rows);
-				if (Grid.refresh) {
-					Artist.drawGame(game,g2);
-					Grid.refresh = false;
-				}
-				this.drawn = true;
-			}
-		} catch (Exception e) {
-			System.out.println("Error in paint: " + e.getMessage());
-		}
-
-	}
-
-	public void highLightDot(Color c) {
-		BoardFrame.print_point.setText("" + (new Point(hl_x, hl_y)).toString());
-		if (mouseMove) {
-			//g2.setColor(ccolor);
-			//drawCursor(x, y);
-			Artist.drawCursor(new Point(x,y), gridLineStroke, Grid.half_squareSize, ccolor, g2);
-			hl_x = x;
-			hl_y = y;
-		}
-		mouseMove = false;
-	}
-
-	public void unDrawSelection(ArrayList<Point> contour) {
-		Game game = JKemik.game;
-		try {
-			/* set color */
-//			g2.setColor(BoardFrame.BOARD_COLOR);
-//			g2.setStroke(new BasicStroke(gridLineStroke + CURSOR_VARIANT_STROKE));// 
-
-			/* Erase last line */
-			int index = contour.size() - 1;
-			Point lastp = null, before_lastp = null;
-			if (contour.size() > 1) {
-				lastp = contour.get(index);
-				before_lastp = contour.get(index - 1);
-			} else if (contour.size() == 1) {
-				lastp = contour.get(index);
-				//drawCircle(lastp, game.getCurrentP().getColor());
-				Artist.drawCircle(lastp, game.getCurrentP()
-						.getColor(), Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-						gridLineStroke, g2);
-				//drawCursor(lastp, gridLineCol);
-				Artist.drawCursor(lastp, gridLineStroke, Grid.half_squareSize, gridLineCol, g2);
-				contour.remove(index);
-				return;
-			} else {
-				return;
-			}
-
-			//drawLine(lastp, before_lastp);
-			Artist.drawLine(lastp, before_lastp, gridLineStroke + CURSOR_VARIANT_STROKE, BoardFrame.BOARD_COLOR, g2);
-			//drawCircle(lastp, game.getCurrentP().getColor());
-			Artist.drawCircle(lastp, game.getCurrentP()
-					.getColor(), Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-					gridLineStroke, g2);
-			//drawCursor(lastp, gridLineCol);
-			Artist.drawCursor(lastp, gridLineStroke, Grid.half_squareSize, gridLineCol, g2);
-			//drawCircle(before_lastp, game.getCurrentP().getFadedColor());
-			Artist.drawCircle(before_lastp, game.getCurrentP()
-					.getFadedColor(), Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-					gridLineStroke, g2);
-			//drawCursor(before_lastp, gridLineCol);
-			Artist.drawCursor(before_lastp, gridLineStroke, Grid.half_squareSize, gridLineCol, g2);
-
-			if (!contour.isEmpty()) {
-				game.setLastp(before_lastp);
-				contour.remove(index);
-			}
-
-		} catch (NullPointerException e) {
-			System.out.println("In drawCell: " + e.getMessage());
-		}
 	}
 
 	public void switchTurn() {
