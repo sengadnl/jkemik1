@@ -41,9 +41,9 @@ public class SettingsPanel extends JFrame {
 	public static RotateColor right_color;
 	public static JTextField max_win;
 	public static JComboBox languageList;
-	
-	
+	public static JLabel label1,label2,label3,label4,label5;	
 	private int maxWinVal;
+	static ResourceBundle messages;
 
 	private String[] auto_cap = { "ON", "OFF" };
 	private String[] auto_t_p = { "ON", "OFF" };
@@ -121,7 +121,8 @@ public class SettingsPanel extends JFrame {
 		String properties = Tools.propertiesFilename(code);
 		Locale currentLocale = new Locale(code.toLowerCase());
 
-		ResourceBundle messages = ResourceBundle.getBundle(properties, currentLocale);
+	//	ResourceBundle 
+		messages = ResourceBundle.getBundle(properties, currentLocale);
 		
 		JKIcon icon = new JKIcon("media/jkemik-small.png", "");
 		save = new JButton("Done");
@@ -132,33 +133,32 @@ public class SettingsPanel extends JFrame {
 		l2 = new JPanel();
 		l2.setBackground(BoardFrame.BOARD_COLOR);
 		l2.setLayout(new GridLayout(4, 2,20,20));
-		
 		l3 = new JPanel();
 		l3.setBackground(BoardFrame.BOARD_COLOR);
 
 		auto_capture = new RotateLabel(auto_cap);
 		auto_turn_pass = new RotateLabel(auto_t_p);
+		
 		max_win = new JTextField("" + JKemik.settings_t.getMaxWinVal());
-		//max_win = new JTextField(""); 
 		max_win.setBackground(Color.GRAY);
 		max_win.setForeground(Color.WHITE);
 		max_win.setCaretColor(Color.GREEN);
 		
-		languageList = new JComboBox(Globals.laguageNames);//TODO
+		languageList = new JComboBox(Globals.laguageNames);//
 
-		JLabel label1 = new JLabel("  " + messages.getString("autoCaptureL") + " : ");
+		label1 = new JLabel("  " + messages.getString("autoCaptureL") + " : ");
 		label1.setForeground(Color.YELLOW);
 
-		JLabel label2 = new JLabel("  " + messages.getString("autoPassL") + " : ");
+		label2 = new JLabel("  " + messages.getString("autoPassL") + " : ");
 		label2.setForeground(Color.YELLOW);
 
-		JLabel label3 = new JLabel("  " + messages.getString("manualCapt") + " : ");
+		label3 = new JLabel("  " + messages.getString("manualCapt") + " : ");
 		label3.setForeground(Color.YELLOW);
 
-		JLabel label4 = new JLabel("  " + messages.getString("maxWinl") + " : ");
+		label4 = new JLabel("  " + messages.getString("maxWinl") + " : ");
 		label4.setForeground(Color.YELLOW);
 		
-		JLabel label5 = new JLabel("  " + messages.getString("language") + " : ");
+		label5 = new JLabel("  " + messages.getString("language") + " : ");
 		label5.setForeground(Color.YELLOW);
 		
 		save.setText(messages.getString("saveB"));
@@ -203,10 +203,18 @@ public class SettingsPanel extends JFrame {
 	public static void setAuto_turn_pass(RotateLabel autoTurnPass) {
 		auto_turn_pass = autoTurnPass;
 	}
-
-	public static void main(String[] args) {
-		SettingsPanel settings = new SettingsPanel(300, 300);
-		settings.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		settings.setVisible(true);
+	public static void translateUI(){
+		label1.setText("  " + messages.getString("autoCaptureL") + " : ");
+		label2.setText("  " + messages.getString("autoPassL") + " : ");
+		label3.setText("  " + messages.getString("manualCapt") + " : ");
+		label4.setText("  " + messages.getString("maxWinl") + " : ");
+		label5.setText("  " + messages.getString("language") + " : ");
+		save.setText(messages.getString("saveB"));
 	}
+
+//	public static void main(String[] args) {
+//		SettingsPanel settings = new SettingsPanel(300, 300);
+//		settings.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		settings.setVisible(true);
+//	}
 }

@@ -29,12 +29,10 @@ public class SaveSettingsListener implements MouseListener {
 					&& JKemik.settings_t.isAutoPass()) {
 				// JOptionPane.showMessageDialog(null, "Auto Capture MUST be ON"
 				// + "\nwhen automatic turn pass is ON", "Ellegal Action",
-				// JOptionPane.WARNING_MESSAGE);
 				JOptionPane.showMessageDialog(null,
 						BoardFrame.messages.getString("autoMustBeON1")
 								+ "\n"
-								+ BoardFrame.messages
-										.getString("autoMustBeON2"),
+								+ BoardFrame.messages.getString("autoMustBeON2"),
 						BoardFrame.messages.getString("ilAction"),
 						JOptionPane.WARNING_MESSAGE);
 			} else {
