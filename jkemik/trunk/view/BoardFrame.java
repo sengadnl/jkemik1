@@ -691,7 +691,7 @@ public class BoardFrame extends JFrame {
 		la.setText(" " + messages.getString("capturel"));
 		lb.setText(" " + messages.getString("passl"));
 		lc.setText(" " + messages.getString("winl"));
-		
+
 	}
 
 	public static void showControlButtons() {
