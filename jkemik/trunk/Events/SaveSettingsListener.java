@@ -38,6 +38,7 @@ public class SaveSettingsListener implements MouseListener {
 			} else {
 				STemplate t = JKemik.settings_t;
 				String str = SettingsPanel.max_win.getText();
+				//SettingsPanel.translateUI();
 				String lang = (String) SettingsPanel.getLanguageList()
 						.getSelectedItem();
 				String key = Tools.languageKey(lang);
