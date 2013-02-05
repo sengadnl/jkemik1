@@ -22,7 +22,7 @@ import view.BoardFrame;
 import view.Grid;
 
 /**
- * @author dalet
+ * @author Dalet
  * 
  */
 public class GridMouseListener implements MouseListener, MouseMotionListener {
@@ -137,7 +137,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		// }
 		if (JKemik.game.checkEndGame()) {
 			JOptionPane.showMessageDialog(null, ""
-					+ JKemik.game.getGuest().getName() + " WINS !!!", " Win",
+					+ JKemik.game.getGuest().getName() + BoardFrame.messages.getString("winM"), " Win",
 					JOptionPane.OK_OPTION);
 			BoardFrame.panel2.repaint();
 			BoardFrame.pColor1.addMouseListener(ViewEvents.p1Listener);
