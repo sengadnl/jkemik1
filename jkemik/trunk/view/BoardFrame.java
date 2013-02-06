@@ -278,7 +278,7 @@ public class BoardFrame extends JFrame {
 		panel33.add(panel332);
 
 		panel3.add(panel33, BorderLayout.EAST);
-		//---------------------------
+		// ---------------------------
 	}
 
 	private void createPanel31() {
@@ -286,6 +286,13 @@ public class BoardFrame extends JFrame {
 		panel31.setPreferredSize(new Dimension(
 				(int) (CORNER_WIDTH * this.width),
 				(int) (CORNER_HEIGHT * this.height)));
+		panel31_container = new JPanel();
+		panel31_container.setPreferredSize(new Dimension(
+				(int) (CORNER_WIDTH * this.width),
+				(int) ((CORNER_HEIGHT * this.height))/2));
+		progressB = new JProgressBar(0,100);
+		//progressB.setIndeterminate(true);
+		
 		AutoCap = new JLabel(JKemik.settings_t.getAutoCaptureStatus());
 		AutoCap.setForeground(Color.WHITE);
 		AutoPass = new JLabel(JKemik.settings_t.getAutoPassStatus());
@@ -297,13 +304,18 @@ public class BoardFrame extends JFrame {
 		lb = new JLabel(" " + messages.getString("passl"));
 		lc = new JLabel(" " + messages.getString("winl"));
 		decorateLabelss(Color.ORANGE);
-
-		panel31.add(la);
-		panel31.add(AutoCap);
-		panel31.add(lb);
-		panel31.add(AutoPass);
-		panel31.add(lc);
-		panel31.add(Win);
+		
+		
+		panel31_container.add(la);
+		panel31_container.add(AutoCap);
+		panel31_container.add(lb);
+		panel31_container.add(AutoPass);
+		panel31_container.add(lc);
+		panel31_container.add(Win);
+		//panel31_container.add(panel31);//new
+		
+		panel31.add(panel31_container, BorderLayout.NORTH);//new
+		panel31.add(progressB,BorderLayout.SOUTH);
 		panel3.add(panel31, BorderLayout.WEST);
 	}
 
@@ -577,7 +589,10 @@ public class BoardFrame extends JFrame {
 		panel33.setBackground(BoardFrame.THEME_COLOR);
 		panel331.setBackground(BoardFrame.THEME_COLOR);
 		panel332.setBackground(BoardFrame.THEME_COLOR);
-
+		panel31_container.setBackground(BoardFrame.THEME_COLOR);
+		progressB.setBackground(BoardFrame.THEME_COLOR);
+		progressB.setForeground(BOARD_COLOR);
+		
 		blank1.setBackground(BoardFrame.THEME_COLOR);
 		blank3.setBackground(BoardFrame.THEME_COLOR);
 		panel32.setBackground(BoardFrame.CPANEL_COLOR);
@@ -669,25 +684,25 @@ public class BoardFrame extends JFrame {
 	}
 
 	public static void translateUI() {
-		//panel 13
+		// panel 13
 		Game_status.setText(messages.getString("newG"));
 		settings.setText(messages.getString("settings"));
 		exit.setText(messages.getString("exit"));
 		help.setText(messages.getString("help"));
-		
-		//panel 33
+
+		// panel 33
 		pass_turn.setText(messages.getString("passB"));
 		undo.setText(messages.getString("undoB"));
 		refresh.setText(messages.getString("refreshB"));
 		manual_c.setText(messages.getString("captureMode"));
-		
-		//panel 23
+
+		// panel 23
 		manual.setText(messages.getString("manualModel"));
-		
-		//panel 32
+
+		// panel 32
 		save.setText(messages.getString("startGameB"));
-		
-		//panel 31
+
+		// panel 31
 		la.setText(" " + messages.getString("capturel"));
 		lb.setText(" " + messages.getString("passl"));
 		lc.setText(" " + messages.getString("winl"));
@@ -741,105 +756,40 @@ public class BoardFrame extends JFrame {
 		BoardFrame.messages = messages;
 	}
 
-	public double height = 0.0;
-	public double width = 0.0;
-
+	public double height = 0.0, width = 0.0;
+	//public static Load loadingBar;
 	public static JProgressBar progressB;
-	public static JLabel p3_label1;
-	public static JLabel p3_label2;
-
+	public static JLabel p3_label1, p3_label2;
 	public static JLabel print_point;
-
-	public static JPanel panel1;
-	public static JPanel panel2;
-	public static JPanel panel3;
-
-	public static JPanel panel11;
-	public static JPanel panel12;
-	public static JPanel panel13;
-
-	public static JPanel panel21;
-	public static JPanel panel22;
-	public static JPanel panel23;
-
-	public static JPanel panel31;
-	public static JPanel panel32;
-	public static JPanel panel33;
-	public static JPanel panel331;
-	public static JPanel panel332;
-
-	public static JPanel Holder1;
-	public static JPanel Holder2;
-	public static JPanel Holder3;
-
-	public static JLabel label1;
-	public static JLabel label2;
+	public static JPanel panel1, panel2, panel3;
+	public static JPanel panel11, panel12, panel13;
+	public static JPanel panel21, panel22, panel23;
+	public static JPanel panel31, panel32, panel33,panel31_container;
+	public static JPanel panel331, panel332;
+	public static JPanel Holder1, Holder2, Holder3;
+	public static JLabel label1, label2;
 	public static JLabel help;
-
-	public static JButton refresh;
-	public static JButton save;
-	public static JButton undo;
-	// public static JButton capture;
-	public static JCheckBox manual_c;
-	public static JCheckBox manual;
+	public static JButton refresh, save, undo;
+	public static JCheckBox manual_c, manual;
 	public static JButton pass_turn;
-
-	public static JLabel blank1;
-	public static JLabel blank2;
-	public static JLabel blank3;
-	public static JLabel blank4;
-	public static JLabel blank5;
-	public static JLabel blank6;
-	public static JLabel la;
-	public static JLabel lb;
-	public static JLabel lc;
-
-	public static RotateColor pColor1;
-	public static RotateColor pColor2;
-
-	public static JLabel AutoCap;
-	public static JLabel AutoPass;
-
-	public static JLabel Win;
-	public static JLabel exit;
-
-	public static RotateLabel l1;
-	public static RotateLabel l2;
-
-	public static PlayerPanel p1panel;
-	public static PlayerPanel p2panel;
-
-	public static JLabel Game_status;
-	public static JLabel settings;
-
+	public static JLabel blank1, blank2, blank3, blank4, blank5, blank6;
+	public static JLabel la, lb, lc;
+	public static RotateColor pColor1, pColor2;
+	public static JLabel AutoCap, AutoPass, Win, exit;
+	public static RotateLabel l1, l2;
+	public static PlayerPanel p1panel, p2panel;
+	public static JLabel Game_status, settings;
 	private String[] gridsize = { "32x20", "64x40", "8x5", "16x10" };
 	private String[] gameType = { "Origins", "Jkemik", "Classic", "Geeky" };
-
-	public static final double CORNER_WIDTH = .37;
-	public static final double CORNER_HEIGHT = .064;
-	public static final double SIDE_WIDTH = .0994;
-	public static final double SIDE_HEIGHT = .8;
-	public static final double PLAYER_PNL_W_SCALAR = .08;
-	public static final double PLAYER_PNL_H_SCALAR = .25;
-	public static final double P2_W = .26;
-
-	public static final double BOTTOM_COLOR_P_W = 80;
-	public static final double BOTTOM_COLOR_P_H = 12;
-
+	public static final double CORNER_WIDTH = .37, CORNER_HEIGHT = .064,
+			SIDE_WIDTH = .0994, SIDE_HEIGHT = .8, PLAYER_PNL_W_SCALAR = .08,
+			PLAYER_PNL_H_SCALAR = .25, P2_W = .26, BOTTOM_COLOR_P_W = 80,
+			BOTTOM_COLOR_P_H = 12;
 	public static Grid grid;
-
 	private static java.awt.Container container;
 	private static final long serialVersionUID = 1L;
-
-	public static Color THEME_COLOR;
-	public static Color CPANEL_COLOR;
-	public static Color BOARD_COLOR;
-
+	public static Color THEME_COLOR, CPANEL_COLOR, BOARD_COLOR;
 	public static boolean makingGame;
-	public static int thereIsSavedGame = 1;
-	public static int COUNTER = 0;
-	public static int MAX_VAL = 0;
-	public static final int THEME_JKEMIK = 0;
-	public static final int THEME_ORIGINS = 1;
-	public static final int THEME_OLD = 3;
+	public static int thereIsSavedGame = 1, COUNTER = 0, MAX_VAL = 0;
+	public static final int THEME_JKEMIK = 0, THEME_ORIGINS = 1, THEME_OLD = 3;
 }

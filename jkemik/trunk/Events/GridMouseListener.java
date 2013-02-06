@@ -84,7 +84,11 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			}
 		}
 		if (game.isEmbuche_on() && JKemik.settings_t.isAutoCapture()) {
+			
+			BoardFrame.progressB.setIndeterminate(true);
 			Grid.cell = game.embush(Grid.squareSize);// new line
+			BoardFrame.progressB.setIndeterminate(false);
+			
 			BoardFrame.grid.repaint();
 			System.out.println("Embush attempt");
 			game.getCurrentP().setSelected(new ArrayList<Point>());
