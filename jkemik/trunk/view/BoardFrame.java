@@ -202,6 +202,7 @@ public class BoardFrame extends JFrame {
 	}
 
 	private void designPanel2() {
+		
 		panel21 = new JPanel();
 		panel21.setPreferredSize(new Dimension((int) (SIDE_WIDTH * this.width),
 				(int) (SIDE_HEIGHT * this.height)));
@@ -209,13 +210,17 @@ public class BoardFrame extends JFrame {
 		p1panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (PLAYER_PNL_H_SCALAR * SIDE_HEIGHT * this.height));
 		panel21.add(p1panel, BorderLayout.NORTH);
+		
+		panel22 = new JPanel();
 
 		p1panel.initPanelForNewGame(JKemik.game.getPlayer1().getName(),
 				JKemik.game.getPlayer1().getColor());
 
 		grid = Grid.getInstance((int) JKemik.template.getG_size());//
-		Tools.resetMaxWin(Grid.squareCount(), JKemik.settings_t);
-
+//		Tools.resetMaxWin(Grid.squareCount(), JKemik.settings_t);
+		settings_p = new SettingsPanel(500,400);
+		settings_p.setBorder(BorderFactory.createLineBorder(Color.yellow));
+		
 		panel23 = new JPanel();
 		panel23.setPreferredSize(new Dimension((int) (SIDE_WIDTH * this.width),
 				(int) (SIDE_HEIGHT * this.height)));
@@ -224,6 +229,11 @@ public class BoardFrame extends JFrame {
 		manual = new JCheckBox(messages.getString("manualModel"));
 		p2panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (.25 * SIDE_HEIGHT * this.height));
+		
+		//panel22.add(grid);
+		panel22.add(settings_p);
+		panel22.add(controlP);
+		
 		panel23.add(p2panel, BorderLayout.NORTH);
 		panel23.add(manual, BorderLayout.SOUTH);
 
@@ -231,7 +241,9 @@ public class BoardFrame extends JFrame {
 				JKemik.game.getPlayer2().getColor());
 
 		panel2.add(panel21, BorderLayout.WEST);
-		panel2.add(grid, BorderLayout.CENTER);
+		panel2.add(panel22, BorderLayout.CENTER);
+		//panel2.add(grid, BorderLayout.CENTER);
+		//panel2.add(settings_p, BorderLayout.CENTER);
 		panel2.add(panel23, BorderLayout.EAST);
 	}
 
@@ -320,6 +332,9 @@ public class BoardFrame extends JFrame {
 	}
 
 	private void createPanel32() {
+		panel32 = new JPanel();
+		
+		
 		blank1 = new JLabel(" ");
 		blank2 = new JLabel(" ");
 		blank3 = new JLabel(" ");
@@ -327,9 +342,10 @@ public class BoardFrame extends JFrame {
 		blank5 = new JLabel(" ");
 		blank6 = new JLabel(" ");
 
-		panel32 = new JPanel();
-		panel32.setLayout(new BorderLayout(12, 12));
-
+		controlP = new JPanel();
+		controlP.setLayout(new BorderLayout(12, 12));
+		controlP.setBorder(BorderFactory.createLineBorder(Color.yellow));
+		
 		label1 = new JLabel(JKemik.template.getP1_name());
 		label1.setForeground(Color.WHITE);
 		label1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -377,13 +393,15 @@ public class BoardFrame extends JFrame {
 		Holder3.add(pColor2);
 		Holder3.add(blank4);
 
-		panel32.setPreferredSize(new Dimension((int) (P2_W * this.width),
+		controlP.setPreferredSize(new Dimension((int) (P2_W * this.width),
 				(int) (CORNER_HEIGHT * this.height)));
 
-		panel32.add(Holder1, BorderLayout.WEST);
-		panel32.add(Holder2, BorderLayout.CENTER);
-		panel32.add(Holder3, BorderLayout.EAST);
+		controlP.add(Holder1, BorderLayout.WEST);
+		controlP.add(Holder2, BorderLayout.CENTER);
+		controlP.add(Holder3, BorderLayout.EAST);
 
+		//panel3.add(controlP, BorderLayout.CENTER);
+		
 		panel3.add(panel32, BorderLayout.CENTER);
 		System.out.println("Panel32: " + (P2_W * this.width) + " X "
 				+ (CORNER_HEIGHT * this.height));
@@ -582,10 +600,13 @@ public class BoardFrame extends JFrame {
 
 		panel2.setBackground(BOARD_COLOR);
 		panel21.setBackground(BoardFrame.THEME_COLOR);
+		panel22.setBackground(BoardFrame.THEME_COLOR);
 		panel23.setBackground(BoardFrame.THEME_COLOR);
+		settings_p.setBackground(BoardFrame.THEME_COLOR);
 
 		panel3.setBackground(BoardFrame.THEME_COLOR);
 		panel31.setBackground(BoardFrame.THEME_COLOR);
+		panel32.setBackground(BoardFrame.THEME_COLOR);
 		panel33.setBackground(BoardFrame.THEME_COLOR);
 		panel331.setBackground(BoardFrame.THEME_COLOR);
 		panel332.setBackground(BoardFrame.THEME_COLOR);
@@ -595,7 +616,7 @@ public class BoardFrame extends JFrame {
 		
 		blank1.setBackground(BoardFrame.THEME_COLOR);
 		blank3.setBackground(BoardFrame.THEME_COLOR);
-		panel32.setBackground(BoardFrame.CPANEL_COLOR);
+		controlP.setBackground(BoardFrame.CPANEL_COLOR);
 		Holder1.setBackground(BoardFrame.CPANEL_COLOR);
 		Holder2.setBackground(BoardFrame.CPANEL_COLOR);
 		Holder3.setBackground(BoardFrame.CPANEL_COLOR);
@@ -764,7 +785,7 @@ public class BoardFrame extends JFrame {
 	public static JPanel panel1, panel2, panel3;
 	public static JPanel panel11, panel12, panel13;
 	public static JPanel panel21, panel22, panel23;
-	public static JPanel panel31, panel32, panel33,panel31_container;
+	public static JPanel panel31, controlP, panel32,panel33,panel31_container;
 	public static JPanel panel331, panel332;
 	public static JPanel Holder1, Holder2, Holder3;
 	public static JLabel label1, label2;
@@ -786,6 +807,7 @@ public class BoardFrame extends JFrame {
 			PLAYER_PNL_H_SCALAR = .25, P2_W = .26, BOTTOM_COLOR_P_W = 80,
 			BOTTOM_COLOR_P_H = 12;
 	public static Grid grid;
+	public static SettingsPanel settings_p;
 	private static java.awt.Container container;
 	private static final long serialVersionUID = 1L;
 	public static Color THEME_COLOR, CPANEL_COLOR, BOARD_COLOR;
