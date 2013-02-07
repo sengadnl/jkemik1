@@ -20,7 +20,6 @@ import api.*;
  */
 public class JKemik extends Application {
 	public static Game game;
-	// public static Manual manual;
 	public static GTemplate template;
 	public static STemplate settings_t;
 	public static BoardFrame view;
@@ -47,7 +46,7 @@ public class JKemik extends Application {
 			// readGameObj();
 			settings = new SettingsPanel(300, 300);
 			game = new Game(new Player(template.getP1_c(),
-					template.getP1_name()), new Player(template.getP1_c(),
+				 	template.getP1_name()), new Player(template.getP1_c(),
 					template.getP2_name()));
 			System.out.println(game + "\n\n");
 		} catch (Exception e) {

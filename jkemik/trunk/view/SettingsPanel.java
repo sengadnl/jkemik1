@@ -2,10 +2,12 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -19,7 +21,7 @@ import controler.JKemik;
 import utilities.Globals;
 import utilities.Tools;
 
-public class SettingsPanel extends JFrame {
+public class SettingsPanel extends JPanel{
 	/**
 	 * 
 	 */
@@ -50,14 +52,15 @@ public class SettingsPanel extends JFrame {
 	private static java.awt.Container container;
 
 	public SettingsPanel(int w, int h) {
-		container = getContentPane();
-		container.setBackground(new Color(0, 0, 0));
+		//container = getContentPane();
+		//container.setBackground(new Color(0, 0, 0));
 		maxWinVal = 2;
 		setLayout(new BorderLayout());
-		setSize(w, h);
-		setLocation(500, 300);
+		setSize(w,h);
+		//BorderFactory.createLineBorder(Color.yellow, 3);
+	//	setLocation(500, 300);
 		buildPane();
-		setVisible(false);
+		//setVisible(false);
 	}
 
 	public static JComboBox getLanguageList() {
