@@ -2,15 +2,12 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -49,7 +46,7 @@ public class SettingsPanel extends JPanel{
 
 	private String[] auto_cap = { "ON", "OFF" };
 	private String[] auto_t_p = { "ON", "OFF" };
-	private static java.awt.Container container;
+	//private static java.awt.Container container;
 
 	public SettingsPanel(int w, int h) {
 		//container = getContentPane();

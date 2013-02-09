@@ -17,6 +17,7 @@ public class RefreshListener implements MouseListener{
 
 	public void mouseClicked(MouseEvent arg0) {
 		Grid.setDebug(true);
+		//BoardFrame.displayGrid();
 		BoardFrame.repaintGrid();
 	}
 

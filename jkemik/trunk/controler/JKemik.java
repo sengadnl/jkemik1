@@ -23,7 +23,7 @@ public class JKemik extends Application {
 	public static GTemplate template;
 	public static STemplate settings_t;
 	public static BoardFrame view;
-	public static SettingsPanel settings;
+	//public static SettingsPanel settings;
 	private static boolean isStarted = false;
 	public static Load load;
 	static File s_object = new File(Tools.fullPath()
@@ -44,7 +44,7 @@ public class JKemik extends Application {
 			readTemplate();
 			readSettings();
 			// readGameObj();
-			settings = new SettingsPanel(300, 300);
+			//settings = new SettingsPanel(300, 300);
 			game = new Game(new Player(template.getP1_c(),
 				 	template.getP1_name()), new Player(template.getP1_c(),
 					template.getP2_name()));

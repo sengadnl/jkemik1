@@ -93,6 +93,8 @@ public class BoardFrame extends JFrame {
 		ViewEvents.addPlayer2NameAction(label2);
 		ViewEvents.saveAction(save);
 		showControlButtons();
+		displayGrid(false);
+		
 		ViewEvents.newGameEvent();
 		ViewEvents.settingsLabelAction();
 		ViewEvents.saveSettingsAction();
@@ -217,7 +219,7 @@ public class BoardFrame extends JFrame {
 				JKemik.game.getPlayer1().getColor());
 
 		grid = Grid.getInstance((int) JKemik.template.getG_size());//
-//		Tools.resetMaxWin(Grid.squareCount(), JKemik.settings_t);
+		Tools.resetMaxWin(Grid.squareCount(), JKemik.settings_t);
 		settings_p = new SettingsPanel(500,400);
 		settings_p.setBorder(BorderFactory.createLineBorder(Color.yellow));
 		
@@ -230,9 +232,9 @@ public class BoardFrame extends JFrame {
 		p2panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (.25 * SIDE_HEIGHT * this.height));
 		
-		//panel22.add(grid);
+		panel22.add(grid);
 		panel22.add(settings_p);
-		panel22.add(controlP);
+		//panel22.add(controlP);
 		
 		panel23.add(p2panel, BorderLayout.NORTH);
 		panel23.add(manual, BorderLayout.SOUTH);
@@ -344,7 +346,7 @@ public class BoardFrame extends JFrame {
 
 		controlP = new JPanel();
 		controlP.setLayout(new BorderLayout(12, 12));
-		controlP.setBorder(BorderFactory.createLineBorder(Color.yellow));
+		//controlP.setBorder(BorderFactory.createLineBorder(Color.yellow));
 		
 		label1 = new JLabel(JKemik.template.getP1_name());
 		label1.setForeground(Color.WHITE);
@@ -401,8 +403,8 @@ public class BoardFrame extends JFrame {
 		controlP.add(Holder3, BorderLayout.EAST);
 
 		//panel3.add(controlP, BorderLayout.CENTER);
-		
-		panel3.add(panel32, BorderLayout.CENTER);
+		//panel32.add(controlP);
+		panel3.add(controlP, BorderLayout.CENTER);
 		System.out.println("Panel32: " + (P2_W * this.width) + " X "
 				+ (CORNER_HEIGHT * this.height));
 	}
@@ -752,6 +754,15 @@ public class BoardFrame extends JFrame {
 
 		}
 	}
+	public static void displayGrid(boolean display){
+		settings_p.setVisible(!display);
+		grid.setVisible(display);
+		if (grid.drawn) {
+			System.out.println("Displaying the grid.....");
+			grid.drawn = false;
+			grid.repaint();
+		}
+	}
 
 	public static boolean isMakingGame() {
 		return makingGame;
@@ -793,6 +804,7 @@ public class BoardFrame extends JFrame {
 	public static JButton refresh, save, undo;
 	public static JCheckBox manual_c, manual;
 	public static JButton pass_turn;
+	public static JButton saveSet;
 	public static JLabel blank1, blank2, blank3, blank4, blank5, blank6;
 	public static JLabel la, lb, lc;
 	public static RotateColor pColor1, pColor2;

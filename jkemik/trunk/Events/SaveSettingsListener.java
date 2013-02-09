@@ -56,7 +56,8 @@ public class SaveSettingsListener implements MouseListener {
 
 					System.out.println("The language is : " + lang);
 					BoardFrame.translateUI();
-					JKemik.settings.setVisible(false);
+					//JKemik.settings.setVisible(false);
+					BoardFrame.displayGrid(true);
 				} else {
 					JOptionPane.showMessageDialog(null, BoardFrame.messages
 							.getString("maxWinSizeMustbBe1")
