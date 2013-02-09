@@ -32,37 +32,52 @@ public class SaveSettingsListener implements MouseListener {
 				JOptionPane.showMessageDialog(null,
 						BoardFrame.messages.getString("autoMustBeON1")
 								+ "\n"
-								+ BoardFrame.messages.getString("autoMustBeON2"),
+								+ BoardFrame.messages
+										.getString("autoMustBeON2"),
 						BoardFrame.messages.getString("ilAction"),
 						JOptionPane.WARNING_MESSAGE);
 			} else {
 				STemplate t = JKemik.settings_t;
 				String str = SettingsPanel.max_win.getText();
-				//SettingsPanel.translateUI();
+				// SettingsPanel.translateUI();
 				String lang = (String) SettingsPanel.getLanguageList()
 						.getSelectedItem();
 				String key = Tools.languageKey(lang);
 				String properties = Tools.propertiesFilename(key);
 				int maxw = Integer.parseInt(str);
 				if (Tools.isMaxWinLessThanGrid(Grid.getBoardSize(), maxw)) {
+//					BoardFrame.progressB.setVisible(true);
+					// BoardFrame.PROGRESS_BAR_MAX = 9;int i = 0;
+					//BoardFrame.progressB.setIndeterminate(true);
+					BoardFrame.displayGrid(true);
 					t.setMaxWinVal(maxw);
 					BoardFrame.updateSettingPanel();
 					t.setMemo(t.isAutoCapture(), t.isAutoPass());
 					t.setLanguage(lang);
-
 					Locale local = new Locale(key);
 					BoardFrame.setMessages(ResourceBundle.getBundle(properties,
 							local));
-
 					System.out.println("The language is : " + lang);
 					BoardFrame.translateUI();
-					//JKemik.settings.setVisible(false);
-					BoardFrame.displayGrid(true);
+					
+					BoardFrame.enableGameControlPanel();
+					BoardFrame.pColor1.addMouseListener(ViewEvents.p1Listener);
+					BoardFrame.pColor2.addMouseListener(ViewEvents.p2Listener);
+					BoardFrame.label1.addMouseListener(ViewEvents.n1Listener);
+					BoardFrame.label2.addMouseListener(ViewEvents.n2Listener);
+					BoardFrame.l1.addMouseListener(ViewEvents.gridSizeListener);
+					BoardFrame.l2.addMouseListener(ViewEvents.gameThemeListener);
+					BoardFrame.settings.addMouseListener(ViewEvents.sysPrefsListener);
+					BoardFrame.startG.addMouseListener(ViewEvents.saveListener);
+//					Thread.sleep(1000);
+//					BoardFrame.progressB.setIndeterminate(false);
+//					BoardFrame.progressB.setVisible(false);
 				} else {
 					JOptionPane.showMessageDialog(null, BoardFrame.messages
 							.getString("maxWinSizeMustbBe1")
 							+ Grid.getBoardSize()
-							+ BoardFrame.messages.getString("maxWinSizeMustbBe2"),
+							+ BoardFrame.messages
+									.getString("maxWinSizeMustbBe2"),
 							BoardFrame.messages.getString("wrongInput"),
 							JOptionPane.WARNING_MESSAGE);
 				}

@@ -24,8 +24,8 @@ public class ViewEvents {
 	public static GridMouseListener gridListener = new GridMouseListener(BoardFrame.grid);
 	public static BoardSizeListener gridSizeListener = new BoardSizeListener(BoardFrame.l1);
 	public static GameThemeListener gameThemeListener = new GameThemeListener(BoardFrame.l2);
-	public static SaveButtonListener saveListener = new SaveButtonListener(BoardFrame.save);
-	public static SettingsLabelListener saveSettings = new SettingsLabelListener(BoardFrame.settings);
+	public static SaveButtonListener saveListener = new SaveButtonListener(BoardFrame.startG);
+	public static SysPrefsListener sysPrefsListener = new SysPrefsListener(BoardFrame.settings);
 	public static SaveSettingsListener saveSetting = new SaveSettingsListener(SettingsPanel.save);
 	public static UndoListener undoListener = new UndoListener(BoardFrame.undo);
 
@@ -73,7 +73,7 @@ public class ViewEvents {
 		SettingsPanel.save.addMouseListener(saveSetting);
 	}
 	public static void settingsLabelAction(){
-		BoardFrame.settings.addMouseListener(saveSettings);
+		BoardFrame.settings.addMouseListener(sysPrefsListener);
 	}
 
 	public static void undoAction(JButton undo){

@@ -66,7 +66,9 @@ public class SaveButtonListener implements MouseListener {
 			BoardFrame.label2.removeMouseListener(ViewEvents.n2Listener);
 			BoardFrame.l1.removeMouseListener(ViewEvents.gridSizeListener);
 			BoardFrame.l2.removeMouseListener(ViewEvents.gameThemeListener);
-			BoardFrame.settings.removeMouseListener(ViewEvents.saveSettings);
+			BoardFrame.settings.removeMouseListener(ViewEvents.sysPrefsListener);
+			BoardFrame.startG.removeMouseListener(ViewEvents.saveListener);
+			
 			BoardFrame.Game_status.setText(BoardFrame.messages
 					.getString("endG"));
 			BoardFrame.Game_status.setForeground(Color.RED);
@@ -91,7 +93,7 @@ public class SaveButtonListener implements MouseListener {
 			BoardFrame.p1panel.initPanelForNewGame(p1n, p1c);
 			BoardFrame.p2panel.initPanelForNewGame(p2n, p2c);
 			BoardFrame.Win.setText(JKemik.settings_t.getMaxWinVal() + "");
-			BoardFrame.save.removeMouseListener(ViewEvents.saveListener);
+			BoardFrame.startG.removeMouseListener(ViewEvents.saveListener);
 
 			int response = JOptionPane.showConfirmDialog(null,
 					BoardFrame.messages.getString("startGameWill") + str1 +" "+

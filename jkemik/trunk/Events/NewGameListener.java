@@ -54,8 +54,8 @@ public class NewGameListener implements MouseListener{
 			BoardFrame.label2.addMouseListener(ViewEvents.n2Listener);
 			BoardFrame.l1.addMouseListener(ViewEvents.gridSizeListener);
 			BoardFrame.l2.addMouseListener(ViewEvents.gameThemeListener);
-			BoardFrame.save.addMouseListener(ViewEvents.saveListener);
-			BoardFrame.settings.addMouseListener(ViewEvents.saveSettings);
+			BoardFrame.startG.addMouseListener(ViewEvents.saveListener);
+			BoardFrame.settings.addMouseListener(ViewEvents.sysPrefsListener);
 			BoardFrame.grid.removeMouseListener(ViewEvents.gridListener);
 			BoardFrame.grid.removeMouseMotionListener(ViewEvents.gridListener);
 			

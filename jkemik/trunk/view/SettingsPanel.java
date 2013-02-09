@@ -185,7 +185,7 @@ public class SettingsPanel extends JPanel{
 		setAutoCap(t.isAutoCapture());
 		setAutoPass(t.isAutoPass());
 		SettingsPanel.setMax_win(t.getMaxWinVal());
-		JKemik.settings.setVisible(true);
+		//JKemik.settings.setVisible(true);
 	}
 
 	public static RotateLabel getAuto_capture() {

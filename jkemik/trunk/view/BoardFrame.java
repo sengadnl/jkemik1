@@ -91,9 +91,11 @@ public class BoardFrame extends JFrame {
 		ViewEvents.setGameThemeAction(l2);
 		ViewEvents.addPlayer1NameAction(label1);
 		ViewEvents.addPlayer2NameAction(label2);
-		ViewEvents.saveAction(save);
+		ViewEvents.saveAction(startG);
 		showControlButtons();
-		displayGrid(false);
+		progressB.setVisible(false);
+		displayGrid(true);
+		
 		
 		ViewEvents.newGameEvent();
 		ViewEvents.settingsLabelAction();
@@ -304,7 +306,7 @@ public class BoardFrame extends JFrame {
 		panel31_container.setPreferredSize(new Dimension(
 				(int) (CORNER_WIDTH * this.width),
 				(int) ((CORNER_HEIGHT * this.height))/2));
-		progressB = new JProgressBar(0,100);
+		progressB = new JProgressBar(0,PROGRESS_BAR_MAX);
 		//progressB.setIndeterminate(true);
 		
 		AutoCap = new JLabel(JKemik.settings_t.getAutoCaptureStatus());
@@ -374,9 +376,9 @@ public class BoardFrame extends JFrame {
 
 		// save = new JButton("START GAME");
 		// System.out.println("Jbutton: " + );
-		save = new JButton(messages.getString("startGameB"));
-		save.setBackground(new Color(200, 0, 0));
-		save.setForeground(new Color(255, 255, 255));
+		startG = new JButton(messages.getString("startGameB"));
+		startG.setBackground(new Color(200, 0, 0));
+		startG.setForeground(new Color(255, 255, 255));
 
 		Holder1.setLayout(new GridLayout(4, 1));
 		Holder1.add(blank1);
@@ -387,7 +389,7 @@ public class BoardFrame extends JFrame {
 		Holder2.setLayout(new GridLayout(3, 1));
 		Holder2.add(l1);
 		Holder2.add(l2);
-		Holder2.add(save);
+		Holder2.add(startG);
 
 		Holder3.setLayout(new GridLayout(4, 1));
 		Holder3.add(blank3);
@@ -437,7 +439,7 @@ public class BoardFrame extends JFrame {
 		label2.setForeground(Tools.fade(Color.WHITE));
 		pColor1.setBackground(Tools.fade(pColor1.getBackground()));
 		pColor2.setBackground(Tools.fade(pColor2.getBackground()));
-		fadeButton(save);
+		fadeButton(startG);
 	}
 
 	public static void enableGameControlPanel() {
@@ -453,7 +455,7 @@ public class BoardFrame extends JFrame {
 		pColor1.setBackground(JKemik.template.getP1_c());
 		pColor2.setBackground(JKemik.template.getP2_c());
 
-		boostButton(save);
+		boostButton(startG);
 	}
 
 	public static void highlightP1() {
@@ -723,7 +725,7 @@ public class BoardFrame extends JFrame {
 		manual.setText(messages.getString("manualModel"));
 
 		// panel 32
-		save.setText(messages.getString("startGameB"));
+		startG.setText(messages.getString("startGameB"));
 
 		// panel 31
 		la.setText(" " + messages.getString("capturel"));
@@ -756,6 +758,7 @@ public class BoardFrame extends JFrame {
 	}
 	public static void displayGrid(boolean display){
 		settings_p.setVisible(!display);
+		panel22.repaint();
 		grid.setVisible(display);
 		if (grid.drawn) {
 			System.out.println("Displaying the grid.....");
@@ -787,9 +790,17 @@ public class BoardFrame extends JFrame {
 	public static void setMessages(ResourceBundle messages) {
 		BoardFrame.messages = messages;
 	}
+	public static void increment(int current) {//TODO
+		long num = 100;
+		try {
+				progressB.setValue(current);
+				Thread.sleep(num);
+		} catch (Exception e) {
+
+		}
+	}
 
 	public double height = 0.0, width = 0.0;
-	//public static Load loadingBar;
 	public static JProgressBar progressB;
 	public static JLabel p3_label1, p3_label2;
 	public static JLabel print_point;
@@ -801,10 +812,10 @@ public class BoardFrame extends JFrame {
 	public static JPanel Holder1, Holder2, Holder3;
 	public static JLabel label1, label2;
 	public static JLabel help;
-	public static JButton refresh, save, undo;
+	public static JButton refresh, startG, undo,pass_turn,saveSet;
 	public static JCheckBox manual_c, manual;
-	public static JButton pass_turn;
-	public static JButton saveSet;
+//	public static JButton pass_turn;
+//	public static JButton saveSet;
 	public static JLabel blank1, blank2, blank3, blank4, blank5, blank6;
 	public static JLabel la, lb, lc;
 	public static RotateColor pColor1, pColor2;
@@ -824,6 +835,6 @@ public class BoardFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public static Color THEME_COLOR, CPANEL_COLOR, BOARD_COLOR;
 	public static boolean makingGame;
-	public static int thereIsSavedGame = 1, COUNTER = 0, MAX_VAL = 0;
+	public static int thereIsSavedGame = 1, COUNTER = 0, MAX_VAL = 0, PROGRESS_BAR_MAX = 100;
 	public static final int THEME_JKEMIK = 0, THEME_ORIGINS = 1, THEME_OLD = 3;
 }
