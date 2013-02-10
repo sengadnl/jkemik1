@@ -49,15 +49,10 @@ public class SettingsPanel extends JPanel{
 	//private static java.awt.Container container;
 
 	public SettingsPanel(int w, int h) {
-		//container = getContentPane();
-		//container.setBackground(new Color(0, 0, 0));
 		maxWinVal = 2;
 		setLayout(new BorderLayout());
 		setSize(w,h);
-		//BorderFactory.createLineBorder(Color.yellow, 3);
-	//	setLocation(500, 300);
 		buildPane();
-		//setVisible(false);
 	}
 
 	public static JComboBox getLanguageList() {
@@ -124,7 +119,7 @@ public class SettingsPanel extends JPanel{
 	//	ResourceBundle 
 		messages = ResourceBundle.getBundle(properties, currentLocale);
 		
-		JKIcon icon = new JKIcon("media/jkemik-small.png", "");
+		//JKIcon icon = new JKIcon("media/jkemik-small.png", "");
 		save = new JButton("Done");
 		save.setBackground(Globals.BTN_BGD_COLOR);
 		save.setForeground(Globals.BTN_FRD_COLOR);
@@ -167,7 +162,7 @@ public class SettingsPanel extends JPanel{
 		add(l2, BorderLayout.CENTER);
 		add(l3, BorderLayout.SOUTH);
 
-		l1.add(icon.createIcon());
+		//l1.add(icon.createIcon());
 		l2.add(label1);
 		l2.add(auto_capture);
 		l2.add(label2);
@@ -180,7 +175,7 @@ public class SettingsPanel extends JPanel{
 		l3.add(save);
 
 	}
-	public static void translateSettingsPanel(STemplate t){
+	public void translateSettingsPanel(STemplate t){
 		getLanguageList().setSelectedItem(t.getLanguage());
 		setAutoCap(t.isAutoCapture());
 		setAutoPass(t.isAutoPass());

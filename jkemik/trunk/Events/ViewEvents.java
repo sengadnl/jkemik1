@@ -5,6 +5,9 @@ package Events;
 
 import javax.swing.*;
 
+import api.GTemplate;
+import api.STemplate;
+
 import controler.JKemik;
 
 
@@ -112,5 +115,58 @@ public class ViewEvents {
 
 	public static void newGameEvent() {
 		BoardFrame.Game_status.addMouseListener(newGameListener);
+	}
+	public static void uiEventUpdates(STemplate s, GTemplate t){
+		if (s.isGameSetupMode()) {
+			BoardFrame.pColor1.addMouseListener(p1Listener);
+			BoardFrame.pColor2.addMouseListener(p2Listener);
+			BoardFrame.label1.addMouseListener(n1Listener);
+			BoardFrame.label2.addMouseListener(n2Listener);
+			BoardFrame.l1.addMouseListener(gridSizeListener);
+			BoardFrame.l2.addMouseListener(gameThemeListener);
+			BoardFrame.startG.addMouseListener(saveListener);
+			BoardFrame.settings.addMouseListener(sysPrefsListener);
+			BoardFrame.grid.removeMouseListener(gridListener);
+			BoardFrame.grid.removeMouseMotionListener(gridListener);
+			
+			//Disable control buttons
+			BoardFrame.refresh.removeMouseListener(refreshListener);
+			BoardFrame.manual_c.removeMouseListener(manualCaptureButtonListener);
+			BoardFrame.undo.removeMouseListener(undoListener);
+			BoardFrame.pass_turn.removeMouseListener(passTurnListener);
+		}
+		if (s.isPlayMode()) {
+			BoardFrame.pColor1.removeMouseListener(p1Listener);
+			BoardFrame.pColor2.removeMouseListener(p2Listener);
+			BoardFrame.label1.removeMouseListener(n1Listener);
+			BoardFrame.label2.removeMouseListener(n2Listener);
+			BoardFrame.l1.removeMouseListener(gridSizeListener);
+			BoardFrame.l2.removeMouseListener(gameThemeListener);
+			BoardFrame.settings.removeMouseListener(sysPrefsListener);
+			BoardFrame.startG.removeMouseListener(saveListener);
+			
+			// Enable control buttons
+			BoardFrame.refresh.addMouseListener(refreshListener);
+			BoardFrame.manual_c
+					.addMouseListener(manualCaptureButtonListener);
+			BoardFrame.undo.addMouseListener(undoListener);
+			BoardFrame.pass_turn.addMouseListener(passTurnListener);
+			
+			BoardFrame.grid.addMouseListener(ViewEvents.gridListener);
+			BoardFrame.grid.addMouseMotionListener(ViewEvents.gridListener);
+
+			
+		}
+		if (s.isSystemSetupMode()) {
+			BoardFrame.pColor1.removeMouseListener(p1Listener);
+			BoardFrame.pColor2.removeMouseListener(p2Listener);
+			BoardFrame.label1.removeMouseListener(n1Listener);
+			BoardFrame.label2.removeMouseListener(n2Listener);
+			BoardFrame.l1.removeMouseListener(gridSizeListener);
+			BoardFrame.l2.removeMouseListener(gameThemeListener);
+			BoardFrame.settings.removeMouseListener(sysPrefsListener);
+			BoardFrame.startG.removeMouseListener(saveListener);
+			BoardFrame.settings.removeMouseListener(sysPrefsListener);
+		}
 	}
 }

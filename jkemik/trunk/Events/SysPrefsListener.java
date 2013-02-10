@@ -7,11 +7,10 @@ import javax.swing.JLabel;
 
 import controler.JKemik;
 
-import api.STemplate;
 import utilities.Tools;
 //import view.BoardFrame;
 import view.BoardFrame;
-import view.SettingsPanel;
+
 
 public class SysPrefsListener implements MouseListener {
 	private JLabel label;
@@ -21,21 +20,24 @@ public class SysPrefsListener implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
-		STemplate t = JKemik.settings_t;
-		SettingsPanel.translateSettingsPanel(t);
+		JKemik.settings_t.setSystemSetupMode(true);
+		//STemplate t = JKemik.settings_t;
+//		SettingsPanel.translateSettingsPanel(t);
+		BoardFrame.uiLooksUpdate(JKemik.settings_t,JKemik.template);
+		ViewEvents.uiEventUpdates(JKemik.settings_t,JKemik.template);
+//		BoardFrame.print_point.setText("" + BoardFrame.messages.getString("sysSetupMode"));
+//		BoardFrame.disableGameControlPanel();
+//		BoardFrame.pColor1.removeMouseListener(ViewEvents.p1Listener);
+//		BoardFrame.pColor2.removeMouseListener(ViewEvents.p2Listener);
+//		BoardFrame.label1.removeMouseListener(ViewEvents.n1Listener);
+//		BoardFrame.label2.removeMouseListener(ViewEvents.n2Listener);
+//		BoardFrame.l1.removeMouseListener(ViewEvents.gridSizeListener);
+//		BoardFrame.l2.removeMouseListener(ViewEvents.gameThemeListener);
+//		BoardFrame.settings.removeMouseListener(ViewEvents.sysPrefsListener);
+//		BoardFrame.startG.removeMouseListener(ViewEvents.saveListener);
+//		BoardFrame.settings.removeMouseListener(ViewEvents.sysPrefsListener);
 		
-		BoardFrame.disableGameControlPanel();
-		BoardFrame.pColor1.removeMouseListener(ViewEvents.p1Listener);
-		BoardFrame.pColor2.removeMouseListener(ViewEvents.p2Listener);
-		BoardFrame.label1.removeMouseListener(ViewEvents.n1Listener);
-		BoardFrame.label2.removeMouseListener(ViewEvents.n2Listener);
-		BoardFrame.l1.removeMouseListener(ViewEvents.gridSizeListener);
-		BoardFrame.l2.removeMouseListener(ViewEvents.gameThemeListener);
-		BoardFrame.settings.removeMouseListener(ViewEvents.sysPrefsListener);
-		BoardFrame.startG.removeMouseListener(ViewEvents.saveListener);
-		BoardFrame.settings.removeMouseListener(ViewEvents.sysPrefsListener);
-		
-		BoardFrame.displayGrid(false);
+	//	BoardFrame.displayGrid(false);
 	}
 
 	public void mouseExited(MouseEvent arg0) {
