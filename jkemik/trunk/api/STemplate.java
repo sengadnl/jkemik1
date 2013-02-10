@@ -12,6 +12,9 @@ public class STemplate implements Serializable {
 	private boolean autoCapture = true;
 	private boolean manualCapture = false;
 	private boolean autoPass = true;
+	private boolean gameSetupMode = true;
+	private boolean playMode = false;
+	private boolean systemSetupMode = false;
 	private String theme = "Geeky";
 	private int maxWinVal = 4;
 	private double MaxPointPerPlayer = 0.0;
@@ -20,6 +23,36 @@ public class STemplate implements Serializable {
 
 	public STemplate() {
 		
+	}
+
+	public boolean isPlayMode() {
+		return playMode;
+	}
+
+	public void setPlayMode(boolean playMode) {
+		this.playMode = playMode;
+		this.systemSetupMode = !playMode;
+		this.gameSetupMode = !playMode;
+	}
+
+	public boolean isGameSetupMode() {
+		return gameSetupMode;
+	}
+
+	public void setGameSetupMode(boolean gameSetupMode) {
+		this.gameSetupMode = gameSetupMode;
+		this.playMode = !gameSetupMode;
+		this.systemSetupMode = !gameSetupMode;
+	}
+
+	public boolean isSystemSetupMode() {
+		return systemSetupMode;
+	}
+
+	public void setSystemSetupMode(boolean systemSetupMode) {
+		this.gameSetupMode = !systemSetupMode;
+		this.playMode = !systemSetupMode;
+		this.systemSetupMode = systemSetupMode;
 	}
 
 	public String getLanguage() {

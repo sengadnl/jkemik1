@@ -145,8 +145,8 @@ public class Grid extends JPanel {
 	}
 
 	public void highLightDot(Color c) {
-		BoardFrame.print_point.setText("" + (new Point(hl_x, hl_y)).toString());
 		if (mouseMove) {
+			BoardFrame.print_point.setText("" + (new Point(hl_x, hl_y)).toString());
 			// g2.setColor(ccolor);
 			// drawCursor(x, y);
 			Artist.drawCursor(new Point(x, y), gridLineStroke,
@@ -227,7 +227,7 @@ public class Grid extends JPanel {
 			CIRCLE_DIAMETER = 12;
 			HALF_DIAMETER = CIRCLE_DIAMETER / 2;
 			gridLineStroke = 2;
-			squareFadeVariant = 6;
+			squareFadeVariant = 4;
 			size = ((int) (Width / Grid.squareSize) * (int) (Height / Grid.squareSize))
 					+ ((int) (Width / Grid.squareSize) + (int) (Height / Grid.squareSize));
 		}

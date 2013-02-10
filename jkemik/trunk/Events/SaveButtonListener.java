@@ -18,7 +18,6 @@ import view.Grid;
 import api.GTemplate;
 import api.Game;
 import api.Player;
-import api.Point;
 
 /**
  * @author dalet
@@ -46,6 +45,7 @@ public class SaveButtonListener implements MouseListener {
 
 		if (ValidateInput.names(str1, str2)
 				&& ValidateInput.validateColors(c1, c2)) {
+			JKemik.settings_t.setPlayMode(true);
 			t.setP1_c(c1);
 			t.setP2_c(c2);
 			t.setP1_name(str1);
@@ -58,42 +58,43 @@ public class SaveButtonListener implements MouseListener {
 			JKemik.game = game;
 
 			JKemik.game.setMaxScore(JKemik.settings_t.getMaxWinVal());//
-
-			BoardFrame.disableGameControlPanel();
-			BoardFrame.pColor1.removeMouseListener(ViewEvents.p1Listener);
-			BoardFrame.pColor2.removeMouseListener(ViewEvents.p2Listener);
-			BoardFrame.label1.removeMouseListener(ViewEvents.n1Listener);
-			BoardFrame.label2.removeMouseListener(ViewEvents.n2Listener);
-			BoardFrame.l1.removeMouseListener(ViewEvents.gridSizeListener);
-			BoardFrame.l2.removeMouseListener(ViewEvents.gameThemeListener);
-			BoardFrame.settings.removeMouseListener(ViewEvents.sysPrefsListener);
-			BoardFrame.startG.removeMouseListener(ViewEvents.saveListener);
+			BoardFrame.uiLooksUpdate(JKemik.settings_t,t);
+			ViewEvents.uiEventUpdates(JKemik.settings_t,JKemik.template);
+			//BoardFrame.disableGameControlPanel();
+//			BoardFrame.pColor1.removeMouseListener(ViewEvents.p1Listener);
+//			BoardFrame.pColor2.removeMouseListener(ViewEvents.p2Listener);
+//			BoardFrame.label1.removeMouseListener(ViewEvents.n1Listener);
+//			BoardFrame.label2.removeMouseListener(ViewEvents.n2Listener);
+//			BoardFrame.l1.removeMouseListener(ViewEvents.gridSizeListener);
+//			BoardFrame.l2.removeMouseListener(ViewEvents.gameThemeListener);
+//			BoardFrame.settings.removeMouseListener(ViewEvents.sysPrefsListener);
+//			BoardFrame.startG.removeMouseListener(ViewEvents.saveListener);
 			
-			BoardFrame.Game_status.setText(BoardFrame.messages
-					.getString("endG"));
-			BoardFrame.Game_status.setForeground(Color.RED);
-
-			BoardFrame.fadeLabel(BoardFrame.settings);
-
-			BoardFrame.showControlButtons();
+//			BoardFrame.Game_status.setText(BoardFrame.messages
+//					.getString("endG"));
+//			BoardFrame.Game_status.setForeground(Color.RED);
+//
+//			BoardFrame.fadeLabel(BoardFrame.settings);
+//
+//			BoardFrame.showControlButtons();
 
 			// Enable control buttons
-			BoardFrame.refresh.addMouseListener(ViewEvents.refreshListener);
-			BoardFrame.manual_c
-					.addMouseListener(ViewEvents.manualCaptureButtonListener);
-			BoardFrame.undo.addMouseListener(ViewEvents.undoListener);
-			BoardFrame.pass_turn.addMouseListener(ViewEvents.passTurnListener);
+//			BoardFrame.refresh.addMouseListener(ViewEvents.refreshListener);
+//			BoardFrame.manual_c
+//					.addMouseListener(ViewEvents.manualCaptureButtonListener);
+//			BoardFrame.undo.addMouseListener(ViewEvents.undoListener);
+//			BoardFrame.pass_turn.addMouseListener(ViewEvents.passTurnListener);
 
-			BoardFrame.print_point.setText("" + (new Point(0, 0)).toString());
-			String p1n = t.getP1_name();
-			String p2n = t.getP2_name();
-			Color p1c = t.getP1_c();
-			Color p2c = t.getP2_c();
-
-			BoardFrame.p1panel.initPanelForNewGame(p1n, p1c);
-			BoardFrame.p2panel.initPanelForNewGame(p2n, p2c);
-			BoardFrame.Win.setText(JKemik.settings_t.getMaxWinVal() + "");
-			BoardFrame.startG.removeMouseListener(ViewEvents.saveListener);
+//			BoardFrame.print_point.setText("" + (new Point(0, 0)).toString());
+//			String p1n = t.getP1_name();
+//			String p2n = t.getP2_name();
+//			Color p1c = t.getP1_c();
+//			Color p2c = t.getP2_c();
+//
+//			BoardFrame.p1panel.initPanelForNewGame(p1n, p1c);
+//			BoardFrame.p2panel.initPanelForNewGame(p2n, p2c);
+//			BoardFrame.Win.setText(JKemik.settings_t.getMaxWinVal() + "");
+//			BoardFrame.startG.removeMouseListener(ViewEvents.saveListener);
 
 			int response = JOptionPane.showConfirmDialog(null,
 					BoardFrame.messages.getString("startGameWill") + str1 +" "+
@@ -106,11 +107,11 @@ public class SaveButtonListener implements MouseListener {
 			} else {
 
 			}
-			BoardFrame.grid.addMouseListener(ViewEvents.gridListener);
-			BoardFrame.grid.addMouseMotionListener(ViewEvents.gridListener);
-
-			BoardFrame.setMakingGame(false);
-			BoardFrame.manual.setVisible(true);
+//			BoardFrame.grid.addMouseListener(ViewEvents.gridListener);
+//			BoardFrame.grid.addMouseMotionListener(ViewEvents.gridListener);
+//
+//			BoardFrame.setMakingGame(false);
+//			BoardFrame.manual.setVisible(true);
 			//JKemik.settings.setVisible(false);
 			System.out.println(game + "\n\n");
 			JKemik.writeSettings();

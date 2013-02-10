@@ -27,8 +27,7 @@ public class SaveSettingsListener implements MouseListener {
 		try {
 			if (!JKemik.settings_t.isAutoCapture()
 					&& JKemik.settings_t.isAutoPass()) {
-				// JOptionPane.showMessageDialog(null, "Auto Capture MUST be ON"
-				// + "\nwhen automatic turn pass is ON", "Ellegal Action",
+				
 				JOptionPane.showMessageDialog(null,
 						BoardFrame.messages.getString("autoMustBeON1")
 								+ "\n"
@@ -37,6 +36,8 @@ public class SaveSettingsListener implements MouseListener {
 						BoardFrame.messages.getString("ilAction"),
 						JOptionPane.WARNING_MESSAGE);
 			} else {
+				JKemik.settings_t.setGameSetupMode(true);
+				BoardFrame.print_point.setText("" + BoardFrame.messages.getString("gameSetupMode"));
 				STemplate t = JKemik.settings_t;
 				String str = SettingsPanel.max_win.getText();
 				// SettingsPanel.translateUI();
@@ -47,28 +48,30 @@ public class SaveSettingsListener implements MouseListener {
 				int maxw = Integer.parseInt(str);
 				if (Tools.isMaxWinLessThanGrid(Grid.getBoardSize(), maxw)) {
 //					BoardFrame.progressB.setVisible(true);
-					// BoardFrame.PROGRESS_BAR_MAX = 9;int i = 0;
-					//BoardFrame.progressB.setIndeterminate(true);
-					BoardFrame.displayGrid(true);
+//					 BoardFrame.PROGRESS_BAR_MAX = 9;int i = 0;
+//					BoardFrame.progressB.setIndeterminate(true);
+					//BoardFrame.displayGrid(true);
 					t.setMaxWinVal(maxw);
-					BoardFrame.updateSettingPanel();
+					//BoardFrame.updateSettingPanel();
 					t.setMemo(t.isAutoCapture(), t.isAutoPass());
 					t.setLanguage(lang);
 					Locale local = new Locale(key);
 					BoardFrame.setMessages(ResourceBundle.getBundle(properties,
 							local));
 					System.out.println("The language is : " + lang);
-					BoardFrame.translateUI();
-					
-					BoardFrame.enableGameControlPanel();
-					BoardFrame.pColor1.addMouseListener(ViewEvents.p1Listener);
-					BoardFrame.pColor2.addMouseListener(ViewEvents.p2Listener);
-					BoardFrame.label1.addMouseListener(ViewEvents.n1Listener);
-					BoardFrame.label2.addMouseListener(ViewEvents.n2Listener);
-					BoardFrame.l1.addMouseListener(ViewEvents.gridSizeListener);
-					BoardFrame.l2.addMouseListener(ViewEvents.gameThemeListener);
-					BoardFrame.settings.addMouseListener(ViewEvents.sysPrefsListener);
-					BoardFrame.startG.addMouseListener(ViewEvents.saveListener);
+					//BoardFrame.translateUI();
+					BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
+					ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
+//					BoardFrame.enableGameControlPanel();
+//					BoardFrame.pColor1.addMouseListener(ViewEvents.p1Listener);
+//					BoardFrame.pColor2.addMouseListener(ViewEvents.p2Listener);
+//					BoardFrame.label1.addMouseListener(ViewEvents.n1Listener);
+//					BoardFrame.label2.addMouseListener(ViewEvents.n2Listener);
+//					BoardFrame.l1.addMouseListener(ViewEvents.gridSizeListener);
+//					BoardFrame.l2.addMouseListener(ViewEvents.gameThemeListener);
+//					BoardFrame.settings.addMouseListener(ViewEvents.sysPrefsListener);
+//					BoardFrame.startG.addMouseListener(ViewEvents.saveListener);
+//					BoardFrame.settings.removeMouseListener(ViewEvents.sysPrefsListener);
 //					Thread.sleep(1000);
 //					BoardFrame.progressB.setIndeterminate(false);
 //					BoardFrame.progressB.setVisible(false);
