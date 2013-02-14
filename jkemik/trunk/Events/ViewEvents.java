@@ -147,8 +147,7 @@ public class ViewEvents {
 			
 			// Enable control buttons
 			BoardFrame.refresh.addMouseListener(refreshListener);
-			BoardFrame.manual_c
-					.addMouseListener(manualCaptureButtonListener);
+			BoardFrame.manual_c.addMouseListener(manualCaptureButtonListener);
 			BoardFrame.undo.addMouseListener(undoListener);
 			BoardFrame.pass_turn.addMouseListener(passTurnListener);
 			
@@ -164,7 +163,7 @@ public class ViewEvents {
 			BoardFrame.label2.removeMouseListener(n2Listener);
 			BoardFrame.l1.removeMouseListener(gridSizeListener);
 			BoardFrame.l2.removeMouseListener(gameThemeListener);
-			BoardFrame.settings.removeMouseListener(sysPrefsListener);
+			//BoardFrame.settings.removeMouseListener(sysPrefsListener);
 			BoardFrame.startG.removeMouseListener(saveListener);
 			BoardFrame.settings.removeMouseListener(sysPrefsListener);
 		}

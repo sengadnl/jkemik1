@@ -39,51 +39,10 @@ public class NewGameListener implements MouseListener{
 		if (response == 0) {
 			// set listeners
 			JKemik.settings_t.setGameSetupMode(true);
-			//if(BoardFrame.manual.isSelected()){
-				JKemik.game.getCurrentP().setSelected(new ArrayList<Point>());
-//				Grid.manualc = false;
-//				BoardFrame.manual.setSelected(false);
-//				BoardFrame.manual_c.setSelected(false);
-//				JKemik.settings_t.restaureMemo();
-//				BoardFrame.updateSettingPanel();
-//			}
-			
-//			BoardFrame.pColor1.addMouseListener(ViewEvents.p1Listener);
-//			BoardFrame.pColor2.addMouseListener(ViewEvents.p2Listener);
-//			BoardFrame.label1.addMouseListener(ViewEvents.n1Listener);
-//			BoardFrame.label2.addMouseListener(ViewEvents.n2Listener);
-//			BoardFrame.l1.addMouseListener(ViewEvents.gridSizeListener);
-//			BoardFrame.l2.addMouseListener(ViewEvents.gameThemeListener);
-//			BoardFrame.startG.addMouseListener(ViewEvents.saveListener);
-//			BoardFrame.settings.addMouseListener(ViewEvents.sysPrefsListener);
-//			BoardFrame.grid.removeMouseListener(ViewEvents.gridListener);
-//			BoardFrame.grid.removeMouseMotionListener(ViewEvents.gridListener);
-//			
-//			//Disable control buttons
-//			BoardFrame.refresh.removeMouseListener(ViewEvents.refreshListener);
-//			BoardFrame.manual_c.removeMouseListener(ViewEvents.manualCaptureButtonListener);
-//			BoardFrame.undo.removeMouseListener(ViewEvents.undoListener);
-//			BoardFrame.pass_turn.removeMouseListener(ViewEvents.passTurnListener);
+			JKemik.game.getCurrentP().setSelected(new ArrayList<Point>());
+
 			ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
 			BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
-			
-//			BoardFrame.enableGameControlPanel();
-//			
-//			//Reset game exit label
-//			BoardFrame.Game_status.setText(BoardFrame.messages.getString("newG"));
-//			BoardFrame.Game_status.setForeground(Color.GREEN);
-//			
-//			BoardFrame.boostLabel(BoardFrame.settings);
-//			
-//			BoardFrame.showControlButtons();
-//			BoardFrame.grid.initCursorLocation();
-//			//Reset grid
-//			BoardFrame.panel2.repaint();
-//			BoardFrame.grid.drawn = false;
-//			BoardFrame.grid.repaint();
-//			
-//			BoardFrame.p1panel.initPanelForNewGame(JKemik.template.getP1_name(), BoardFrame.BOARD_COLOR);
-//			BoardFrame.p2panel.initPanelForNewGame(JKemik.template.getP2_name(), BoardFrame.BOARD_COLOR);
 
 		} else if (response == 1) {
 			int res = JOptionPane.showConfirmDialog(null,
