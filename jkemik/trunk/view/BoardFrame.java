@@ -628,6 +628,7 @@ public class BoardFrame extends JFrame {
 		manual_c.setForeground(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
 		manual.setBackground(BoardFrame.THEME_COLOR);
 		manual.setForeground(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
+		SettingsPanel.setTheme(THEME_COLOR, Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
 	}
 
 	public void setTheme(String str) {
@@ -836,7 +837,7 @@ public class BoardFrame extends JFrame {
 			displayGrid(false);
 		}
 	}
-
+	
 	public double height = 0.0, width = 0.0;
 	public static JProgressBar progressB;
 	public static JLabel p3_label1, p3_label2;
