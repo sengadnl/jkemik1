@@ -3,13 +3,17 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import api.STemplate;
@@ -33,6 +37,7 @@ public class SettingsPanel extends JPanel{
 	private static JPanel l1;
 	private static JPanel l2;
 	private static JPanel l3;
+	private static JPanel rbHolder;
 
 	public static RotateLabel auto_capture;
 	public static RotateLabel auto_turn_pass;
@@ -43,7 +48,9 @@ public class SettingsPanel extends JPanel{
 	public static JLabel label1,label2,label3,label4,label5;	
 	private int maxWinVal;
 	static ResourceBundle messages;
-
+	public static JRadioButton humHumButton,humComButton, networkButton;  
+	private ButtonGroup group = new ButtonGroup(); 
+	
 	private String[] auto_cap = { "ON", "OFF" };
 	private String[] auto_t_p = { "ON", "OFF" };
 	//private static java.awt.Container container;
@@ -121,15 +128,14 @@ public class SettingsPanel extends JPanel{
 		
 		//JKIcon icon = new JKIcon("media/jkemik-small.png", "");
 		save = new JButton("Done");
-		save.setBackground(Globals.BTN_BGD_COLOR);
-		save.setForeground(Globals.BTN_FRD_COLOR);
 		l1 = new JPanel();
 		l1.setBackground(BoardFrame.BOARD_COLOR);
 		l2 = new JPanel();
-		l2.setBackground(BoardFrame.BOARD_COLOR);
+		
 		l2.setLayout(new GridLayout(4, 2,20,20));
 		l3 = new JPanel();
-		l3.setBackground(BoardFrame.BOARD_COLOR);
+		l3.setLayout(new BorderLayout());
+		
 
 		auto_capture = new RotateLabel(auto_cap);
 		auto_turn_pass = new RotateLabel(auto_t_p);
@@ -142,19 +148,11 @@ public class SettingsPanel extends JPanel{
 		languageList = new JComboBox(Globals.laguageNames);//
 
 		label1 = new JLabel("  " + messages.getString("autoCaptureL") + " : ");
-		label1.setForeground(Color.YELLOW);
-
 		label2 = new JLabel("  " + messages.getString("autoPassL") + " : ");
-		label2.setForeground(Color.YELLOW);
-
 		label3 = new JLabel("  " + messages.getString("manualCapt") + " : ");
-		label3.setForeground(Color.YELLOW);
-
 		label4 = new JLabel("  " + messages.getString("maxWinl") + " : ");
-		label4.setForeground(Color.YELLOW);
-		
 		label5 = new JLabel("  " + messages.getString("language") + " : ");
-		label5.setForeground(Color.YELLOW);
+		
 		
 		save.setText(messages.getString("saveB"));
 
@@ -171,10 +169,63 @@ public class SettingsPanel extends JPanel{
 		l2.add(max_win);
 		l2.add(label5);
 		l2.add(languageList);
+		createRadioButtons();
+		l3.add(save, BorderLayout.SOUTH);
 		
-		l3.add(save);
-
 	}
+	protected static void setTheme(Color bg, Color fg){
+		label1.setForeground(fg);
+		label2.setForeground(fg);
+		label3.setForeground(fg);
+		label4.setForeground(fg);
+		label5.setForeground(fg);
+		
+		save.setForeground(Globals.BTN_FRD_COLOR);
+		save.setBackground(Globals.BTN_BGD_COLOR);
+		
+		l2.setBackground(bg);
+		l3.setBackground(bg);
+		
+		humHumButton.setBackground(bg);
+		humHumButton.setForeground(fg);
+		humComButton.setBackground(bg);
+		humComButton.setForeground(fg);
+		networkButton.setBackground(bg);
+		networkButton.setForeground(fg);
+	}
+	
+	public void createRadioButtons(){
+		rbHolder = new JPanel();
+		rbHolder.setBackground(BoardFrame.THEME_COLOR);
+		//rbHolder.setForeground(BoardFrame.BOARD_COLOR);
+		humHumButton = new JRadioButton("Hum vs Hum");
+		
+		humHumButton.setMnemonic(KeyEvent.VK_B);
+		//humHumButton.setActionCommand(birdString);    
+		humHumButton.setSelected(true);
+
+		humComButton = new JRadioButton("Hum vs Com");
+		
+		humComButton.setMnemonic(KeyEvent.VK_C);
+		//humComButton.setActionCommand(catString);
+
+		networkButton = new JRadioButton("Network");
+		
+		networkButton.setMnemonic(KeyEvent.VK_D);
+		//networkButton.setActionCommand(dogString);
+
+		    
+		//Group the radio buttons.
+		group = new ButtonGroup();
+		group.add(humHumButton);
+		group.add(humComButton);
+		group.add(networkButton);
+		rbHolder.add(humHumButton);
+		rbHolder.add(humComButton);
+		rbHolder.add(networkButton);
+		l3.add(rbHolder, BorderLayout.NORTH);
+	}
+	
 	public void translateSettingsPanel(STemplate t){
 		getLanguageList().setSelectedItem(t.getLanguage());
 		setAutoCap(t.isAutoCapture());
@@ -208,8 +259,10 @@ public class SettingsPanel extends JPanel{
 	}
 
 //	public static void main(String[] args) {
+//		JFrame frame = new JFrame();
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		SettingsPanel settings = new SettingsPanel(300, 300);
-//		settings.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		settings.setVisible(true);
+//		frame.add(settings);
+//		frame.setVisible(true);
 //	}
 }
