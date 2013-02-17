@@ -2,12 +2,14 @@
  * 
  */
 package Events;
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import controler.JKemik;
 import api.GTemplate;
 import utilities.Globals;
+import utilities.Tools;
 import view.BoardFrame;
 import view.Grid;
 import view.RotateLabel;
@@ -40,14 +42,17 @@ public class BoardSizeListener implements MouseListener{
 
 	
 	public void mouseEntered(MouseEvent e) {
-		this.label.highlight();
+		Color c = BoardFrame.BOARD_COLOR;
+		this.label.setForeground(Tools.fade(c));
 		//label.setToolTipText("Click to change board size.");
 		label.setToolTipText(BoardFrame.messages.getString("boardSizeHover"));
 		//boardSizeHover
 	}
 	
 	public void mouseExited(MouseEvent e) {
-		this.label.resetBGC();
+		//this.label.resetBGC();
+		Color c = BoardFrame.BOARD_COLOR;
+		this.label.setForeground(c);
 	}
 
 	public void mousePressed(MouseEvent e) {

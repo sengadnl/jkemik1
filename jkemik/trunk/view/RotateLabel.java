@@ -3,7 +3,6 @@
  */
 package view;
 
-import java.awt.*;
 
 import javax.swing.*;
 
@@ -18,12 +17,12 @@ public class RotateLabel extends JLabel {
 	private static final long serialVersionUID = 1L;
 	private String[] list;
 	private int index = 0;
-	private Color bg = new Color(255,255,255);
+	//private Color bg = new Color(255,255,255);
 
 	public RotateLabel(String[] list) {
 		this.list = list;
 		setText(list[0]);
-		setForeground(this.bg);
+		//setForeground(BoardFrame.BOARD_COLOR);
 		setHorizontalAlignment(SwingConstants.CENTER);
 	}
 
@@ -56,13 +55,13 @@ public class RotateLabel extends JLabel {
 		}
 	}
 
-	public void highlight() {
-		setForeground(new Color(250,0,250));
-	}
-
-	public void resetBGC() {
-		setForeground(this.bg);
-	}
+//	public void highlight() {
+//		setForeground(new Color(250,0,250));
+//	}
+//
+//	public void resetBGC() {
+//		setForeground(this.bg);
+//	}
 
 	/**
 	 * @return the list

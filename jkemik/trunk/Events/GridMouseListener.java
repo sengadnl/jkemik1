@@ -38,7 +38,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		Grid.x = e.getX();
 		Grid.y = e.getY();
 		Game game = JKemik.game;
-		Player current = game.getCurrentP();
+		Player current = (Player)game.getCurrentP();
 		// if the point is not out of the board's bounds
 		Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
 		Point temp = new Point(Grid.x, Grid.y);
