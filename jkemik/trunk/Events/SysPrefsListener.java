@@ -21,23 +21,8 @@ public class SysPrefsListener implements MouseListener {
 
 	public void mouseClicked(MouseEvent arg0) {
 		JKemik.settings_t.setSystemSetupMode(true);
-		//STemplate t = JKemik.settings_t;
-//		SettingsPanel.translateSettingsPanel(t);
 		BoardFrame.uiLooksUpdate(JKemik.settings_t,JKemik.template);
 		ViewEvents.uiEventUpdates(JKemik.settings_t,JKemik.template);
-//		BoardFrame.print_point.setText("" + BoardFrame.messages.getString("sysSetupMode"));
-//		BoardFrame.disableGameControlPanel();
-//		BoardFrame.pColor1.removeMouseListener(ViewEvents.p1Listener);
-//		BoardFrame.pColor2.removeMouseListener(ViewEvents.p2Listener);
-//		BoardFrame.label1.removeMouseListener(ViewEvents.n1Listener);
-//		BoardFrame.label2.removeMouseListener(ViewEvents.n2Listener);
-//		BoardFrame.l1.removeMouseListener(ViewEvents.gridSizeListener);
-//		BoardFrame.l2.removeMouseListener(ViewEvents.gameThemeListener);
-//		BoardFrame.settings.removeMouseListener(ViewEvents.sysPrefsListener);
-//		BoardFrame.startG.removeMouseListener(ViewEvents.saveListener);
-//		BoardFrame.settings.removeMouseListener(ViewEvents.sysPrefsListener);
-		
-	//	BoardFrame.displayGrid(false);
 	}
 
 	public void mouseExited(MouseEvent arg0) {

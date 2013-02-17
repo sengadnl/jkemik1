@@ -290,7 +290,7 @@ public class Game implements Serializable {
 	 * 
 	 * @return the guest
 	 */
-	public Player getGuest() {
+	public AbstractPlayer getGuest() {
 		return guest;
 	}
 
@@ -307,7 +307,7 @@ public class Game implements Serializable {
 	/**
 	 * @return This method returns the current player
 	 */
-	public Player getCurrentP() {
+	public AbstractPlayer getCurrentP() {
 		return currentP;
 	}
 
@@ -428,7 +428,7 @@ public class Game implements Serializable {
 	/**
 	 * @return the player1
 	 */
-	public Player getPlayer1() {
+	public AbstractPlayer getPlayer1() {
 		return player1;
 	}
 
@@ -443,7 +443,7 @@ public class Game implements Serializable {
 	/**
 	 * @return the player2
 	 */
-	public Player getPlayer2() {
+	public AbstractPlayer getPlayer2() {
 		return player2;
 	}
 
@@ -518,9 +518,9 @@ public class Game implements Serializable {
 
 	/* keeps track of all captured points */
 	public static ArrayList<Point> deadDots;
-	private Player player1;
-	private Player player2;
-	private static Player currentP = new Player(null, "");
-	private static Player guest = new Player(null, "");
+	private AbstractPlayer player1;
+	private AbstractPlayer player2;
+	private static AbstractPlayer currentP = new Player(null, "");
+	private static AbstractPlayer guest = new Player(null, "");
 
 }

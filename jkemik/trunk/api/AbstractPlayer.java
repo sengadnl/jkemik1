@@ -12,7 +12,7 @@ import utilities.Tools;
  * @author Daniel Senga Version 0.02010
  * @version 10.0
  */
-abstract class AbstractPlayer implements Serializable {
+public abstract class AbstractPlayer implements Serializable {
 
 	/**
 	 * 
@@ -316,6 +316,20 @@ abstract class AbstractPlayer implements Serializable {
 	public void setPlay_flag(int playFlag) {
 		play_flag = playFlag;
 	}
+	public int compareTo(AbstractPlayer o) {
+		if (this.getColor().equals(o.getColor())) {
+			return 0;
+		}
+		return 1;
+	}
+
+	public boolean isAi() {
+		return ai;
+	}
+
+	public void setAi(boolean ai) {
+		this.ai = ai;
+	}
 
 	/**
 	 * @param cells
@@ -336,6 +350,7 @@ abstract class AbstractPlayer implements Serializable {
 
 	private String name = "player";
 	private boolean turn = false;
+	private boolean ai = false;
 	private double score = 0.0;
 	private Color color;
 	private Point origin = new Point(444444, 7798979);

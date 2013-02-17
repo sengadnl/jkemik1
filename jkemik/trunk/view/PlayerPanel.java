@@ -3,20 +3,13 @@
  */
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 import utilities.Tools;
+import api.AbstractPlayer;
 
-import api.Player;
 
 /**
  * @author dalet
@@ -186,13 +179,13 @@ public class PlayerPanel extends JPanel {
 	}
 
 
-	public void updatePlayerPanel(Player p) {
+	public void updatePlayerPanel(AbstractPlayer abstractPlayer) {
 		try {
-			plottedv.setText("" + p.getPloted().size());
-			capturedv.setText("" + p.getCapturedDots().size());
-			cellsv.setText("" + p.getCells().size());
-			captCellsv.setText("" + p.getCapturedCells().size());
-			scorev.setText("" + p.getScore());
+			plottedv.setText("" + abstractPlayer.getPloted().size());
+			capturedv.setText("" + abstractPlayer.getCapturedDots().size());
+			cellsv.setText("" + abstractPlayer.getCells().size());
+			captCellsv.setText("" + abstractPlayer.getCapturedCells().size());
+			scorev.setText("" + abstractPlayer.getScore());
 		} catch (Exception e) {
 			System.out.println(" In PlayerPanel " + e.getMessage());
 		}

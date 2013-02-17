@@ -140,10 +140,11 @@ public class Artist {
 	}
 
 	protected static void drawGame(Game g, Graphics2D g2) {
-		ArrayList<Cell> p1c = g.getPlayer1().getCells();
-		ArrayList<Cell> p2c = g.getPlayer2().getCells();
-		Player p1 = g.getPlayer1();
-		Player p2 = g.getPlayer2();
+		Player p1 = (Player) g.getPlayer1();
+		Player p2 = (Player) g.getPlayer2();
+		ArrayList<Cell> p1c = p1.getCells();
+		ArrayList<Cell> p2c = p2.getCells();
+		
 
 		// draw p1 cells
 		if (drawCell(p1c, p1, p2, g2)) {}

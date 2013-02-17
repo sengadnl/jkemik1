@@ -6,18 +6,16 @@ import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-
+import javax.swing.border.TitledBorder;
 import api.STemplate;
-
 import controler.JKemik;
 import utilities.Globals;
 import utilities.Tools;
@@ -34,10 +32,11 @@ public class SettingsPanel extends JPanel{
 	protected static int COUNTER = 1;
 	protected static int MAX_VAL = 33;
 	public static JButton save;
-	private static JPanel l1;
+	//private static JPanel l1;
 	private static JPanel l2;
 	private static JPanel l3;
 	private static JPanel rbHolder;
+	private static JPanel buttonsHolder;
 
 	public static RotateLabel auto_capture;
 	public static RotateLabel auto_turn_pass;
@@ -49,6 +48,7 @@ public class SettingsPanel extends JPanel{
 	private int maxWinVal;
 	static ResourceBundle messages;
 	public static JRadioButton humHumButton,humComButton, networkButton;  
+	private static TitledBorder RBBorder;
 	private ButtonGroup group = new ButtonGroup(); 
 	
 	private String[] auto_cap = { "ON", "OFF" };
@@ -122,14 +122,15 @@ public class SettingsPanel extends JPanel{
 		String code = Tools.languageKey(JKemik.settings_t.getLanguage());
 		String properties = Tools.propertiesFilename(code);
 		Locale currentLocale = new Locale(code.toLowerCase());
-
+		buttonsHolder = new JPanel();
+		buttonsHolder.setBackground(BoardFrame.THEME_COLOR);
 	//	ResourceBundle 
 		messages = ResourceBundle.getBundle(properties, currentLocale);
 		
 		//JKIcon icon = new JKIcon("media/jkemik-small.png", "");
 		save = new JButton("Done");
-		l1 = new JPanel();
-		l1.setBackground(BoardFrame.BOARD_COLOR);
+//		l1 = new JPanel();
+//		l1.setBackground(BoardFrame.BOARD_COLOR);
 		l2 = new JPanel();
 		
 		l2.setLayout(new GridLayout(4, 2,20,20));
@@ -141,9 +142,6 @@ public class SettingsPanel extends JPanel{
 		auto_turn_pass = new RotateLabel(auto_t_p);
 		
 		max_win = new JTextField("" + JKemik.settings_t.getMaxWinVal());
-		max_win.setBackground(Color.GRAY);
-		max_win.setForeground(Color.WHITE);
-		max_win.setCaretColor(Color.GREEN);
 		
 		languageList = new JComboBox(Globals.laguageNames);//
 
@@ -156,7 +154,7 @@ public class SettingsPanel extends JPanel{
 		
 		save.setText(messages.getString("saveB"));
 
-		add(l1, BorderLayout.NORTH);
+		//add(l1, BorderLayout.NORTH);
 		add(l2, BorderLayout.CENTER);
 		add(l3, BorderLayout.SOUTH);
 
@@ -170,21 +168,28 @@ public class SettingsPanel extends JPanel{
 		l2.add(label5);
 		l2.add(languageList);
 		createRadioButtons();
-		l3.add(save, BorderLayout.SOUTH);
+		buttonsHolder.add(save);
+		l3.add(buttonsHolder, BorderLayout.SOUTH);
 		
 	}
-	protected static void setTheme(Color bg, Color fg){
+	protected void setTheme(Color bg, Color fg){
+		setBorder(BorderFactory.createLineBorder(fg));
 		label1.setForeground(fg);
 		label2.setForeground(fg);
 		label3.setForeground(fg);
 		label4.setForeground(fg);
 		label5.setForeground(fg);
-		
-		save.setForeground(Globals.BTN_FRD_COLOR);
-		save.setBackground(Globals.BTN_BGD_COLOR);
+		decoratebuttons(fg, bg);
 		
 		l2.setBackground(bg);
 		l3.setBackground(bg);
+		
+		max_win.setBackground(fg);
+		max_win.setForeground(bg);
+		max_win.setCaretColor(bg);
+		
+		languageList.setBackground(fg);
+		languageList.setForeground(bg);
 		
 		humHumButton.setBackground(bg);
 		humHumButton.setForeground(fg);
@@ -192,12 +197,16 @@ public class SettingsPanel extends JPanel{
 		humComButton.setForeground(fg);
 		networkButton.setBackground(bg);
 		networkButton.setForeground(fg);
+		RBBorder.setTitleColor(fg);
 	}
 	
-	public void createRadioButtons(){
+	private void createRadioButtons(){
 		rbHolder = new JPanel();
 		rbHolder.setBackground(BoardFrame.THEME_COLOR);
-		//rbHolder.setForeground(BoardFrame.BOARD_COLOR);
+		rbHolder.setForeground(BoardFrame.BOARD_COLOR);
+		RBBorder = new TitledBorder("Game Type");
+		RBBorder.setTitleColor(BoardFrame.BOARD_COLOR);
+		rbHolder.setBorder(RBBorder);
 		humHumButton = new JRadioButton("Hum vs Hum");
 		
 		humHumButton.setMnemonic(KeyEvent.VK_B);
@@ -256,6 +265,18 @@ public class SettingsPanel extends JPanel{
 		label4.setText("  " + messages.getString("maxWinl") + " : ");
 		label5.setText("  " + messages.getString("language") + " : ");
 		save.setText(messages.getString("saveB"));
+	}
+
+	public TitledBorder getRBBorder() {
+		return RBBorder;
+	}
+
+	public void setRBBorder(TitledBorder rBBorder) {
+		RBBorder = rBBorder;
+	}
+	public static void decoratebuttons(Color bg, Color fg) {
+		save.setBackground(bg);
+		save.setForeground(fg);
 	}
 
 //	public static void main(String[] args) {

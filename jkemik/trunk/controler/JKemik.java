@@ -6,9 +6,9 @@ package controler;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-
 import utilities.*;
 import view.*;
+import agents.JkBot;
 import api.*;
 
 /**
@@ -44,10 +44,10 @@ public class JKemik extends Application {
 			readTemplate();
 			readSettings();
 			// readGameObj();
-			//settings = new SettingsPanel(300, 300);
-			game = new Game(new Player(template.getP1_c(),
-				 	template.getP1_name()), new Player(template.getP1_c(),
-					template.getP2_name()));
+			AbstractPlayer player1 = new Player(template.getP1_c(),template.getP1_name());
+			AbstractPlayer player2 = new Player(template.getP2_c(),template.getP2_name());
+			//JkBot player3 = new JkBot(template.getP2_c(), template.getP2_name()); //TODO
+			game = new Game((Player)player1,(Player)player2);
 			System.out.println(game + "\n\n");
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());

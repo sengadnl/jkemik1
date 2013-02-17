@@ -3,12 +3,12 @@
  */
 package Events;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import controler.JKemik;
-
-import api.GTemplate;
+import utilities.Tools;
 import view.BoardFrame;
 import view.RotateLabel;
 
@@ -34,21 +34,20 @@ public class GameThemeListener implements MouseListener{
 			BoardFrame.grid.drawn = false;
 			BoardFrame.grid.repaint();
 		}
-		
-		GTemplate t = JKemik.template;
-		BoardFrame.p1panel.initPanelForNewGame(t.getP1_name(), BoardFrame.BOARD_COLOR);
-		BoardFrame.p2panel.initPanelForNewGame(t.getP2_name(), BoardFrame.BOARD_COLOR);
+		BoardFrame.uiLooksUpdate(JKemik.settings_t,JKemik.template);
 		JKemik.view.repaint();
 
 	}
 	public void mouseEntered(MouseEvent e) {
-		this.label.highlight();
+		Color c = BoardFrame.BOARD_COLOR;
+		this.label.setForeground(Tools.fade(c));
 		//label.setToolTipText("Click to change the theme.");
 		label.setToolTipText(BoardFrame.messages.getString("themeHover"));
 	}
 
 	public void mouseExited(MouseEvent e) {
-		this.label.resetBGC();	
+		Color c = BoardFrame.BOARD_COLOR;
+		this.label.setForeground(c);
 	}
 
 	public void mousePressed(MouseEvent e) {}

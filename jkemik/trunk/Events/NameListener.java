@@ -3,6 +3,7 @@
  */
 package Events;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -11,6 +12,7 @@ import javax.swing.JOptionPane;
 
 import controler.JKemik;
 
+import utilities.Tools;
 import utilities.ValidateInput;
 import view.BoardFrame;
 
@@ -70,16 +72,18 @@ public class NameListener implements MouseListener {
 
 	public void mouseEntered(MouseEvent e) {
 		if (this.one == 1) {
-			BoardFrame.highlightP1();
+			Color c = JKemik.template.getP1_c();
+			BoardFrame.label1.setForeground(Tools.fade(c));
 		} else {
-			BoardFrame.highlightP2();
+			Color c = JKemik.template.getP2_c();
+			BoardFrame.label2.setForeground(Tools.fade(c));
 		}
-		// lab.setToolTipText("Click to set this player's name.");
 		lab.setToolTipText(BoardFrame.messages.getString("playerNameHover"));
 	}
 
 	public void mouseExited(MouseEvent e) {
-		BoardFrame.resetBGCP();
+		BoardFrame.label1.setForeground(JKemik.template.getP1_c());
+		BoardFrame.label2.setForeground(JKemik.template.getP2_c());
 	}
 
 	public void mousePressed(MouseEvent e) {
