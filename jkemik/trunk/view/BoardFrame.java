@@ -436,11 +436,11 @@ public class BoardFrame extends JFrame {
 	}
 
 	public static void enableGameControlPanel() {
-		l1.setForeground(Tools.boost(l1.getBackground()));
-		l2.setForeground(Tools.boost(l2.getBackground()));
+		l1.setForeground(Tools.boost(BoardFrame.BOARD_COLOR, Globals.FADE_VARIANT));
+		l2.setForeground(Tools.boost(BoardFrame.BOARD_COLOR,  Globals.FADE_VARIANT));
 
-		label1.setForeground(Tools.boost(l1.getBackground()));
-		label2.setForeground(Tools.boost(l1.getBackground()));
+		label1.setForeground(Tools.boost(JKemik.template.getP1_c()));
+		label2.setForeground(Tools.boost(JKemik.template.getP2_c()));
 
 		p1panel.initPanelForNewGame("", JKemik.template.getP1_c());
 		p2panel.initPanelForNewGame("", JKemik.template.getP2_c());
