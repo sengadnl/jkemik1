@@ -1,10 +1,14 @@
 package Events;
 
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import controler.JKemik;
+import utilities.Globals;
+import utilities.Tools;
+import view.BoardFrame;
 import view.RotateLabel;
 
 public class AutoCaptureListener implements MouseListener{
@@ -22,11 +26,13 @@ public class AutoCaptureListener implements MouseListener{
 		}
 	}
 	public void mouseEntered(MouseEvent e) {
-		this.label.highlight();
+		Color c = Tools.boost(BoardFrame.BOARD_COLOR, Globals.LABEL_VARIANT);
+		this.label.setForeground(Tools.fade(c));
 	}
 
 	public void mouseExited(MouseEvent e) {
-		this.label.resetBGC();	
+		Color c = Tools.boost(BoardFrame.BOARD_COLOR, Globals.LABEL_VARIANT);
+		this.label.setForeground(c);
 	}
 
 	public void mousePressed(MouseEvent e) {

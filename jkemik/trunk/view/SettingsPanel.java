@@ -184,6 +184,9 @@ public class SettingsPanel extends JPanel{
 		l2.setBackground(bg);
 		l3.setBackground(bg);
 		
+		auto_capture.setForeground(fg);
+		auto_turn_pass.setForeground(fg);
+		
 		max_win.setBackground(fg);
 		max_win.setForeground(bg);
 		max_win.setCaretColor(bg);
