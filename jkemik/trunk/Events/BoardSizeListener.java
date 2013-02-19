@@ -42,7 +42,7 @@ public class BoardSizeListener implements MouseListener{
 
 	
 	public void mouseEntered(MouseEvent e) {
-		Color c = BoardFrame.BOARD_COLOR;
+		Color c = Tools.boost(BoardFrame.BOARD_COLOR,Globals.LABEL_VARIANT);
 		this.label.setForeground(Tools.fade(c));
 		//label.setToolTipText("Click to change board size.");
 		label.setToolTipText(BoardFrame.messages.getString("boardSizeHover"));
@@ -51,7 +51,7 @@ public class BoardSizeListener implements MouseListener{
 	
 	public void mouseExited(MouseEvent e) {
 		//this.label.resetBGC();
-		Color c = BoardFrame.BOARD_COLOR;
+		Color c = Tools.boost(BoardFrame.BOARD_COLOR,Globals.LABEL_VARIANT);
 		this.label.setForeground(c);
 	}
 

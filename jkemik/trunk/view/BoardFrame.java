@@ -366,6 +366,7 @@ public class BoardFrame extends JFrame {
 				(int) BOTTOM_COLOR_P_H);
 		pColor2.rotateColor(JKemik.template.getP2_c());
 
+		//TODO
 		l1 = new RotateLabel(this.gridsize);
 		l1.setText(JKemik.template.gridSizeToString());
 		l2 = new RotateLabel(this.gameType);
@@ -426,8 +427,9 @@ public class BoardFrame extends JFrame {
 	}
 
 	public static void disableGameControlPanel() {
-		l1.setForeground(BoardFrame.BOARD_COLOR);
-		l2.setForeground(BoardFrame.BOARD_COLOR);
+		Color c  = Tools.boost(BoardFrame.BOARD_COLOR, Globals.FADE_VARIANT);
+		l1.setForeground(Tools.fade(c));
+		l2.setForeground(Tools.fade(c));
 		label1.setForeground(Tools.fade(JKemik.template.getP1_c()));
 		label2.setForeground(Tools.fade(JKemik.template.getP2_c()));
 		pColor1.setBackground(Tools.fade(JKemik.template.getP1_c()));
@@ -612,8 +614,8 @@ public class BoardFrame extends JFrame {
 		Holder2.setBackground(BoardFrame.CPANEL_COLOR);
 		Holder3.setBackground(BoardFrame.CPANEL_COLOR);
 		//TODO
-		l1.setForeground(Tools.boost(BOARD_COLOR,Globals.FADE_VARIANT));
-		l2.setForeground(Tools.boost(BOARD_COLOR,Globals.FADE_VARIANT));
+		l1.setForeground(Tools.boost(BOARD_COLOR,Globals.LABEL_VARIANT));
+		l2.setForeground(Tools.boost(BOARD_COLOR,Globals.LABEL_VARIANT));
 		
 		manual_c.setBackground(BoardFrame.THEME_COLOR);
 		manual_c.setForeground(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
