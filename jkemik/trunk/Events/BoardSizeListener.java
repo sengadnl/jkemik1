@@ -51,8 +51,8 @@ public class BoardSizeListener implements MouseListener{
 	
 	public void mouseExited(MouseEvent e) {
 		//this.label.resetBGC();
-		Color c = Tools.boost(BoardFrame.BOARD_COLOR,Globals.LABEL_VARIANT);
-		this.label.setForeground(c);
+		//Color c = Tools.boost(BoardFrame.BOARD_COLOR,Globals.LABEL_VARIANT);
+		this.label.setForeground(Color.WHITE);
 	}
 
 	public void mousePressed(MouseEvent e) {

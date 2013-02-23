@@ -82,8 +82,8 @@ public class NameListener implements MouseListener {
 	}
 
 	public void mouseExited(MouseEvent e) {
-		BoardFrame.label1.setForeground(JKemik.template.getP1_c());
-		BoardFrame.label2.setForeground(JKemik.template.getP2_c());
+		BoardFrame.label1.setForeground(Color.WHITE);
+		BoardFrame.label2.setForeground(Color.WHITE);
 	}
 
 	public void mousePressed(MouseEvent e) {
