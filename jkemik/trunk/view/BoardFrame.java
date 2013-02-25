@@ -104,6 +104,9 @@ public class BoardFrame extends JFrame {
 		ViewEvents.saveSettingsAction();
 		ViewEvents.onAutoCaptureAction();
 		ViewEvents.onAutoPassTurnAction();
+		ViewEvents.networkGameListener();
+		ViewEvents.hvsHListener();
+		ViewEvents.hvsAIListener();
 		ViewEvents.exitListener();
 		ViewEvents.helpListener();
 		ViewEvents.refreshListener();

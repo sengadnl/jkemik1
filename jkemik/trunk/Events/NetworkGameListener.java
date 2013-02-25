@@ -3,6 +3,7 @@ package Events;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 public class NetworkGameListener implements MouseListener{
@@ -10,7 +11,6 @@ public class NetworkGameListener implements MouseListener{
 	public NetworkGameListener(JRadioButton network){
 		setNetwork(network);
 	}
-	
 	public JRadioButton getNetwork() {
 		return network;
 	}
@@ -21,7 +21,7 @@ public class NetworkGameListener implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Network");
 		
 	}
 
