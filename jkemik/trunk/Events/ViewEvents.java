@@ -41,7 +41,21 @@ public class ViewEvents {
 	public static WindowEvents windowListener = new WindowEvents(JKemik.view);
 	public static ManualSelectionListener manualCaptureButtonListener = new ManualSelectionListener(BoardFrame.manual_c);	
 	public static ModeToggleListener modeToggleListener = new ModeToggleListener(BoardFrame.manual);
+	public static HvsHListener hvsh = new HvsHListener(SettingsPanel.humHumButton);
+	public static NetworkGameListener network = new NetworkGameListener(SettingsPanel.networkButton);
+	public static HvsAIListener HvsAI = new HvsAIListener(SettingsPanel.humComButton);
 	
+	public static void hvsAIListener(){
+		SettingsPanel.humComButton.addMouseListener(HvsAI);
+	}
+	
+	public static void networkGameListener(){
+		SettingsPanel.networkButton.addMouseListener(network);
+	}
+	
+	public static void hvsHListener(){
+		SettingsPanel.humHumButton.addMouseListener(hvsh);
+	}
 	public static void modeToggleActionListener(){
 		BoardFrame.manual.addMouseListener(modeToggleListener);
 	}

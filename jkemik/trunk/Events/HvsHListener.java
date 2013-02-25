@@ -3,6 +3,7 @@ package Events;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 public class HvsHListener implements MouseListener{
@@ -21,8 +22,7 @@ public class HvsHListener implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		JOptionPane.showMessageDialog(null, "HvsH");
 	}
 
 	@Override
