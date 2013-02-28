@@ -2,9 +2,9 @@ package Events;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+
+import controler.JKemik;
 
 public class HvsHListener implements MouseListener{
 	private JRadioButton gtype;
@@ -22,7 +22,7 @@ public class HvsHListener implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		JOptionPane.showMessageDialog(null, "HvsH");
+		JKemik.settings_t.setHh(true);
 	}
 
 	@Override
