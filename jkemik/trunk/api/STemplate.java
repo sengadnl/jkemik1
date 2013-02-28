@@ -10,6 +10,9 @@ public class STemplate implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private boolean autoCapture = true;
+	private boolean hh = true;
+	private boolean ch = true;
+	private boolean net = true;
 	private boolean manualCapture = false;
 	private boolean autoPass = true;
 	private boolean gameSetupMode = true;
@@ -23,6 +26,36 @@ public class STemplate implements Serializable {
 
 	public STemplate() {
 		
+	}
+
+	public boolean isHh() {
+		return hh;
+	}
+
+	public void setHh(boolean hh) {
+		this.hh = hh;
+		this.ch = !hh;
+		this.net = !hh;
+	}
+
+	public boolean isCh() {
+		return ch;
+	}
+
+	public void setCh(boolean ch) {
+		this.hh = !ch;
+		this.ch = ch;
+		this.net = !ch;
+	}
+
+	public boolean isNet() {
+		return net;
+	}
+
+	public void setNet(boolean net) {
+		this.hh = !net;
+		this.ch = !net;
+		this.net = net;
 	}
 
 	public boolean isPlayMode() {

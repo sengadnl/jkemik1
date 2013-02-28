@@ -80,7 +80,11 @@ public class JKemik extends Application {
 	public static boolean isStarted() {
 		return isStarted;
 	}
-
+	//TODO
+//	private Game createGame(){
+//		Game game;
+//		return game;
+//	}
 	/**
 	 * @param isStarted
 	 *            the isStarted to set
