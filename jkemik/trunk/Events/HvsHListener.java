@@ -4,8 +4,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JRadioButton;
 
-import controler.JKemik;
-
 public class HvsHListener implements MouseListener{
 	private JRadioButton gtype;
 	public HvsHListener(JRadioButton gtype){
@@ -22,7 +20,7 @@ public class HvsHListener implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		JKemik.settings_t.setHh(true);
+		//JKemik.settings_t.setHh(true);
 	}
 
 	@Override

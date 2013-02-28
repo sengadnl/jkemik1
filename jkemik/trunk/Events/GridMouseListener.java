@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 import controler.JKemik;
 
-import api.Game;
+import api.AbstractGame;
 import api.Player;
 import api.Point;
 
@@ -37,7 +37,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		Grid.mouseclicked = true;
 		Grid.x = e.getX();
 		Grid.y = e.getY();
-		Game game = JKemik.game;
+		AbstractGame game = JKemik.game;
 		Player current = (Player)game.getCurrentP();
 		// if the point is not out of the board's bounds
 		Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
@@ -129,7 +129,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		// if (!Grid.outOfBoard(Grid.x, Grid.y, (int) Grid.squareSize)) {
 		Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
 		Point temp = Grid.makeDrawable(Grid.x, Grid.y);
-		Game game = JKemik.game;
+		AbstractGame game = JKemik.game;
 		if (Tools.containPoint(temp, game.getCurrentP().getPloted())
 				|| Tools.containPoint(temp, game.getGuest().getPloted())
 				|| Tools.containPoint(temp, game.getDeadDots())) {

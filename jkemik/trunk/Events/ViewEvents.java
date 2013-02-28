@@ -144,7 +144,8 @@ public class ViewEvents {
 			BoardFrame.grid.removeMouseMotionListener(gridListener);
 			
 			//Disable control buttons
-			BoardFrame.refresh.removeMouseListener(refreshListener);
+			//BoardFrame.refresh.removeMouseListener(refreshListener);
+			BoardFrame.refresh.addMouseListener(refreshListener);
 			BoardFrame.manual_c.removeMouseListener(manualCaptureButtonListener);
 			BoardFrame.undo.removeMouseListener(undoListener);
 			BoardFrame.pass_turn.removeMouseListener(passTurnListener);
@@ -171,6 +172,7 @@ public class ViewEvents {
 			
 		}
 		if (s.isSystemSetupMode()) {
+			BoardFrame.refresh.addMouseListener(refreshListener);
 			BoardFrame.pColor1.removeMouseListener(p1Listener);
 			BoardFrame.pColor2.removeMouseListener(p2Listener);
 			BoardFrame.label1.removeMouseListener(n1Listener);

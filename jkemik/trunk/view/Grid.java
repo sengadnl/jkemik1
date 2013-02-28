@@ -9,7 +9,7 @@ import javax.swing.*;
 import utilities.*;
 import controler.*;
 import api.*;
-import api.Game;
+import api.AbstractGame;
 import api.Point;
 
 /**
@@ -74,7 +74,7 @@ public class Grid extends JPanel {
 					Grid.half_squareSize, gridLineCol, g2);
 			highLightDot(ccolor);
 
-			Game game = JKemik.game;
+			AbstractGame game = JKemik.game;
 			if (mouseclicked && plotPoint) {
 				Artist.drawCircle(new Point(x, y), game.getCurrentP()
 						.getColor(), Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
@@ -184,7 +184,7 @@ public class Grid extends JPanel {
 	}
 
 	public void switchTurn() {
-		Game game = JKemik.game;
+		AbstractGame game = JKemik.game;
 		if (game.getCurrentP().compareTo(game.getPlayer1()) == 0) {
 			BoardFrame.p2panel.setLabelColor(game.getPlayer2().getColor());
 			BoardFrame.p1panel.setLabelColor(game.getPlayer1().getFadedColor());
@@ -432,7 +432,7 @@ public class Grid extends JPanel {
 		return refresh;
 	}
 
-	public static void setDebug(boolean debug) {
+	public static void setRefresh(boolean debug) {
 		Grid.refresh = debug;
 	}
 

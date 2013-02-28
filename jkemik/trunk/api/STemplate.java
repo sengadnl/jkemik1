@@ -11,8 +11,8 @@ public class STemplate implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private boolean autoCapture = true;
 	private boolean hh = true;
-	private boolean ch = true;
-	private boolean net = true;
+	private boolean ch = false;
+	private boolean net = false;
 	private boolean manualCapture = false;
 	private boolean autoPass = true;
 	private boolean gameSetupMode = true;

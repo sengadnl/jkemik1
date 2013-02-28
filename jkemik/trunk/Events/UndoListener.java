@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 import controler.JKemik;
 
-import api.Game;
+import api.AbstractGame;
 
 import view.BoardFrame;
 import view.Grid;
@@ -29,7 +29,7 @@ public class UndoListener implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
-		Game game = JKemik.game;
+		AbstractGame game = JKemik.game;
 		System.out.println("entering undo > flag = " 
 				+ game.getCurrentP().getPlay_flag() + "\nturn = " + 
 				game.getCurrentP().isTurn());
