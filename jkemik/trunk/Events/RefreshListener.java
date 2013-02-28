@@ -5,10 +5,12 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 
+import controler.JKemik;
+
 import view.BoardFrame;
 import view.Grid;
 
-public class RefreshListener implements MouseListener{
+public class RefreshListener implements MouseListener {
 	private JButton refresh;
 
 	public RefreshListener(JButton refresh) {
@@ -16,13 +18,17 @@ public class RefreshListener implements MouseListener{
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
-		Grid.setDebug(true);
-		//BoardFrame.displayGrid();
-		BoardFrame.repaintGrid();
+		if (JKemik.settings_t.isGameSetupMode()
+				|| JKemik.settings_t.isPlayMode()) {
+			Grid.setRefresh(true);
+			BoardFrame.displayGrid(true);
+		} else {
+			BoardFrame.displayGrid(false);
+		}
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
-		//refresh.setToolTipText("Click to refresh the board");
+		// refresh.setToolTipText("Click to refresh the board");
 		refresh.setToolTipText(BoardFrame.messages.getString("refreshHover"));
 	}
 

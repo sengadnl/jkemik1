@@ -18,7 +18,7 @@ public class WindowEvents implements WindowListener, ComponentListener{
 
 	@Override
 	public void windowActivated(WindowEvent arg0) {
-		Grid.setDebug(true);
+		Grid.setRefresh(true);
 		BoardFrame.repaintGrid();
 	}
 
@@ -64,7 +64,7 @@ public class WindowEvents implements WindowListener, ComponentListener{
 
 	@Override
 	public void componentResized(ComponentEvent arg0) {
-		Grid.setDebug(true);
+		Grid.setRefresh(true);
 		BoardFrame.repaintGrid();
 	}
 

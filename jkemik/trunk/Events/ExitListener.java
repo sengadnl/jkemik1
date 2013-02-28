@@ -31,6 +31,7 @@ public class ExitListener implements MouseListener{
 			//STemplate t = JKemik.settings_t;
 			//t.setMemo(t.isAutoCapture(), t.isAutoPass());
 			JKemik.settings_t.restaureMemo();
+			JKemik.settings_t.setGameSetupMode(true);
 			// Save settings
 			//JKemik.writeGame();
 			JKemik.writeSettings();

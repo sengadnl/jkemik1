@@ -57,7 +57,7 @@ public abstract class AbstractPlayer implements Serializable {
 			if (this.successful) {
 				return true;
 			}
-			if (Game.isPath(box[i])) {// if this Point is path
+			if (AbstractGame.isPath(box[i])) {// if this Point is path
 				if (box[i].compareTo(this.from) != 0) {// is it == to previous
 					if (!Tools.containPoint(o, this.selected)) {
 						/* Add o if it hasn't been visited */

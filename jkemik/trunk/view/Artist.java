@@ -11,7 +11,7 @@ import controler.JKemik;
 
 import utilities.Tools;
 import api.Cell;
-import api.Game;
+import api.AbstractGame;
 import api.Player;
 import api.Point;
 
@@ -51,7 +51,7 @@ public class Artist {
 	}
 
 	protected static boolean drawCell(Cell cell, Graphics2D g2) {
-		Game game = JKemik.game;
+		AbstractGame game = JKemik.game;
 		try {
 			if (cell == null) {
 				return false;
@@ -139,7 +139,7 @@ public class Artist {
 		return true;
 	}
 
-	protected static void drawGame(Game g, Graphics2D g2) {
+	protected static void drawGame(AbstractGame g, Graphics2D g2) {
 		Player p1 = (Player) g.getPlayer1();
 		Player p2 = (Player) g.getPlayer2();
 		ArrayList<Cell> p1c = p1.getCells();
@@ -257,7 +257,7 @@ public class Artist {
 
 	protected static void unDrawSelection(ArrayList<Point> contour,
 			Graphics2D g2) {
-		Game game = JKemik.game;
+		AbstractGame game = JKemik.game;
 		try {
 			/* Erase last line */
 			int index = contour.size() - 1;

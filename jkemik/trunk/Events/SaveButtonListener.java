@@ -16,8 +16,7 @@ import utilities.ValidateInput;
 import view.BoardFrame;
 import view.Grid;
 import api.GTemplate;
-import api.Game;
-import api.Player;
+import api.STemplate;
 
 /**
  * @author dalet
@@ -40,80 +39,42 @@ public class SaveButtonListener implements MouseListener {
 		str2 = BoardFrame.label2.getText();
 
 		GTemplate t = JKemik.template;
-		Player p1 = null, p2 = null;
-		Game game = null;
+		STemplate s = JKemik.settings_t;
+		//Player p1 = null, p2 = null;
+		//AbstractGame game = null;
 
 		if (ValidateInput.names(str1, str2)
 				&& ValidateInput.validateColors(c1, c2)) {
-			JKemik.settings_t.setPlayMode(true);
+			s.setPlayMode(true);
 			t.setP1_c(c1);
 			t.setP2_c(c2);
 			t.setP1_name(str1);
 			t.setP2_name(str2);
 			Grid.setPcolor(t.getP1_c());
 			Grid.setCcolor(t.getP1_c());
-			p1 = new Player(c1, str1);
-			p2 = new Player(c2, str2);
-			game = new Game(p1, p2);
-			JKemik.game = game;
+//			p1 = new Player(c1, str1);
+//			p2 = new Player(c2, str2);
+			//game = new AbstractGame(p1, p2);
+			JKemik.createGame(t, s);
+			//JKemik.game = game;
 
-			JKemik.game.setMaxScore(JKemik.settings_t.getMaxWinVal());//
-			BoardFrame.uiLooksUpdate(JKemik.settings_t,t);
-			ViewEvents.uiEventUpdates(JKemik.settings_t,JKemik.template);
-			//BoardFrame.disableGameControlPanel();
-//			BoardFrame.pColor1.removeMouseListener(ViewEvents.p1Listener);
-//			BoardFrame.pColor2.removeMouseListener(ViewEvents.p2Listener);
-//			BoardFrame.label1.removeMouseListener(ViewEvents.n1Listener);
-//			BoardFrame.label2.removeMouseListener(ViewEvents.n2Listener);
-//			BoardFrame.l1.removeMouseListener(ViewEvents.gridSizeListener);
-//			BoardFrame.l2.removeMouseListener(ViewEvents.gameThemeListener);
-//			BoardFrame.settings.removeMouseListener(ViewEvents.sysPrefsListener);
-//			BoardFrame.startG.removeMouseListener(ViewEvents.saveListener);
-			
-//			BoardFrame.Game_status.setText(BoardFrame.messages
-//					.getString("endG"));
-//			BoardFrame.Game_status.setForeground(Color.RED);
-//
-//			BoardFrame.fadeLabel(BoardFrame.settings);
-//
-//			BoardFrame.showControlButtons();
-
-			// Enable control buttons
-//			BoardFrame.refresh.addMouseListener(ViewEvents.refreshListener);
-//			BoardFrame.manual_c
-//					.addMouseListener(ViewEvents.manualCaptureButtonListener);
-//			BoardFrame.undo.addMouseListener(ViewEvents.undoListener);
-//			BoardFrame.pass_turn.addMouseListener(ViewEvents.passTurnListener);
-
-//			BoardFrame.print_point.setText("" + (new Point(0, 0)).toString());
-//			String p1n = t.getP1_name();
-//			String p2n = t.getP2_name();
-//			Color p1c = t.getP1_c();
-//			Color p2c = t.getP2_c();
-//
-//			BoardFrame.p1panel.initPanelForNewGame(p1n, p1c);
-//			BoardFrame.p2panel.initPanelForNewGame(p2n, p2c);
-//			BoardFrame.Win.setText(JKemik.settings_t.getMaxWinVal() + "");
-//			BoardFrame.startG.removeMouseListener(ViewEvents.saveListener);
-
+			JKemik.game.setMaxScore(s.getMaxWinVal());//
+			BoardFrame.uiLooksUpdate(s,t);
+			ViewEvents.uiEventUpdates(s,t);
+		System.out.println("Saving this game ...?????????????????????????????");
 			int response = JOptionPane.showConfirmDialog(null,
 					BoardFrame.messages.getString("startGameWill") + str1 +" "+
 							BoardFrame.messages.getString("starGameFirst")
 							+ "\n", BoardFrame.messages.getString("question"),
 					JOptionPane.YES_NO_OPTION);
 			if (response == 1) {
-				game.switchPlayTurns();
-				Grid.setCcolor(game.getCurrentP().getColor());
+				JKemik.game.switchPlayTurns();
+				Grid.setCcolor(JKemik.game.getCurrentP().getColor());
 			} else {
 
 			}
-//			BoardFrame.grid.addMouseListener(ViewEvents.gridListener);
-//			BoardFrame.grid.addMouseMotionListener(ViewEvents.gridListener);
-//
-//			BoardFrame.setMakingGame(false);
-//			BoardFrame.manual.setVisible(true);
-			//JKemik.settings.setVisible(false);
-			System.out.println(game + "\n\n");
+
+			System.out.println(JKemik.game + "\n\n");
 			JKemik.writeSettings();
 		}
 	}

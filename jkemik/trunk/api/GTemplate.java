@@ -25,7 +25,7 @@ public class GTemplate implements Serializable{
 	//private static final long serialVersionUID = 1L;
 	private String P1_name, P2_name;
 	private String str_p1_c = "", str_p2_c = "";
-	private String gType = "";
+	//private String gType = "";
 	
 	private Color p1_c;
 	private Color p2_c;
@@ -77,16 +77,16 @@ public class GTemplate implements Serializable{
 	/**
 	 * @return the gType
 	 */
-	public String getgType() {
-		return this.gType;
-	}
-
-	/**
-	 * @param gType the gType to set
-	 */
-	public void setgType(String gType) {
-		this.gType = gType;
-	}
+//	public String getgType() {
+//		return this.gType;
+//	}
+//
+//	/**
+//	 * @param gType the gType to set
+//	 */
+//	public void setgType(String gType) {
+//		this.gType = gType;
+//	}
 	/**
 	 * @return the dimension
 	 */
@@ -147,24 +147,24 @@ public class GTemplate implements Serializable{
 			return "8x5";
 		}
 	}
-	public String gameTypeToString(){
-		if(this.gType.equals("H vs H")){
-			return "H vs H";
-		}else if(this.gType.equals("H vs C")){
-			return "H vs C";
-		}else{
-			return "LAN";
-		}
-	}
+//	public String gameTypeToString(){
+//		if(this.gType.equals("H vs H")){
+//			return "H vs H";
+//		}else if(this.gType.equals("H vs C")){
+//			return "H vs C";
+//		}else{
+//			return "LAN";
+//		}
+//	}
 
 	public double getG_size() {
 		return G_size;
 	}
 
-	public void setTheme(Color p1,Color p2) {
-		this.p1_c = p1;
-		this.p2_c = p2;
-	}
+//	public void setTheme(Color p1,Color p2) {
+//		this.p1_c = p1;
+//		this.p2_c = p2;
+//	}
 
 	public String getP1_name() {
 		return P1_name;

@@ -18,8 +18,8 @@ import api.*;
  * @version Beta 4.0 12-2012
  * 
  */
-public class JKemik extends Application {
-	public static Game game;
+public class JKemik extends Application{
+	public static AbstractGame game;
 	public static GTemplate template;
 	public static STemplate settings_t;
 	public static BoardFrame view;
@@ -35,7 +35,6 @@ public class JKemik extends Application {
 	protected void init() {
 		try {
 			load = new Load(362, 183);
-			System.out.println("Before checking tmp");
 			File tmp = new File(Globals.tempFile);
 			if (!tmp.exists()) {
 				if (tmp.mkdir()) {
@@ -44,10 +43,8 @@ public class JKemik extends Application {
 			readTemplate();
 			readSettings();
 			// readGameObj();
-			AbstractPlayer player1 = new Player(template.getP1_c(),template.getP1_name());
-			AbstractPlayer player2 = new Player(template.getP2_c(),template.getP2_name());
-			//JkBot player3 = new JkBot(template.getP2_c(), template.getP2_name()); //TODO
-			game = new Game((Player)player1,(Player)player2);
+
+			createGame(JKemik.template, JKemik.settings_t);
 			System.out.println(game + "\n\n");
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
@@ -80,11 +77,25 @@ public class JKemik extends Application {
 	public static boolean isStarted() {
 		return isStarted;
 	}
+	
 	//TODO
-//	private Game createGame(){
-//		Game game;
-//		return game;
-//	}
+	public static void createGame(GTemplate t, STemplate s){
+		GameCreator create = new GameCreator();
+		
+		if(s.isCh()){
+			System.out.println("Creating a computer vs human game >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			AbstractPlayer player1 = new Player(t.getP1_c(),t.getP1_name());
+			AbstractPlayer player2 = new JkBot(t.getP2_c(),t.getP2_name());
+			game = create.createGame((Player)player1, (JkBot)player2);
+		}
+		
+		if(s.isHh() || s.isNet()){
+			System.out.println("Creating a human vs human game >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			AbstractPlayer player1 = new Player(t.getP1_c(),t.getP1_name());
+			AbstractPlayer player2 = new Player(t.getP2_c(),t.getP2_name());
+			game = create.createGame((Player)player1, (Player)player2);
+		}
+	}
 	/**
 	 * @param isStarted
 	 *            the isStarted to set
@@ -233,5 +244,4 @@ public class JKemik extends Application {
 			(new JKemik()).run();
 		}
 	}
-
 }
