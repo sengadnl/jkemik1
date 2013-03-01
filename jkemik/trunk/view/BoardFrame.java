@@ -89,15 +89,7 @@ public class BoardFrame extends JFrame {
 		// if (BoardFrame.getThereIsSavedGame() == 0) {
 		// } else {
 		// }
-
-		ViewEvents.changeColorPanel1Action(pColor1);
-		ViewEvents.changeColorPanel2Action(pColor2);
-		ViewEvents.setBoardSizeAction(l1);
-		ViewEvents.setGameThemeAction(l2);
-		ViewEvents.addPlayer1NameAction(label1);
-		ViewEvents.addPlayer2NameAction(label2);
-		ViewEvents.saveAction(startG);
-		//showControlButtons();
+		
 		progressB.setVisible(false);
 		ViewEvents.newGameEvent();
 		ViewEvents.settingsLabelAction();
