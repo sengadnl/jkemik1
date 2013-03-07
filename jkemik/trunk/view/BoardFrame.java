@@ -432,8 +432,8 @@ public class BoardFrame extends JFrame {
 	}
 
 	public static void enableGameControlPanel() {
-		l1.setForeground(Tools.boost(BoardFrame.BOARD_COLOR, Globals.FADE_VARIANT));
-		l2.setForeground(Tools.boost(BoardFrame.BOARD_COLOR,  Globals.FADE_VARIANT));
+		l1.setForeground(Tools.boost(Color.WHITE, Globals.FADE_VARIANT));
+		l2.setForeground(Tools.boost(Color.WHITE,  Globals.FADE_VARIANT));
 
 		label1.setForeground(Color.WHITE);
 		label2.setForeground(Color.WHITE);
@@ -603,8 +603,8 @@ public class BoardFrame extends JFrame {
 		Holder2.setBackground(BoardFrame.CPANEL_COLOR);
 		Holder3.setBackground(BoardFrame.CPANEL_COLOR);
 		
-		l1.setForeground(Tools.boost(BOARD_COLOR,Globals.LABEL_VARIANT));
-		l2.setForeground(Tools.boost(BOARD_COLOR,Globals.LABEL_VARIANT));
+		l1.setForeground(Tools.boost(Color.WHITE,Globals.LABEL_VARIANT));
+		l2.setForeground(Tools.boost(Color.WHITE,Globals.LABEL_VARIANT));
 		
 		manual_c.setBackground(BoardFrame.THEME_COLOR);
 		manual_c.setForeground(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));

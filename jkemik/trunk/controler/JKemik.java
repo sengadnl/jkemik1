@@ -84,16 +84,16 @@ public class JKemik extends Application{
 		
 		if(s.isCh()){
 			System.out.println("Creating a computer vs human game >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-			AbstractPlayer player1 = new Player(t.getP1_c(),t.getP1_name());
-			AbstractPlayer player2 = new JkBot(t.getP2_c(),t.getP2_name());
-			game = create.createGame((Player)player1, (JkBot)player2);
+			Player player1 = new Player(t.getP1_c(),t.getP1_name());
+			JkBot player2 = new JkBot(t.getP2_c(),t.getP2_name());
+			game = create.createGame(player1, player2);
 		}
 		
 		if(s.isHh() || s.isNet()){
 			System.out.println("Creating a human vs human game >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-			AbstractPlayer player1 = new Player(t.getP1_c(),t.getP1_name());
-			AbstractPlayer player2 = new Player(t.getP2_c(),t.getP2_name());
-			game = create.createGame((Player)player1, (Player)player2);
+			Player player1 = new Player(t.getP1_c(),t.getP1_name());
+			Player player2 = new Player(t.getP2_c(),t.getP2_name());
+			game = create.createGame(player1, player2);
 		}
 	}
 	/**

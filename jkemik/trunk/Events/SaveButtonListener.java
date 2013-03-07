@@ -61,13 +61,13 @@ public class SaveButtonListener implements MouseListener {
 			JKemik.game.setMaxScore(s.getMaxWinVal());//
 			BoardFrame.uiLooksUpdate(s,t);
 			ViewEvents.uiEventUpdates(s,t);
-		System.out.println("Saving this game ...?????????????????????????????");
 			int response = JOptionPane.showConfirmDialog(null,
 					BoardFrame.messages.getString("startGameWill") + str1 +" "+
 							BoardFrame.messages.getString("starGameFirst")
 							+ "\n", BoardFrame.messages.getString("question"),
 					JOptionPane.YES_NO_OPTION);
 			if (response == 1) {
+				System.out.println("Saving this game ...?????????????????????????????");
 				JKemik.game.switchPlayTurns();
 				Grid.setCcolor(JKemik.game.getCurrentP().getColor());
 			} else {
