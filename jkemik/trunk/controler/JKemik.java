@@ -81,7 +81,7 @@ public class JKemik extends Application{
 	//TODO
 	public static void createGame(GTemplate t, STemplate s){
 		GameCreator create = new GameCreator();
-		
+		System.out.println("CH: " + s.isCh() +"\nHH: " + s.isHh() + "\nNet: " + s.isNet());
 		if(s.isCh()){
 			System.out.println("Creating a computer vs human game >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 			Player player1 = new Player(t.getP1_c(),t.getP1_name());

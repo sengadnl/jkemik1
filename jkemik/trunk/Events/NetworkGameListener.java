@@ -4,6 +4,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JRadioButton;
 
+import controler.JKemik;
+
 public class NetworkGameListener implements MouseListener{
 	private JRadioButton network;
 	public NetworkGameListener(JRadioButton network){
@@ -19,7 +21,7 @@ public class NetworkGameListener implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		//JKemik.settings_t.setNet(true);
+		JKemik.settings_t.setNet(true);
 	}
 
 	@Override
