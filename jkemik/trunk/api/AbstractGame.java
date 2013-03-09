@@ -364,10 +364,10 @@ public abstract class AbstractGame implements Serializable {
 			Point p = c.getCellContour().get(0);
 			if (Tools.containPoint(p, cell.getCapturedPoints())) {
 				currentP.addCapturedCells(c);
-				//currentP.getCapturedCells().add(c);
+				// currentP.getCapturedCells().add(c);
 				cell.setValue(cell.getValue() + c.getValue());
 				cell.addCellToCell(c);
-				//guest.getCells().remove(c);
+				// guest.getCells().remove(c);
 				guest.setScore(guest.getScore() - c.getValue());
 			}
 		}
@@ -508,8 +508,16 @@ public abstract class AbstractGame implements Serializable {
 				+ "\nMaximum score: " + this.maxScore;
 	}
 
-	/* Connecting dots utilities */
+	public boolean isAI() {
+		return AI;
+	}
 
+	public void setAI(boolean aI) {
+		AI = aI;
+	}
+
+	/* Connecting dots utilities */
+	public boolean AI = false;
 	public boolean embuche_on = false;
 	private Cell tempCell = null;
 

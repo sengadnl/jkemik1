@@ -435,7 +435,9 @@ public class BoardFrame extends JFrame {
 		l1.setForeground(Tools.boost(Color.WHITE, Globals.FADE_VARIANT));
 		l2.setForeground(Tools.boost(Color.WHITE,  Globals.FADE_VARIANT));
 
+		label1.setText(JKemik.template.getP1_name());
 		label1.setForeground(Color.WHITE);
+		label2.setText(JKemik.template.getP2_name());
 		label2.setForeground(Color.WHITE);
 
 		p1panel.initPanelForNewGame("", JKemik.template.getP1_c());
