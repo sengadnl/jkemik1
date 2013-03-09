@@ -78,22 +78,25 @@ public class JKemik extends Application{
 		return isStarted;
 	}
 	
-	//TODO
+	/**/
 	public static void createGame(GTemplate t, STemplate s){
 		GameCreator create = new GameCreator();
 		System.out.println("CH: " + s.isCh() +"\nHH: " + s.isHh() + "\nNet: " + s.isNet());
 		if(s.isCh()){
-			System.out.println("Creating a computer vs human game >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			System.out.println("Creating a Human vs AI game ...");
+			t.setP2_name("Com");
 			Player player1 = new Player(t.getP1_c(),t.getP1_name());
 			JkBot player2 = new JkBot(t.getP2_c(),t.getP2_name());
 			game = create.createGame(player1, player2);
+			System.out.println("Is game AI: " + game.isAI());
 		}
 		
 		if(s.isHh() || s.isNet()){
-			System.out.println("Creating a human vs human game >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			System.out.println("Creating a Human vs Human game ...");
 			Player player1 = new Player(t.getP1_c(),t.getP1_name());
 			Player player2 = new Player(t.getP2_c(),t.getP2_name());
 			game = create.createGame(player1, player2);
+			System.out.println("Is game AI: " + game.isAI());
 		}
 	}
 	/**
