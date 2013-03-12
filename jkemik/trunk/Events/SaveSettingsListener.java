@@ -53,7 +53,6 @@ public class SaveSettingsListener implements MouseListener {
 					Locale local = new Locale(key);
 					BoardFrame.setMessages(ResourceBundle.getBundle(properties,
 							local));
-					System.out.println("The language is : " + lang);
 					BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
 					ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
 				} else {
@@ -64,7 +63,9 @@ public class SaveSettingsListener implements MouseListener {
 									.getString("maxWinSizeMustbBe2"),
 							BoardFrame.messages.getString("wrongInput"),
 							JOptionPane.WARNING_MESSAGE);
+					
 				}
+				
 			}
 		} catch (Exception exp) {
 
