@@ -38,33 +38,34 @@ public class SaveSettingsListener implements MouseListener {
 			} else {
 				JKemik.settings_t.setGameSetupMode(true);
 				BoardFrame.print_point.setText("" + BoardFrame.messages.getString("gameSetupMode"));
-				STemplate t = JKemik.settings_t;
-				String str = SettingsPanel.max_win.getText();
-				// SettingsPanel.translateUI();
-				String lang = (String) SettingsPanel.getLanguageList()
-						.getSelectedItem();
-				String key = Tools.languageKey(lang);
-				String properties = Tools.propertiesFilename(key);
-				int maxw = Integer.parseInt(str);
-				if (Tools.isMaxWinLessThanGrid(Grid.getBoardSize(), maxw)) {
-					t.setMaxWinVal(maxw);
-					t.setMemo(t.isAutoCapture(), t.isAutoPass());
-					t.setLanguage(lang);
-					Locale local = new Locale(key);
-					BoardFrame.setMessages(ResourceBundle.getBundle(properties,
-							local));
-					BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
-					ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
-				} else {
-					JOptionPane.showMessageDialog(null, BoardFrame.messages
-							.getString("maxWinSizeMustbBe1")
-							+ Grid.getBoardSize()
-							+ BoardFrame.messages
-									.getString("maxWinSizeMustbBe2"),
-							BoardFrame.messages.getString("wrongInput"),
-							JOptionPane.WARNING_MESSAGE);
-					
-				}
+				JKemik.saveSysPrefs();
+//				STemplate t = JKemik.settings_t;
+//				String str = SettingsPanel.max_win.getText();
+//				// SettingsPanel.translateUI();
+//				String lang = (String) SettingsPanel.getLanguageList()
+//						.getSelectedItem();
+//				String key = Tools.languageKey(lang);
+//				String properties = Tools.propertiesFilename(key);
+//				int maxw = Integer.parseInt(str);
+//				if (Tools.isMaxWinLessThanGrid(Grid.getBoardSize(), maxw)) {
+//					t.setMaxWinVal(maxw);
+//					t.setMemo(t.isAutoCapture(), t.isAutoPass());
+//					t.setLanguage(lang);
+//					Locale local = new Locale(key);
+//					BoardFrame.setMessages(ResourceBundle.getBundle(properties,
+//							local));
+//					BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
+//					ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
+//				} else {
+//					JOptionPane.showMessageDialog(null, BoardFrame.messages
+//							.getString("maxWinSizeMustbBe1")
+//							+ Grid.getBoardSize()
+//							+ BoardFrame.messages
+//									.getString("maxWinSizeMustbBe2"),
+//							BoardFrame.messages.getString("wrongInput"),
+//							JOptionPane.WARNING_MESSAGE);
+//					
+//				}
 				
 			}
 		} catch (Exception exp) {
