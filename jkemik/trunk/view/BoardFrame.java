@@ -86,22 +86,21 @@ public class BoardFrame extends JFrame {
 		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
 		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
 
-		// if (BoardFrame.getThereIsSavedGame() == 0) {
-		// } else {
-		// }
+//		 if (BoardFrame.getThereIsSavedGame() == 0) {
+//		 } else {
+//		 }
 		
 		progressB.setVisible(false);
-		ViewEvents.newGameEvent();
-		ViewEvents.settingsLabelAction();
+		
+		//System Preferences Events
 		ViewEvents.saveSettingsAction();
 		ViewEvents.onAutoCaptureAction();
 		ViewEvents.onAutoPassTurnAction();
 		ViewEvents.networkGameListener();
 		ViewEvents.hvsHListener();
 		ViewEvents.hvsAIListener();
-		ViewEvents.exitListener();
-		ViewEvents.helpListener();
-		ViewEvents.refreshListener();
+		
+		//ViewEvents.refreshListener();
 		ViewEvents.modeToggleActionListener();
 		uiLooksUpdate(JKemik.settings_t, JKemik.template);
 		ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
@@ -516,11 +515,9 @@ public class BoardFrame extends JFrame {
 	/**
 	 * Boosts the back and Foreground colors of b
 	 */
-	public static void boostLabel(JLabel label) {
-		Color fore = label.getForeground();
-		Color back = label.getBackground();
-		label.setForeground(Tools.boost(fore));
-		label.setBackground(Tools.boost(back));
+	public static void boostLabel(JLabel label, Color fg, Color bg) {
+		label.setForeground(Tools.boost(fg));
+		label.setBackground(Tools.boost(bg));
 	}
 
 	public static void fadeCheckBox(JCheckBox checkbox) {
@@ -794,7 +791,7 @@ public class BoardFrame extends JFrame {
 		if (s.isGameSetupMode()) {
 			print_point.setText(""
 					+ messages.getString("gameSetupMode"));
-			boostLabel(settings);
+			boostLabel(settings, Color.WHITE, BoardFrame.THEME_COLOR);
 			displayGrid(true);
 			updateSettingPanel();
 			translateUI();

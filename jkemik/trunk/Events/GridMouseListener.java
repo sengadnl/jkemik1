@@ -160,11 +160,10 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			BoardFrame.Game_status.setText("NEW");
 			BoardFrame.Game_status.setForeground(Color.GREEN);
 
-			BoardFrame.boostLabel(BoardFrame.settings);
+			BoardFrame.boostLabel(BoardFrame.settings,Color.WHITE, BoardFrame.THEME_COLOR);
 
 			BoardFrame.grid.drawn = false;
 			BoardFrame.grid.repaint();
-
 		}
 		BoardFrame.grid.repaint();
 		// }
