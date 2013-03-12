@@ -368,8 +368,6 @@ public class BoardFrame extends JFrame {
 		// save = new JButton("START GAME");
 		// System.out.println("Jbutton: " + );
 		startG = new JButton(messages.getString("startGameB"));
-		startG.setBackground(new Color(200, 0, 0));
-		startG.setForeground(new Color(255, 255, 255));
 
 		Holder1.setLayout(new GridLayout(4, 1));
 		Holder1.add(blank1);
@@ -405,12 +403,12 @@ public class BoardFrame extends JFrame {
 	public static void decoratebuttons(Color bg, Color fg) {
 		pass_turn.setBackground(bg);
 		pass_turn.setForeground(fg);
-
 		undo.setBackground(bg);
 		undo.setForeground(fg);
-
 		refresh.setBackground(bg);
 		refresh.setForeground(fg);
+		startG.setBackground(bg);
+		startG.setForeground(fg);
 	}
 
 	public static void decorateLabelss(Color fg) {
@@ -427,7 +425,7 @@ public class BoardFrame extends JFrame {
 		label2.setForeground(Tools.fade(JKemik.template.getP2_c()));
 		pColor1.setBackground(Tools.fade(JKemik.template.getP1_c()));
 		pColor2.setBackground(Tools.fade(JKemik.template.getP2_c()));
-		fadeButton(startG);
+		//fadeButton(startG);
 	}
 
 	public static void enableGameControlPanel() {
@@ -444,7 +442,8 @@ public class BoardFrame extends JFrame {
 
 		pColor1.setBackground(JKemik.template.getP1_c());
 		pColor2.setBackground(JKemik.template.getP2_c());
-		boostButton(startG);
+		//startG.setBackground(new Color(200,0, 0));
+		//boostButton(startG);
 	}
 	public static void highlightP2() {
 		label2.setForeground(new Color(250, 0, 250));
@@ -849,7 +848,7 @@ public class BoardFrame extends JFrame {
 	public static JLabel Game_status, settings;
 	private String[] gridsize = { "32x20", "64x40", "8x5", "16x10" };
 	private String[] gameType = { "Origins", "Jkemik", "Classic", "Geeky" };
-	public static final double CORNER_WIDTH = .37, CORNER_HEIGHT = .064,
+	public static final double CORNER_WIDTH = .35, CORNER_HEIGHT = .064,
 			SIDE_WIDTH = .0994, SIDE_HEIGHT = .8, PLAYER_PNL_W_SCALAR = .08,
 			PLAYER_PNL_H_SCALAR = .25, P2_W = .26, BOTTOM_COLOR_P_W = 80,
 			BOTTOM_COLOR_P_H = 12;
