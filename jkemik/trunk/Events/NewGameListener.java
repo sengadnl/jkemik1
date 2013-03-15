@@ -28,6 +28,22 @@ public class NewGameListener implements MouseListener{
 		this.label = label;
 	}
 	public void mouseClicked(MouseEvent arg0) {
+		if(JKemik.settings_t.isSystemSetupMode()){
+			int res = JOptionPane.showConfirmDialog(null,"Exit System Preferences?","Warning",
+					JOptionPane.YES_OPTION);
+			if(res == 0){
+				if(BoardFrame.isMakingGame()){
+					return;
+				}else{
+					BoardFrame.setMakingGame(true);
+				}
+				JKemik.settings_t.setGameSetupMode(true);
+				BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
+				ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
+			}else{
+				return;
+			}
+		}
 		if(BoardFrame.isMakingGame()){
 			return;
 		}else{

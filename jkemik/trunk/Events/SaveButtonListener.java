@@ -52,11 +52,8 @@ public class SaveButtonListener implements MouseListener {
 			t.setP2_name(str2);
 			Grid.setPcolor(t.getP1_c());
 			Grid.setCcolor(t.getP1_c());
-//			p1 = new Player(c1, str1);
-//			p2 = new Player(c2, str2);
-			//game = new AbstractGame(p1, p2);
+
 			JKemik.createGame(t, s);
-			//JKemik.game = game;
 
 			JKemik.game.setMaxScore(s.getMaxWinVal());//
 			BoardFrame.uiLooksUpdate(s,t);

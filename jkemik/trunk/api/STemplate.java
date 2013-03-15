@@ -120,7 +120,7 @@ public class STemplate implements Serializable {
 			this.memo[1] = false;
 		}
 	}
-
+	/**Remember the current game mode in case it is temporarily switched*/
 	public void restaureMemo() {
 		if (this.memo[0]) {
 			this.autoCapture = true;
