@@ -100,7 +100,11 @@ public class BoardFrame extends JFrame {
 		ViewEvents.hvsHListener();
 		ViewEvents.hvsAIListener();
 		
-		//ViewEvents.refreshListener();
+		//constant events
+		ViewEvents.exitListener();
+		ViewEvents.helpListener();
+		ViewEvents.refreshListener();
+		
 		ViewEvents.modeToggleActionListener();
 		uiLooksUpdate(JKemik.settings_t, JKemik.template);
 		ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
@@ -733,9 +737,11 @@ public class BoardFrame extends JFrame {
 			if (JKemik.settings_t.isAutoCapture()) {
 				manual_c.setVisible(false);
 				undo.setVisible(false);
+				//manual.setVisible(true);
 			} else {
 				undo.setVisible(true);
 				manual_c.setVisible(true);
+//				manual.setVisible(false);
 			}
 
 			if (JKemik.settings_t.isAutoPass()) {
@@ -743,6 +749,12 @@ public class BoardFrame extends JFrame {
 			} else {
 				undo.setVisible(true);
 				pass_turn.setVisible(true);
+				//manual.setVisible(false);
+			}
+			if(JKemik.settings_t.getMemo()[0]){
+				manual.setVisible(true);
+			}else{
+				manual.setVisible(false);
 			}
 
 			BoardFrame.refresh.setVisible(true);
@@ -810,7 +822,6 @@ public class BoardFrame extends JFrame {
 			p1panel.initPanelForNewGame(p1n, p1c);
 			p2panel.initPanelForNewGame(p2n, p2c);
 			Win.setText(JKemik.settings_t.getMaxWinVal() + "");
-			manual.setVisible(true);
 			setMakingGame(false);
 		}
 		if (s.isSystemSetupMode()) {

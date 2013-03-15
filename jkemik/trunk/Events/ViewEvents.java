@@ -205,8 +205,6 @@ public class ViewEvents {
 	}
 
 	public static void uiEventUpdates(STemplate s, GTemplate t) {
-		ViewEvents.exitListener();
-		ViewEvents.helpListener();
 		if (s.isGameSetupMode()) {
 			ViewEvents.newGameEvent();
 			ViewEvents.settingsLabelAction();
@@ -218,7 +216,7 @@ public class ViewEvents {
 			setGameThemeAction(BoardFrame.l2);
 			saveAction(BoardFrame.startG);
 			settingsLabelAction();
-			refreshListener();
+			
 			
 			BoardFrame.grid.removeMouseListener(gridListener);
 			BoardFrame.grid.removeMouseMotionListener(gridListener);
@@ -239,14 +237,13 @@ public class ViewEvents {
 			BoardFrame.startG.removeMouseListener(saveListener);
 
 			// Enable control buttons
-			refreshListener();
 			manualSelectionActionListener(BoardFrame.manual_c);
 			undoAction(BoardFrame.undo);
 			passTurnAction(BoardFrame.pass_turn);
 			gridMouseAction(BoardFrame.grid);
 		}
 		if (s.isSystemSetupMode()) {
-			refreshListener();
+			
 			BoardFrame.pColor1.removeMouseListener(p1Listener);
 			BoardFrame.pColor2.removeMouseListener(p2Listener);
 			BoardFrame.label1.removeMouseListener(n1Listener);
