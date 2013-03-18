@@ -106,9 +106,10 @@ public class BoardFrame extends JFrame {
 		ViewEvents.refreshListener();
 		
 		ViewEvents.modeToggleActionListener();
-		uiLooksUpdate(JKemik.settings_t, JKemik.template);
 		ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
 		print_point.setText("" + messages.getString("gameSetupMode"));
+		uiLooksUpdate(JKemik.settings_t, JKemik.template);
+		
 	}
 
 	/**
@@ -803,10 +804,10 @@ public class BoardFrame extends JFrame {
 			print_point.setText(""
 					+ messages.getString("gameSetupMode"));
 			boostLabel(settings, Color.WHITE, BoardFrame.THEME_COLOR);
-			displayGrid(true);
 			updateSettingPanel();
 			translateUI();
 			enableGameControlPanel();
+			displayGrid(true);
 		}
 		if (s.isPlayMode()) {
 			Game_status.setText(BoardFrame.messages.getString("endG"));
