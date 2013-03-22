@@ -9,11 +9,11 @@ public class STemplate implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private boolean autoCapture = true;
 	private boolean hh = true;
 	private boolean ch = false;
 	private boolean net = false;
 	private boolean manualCapture = false;
+	private boolean autoCapture = true;
 	private boolean autoPass = true;
 	private boolean gameSetupMode = true;
 	private boolean playMode = false;
@@ -22,7 +22,7 @@ public class STemplate implements Serializable {
 	private int maxWinVal = 4;
 	private double MaxPointPerPlayer = 0.0;
 	private String language = "ENGLISH";
-	private boolean[] memo = { true, false };
+	private boolean[] memo = { true, true };
 
 	public STemplate() {
 		
@@ -107,7 +107,10 @@ public class STemplate implements Serializable {
 	public boolean[] getMemo() {
 		return memo;
 	}
-
+/**
+ * @param c = capture mode and p = pass mode
+ * @return void
+ * */
 	public void setMemo(boolean c, boolean p) {
 		if (c) {
 			this.memo[0] = true;
@@ -120,7 +123,9 @@ public class STemplate implements Serializable {
 			this.memo[1] = false;
 		}
 	}
-	/**Remember the current game mode in case it is temporarily switched*/
+	/**Remember the current game mode in case it is temporarily switched
+	 * @param none
+	 * @return void*/
 	public void restaureMemo() {
 		if (this.memo[0]) {
 			this.autoCapture = true;
