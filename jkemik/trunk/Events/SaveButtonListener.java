@@ -40,8 +40,8 @@ public class SaveButtonListener implements MouseListener {
 
 		GTemplate t = JKemik.template;
 		STemplate s = JKemik.settings_t;
-		//Player p1 = null, p2 = null;
-		//AbstractGame game = null;
+		// Player p1 = null, p2 = null;
+		// AbstractGame game = null;
 
 		if (ValidateInput.names(str1, str2)
 				&& ValidateInput.validateColors(c1, c2)) {
@@ -56,15 +56,24 @@ public class SaveButtonListener implements MouseListener {
 			JKemik.createGame(t, s);
 
 			JKemik.game.setMaxScore(s.getMaxWinVal());//
-			BoardFrame.uiLooksUpdate(s,t);
-			ViewEvents.uiEventUpdates(s,t);
+			
+			/*Toggling from manual mode to auto*/
+			if (!JKemik.settings_t.getMemo()[0]
+					&& !JKemik.settings_t.getMemo()[1]) {
+				BoardFrame.manual.setSelected(true);
+			} else {
+				BoardFrame.manual.setSelected(false);
+			}
+			BoardFrame.uiLooksUpdate(s, t);
+			ViewEvents.uiEventUpdates(s, t);
 			int response = JOptionPane.showConfirmDialog(null,
-					BoardFrame.messages.getString("startGameWill") + str1 +" "+
-							BoardFrame.messages.getString("starGameFirst")
+					BoardFrame.messages.getString("startGameWill") + str1 + " "
+							+ BoardFrame.messages.getString("starGameFirst")
 							+ "\n", BoardFrame.messages.getString("question"),
 					JOptionPane.YES_NO_OPTION);
 			if (response == 1) {
-				System.out.println("Saving this game ...?????????????????????????????");
+				System.out
+						.println("Saving this game ...?????????????????????????????");
 				JKemik.game.switchPlayTurns();
 				Grid.setCcolor(JKemik.game.getCurrentP().getColor());
 			} else {

@@ -752,12 +752,10 @@ public class BoardFrame extends JFrame {
 				pass_turn.setVisible(true);
 				//manual.setVisible(false);
 			}
-			if(JKemik.settings_t.getMemo()[0]){
-				manual.setVisible(true);
-			}else{
-				manual.setVisible(false);
-			}
-
+//			if(!JKemik.settings_t.getMemo()[0] && !JKemik.settings_t.getMemo()[1]){
+//				manual.setSelected(true);
+//			}
+			manual.setVisible(true);
 			BoardFrame.refresh.setVisible(true);
 		} catch (Exception e) {
 
