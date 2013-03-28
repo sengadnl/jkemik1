@@ -40,8 +40,8 @@ public class PlayerPanel extends JPanel {
 	private JLabel captCellsv;
 
 	private JLabel scorev;
-	private final int FONT_SIZE = 11;
-	private final int LINE_BORDER_STOKE = 6;
+	private final int FONT_SIZE = 10;
+	private final int LINE_BORDER_STOKE = 2;
 	private final double LB_FADE_VAR = .60;
 	private final int FADE_TH = 10;// fade threshold
 
