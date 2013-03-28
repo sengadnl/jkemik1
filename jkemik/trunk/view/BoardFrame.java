@@ -210,17 +210,23 @@ public class BoardFrame extends JFrame {
 	}
 
 	private void designPanel2() {
-
+		panel21_container = new JPanel();
+		panel21_container.setPreferredSize(new Dimension(((int) (SIDE_WIDTH * this.width)),
+				(int) (PLAYER_PNL_H_SCALAR * SIDE_HEIGHT * this.height)));
+		//panel21_container.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
+		panel21_container.setLayout(new BorderLayout());
+		
 		panel21 = new JPanel();
-		panel21.setPreferredSize(new Dimension((int) (SIDE_WIDTH * this.width),
+//		panel21.setPreferredSize(new Dimension((int) (SIDE_WIDTH * this.width),
+//				(int) (SIDE_HEIGHT * this.height)));
+		panel21.setPreferredSize(new Dimension(((int) (SIDE_WIDTH * this.width)),
 				(int) (SIDE_HEIGHT * this.height)));
-		panel21.setLayout(new BorderLayout(10, 10));
+		panel21.setLayout(new BorderLayout(1, 1));
 		p1panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (PLAYER_PNL_H_SCALAR * SIDE_HEIGHT * this.height));
-		panel21.add(p1panel, BorderLayout.NORTH);
+		
 
 		panel22 = new JPanel();
-		//panel22.setOpaque(false);
 		p1panel.initPanelForNewGame(JKemik.game.getPlayer1().getName(),
 				JKemik.game.getPlayer1().getColor());
 
@@ -231,24 +237,30 @@ public class BoardFrame extends JFrame {
 		panel23 = new JPanel();
 		panel23.setPreferredSize(new Dimension((int) (SIDE_WIDTH * this.width),
 				(int) (SIDE_HEIGHT * this.height)));
-		panel23.setLayout(new BorderLayout(10, 10));
+		panel23.setLayout(new BorderLayout(1, 1));
 
 		manual = new JCheckBox(messages.getString("manualModel"));
 		p2panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (.25 * SIDE_HEIGHT * this.height));
-
+		
+		panel21_container.add(p1panel, BorderLayout.WEST);
+		panel21_container.add(p2panel, BorderLayout.EAST);
+		panel21.add(panel21_container, BorderLayout.NORTH);
+		panel21.add(manual, BorderLayout.SOUTH);
+		
+		//panel21.add(p1panel, BorderLayout.NORTH);
 		panel22.add(grid);
 		panel22.add(settings_p);
 
-		panel23.add(p2panel, BorderLayout.NORTH);
-		panel23.add(manual, BorderLayout.SOUTH);
+		//panel23.add(p2panel, BorderLayout.NORTH);
+//		panel23.add(manual, BorderLayout.SOUTH);
 
 		p2panel.initPanelForNewGame(JKemik.game.getPlayer2().getName(),
 				JKemik.game.getPlayer2().getColor());
 
-		panel2.add(panel21, BorderLayout.WEST);
-		panel2.add(panel22, BorderLayout.CENTER);
-		panel2.add(panel23, BorderLayout.EAST);
+		panel2.add(panel21, BorderLayout.EAST);
+		//panel2.add(panel23, BorderLayout.CENTER);
+		panel2.add(panel22, BorderLayout.WEST);
 	}
 
 	private void designPanel3() {
@@ -582,8 +594,9 @@ public class BoardFrame extends JFrame {
 		panel1.setBackground(BoardFrame.THEME_COLOR);
 		panel11.setBackground(BoardFrame.THEME_COLOR);
 		panel12.setBackground(BoardFrame.THEME_COLOR);
-
-		panel2.setBackground(BOARD_COLOR);
+		panel21_container.setBackground(BoardFrame.THEME_COLOR);
+		
+		panel2.setBackground(BoardFrame.THEME_COLOR);
 		panel21.setBackground(BoardFrame.THEME_COLOR);
 		panel22.setBackground(BoardFrame.THEME_COLOR);
 		panel23.setBackground(BoardFrame.THEME_COLOR);
@@ -838,7 +851,7 @@ public class BoardFrame extends JFrame {
 	public static JLabel print_point;
 	public static JPanel panel1, panel2, panel3;
 	public static JPanel panel11, panel12, panel13;
-	public static JPanel panel21, panel22, panel23;
+	public static JPanel panel21, panel22, panel23, panel21_container;
 	public static JPanel panel31, controlP, panel32, panel33,
 			panel31_container;
 	public static JPanel panel331, panel332;
@@ -858,10 +871,10 @@ public class BoardFrame extends JFrame {
 	public static JLabel Game_status, settings;
 	private String[] gridsize = { "32x20", "64x40", "8x5", "16x10" };
 	private String[] gameType = { "Origins", "Jkemik", "Classic", "Geeky" };
-	public static final double CORNER_WIDTH = .35, CORNER_HEIGHT = .064,
-			SIDE_WIDTH = .0994, SIDE_HEIGHT = .8, PLAYER_PNL_W_SCALAR = .08,
+	public static final double CORNER_WIDTH = .35, CORNER_HEIGHT = .08,
+			SIDE_WIDTH = .14, SIDE_HEIGHT = .8, PLAYER_PNL_W_SCALAR = .0688,
 			PLAYER_PNL_H_SCALAR = .25, P2_W = .26, BOTTOM_COLOR_P_W = 80,
-			BOTTOM_COLOR_P_H = 12;
+			BOTTOM_COLOR_P_H = 12;//SIDE_WIDTH = .0994, PLAYER_PNL_W_SCALAR = .08
 	public static Grid grid;
 	public static SettingsPanel settings_p;
 	private static java.awt.Container container;
