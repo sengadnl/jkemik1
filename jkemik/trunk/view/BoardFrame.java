@@ -604,7 +604,7 @@ public class BoardFrame extends JFrame {
 
 		panel2.setBackground(BoardFrame.THEME_COLOR);
 		panel21.setBackground(BoardFrame.THEME_COLOR);
-		panel22.setBackground(BoardFrame.BOARD_COLOR);
+		panel22.setBackground(BoardFrame.THEME_COLOR);
 		panel23.setBackground(BoardFrame.THEME_COLOR);
 		settings_p.setBackground(BoardFrame.THEME_COLOR);
 

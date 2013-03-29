@@ -9,7 +9,6 @@ import javax.swing.*;
 import utilities.*;
 import controler.*;
 import api.*;
-import api.AbstractGame;
 import api.Point;
 
 /**
@@ -48,7 +47,6 @@ public class Grid extends JPanel {
 	public static int position_count = 0;
 	private static int size;
 	private static volatile Grid instance = null;
-	private static java.awt.Container gcontainer;
 	public Grid(int squareSize) {
 		setPreferredSize(new Dimension((int) Width, (int) Height));
 		setSquareSize(squareSize);
@@ -265,6 +263,7 @@ public class Grid extends JPanel {
 
 		int currentposition = 0;
 		int index = 0;
+		Artist.drawGridBG(g2, 50, 50);
 		while (index < Columns + 1) {
 			// draw columns
 			if (currentposition <= Width) {
