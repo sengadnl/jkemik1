@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import controler.JKemik;
@@ -16,6 +17,12 @@ import api.Player;
 import api.Point;
 
 public class Artist {
+	protected static void drawGridBG(Graphics2D g2, double w, double h){
+		g2.setColor(BoardFrame.BOARD_COLOR);//BoardFrame.BOARD_COLOR
+		Rectangle2D.Double bg = new Rectangle2D.Double(0, 0,Grid.Width,Grid.Height);
+		g2.draw(bg);
+		g2.fill(bg);
+	}
 
 	protected static void drawLine(Point from, Point to, int stroke, Color c,
 			Graphics2D g2) {
