@@ -38,8 +38,8 @@ public class Grid extends JPanel {
 	protected static Color ccolor = new Color(255, 255, 255);// Cursor color
 	protected static Color gridLineCol = new Color(10, 60, 30);
 
-	public static double Height = 640;
-	public static double Width = 1024;
+	public static double Height = 640;//640
+	public static double Width = 1024;//1024
 
 	public static double Columns = 0.0, rows = 0.0;
 	public static double x = 0, y = 0, hl_x = 0, hl_y = 0;
@@ -48,7 +48,7 @@ public class Grid extends JPanel {
 	public static int position_count = 0;
 	private static int size;
 	private static volatile Grid instance = null;
-
+	private static java.awt.Container gcontainer;
 	public Grid(int squareSize) {
 		setPreferredSize(new Dimension((int) Width, (int) Height));
 		setSquareSize(squareSize);
