@@ -29,15 +29,12 @@ public class GameThemeListener implements MouseListener{
 		String str = this.label.getActiveLabel();
 		JKemik.view.setTheme(str);
 		JKemik.settings_t.setTheme(str);
-		//BoardFrame.panel2.repaint();
 		// change the grid size
 		if (BoardFrame.grid.drawn) {
 			BoardFrame.grid.drawn = false;
 			BoardFrame.grid.repaint();
 		}
 		BoardFrame.uiLooksUpdate(JKemik.settings_t,JKemik.template);
-		JKemik.view.repaint();
-
 	}
 	public void mouseEntered(MouseEvent e) {
 		Color c = Tools.boost(BoardFrame.BOARD_COLOR,Globals.LABEL_VARIANT);

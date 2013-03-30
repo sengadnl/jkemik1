@@ -25,20 +25,14 @@ public class ManualSelectionListener implements MouseListener {
 			Grid.setManualc(true);
 			Grid.selectPoint = true;
 			BoardFrame.manual.setVisible(false);
-			//JKemik.game.getCurrentP().setOrigin(JKemik.game.getLastp());
-			//JKemik.game.getCurrentP().getSelected().add(JKemik.game.getLastp());
-			//Grid.setSelectedP(JKemik.game.getLastp());
 			JKemik.game.setEmbuche_on(false);
-			//BoardFrame.grid.repaint();
 		} else {
 			JKemik.game.getCurrentP().setSelected(new ArrayList<Point>());
-			BoardFrame.panel2.setBackground(BoardFrame.BOARD_COLOR);
 			JKemik.view.repaint();
 			BoardFrame.grid.drawn = false;
 			Grid.manualc = false;
 			Grid.refresh = true;
 			BoardFrame.manual.setVisible(true);
-			BoardFrame.repaintGrid();
 		}
 	}
 
