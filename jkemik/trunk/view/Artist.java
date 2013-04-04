@@ -287,7 +287,7 @@ public class Artist {
 			}
 
 			drawLine(lastp, before_lastp, Grid.gridLineStroke
-					+ Grid.CURSOR_VARIANT_STROKE, BoardFrame.THEME_COLOR, g2);
+					+ Grid.CURSOR_VARIANT_STROKE, BoardFrame.BOARD_COLOR, g2);
 			drawCircle(lastp, game.getCurrentP().getColor(),
 					Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 					Grid.gridLineStroke, g2);

@@ -37,7 +37,7 @@ public class Grid extends JPanel {
 	protected static Color ccolor = new Color(255, 255, 255);// Cursor color
 	protected static Color gridLineCol = new Color(10, 60, 30);
 
-	public static double Height = 640;//640
+	public static double Height = 704;//640
 	public static double Width = 1024;//1024
 
 	public static double Columns = 0.0, rows = 0.0;
