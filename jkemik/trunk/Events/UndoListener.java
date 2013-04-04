@@ -44,7 +44,12 @@ public class UndoListener implements MouseListener {
 			BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
 			BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
 		}else{
-			//JOptionPane.showMessageDialog(null, "NOTHING TO UNDOING\n","Illegal Action", JOptionPane.WARNING_MESSAGE);
+			if(Grid.manualc){
+				Grid.undo = true;
+				System.out.println("Trying to undo selection...");
+				BoardFrame.grid.repaint();
+				return;
+			}
 			JOptionPane.showMessageDialog(null, BoardFrame.messages.getString("ilUndo")+"\n", BoardFrame.messages.getString("ilAction"), JOptionPane.WARNING_MESSAGE);
 		}
 	}

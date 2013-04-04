@@ -138,6 +138,7 @@ public class BoardFrame extends JFrame {
 			panel1.setLayout(new BorderLayout());
 			panel1.setPreferredSize(new Dimension((int) this.width,
 					(int) (CORNER_HEIGHT * this.height)));
+			//panel1.setBorder(BorderFactory.createLineBorder(BoardFrame.BOARD_COLOR));
 			add(panel1, BorderLayout.NORTH);
 
 			panel2 = new JPanel();
@@ -149,8 +150,11 @@ public class BoardFrame extends JFrame {
 
 			panel3 = new JPanel();
 			panel3.setLayout(new BorderLayout());// 10,10
+//			panel3.setPreferredSize(new Dimension((int) this.width,
+//					(int) (CORNER_HEIGHT * this.height)));
 			panel3.setPreferredSize(new Dimension((int) this.width,
 					(int) (CORNER_HEIGHT * this.height)));
+			//panel3.setBorder(BorderFactory.createLineBorder(BoardFrame.BOARD_COLOR));
 			add(panel3, BorderLayout.SOUTH);
 		} catch (NullPointerException e) {
 			System.out.println("Exception: " + e.getMessage());
@@ -214,7 +218,7 @@ public class BoardFrame extends JFrame {
 		// panel21_container.setPreferredSize(new Dimension(((int) (SIDE_WIDTH *
 		// this.width)),
 		// (int) (PLAYER_PNL_H_SCALAR * SIDE_HEIGHT * this.height)));
-		// panel21_container.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
+		//panel21_container.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
 		panel21_container.setLayout(new BorderLayout());
 
 		panel21 = new JPanel();
@@ -226,6 +230,7 @@ public class BoardFrame extends JFrame {
 				(int) (SIDE_HEIGHT * this.height)));
 		// panel21.setLayout(new BorderLayout(1, 1));
 		panel21.setLayout(new FlowLayout());
+		//panel21.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
 		p1panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (PLAYER_PNL_H_SCALAR * SIDE_HEIGHT * this.height));
 
@@ -238,7 +243,7 @@ public class BoardFrame extends JFrame {
 		settings_p = new SettingsPanel(500, 400);
 
 		panel23 = new JPanel();
-		panel23.setPreferredSize(new Dimension((int) (SIDE_WIDTH * this.width),
+		panel23.setPreferredSize(new Dimension((int) (.01 * this.width),
 				(int) (SIDE_HEIGHT * this.height)));
 		panel23.setLayout(new BorderLayout(1, 1));
 
@@ -247,16 +252,14 @@ public class BoardFrame extends JFrame {
 
 		panel21_container.add(p1panel, BorderLayout.WEST);
 		panel21_container.add(p2panel, BorderLayout.EAST);
-		// panel21.add(panel21_container, BorderLayout.NORTH);
-		// panel21.add(manual, BorderLayout.SOUTH);
-
-		// panel21_container.add(p1panel);
-		// panel21_container.add(p2panel);
+		
 		settingPanel();
-		gameSettingPanel();
+		//gameSettingPanel();
+		
 		panel21.add(panel21_container);
 		panel21.add(panel31_container);// new
 		panel21.add(controlP);
+		panel21.add(panel33);
 		//panel21.add(manual);
 
 		// panel21.add(p1panel, BorderLayout.NORTH);
@@ -269,8 +272,8 @@ public class BoardFrame extends JFrame {
 		p2panel.initPanelForNewGame(JKemik.game.getPlayer2().getName(),
 				JKemik.game.getPlayer2().getColor());
 
-		// panel2.add(panel23, BorderLayout.CENTER);
-		panel2.add(panel22, BorderLayout.WEST);
+		panel2.add(panel23, BorderLayout.WEST);
+		panel2.add(panel22,BorderLayout.CENTER);
 		panel2.add(panel21, BorderLayout.EAST);
 
 	}
@@ -286,12 +289,14 @@ public class BoardFrame extends JFrame {
 
 	private void createPanel33() {
 		panel33 = new JPanel();
-		panel33.setPreferredSize(new Dimension(
-				(int) (CORNER_WIDTH * this.width)*2,
-				(int) (CORNER_HEIGHT * this.height)));
-
-		panel331 = new JPanel();
-		panel332 = new JPanel();
+//		panel33.setPreferredSize(new Dimension(
+//				(int) (CORNER_WIDTH * this.width)*2,
+//				(int) (CORNER_HEIGHT * this.height)));
+		panel33.setLayout(new GridLayout(5,1,20,20));
+		//panel33.setBorder(BorderFactory.createLineBorder(BOARD_COLOR));
+		
+//		panel331 = new JPanel();panel331.setLayout(new FlowLayout());
+//		panel332 = new JPanel();panel332.setLayout(new FlowLayout());
 
 		// pass_turn = new JButton("Pass");
 		pass_turn = new JButton(messages.getString("passB"));
@@ -304,30 +309,32 @@ public class BoardFrame extends JFrame {
 		decoratebuttons(Globals.BTN_BGD_COLOR, Globals.BTN_FRD_COLOR);
 		manual = new JCheckBox(messages.getString("manualModel"));
 
-		panel331.add(pass_turn);
-		panel331.add(undo);
-		// panel331.add(capture);
-
-		panel332.add(refresh);
-		panel332.add(manual_c);
-		panel332.add(manual);
+//		panel331.add(pass_turn);
+//		panel331.add(undo);
+//		panel332.add(refresh);
+//		panel332.add(manual_c);
+//		panel332.add(manual);
+		panel33.add(pass_turn);
+		panel33.add(undo);
+		panel33.add(refresh);
+		panel33.add(manual_c);
+		panel33.add(manual);
 
 		pass_turn.setVisible(false);
 		undo.setVisible(false);
 		manual_c.setVisible(false);
 
-		panel33.add(panel331);
-		panel33.add(panel332);
+//		panel33.add(panel331);
+//		panel33.add(panel332);
 
-		panel3.add(panel33, BorderLayout.EAST);
+		//panel3.add(panel33, BorderLayout.EAST);
 		// ---------------------------
 	}
 
 	private void settingPanel() {
 		panel31_container = new JPanel();
-
 		panel31_container.setLayout(new GridLayout(3,2));
-
+		panel31_container.setBorder(BorderFactory.createLineBorder(BOARD_COLOR));
 		AutoCap = new JLabel(JKemik.settings_t.getAutoCaptureStatus());
 		AutoCap.setForeground(Color.WHITE);
 		AutoPass = new JLabel(JKemik.settings_t.getAutoPassStatus());
@@ -353,7 +360,7 @@ public class BoardFrame extends JFrame {
 		progressB = new JProgressBar(0, PROGRESS_BAR_MAX);
 		panel31.setPreferredSize(new Dimension(
 				(int) (CORNER_WIDTH * this.width),
-				(int) (CORNER_HEIGHT * this.height)));
+				(int) (.1 * this.height)));
 
 		// panel31.add(panel31_container, BorderLayout.NORTH);// new
 		panel31.add(progressB, BorderLayout.SOUTH);
@@ -373,7 +380,7 @@ public class BoardFrame extends JFrame {
 
 		controlP = new JPanel();
 		controlP.setLayout(new GridLayout(3,1));
-		// controlP.setBorder(BorderFactory.createLineBorder(Color.yellow));
+		controlP.setBorder(BorderFactory.createLineBorder(BoardFrame.BOARD_COLOR));
 
 		label1 = new JLabel(JKemik.template.getP1_name());
 		label1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -612,8 +619,8 @@ public class BoardFrame extends JFrame {
 		panel31.setBackground(BoardFrame.THEME_COLOR);
 		panel32.setBackground(BoardFrame.THEME_COLOR);
 		panel33.setBackground(BoardFrame.THEME_COLOR);
-		panel331.setBackground(BoardFrame.THEME_COLOR);
-		panel332.setBackground(BoardFrame.THEME_COLOR);
+		//panel331.setBackground(BoardFrame.THEME_COLOR);
+		//panel332.setBackground(BoardFrame.THEME_COLOR);
 		panel31_container.setBackground(BoardFrame.THEME_COLOR);
 		progressB.setBackground(BoardFrame.THEME_COLOR);
 		progressB.setForeground(BOARD_COLOR);
@@ -878,7 +885,7 @@ public class BoardFrame extends JFrame {
 	public static JLabel Game_status, settings;
 	private String[] gridsize = { "32x20", "64x40", "8x5", "16x10" };
 	private String[] gameType = { "Origins", "Jkemik", "Classic", "Geeky" };
-	public static final double CORNER_WIDTH = .35, CORNER_HEIGHT = .06,
+	public static final double CORNER_WIDTH = .35, CORNER_HEIGHT = .04,
 			SIDE_WIDTH = .14, SIDE_HEIGHT = .8, PLAYER_PNL_W_SCALAR = .0688,
 			PLAYER_PNL_H_SCALAR = .25, P2_W = .26, BOTTOM_COLOR_P_W = 80,
 			BOTTOM_COLOR_P_H = 12;// SIDE_WIDTH = .0994, PLAYER_PNL_W_SCALAR =
