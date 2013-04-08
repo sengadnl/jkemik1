@@ -14,7 +14,6 @@ import controler.JKemik;
 
 import utilities.ValidateInput;
 import view.BoardFrame;
-import view.Grid;
 import api.GTemplate;
 import api.STemplate;
 
@@ -50,8 +49,8 @@ public class SaveButtonListener implements MouseListener {
 			t.setP2_c(c2);
 			t.setP1_name(str1);
 			t.setP2_name(str2);
-			Grid.setPcolor(t.getP1_c());
-			Grid.setCcolor(t.getP1_c());
+//			Grid.setPcolor(t.getP1_c());
+//			Grid.setCcolor(t.getP1_c());
 
 			JKemik.createGame(t, s);
 
@@ -75,7 +74,7 @@ public class SaveButtonListener implements MouseListener {
 				System.out
 						.println("Saving this game ...?????????????????????????????");
 				JKemik.game.switchPlayTurns();
-				Grid.setCcolor(JKemik.game.getCurrentP().getColor());
+				//Grid.setCcolor(JKemik.game.getCurrentP().getColor());
 			} else {
 
 			}

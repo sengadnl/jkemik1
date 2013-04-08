@@ -260,7 +260,7 @@ public class Artist {
 		g2.draw(new Line2D.Double(p.getXC() - Grid.squareSize, p.getYC(), p
 				.getXC()
 				+ Grid.squareSize, p.getYC()));
-		g2.setColor(Grid.pcolor);
+		g2.setColor(JKemik.game.getCurrentP().getColor());
 	}
 
 	protected static void unDrawSelection(ArrayList<Point> contour,

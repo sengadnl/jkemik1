@@ -33,8 +33,6 @@ public class Grid extends JPanel {
 	
 	public boolean drawn = false;
 
-	protected static Color pcolor = new Color(255, 255, 255);
-	protected static Color ccolor = new Color(255, 255, 255);// Cursor color
 	protected static Color gridLineCol = new Color(10, 60, 30);
 
 	public static double Height = 704;//640
@@ -66,13 +64,14 @@ public class Grid extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		Grid.g2 = (Graphics2D) g;
+		AbstractGame game = JKemik.game;
 		// super.paintComponent(g2);
 		try {
 			Artist.drawCursor(new Point(hl_x, hl_y), gridLineStroke,
 					Grid.half_squareSize, gridLineCol, g2);
-			highLightDot(ccolor);
+			highLightDot(game.getCurrentP().getColor());
 
-			AbstractGame game = JKemik.game;
+			
 			if (mouseclicked && plotPoint) {
 				Artist.drawCircle(new Point(x, y), game.getCurrentP()
 						.getColor(), Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
@@ -123,7 +122,6 @@ public class Grid extends JPanel {
 					&& game.getCurrentP().getPlay_flag() == 1) {
 				System.out.println("Automatic pass is true...");
 				game.switchPlayTurns();
-				Grid.setCcolor(game.getCurrentP().getColor());
 			}
 
 			if (!this.drawn) {
@@ -145,10 +143,9 @@ public class Grid extends JPanel {
 	public void highLightDot(Color c) {
 		if (mouseMove) {
 			BoardFrame.print_point.setText("" + (new Point(hl_x, hl_y)).toString());
-			// g2.setColor(ccolor);
-			// drawCursor(x, y);
 			Artist.drawCursor(new Point(x, y), gridLineStroke,
-					Grid.half_squareSize, ccolor, g2);
+					Grid.half_squareSize, JKemik.game.getCurrentP().getColor(), g2);
+
 			hl_x = x;
 			hl_y = y;
 		}
@@ -192,20 +189,6 @@ public class Grid extends JPanel {
 		}
 	}
 
-	/**
-	 * @return the pcolor
-	 */
-	public static Color getPcolor() {
-		return pcolor;
-	}
-
-	/**
-	 * @param pcolor
-	 *            the pcolor to set
-	 */
-	public static void setPcolor(Color pcolor) {
-		Grid.pcolor = pcolor;
-	}
 
 	/**
 	 * @return the squareSize
@@ -324,21 +307,6 @@ public class Grid extends JPanel {
 	 */
 	public static void setPoistions_count(int poistions_count) {
 		Grid.position_count = poistions_count;
-	}
-
-	/**
-	 * @return the ccolor
-	 */
-	public static Color getCcolor() {
-		return ccolor;
-	}
-
-	/**
-	 * @param ccolor
-	 *            the ccolor to set
-	 */
-	public static void setCcolor(Color ccolor) {
-		Grid.ccolor = ccolor;
 	}
 
 	/**

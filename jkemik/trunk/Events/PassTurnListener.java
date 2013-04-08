@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import controler.JKemik;
 
 import view.BoardFrame;
-import view.Grid;
+
 
 /**
  * @author dalet
@@ -37,7 +37,7 @@ public class PassTurnListener implements MouseListener {
 			 */
 			if (JKemik.game.getCurrentP().getPlay_flag() == 1) {
 				JKemik.game.switchPlayTurns();
-				Grid.setCcolor(JKemik.game.getCurrentP().getColor());
+				//Grid.setCcolor(JKemik.game.getCurrentP().getColor());
 
 			} else {
 //				JOptionPane.showMessageDialog(null,
