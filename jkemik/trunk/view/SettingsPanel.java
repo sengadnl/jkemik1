@@ -43,7 +43,7 @@ public class SettingsPanel extends JPanel{
 	public static RotateColor left_color;
 	public static RotateColor right_color;
 	public static JTextField max_win;
-	public static JComboBox languageList;
+	public static JComboBox<String> languageList;
 	public static JLabel label1,label2,label3,label4,label5;	
 	private int maxWinVal;
 	static ResourceBundle messages;
@@ -62,11 +62,11 @@ public class SettingsPanel extends JPanel{
 		buildPane();
 	}
 
-	public static JComboBox getLanguageList() {
+	public static JComboBox<String> getLanguageList() {
 		return languageList;
 	}
 
-	public static void setLanguageList(JComboBox languageList) {
+	public static void setLanguageList(JComboBox<String> languageList) {
 		SettingsPanel.languageList = languageList;
 	}
 
@@ -143,7 +143,7 @@ public class SettingsPanel extends JPanel{
 		
 		max_win = new JTextField("" + JKemik.settings_t.getMaxWinVal());
 		
-		languageList = new JComboBox(Globals.laguageNames);//
+		languageList = new JComboBox<String>(Globals.laguageNames);//
 
 		label1 = new JLabel("  " + messages.getString("autoCaptureL") + " : ");
 		label2 = new JLabel("  " + messages.getString("autoPassL") + " : ");
