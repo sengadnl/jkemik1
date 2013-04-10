@@ -49,6 +49,9 @@ public class Grid extends JPanel {
 		setPreferredSize(new Dimension((int) Width, (int) Height));
 		setSquareSize(squareSize);
 		calColAndRows((int) squareSize);
+	}public Grid(int w, int h) {
+		
+		// TODO
 	}
 
 	public static Grid getInstance(int squareSize) {
