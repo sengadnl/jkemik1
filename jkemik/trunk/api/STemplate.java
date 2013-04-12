@@ -1,7 +1,12 @@
 package api;
 
+import java.awt.Dimension;
 import java.io.Serializable;
+import java.util.ArrayList;
 
+
+import utilities.Globals;
+import utilities.Tools;
 
 public class STemplate implements Serializable {
 
@@ -23,9 +28,57 @@ public class STemplate implements Serializable {
 	private double MaxPointPerPlayer = 0.0;
 	private String language = "ENGLISH";
 	private boolean[] memo = { true, true };
+	private ArrayList<GridDimension> sizes;
 
 	public STemplate() {
-		
+		boardSizes(Globals.SIZE_PERCENT);
+	}
+	public double getSqrSize(String str) {
+		double sqrSize = 32;
+		//System.out.println("GridDimensions: " + sizes);
+		for (GridDimension size: sizes) {
+			String s = size.toString();
+			if(s.equals(str)){
+				return size.getSqrSize();
+			}
+		}
+		System.out.println("Grid size: " + sqrSize);
+		return sqrSize;
+	}
+	public void boardSizes(double grid_percent) {
+		sizes = new ArrayList<GridDimension>();
+
+		// calculate board container dimension (pixels)
+		int w_ini = (int) (Globals.FRAME_WIDTH * grid_percent);
+		int h_ini = (int) (Globals.FRAME_HEIGHT * grid_percent);
+		Dimension gcontainer = new Dimension(w_ini, h_ini);
+		//boards.add(gcontainer);
+		System.out.println("" + gcontainer);
+
+		// Get list of square sizes
+		ArrayList<Integer> sqrSizes = Tools.sqrtSizeGCD(new Dimension(w_ini, h_ini),
+				Globals.SQUARE_MIN_SIZE);
+
+		// Generate board list of board dimensions based on square sizes
+		int index = 0;
+		for (int temp : sqrSizes) {
+			// Skip board container dimensions
+			if (index == 0) {
+				index++;
+				continue;
+			}
+			System.out.print("SQR Size:" + temp + " -> ");
+			sizes.add(new GridDimension(Tools.bSize(gcontainer, temp),temp));
+		}
+		System.out.println("Possible board sizes: " + sizes);
+	}
+
+	public ArrayList<GridDimension> getSizes() {
+		return sizes;
+	}
+
+	public void setSizes(ArrayList<GridDimension> sizes) {
+		this.sizes = sizes;
 	}
 
 	public boolean isHh() {
@@ -107,10 +160,12 @@ public class STemplate implements Serializable {
 	public boolean[] getMemo() {
 		return memo;
 	}
-/**
- * @param c = capture mode and p = pass mode
- * @return void
- * */
+
+	/**
+	 * @param c
+	 *            = capture mode and p = pass mode
+	 * @return void
+	 * */
 	public void setMemo(boolean c, boolean p) {
 		if (c) {
 			this.memo[0] = true;
@@ -123,9 +178,13 @@ public class STemplate implements Serializable {
 			this.memo[1] = false;
 		}
 	}
-	/**Remember the current game mode in case it is temporarily switched
+
+	/**
+	 * Remember the current game mode in case it is temporarily switched
+	 * 
 	 * @param none
-	 * @return void*/
+	 * @return void
+	 */
 	public void restaureMemo() {
 		if (this.memo[0]) {
 			this.autoCapture = true;
@@ -200,8 +259,10 @@ public class STemplate implements Serializable {
 	public void setAutoPass(boolean autoPass) {
 		this.autoPass = autoPass;
 	}
-	public String toString(){
-		return "MaxPointPerPlayer: " + this.MaxPointPerPlayer + "\nMaxWinVal :" + this.maxWinVal;
+
+	public String toString() {
+		return "MaxPointPerPlayer: " + this.MaxPointPerPlayer + "\nMaxWinVal :"
+				+ this.maxWinVal;
 	}
 
 }
