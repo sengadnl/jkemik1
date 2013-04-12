@@ -140,7 +140,7 @@ public class BoardFrame extends JFrame {
 			panel1.setLayout(new BorderLayout());
 			panel1.setPreferredSize(new Dimension((int) this.width,
 					(int) (CORNER_HEIGHT * this.height)));
-			//panel1.setBorder(BorderFactory.createLineBorder(BoardFrame.BOARD_COLOR));
+			// panel1.setBorder(BorderFactory.createLineBorder(BoardFrame.BOARD_COLOR));
 			add(panel1, BorderLayout.NORTH);
 
 			panel2 = new JPanel();
@@ -152,11 +152,11 @@ public class BoardFrame extends JFrame {
 
 			panel3 = new JPanel();
 			panel3.setLayout(new BorderLayout());// 10,10
-//			panel3.setPreferredSize(new Dimension((int) this.width,
-//					(int) (CORNER_HEIGHT * this.height)));
+			// panel3.setPreferredSize(new Dimension((int) this.width,
+			// (int) (CORNER_HEIGHT * this.height)));
 			panel3.setPreferredSize(new Dimension((int) this.width,
 					(int) (CORNER_HEIGHT * this.height)));
-			//panel3.setBorder(BorderFactory.createLineBorder(BoardFrame.BOARD_COLOR));
+			// panel3.setBorder(BorderFactory.createLineBorder(BoardFrame.BOARD_COLOR));
 			add(panel3, BorderLayout.SOUTH);
 		} catch (NullPointerException e) {
 			System.out.println("Exception: " + e.getMessage());
@@ -216,23 +216,23 @@ public class BoardFrame extends JFrame {
 	}
 
 	private void designPanel2() {
-		panel21_container = new JPanel();
-		panel21_container.setLayout(new BorderLayout());
+		playerPanel_container = new JPanel();
+		playerPanel_container.setLayout(new BorderLayout());
 
-		panel21 = new JPanel();
-		panel21.setPreferredSize(new Dimension(
+		status_panel_container = new JPanel();
+		status_panel_container.setPreferredSize(new Dimension(
 				((int) (SIDE_WIDTH * this.width)),
 				(int) (SIDE_HEIGHT * this.height)));
-		panel21.setLayout(new FlowLayout());
+		status_panel_container.setLayout(new FlowLayout());
 		p1panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (PLAYER_PNL_H_SCALAR * SIDE_HEIGHT * this.height));
 
-		panel22 = new JPanel();
+		grid_container = new JPanel();
 		p1panel.initPanelForNewGame(JKemik.game.getPlayer1().getName(),
 				JKemik.game.getPlayer1().getColor());
 		grid = Grid.getInstance(JKemik.settings_t.getSizes().get(0));//
 		Tools.resetMaxWin(Grid.squareCount(), JKemik.settings_t);
-		
+
 		System.out.println("GRID SIZE: ");
 		settings_p = new SettingsPanel(500, 400);
 
@@ -244,21 +244,21 @@ public class BoardFrame extends JFrame {
 		p2panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
 				(int) (.25 * SIDE_HEIGHT * this.height));
 
-		panel21_container.add(p1panel, BorderLayout.WEST);
-		panel21_container.add(p2panel, BorderLayout.EAST);
-		
-		settingPanel();
-		//gameSettingPanel();
-		
-		panel21.add(panel21_container);
-		panel21.add(panel31_container);// new
-		panel21.add(controlP);
-		panel21.add(panel33);
-		//panel21.add(manual);
+		playerPanel_container.add(p1panel, BorderLayout.WEST);
+		playerPanel_container.add(p2panel, BorderLayout.EAST);
+
+		gameConfigPanel();
+		// gameSettingPanel();
+
+		status_panel_container.add(playerPanel_container);
+		status_panel_container.add(config_container);// new
+		status_panel_container.add(setupP);
+		status_panel_container.add(controler_panel);
+		// panel21.add(manual);
 
 		// panel21.add(p1panel, BorderLayout.NORTH);
-		panel22.add(grid);
-		panel22.add(settings_p);
+		grid_container.add(grid);
+		grid_container.add(settings_p);
 
 		// panel23.add(p2panel, BorderLayout.NORTH);
 		// panel23.add(manual, BorderLayout.SOUTH);
@@ -267,23 +267,23 @@ public class BoardFrame extends JFrame {
 				JKemik.game.getPlayer2().getColor());
 
 		panel2.add(panel23, BorderLayout.WEST);
-		panel2.add(panel22,BorderLayout.CENTER);
-		panel2.add(panel21, BorderLayout.EAST);
+		panel2.add(grid_container, BorderLayout.CENTER);
+		panel2.add(status_panel_container, BorderLayout.EAST);
 
 	}
 
 	private void designPanel3() {
 		createPanel31();
-		gameConfigPanel();
-		createPanel33();
+		gameSetupPanel();
+		createControlerPanel();
 
 		System.out.println("Panel33: " + (CORNER_WIDTH * this.width) + " X "
 				+ (CORNER_HEIGHT * this.height));
 	}
 
-	private void createPanel33() {
-		panel33 = new JPanel();
-		panel33.setLayout(new GridLayout(5,1,20,20));
+	private void createControlerPanel() {
+		controler_panel = new JPanel();
+		controler_panel.setLayout(new GridLayout(5, 1, 20, 20));
 
 		pass_turn = new JButton(messages.getString("passB"));
 		// undo = new JButton("Undo");//messages.getString("captureMode")
@@ -295,27 +295,21 @@ public class BoardFrame extends JFrame {
 		decoratebuttons(Globals.BTN_BGD_COLOR, Globals.BTN_FRD_COLOR);
 		manual = new JCheckBox(messages.getString("manualModel"));
 
-		panel33.add(pass_turn);
-		panel33.add(undo);
-		panel33.add(refresh);
-		panel33.add(manual_c);
-		panel33.add(manual);
+		controler_panel.add(pass_turn);
+		controler_panel.add(undo);
+		controler_panel.add(refresh);
+		controler_panel.add(manual_c);
+		controler_panel.add(manual);
 
 		pass_turn.setVisible(false);
 		undo.setVisible(false);
 		manual_c.setVisible(false);
-
-//		panel33.add(panel331);
-//		panel33.add(panel332);
-
-		//panel3.add(panel33, BorderLayout.EAST);
-		// ---------------------------
 	}
 
-	private void settingPanel() {
-		panel31_container = new JPanel();
-		panel31_container.setLayout(new GridLayout(3,2));
-		//panel31_container.setBorder(BorderFactory.createLineBorder(BOARD_COLOR));
+	private void gameConfigPanel() {
+		config_container = new JPanel();
+		config_container.setLayout(new GridLayout(3, 2));
+		// panel31_container.setBorder(BorderFactory.createLineBorder(BOARD_COLOR));
 		AutoCap = new JLabel(JKemik.settings_t.getAutoCaptureStatus());
 		AutoCap.setForeground(Color.WHITE);
 		AutoPass = new JLabel(JKemik.settings_t.getAutoPassStatus());
@@ -328,28 +322,27 @@ public class BoardFrame extends JFrame {
 		lc = new JLabel(" " + messages.getString("winl"));
 		decorateLabelss(BoardFrame.BOARD_COLOR);
 
-		panel31_container.add(la);
-		panel31_container.add(AutoCap);
-		panel31_container.add(lb);
-		panel31_container.add(AutoPass);
-		panel31_container.add(lc);
-		panel31_container.add(Win);
+		config_container.add(la);
+		config_container.add(AutoCap);
+		config_container.add(lb);
+		config_container.add(AutoPass);
+		config_container.add(lc);
+		config_container.add(Win);
 	}
 
 	private void createPanel31() {
-		panel31 = new JPanel();
+		down_left = new JPanel();
 		progressB = new JProgressBar(0, PROGRESS_BAR_MAX);
-		panel31.setPreferredSize(new Dimension(
-				(int) (CORNER_WIDTH * this.width),
-				(int) (.1 * this.height)));
+		down_left.setPreferredSize(new Dimension(
+				(int) (CORNER_WIDTH * this.width), (int) (.1 * this.height)));
 
 		// panel31.add(panel31_container, BorderLayout.NORTH);// new
-		panel31.add(progressB, BorderLayout.SOUTH);
-		panel3.add(panel31, BorderLayout.WEST);
+		down_left.add(progressB, BorderLayout.SOUTH);
+		panel3.add(down_left, BorderLayout.WEST);
 		// panel21.add(panel31);
 	}
 
-	private void gameConfigPanel() {
+	private void gameSetupPanel() {
 		panel32 = new JPanel();
 
 		blank1 = new JLabel(" ");
@@ -359,9 +352,9 @@ public class BoardFrame extends JFrame {
 		blank5 = new JLabel(" ");
 		blank6 = new JLabel(" ");
 
-		controlP = new JPanel();
-		controlP.setLayout(new GridLayout(3,1));
-	
+		setupP = new JPanel();
+		setupP.setLayout(new GridLayout(3, 1));
+
 		label1 = new JLabel(JKemik.template.getP1_name());
 		label1.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -402,11 +395,11 @@ public class BoardFrame extends JFrame {
 		Holder3.add(label2);
 		Holder3.add(pColor2);
 		Holder3.add(blank4);
-		
-		controlP.add(Holder1);
-		controlP.add(Holder3);
-		controlP.add(Holder2);
-		
+
+		setupP.add(Holder1);
+		setupP.add(Holder3);
+		setupP.add(Holder2);
+
 		System.out.println("Panel32: " + (P2_W * this.width) + " X "
 				+ (CORNER_HEIGHT * this.height));
 	}
@@ -588,27 +581,27 @@ public class BoardFrame extends JFrame {
 		panel1.setBackground(BoardFrame.THEME_COLOR);
 		panel11.setBackground(BoardFrame.THEME_COLOR);
 		panel12.setBackground(BoardFrame.THEME_COLOR);
-		panel21_container.setBackground(BoardFrame.THEME_COLOR);
+		playerPanel_container.setBackground(BoardFrame.THEME_COLOR);
 
 		panel2.setBackground(BoardFrame.THEME_COLOR);
-		panel21.setBackground(BoardFrame.THEME_COLOR);
-		panel22.setBackground(BoardFrame.THEME_COLOR);
+		status_panel_container.setBackground(BoardFrame.THEME_COLOR);
+		grid_container.setBackground(BoardFrame.THEME_COLOR);
 		panel23.setBackground(BoardFrame.THEME_COLOR);
 		settings_p.setBackground(BoardFrame.THEME_COLOR);
 
 		panel3.setBackground(BoardFrame.THEME_COLOR);
-		panel31.setBackground(BoardFrame.THEME_COLOR);
+		down_left.setBackground(BoardFrame.THEME_COLOR);
 		panel32.setBackground(BoardFrame.THEME_COLOR);
-		panel33.setBackground(BoardFrame.THEME_COLOR);
-		//panel331.setBackground(BoardFrame.THEME_COLOR);
-		//panel332.setBackground(BoardFrame.THEME_COLOR);
-		panel31_container.setBackground(BoardFrame.THEME_COLOR);
+		controler_panel.setBackground(BoardFrame.THEME_COLOR);
+		// panel331.setBackground(BoardFrame.THEME_COLOR);
+		// panel332.setBackground(BoardFrame.THEME_COLOR);
+		config_container.setBackground(BoardFrame.THEME_COLOR);
 		progressB.setBackground(BoardFrame.THEME_COLOR);
 		progressB.setForeground(BOARD_COLOR);
 
 		blank1.setBackground(BOARD_COLOR);
 		blank2.setBackground(BOARD_COLOR);
-		controlP.setBackground(BoardFrame.CPANEL_COLOR);
+		setupP.setBackground(BoardFrame.CPANEL_COLOR);
 		Holder1.setBackground(BoardFrame.CPANEL_COLOR);
 		Holder2.setBackground(BoardFrame.CPANEL_COLOR);
 		Holder3.setBackground(BoardFrame.CPANEL_COLOR);
@@ -773,7 +766,7 @@ public class BoardFrame extends JFrame {
 
 	public static void displayGrid(boolean display) {
 		settings_p.setVisible(!display);
-		panel22.repaint();
+		grid_container.repaint();
 		grid.setVisible(display);
 		if (grid.drawn) {
 			System.out.println("Displaying the grid.....");
@@ -848,7 +841,7 @@ public class BoardFrame extends JFrame {
 		int len = sizes.size();
 		this.gridsize = new String[len];
 		int index = 0;
-		for(GridDimension s: sizes){
+		for (GridDimension s : sizes) {
 			this.gridsize[index] = s.toString();
 			index++;
 		}
@@ -860,9 +853,10 @@ public class BoardFrame extends JFrame {
 	public static JLabel print_point;
 	public static JPanel panel1, panel2, panel3;
 	public static JPanel panel11, panel12, panel13;
-	public static JPanel panel21, panel22, panel23, panel21_container;
-	public static JPanel panel31, controlP, panel32, panel33,
-			panel31_container;
+	public static JPanel status_panel_container, grid_container, panel23,
+			playerPanel_container;
+	public static JPanel down_left, setupP, panel32, controler_panel,
+			config_container;
 	public static JPanel panel331, panel332;
 	public static JPanel Holder1, Holder2, Holder3;
 	public static JLabel label1, label2;

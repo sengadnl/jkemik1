@@ -222,7 +222,7 @@ public class Grid extends JPanel {
 		Grid.squareSize = squareSize;
 
 		Grid.half_squareSize = squareSize / 2;
-		CIRCLE_DIAMETER = (int) (squareSize * .44);
+		CIRCLE_DIAMETER = (int) (squareSize * .46);
 		HALF_DIAMETER = CIRCLE_DIAMETER / 2;
 		gridLineStroke = (int) (squareSize * .12);
 		squareFadeVariant = (int) (squareSize * .25);
