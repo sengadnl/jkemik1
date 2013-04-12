@@ -30,7 +30,7 @@ public class BoardSizeListener implements MouseListener{
 		//Grid.setSquareSize(Grid.getSqrSize(s));
 		Grid.setSquareSize(JKemik.settings_t.getSqrSize(s));
 		t.setG_size(Grid.getSquareSize());
-		BoardFrame.panel2.repaint();
+		BoardFrame.middle_container.repaint();
 		
 		// change the grid size
 		if (BoardFrame.grid.drawn) {
