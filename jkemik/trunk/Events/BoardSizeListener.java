@@ -27,7 +27,8 @@ public class BoardSizeListener implements MouseListener{
 		GTemplate t = JKemik.template;
 		this.label.rotateLabel();
 		String s = this.label.getActiveLabel();
-		Grid.setSquareSize(Grid.getSqrSize(s));
+		//Grid.setSquareSize(Grid.getSqrSize(s));
+		Grid.setSquareSize(JKemik.settings_t.getSqrSize(s));
 		t.setG_size(Grid.getSquareSize());
 		BoardFrame.panel2.repaint();
 		

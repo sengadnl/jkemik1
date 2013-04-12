@@ -116,26 +116,26 @@ public class GTemplate implements Serializable{
 		this.P2_name = P2_name;
 	}
 
-	public void setGridSize(String Grid_size) {
-
-		Grid_size = Grid_size.toLowerCase();
-
-		if (Grid_size.equals("64x40")) {
-			this.G_size = ((dimension.getWidth() * GRID_PERCENT) / LARGE_SCALAR);
-		}
-
-		if (Grid_size.equals("32x20")) {
-			this.G_size = ((dimension.getWidth() * GRID_PERCENT) / MIDIUM_SCALAR);
-		}
-
-		if (Grid_size.equals("16x10")) {
-			this.G_size = ((dimension.getWidth() * GRID_PERCENT) / SMALL_SCALAR);
-		}
-
-		if (Grid_size.equals("8x5")) {
-			this.G_size = ((dimension.getWidth() * GRID_PERCENT) / VERY_LARGE_SCALAR);
-		}
-	}
+//	public void setGridSize(String Grid_size) {
+//
+//		Grid_size = Grid_size.toLowerCase();
+//
+//		if (Grid_size.equals("64x40")) {
+//			this.G_size = ((dimension.getWidth() * GRID_PERCENT) / LARGE_SCALAR);
+//		}
+//
+//		if (Grid_size.equals("32x20")) {
+//			this.G_size = ((dimension.getWidth() * GRID_PERCENT) / MIDIUM_SCALAR);
+//		}
+//
+//		if (Grid_size.equals("16x10")) {
+//			this.G_size = ((dimension.getWidth() * GRID_PERCENT) / SMALL_SCALAR);
+//		}
+//
+//		if (Grid_size.equals("8x5")) {
+//			this.G_size = ((dimension.getWidth() * GRID_PERCENT) / VERY_LARGE_SCALAR);
+//		}
+//	}
 	public String gridSizeToString(){
 		if(this.G_size == ((this.dimension.getWidth() * this.GRID_PERCENT) / this.SMALL_SCALAR)){
 			return "64x40";

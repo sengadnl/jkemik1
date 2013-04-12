@@ -4,12 +4,14 @@
 package view;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.*;
 
 import api.GTemplate;
+import api.GridDimension;
 import api.Point;
 import api.STemplate;
 import Events.*;
@@ -238,8 +240,11 @@ public class BoardFrame extends JFrame {
 		p1panel.initPanelForNewGame(JKemik.game.getPlayer1().getName(),
 				JKemik.game.getPlayer1().getColor());
 
-		grid = Grid.getInstance((int) JKemik.template.getG_size());//
+//		grid = Grid.getInstance((int) JKemik.template.getG_size());//
+		grid = Grid.getInstance(JKemik.settings_t.getSizes().get(0));//
 		Tools.resetMaxWin(Grid.squareCount(), JKemik.settings_t);
+		
+		System.out.println("GRID SIZE: ");
 		settings_p = new SettingsPanel(500, 400);
 
 		panel23 = new JPanel();
@@ -399,7 +404,8 @@ public class BoardFrame extends JFrame {
 				(int) BOTTOM_COLOR_P_H);
 		pColor2.rotateColor(JKemik.template.getP2_c());
 
-		l1 = new RotateLabel(this.gridsize);
+		setGridsize(JKemik.settings_t.getSizes());
+		l1 = new RotateLabel(getGridsize());
 		l1.setText(JKemik.template.gridSizeToString());
 		l2 = new RotateLabel(this.gameType);
 		l2.setText(JKemik.settings_t.getTheme());
@@ -856,6 +862,20 @@ public class BoardFrame extends JFrame {
 					+ BoardFrame.messages.getString("sysSetupMode"));
 			disableGameControlPanel();
 			displayGrid(false);
+		}
+	}
+
+	public String[] getGridsize() {
+		return gridsize;
+	}
+
+	public void setGridsize(ArrayList<GridDimension> sizes) {
+		int len = sizes.size();
+		this.gridsize = new String[len];
+		int index = 0;
+		for(GridDimension s: sizes){
+			this.gridsize[index] = s.toString();
+			index++;
 		}
 	}
 

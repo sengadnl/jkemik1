@@ -28,10 +28,11 @@ public class Globals {
 	public static final double MAX_WIN = .1;
 	public static final int LIGHT_PURPPLE_INDEX = 3;
 	public static final int DARK_PURPPLE_INDEX = 9;
-	public static final int SQUARE_MIN_SIZE = 10;
+	public static final int SQUARE_MIN_SIZE = 16;
 	public static final int SQUARE_MAX_SIZE = 64;
 	public static final double FRAME_WIDTH = 1280;
 	public static final double FRAME_HEIGHT = 800;
+	public static final double SIZE_PERCENT = .75;
 	
 	public static final Color[] CHEMIK_COLOR = {
 		new Color(250, 0, 255),
