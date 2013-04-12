@@ -144,7 +144,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			JOptionPane.showMessageDialog(null, ""
 					+ JKemik.game.getGuest().getName() + BoardFrame.messages.getString("winM"), " Win",
 					JOptionPane.OK_OPTION);
-			BoardFrame.panel2.repaint();
+			BoardFrame.middle_container.repaint();
 			BoardFrame.pColor1.addMouseListener(ViewEvents.p1Listener);
 			BoardFrame.pColor2.addMouseListener(ViewEvents.p2Listener);
 			BoardFrame.label1.addMouseListener(ViewEvents.n1Listener);
