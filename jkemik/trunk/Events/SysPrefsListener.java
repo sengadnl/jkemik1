@@ -11,6 +11,7 @@ import controler.JKemik;
 import utilities.Tools;
 //import view.BoardFrame;
 import view.BoardFrame;
+import view.Grid;
 
 public class SysPrefsListener implements MouseListener {
 	private JLabel label;
@@ -41,6 +42,7 @@ public class SysPrefsListener implements MouseListener {
 		Color color;
 		color = Tools.boost(this.label.getForeground());
 		this.label.setForeground(color);
+		BoardFrame.displayGrid(true);
 	}
 
 	public void mousePressed(MouseEvent arg0) {
@@ -58,5 +60,6 @@ public class SysPrefsListener implements MouseListener {
 		// this.label.setToolTipText("System Preferences.");
 		this.label
 				.setToolTipText(BoardFrame.messages.getString("sysPrefHover"));
+		Grid.refresh = true;
 	}
 }

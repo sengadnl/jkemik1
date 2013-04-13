@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import controler.JKemik;
 
 import view.BoardFrame;
+import view.Grid;
 
 
 /**
@@ -53,6 +54,7 @@ public class PassTurnListener implements MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		//pass.setToolTipText("Click to pass the turn.");
 		pass.setToolTipText(BoardFrame.messages.getString("passHover"));
+		Grid.refresh = true;
 	}
 
 	public void mouseExited(MouseEvent e) {

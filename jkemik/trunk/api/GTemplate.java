@@ -30,12 +30,12 @@ public class GTemplate implements Serializable{
 	private Color p1_c;
 	private Color p2_c;
 	private Dimension dimension; // = Toolkit.getDefaultToolkit().getScreenSize();
-	private final double GRID_PERCENT = 0.8; //
-	private final double VERY_LARGE_SCALAR = 128;
-	private final double LARGE_SCALAR = 16;
-	private final double MIDIUM_SCALAR = 32;
-	private final double SMALL_SCALAR = 64;
-	private double G_size = SMALL_SCALAR;
+//	private final double GRID_PERCENT = 0.8; //
+//	private final double VERY_LARGE_SCALAR = 128;
+//	private final double LARGE_SCALAR = 16;
+//	private final double MIDIUM_SCALAR = 32;
+//	private final double SMALL_SCALAR = 64;
+//	private double G_size = SMALL_SCALAR;
 
 	public GTemplate() {
 		this.dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -43,7 +43,7 @@ public class GTemplate implements Serializable{
 		this.P2_name = "Player 2";
 		this.p1_c = new Color(0, 250, 0);
 		this.p2_c = new Color(250, 0, 0);
-		this.G_size = ((this.dimension.getWidth() * this.GRID_PERCENT) / this.MIDIUM_SCALAR);
+		//this.G_size = ((this.dimension.getWidth() * this.GRID_PERCENT) / this.MIDIUM_SCALAR);
 	}
 
 	/**
@@ -102,9 +102,9 @@ public class GTemplate implements Serializable{
 		this.dimension = d;
 	}
 
-	public void setG_size(double G_size) {
-		this.G_size = G_size;
-	}
+//	public void setG_size(double G_size) {
+//		this.G_size = G_size;
+//	}
 
 	public void setP1_name(String P1_name) {
 		System.out.println("----------" + P1_name);
@@ -136,17 +136,17 @@ public class GTemplate implements Serializable{
 //			this.G_size = ((dimension.getWidth() * GRID_PERCENT) / VERY_LARGE_SCALAR);
 //		}
 //	}
-	public String gridSizeToString(){
-		if(this.G_size == ((this.dimension.getWidth() * this.GRID_PERCENT) / this.SMALL_SCALAR)){
-			return "64x40";
-		}else if(this.G_size == ((this.dimension.getWidth() * this.GRID_PERCENT) / this.MIDIUM_SCALAR)){
-			return "32x20";
-		}else if(this.G_size == ((this.dimension.getWidth() * this.GRID_PERCENT) / this.LARGE_SCALAR)){
-			return "16x10";
-		}else{
-			return "8x5";
-		}
-	}
+//	public String gridSizeToString(){
+//		if(this.G_size == ((this.dimension.getWidth() * this.GRID_PERCENT) / this.SMALL_SCALAR)){
+//			return "64x40";
+//		}else if(this.G_size == ((this.dimension.getWidth() * this.GRID_PERCENT) / this.MIDIUM_SCALAR)){
+//			return "32x20";
+//		}else if(this.G_size == ((this.dimension.getWidth() * this.GRID_PERCENT) / this.LARGE_SCALAR)){
+//			return "16x10";
+//		}else{
+//			return "8x5";
+//		}
+//	}
 //	public String gameTypeToString(){
 //		if(this.gType.equals("H vs H")){
 //			return "H vs H";
@@ -157,9 +157,9 @@ public class GTemplate implements Serializable{
 //		}
 //	}
 
-	public double getG_size() {
-		return G_size;
-	}
+//	public double getG_size() {
+//		return G_size;
+//	}
 
 //	public void setTheme(Color p1,Color p2) {
 //		this.p1_c = p1;
@@ -195,6 +195,6 @@ public class GTemplate implements Serializable{
 		p2_c = p2C;
 	}
 	public String toString() {
-		return " " + P1_name + " " + P2_name + " " + G_size;
+		return " " + P1_name + " " + P2_name + " ";
 	}
 }

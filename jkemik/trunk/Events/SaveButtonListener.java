@@ -39,8 +39,6 @@ public class SaveButtonListener implements MouseListener {
 
 		GTemplate t = JKemik.template;
 		STemplate s = JKemik.settings_t;
-		// Player p1 = null, p2 = null;
-		// AbstractGame game = null;
 
 		if (ValidateInput.names(str1, str2)
 				&& ValidateInput.validateColors(c1, c2)) {
@@ -49,9 +47,6 @@ public class SaveButtonListener implements MouseListener {
 			t.setP2_c(c2);
 			t.setP1_name(str1);
 			t.setP2_name(str2);
-//			Grid.setPcolor(t.getP1_c());
-//			Grid.setCcolor(t.getP1_c());
-
 			JKemik.createGame(t, s);
 
 			JKemik.game.setMaxScore(s.getMaxWinVal());//

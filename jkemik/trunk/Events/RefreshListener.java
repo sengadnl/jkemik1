@@ -30,10 +30,11 @@ public class RefreshListener implements MouseListener {
 	public void mouseEntered(MouseEvent arg0) {
 		// refresh.setToolTipText("Click to refresh the board");
 		refresh.setToolTipText(BoardFrame.messages.getString("refreshHover"));
+		Grid.refresh = true;
 	}
 
 	public void mouseExited(MouseEvent arg0) {
-
+		BoardFrame.displayGrid(true);
 	}
 
 	public void mousePressed(MouseEvent arg0) {
