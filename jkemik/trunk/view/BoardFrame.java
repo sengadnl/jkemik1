@@ -7,6 +7,8 @@ import java.awt.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
+
 import api.GTemplate;
 import api.Point;
 import api.STemplate;
@@ -320,10 +322,13 @@ public class BoardFrame extends JFrame {
 		// middle_container.setBorder(BorderFactory.createLineBorder(BOARD_COLOR));
 		//bottom_container.setBorder(BorderFactory.createLineBorder(BOARD_COLOR));
 		// controler_panel.setBorder(BorderFactory.createLineBorder(BOARD_COLOR));
-		Holder2.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createLineBorder(BOARD_COLOR), "Setup"));
-		config_container.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createLineBorder(BOARD_COLOR), "Control"));
+		TitledBorder SetupBorder = new TitledBorder("Setup");
+		SetupBorder.setTitleColor(BOARD_COLOR);
+		Holder2.setBorder(SetupBorder);
+		
+		TitledBorder ControlBorder = new TitledBorder("Control");
+		ControlBorder.setTitleColor(BOARD_COLOR);
+		config_container.setBorder(ControlBorder);
 	}
 
 	public static void decoratebuttons(Color bg, Color fg) {
@@ -541,6 +546,9 @@ public class BoardFrame extends JFrame {
 		Holder1.setBackground(Tools.fade(BoardFrame.BOARD_COLOR));
 		Holder2.setBackground(BoardFrame.CPANEL_COLOR);
 		Holder3.setBackground(Tools.fade(BoardFrame.BOARD_COLOR));
+		
+//		Holder2.setForeground(BOARD_COLOR);
+//		config_container.setForeground(BOARD_COLOR);
 
 		l1.setForeground(Tools.boost(Color.WHITE, Globals.LABEL_VARIANT));
 		l2.setForeground(Tools.boost(Color.WHITE, Globals.LABEL_VARIANT));
