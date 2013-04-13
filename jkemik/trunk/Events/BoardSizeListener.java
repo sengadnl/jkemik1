@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import controler.JKemik;
-import api.GTemplate;
+import api.STemplate;
 import utilities.Globals;
 import utilities.Tools;
 import view.BoardFrame;
@@ -24,21 +24,20 @@ public class BoardSizeListener implements MouseListener{
 		this.label = label;
 	}
 	public void mouseClicked(MouseEvent e) {
-		GTemplate t = JKemik.template;
+		STemplate t = JKemik.settings_t;
 		this.label.rotateLabel();
 		String s = this.label.getActiveLabel();
-		//Grid.setSquareSize(Grid.getSqrSize(s));
-		Grid.setSquareSize(JKemik.settings_t.getSqrSize(s));
-		t.setG_size(Grid.getSquareSize());
+		double sqr = t.getSqrSize(s);
+		Grid.setSquareSize(sqr);
+		t.setSquareSize(sqr);
 		BoardFrame.middle_container.repaint();
-		
 		// change the grid size
 		if (BoardFrame.grid.drawn) {
 			BoardFrame.grid.drawn = false;
 			BoardFrame.grid.repaint();
 		}
 		BoardFrame.Win.setText((int)(Grid.getBoardSize()* Globals.MAX_WIN) + "");
-		JKemik.settings_t.setMaxWinVal((int)(Grid.getBoardSize() * Globals.MAX_WIN));
+		t.setMaxWinVal((int)(Grid.getBoardSize() * Globals.MAX_WIN));
 	}
 
 	

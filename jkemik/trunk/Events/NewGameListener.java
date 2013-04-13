@@ -17,6 +17,7 @@ import api.Point;
 
 import utilities.Tools;
 import view.BoardFrame;
+import view.Grid;
 
 /**
  * @author dalet
@@ -32,6 +33,7 @@ public class NewGameListener implements MouseListener{
 			int res = JOptionPane.showConfirmDialog(null,"Exit System Preferences?","Warning",
 					JOptionPane.YES_OPTION);
 			if(res == 0){
+				JKemik.createGame(JKemik.template, JKemik.settings_t);
 				if(BoardFrame.isMakingGame()){
 					return;
 				}else{
@@ -80,6 +82,7 @@ public class NewGameListener implements MouseListener{
 		Color color;
 		color = Tools.boost(this.label.getForeground());
 		this.label.setForeground(color);
+		BoardFrame.displayGrid(true);
 	}
 
 	public void mousePressed(MouseEvent arg0) {
@@ -96,5 +99,6 @@ public class NewGameListener implements MouseListener{
 		this.label.setForeground(color);
 		//this.label.setToolTipText("Start new game.");
 		this.label.setToolTipText(BoardFrame.messages.getString("startNewGamelHover"));
+		Grid.refresh = true;
 	}
 }

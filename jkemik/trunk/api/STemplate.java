@@ -28,6 +28,7 @@ public class STemplate implements Serializable {
 	private double MaxPointPerPlayer = 0.0;
 	private String language = "ENGLISH";
 	private boolean[] memo = { true, true };
+	private double squareSize = 0.0;
 	private ArrayList<GridDimension> sizes;
 
 	public STemplate() {
@@ -81,6 +82,12 @@ public class STemplate implements Serializable {
 		this.sizes = sizes;
 	}
 
+	public double getSquareSize() {
+		return squareSize;
+	}
+	public void setSquareSize(double squareSize) {
+		this.squareSize = squareSize;
+	}
 	public boolean isHh() {
 		return hh;
 	}
