@@ -152,7 +152,6 @@ public class Artist {
 		ArrayList<Cell> p1c = p1.getCells();
 		ArrayList<Cell> p2c = p2.getCells();
 		
-
 		// draw p1 cells
 		if (drawCell(p1c, p1, p2, g2)) {}
 		

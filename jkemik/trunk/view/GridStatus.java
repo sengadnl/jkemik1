@@ -10,7 +10,6 @@ import java.awt.GridLayout;
 
 import java.text.DecimalFormat;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -26,19 +25,19 @@ public class GridStatus extends JPanel{
 	private JLabel deadGridInPercent;
 	private JLabel freeGridInPercent;
 	private JLabel deadCount;
-	private JLabel gridSize;
+	//private JLabel gridSize;
 	
 	
-	private final int FONT_SIZE = 9;
+	private final int FONT_SIZE = 11;
 	public GridStatus(int w, int h){
 		
 		setPreferredSize(new Dimension(w,h));
 		setOpaque(true);
-		setBackground(new Color(40, 20, 10));
-		setBorder(BorderFactory.createLineBorder(new Color(100, 100, 0), 1));
-		setLayout(new GridLayout(5,1));
+//		setBackground(new Color(40, 20, 10));
+//		setBorder(BorderFactory.createLineBorder(new Color(100, 100, 0), 1));
+		setLayout(new GridLayout(1,3));
 		
-		this.gridSize = new JLabel(0 + " x " + 0); // Assuming the GridPanel already exists
+		//this.gridSize = new JLabel(0 + " x " + 0); // Assuming the GridPanel already exists
 		this.deadCount = new JLabel();
 		this.deadGridInPercent = new JLabel();
 		this.freeGridInPercent = new JLabel();
@@ -56,30 +55,30 @@ public class GridStatus extends JPanel{
         Font clvfont = new Font("Arial",Font.BOLD,this.FONT_SIZE);  
         this.freeGridInPercent.setFont(clvfont);
        
-        this.gridSize.setForeground(new Color(190,100,200));
-        Font gsfont = new Font("Arial",Font.BOLD,this.FONT_SIZE);  
-        this.gridSize.setFont(gsfont);
+//        this.gridSize.setForeground(new Color(190,100,200));
+//        Font gsfont = new Font("Arial",Font.BOLD,this.FONT_SIZE);  
+//        this.gridSize.setFont(gsfont);
           
-        final JLabel dc = new JLabel("  Tot plots: ");
+        final JLabel dc = new JLabel("  Tot plots:");
         dc.setForeground(new Color(255,255,255));
         Font pttfont = new Font("Arial",Font.BOLD,this.FONT_SIZE);  
         dc.setFont(pttfont);
        
-        final JLabel dgp = new JLabel("  Occupied: ");
+        final JLabel dgp = new JLabel("  Occupied:");
         dgp.setForeground(new Color(255,255,255));
         Font cfont = new Font("Arial",Font.BOLD,this.FONT_SIZE);  
         dgp.setFont(cfont);
        
-        final JLabel fgp = new JLabel("  Free: ");
+        final JLabel fgp = new JLabel("  Free:");
         fgp.setForeground(new Color(255,255,255));
         Font clfont = new Font("Arial",Font.BOLD,this.FONT_SIZE);  
         fgp.setFont(clfont);
         
-        final JLabel gs = new JLabel("  Grid size: ");
-        gs.setForeground(new Color(255,255,255));
-        Font gfont = new Font("Arial",Font.BOLD,this.FONT_SIZE);  
-        gs.setFont(gfont);
-
+//        final JLabel gs = new JLabel("  Grid size: ");
+//        gs.setForeground(new Color(255,255,255));
+//        Font gfont = new Font("Arial",Font.BOLD,this.FONT_SIZE);  
+//        gs.setFont(gfont);
+        init();
 
         
         add(dc);
@@ -88,29 +87,29 @@ public class GridStatus extends JPanel{
         add(this.deadGridInPercent);
         add(fgp);
         add(this.freeGridInPercent);
-        add(gs);
-        add(this.gridSize);
+//        add(gs);
+//        add(this.gridSize);
 	}
 
 	/**
 	 * @return the dridSize
 	 */
-	public JLabel getGridSize() {
-		return this.gridSize;
-	}
-	/**
-	 * @param dridSize the dridSize to set
-	 */
-	public void setGridSize(int rows, int cols) {
-	//	if(rows > 0 && cols > 0){
-		cols = cols - 1;
-		rows = rows - 1;
-		this.gridSize.setText(cols + " x " + rows);
-		System.out.println((cols - 1) + " x " + (rows - 1));
-//		}else{
-//			throw new IllegalStateException();
-//		}
-	}
+//	public JLabel getGridSize() {
+//		return this.gridSize;
+//	}
+//	/**
+//	 * @param dridSize the dridSize to set
+//	 */
+//	public void setGridSize(int rows, int cols) {
+//	//	if(rows > 0 && cols > 0){
+//		cols = cols - 1;
+//		rows = rows - 1;
+//		this.gridSize.setText(cols + " x " + rows);
+//		System.out.println((cols - 1) + " x " + (rows - 1));
+////		}else{
+////			throw new IllegalStateException();
+////		}
+//	}
 	public void init(){
 		setDeadCountV("0");
 		setDeadGridInPercentV(0);
@@ -168,7 +167,7 @@ public class GridStatus extends JPanel{
 	/**
 	 * @param gridSize the gridSize to set
 	 */
-	public void setGridSize(JLabel gridSize) {
-		this.gridSize = gridSize;
-	}
+//	public void setGridSize(JLabel gridSize) {
+//		this.gridSize = gridSize;
+//	}
 }

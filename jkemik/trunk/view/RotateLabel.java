@@ -54,6 +54,9 @@ public class RotateLabel extends JLabel {
 			}
 		}
 	}
+	public void rotateLabel(int i) {
+		this.setText(this.list[i]);
+	}
 
 //	public void highlight() {
 //		setForeground(new Color(250,0,250));

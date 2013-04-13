@@ -32,9 +32,7 @@ public class Grid extends JPanel {
 			mouseMove = false, undo = false, saveSettings = false, ON = false;
 
 	public boolean drawn = false;
-
 	protected static Color gridLineCol = new Color(10, 60, 30);
-
 	public static double Height = 640;// 640
 	public static double Width = 1024;// 1024
 
@@ -46,28 +44,12 @@ public class Grid extends JPanel {
 	private static int size;
 	private static volatile Grid instance = null;
 
-//	public Grid(int squareSize) {
-//		setPreferredSize(new Dimension((int) Width, (int) Height));
-//		setSquareSize(squareSize);
-//		calColAndRows((int) squareSize);
-//	}
-
 	public Grid(GridDimension dimension) {
 		setPreferredSize(dimension.getPixelDimension());
 		setSquareSize(dimension.getSqrSize());
 		calColAndRows(dimension.getSqrSize());
 	}
 
-//	public static Grid getInstance(int squareSize) {
-//		if (instance == null) {
-//			synchronized (Grid.class) {
-//				if (instance == null) {
-//					instance = new Grid(squareSize);
-//				}
-//			}
-//		}
-//		return instance;
-//	}
 	public static Grid getInstance(GridDimension dimension) {
 		if (instance == null) {
 			synchronized (Grid.class) {
@@ -219,21 +201,19 @@ public class Grid extends JPanel {
 	 *            the squareSize to set
 	 */
 	public static void setSquareSize(double squareSize) {
+		calColAndRows((int)squareSize);
 		Grid.squareSize = squareSize;
-
 		Grid.half_squareSize = squareSize / 2;
 		CIRCLE_DIAMETER = (int) (squareSize * .46);
 		HALF_DIAMETER = CIRCLE_DIAMETER / 2;
 		gridLineStroke = (int) (squareSize * .12);
 		squareFadeVariant = (int) (squareSize * .25);
-
 		size = ((int) (Width / Grid.squareSize) * (int) (Height / Grid.squareSize))
 				+ ((int) (Width / Grid.squareSize) + (int) (Height / Grid.squareSize));
 	}
 
 	public static void drawGrid() {
-		//calColAndRows((int) Grid.squareSize);
-
+		
 		int currentColPos = 0;
 		int currentRowPos = 0;
 		int index = 0;
@@ -264,7 +244,7 @@ public class Grid extends JPanel {
 			}
 			index++;
 		}
-		System.out.println("grid index : " + index);
+
 		int index2 = 0;
 		int currentColPos2 = 0;
 		int currentRowPos2 = 0;
@@ -286,59 +266,7 @@ public class Grid extends JPanel {
 			}
 			index2++;
 		}
-	}
-
-	public static void drawGrid2() {
-		calColAndRows((int) Grid.squareSize);
-
-		int currentposition = 0;
-		int index = 0;
-		Artist.drawGridBG(g2, 50, 50);
-		while (index < Columns) {
-			// draw columns
-			if (currentposition <= Width) {
-				Point from = new Point(squareSize * index, 0);
-				Point to = new Point(Grid.squareSize * index, Grid.Height);
-				Artist.drawLine(from, to, squareFadeVariant,
-						Tools.fade(BoardFrame.BOARD_COLOR), g2);
-				Artist.drawLine(from, to, gridLineStroke,
-						Tools.fade(BoardFrame.BOARD_COLOR), g2);
-				position_count++;
-			}
-			// draw rows
-			if (currentposition <= Grid.Height) {
-
-				Point from = new Point(0, Grid.squareSize * index);
-				Point to = new Point(Grid.Width, Grid.squareSize * index);
-				Artist.drawLine(from, to, squareFadeVariant,
-						Tools.fade(BoardFrame.BOARD_COLOR), g2);
-				Artist.drawLine(from, to, gridLineStroke,
-						Tools.fade(BoardFrame.BOARD_COLOR), g2);
-				position_count++;
-			}
-			currentposition += Grid.squareSize;
-			index++;
-		}
-		System.out.println("grid index : " + index);
-		int index2 = 0;
-		int currentposition2 = 0;
-		while (index2 < Columns) {
-			// draw columns
-			if (currentposition2 <= Width) {
-				Point from = new Point(squareSize * index2, 0);
-				Point to = new Point(Grid.squareSize * index2, Grid.Height);
-				Artist.drawLine(from, to, gridLineStroke, Color.BLACK, g2);
-			}
-			// draw rows
-			if (currentposition2 <= Grid.Height) {
-
-				Point from = new Point(0, Grid.squareSize * index2);
-				Point to = new Point(Grid.Width, Grid.squareSize * index2);
-				Artist.drawLine(from, to, gridLineStroke, Color.BLACK, g2);
-			}
-			currentposition2 += Grid.squareSize;
-			index2++;
-		}
+		
 	}
 
 	/**

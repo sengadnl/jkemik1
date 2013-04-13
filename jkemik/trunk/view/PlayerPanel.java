@@ -77,7 +77,7 @@ public class PlayerPanel extends JPanel {
 		this.holder = new JPanel();
 		this.holder.setBackground(Color.BLACK);
 		this.holder.setPreferredSize(new Dimension(this.WIDTH,
-				(int) (.7 * this.HEIGHT)));
+				(int) (.82 * this.HEIGHT)));
 
 		this.holder.setLayout(new GridLayout(6, 2));
 
@@ -291,10 +291,6 @@ public class PlayerPanel extends JPanel {
 	public void setScorev(String str) {
 		scorev.setText(str);
 	}
-
-	// public void setPlayerName(String name) {
-	// p.setName(name);
-	// }
 
 	public void setLabelColor(Color c) {
 		this.player_name.setForeground(c);
