@@ -29,7 +29,7 @@ public class GridDimension implements Comparable<GridDimension>, Serializable {
 	public void setSqrSize(int sqrSize) {
 		this.sqrSize = sqrSize;
 	}
-	
+
 	public Dimension getDimensionSquares() {
 		return squares;
 	}
@@ -40,8 +40,14 @@ public class GridDimension implements Comparable<GridDimension>, Serializable {
 
 	/* return the pixels dimensions of the board */
 	public Dimension getPixelDimension() {
-		int w = (int) (this.squares.getWidth() * this.sqrSize);
-		int h = (int) (this.squares.getHeight() * this.sqrSize);
+		int w = 0, h = 0;
+		try {
+			w = (int) (this.squares.getWidth() * this.sqrSize);
+			h = (int) (this.squares.getHeight() * this.sqrSize);
+		} catch (NullPointerException e) {
+			System.out.println("GridDimention -> getPixelDimension: "
+					+ e.getMessage());
+		}
 		return new Dimension(w, h);
 	}
 

@@ -33,7 +33,7 @@ public class NewGameListener implements MouseListener{
 			int res = JOptionPane.showConfirmDialog(null,"Exit System Preferences?","Warning",
 					JOptionPane.YES_OPTION);
 			if(res == 0){
-				JKemik.createGame(JKemik.template, JKemik.settings_t);
+				//JKemik.createGame(JKemik.template, JKemik.settings_t);
 				if(BoardFrame.isMakingGame()){
 					return;
 				}else{

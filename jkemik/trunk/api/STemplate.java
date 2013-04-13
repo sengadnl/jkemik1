@@ -28,11 +28,12 @@ public class STemplate implements Serializable {
 	private double MaxPointPerPlayer = 0.0;
 	private String language = "ENGLISH";
 	private boolean[] memo = { true, true };
-	private double squareSize = 0.0;
+	private GridDimension dimesion = new GridDimension(new Dimension(0,0),0);
 	private ArrayList<GridDimension> sizes;
 
 	public STemplate() {
 		boardSizes(Globals.SIZE_PERCENT);
+		setGridDimesion(sizes.get(2));
 	}
 	public double getSqrSize(String str) {
 		double sqrSize = 32;
@@ -53,7 +54,6 @@ public class STemplate implements Serializable {
 		int w_ini = (int) (Globals.FRAME_WIDTH * grid_percent);
 		int h_ini = (int) (Globals.FRAME_HEIGHT * grid_percent);
 		Dimension gcontainer = new Dimension(w_ini, h_ini);
-		//boards.add(gcontainer);
 		System.out.println("" + gcontainer);
 
 		// Get list of square sizes
@@ -74,19 +74,40 @@ public class STemplate implements Serializable {
 		System.out.println("Possible board sizes: " + sizes);
 	}
 
-	public ArrayList<GridDimension> getSizes() {
+	public ArrayList<GridDimension> getGridDimensions() {
 		return sizes;
 	}
-
+	public String[] getGridDimensionsToString() {
+		int len = sizes.size(), index = 0;
+		String[] list = new String[len];
+		for(GridDimension d: this.sizes){
+			list[index] = d.toString();
+			index++;
+		}
+		return list;
+	}
 	public void setSizes(ArrayList<GridDimension> sizes) {
 		this.sizes = sizes;
 	}
-
-	public double getSquareSize() {
-		return squareSize;
+	public GridDimension getGridDimesion() {
+		return dimesion;
 	}
-	public void setSquareSize(double squareSize) {
-		this.squareSize = squareSize;
+	public void setGridDimesion(GridDimension dimesion) {
+		this.dimesion = dimesion;
+	}
+	public void setGridDimesion(double sqrSize) {
+		for(GridDimension d: sizes){
+			if(sqrSize == d.getSqrSize()){
+				this.dimesion = d;
+			}
+		}
+	}
+	public void setDimesion(String sqrSize) {
+		for(GridDimension d: sizes){
+			if(sqrSize.equals(d.toString())){
+				this.dimesion = d;
+			}
+		}
 	}
 	public boolean isHh() {
 		return hh;

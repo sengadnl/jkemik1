@@ -74,6 +74,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 						&& !Tools.containPoint(temp, game.getDeadDots())) {
 					// System.out.println("Plotting ...");
 					Grid.plotPoint = true;
+					
 					BoardFrame.grid.repaint();
 					game.getCurrentP().getPloted().add(temp);
 					game.lastp = temp;
@@ -101,6 +102,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		}
 		BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
 		BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
+		BoardFrame.updateBoardStatus();
 	}
 
 	public void mouseEntered(MouseEvent e) {
@@ -141,8 +143,10 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		}
 		// }
 		if (JKemik.game.checkEndGame()) {
-			JOptionPane.showMessageDialog(null, ""
-					+ JKemik.game.getGuest().getName() + BoardFrame.messages.getString("winM"), " Win",
+			JOptionPane.showMessageDialog(
+					null,
+					"" + JKemik.game.getGuest().getName()
+							+ BoardFrame.messages.getString("winM"), " Win",
 					JOptionPane.OK_OPTION);
 			BoardFrame.middle_container.repaint();
 			BoardFrame.pColor1.addMouseListener(ViewEvents.p1Listener);
@@ -161,7 +165,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			BoardFrame.Game_status.setText("NEW");
 			BoardFrame.Game_status.setForeground(Color.GREEN);
 
-			BoardFrame.boostLabel(BoardFrame.settings,Color.WHITE, BoardFrame.THEME_COLOR);
+			BoardFrame.boostLabel(BoardFrame.settings, Color.WHITE,
+					BoardFrame.THEME_COLOR);
 
 			BoardFrame.grid.drawn = false;
 			BoardFrame.grid.repaint();

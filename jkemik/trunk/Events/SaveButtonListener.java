@@ -58,6 +58,7 @@ public class SaveButtonListener implements MouseListener {
 			} else {
 				BoardFrame.manual.setSelected(false);
 			}
+			BoardFrame.updateBoardStatus();
 			BoardFrame.uiLooksUpdate(s, t);
 			ViewEvents.uiEventUpdates(s, t);
 			int response = JOptionPane.showConfirmDialog(null,

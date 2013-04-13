@@ -29,8 +29,7 @@ public class BoardSizeListener implements MouseListener{
 		String s = this.label.getActiveLabel();
 		double sqr = t.getSqrSize(s);
 		Grid.setSquareSize(sqr);
-		t.setSquareSize(sqr);
-		BoardFrame.middle_container.repaint();
+		t.setGridDimesion(sqr);
 		// change the grid size
 		if (BoardFrame.grid.drawn) {
 			BoardFrame.grid.drawn = false;

@@ -24,14 +24,14 @@ public class Tools {
 		}
 		return "";
 	}
-	//TODO may not use this
-/** 
- * @param 
- * gcontainer: board container dimension in quare;
- * @return Square size
- * 
- * */
-	public static double calculateSquareSize(Dimension gcontainer,int sqrMin) {
+
+	// TODO may not use this
+	/**
+	 * @param gcontainer: board container dimension in quare;
+	 * @return Square size
+	 * 
+	 * */
+	public static double calculateSquareSize(Dimension gcontainer, int sqrMin) {
 		double w = gcontainer.getWidth();
 		double h = gcontainer.getHeight();
 
@@ -46,6 +46,12 @@ public class Tools {
 		}
 		return counter;
 	}
+	/**
+	 * @return the total number of positions from a board of Dimension d*/
+	public static int numberOfPositions(Dimension d) {
+		System.out.println("Dimension in numberOfPositions " + d);
+		return ((int)d.getWidth() + 1) * ((int)d.getHeight() + 1);
+	}
 
 	/**
 	 * Board size in terms of number of squares
@@ -55,40 +61,42 @@ public class Tools {
 		double ch = gcontainer.getHeight();
 		int w = (int) cw / sqr;
 		int h = (int) ch / sqr;
-		System.out.println("" + w + " X " + h + "----" + calculateSquareSize(gcontainer,sqr));
-		
+		System.out.println("" + w + " X " + h + "----"
+				+ calculateSquareSize(gcontainer, sqr));
+
 		return new Dimension(w, h);
 	}
-//	public static ArrayList<GridDimension> boardSizes(double framew,
-//			double frameh, double grid_percent) {
-//		ArrayList<GridDimension> boards = new ArrayList<GridDimension>();
-//
-//		// calculate board container dimension (pixels)
-//		int w_ini = (int) (framew * grid_percent);
-//		int h_ini = (int) (frameh * grid_percent);
-//		Dimension gcontainer = new Dimension(w_ini, h_ini);
-//		//boards.add(gcontainer);
-//		System.out.println("" + gcontainer);
-//
-//		// Get list of square sizes
-//		ArrayList<Integer> sqrSizes = sqrtSizeGCD(new Dimension(w_ini, h_ini),
-//				Globals.SQUARE_MIN_SIZE);
-//
-//		// Generate board list of board dimensions based on square sizes
-//		int index = 0;
-//		for (int temp : sqrSizes) {
-//			// Skip board container dimensions
-//			if (index == 0) {
-//				index++;
-//				continue;
-//			}
-//			System.out.print("SQR Size:" + temp + " -> ");
-//			boards.add(new GridDimension(bSize(gcontainer, temp),temp));
-//		}
-//		System.out.println("Possible board sizes: " + boards);
-//		// possible grid sizes (sqrs)
-//		return boards;
-//	}
+
+	// public static ArrayList<GridDimension> boardSizes(double framew,
+	// double frameh, double grid_percent) {
+	// ArrayList<GridDimension> boards = new ArrayList<GridDimension>();
+	//
+	// // calculate board container dimension (pixels)
+	// int w_ini = (int) (framew * grid_percent);
+	// int h_ini = (int) (frameh * grid_percent);
+	// Dimension gcontainer = new Dimension(w_ini, h_ini);
+	// //boards.add(gcontainer);
+	// System.out.println("" + gcontainer);
+	//
+	// // Get list of square sizes
+	// ArrayList<Integer> sqrSizes = sqrtSizeGCD(new Dimension(w_ini, h_ini),
+	// Globals.SQUARE_MIN_SIZE);
+	//
+	// // Generate board list of board dimensions based on square sizes
+	// int index = 0;
+	// for (int temp : sqrSizes) {
+	// // Skip board container dimensions
+	// if (index == 0) {
+	// index++;
+	// continue;
+	// }
+	// System.out.print("SQR Size:" + temp + " -> ");
+	// boards.add(new GridDimension(bSize(gcontainer, temp),temp));
+	// }
+	// System.out.println("Possible board sizes: " + boards);
+	// // possible grid sizes (sqrs)
+	// return boards;
+	// }
 
 	/**
 	 * @param framew
