@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 import utilities.Manual;
 import utilities.Tools;
 import view.BoardFrame;
-import view.Grid;
 
 public class HelpListener implements MouseListener {
 	private JLabel label;
@@ -25,7 +24,6 @@ public class HelpListener implements MouseListener {
 		Color color;
 		color = Tools.boost(this.label.getForeground());
 		this.label.setForeground(color);
-		BoardFrame.displayGrid(true);
 	}
 
 	public void mousePressed(MouseEvent arg0) {
@@ -41,6 +39,5 @@ public class HelpListener implements MouseListener {
 		color = Tools.fade(this.label.getForeground());
 		this.label.setForeground(color);
 		this.label.setToolTipText(BoardFrame.messages.getString("onlineManualHover"));
-		Grid.refresh = true;
 	}
 }
