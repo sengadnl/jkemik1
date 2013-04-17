@@ -157,9 +157,11 @@ public class BoardFrame extends JFrame {
 		panel32 = new JPanel();
 		controler_panel = new JPanel();
 		config_container = new JPanel();
-		Holder1 = new JPanel();
-		Holder2 = new JPanel();
-		Holder3 = new JPanel();
+		pname1 = new JPanel();
+		pname2 = new JPanel();
+		p1p2NameHolder = new JPanel();
+		gSizeAndTheme = new JPanel();
+		
 		gridstats = new GridStatus((int)(.4 * this.width),
 				(int) (.1 * this.height));
 	}
@@ -216,15 +218,18 @@ public class BoardFrame extends JFrame {
 		logo_panel.setLayout(new BorderLayout());
 
 		/* Middle panels layout */
-		status_panel_container.setLayout(new FlowLayout());
-		playerPanel_container.setLayout(new GridLayout(1, 2, 5, 40));
+		status_panel_container.setLayout(new GridLayout(3,1));
+		//playerPanel_container.setLayout(new GridLayout(1, 2, 5, 40));
+		playerPanel_container.setLayout(new BorderLayout(5, 10));
 		controler_panel.setLayout(new GridLayout(5, 1, 10, 10));
 		config_container.setLayout(new GridLayout(3, 2));
-		west_blank_panel.setLayout(new BorderLayout(1, 1));
+		//west_blank_panel.setLayout(new BorderLayout(1, 1));
 		setupP.setLayout(new BorderLayout(10, 10));
-		Holder1.setLayout(new GridLayout(2, 1));
-		Holder2.setLayout(new GridLayout(3, 1));
-		Holder3.setLayout(new GridLayout(2, 1));
+		p1p2NameHolder.setLayout(new BorderLayout(5, 10));
+		pname1.setLayout(new GridLayout(2, 1));
+		pname2.setLayout(new GridLayout(2, 1));
+		gSizeAndTheme.setLayout(new GridLayout(3, 1));
+		
 		/* Bottom panels layout */
 	}
 
@@ -234,7 +239,7 @@ public class BoardFrame extends JFrame {
 		middle_container.setPreferredSize(new Dimension(
 				(int) (.8 * this.width), (int) (.75 * this.height)));
 		bottom_container.setPreferredSize(new Dimension((int) this.width,
-				(int) (.15 * this.height)));
+				(int) (.10 * this.height)));
 
 		logo_panel.setPreferredSize(new Dimension(
 				(int) (CORNER_WIDTH * this.width),
@@ -249,7 +254,10 @@ public class BoardFrame extends JFrame {
 				((int) (SIDE_WIDTH * this.width)), (int) (.75 * this.height)));
 		west_blank_panel.setPreferredSize(new Dimension(
 				(int) (.01 * this.width), (int) (.75 * this.height)));
-
+		pname1.setPreferredSize(new Dimension(
+				((int) (.1 * this.width)), (int) (.05 * this.height)));
+		pname2.setPreferredSize(new Dimension(
+				((int) (.1 * this.width)), (int) (.05 * this.height)));
 		down_left.setPreferredSize(new Dimension(
 				(int) (CORNER_WIDTH * this.width), (int) (.1 * this.height)));
 	}
@@ -277,36 +285,39 @@ public class BoardFrame extends JFrame {
 		grid_container.add(grid);
 		grid_container.add(settings_p);
 		status_panel_container.add(playerPanel_container);
-		status_panel_container.add(config_container);
+		//status_panel_container.add(config_container);
 		status_panel_container.add(setupP);
 		status_panel_container.add(controler_panel);
-		playerPanel_container.add(p1panel);
-		playerPanel_container.add(p2panel);
+		playerPanel_container.add(p1panel, BorderLayout.WEST);
+		playerPanel_container.add(p2panel, BorderLayout.EAST);
+		playerPanel_container.add(config_container, BorderLayout.SOUTH);
 		config_container.add(la);
 		config_container.add(AutoCap);
 		config_container.add(lb);
 		config_container.add(AutoPass);
 		config_container.add(lc);
 		config_container.add(Win);
-		setupP.add(Holder1, BorderLayout.NORTH);
-		setupP.add(Holder3, BorderLayout.CENTER);
-		setupP.add(Holder2, BorderLayout.SOUTH);
+		p1p2NameHolder.add(pname1, BorderLayout.NORTH);
+		p1p2NameHolder.add(pname2, BorderLayout.SOUTH);
+		setupP.add(p1p2NameHolder, BorderLayout.NORTH);
+		//setupP.add(pname2, BorderLayout.CENTER);
+		setupP.add(gSizeAndTheme, BorderLayout.SOUTH);
 		controler_panel.add(pass_turn);
 		controler_panel.add(undo);
 		controler_panel.add(refresh);
 		controler_panel.add(manual_c);
 		controler_panel.add(manual);
-		// Holder1.add(blank1);
-		Holder1.add(label1);
-		Holder1.add(pColor1);
-		// Holder1.add(blank2);
-		Holder2.add(l1);
-		Holder2.add(l2);
-		Holder2.add(startG);
-		// Holder3.add(blank3);
-		Holder3.add(label2);
-		Holder3.add(pColor2);
-		// Holder3.add(blank4);
+		
+		pname1.add(label1);
+		pname1.add(pColor1);
+		
+		gSizeAndTheme.add(l1);
+		gSizeAndTheme.add(l2);
+		gSizeAndTheme.add(startG);
+		
+		pname2.add(label2);
+		pname2.add(pColor2);
+		
 		// ..........................................................//
 		// ..........................................................//
 		bottom_container.add(down_left);//gridstats
@@ -324,7 +335,7 @@ public class BoardFrame extends JFrame {
 		// controler_panel.setBorder(BorderFactory.createLineBorder(BOARD_COLOR));
 		TitledBorder SetupBorder = new TitledBorder("Setup");
 		SetupBorder.setTitleColor(BOARD_COLOR);
-		Holder2.setBorder(SetupBorder);
+		gSizeAndTheme.setBorder(SetupBorder);
 		
 		TitledBorder ControlBorder = new TitledBorder("Control");
 		ControlBorder.setTitleColor(BOARD_COLOR);
@@ -542,10 +553,11 @@ public class BoardFrame extends JFrame {
 
 		// blank1.setBackground(BOARD_COLOR);
 		// blank2.setBackground(BOARD_COLOR);
+		p1p2NameHolder.setBackground(BoardFrame.THEME_COLOR);
 		setupP.setBackground(BoardFrame.CPANEL_COLOR);
-		Holder1.setBackground(Tools.fade(BoardFrame.BOARD_COLOR));
-		Holder2.setBackground(BoardFrame.CPANEL_COLOR);
-		Holder3.setBackground(Tools.fade(BoardFrame.BOARD_COLOR));
+		pname1.setBackground(Tools.fade(BoardFrame.BOARD_COLOR));
+		gSizeAndTheme.setBackground(BoardFrame.CPANEL_COLOR);
+		pname2.setBackground(Tools.fade(BoardFrame.BOARD_COLOR));
 		
 //		Holder2.setForeground(BOARD_COLOR);
 //		config_container.setForeground(BOARD_COLOR);
@@ -794,7 +806,7 @@ public class BoardFrame extends JFrame {
 			west_blank_panel, playerPanel_container, logo_panel, top_middle,
 			top_right, top_container, middle_container, bottom_container,
 			down_left, setupP, panel32, controler_panel, config_container,
-			Holder1, Holder2, Holder3;
+			pname1, gSizeAndTheme, pname2, p1p2NameHolder;
 	public static GridStatus gridstats;
 	public static JButton refresh, startG, undo, pass_turn;
 	public static JCheckBox manual_c, manual;
