@@ -4,6 +4,7 @@
 package view;
 
 import java.awt.*;
+
 import javax.swing.*;
 
 import utilities.*;
@@ -21,7 +22,7 @@ public class Grid extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static Graphics2D g2;
-
+	// private JKIcon board = new JKIcon("media/board1.PNG", "");
 	protected static int gridLineStroke = 2, squareFadeVariant = 4,
 			CURSOR_VARIANT_STROKE = 6;
 	public static double CIRCLE_DIAMETER = 10.0, HALF_DIAMETER = 5.0,
@@ -46,8 +47,10 @@ public class Grid extends JPanel {
 
 	public Grid(GridDimension dimension) {
 		setPreferredSize(dimension.getPixelDimension());
+		System.out.println("Grid size: " + dimension.getPixelDimension());
 		setSquareSize(dimension.getSqrSize());
 		calColAndRows(dimension.getSqrSize());
+		// getRootPane().add(board.createIcon());
 	}
 
 	public static Grid getInstance(GridDimension dimension) {
@@ -201,7 +204,7 @@ public class Grid extends JPanel {
 	 *            the squareSize to set
 	 */
 	public static void setSquareSize(double squareSize) {
-		calColAndRows((int)squareSize);
+		calColAndRows((int) squareSize);
 		Grid.squareSize = squareSize;
 		Grid.half_squareSize = squareSize / 2;
 		CIRCLE_DIAMETER = (int) (squareSize * .46);
@@ -213,11 +216,11 @@ public class Grid extends JPanel {
 	}
 
 	public static void drawGrid() {
-		
+
 		int currentColPos = 0;
 		int currentRowPos = 0;
 		int index = 0;
-		Artist.drawGridBG(g2, 50, 50);
+		Artist.drawGridBG(g2, 960, 600);
 		while (index < Columns) {
 			// draw columns
 			if (currentColPos <= Width) {
@@ -266,7 +269,7 @@ public class Grid extends JPanel {
 			}
 			index2++;
 		}
-		
+
 	}
 
 	/**
