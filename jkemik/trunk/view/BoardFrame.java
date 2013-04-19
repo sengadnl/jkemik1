@@ -218,7 +218,7 @@ public class BoardFrame extends JFrame {
 		logo_panel.setLayout(new BorderLayout());
 
 		/* Middle panels layout */
-		status_panel_container.setLayout(new GridLayout(3,1));
+		status_panel_container.setLayout(new FlowLayout());
 		//playerPanel_container.setLayout(new GridLayout(1, 2, 5, 40));
 		playerPanel_container.setLayout(new BorderLayout(5, 10));
 		controler_panel.setLayout(new GridLayout(5, 1, 10, 10));
@@ -284,10 +284,11 @@ public class BoardFrame extends JFrame {
 		middle_container.add(status_panel_container, BorderLayout.EAST);
 		grid_container.add(grid);
 		grid_container.add(settings_p);
-		status_panel_container.add(playerPanel_container);
-		//status_panel_container.add(config_container);
+		
+		status_panel_container.add(playerPanel_container, BorderLayout.NORTH);
 		status_panel_container.add(setupP);
-		status_panel_container.add(controler_panel);
+		status_panel_container.add(controler_panel, BorderLayout.SOUTH);
+		
 		playerPanel_container.add(p1panel, BorderLayout.WEST);
 		playerPanel_container.add(p2panel, BorderLayout.EAST);
 		playerPanel_container.add(config_container, BorderLayout.SOUTH);
@@ -297,11 +298,13 @@ public class BoardFrame extends JFrame {
 		config_container.add(AutoPass);
 		config_container.add(lc);
 		config_container.add(Win);
+		
 		p1p2NameHolder.add(pname1, BorderLayout.NORTH);
 		p1p2NameHolder.add(pname2, BorderLayout.SOUTH);
+		
 		setupP.add(p1p2NameHolder, BorderLayout.NORTH);
-		//setupP.add(pname2, BorderLayout.CENTER);
 		setupP.add(gSizeAndTheme, BorderLayout.SOUTH);
+		
 		controler_panel.add(pass_turn);
 		controler_panel.add(undo);
 		controler_panel.add(refresh);
@@ -820,7 +823,7 @@ public class BoardFrame extends JFrame {
 	public static final double CORNER_WIDTH = .35, CORNER_HEIGHT = .04,
 			SIDE_WIDTH = .18, SIDE_HEIGHT = .8, PLAYER_PNL_W_SCALAR = .085,
 			PLAYER_PNL_H_SCALAR = .20, P2_W = .26, BOTTOM_COLOR_P_W = 80,
-			BOTTOM_COLOR_P_H = 12;
+			BOTTOM_COLOR_P_H = 10;
 	public static Grid grid;
 	public static SettingsPanel settings_p;
 	private static java.awt.Container container;
