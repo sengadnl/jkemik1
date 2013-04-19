@@ -219,13 +219,11 @@ public class BoardFrame extends JFrame {
 
 		/* Middle panels layout */
 		status_panel_container.setLayout(new FlowLayout());
-		//playerPanel_container.setLayout(new GridLayout(1, 2, 5, 40));
 		playerPanel_container.setLayout(new BorderLayout(5, 10));
 		controler_panel.setLayout(new GridLayout(5, 1, 10, 10));
 		config_container.setLayout(new GridLayout(3, 2));
-		//west_blank_panel.setLayout(new BorderLayout(1, 1));
-		setupP.setLayout(new BorderLayout(10, 10));
-		p1p2NameHolder.setLayout(new BorderLayout(5, 10));
+		setupP.setLayout(new BorderLayout(5, 10));
+		p1p2NameHolder.setLayout(new BorderLayout(5, 5));
 		pname1.setLayout(new GridLayout(2, 1));
 		pname2.setLayout(new GridLayout(2, 1));
 		gSizeAndTheme.setLayout(new GridLayout(3, 1));
@@ -255,9 +253,9 @@ public class BoardFrame extends JFrame {
 		west_blank_panel.setPreferredSize(new Dimension(
 				(int) (.01 * this.width), (int) (.75 * this.height)));
 		pname1.setPreferredSize(new Dimension(
-				((int) (.1 * this.width)), (int) (.05 * this.height)));
+				((int) (.1 * this.width)), (int) (.04 * this.height)));
 		pname2.setPreferredSize(new Dimension(
-				((int) (.1 * this.width)), (int) (.05 * this.height)));
+				((int) (.1 * this.width)), (int) (.04 * this.height)));
 		down_left.setPreferredSize(new Dimension(
 				(int) (CORNER_WIDTH * this.width), (int) (.1 * this.height)));
 	}
@@ -823,7 +821,7 @@ public class BoardFrame extends JFrame {
 	public static final double CORNER_WIDTH = .35, CORNER_HEIGHT = .04,
 			SIDE_WIDTH = .18, SIDE_HEIGHT = .8, PLAYER_PNL_W_SCALAR = .085,
 			PLAYER_PNL_H_SCALAR = .20, P2_W = .26, BOTTOM_COLOR_P_W = 80,
-			BOTTOM_COLOR_P_H = 10;
+			BOTTOM_COLOR_P_H = 5;
 	public static Grid grid;
 	public static SettingsPanel settings_p;
 	private static java.awt.Container container;
