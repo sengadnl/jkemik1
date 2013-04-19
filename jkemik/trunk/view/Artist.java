@@ -3,6 +3,8 @@ package view;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -18,6 +20,11 @@ import api.Point;
 
 public class Artist {
 	protected static void drawGridBG(Graphics2D g2, double w, double h){
+		
+		//Image img1 = Toolkit.getDefaultToolkit().getImage("media/board2.PNG");
+	    //g2.drawImage(img1, (int)w, (int)h, JKemik.view.getGrid());
+	    //g2.finalize();
+		
 		g2.setColor(BoardFrame.BOARD_COLOR);//BoardFrame.BOARD_COLOR
 		Rectangle2D.Double bg = new Rectangle2D.Double(0, 0,Grid.Width,Grid.Height);
 		g2.draw(bg);
