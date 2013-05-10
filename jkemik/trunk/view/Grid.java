@@ -44,8 +44,10 @@ public class Grid extends JPanel {
 	public static int position_count = 0;
 	private static int size;
 	private static volatile Grid instance = null;
+	private static GridDimension dimension = null;
 
 	public Grid(GridDimension dimension) {
+		Grid.dimension = dimension;
 		setPreferredSize(dimension.getPixelDimension());
 		System.out.println("Grid size: " + dimension.getPixelDimension());
 		setSquareSize(dimension.getSqrSize());
@@ -269,7 +271,6 @@ public class Grid extends JPanel {
 			}
 			index2++;
 		}
-
 	}
 
 	/**

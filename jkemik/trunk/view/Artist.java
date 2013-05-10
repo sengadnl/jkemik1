@@ -2,33 +2,108 @@ package view;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 import controler.JKemik;
 
 import utilities.Tools;
 import api.Cell;
 import api.AbstractGame;
+import api.GridDimension;
 import api.Player;
 import api.Point;
 
 public class Artist {
 	protected static void drawGridBG(Graphics2D g2, double w, double h){
 		
-		//Image img1 = Toolkit.getDefaultToolkit().getImage("media/board2.PNG");
-	    //g2.drawImage(img1, (int)w, (int)h, JKemik.view.getGrid());
-	    //g2.finalize();
+//		Image img1 = Toolkit.getDefaultToolkit().getImage("media/board2.PNG");
+//	    g2.drawImage(img1, (int)w, (int)h, JKemik.view.getGrid());
+//	    g2.finalize();
+		/*-------------------------------------------------------*/
+		BufferedImage img1 = null;
+		try {
+		    img1 = ImageIO.read(new File("media/board2.PNG"));
+		    g2.drawImage(img1, (int)w, (int)h, JKemik.view.getGrid());
+		    g2.finalize();
+		} catch (IOException e) {
+		}
+		/*-------------------------------------------------------*/
+//		g2.setColor(BoardFrame.BOARD_COLOR);//BoardFrame.BOARD_COLOR
+//		Rectangle2D.Double bg = new Rectangle2D.Double(0, 0,Grid.Width,Grid.Height);
+//		g2.draw(bg);
+//		g2.fill(bg);
+	}
+	public static void drawGrid(Graphics2D g2, GridDimension dimension, int squareFadeVariant, int gridLineStroke) {
+		Dimension d = dimension.getPixelDimension();
+		int Width = (int)d.getWidth(), Height = (int)d.getHeight(), squareSize = dimension.getSqrSize();
 		
-		g2.setColor(BoardFrame.BOARD_COLOR);//BoardFrame.BOARD_COLOR
-		Rectangle2D.Double bg = new Rectangle2D.Double(0, 0,Grid.Width,Grid.Height);
-		g2.draw(bg);
-		g2.fill(bg);
+		int currentColPos = 0;
+		int currentRowPos = 0;
+		int index = 0;
+		double Columns = 0;
+		Artist.drawGridBG(g2, 960, 600);
+		while (index < Columns) {
+			// draw columns
+			if (currentColPos <= Width) {
+				Point from = new Point(squareSize * index, 0);
+				Point to = new Point(squareSize * index, Height);
+				Artist.drawLine(from, to, squareFadeVariant,
+						Tools.fade(BoardFrame.BOARD_COLOR), g2);
+				Artist.drawLine(from, to, gridLineStroke,
+						Tools.fade(BoardFrame.BOARD_COLOR), g2);
+				Grid.position_count++;
+				currentColPos += squareSize;
+			}
+			// draw rows
+			if (currentRowPos <= Height) {
+
+				Point from = new Point(0, Grid.squareSize * index);
+				Point to = new Point(Width, squareSize * index);
+				Artist.drawLine(from, to, squareFadeVariant,
+						Tools.fade(BoardFrame.BOARD_COLOR), g2);
+				Artist.drawLine(from, to, gridLineStroke,
+						Tools.fade(BoardFrame.BOARD_COLOR), g2);
+				Grid.position_count++;
+				currentRowPos += squareSize;
+			}
+			index++;
+		}
+
+		int index2 = 0;
+		int currentColPos2 = 0;
+		int currentRowPos2 = 0;
+		while (index2 < Columns) {
+			// draw columns
+			if (currentColPos2 <= Width) {
+				Point from = new Point(squareSize * index2, 0);
+				Point to = new Point(squareSize * index2, Height);
+				Artist.drawLine(from, to, gridLineStroke, Color.BLACK, g2);
+				currentColPos2 += squareSize;
+			}
+			// draw rows
+			if (currentRowPos2 <= Grid.Height) {
+
+				Point from = new Point(0, squareSize * index2);
+				Point to = new Point(Width, squareSize * index2);
+				Artist.drawLine(from, to, gridLineStroke, Color.BLACK, g2);
+				currentRowPos2 += squareSize;
+			}
+			index2++;
+		}
+		Grid.Columns = Columns;
+
 	}
 
 	protected static void drawLine(Point from, Point to, int stroke, Color c,
