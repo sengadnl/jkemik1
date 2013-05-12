@@ -46,13 +46,7 @@ public class Tools {
 		}
 		return counter;
 	}
-	/**
-	 * @return the total number of positions from a board of Dimension d*/
-	public static int numberOfPositions(Dimension d) {
-		System.out.println("Dimension in numberOfPositions " + d);
-		return ((int)d.getWidth() + 1) * ((int)d.getHeight() + 1);
-	}
-
+	
 	/**
 	 * Board size in terms of number of squares
 	 **/

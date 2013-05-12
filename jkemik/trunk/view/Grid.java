@@ -41,7 +41,7 @@ public class Grid extends JPanel {
 	public static double x = 0, y = 0, hl_x = 0, hl_y = 0;
 	public static Point selectedP = new Point(0, 0);
 	public static Cell cell = null;
-	public static int position_count = 0;
+	//public static int position_count = 0;
 	private static int size;
 	private static volatile Grid instance = null;
 	private static GridDimension dimension = null;
@@ -54,6 +54,7 @@ public class Grid extends JPanel {
 		calColAndRows(dimension.getSqrSize());
 		// getRootPane().add(board.createIcon());
 	}
+	
 
 	public static Grid getInstance(GridDimension dimension) {
 		if (instance == null) {
@@ -128,8 +129,8 @@ public class Grid extends JPanel {
 			}
 
 			if (!this.drawn) {
-				drawGrid();
-
+				//drawGrid();
+				Artist.drawGrid(g2, Grid.dimension, Grid.squareFadeVariant, Grid.gridLineStroke);
 				size = (int) (Columns * rows);
 				if (Grid.refresh) {
 					Artist.drawGame(game, g2);
@@ -222,7 +223,7 @@ public class Grid extends JPanel {
 		int currentColPos = 0;
 		int currentRowPos = 0;
 		int index = 0;
-		Artist.drawGridBG(g2, 960, 600);
+		Artist.drawGridBG(g2, Grid.Width, Grid.Height);
 		while (index < Columns) {
 			// draw columns
 			if (currentColPos <= Width) {
@@ -232,7 +233,7 @@ public class Grid extends JPanel {
 						Tools.fade(BoardFrame.BOARD_COLOR), g2);
 				Artist.drawLine(from, to, gridLineStroke,
 						Tools.fade(BoardFrame.BOARD_COLOR), g2);
-				position_count++;
+				
 				currentColPos += Grid.squareSize;
 			}
 			// draw rows
@@ -244,7 +245,7 @@ public class Grid extends JPanel {
 						Tools.fade(BoardFrame.BOARD_COLOR), g2);
 				Artist.drawLine(from, to, gridLineStroke,
 						Tools.fade(BoardFrame.BOARD_COLOR), g2);
-				position_count++;
+				
 				currentRowPos += Grid.squareSize;
 			}
 			index++;
@@ -271,21 +272,7 @@ public class Grid extends JPanel {
 			}
 			index2++;
 		}
-	}
-
-	/**
-	 * @return the poistions_count
-	 */
-	public static int getPoistions_count() {
-		return position_count;
-	}
-
-	/**
-	 * @param poisitions_count
-	 *            the poisitions_count to set
-	 */
-	public static void setPoistions_count(int poistions_count) {
-		Grid.position_count = poistions_count;
+		
 	}
 
 	// TODO the following might go way
@@ -442,6 +429,15 @@ public class Grid extends JPanel {
 
 	public static void setBoardSize(int size) {
 		Grid.size = size;
+	}
+
+	public static GridDimension getDimension() {
+		return dimension;
+	}
+
+	public static void setDimension(GridDimension dimension) {
+		Grid.dimension = dimension;
+		Grid.squareSize = Grid.dimension.getSqrSize();
 	}
 
 }
