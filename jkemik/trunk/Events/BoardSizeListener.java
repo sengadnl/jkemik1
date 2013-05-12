@@ -28,18 +28,18 @@ public class BoardSizeListener implements MouseListener{
 		this.label.rotateLabel();
 		String s = this.label.getActiveLabel();
 		double sqr = t.getSqrSize(s);
-		Grid.setSquareSize(sqr);
 		t.setGridDimesion(sqr);
-		Grid.setDimension(t.getGridDimesion());
-		System.out.println("Square Size: " + sqr + "" +
-				"\nTemplate Grid dim : " + Grid.getDimension());
+		//Grid.setSquareSize(sqr);
+		
+		Grid.setDimension(t.getGridDimension());
+
 		// change the grid size
 		if (BoardFrame.grid.drawn) {
 			BoardFrame.grid.drawn = false;
 			BoardFrame.grid.repaint();
 		}
-		BoardFrame.Win.setText((int)(Grid.getBoardSize()* Globals.MAX_WIN) + "");
-		t.setMaxWinVal((int)(Grid.getBoardSize() * Globals.MAX_WIN));
+		BoardFrame.Win.setText((int)(t.getGridDimension().positions()* Globals.MAX_WIN) + "");
+		t.setMaxWinVal((int)(t.getGridDimension().positions() * Globals.MAX_WIN));
 	}
 
 	
