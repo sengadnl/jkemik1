@@ -30,6 +30,9 @@ public class BoardSizeListener implements MouseListener{
 		double sqr = t.getSqrSize(s);
 		Grid.setSquareSize(sqr);
 		t.setGridDimesion(sqr);
+		Grid.setDimension(t.getGridDimesion());
+		System.out.println("Square Size: " + sqr + "" +
+				"\nTemplate Grid dim : " + Grid.getDimension());
 		// change the grid size
 		if (BoardFrame.grid.drawn) {
 			BoardFrame.grid.drawn = false;

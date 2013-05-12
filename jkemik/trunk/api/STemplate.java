@@ -33,7 +33,7 @@ public class STemplate implements Serializable {
 
 	public STemplate() {
 		boardSizes(Globals.SIZE_PERCENT);
-		setGridDimesion(sizes.get(2));
+		setGridDimension(sizes.get(2));
 	}
 	public double getSqrSize(String str) {
 		double sqrSize = 32;
@@ -92,7 +92,7 @@ public class STemplate implements Serializable {
 	public GridDimension getGridDimesion() {
 		return dimesion;
 	}
-	public void setGridDimesion(GridDimension dimesion) {
+	public void setGridDimension(GridDimension dimesion) {
 		this.dimesion = dimesion;
 	}
 	public void setGridDimesion(double sqrSize) {

@@ -22,6 +22,26 @@ public class GridDimension implements Comparable<GridDimension>, Serializable {
 		this.sqrSize = sqrSize;
 	}
 
+	/**
+	 * @param none
+	 * @return Board dimensions in terms of play position. This is not to be
+	 *         used in any GUI dimension representation. It represents how many
+	 *         positions are available for play
+	 */
+	public Dimension positionsDimension() {
+		int width = (int) this.squares.getWidth() + 1;
+		int height = (int) this.squares.getHeight() + 1;
+		return new Dimension(width, height);
+	}
+	/**
+	 * @param none
+	 * @return Number of positions*/
+	public int positions(){
+		int width = (int) positionsDimension().getWidth();
+		int height = (int) positionsDimension().getHeight();
+		return (width * height);
+	}
+
 	public int getSqrSize() {
 		return sqrSize;
 	}
@@ -52,7 +72,7 @@ public class GridDimension implements Comparable<GridDimension>, Serializable {
 	}
 
 	public String toString() {
-		return "" + this.squares.width + "x" + this.squares.height;
+		return "" + this.squares.width + "x" + this.squares.height + ": " + this.sqrSize;
 	}
 
 	@Override

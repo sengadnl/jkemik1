@@ -32,18 +32,18 @@ public class Artist {
 //	    g2.drawImage(img1, (int)w, (int)h, JKemik.view.getGrid());
 //	    g2.finalize();
 		/*-------------------------------------------------------*/
-		BufferedImage img1 = null;
-		try {
-		    img1 = ImageIO.read(new File("media/board2.PNG"));
-		    g2.drawImage(img1, (int)w, (int)h, JKemik.view.getGrid());
-		    g2.finalize();
-		} catch (IOException e) {
-		}
+//		BufferedImage img1 = null;
+//		try {
+//		    img1 = ImageIO.read(new File("media/board2.PNG"));
+//		    g2.drawImage(img1, (int)w, (int)h, JKemik.view.getGrid());
+//		    g2.finalize();
+//		} catch (IOException e) {
+//		}
 		/*-------------------------------------------------------*/
-//		g2.setColor(BoardFrame.BOARD_COLOR);//BoardFrame.BOARD_COLOR
-//		Rectangle2D.Double bg = new Rectangle2D.Double(0, 0,Grid.Width,Grid.Height);
-//		g2.draw(bg);
-//		g2.fill(bg);
+		g2.setColor(BoardFrame.BOARD_COLOR);//BoardFrame.BOARD_COLOR
+		Rectangle2D.Double bg = new Rectangle2D.Double(0, 0,w,h);
+		g2.draw(bg);
+		g2.fill(bg);
 	}
 	public static void drawGrid(Graphics2D g2, GridDimension dimension, int squareFadeVariant, int gridLineStroke) {
 		Dimension d = dimension.getPixelDimension();
@@ -53,7 +53,7 @@ public class Artist {
 		int currentRowPos = 0;
 		int index = 0;
 		double Columns = 0;
-		Artist.drawGridBG(g2, 960, 600);
+		Artist.drawGridBG(g2, Grid.Width, Grid.Height);
 		while (index < Columns) {
 			// draw columns
 			if (currentColPos <= Width) {
@@ -63,7 +63,7 @@ public class Artist {
 						Tools.fade(BoardFrame.BOARD_COLOR), g2);
 				Artist.drawLine(from, to, gridLineStroke,
 						Tools.fade(BoardFrame.BOARD_COLOR), g2);
-				Grid.position_count++;
+				//Grid.position_count++;
 				currentColPos += squareSize;
 			}
 			// draw rows
@@ -75,7 +75,7 @@ public class Artist {
 						Tools.fade(BoardFrame.BOARD_COLOR), g2);
 				Artist.drawLine(from, to, gridLineStroke,
 						Tools.fade(BoardFrame.BOARD_COLOR), g2);
-				Grid.position_count++;
+				//Grid.position_count++;
 				currentRowPos += squareSize;
 			}
 			index++;
@@ -93,7 +93,7 @@ public class Artist {
 				currentColPos2 += squareSize;
 			}
 			// draw rows
-			if (currentRowPos2 <= Grid.Height) {
+			if (currentRowPos2 <= Height) {
 
 				Point from = new Point(0, squareSize * index2);
 				Point to = new Point(Width, squareSize * index2);
@@ -102,7 +102,7 @@ public class Artist {
 			}
 			index2++;
 		}
-		Grid.Columns = Columns;
+		//Grid.Columns = Columns;
 
 	}
 
