@@ -41,8 +41,7 @@ public class Grid extends JPanel {
 	public static double x = 0, y = 0, hl_x = 0, hl_y = 0;
 	public static Point selectedP = new Point(0, 0);
 	public static Cell cell = null;
-	//public static int position_count = 0;
-	private static int size;
+
 	private static volatile Grid instance = null;
 	private static GridDimension dimension = null;
 
@@ -50,8 +49,7 @@ public class Grid extends JPanel {
 		Grid.dimension = dimension;
 		setPreferredSize(dimension.getPixelDimension());
 		System.out.println("Grid size: " + dimension.getPixelDimension());
-		setSquareSize(dimension.getSqrSize());
-		calColAndRows(dimension.getSqrSize());
+		setDimension(dimension);
 		// getRootPane().add(board.createIcon());
 	}
 	
@@ -129,9 +127,9 @@ public class Grid extends JPanel {
 			}
 
 			if (!this.drawn) {
-				//drawGrid();
-				Artist.drawGrid(g2, Grid.dimension, Grid.squareFadeVariant, Grid.gridLineStroke);
-				size = (int) (Columns * rows);
+				drawGrid();
+				//Artist.drawGrid(g2, Grid.dimension, Grid.squareFadeVariant, Grid.gridLineStroke);
+				
 				if (Grid.refresh) {
 					Artist.drawGame(game, g2);
 					Grid.refresh = false;
@@ -202,22 +200,6 @@ public class Grid extends JPanel {
 		return squareSize;
 	}
 
-	/**
-	 * @param squareSize
-	 *            the squareSize to set
-	 */
-	public static void setSquareSize(double squareSize) {
-		calColAndRows((int) squareSize);
-		Grid.squareSize = squareSize;
-		Grid.half_squareSize = squareSize / 2;
-		CIRCLE_DIAMETER = (int) (squareSize * .46);
-		HALF_DIAMETER = CIRCLE_DIAMETER / 2;
-		gridLineStroke = (int) (squareSize * .12);
-		squareFadeVariant = (int) (squareSize * .25);
-		size = ((int) (Width / Grid.squareSize) * (int) (Height / Grid.squareSize))
-				+ ((int) (Width / Grid.squareSize) + (int) (Height / Grid.squareSize));
-	}
-
 	public static void drawGrid() {
 
 		int currentColPos = 0;
@@ -274,48 +256,6 @@ public class Grid extends JPanel {
 		}
 		
 	}
-
-	// TODO the following might go way
-	// /**
-	// * @param str
-	// * @return
-	// */
-	// public static double getSqrSize(String str) {
-	// double sqrSize = 32;
-	// ArrayList<GridDimension> list = JKemik.settings_t.getSizes();
-	// System.out.println("GridDimensions: " + list);
-	// for (GridDimension size: list) {
-	// String s = size.toString();
-	// if(s.equals(str)){
-	// return size.getSqrSize();
-	// }
-	// }
-	// return sqrSize;
-	// }
-	// TODO will remove the following if the above works
-	/**
-	 * @param str
-	 * @return
-	 */
-	// public static double getSqrSize(String str) {
-	// double sqrSize = 32;
-	// if (str.equals("64x40")) {
-	// sqrSize = 16.0;
-	// }
-	//
-	// if (str.equals("32x20")) {
-	// sqrSize = 32.0;
-	// }
-	//
-	// if (str.equals("16x10")) {
-	// sqrSize = 64.0;
-	// }
-	//
-	// if (str.equals("8x5")) {
-	// sqrSize = 128.0;
-	// }
-	// return sqrSize;
-	// }
 
 	public static void closestTo(double xcoor, double ycoor, int square) {
 		// xcoor = xcoor + squareSize;
@@ -423,21 +363,19 @@ public class Grid extends JPanel {
 		this.repaint();
 	}
 
-	public static int getBoardSize() {
-		return size;
-	}
-
-	public static void setBoardSize(int size) {
-		Grid.size = size;
-	}
-
 	public static GridDimension getDimension() {
 		return dimension;
 	}
 
 	public static void setDimension(GridDimension dimension) {
 		Grid.dimension = dimension;
+		calColAndRows(dimension.getSqrSize());
 		Grid.squareSize = Grid.dimension.getSqrSize();
+		Grid.half_squareSize = squareSize / 2;
+		CIRCLE_DIAMETER = (int) (squareSize * .46);
+		HALF_DIAMETER = CIRCLE_DIAMETER / 2;
+		gridLineStroke = (int) (squareSize * .12);
+		squareFadeVariant = (int) (squareSize * .25);
 	}
 
 }

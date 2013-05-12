@@ -89,7 +89,7 @@ public class STemplate implements Serializable {
 	public void setSizes(ArrayList<GridDimension> sizes) {
 		this.sizes = sizes;
 	}
-	public GridDimension getGridDimesion() {
+	public GridDimension getGridDimension() {
 		return dimesion;
 	}
 	public void setGridDimension(GridDimension dimesion) {

@@ -96,7 +96,7 @@ public class BoardFrame extends JFrame {
 		// } else {
 		// }
 		progressB.setVisible(false);
-		l1.rotateLabel(JKemik.settings_t.getGridDimesion().toString());
+		l1.rotateLabel(JKemik.settings_t.getGridDimension().toString());
 		// System Preferences Events
 		ViewEvents.saveSettingsAction();
 		ViewEvents.onAutoCaptureAction();
@@ -140,7 +140,7 @@ public class BoardFrame extends JFrame {
 		top_right = new JPanel();
 		status_panel_container = new JPanel();
 		grid_container = new JPanel();
-		grid = Grid.getInstance(JKemik.settings_t.getGridDimesion());//
+		grid = Grid.getInstance(JKemik.settings_t.getGridDimension());//
 		west_blank_panel = new JPanel();
 		playerPanel_container = new JPanel();
 		p1panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
@@ -757,7 +757,7 @@ public class BoardFrame extends JFrame {
 	}
 	public static void updateBoardStatus(){
 		double totPlots = JKemik.game.getCurrentP().getPloted().size() + JKemik.game.getGuest().getPloted().size();
-		double totalOnBoard = JKemik.settings_t.getGridDimesion().positions();
+		double totalOnBoard = JKemik.settings_t.getGridDimension().positions();
 		double deadBoard = (100*totPlots)/totalOnBoard;
 		double free = totalOnBoard - totPlots;
 		gridstats.setDeadGridInPercentV(deadBoard);
