@@ -238,7 +238,7 @@ public class JKemik extends Application {
 		String key = Tools.languageKey(lang);
 		String properties = Tools.propertiesFilename(key);
 		int maxw = Integer.parseInt(str);
-		if (Tools.isMaxWinLessThanGrid(Grid.getBoardSize(), maxw)) {
+		if (Tools.isMaxWinLessThanGrid(Grid.getDimension().positions(), maxw)) {
 			t.setMaxWinVal(maxw);
 			t.setMemo(t.isAutoCapture(), t.isAutoPass());
 			t.setLanguage(lang);
@@ -250,7 +250,7 @@ public class JKemik extends Application {
 		} else {
 			JOptionPane.showMessageDialog(null, BoardFrame.messages
 					.getString("maxWinSizeMustbBe1")
-					+ Grid.getBoardSize()
+					+ Grid.getDimension().positions()
 					+ BoardFrame.messages
 							.getString("maxWinSizeMustbBe2"),
 					BoardFrame.messages.getString("wrongInput"),
