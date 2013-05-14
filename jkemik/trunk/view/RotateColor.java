@@ -80,8 +80,9 @@ public class RotateColor extends JPanel {
 	 *            integer specifying the position of the color to rotate to
 	 * @return void
 	 */
-	public void rotateColor(int i) {
+	public Color rotateColor(int i) {
 		this.setBackground(this.colors[i]);
+		return this.colors[i];
 	}
 
 	/**

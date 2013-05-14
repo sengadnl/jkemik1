@@ -7,8 +7,6 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.*;
-
 import controler.JKemik;
 import utilities.Tools;
 import view.BoardFrame;
@@ -20,15 +18,16 @@ import view.RotateColor;
  */
 
 public class ColorChangeListenerA implements MouseListener {
-	private JPanel panel;
+	private RotateColor panel;
 
-	public ColorChangeListenerA(JPanel panel) {
+	public ColorChangeListenerA(RotateColor panel) {
 		this.panel = panel;
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		((RotateColor) this.panel).rotateColor();
-		JKemik.template.setP1_c(this.panel.getBackground());
+		this.panel.rotateColor();
+		int i = this.panel.getColorIndex();
+		JKemik.template.setP1_c(this.panel.rotateColor(i));
 	}
 
 	public void mouseEntered(MouseEvent e) {
