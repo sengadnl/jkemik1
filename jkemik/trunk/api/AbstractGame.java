@@ -60,17 +60,19 @@ public abstract class AbstractGame implements Serializable {
 
 			if (isAreaEmpty(area, guestP)) {
 				currentP.setSelected(new ArrayList<Point>());
+				System.out.println("This Cell is empty..." +
+				"Trying to find another cell ...");
 				return null;
 			}
-
+			System.out.println("Counting captures...");
 			/* Go through all selected dots from recursion */
 			for (Point p : area) {
+				
 				if (Tools.containPoint(p, guestP)
 						&& !Tools.containPoint(p, currPlayerCaptures)) {
 
 					/* keep track of captures for this cell */
 					captured.add(p);
-
 					/* keep track of total captures for this player */
 					currPlayerCaptures.add(p);
 					getDeadDots().add(p);//
@@ -84,16 +86,18 @@ public abstract class AbstractGame implements Serializable {
 
 				}/* end first if else */
 			}/* end of second for loop */
+			System.out.println("Constructing a cell...");
 			getCurrentP().getConnectedPoints().addAll(currentP.getSelected());
 			cell = new Cell(getCurrentP().getSelected(), area, captured, null);// Engine.getGame().
-
+			System.out.println("Calculating the score...");
 			calculateScore(cell);
 
 		} else {
+			System.out.println("\nDEAD END !!!");
 			currentP.setSuccessful(false);
 			currentP.setSelected(new ArrayList<Point>());
 		}
-
+		System.out.println("CELL: " + cell);
 		return cell;
 	}
 
@@ -111,9 +115,11 @@ public abstract class AbstractGame implements Serializable {
 
 		if (isAreaEmpty(area, guestP)) {
 			// currentP.setSelected(new ArrayList<Point>());
+			System.out.println("This Cell is empty...");
 			return new Cell(currentP.getSelected(), area, captured, null);
 		}
 
+		System.out.println("Counting captures...");
 		/* Go through all selected dots from recursion */
 		for (Point p : area) {
 			if (Tools.containPoint(p, guestP)
@@ -134,9 +140,11 @@ public abstract class AbstractGame implements Serializable {
 
 			}/* end first if else */
 		}/* end of second for loop */
+		System.out.println("Constructing a cell...");
 		currentP.getConnectedPoints().addAll(currentP.getSelected());
 		cell = new Cell(currentP.getSelected(), area, captured, null);// Engine.getGame().
-
+		
+		System.out.println("Calculating the score...");
 		calculateScore(cell);
 		return cell;
 	}
@@ -154,9 +162,10 @@ public abstract class AbstractGame implements Serializable {
 
 				tempCell = capture(currentPP, squareSize);
 				if (tempCell != null) {
-					System.out.println("Cell was not NULL");
+					//System.out.println("Cell was not NULL");
 					return true;
 				} else {
+					System.out.println("Starting new search\n--------");
 					continue;
 				}
 			} catch (IndexOutOfBoundsException e) {
@@ -169,6 +178,7 @@ public abstract class AbstractGame implements Serializable {
 				continue;
 			}
 		}
+		System.out.println("Went through all the points !!!!\n--------------");
 		return false;
 	}
 
