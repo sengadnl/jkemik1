@@ -31,7 +31,7 @@ public class ColorChangeListenerB implements MouseListener{
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		Color c = this.panel.getBackground();
+		Color c = JKemik.template.getP2_c();
 		c = Tools.fade(c);
 		this.panel.setBackground(c);
 		//panel.setToolTipText("Click to change the color.");
@@ -39,7 +39,7 @@ public class ColorChangeListenerB implements MouseListener{
 	}
 
 	public void mouseExited(MouseEvent e) {
-		Color c = this.panel.getBackground();
+		Color c = JKemik.template.getP2_c();
 		c = Tools.boost(c);
 		this.panel.setBackground(c);
 	}
