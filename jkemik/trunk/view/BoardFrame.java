@@ -52,7 +52,7 @@ public class BoardFrame extends JFrame {
 		instantiateAllLabels();
 		instantiateAllButtonss();
 		instantiateAllCheckBoxes();
-		setAllBorders();
+		//setAllBorders();
 		setAllLayouts();
 		setPanelSizes();
 		addComponentsToPanels();
@@ -326,7 +326,7 @@ public class BoardFrame extends JFrame {
 		down_left.add(progressB, BorderLayout.SOUTH);
 	}
 
-	private void setAllBorders() {
+	//private void setAllBorders() {
 		// grid_container.setBorder(BorderFactory.createLineBorder(BOARD_COLOR));
 		// status_panel_container.setBorder(BorderFactory
 		// .createLineBorder(BOARD_COLOR));
@@ -334,14 +334,14 @@ public class BoardFrame extends JFrame {
 		// middle_container.setBorder(BorderFactory.createLineBorder(BOARD_COLOR));
 		//bottom_container.setBorder(BorderFactory.createLineBorder(BOARD_COLOR));
 		// controler_panel.setBorder(BorderFactory.createLineBorder(BOARD_COLOR));
-		TitledBorder SetupBorder = new TitledBorder("Setup");
-		SetupBorder.setTitleColor(BOARD_COLOR);
-		gSizeAndTheme.setBorder(SetupBorder);
-		
-		TitledBorder ControlBorder = new TitledBorder("Control");
-		ControlBorder.setTitleColor(BOARD_COLOR);
-		config_container.setBorder(ControlBorder);
-	}
+//		TitledBorder SetupBorder = new TitledBorder("Setup");
+//		SetupBorder.setTitleColor(BOARD_COLOR);
+//		gSizeAndTheme.setBorder(SetupBorder);
+//		
+//		TitledBorder ControlBorder = new TitledBorder("Control");
+//		ControlBorder.setTitleColor(BOARD_COLOR);
+//		config_container.setBorder(ControlBorder);
+	//}
 
 	public static void decoratebuttons(Color bg, Color fg) {
 		pass_turn.setBackground(bg);
