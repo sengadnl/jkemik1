@@ -67,8 +67,7 @@ public abstract class AbstractPlayer implements Serializable {
 								&& this.selected.size() > 3) {
 							this.successful = true;/* Set recursive call stop */
 							this.origin = null;/* Reset the origin */
-							System.out.println("A cell was found: \n" + "box["
-									+ i + "]\n");
+							System.out.println("Found cell...");
 							return true;/* Capture was found */
 						}
 						/* This adjacent Point was a dead end */
