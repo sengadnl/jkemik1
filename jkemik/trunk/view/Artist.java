@@ -45,8 +45,8 @@ public class Artist {
 		int currentColPos = 0;
 		int currentRowPos = 0;
 		int index = 0;
-		double Columns = 0;
-		Artist.drawGridBG(g2, Grid.Width, Grid.Height);
+		double Columns = dimension.positionsDimension().getWidth();
+		Artist.drawGridBG(g2, Width, Height);
 		while (index < Columns) {
 			// draw columns
 			if (currentColPos <= Width) {
@@ -56,19 +56,17 @@ public class Artist {
 						Tools.fade(BoardFrame.BOARD_COLOR), g2);
 				Artist.drawLine(from, to, gridLineStroke,
 						Tools.fade(BoardFrame.BOARD_COLOR), g2);
-				//Grid.position_count++;
 				currentColPos += squareSize;
 			}
 			// draw rows
 			if (currentRowPos <= Height) {
 
-				Point from = new Point(0, Grid.squareSize * index);
+				Point from = new Point(0, squareSize * index);
 				Point to = new Point(Width, squareSize * index);
 				Artist.drawLine(from, to, squareFadeVariant,
 						Tools.fade(BoardFrame.BOARD_COLOR), g2);
 				Artist.drawLine(from, to, gridLineStroke,
 						Tools.fade(BoardFrame.BOARD_COLOR), g2);
-				//Grid.position_count++;
 				currentRowPos += squareSize;
 			}
 			index++;

@@ -22,7 +22,7 @@ public class Grid extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static Graphics2D g2;
-	// private JKIcon board = new JKIcon("media/board1.PNG", "");
+	//private JKIcon board = new JKIcon("media/board1.PNG", "");
 	protected static int gridLineStroke = 2, squareFadeVariant = 4,
 			CURSOR_VARIANT_STROKE = 6;
 	public static double CIRCLE_DIAMETER = 10.0, HALF_DIAMETER = 5.0,
@@ -50,7 +50,7 @@ public class Grid extends JPanel {
 		setPreferredSize(dimension.getPixelDimension());
 		System.out.println("Grid size: " + dimension.getPixelDimension());
 		setDimension(dimension);
-		// getRootPane().add(board.createIcon());
+		//getRootPane().add(board.createIcon());
 	}
 	
 
@@ -128,8 +128,7 @@ public class Grid extends JPanel {
 			}
 
 			if (!this.drawn) {
-				drawGrid();
-				//Artist.drawGrid(g2, Grid.dimension, Grid.squareFadeVariant, Grid.gridLineStroke);
+				Artist.drawGrid(g2, Grid.dimension, Grid.squareFadeVariant, Grid.gridLineStroke);
 				
 				if (Grid.refresh) {
 					Artist.drawGame(game, g2);
@@ -201,75 +200,16 @@ public class Grid extends JPanel {
 		return squareSize;
 	}
 
-	public static void drawGrid() {
-
-		int currentColPos = 0;
-		int currentRowPos = 0;
-		int index = 0;
-		Artist.drawGridBG(g2, Grid.Width, Grid.Height);
-		while (index < Columns) {
-			// draw columns
-			if (currentColPos <= Width) {
-				Point from = new Point(squareSize * index, 0);
-				Point to = new Point(Grid.squareSize * index, Grid.Height);
-				Artist.drawLine(from, to, squareFadeVariant,
-						Tools.fade(BoardFrame.BOARD_COLOR), g2);
-				Artist.drawLine(from, to, gridLineStroke,
-						Tools.fade(BoardFrame.BOARD_COLOR), g2);
-				
-				currentColPos += Grid.squareSize;
-			}
-			// draw rows
-			if (currentRowPos <= Grid.Height) {
-
-				Point from = new Point(0, Grid.squareSize * index);
-				Point to = new Point(Grid.Width, Grid.squareSize * index);
-				Artist.drawLine(from, to, squareFadeVariant,
-						Tools.fade(BoardFrame.BOARD_COLOR), g2);
-				Artist.drawLine(from, to, gridLineStroke,
-						Tools.fade(BoardFrame.BOARD_COLOR), g2);
-				
-				currentRowPos += Grid.squareSize;
-			}
-			index++;
-		}
-
-		int index2 = 0;
-		int currentColPos2 = 0;
-		int currentRowPos2 = 0;
-		while (index2 < Columns) {
-			// draw columns
-			if (currentColPos2 <= Width) {
-				Point from = new Point(squareSize * index2, 0);
-				Point to = new Point(Grid.squareSize * index2, Grid.Height);
-				Artist.drawLine(from, to, gridLineStroke, Color.BLACK, g2);
-				currentColPos2 += Grid.squareSize;
-			}
-			// draw rows
-			if (currentRowPos2 <= Grid.Height) {
-
-				Point from = new Point(0, Grid.squareSize * index2);
-				Point to = new Point(Grid.Width, Grid.squareSize * index2);
-				Artist.drawLine(from, to, gridLineStroke, Color.BLACK, g2);
-				currentRowPos2 += Grid.squareSize;
-			}
-			index2++;
-		}
-		
-	}
-
 	public static void closestTo(double xcoor, double ycoor, int square) {
-		// xcoor = xcoor + squareSize;
-		// ycoor = ycoor + squareSize;
+
 		int deltax = 0, deltay = 0;
 		int xc = 0, yc = 0;
 		deltax = (int) (xcoor % square);
 		xc = square - deltax;
-		// xc = square;
 
 		deltay = (int) (ycoor % square);
 		yc = square - deltay;
-		// if (!outOfBoard(xcoor, ycoor, square)) {
+	
 		if (deltax > xc) {
 			x = xcoor + xc;
 		} else {
@@ -281,7 +221,6 @@ public class Grid extends JPanel {
 		} else {
 			y = ycoor - deltay;
 		}
-		// }
 	}
 
 	/**
