@@ -6,8 +6,6 @@ package view;
 import java.awt.*;
 
 import javax.swing.*;
-
-import utilities.*;
 import controler.*;
 import api.*;
 import api.Point;
