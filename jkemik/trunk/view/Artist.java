@@ -4,10 +4,18 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 import controler.JKemik;
 
@@ -19,29 +27,49 @@ import api.Player;
 import api.Point;
 
 public class Artist {
-	protected static void drawGridBG(Graphics2D g2, double w, double h){
-		
-//		Image img1 = Toolkit.getDefaultToolkit().getImage("media/board2.PNG");
-//	    g2.drawImage(img1, (int)w, (int)h, JKemik.view.getGrid());
-//	    g2.finalize();
+	protected static void drawGridBG(Graphics2D g2, double w, double h) {
+
+//		 Image img1 =
+//		 Toolkit.getDefaultToolkit().getImage("media/board2.PNG");
+//		 g2.drawImage(img1, (int)w, (int)h, BoardFrame.getGrid());
+		 //g2.finalize();
 		/*-------------------------------------------------------*/
 //		BufferedImage img1 = null;
 //		try {
-//		    img1 = ImageIO.read(new File("media/board2.PNG"));
-//		    g2.drawImage(img1, (int)w, (int)h, JKemik.view.getGrid());
-//		    g2.finalize();
+//			img1 = ImageIO.read(new File("media/board2.PNG"));
+//			g2.drawImage(img1, (int) w, (int) h, JKemik.view.getGrid());
+//			g2.finalize();
 //		} catch (IOException e) {
 //		}
 		/*-------------------------------------------------------*/
-		g2.setColor(BoardFrame.BOARD_COLOR);//BoardFrame.BOARD_COLOR
-		Rectangle2D.Double bg = new Rectangle2D.Double(0, 0,w,h);
-		g2.draw(bg);
-		g2.fill(bg);
+		 g2.setColor(BoardFrame.BOARD_COLOR);//BoardFrame.BOARD_COLOR
+		 Rectangle2D.Double bg = new Rectangle2D.Double(0, 0,w,h);
+		 g2.draw(bg);
+		 g2.fill(bg);
 	}
-	public static void drawGrid(Graphics2D g2, GridDimension dimension, int squareFadeVariant, int gridLineStroke) {
+	protected static void drawBG(Graphics2D g2, JPanel jp, int w, int h, String str) {
+
+		/*-------------------------------------------------------*/
+		BufferedImage img1 = null;
+		try {
+			img1 = ImageIO.read(new File(str));
+			g2.drawImage(img1, (int) w, (int) h, jp);
+			g2.finalize();
+		} catch (IOException e) {
+		}
+		/*-------------------------------------------------------*/
+		// g2.setColor(BoardFrame.BOARD_COLOR);//BoardFrame.BOARD_COLOR
+		// Rectangle2D.Double bg = new Rectangle2D.Double(0, 0,w,h);
+		// g2.draw(bg);
+		// g2.fill(bg);
+	}
+
+	public static void drawGrid(Graphics2D g2, GridDimension dimension,
+			int squareFadeVariant, int gridLineStroke) {
 		Dimension d = dimension.getPixelDimension();
-		int Width = (int)d.getWidth(), Height = (int)d.getHeight(), squareSize = dimension.getSqrSize();
-		
+		int Width = (int) d.getWidth(), Height = (int) d.getHeight(), squareSize = dimension
+				.getSqrSize();
+
 		int currentColPos = 0;
 		int currentRowPos = 0;
 		int index = 0;
@@ -93,7 +121,7 @@ public class Artist {
 			}
 			index2++;
 		}
-		//Grid.Columns = Columns;
+		// Grid.Columns = Columns;
 
 	}
 
@@ -101,8 +129,8 @@ public class Artist {
 			Graphics2D g2) {
 		g2.setColor(c);
 		g2.setStroke(new BasicStroke(stroke));
-		g2.drawLine((int) (from.getXC()), (int) (from.getYC()), (int) (to
-				.getXC()), (int) (to.getYC()));
+		g2.drawLine((int) (from.getXC()), (int) (from.getYC()),
+				(int) (to.getXC()), (int) (to.getYC()));
 	}
 
 	protected static void drawCircle(Point p, Color c, double h_d, double c_d,
@@ -123,8 +151,7 @@ public class Artist {
 		g2.setColor(c);
 		g2.setStroke(new BasicStroke(stroke));
 		g2.draw(new Line2D.Double(p.getXC(), p.getYC() + h_sqr, p.getXC(), p
-				.getYC()
-				- h_sqr));
+				.getYC() - h_sqr));
 		g2.draw(new Line2D.Double(p.getXC() - h_sqr, p.getYC(), p.getXC()
 				+ h_sqr, p.getYC()));
 		g2.setColor(c);
@@ -147,7 +174,7 @@ public class Artist {
 				return unDrawCell(cell, g2);
 			}
 			game.getCurrentP().getConnectedPoints().addAll(contour);
-			
+
 			/* draw cell contour */
 			drawLine(contour.get(0), contour.get(contour.size() - 1),
 					Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE, game
@@ -191,7 +218,7 @@ public class Artist {
 			drawLine(contour.get(0), contour.get(contour.size() - 1),
 					Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE,
 					BoardFrame.BOARD_COLOR, g2);
-			for (int i = 0; i < contour.size()-1; i++) {
+			for (int i = 0; i < contour.size() - 1; i++) {
 				System.out.println("Lines: " + i);
 				drawLine(contour.get(i), contour.get(i + 1),
 						Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE,
@@ -224,12 +251,14 @@ public class Artist {
 		Player p2 = (Player) g.getPlayer2();
 		ArrayList<Cell> p1c = p1.getCells();
 		ArrayList<Cell> p2c = p2.getCells();
-		
+
 		// draw p1 cells
-		if (drawCell(p1c, p1, p2, g2)) {}
-		
+		if (drawCell(p1c, p1, p2, g2)) {
+		}
+
 		// draw p1 cells
-		if (drawCell(p2c, p2, p1, g2)) {}
+		if (drawCell(p2c, p2, p1, g2)) {
+		}
 		// draw p1 points
 		for (Point p : p1.getPloted()) {
 
@@ -280,7 +309,7 @@ public class Artist {
 					Artist.drawLine(contour.get(i), contour.get(i + 1),
 							Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE,
 							pl1.getColor(), g2);
-					
+
 					// draw intersection
 					Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
 							Grid.half_squareSize, Grid.gridLineCol, g2);
@@ -309,7 +338,7 @@ public class Artist {
 			Ellipse2D.Double circle = new Ellipse2D.Double(px
 					- Grid.HALF_DIAMETER, py - Grid.HALF_DIAMETER,
 					Grid.CIRCLE_DIAMETER, Grid.CIRCLE_DIAMETER);
-			//g2.setColor(BoardFrame.BOARD_COLOR);
+			// g2.setColor(BoardFrame.BOARD_COLOR);
 			g2.setColor(BoardFrame.THEME_COLOR);
 			g2.fill(circle);
 			g2.draw(circle);
@@ -330,8 +359,7 @@ public class Artist {
 		g2.draw(new Line2D.Double(p.getXC(), p.getYC() + Grid.squareSize, p
 				.getXC(), p.getYC() - Grid.squareSize));
 		g2.draw(new Line2D.Double(p.getXC() - Grid.squareSize, p.getYC(), p
-				.getXC()
-				+ Grid.squareSize, p.getYC()));
+				.getXC() + Grid.squareSize, p.getYC()));
 		g2.setColor(JKemik.game.getCurrentP().getColor());
 	}
 

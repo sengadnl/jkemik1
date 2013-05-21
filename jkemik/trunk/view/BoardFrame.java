@@ -37,11 +37,14 @@ public class BoardFrame extends JFrame {
 
 		setFrameSize((int) width, (int) height);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//TODO
+		//JKIcon bg = new JKIcon("media/board1.PNG", "");
+		//setContentPane(bg.createIcon());
 		setContainerAttributs();
 
 		System.out.println("Frame: " + width + " X " + height);
-		System.out.println("Frame container: " + container.getWidth() + " X "
-				+ container.getHeight());
+//		System.out.println("Frame container: " + container.getWidth() + " X "
+//				+ container.getHeight());
 
 		String code = Tools.languageKey(JKemik.settings_t.getLanguage());
 		String properties = Tools.propertiesFilename(code);
@@ -121,8 +124,8 @@ public class BoardFrame extends JFrame {
 	 * Defines container's attributes
 	 * */
 	private void setContainerAttributs() {
-		container = getContentPane();
-		container.setBackground(new Color(0, 0, 0));
+//		container = getContentPane();
+//		container.setBackground(new Color(0, 0, 0));
 	}
 
 	private void setFrameSize(int w, int h) {
