@@ -21,27 +21,29 @@ public class SysPrefsListener implements MouseListener {
 
 	public void mouseClicked(MouseEvent arg0) {
 		if (JKemik.settings_t.isPlayMode()) {
-			int res = JOptionPane.showConfirmDialog(null,"Would you like to stop the current Game?","Warning",
+			int res = JOptionPane.showConfirmDialog(null,
+					BoardFrame.messages.getString("stopGame"),
+					BoardFrame.messages.getString("warning"),
 					JOptionPane.YES_OPTION);
-			if(res == 0){
+			if (res == 0) {
 				JKemik.settings_t.setSystemSetupMode(true);
 				BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
 				ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
-			}else{
+			} else {
 				return;
 			}
 		}
 		JKemik.settings_t.setSystemSetupMode(true);
 		BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
 		ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
-		
+
 	}
 
 	public void mouseExited(MouseEvent arg0) {
 		Color color;
 		color = Tools.boost(this.label.getForeground());
 		this.label.setForeground(color);
-		//BoardFrame.displayGrid(true);
+		// BoardFrame.displayGrid(true);
 	}
 
 	public void mousePressed(MouseEvent arg0) {
