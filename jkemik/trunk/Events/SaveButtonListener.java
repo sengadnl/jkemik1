@@ -54,9 +54,9 @@ public class SaveButtonListener implements MouseListener {
 			/*Toggling from manual mode to auto*/
 			if (!JKemik.settings_t.getMemo()[0]
 					&& !JKemik.settings_t.getMemo()[1]) {
-				BoardFrame.manual.setSelected(true);
+				BoardFrame.mode.setSelected(true);
 			} else {
-				BoardFrame.manual.setSelected(false);
+				BoardFrame.mode.setSelected(false);
 			}
 			BoardFrame.updateBoardStatus();
 			BoardFrame.uiLooksUpdate(s, t);

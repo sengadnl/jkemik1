@@ -4,12 +4,10 @@
 package view;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
@@ -41,14 +39,14 @@ public class BoardFrame extends JFrame {
 
 		setFrameSize((int) width, (int) height);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//TODO
-		//JKIcon bg = new JKIcon("media/board1.PNG", "");
-		//setContentPane(bg.createIcon());
+		// TODO
+		// JKIcon bg = new JKIcon("media/board1.PNG", "");
+		// setContentPane(bg.createIcon());
 		setContainerAttributs();
 
 		System.out.println("Frame: " + width + " X " + height);
-//		System.out.println("Frame container: " + container.getWidth() + " X "
-//				+ container.getHeight());
+		// System.out.println("Frame container: " + container.getWidth() + " X "
+		// + container.getHeight());
 
 		String code = Tools.languageKey(JKemik.settings_t.getLanguage());
 		String properties = Tools.propertiesFilename(code);
@@ -67,7 +65,7 @@ public class BoardFrame extends JFrame {
 
 		makingGame = true;
 		init();
-		BoardFrame.manual.setVisible(false);
+		BoardFrame.mode.setVisible(false);
 		setTitle("J-Kemik " + Globals.VERSION);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
@@ -128,8 +126,8 @@ public class BoardFrame extends JFrame {
 	 * Defines container's attributes
 	 * */
 	private void setContainerAttributs() {
-//		container = getContentPane();
-//		container.setBackground(new Color(0, 0, 0));
+		// container = getContentPane();
+		// container.setBackground(new Color(0, 0, 0));
 	}
 
 	private void setFrameSize(int w, int h) {
@@ -168,8 +166,8 @@ public class BoardFrame extends JFrame {
 		pname2 = new JPanel();
 		p1p2NameHolder = new JPanel();
 		gSizeAndTheme = new JPanel();
-		
-		gridstats = new GridStatus((int)(.4 * this.width),
+
+		gridstats = new GridStatus((int) (.4 * this.width),
 				(int) (.1 * this.height));
 	}
 
@@ -206,10 +204,10 @@ public class BoardFrame extends JFrame {
 	}
 
 	private void instantiateAllCheckBoxes() {
-		manual_c = new JCheckBox(messages.getString("captureMode"));
-		manual = new JCheckBox(messages.getString("manualModel"));
+		mouseSelection = new JCheckBox(messages.getString("captureMode"));
+		mode = new JCheckBox(messages.getString("manualModel"));
 
-		manual_c.setVisible(false);
+		mouseSelection.setVisible(false);
 	}
 
 	private void setAllLayouts() {
@@ -234,7 +232,7 @@ public class BoardFrame extends JFrame {
 		pname1.setLayout(new GridLayout(2, 1));
 		pname2.setLayout(new GridLayout(2, 1));
 		gSizeAndTheme.setLayout(new GridLayout(3, 1));
-		
+
 		/* Bottom panels layout */
 	}
 
@@ -259,10 +257,10 @@ public class BoardFrame extends JFrame {
 				((int) (SIDE_WIDTH * this.width)), (int) (.75 * this.height)));
 		west_blank_panel.setPreferredSize(new Dimension(
 				(int) (.01 * this.width), (int) (.75 * this.height)));
-		pname1.setPreferredSize(new Dimension(
-				((int) (.1 * this.width)), (int) (.04 * this.height)));
-		pname2.setPreferredSize(new Dimension(
-				((int) (.1 * this.width)), (int) (.04 * this.height)));
+		pname1.setPreferredSize(new Dimension(((int) (.1 * this.width)),
+				(int) (.04 * this.height)));
+		pname2.setPreferredSize(new Dimension(((int) (.1 * this.width)),
+				(int) (.04 * this.height)));
 		down_left.setPreferredSize(new Dimension(
 				(int) (CORNER_WIDTH * this.width), (int) (.1 * this.height)));
 	}
@@ -289,11 +287,11 @@ public class BoardFrame extends JFrame {
 		middle_container.add(status_panel_container, BorderLayout.EAST);
 		grid_container.add(grid);
 		grid_container.add(settings_p);
-		
+
 		status_panel_container.add(playerPanel_container, BorderLayout.NORTH);
 		status_panel_container.add(setupP);
 		status_panel_container.add(controler_panel, BorderLayout.SOUTH);
-		
+
 		playerPanel_container.add(p1panel, BorderLayout.WEST);
 		playerPanel_container.add(p2panel, BorderLayout.EAST);
 		playerPanel_container.add(config_container, BorderLayout.SOUTH);
@@ -303,32 +301,32 @@ public class BoardFrame extends JFrame {
 		config_container.add(AutoPass);
 		config_container.add(lc);
 		config_container.add(Win);
-		
+
 		p1p2NameHolder.add(pname1, BorderLayout.NORTH);
 		p1p2NameHolder.add(pname2, BorderLayout.SOUTH);
-		
+
 		setupP.add(p1p2NameHolder, BorderLayout.NORTH);
 		setupP.add(gSizeAndTheme, BorderLayout.SOUTH);
-		
+
 		controler_panel.add(pass_turn);
 		controler_panel.add(undo);
 		controler_panel.add(refresh);
-		controler_panel.add(manual_c);
-		controler_panel.add(manual);
-		
+		controler_panel.add(mouseSelection);
+		controler_panel.add(mode);
+
 		pname1.add(label1);
 		pname1.add(pColor1);
-		
+
 		gSizeAndTheme.add(l1);
 		gSizeAndTheme.add(l2);
 		gSizeAndTheme.add(startG);
-		
+
 		pname2.add(label2);
 		pname2.add(pColor2);
-		
+
 		// ..........................................................//
 		// ..........................................................//
-		bottom_container.add(down_left);//gridstats
+		bottom_container.add(down_left);// gridstats
 		bottom_container.add(gridstats);
 		down_left.add(progressB, BorderLayout.SOUTH);
 	}
@@ -339,12 +337,12 @@ public class BoardFrame extends JFrame {
 		// .createLineBorder(BOARD_COLOR));
 		// top_container.setBorder(BorderFactory.createLineBorder(BOARD_COLOR));
 		// middle_container.setBorder(BorderFactory.createLineBorder(BOARD_COLOR));
-		//bottom_container.setBorder(BorderFactory.createLineBorder(BOARD_COLOR));
+		// bottom_container.setBorder(BorderFactory.createLineBorder(BOARD_COLOR));
 		// controler_panel.setBorder(BorderFactory.createLineBorder(BOARD_COLOR));
 		TitledBorder SetupBorder = new TitledBorder("Setup");
 		SetupBorder.setTitleColor(BOARD_COLOR);
 		gSizeAndTheme.setBorder(SetupBorder);
-		
+
 		TitledBorder ControlBorder = new TitledBorder("Control");
 		ControlBorder.setTitleColor(BOARD_COLOR);
 		config_container.setBorder(ControlBorder);
@@ -566,17 +564,18 @@ public class BoardFrame extends JFrame {
 		pname1.setBackground(Tools.fade(BoardFrame.BOARD_COLOR));
 		gSizeAndTheme.setBackground(BoardFrame.CPANEL_COLOR);
 		pname2.setBackground(Tools.fade(BoardFrame.BOARD_COLOR));
-		
-//		Holder2.setForeground(BOARD_COLOR);
-//		config_container.setForeground(BOARD_COLOR);
+
+		// Holder2.setForeground(BOARD_COLOR);
+		// config_container.setForeground(BOARD_COLOR);
 
 		l1.setForeground(Tools.boost(Color.WHITE, Globals.LABEL_VARIANT));
 		l2.setForeground(Tools.boost(Color.WHITE, Globals.LABEL_VARIANT));
 
-		manual_c.setBackground(BoardFrame.THEME_COLOR);
-		manual_c.setForeground(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
-		manual.setBackground(BoardFrame.THEME_COLOR);
-		manual.setForeground(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
+		mouseSelection.setBackground(BoardFrame.THEME_COLOR);
+		mouseSelection.setForeground(Tools.boost(BOARD_COLOR,
+				Globals.LABEL_VARIANT));
+		mode.setBackground(BoardFrame.THEME_COLOR);
+		mode.setForeground(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
 		settings_p.setTheme(Tools.fade(BOARD_COLOR),
 				Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
 	}
@@ -683,10 +682,10 @@ public class BoardFrame extends JFrame {
 		pass_turn.setText(messages.getString("passB"));
 		undo.setText(messages.getString("undoB"));
 		refresh.setText(messages.getString("refreshB"));
-		manual_c.setText(messages.getString("captureMode"));
+		mouseSelection.setText(messages.getString("captureMode"));
 
 		// panel 23
-		manual.setText(messages.getString("manualModel"));
+		mode.setText(messages.getString("manualModel"));
 
 		// panel 32
 		startG.setText(messages.getString("startGameB"));
@@ -701,12 +700,12 @@ public class BoardFrame extends JFrame {
 	public static void showControlButtons() {
 		try {
 			if (JKemik.settings_t.isAutoCapture()) {
-				manual_c.setVisible(false);
+				mouseSelection.setVisible(false);
 				undo.setVisible(false);
 				// manual.setVisible(true);
 			} else {
 				undo.setVisible(true);
-				manual_c.setVisible(true);
+				mouseSelection.setVisible(true);
 				// manual.setVisible(false);
 			}
 
@@ -717,15 +716,27 @@ public class BoardFrame extends JFrame {
 				pass_turn.setVisible(true);
 				// manual.setVisible(false);
 			}
+			//TODO
 			// if(!JKemik.settings_t.getMemo()[0] &&
 			// !JKemik.settings_t.getMemo()[1]){
 			// manual.setSelected(true);
-			// }
-			manual.setVisible(true);
+			// }			
+			initMouseSelection();
+			mode.setVisible(true);
 			BoardFrame.refresh.setVisible(true);
 		} catch (Exception e) {
 
 		}
+	}
+
+	// TODO should handle this in memo in the future
+	protected static void initMouseSelection() {
+		// JKemik.game.getCurrentP().setSelected(new ArrayList<Point>());
+		BoardFrame.mouseSelection.setSelected(false);
+		JKemik.view.repaint();
+		BoardFrame.grid.drawn = false;
+		Grid.manualc = false;
+		Grid.refresh = true;
 	}
 
 	public static void displayGrid(boolean display) {
@@ -762,13 +773,15 @@ public class BoardFrame extends JFrame {
 	public static void setMessages(ResourceBundle messages) {
 		BoardFrame.messages = messages;
 	}
-	public static void updateBoardStatus(){
-		double totPlots = JKemik.game.getCurrentP().getPloted().size() + JKemik.game.getGuest().getPloted().size();
+
+	public static void updateBoardStatus() {
+		double totPlots = JKemik.game.getCurrentP().getPloted().size()
+				+ JKemik.game.getGuest().getPloted().size();
 		double totalOnBoard = JKemik.settings_t.getGridDimension().positions();
-		double deadBoard = (100*totPlots)/totalOnBoard;
+		double deadBoard = (100 * totPlots) / totalOnBoard;
 		double free = totalOnBoard - totPlots;
 		gridstats.setDeadGridInPercentV(deadBoard);
-		gridstats.setFreeGridInPercentV((free * 100)/totalOnBoard);
+		gridstats.setFreeGridInPercentV((free * 100) / totalOnBoard);
 		gridstats.setDeadCountV("" + totPlots);
 	}
 
@@ -781,6 +794,11 @@ public class BoardFrame extends JFrame {
 			enableGameControlPanel();
 			displayGrid(true);
 			gridstats.init();
+			
+			mouseSelection.setVisible(false);
+			undo.setVisible(false);
+			pass_turn.setVisible(false);
+			mode.setVisible(false);
 		}
 		if (s.isPlayMode()) {
 			Game_status.setText(BoardFrame.messages.getString("endG"));
@@ -817,7 +835,7 @@ public class BoardFrame extends JFrame {
 			pname1, gSizeAndTheme, pname2, p1p2NameHolder;
 	public static GridStatus gridstats;
 	public static JButton refresh, startG, undo, pass_turn;
-	public static JCheckBox manual_c, manual;
+	public static JCheckBox mouseSelection, mode;
 	public static JLabel print_point, Game_status, settings, help, label1,
 			label2, la, lb, lc, AutoCap, AutoPass, Win, exit;
 	public static JKIcon icon;
@@ -831,7 +849,6 @@ public class BoardFrame extends JFrame {
 			BOTTOM_COLOR_P_H = 5;
 	public static Grid grid;
 	public static SettingsPanel settings_p;
-	private static java.awt.Container container;
 	private static final long serialVersionUID = 1L;
 	public static Color THEME_COLOR, CPANEL_COLOR, BOARD_COLOR;
 	public static boolean makingGame;

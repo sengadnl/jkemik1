@@ -10,22 +10,22 @@ import controler.JKemik;
 import view.BoardFrame;
 
 public class ModeToggleListener implements MouseListener {
-	private JCheckBox manual;
+	private JCheckBox mode;
 
-	public ModeToggleListener(JCheckBox manual) {
-		setManual(manual);
+	public ModeToggleListener(JCheckBox mode) {
+		setManual(mode);
 	}
 
 	public JCheckBox getManual() {
-		return manual;
+		return mode;
 	}
 
 	public void setManual(JCheckBox manual) {
-		this.manual = manual;
+		this.mode = manual;
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
-		if (BoardFrame.manual.isSelected()) {
+		if (BoardFrame.mode.isSelected()) {
 			System.out.println("Manual is selected");
 			if (!JKemik.settings_t.isAutoCapture()
 					&& !JKemik.settings_t.isAutoPass()) {
@@ -34,9 +34,6 @@ public class ModeToggleListener implements MouseListener {
 				JKemik.settings_t.setAutoCapture(false);
 				JKemik.settings_t.setAutoPass(false);
 			}
-			
-			BoardFrame.showControlButtons();
-			BoardFrame.updateSettingPanel();
 		} else {
 			System.out.println("Manual is NOT selected");
 			if (!JKemik.settings_t.getMemo()[0]
@@ -46,15 +43,14 @@ public class ModeToggleListener implements MouseListener {
 			}else{
 				JKemik.settings_t.restaureMemo();
 			}
-			BoardFrame.showControlButtons();
-			BoardFrame.updateSettingPanel();
 		}
-
+		BoardFrame.showControlButtons();
+		BoardFrame.updateSettingPanel();
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
 		// manual.setToolTipText("Check to enable temporary manual mode.");
-		manual.setToolTipText(BoardFrame.messages.getString("manualMode"));
+		mode.setToolTipText(BoardFrame.messages.getString("manualMode"));
 	}
 
 	public void mouseExited(MouseEvent arg0) {

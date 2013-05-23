@@ -20,83 +20,90 @@ import view.BoardFrame;
 
 /**
  * @author dalet
- *
+ * 
  */
-public class NewGameListener implements MouseListener{
-	private JLabel label; 
-	public NewGameListener (JLabel label){
+public class NewGameListener implements MouseListener {
+	private JLabel label;
+
+	public NewGameListener(JLabel label) {
 		this.label = label;
 	}
+
 	public void mouseClicked(MouseEvent arg0) {
-		if(JKemik.settings_t.isSystemSetupMode()){
-			int res = JOptionPane.showConfirmDialog(null,"Exit System Preferences?","Warning",
-					JOptionPane.YES_OPTION);
-			if(res == 0){
-				//JKemik.createGame(JKemik.template, JKemik.settings_t);
-				if(BoardFrame.isMakingGame()){
+		if (JKemik.settings_t.isSystemSetupMode()) {
+			int res = JOptionPane.showConfirmDialog(null,
+					BoardFrame.messages.getString("exitSysPrefs"),
+					BoardFrame.messages.getString("warning"),
+					JOptionPane.YES_OPTION);// "Exit System Preferences?","Warning"
+			if (res == 0) {
+				// JKemik.createGame(JKemik.template, JKemik.settings_t);
+				if (BoardFrame.isMakingGame()) {
 					return;
-				}else{
+				} else {
 					BoardFrame.setMakingGame(true);
 				}
 				JKemik.settings_t.setGameSetupMode(true);
 				BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
 				ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
-			}else{
+			} else {
 				return;
 			}
 		}
-		if(BoardFrame.isMakingGame()){
+		if (BoardFrame.isMakingGame()) {
 			return;
-		}else{
+		} else {
 			BoardFrame.setMakingGame(true);
 		}
 		int response = JOptionPane.showConfirmDialog(null,
-				BoardFrame.messages.getString("startNewGame") + "\n", BoardFrame.messages.getString("question"),
+				BoardFrame.messages.getString("startNewGame") + "\n",
+				BoardFrame.messages.getString("question"),
 				JOptionPane.YES_NO_OPTION);
 		if (response == 0) {
 			// set listeners
 			JKemik.settings_t.setGameSetupMode(true);
 			JKemik.game.getCurrentP().setSelected(new ArrayList<Point>());
-
-			ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
-			BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
-
 		} else if (response == 1) {
 			int res = JOptionPane.showConfirmDialog(null,
-					BoardFrame.messages.getString("exitGame") + "\n", BoardFrame.messages.getString("question"),
+					BoardFrame.messages.getString("exitGame") + "\n",
+					BoardFrame.messages.getString("question"),
 					JOptionPane.YES_NO_OPTION);
-			if(res == 0){
-				//JKemik.writeGame();
+			if (res == 0) {
+				// JKemik.writeGame();
 				JKemik.writeSettings();
 				System.exit(0);
 				System.out.println("Exitting ... ");
-			}else{
+			} else {
 				BoardFrame.setMakingGame(false);
 			}
 		}
-		BoardFrame.manual.setVisible(false);
+		JKemik.settings_t.restaureMemo();
+		ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
+		BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
+		BoardFrame.mode.setVisible(false);
 	}
-	
+
 	public void mouseExited(MouseEvent arg0) {
 		Color color;
 		color = Tools.boost(this.label.getForeground());
 		this.label.setForeground(color);
-		//BoardFrame.displayGrid(true);
+		// BoardFrame.displayGrid(true);
 	}
 
 	public void mousePressed(MouseEvent arg0) {
-		
+
 	}
 
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
-	}	
+
+	}
+
 	public void mouseEntered(MouseEvent arg0) {
 		Color color;
 		color = Tools.fade(this.label.getForeground());
 		this.label.setForeground(color);
-		//this.label.setToolTipText("Start new game.");
-		this.label.setToolTipText(BoardFrame.messages.getString("startNewGamelHover"));
+		// this.label.setToolTipText("Start new game.");
+		this.label.setToolTipText(BoardFrame.messages
+				.getString("startNewGamelHover"));
 	}
 }
