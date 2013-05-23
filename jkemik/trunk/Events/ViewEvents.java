@@ -53,9 +53,9 @@ public class ViewEvents {
 			BoardFrame.refresh);
 	public static WindowEvents windowListener = new WindowEvents(JKemik.view);
 	public static ManualSelectionListener manualCaptureButtonListener = new ManualSelectionListener(
-			BoardFrame.manual_c);
+			BoardFrame.mouseSelection);
 	public static ModeToggleListener modeToggleListener = new ModeToggleListener(
-			BoardFrame.manual);
+			BoardFrame.mode);
 	public static HvsHListener hvsh = new HvsHListener(
 			SettingsPanel.humHumButton);
 	public static NetworkGameListener network = new NetworkGameListener(
@@ -78,8 +78,8 @@ public class ViewEvents {
 	}
 
 	public static void modeToggleActionListener() {
-		if (BoardFrame.manual.getComponentListeners().length == 0) {
-			BoardFrame.manual.addMouseListener(modeToggleListener);
+		if (BoardFrame.mode.getComponentListeners().length == 0) {
+			BoardFrame.mode.addMouseListener(modeToggleListener);
 		}
 	}
 
@@ -222,7 +222,7 @@ public class ViewEvents {
 			BoardFrame.grid.removeMouseMotionListener(gridListener);
 
 			// Disable control buttons
-			BoardFrame.manual_c.removeMouseListener(manualCaptureButtonListener);
+			BoardFrame.mouseSelection.removeMouseListener(manualCaptureButtonListener);
 			BoardFrame.undo.removeMouseListener(undoListener);
 			BoardFrame.pass_turn.removeMouseListener(passTurnListener);
 		}
@@ -237,7 +237,7 @@ public class ViewEvents {
 			BoardFrame.startG.removeMouseListener(saveListener);
 
 			// Enable control buttons
-			manualSelectionActionListener(BoardFrame.manual_c);
+			manualSelectionActionListener(BoardFrame.mouseSelection);
 			undoAction(BoardFrame.undo);
 			passTurnAction(BoardFrame.pass_turn);
 			gridMouseAction(BoardFrame.grid);

@@ -52,8 +52,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					game.getCurrentP().setSelected(new ArrayList<Point>());
 					// System.out.println(current.getSelected().size()
 					// + " were selected");
-					BoardFrame.manual_c.setSelected(false);
-					BoardFrame.manual.setVisible(true);
+					BoardFrame.mouseSelection.setSelected(false);
+					BoardFrame.mode.setVisible(true);
 					//if (BoardFrame.manual.isSelected()) {
 						//BoardFrame.manual.setSelected(false);
 //						JKemik.settings_t.restaureMemo();

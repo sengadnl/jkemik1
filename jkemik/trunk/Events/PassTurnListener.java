@@ -31,7 +31,7 @@ public class PassTurnListener implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		if (!BoardFrame.manual_c.isSelected()) {
+		if (!BoardFrame.mouseSelection.isSelected()) {
 			/*
 			 * Pass turn only if mouse was clicked and it's no longer currentP's
 			 * turn
