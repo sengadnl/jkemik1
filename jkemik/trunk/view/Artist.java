@@ -338,8 +338,8 @@ public class Artist {
 			Ellipse2D.Double circle = new Ellipse2D.Double(px
 					- Grid.HALF_DIAMETER, py - Grid.HALF_DIAMETER,
 					Grid.CIRCLE_DIAMETER, Grid.CIRCLE_DIAMETER);
-			// g2.setColor(BoardFrame.BOARD_COLOR);
-			g2.setColor(BoardFrame.THEME_COLOR);
+			g2.setColor(BoardFrame.BOARD_COLOR);
+			//g2.setColor(BoardFrame.THEME_COLOR);
 			g2.fill(circle);
 			g2.draw(circle);
 			g2.setColor(Grid.gridLineCol);
