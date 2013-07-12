@@ -26,6 +26,7 @@ public abstract class AbstractGame implements Serializable {
 		guest = player2;
 		currentP.setTurn(true);
 		deadDots = new ArrayList<Point>();
+		this.status = 0;
 	}
 
 	/**
@@ -60,14 +61,14 @@ public abstract class AbstractGame implements Serializable {
 
 			if (isAreaEmpty(area, guestP)) {
 				currentP.setSelected(new ArrayList<Point>());
-				System.out.println("This Cell is empty..." +
-				"Trying to find another cell ...");
+				System.out.println("This Cell is empty..."
+						+ "Trying to find another cell ...");
 				return null;
 			}
 			System.out.println("Counting captures...");
 			/* Go through all selected dots from recursion */
 			for (Point p : area) {
-				
+
 				if (Tools.containPoint(p, guestP)
 						&& !Tools.containPoint(p, currPlayerCaptures)) {
 
@@ -143,7 +144,7 @@ public abstract class AbstractGame implements Serializable {
 		System.out.println("Constructing a cell...");
 		currentP.getConnectedPoints().addAll(currentP.getSelected());
 		cell = new Cell(currentP.getSelected(), area, captured, null);// Engine.getGame().
-		
+
 		System.out.println("Calculating the score...");
 		calculateScore(cell);
 		return cell;
@@ -162,7 +163,7 @@ public abstract class AbstractGame implements Serializable {
 
 				tempCell = capture(currentPP, squareSize);
 				if (tempCell != null) {
-					//System.out.println("Cell was not NULL");
+					// System.out.println("Cell was not NULL");
 					return true;
 				} else {
 					System.out.println("Starting new search\n--------");
@@ -257,7 +258,7 @@ public abstract class AbstractGame implements Serializable {
 
 	public boolean checkEndGame() {
 		if ((guest.getScore()) >= this.getMaxScore()) {
-
+			this.status = 1;
 			return true;
 		}
 		return false;
@@ -401,6 +402,9 @@ public abstract class AbstractGame implements Serializable {
 	public void calculateScore(Cell c) {
 		evalCell(c);// check for captured cells in this cell
 		currentP.addCell(c);// make last a prisoner
+		if ((currentP.getScore()) >= this.getMaxScore()) {
+			this.status = 1;//End the Game
+		}
 	}
 
 	/**
@@ -526,11 +530,28 @@ public abstract class AbstractGame implements Serializable {
 		AI = aI;
 	}
 
+	/**
+	 * @param status
+	 *            : integer which defines the status of the game
+	 * @return 0: Current, 1: Ended, -1: Inactive
+	 */
+	public int getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param None
+	 * @return 0: Current, 1: Ended, -1: Suspended
+	 */
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	/* Connecting dots utilities */
 	public boolean AI = false;
 	public boolean embuche_on = false;
 	private Cell tempCell = null;
-
+	private int status = 0;
 	public Point lastp = new Point(553355, 7798979);
 	private int maxScore = 2;
 
