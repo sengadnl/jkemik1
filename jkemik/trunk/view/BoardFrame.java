@@ -545,7 +545,7 @@ public class BoardFrame extends JFrame {
 		AutoPass.setForeground(Color.WHITE);
 		Win.setForeground(Color.WHITE);
 
-		Grid.setGridLineCol(Tools.fade(BoardFrame.THEME_COLOR));
+		Grid.setGridLineCol(Tools.fade(BoardFrame.BOARD_COLOR, 30));
 		top_container.setBackground(BoardFrame.THEME_COLOR);
 		logo_panel.setBackground(BoardFrame.THEME_COLOR);
 		top_middle.setBackground(BoardFrame.THEME_COLOR);
@@ -641,7 +641,7 @@ public class BoardFrame extends JFrame {
 					40));
 			pColor1.setArrayColors(Globals.CLASSIC_COLOR);
 			pColor2.setArrayColors(Globals.CLASSIC_COLOR);
-			pColor1.rotateColor(1);
+			//pColor1.rotateColor(1);
 			JKemik.template.setP1_c(Globals.CLASSIC_COLOR[1]);
 			JKemik.template.setP2_c(Globals.CLASSIC_COLOR[0]);
 			pColor1.setBackground(Globals.CLASSIC_COLOR[1]);
