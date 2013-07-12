@@ -809,7 +809,7 @@ public class BoardFrame extends JFrame {
 		}
 		if (s.isPlayMode()) {
 			Game_status.setText(BoardFrame.messages.getString("endG"));
-			Game_status.setForeground(Color.RED);
+			//Game_status.setForeground(Color.RED);
 			disableGameControlPanel();
 			showControlButtons();
 			print_point.setText("" + (new Point(0, 0)).toString());
