@@ -61,36 +61,7 @@ public class Tools {
 		return new Dimension(w, h);
 	}
 
-	// public static ArrayList<GridDimension> boardSizes(double framew,
-	// double frameh, double grid_percent) {
-	// ArrayList<GridDimension> boards = new ArrayList<GridDimension>();
-	//
-	// // calculate board container dimension (pixels)
-	// int w_ini = (int) (framew * grid_percent);
-	// int h_ini = (int) (frameh * grid_percent);
-	// Dimension gcontainer = new Dimension(w_ini, h_ini);
-	// //boards.add(gcontainer);
-	// System.out.println("" + gcontainer);
-	//
-	// // Get list of square sizes
-	// ArrayList<Integer> sqrSizes = sqrtSizeGCD(new Dimension(w_ini, h_ini),
-	// Globals.SQUARE_MIN_SIZE);
-	//
-	// // Generate board list of board dimensions based on square sizes
-	// int index = 0;
-	// for (int temp : sqrSizes) {
-	// // Skip board container dimensions
-	// if (index == 0) {
-	// index++;
-	// continue;
-	// }
-	// System.out.print("SQR Size:" + temp + " -> ");
-	// boards.add(new GridDimension(bSize(gcontainer, temp),temp));
-	// }
-	// System.out.println("Possible board sizes: " + boards);
-	// // possible grid sizes (sqrs)
-	// return boards;
-	// }
+	
 
 	/**
 	 * @param framew
@@ -275,6 +246,42 @@ public class Tools {
 
 		return new Color((int) r, (int) g, (int) b);
 	}
+	/**
+	 * @param Color and the percentage to which it should faded. This percentage is a whole number
+	 * @return faded color
+	 */
+	public static Color fade(Color c, double percent) {
+		double r = c.getRed();
+		double g = c.getGreen();
+		double b = c.getBlue();
+		try {
+			r = r - (r * (percent/100));
+			g = g - (g * (percent/100));
+			b = b - (b * (percent/100));
+			if (r < 0) {
+				r = 0;
+			}
+			if (g < 0) {
+				g = 0;
+			}
+			if (b < 0) {
+				b = 0;
+			}
+//			if (r < 0) {
+//				r = 0;
+//			}
+//			if (g < 0) {
+//				g = 0;
+//			}
+//			if (b < 0) {
+//				b = 0;
+//			}
+
+		} catch (Exception e) {
+			System.err.println("In Tools.boost: " + e.getMessage());
+		}
+		return new Color((int) r, (int) g, (int) b);
+	}
 
 	/**
 	 * boosts color
@@ -309,9 +316,9 @@ public class Tools {
 		double g = c.getGreen();
 		double b = c.getBlue();
 		try {
-			r = r + percent;
-			g = g + percent;
-			b = b + percent;
+			r = r + (r * (percent/100));
+			g = g + (g * (percent/100));
+			b = b + (b * (percent/100));
 			if (r > 255) {
 				r = 255;
 			}
@@ -321,15 +328,15 @@ public class Tools {
 			if (b > 255) {
 				b = 255;
 			}
-			if (r < 0) {
-				r = 0;
-			}
-			if (g < 0) {
-				g = 0;
-			}
-			if (b < 0) {
-				b = 0;
-			}
+//			if (r < 0) {
+//				r = 0;
+//			}
+//			if (g < 0) {
+//				g = 0;
+//			}
+//			if (b < 0) {
+//				b = 0;
+//			}
 
 		} catch (Exception e) {
 			System.err.println("In Tools.boost: " + e.getMessage());
