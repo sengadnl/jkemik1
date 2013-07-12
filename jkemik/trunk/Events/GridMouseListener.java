@@ -142,34 +142,39 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			Grid.mouseMove = true;
 		}
 		// }
-		if (JKemik.game.checkEndGame()) {
+		//if (JKemik.game.checkEndGame()) {
+		if (JKemik.game.getStatus() == 1) {
 			JOptionPane.showMessageDialog(
 					null,
-					"" + JKemik.game.getGuest().getName()
+					"" + JKemik.game.getGuest().getName() + " "
 							+ BoardFrame.messages.getString("winM"), " Win",
 					JOptionPane.OK_OPTION);
-			BoardFrame.middle_container.repaint();
-			BoardFrame.pColor1.addMouseListener(ViewEvents.p1Listener);
-			BoardFrame.pColor2.addMouseListener(ViewEvents.p2Listener);
-			BoardFrame.label1.addMouseListener(ViewEvents.n1Listener);
-			BoardFrame.label2.addMouseListener(ViewEvents.n2Listener);
-			BoardFrame.l1.addMouseListener(ViewEvents.gridSizeListener);
-			BoardFrame.l2.addMouseListener(ViewEvents.gameThemeListener);
-			BoardFrame.startG.addMouseListener(ViewEvents.saveListener);
-			BoardFrame.settings.addMouseListener(ViewEvents.sysPrefsListener);
-			BoardFrame.grid.removeMouseListener(ViewEvents.gridListener);
-			BoardFrame.grid.removeMouseMotionListener(ViewEvents.gridListener);
-			BoardFrame.enableGameControlPanel();
+			JKemik.game.setStatus(-1);
+			JKemik.settings_t.setGameSetupMode(true);
+			BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
+			ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
+			//BoardFrame.middle_container.repaint();
+//			BoardFrame.pColor1.addMouseListener(ViewEvents.p1Listener);
+//			BoardFrame.pColor2.addMouseListener(ViewEvents.p2Listener);
+//			BoardFrame.label1.addMouseListener(ViewEvents.n1Listener);
+//			BoardFrame.label2.addMouseListener(ViewEvents.n2Listener);
+//			BoardFrame.l1.addMouseListener(ViewEvents.gridSizeListener);
+//			BoardFrame.l2.addMouseListener(ViewEvents.gameThemeListener);
+//			BoardFrame.startG.addMouseListener(ViewEvents.saveListener);
+//			BoardFrame.settings.addMouseListener(ViewEvents.sysPrefsListener);
+//			BoardFrame.grid.removeMouseListener(ViewEvents.gridListener);
+//			BoardFrame.grid.removeMouseMotionListener(ViewEvents.gridListener);
+//			BoardFrame.enableGameControlPanel();
 
 			// Reset game exit label
 			BoardFrame.Game_status.setText("NEW");
 			BoardFrame.Game_status.setForeground(Color.GREEN);
 
-			BoardFrame.boostLabel(BoardFrame.settings, Color.WHITE,
-					BoardFrame.THEME_COLOR);
+//			BoardFrame.boostLabel(BoardFrame.settings, Color.WHITE,
+//					BoardFrame.THEME_COLOR);
 
-			BoardFrame.grid.drawn = false;
-			BoardFrame.grid.repaint();
+//			BoardFrame.grid.drawn = false;
+//			BoardFrame.grid.repaint();
 		}
 		BoardFrame.grid.repaint();
 		// }

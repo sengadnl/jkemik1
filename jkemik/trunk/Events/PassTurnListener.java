@@ -32,6 +32,8 @@ public class PassTurnListener implements MouseListener {
 
 	public void mouseClicked(MouseEvent e) {
 		if (!BoardFrame.mouseSelection.isSelected()) {
+			System.out.println("" + JKemik.game.getCurrentP().getName()+ " > "+
+					"Play Flag: " + JKemik.game.getCurrentP().getPlay_flag());
 			/*
 			 * Pass turn only if mouse was clicked and it's no longer currentP's
 			 * turn
