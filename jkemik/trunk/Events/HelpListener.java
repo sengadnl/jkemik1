@@ -3,16 +3,18 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JLabel;
+import javax.swing.JButton;
+//import javax.swing.JLabel;
 
 import utilities.Manual;
 import utilities.Tools;
 import view.BoardFrame;
 
 public class HelpListener implements MouseListener {
-	private JLabel label;
-
-	public HelpListener(JLabel label) {
+	//private JLabel label;
+	private JButton label; 
+//	public HelpListener(JLabel label) {
+	public HelpListener(JButton label) {
 		this.label = label;
 	}
 

@@ -6,7 +6,9 @@ package Events;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JLabel;
+
+import javax.swing.JButton;
+//import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import controler.JKemik;
@@ -19,8 +21,10 @@ import view.BoardFrame;
  *
  */
 public class ExitListener implements MouseListener{
-	private JLabel label; 
-	public ExitListener (JLabel label){
+	//private JLabel label; 
+	private JButton label; 
+//	public ExitListener (JLabel label){
+	public ExitListener (JButton label){
 		this.label = label;
 	}
 	public void mouseClicked(MouseEvent arg0) {
