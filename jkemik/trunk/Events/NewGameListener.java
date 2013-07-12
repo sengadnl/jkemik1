@@ -8,7 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import controler.JKemik;
@@ -23,9 +23,9 @@ import view.BoardFrame;
  * 
  */
 public class NewGameListener implements MouseListener {
-	private JLabel label;
+	private JButton label;
 
-	public NewGameListener(JLabel label) {
+	public NewGameListener(JButton label) {
 		this.label = label;
 	}
 
@@ -36,7 +36,6 @@ public class NewGameListener implements MouseListener {
 					BoardFrame.messages.getString("warning"),
 					JOptionPane.YES_OPTION);// "Exit System Preferences?","Warning"
 			if (res == 0) {
-				// JKemik.createGame(JKemik.template, JKemik.settings_t);
 				if (BoardFrame.isMakingGame()) {
 					return;
 				} else {

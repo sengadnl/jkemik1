@@ -3,7 +3,9 @@ package Events;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JLabel;
+
+import javax.swing.JButton;
+//import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import controler.JKemik;
@@ -13,9 +15,10 @@ import utilities.Tools;
 import view.BoardFrame;
 
 public class SysPrefsListener implements MouseListener {
-	private JLabel label;
-
-	public SysPrefsListener(JLabel label) {
+	//private JLabel label;
+	private JButton label; 
+//	public SysPrefsListener(JLabel label) {
+	public SysPrefsListener(JButton label) {
 		this.label = label;
 	}
 
