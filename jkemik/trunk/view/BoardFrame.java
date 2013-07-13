@@ -355,8 +355,8 @@ public class BoardFrame extends JFrame {
 		undo.setForeground(fg);
 		refresh.setBackground(bg);
 		refresh.setForeground(fg);
-		startG.setBackground(new Color(220,175,60));
-		startG.setForeground(new Color(255,250,200));
+		startG.setBackground(new Color(255,33,00));
+		startG.setForeground(new Color(255,230,200));
 	}
 
 	public static void decorateLabelss(Color fg) {
@@ -543,7 +543,7 @@ public class BoardFrame extends JFrame {
 		AutoPass.setForeground(Color.WHITE);
 		Win.setForeground(Color.WHITE);
 
-		Grid.setGridLineCol(Tools.fade(BoardFrame.BOARD_COLOR, 30));
+		Grid.setGridLineCol(Tools.fade(BoardFrame.BOARD_COLOR, 35));
 		top_container.setBackground(BoardFrame.THEME_COLOR);
 		logo_panel.setBackground(BoardFrame.THEME_COLOR);
 		top_middle.setBackground(BoardFrame.THEME_COLOR);
@@ -551,7 +551,7 @@ public class BoardFrame extends JFrame {
 
 		middle_container.setBackground(BoardFrame.THEME_COLOR);
 		status_panel_container.setBackground(BoardFrame.THEME_COLOR);
-		grid_container.setBackground(Tools.fade(BoardFrame.BOARD_COLOR,15));
+		grid_container.setBackground(Tools.fade(BoardFrame.BOARD_COLOR,20));
 		west_blank_panel.setBackground(BoardFrame.THEME_COLOR);
 		settings_p.setBackground(BoardFrame.THEME_COLOR);
 
@@ -564,8 +564,6 @@ public class BoardFrame extends JFrame {
 		progressB.setBackground(BoardFrame.THEME_COLOR);
 		progressB.setForeground(BOARD_COLOR);
 
-		// blank1.setBackground(BOARD_COLOR);
-		// blank2.setBackground(BOARD_COLOR);
 		p1p2NameHolder.setBackground(BoardFrame.THEME_COLOR);
 		setupP.setBackground(BoardFrame.CPANEL_COLOR);
 		pname1.setBackground(Tools.fade(BoardFrame.BOARD_COLOR));

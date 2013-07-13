@@ -65,13 +65,13 @@ public class Artist {
 	}
 
 	public static void drawGrid(Graphics2D g2, GridDimension dimension,
-			int squareFadeVariant, int gridLineStroke) {
+			int squareFadeVariant, int gridLineStroke, Color c) {
 		Dimension d = dimension.getPixelDimension();
 		int Width = (int) d.getWidth(), Height = (int) d.getHeight(), squareSize = dimension
 				.getSqrSize();
-		Color c = Tools.fade(BoardFrame.BOARD_COLOR,20);
+		
 		int sqrLineFadePercent = 50;
-		int gridLineFadePercent = 30;
+		int gridLineFadePercent = 35;
 		int currentColPos = 0;
 		int currentRowPos = 0;
 		int index = 0;
