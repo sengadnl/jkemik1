@@ -20,7 +20,7 @@ public class Grid extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static Graphics2D g2;
-	//private JKIcon board = new JKIcon("media/board1.PNG", "");
+	// private JKIcon board = new JKIcon("media/board1.PNG", "");
 	protected static int gridLineStroke = 2, squareFadeVariant = 4,
 			CURSOR_VARIANT_STROKE = 6;
 	public static double CIRCLE_DIAMETER = 10.0, HALF_DIAMETER = 5.0,
@@ -48,9 +48,8 @@ public class Grid extends JPanel {
 		setPreferredSize(dimension.getPixelDimension());
 		System.out.println("Grid size: " + dimension.getPixelDimension());
 		setDimension(dimension);
-		//getRootPane().add(board.createIcon());
+		// getRootPane().add(board.createIcon());
 	}
-	
 
 	public static Grid getInstance(GridDimension dimension) {
 		if (instance == null) {
@@ -64,10 +63,10 @@ public class Grid extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
-		//super.paintComponent(g2);
+		// super.paintComponent(g2);
 		Grid.g2 = (Graphics2D) g;
 		AbstractGame game = JKemik.game;
-		
+
 		try {
 			Artist.drawCursor(new Point(hl_x, hl_y), gridLineStroke,
 					Grid.half_squareSize, gridLineCol, g2);
@@ -126,8 +125,9 @@ public class Grid extends JPanel {
 			}
 
 			if (!this.drawn) {
-				Artist.drawGrid(g2, Grid.dimension, Grid.squareFadeVariant, Grid.gridLineStroke);
-				
+				Artist.drawGrid(g2, Grid.dimension, Grid.squareFadeVariant,
+						Grid.gridLineStroke, BoardFrame.BOARD_COLOR);
+
 				if (Grid.refresh) {
 					Artist.drawGame(game, g2);
 					Grid.refresh = false;
@@ -207,7 +207,7 @@ public class Grid extends JPanel {
 
 		deltay = (int) (ycoor % square);
 		yc = square - deltay;
-	
+
 		if (deltax > xc) {
 			x = xcoor + xc;
 		} else {
