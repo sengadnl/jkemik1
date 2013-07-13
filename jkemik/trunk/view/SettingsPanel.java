@@ -32,6 +32,8 @@ public class SettingsPanel extends JPanel{
 	protected static int COUNTER = 1;
 	protected static int MAX_VAL = 33;
 	public static JButton save;
+	public static JButton cancel;
+	
 	//private static JPanel l1;
 	private static JPanel l2;
 	private static JPanel l3;
@@ -129,6 +131,7 @@ public class SettingsPanel extends JPanel{
 		
 		//JKIcon icon = new JKIcon("media/jkemik-small.png", "");
 		save = new JButton("Done");
+		cancel = new JButton("CANCEL");
 //		l1 = new JPanel();
 //		l1.setBackground(BoardFrame.BOARD_COLOR);
 		l2 = new JPanel();
@@ -169,6 +172,7 @@ public class SettingsPanel extends JPanel{
 		l2.add(languageList);
 		createRadioButtons();
 		buttonsHolder.add(save);
+		buttonsHolder.add(cancel);
 		l3.add(buttonsHolder, BorderLayout.SOUTH);
 		
 	}
@@ -280,6 +284,8 @@ public class SettingsPanel extends JPanel{
 	public static void decoratebuttons(Color bg, Color fg) {
 		save.setBackground(bg);
 		save.setForeground(fg);
+		cancel.setBackground(bg);
+		cancel.setForeground(fg);
 	}
 
 //	public static void main(String[] args) {
