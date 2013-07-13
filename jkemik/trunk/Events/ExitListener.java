@@ -13,6 +13,7 @@ import controler.JKemik;
 import utilities.Globals;
 import utilities.Tools;
 import view.BoardFrame;
+import view.Grid;
 
 
 /**
@@ -48,7 +49,9 @@ public class ExitListener implements MouseListener{
 	
 	public void mouseExited(MouseEvent arg0) {
 		this.label.setForeground(Globals.EXIT_BUTTON_FGCOLOR);
-		BoardFrame.displayGrid(true);
+		if (!JKemik.settings_t.isSystemSetupMode()) {
+			Grid.refresh = true;
+		}
 	}
 
 	public void mousePressed(MouseEvent arg0) {
