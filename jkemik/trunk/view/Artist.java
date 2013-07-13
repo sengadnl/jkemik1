@@ -69,7 +69,9 @@ public class Artist {
 		Dimension d = dimension.getPixelDimension();
 		int Width = (int) d.getWidth(), Height = (int) d.getHeight(), squareSize = dimension
 				.getSqrSize();
-		Color c = Tools.fade(BoardFrame.BOARD_COLOR,5);
+		Color c = Tools.fade(BoardFrame.BOARD_COLOR,20);
+		int sqrLineFadePercent = 50;
+		int gridLineFadePercent = 30;
 		int currentColPos = 0;
 		int currentRowPos = 0;
 		int index = 0;
@@ -81,9 +83,9 @@ public class Artist {
 				Point from = new Point(squareSize * index, 0);
 				Point to = new Point(squareSize * index, Height);
 				Artist.drawLine(from, to, squareFadeVariant,
-						Tools.fade(c,30), g2);
+						Tools.fade(c,sqrLineFadePercent), g2);
 				Artist.drawLine(from, to, gridLineStroke,
-						Tools.fade(c,30), g2);
+						Tools.fade(c,sqrLineFadePercent), g2);
 				currentColPos += squareSize;
 			}
 			// draw rows
@@ -92,9 +94,9 @@ public class Artist {
 				Point from = new Point(0, squareSize * index);
 				Point to = new Point(Width, squareSize * index);
 				Artist.drawLine(from, to, squareFadeVariant,
-						Tools.fade(c,30), g2);
+						Tools.fade(c,sqrLineFadePercent), g2);
 				Artist.drawLine(from, to, gridLineStroke,
-						Tools.fade(c,30), g2);
+						Tools.fade(c,sqrLineFadePercent), g2);
 				currentRowPos += squareSize;
 			}
 			index++;
@@ -108,7 +110,7 @@ public class Artist {
 			if (currentColPos2 <= Width) {
 				Point from = new Point(squareSize * index2, 0);
 				Point to = new Point(squareSize * index2, Height);
-				Artist.drawLine(from, to, gridLineStroke,Tools.fade(c,20) , g2);
+				Artist.drawLine(from, to, gridLineStroke,Tools.fade(c,gridLineFadePercent) , g2);
 				currentColPos2 += squareSize;
 			}
 			// draw rows
@@ -116,7 +118,7 @@ public class Artist {
 
 				Point from = new Point(0, squareSize * index2);
 				Point to = new Point(Width, squareSize * index2);
-				Artist.drawLine(from, to, gridLineStroke,Tools.fade(c,20), g2);
+				Artist.drawLine(from, to, gridLineStroke,Tools.fade(c,gridLineFadePercent), g2);
 				currentRowPos2 += squareSize;
 			}
 			index2++;
