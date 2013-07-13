@@ -2,8 +2,6 @@
  * 
  */
 package Events;
-
-import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -15,8 +13,10 @@ import controler.JKemik;
 
 import api.Point;
 
+import utilities.Globals;
 import utilities.Tools;
 import view.BoardFrame;
+import view.Grid;
 
 /**
  * @author dalet
@@ -82,10 +82,8 @@ public class NewGameListener implements MouseListener {
 	}
 
 	public void mouseExited(MouseEvent arg0) {
-		Color color;
-		color = Tools.boost(this.label.getForeground());
-		this.label.setForeground(color);
-		// BoardFrame.displayGrid(true);
+		this.label.setForeground(Globals.NEWG_BUTTON_FRCOLOR);
+		Grid.refresh = true;
 	}
 
 	public void mousePressed(MouseEvent arg0) {
@@ -98,9 +96,7 @@ public class NewGameListener implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
-		Color color;
-		color = Tools.fade(this.label.getForeground());
-		this.label.setForeground(color);
+		this.label.setForeground(Tools.fade(Globals.NEWG_BUTTON_FRCOLOR,20));
 		// this.label.setToolTipText("Start new game.");
 		this.label.setToolTipText(BoardFrame.messages
 				.getString("startNewGamelHover"));

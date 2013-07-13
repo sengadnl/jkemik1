@@ -2,8 +2,6 @@
  * 
  */
 package Events;
-
-import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -12,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import controler.JKemik;
+import utilities.Globals;
 import utilities.Tools;
 import view.BoardFrame;
 
@@ -48,10 +47,8 @@ public class ExitListener implements MouseListener{
 	}
 	
 	public void mouseExited(MouseEvent arg0) {
-		Color color;
-		color = Tools.boost(this.label.getForeground());
-		this.label.setForeground(color);
-		//BoardFrame.displayGrid(true);
+		this.label.setForeground(Globals.EXIT_BUTTON_FGCOLOR);
+		BoardFrame.displayGrid(true);
 	}
 
 	public void mousePressed(MouseEvent arg0) {
@@ -63,9 +60,7 @@ public class ExitListener implements MouseListener{
 		
 	}	
 	public void mouseEntered(MouseEvent arg0) {
-		Color color;
-		color = Tools.fade(this.label.getForeground());
-		this.label.setForeground(color);
+		this.label.setForeground(Tools.fade(Globals.EXIT_BUTTON_FGCOLOR,20));
 		//this.label.setToolTipText("Exit game");
 		this.label.setToolTipText(BoardFrame.messages.getString("exitGameHover"));
 	}

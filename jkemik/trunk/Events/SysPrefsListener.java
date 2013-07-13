@@ -1,6 +1,4 @@
 package Events;
-
-import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -10,9 +8,11 @@ import javax.swing.JOptionPane;
 
 import controler.JKemik;
 
+import utilities.Globals;
 import utilities.Tools;
 //import view.BoardFrame;
 import view.BoardFrame;
+import view.Grid;
 
 public class SysPrefsListener implements MouseListener {
 	//private JLabel label;
@@ -43,10 +43,9 @@ public class SysPrefsListener implements MouseListener {
 	}
 
 	public void mouseExited(MouseEvent arg0) {
-		Color color;
-		color = Tools.boost(this.label.getForeground());
-		this.label.setForeground(color);
-		// BoardFrame.displayGrid(true);
+		
+		this.label.setForeground(Globals.SYSPREFS_BUTTON_FGCOLOR);
+		Grid.refresh = true;
 	}
 
 	public void mousePressed(MouseEvent arg0) {
@@ -58,9 +57,7 @@ public class SysPrefsListener implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
-		Color color;
-		color = Tools.fade(this.label.getForeground());
-		this.label.setForeground(color);
+		this.label.setForeground(Tools.fade(Globals.SYSPREFS_BUTTON_FGCOLOR,20));
 		// this.label.setToolTipText("System Preferences.");
 		this.label
 				.setToolTipText(BoardFrame.messages.getString("sysPrefHover"));

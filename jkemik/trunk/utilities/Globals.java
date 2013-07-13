@@ -50,6 +50,16 @@ public class Globals {
 		new Color(97, 237, 135),
 		new Color(247, 174, 101),
 		new Color(170, 85, 173)};
+	public static final Color EXIT_BUTTON_BGCOLOR = new Color(180, 50, 50);
+	public static final Color SYSPREFS_BUTTON_BGCOLOR = new Color(160, 29, 100);
+	public static final Color HELP_BUTTON_BGCOLOR = new Color(120, 120, 120);
+	public static final Color NEWG_BUTTON_BGCOLOR = new Color(29, 180, 100);
+	
+	public static final Color EXIT_BUTTON_FGCOLOR = new Color(255, 200, 200);
+	public static final Color SYSPREFS_BUTTON_FGCOLOR = new Color(255, 150, 245);
+	public static final Color HELP_BUTTON_FRCOLOR = new Color(255, 255, 255);
+	public static final Color NEWG_BUTTON_FRCOLOR = new Color(200, 255, 200);
+	
 	public static final String[] code = {"en","fr","de"};
 	public static final String[] laguageNames = {"ENGLISH","FRANCAIS","DEUTSCH"};
 	
