@@ -5,14 +5,11 @@ package Events;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import controler.JKemik;
-
-import api.Point;
 
 import utilities.Globals;
 import utilities.Tools;
@@ -61,7 +58,8 @@ public class NewGameListener implements MouseListener {
 		if (response == 0) {
 			// set listeners
 			JKemik.settings_t.setGameSetupMode(true);
-			JKemik.game.getCurrentP().setSelected(new ArrayList<Point>());
+			JKemik.createGame( JKemik.template,JKemik.settings_t);
+			//JKemik.game.getCurrentP().setSelected(new ArrayList<Point>());
 		} else if (response == 1) {
 			int res = JOptionPane.showConfirmDialog(null,
 					BoardFrame.messages.getString("exitGame") + "\n",
@@ -95,7 +93,6 @@ public class NewGameListener implements MouseListener {
 
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public void mouseEntered(MouseEvent arg0) {

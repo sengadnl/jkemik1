@@ -149,7 +149,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					"" + JKemik.game.getGuest().getName() + " "
 							+ BoardFrame.messages.getString("winM"), " Win",
 					JOptionPane.OK_OPTION);
-			JKemik.game.setStatus(-1);
+			JKemik.game.setStatus(1);
+			JKemik.createGame( JKemik.template,JKemik.settings_t);
 			JKemik.settings_t.setGameSetupMode(true);
 			BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
 			ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
