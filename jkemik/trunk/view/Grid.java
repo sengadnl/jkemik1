@@ -37,7 +37,6 @@ public class Grid extends JPanel {
 
 	public static double Columns = 0.0, rows = 0.0;
 	public static double x = 0, y = 0, hl_x = 0, hl_y = 0;
-	public static Point selectedP = new Point(0, 0);
 	public static Cell cell = null;
 
 	private static volatile Grid instance = null;
@@ -68,55 +67,24 @@ public class Grid extends JPanel {
 		AbstractGame game = JKemik.game;
 
 		try {
-			Artist.drawCursor(new Point(hl_x, hl_y), gridLineStroke,
+			Artist.drawCursor(new Point(hl_x, hl_y,0), gridLineStroke,
 					Grid.half_squareSize, gridLineCol, g2);
 			highLightDot(game.getCurrentP().getColor());
 
 			if (mouseclicked && plotPoint) {
-				Artist.drawCircle(new Point(x, y), game.getCurrentP()
+				Artist.drawCircle(new Point(x, y,game.getCurrentP().getId()), game.getCurrentP()
 						.getColor(), Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 						gridLineStroke, g2);
 				plotPoint = false;
 				mouseclicked = false;
 			}
 
-			if (selectPoint && game.getCurrentP().getSelected().size() >= 1) {
-				Color fade = game.getCurrentP().getFadedColor();
-				Artist.drawLine(game.getLastp(), selectedP, gridLineStroke
-						+ CURSOR_VARIANT_STROKE, fade, g2);
-				Artist.drawCircle(game.getLastp(), fade, Grid.HALF_DIAMETER,
-						Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
-				Artist.drawCursor(game.getLastp(), gridLineStroke,
-						Grid.half_squareSize, gridLineCol, g2);
-				Artist.drawCircle(selectedP, fade, Grid.HALF_DIAMETER,
-						Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
-				Artist.drawCursor(selectedP, gridLineStroke,
-						Grid.half_squareSize, gridLineCol, g2);
-				game.setLastp(selectedP);
-				g2.setColor(fade);
-				selectPoint = false;
-			}
 
-			if (Artist.drawCell(cell, g2)) {
-				cell = null;
-			}
+//			if (Artist.drawCell(cell, g2)) {
+//				cell = null;
+//			}
 
-			if (undo) {
-				if (manualc) {
-					if (game.getCurrentP().getSelected().size() >= 1) {
-						Artist.unDrawSelection(
-								game.getCurrentP().getSelected(), g2);//
-					} else {
-
-					}
-				} else {
-					if (game.undo()) {
-						Artist.unDraw(game.getLastp(), g2);
-					}
-				}
-				undo = false;
-			}
-
+			
 			//
 			if (JKemik.settings_t.isAutoPass()
 					&& game.getCurrentP().getPlay_flag() == 1) {
@@ -128,10 +96,10 @@ public class Grid extends JPanel {
 				Artist.drawGrid(g2, Grid.dimension, Grid.squareFadeVariant,
 						Grid.gridLineStroke, BoardFrame.BOARD_COLOR);
 
-				if (Grid.refresh) {
-					Artist.drawGame(game, g2);
-					Grid.refresh = false;
-				}
+//				if (Grid.refresh) {
+//					Artist.drawGame(game, g2);
+//					Grid.refresh = false;
+//				}
 				this.drawn = true;
 			}
 		} catch (Exception e) {
@@ -143,8 +111,8 @@ public class Grid extends JPanel {
 	public void highLightDot(Color c) {
 		if (mouseMove) {
 			BoardFrame.print_point.setText(""
-					+ (new Point(hl_x, hl_y)).toString());
-			Artist.drawCursor(new Point(x, y), gridLineStroke,
+					+ (new Point(hl_x, hl_y, JKemik.game.getCurrentP().getId())).toString());
+			Artist.drawCursor(new Point(x, y,JKemik.game.getCurrentP().getId()), gridLineStroke,
 					Grid.half_squareSize, JKemik.game.getCurrentP().getColor(),
 					g2);
 
@@ -168,16 +136,16 @@ public class Grid extends JPanel {
 	}
 
 	public static Point makeDrawable(double x, double y) {
-		return new Point(Grid.x - HALF_DIAMETER, Grid.y - HALF_DIAMETER);
+		return new Point(Grid.x - HALF_DIAMETER, Grid.y - HALF_DIAMETER,JKemik.game.getCurrentP().getId());
 	}
 
 	public Point makeDrawable(Point p) {
-		return new Point(p.getXC() - HALF_DIAMETER, p.getYC() - HALF_DIAMETER);
+		return new Point(p.getXC() - HALF_DIAMETER, p.getYC() - HALF_DIAMETER, JKemik.game.getCurrentP().getId());
 	}
 
 	public static Point undoMakeDrawable(Point drawable) {
 		return new Point(drawable.getXC() + HALF_DIAMETER, drawable.getYC()
-				+ HALF_DIAMETER);
+				+ HALF_DIAMETER, JKemik.game.getCurrentP().getId());
 	}
 
 	public void switchTurn() {
@@ -287,14 +255,6 @@ public class Grid extends JPanel {
 
 	public static void setSelectPoint(boolean selectPoint) {
 		Grid.selectPoint = selectPoint;
-	}
-
-	public static Point getSelectedP() {
-		return selectedP;
-	}
-
-	public static void setSelectedP(Point selectedP) {
-		Grid.selectedP = selectedP;
 	}
 
 	public void repaintGrid() {

@@ -3,6 +3,7 @@ package api;
 import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
+
 import utilities.Tools;
 
 /**
@@ -25,77 +26,58 @@ public abstract class AbstractPlayer implements Serializable {
 		this.name = name;
 		this.score = 0.0;
 		this.CapturedCells = new ArrayList<Cell>();
-		this.plotted = new ArrayList<Point>();
 		this.Cells = new ArrayList<Cell>();
-		this.capturedDots = new ArrayList<Point>();
-		this.connectedPoints = new ArrayList<Point>();
-		this.selected = new ArrayList<Point>();
 	}
 
 	/**
-	 * Finds a capture by following a path that starts at Point "o" location and
-	 * ends at "o" as well. Recursively checks every adjacent Point to find a
-	 * valid path. Reverts when a dead end has been reached. a valid capture
-	 * must have at least 4 Point Objects.
-	 * 
-	 * @param o
-	 *            Point where to start
-	 * @param squareSize
-	 *            integer length of the sides of a grid square
-	 * @return true when a valid capture was found, and false otherwise.
-	 * @throws InterruptedException
-	 */
-	public boolean buildPath(Point o, double squareSize) {
-		if (this.successful) {
-			return true;
-		}
-		/* Get all adjacent Points */
-		Point[] box = Tools.boxCoord(o, squareSize);
-		/* Find the point in this box that belongs to the path */
-		for (int i = 0; i < box.length; i++) {
-			/* Stop recursive call here if a path was already found */
-			if (this.successful) {
-				return true;
-			}
-			if (AbstractGame.isPath(box[i])) {// if this Point is path
-				if (box[i].compareTo(this.from) != 0) {// is it == to previous
-					if (!Tools.containPoint(o, this.selected)) {
-						/* Add o if it hasn't been visited */
-						this.selected.add(o);
-						this.from = o; /* Move to the next Point */
-						if (box[i].compareTo(this.origin) == 0
-								&& this.selected.size() > 3) {
-							this.successful = true;/* Set recursive call stop */
-							this.origin = null;/* Reset the origin */
-							System.out.println("Found cell...");
-							return true;/* Capture was found */
-						}
-						/* This adjacent Point was a dead end */
-						if (!buildPath(box[i], squareSize)) {
-							this.selected.remove(o);
-							continue;
-						}
-					}
-				}
-			}
-		}
-		return false;/* No path */
-	}
-
-	/**
-	 * @return the selected
-	 */
-	public ArrayList<Point> getSelected() {
-		return this.selected;
-	}
-
-	/**
-	 * @param selected
-	 *            the selected to set
-	 */
-	public void setSelected(ArrayList<Point> selected) {
-		this.selected = selected;
-	}
+     * Finds a capture by following a path that starts at Point "o" location and
+     * ends at "o" as well. Recursively checks every adjacent Point to find a
+     * valid path. Reverts when a dead end has been reached. a valid capture
+     * must have at least 4 Point Objects.
+     * 
+     * @param o
+     *            Point where to start
+     * @param squareSize
+     *            integer length of the sides of a grid square
+     * @return true when a valid capture was found, and false otherwise.
+     * @throws InterruptedException
+     */
+    public boolean buildPath(Point o, double squareSize) {
+            if (this.successful) {
+                    return true;
+            }
+            /* Get all adjacent Points */
+            Point[] box = Tools.boxCoord(o, squareSize);
+            /* Find the point in this box that belongs to the path */
+            for (int i = 0; i < box.length; i++) {
+                    /* Stop recursive call here if a path was already found */
+                    if (this.successful) {
+                            return true;
+                    }
+//                    if (AbstractGame.isPath(box[i])) {// if this Point is path
+//                            if (box[i].compareTo(this.from) != 0) {// is it == to previous
+//                                    if (!Tools.containPoint(o, this.selected)) {
+//                                            /* Add o if it hasn't been visited */
+//                                            this.selected.add(o);
+//                                            this.from = o; /* Move to the next Point */
+//                                            if (box[i].compareTo(this.origin) == 0
+//                                                            && this.selected.size() > 3) {
+//                                                    this.successful = true;/* Set recursive call stop */
+//                                                    this.origin = null;/* Reset the origin */
+//                                                    System.out.println("Found cell...");
+//                                                    return true;/* Capture was found */
+//                                            }
+//                                            /* This adjacent Point was a dead end */
+//                                            if (!buildPath(box[i], squareSize)) {
+//                                                    this.selected.remove(o);
+//                                                    continue;
+//                                            }
+//                                    }
+//                            }
+//                    }
+            }
+            return false;/* No path */
+    }
 
 	/**
 	 * @return the successful
@@ -170,35 +152,8 @@ public abstract class AbstractPlayer implements Serializable {
 		this.CapturedCells = capturedCells;
 	}
 
-	/**
-	 * @return the capturedDots
-	 */
-	public ArrayList<Point> getCapturedDots() {
-		return this.capturedDots;
-	}
-
-	/**
-	 * @param capturedDots
-	 *            the capturedDots to set
-	 */
-	public void setCapturedDots(ArrayList<Point> capturedDots) {
-		this.capturedDots = capturedDots;
-	}
-
-	/**
-	 * @return the connectedPoints
-	 */
-	public ArrayList<Point> getConnectedPoints() {
-		return this.connectedPoints;
-	}
-
-	/**
-	 * @param connectedPoints
-	 *            the connectedPoints to set
-	 */
-	public void setConnectedPoints(ArrayList<Point> connectedPoints) {
-		this.connectedPoints = connectedPoints;
-	}
+	
+	
 
 	/**
 	 * @param cells
@@ -208,21 +163,7 @@ public abstract class AbstractPlayer implements Serializable {
 		this.Cells = cells;
 	}
 
-	/**
-	 * @return the ploted
-	 */
-	public ArrayList<Point> getPloted() {
-		return this.plotted;
-	}
-
-	/**
-	 * @param ploted
-	 *            the ploted to set
-	 */
-	public void setPloted(ArrayList<Point> ploted) {
-		this.plotted = ploted;
-	}
-
+	
 	/**
 	 * @return the cells
 	 */
@@ -261,21 +202,6 @@ public abstract class AbstractPlayer implements Serializable {
 	}
 
 	/**
-	 * @return the origin
-	 */
-	public Point getOrigin() {
-		return this.origin;
-	}
-
-	/**
-	 * @param origin
-	 *            the origin to set
-	 */
-	public void setOrigin(Point origin) {
-		this.origin = origin;
-	}
-
-	/**
 	 * @return the color
 	 */
 	public Color getColor() {
@@ -289,15 +215,6 @@ public abstract class AbstractPlayer implements Serializable {
 	public void setColor(Color color) {
 		System.out.println("setting color" + color);
 		this.color = color;
-	}
-
-	/**
-	 * @return void
-	 * @param none
-	 *            Initializes selected
-	 */
-	public void initSelected() {
-		this.selected = new ArrayList<Point>();
 	}
 
 	public boolean isTurn() {
@@ -336,30 +253,31 @@ public abstract class AbstractPlayer implements Serializable {
 	 */
 
 	public String toString() {
-		return "\nName: " + this.name + "\nColor: " + this.color.toString()
+		return "\nID: " + this.id + "\nName: " + this.name + "\nColor: " + this.color.toString()
 				+ "\nFaded Color: " + this.getFadedColor() + "\nScore: "
-				+ this.score + "\nMy turn: " + this.turn + "\nPlotted: "
-				+ this.plotted + "\nCells: " + this.Cells + "\nCapturedCells: "
-				+ this.CapturedCells + "\nCapturedDots: " + this.capturedDots
-				+ "\nConnectedPoints: " + this.connectedPoints + "\nSelected: "
-				+ this.selected + "\nPlay Flag: " + this.play_flag
+				+ this.score + "\nMy turn: " + this.turn + "\nCells: " + this.Cells + "\nCapturedCells: "
+				+ this.CapturedCells  +  "\nPlay Flag: " + this.play_flag
 				+ "\nCapture successfull: " + this.successful
 				+ "\nFade variant: " + this.FADE_VARIANT + "\n";
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	private String name = "player";
+	private int id = 0;//player1 = -1 and player2 = 1
 	private boolean turn = false;
 	private boolean ai = false;
 	private double score = 0.0;
 	private Color color;
-	private Point origin = new Point(444444, 7798979);
-	private Point from = new Point(553355, 7798979);
 	private ArrayList<Cell> Cells = null;
 	private ArrayList<Cell> CapturedCells = null;
-	private ArrayList<Point> capturedDots = null;
-	private ArrayList<Point> connectedPoints = null;
-	private ArrayList<Point> plotted = null;
-	private ArrayList<Point> selected = null;
+	
 	private boolean successful = false;
 	private int FADE_VARIANT = 70;
 	private int play_flag = 0;

@@ -17,9 +17,10 @@ public class Cell implements Comparable<Cell>, Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public Cell(ArrayList<Point> cellContour, ArrayList<Point> areaIncell,
+	public Cell(int id, ArrayList<Point> cellContour, ArrayList<Point> areaIncell,
 			ArrayList<Point> capturedPoints, ArrayList<Cell> cellsInCell) {
 		super();
+		this.id = id;
 		this.cellContour = cellContour;
 		this.areaIncell = areaIncell;
 		this.capturedPoints = capturedPoints;
@@ -205,11 +206,19 @@ public class Cell implements Comparable<Cell>, Serializable {
 		this.cellsInCell = cellsInCell;
 	}
 
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	private ArrayList<Point> cellContour;
 	private ArrayList<Point> areaIncell;
 	private ArrayList<Point> capturedPoints;
 	private ArrayList<Cell> cellsInCell;
 	private int capturedcell_Count;
 	private double value = 0.0;
+	private int id = 0;
 	//private Color color;
 }

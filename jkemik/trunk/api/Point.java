@@ -11,6 +11,14 @@ import java.io.Serializable;
  * 
  */
 public class Point extends AbstractPoint implements Serializable{
+	public Point(double x, double y, int id) {
+		super(x, y, id);
+		// TODO Auto-generated constructor stub
+	}
+	public Point(double x, double y) {
+		super(x, y, 0);
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * 
 	 */
@@ -19,9 +27,10 @@ public class Point extends AbstractPoint implements Serializable{
 	 * @param x
 	 * @param y
 	 */
-	public Point(double x, double y) {
-		super(x, y);
-	}
+	
+//	public Point(double x, double y) {
+//		super(x, y);
+//	}
 	public double distanceTo(Point p) {
 		return Math.sqrt(Math.abs((super.getXC() - p.getXC())
 				* ((super.getXC() - p.getXC()) + Math.abs((super.getYC() - p.getYC())
