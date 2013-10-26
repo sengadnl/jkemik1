@@ -774,8 +774,7 @@ public class BoardFrame extends JFrame {
 	}
 
 	public static void updateBoardStatus() {
-		double totPlots = JKemik.game.getCurrentP().getPloted().size()
-				+ JKemik.game.getGuest().getPloted().size();
+		double totPlots = JKemik.game.getCollection().size();
 		double totalOnBoard = JKemik.settings_t.getGridDimension().positions();
 		double deadBoard = (100 * totPlots) / totalOnBoard;
 		double free = totalOnBoard - totPlots;

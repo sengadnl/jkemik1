@@ -159,58 +159,58 @@ public class Artist {
 		g2.setColor(c);
 	}
 
-	protected static boolean drawCell(Cell cell, Graphics2D g2) {
-		AbstractGame game = JKemik.game;
-		try {
-			if (cell == null) {
-				return false;
-			}
-			ArrayList<Point> contour = cell.getCellContour();
-			ArrayList<Point> captured = cell.getCapturedPoints();
-			ArrayList<Point> area = cell.getAreaIncell();
-			if (area.isEmpty()) {
-				return false;
-			}
-			if (captured.isEmpty()) {
-				System.out.println("About to undraw a cell");
-				return unDrawCell(cell, g2);
-			}
-			game.getCurrentP().getConnectedPoints().addAll(contour);
-
-			/* draw cell contour */
-			drawLine(contour.get(0), contour.get(contour.size() - 1),
-					Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE, game
-							.getCurrentP().getColor(), g2);
-			for (int i = 0; i < contour.size() - 1; i++) {
-
-				drawLine(contour.get(i), contour.get(i + 1),
-						Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE, game
-								.getCurrentP().getColor(), g2);
-			}
-
-			// draw positions
-			for (Point p : contour) {
-				drawCircle(p, game.getCurrentP().getColor(),
-						Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-						Grid.gridLineStroke, g2);
-
-				drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
-						Grid.gridLineCol, g2);
-				g2.setColor(game.getCurrentP().getColor());
-				g2.setStroke(new BasicStroke(Grid.gridLineStroke));// +
-			}
-
-			/* Mark empty dots */
-			ArrayList<Point> free_dots = new ArrayList<Point>();
-
-			free_dots.addAll(area);
-			free_dots.removeAll(captured);
-
-		} catch (NullPointerException e) {
-			System.out.println("In drawCell: " + e.getMessage());
-		}
-		return true;
-	}
+//	protected static boolean drawCell(Cell cell, Graphics2D g2) {
+//		AbstractGame game = JKemik.game;
+//		try {
+//			if (cell == null) {
+//				return false;
+//			}
+//			ArrayList<Point> contour = cell.getCellContour();
+//			ArrayList<Point> captured = cell.getCapturedPoints();
+//			ArrayList<Point> area = cell.getAreaIncell();
+//			if (area.isEmpty()) {
+//				return false;
+//			}
+//			if (captured.isEmpty()) {
+//				System.out.println("About to undraw a cell");
+//				return unDrawCell(cell, g2);
+//			}
+//			game.getCurrentP().getConnectedPoints().addAll(contour);
+//
+//			/* draw cell contour */
+//			drawLine(contour.get(0), contour.get(contour.size() - 1),
+//					Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE, game
+//							.getCurrentP().getColor(), g2);
+//			for (int i = 0; i < contour.size() - 1; i++) {
+//
+//				drawLine(contour.get(i), contour.get(i + 1),
+//						Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE, game
+//								.getCurrentP().getColor(), g2);
+//			}
+//
+//			// draw positions
+//			for (Point p : contour) {
+//				drawCircle(p, game.getCurrentP().getColor(),
+//						Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
+//						Grid.gridLineStroke, g2);
+//
+//				drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
+//						Grid.gridLineCol, g2);
+//				g2.setColor(game.getCurrentP().getColor());
+//				g2.setStroke(new BasicStroke(Grid.gridLineStroke));// +
+//			}
+//
+//			/* Mark empty dots */
+//			ArrayList<Point> free_dots = new ArrayList<Point>();
+//
+//			free_dots.addAll(area);
+//			free_dots.removeAll(captured);
+//
+//		} catch (NullPointerException e) {
+//			System.out.println("In drawCell: " + e.getMessage());
+//		}
+//		return true;
+//	}
 
 	protected static boolean unDrawCell(Cell cell, Graphics2D g2) {
 		try {
@@ -248,46 +248,46 @@ public class Artist {
 		return true;
 	}
 
-	protected static void drawGame(AbstractGame g, Graphics2D g2) {
-		Player p1 = (Player) g.getPlayer1();
-		Player p2 = (Player) g.getPlayer2();
-		ArrayList<Cell> p1c = p1.getCells();
-		ArrayList<Cell> p2c = p2.getCells();
-
-		// draw p1 cells
-		if (drawCell(p1c, p1, p2, g2)) {
-		}
-
-		// draw p1 cells
-		if (drawCell(p2c, p2, p1, g2)) {
-		}
-		// draw p1 points
-		for (Point p : p1.getPloted()) {
-
-			Artist.drawCircle(p, p1.getColor(), Grid.HALF_DIAMETER,
-					Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
-			Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
-					Grid.gridLineCol, g2);
-		}
-		// draw p1 points
-		for (Point p : p2.getPloted()) {
-
-			Artist.drawCircle(p, p2.getColor(), Grid.HALF_DIAMETER,
-					Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
-			Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
-					Grid.gridLineCol, g2);
-		}
-		if (Grid.manualc) {
-			for (Point p : g.getCurrentP().getSelected()) {
-
-				Artist.drawCircle(p, g.getCurrentP().getFadedColor(),
-						Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-						Grid.gridLineStroke, g2);
-				Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
-						Grid.gridLineCol, g2);
-			}
-		}
-	}
+//	protected static void drawGame(AbstractGame g, Graphics2D g2) {
+//		Player p1 = (Player) g.getPlayer1();
+//		Player p2 = (Player) g.getPlayer2();
+//		ArrayList<Cell> p1c = p1.getCells();
+//		ArrayList<Cell> p2c = p2.getCells();
+//
+//		// draw p1 cells
+//		if (drawCell(p1c, p1, p2, g2)) {
+//		}
+//
+//		// draw p1 cells
+//		if (drawCell(p2c, p2, p1, g2)) {
+//		}
+//		// draw p1 points
+//		for (Point p : p1.getPloted()) {
+//
+//			Artist.drawCircle(p, p1.getColor(), Grid.HALF_DIAMETER,
+//					Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
+//			Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
+//					Grid.gridLineCol, g2);
+//		}
+//		// draw p1 points
+//		for (Point p : p2.getPloted()) {
+//
+//			Artist.drawCircle(p, p2.getColor(), Grid.HALF_DIAMETER,
+//					Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
+//			Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
+//					Grid.gridLineCol, g2);
+//		}
+//		if (Grid.manualc) {
+//			for (Point p : g.getCurrentP().getSelected()) {
+//
+//				Artist.drawCircle(p, g.getCurrentP().getFadedColor(),
+//						Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
+//						Grid.gridLineStroke, g2);
+//				Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
+//						Grid.gridLineCol, g2);
+//			}
+//		}
+//	}
 
 	/**
 	 * @param Arraylist
@@ -365,49 +365,49 @@ public class Artist {
 		g2.setColor(JKemik.game.getCurrentP().getColor());
 	}
 
-	protected static void unDrawSelection(ArrayList<Point> contour,
-			Graphics2D g2) {
-		AbstractGame game = JKemik.game;
-		try {
-			/* Erase last line */
-			int index = contour.size() - 1;
-			Point lastp = null, before_lastp = null;
-			if (contour.size() > 1) {
-				lastp = contour.get(index);
-				before_lastp = contour.get(index - 1);
-			} else if (contour.size() == 1) {
-				lastp = contour.get(index);
-				drawCircle(lastp, game.getCurrentP().getColor(),
-						Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-						Grid.gridLineStroke, g2);
-				drawCursor(lastp, Grid.gridLineStroke, Grid.half_squareSize,
-						Grid.gridLineCol, g2);
-				contour.remove(index);
-				return;
-			} else {
-				return;
-			}
-
-			drawLine(lastp, before_lastp, Grid.gridLineStroke
-					+ Grid.CURSOR_VARIANT_STROKE, BoardFrame.BOARD_COLOR, g2);
-			drawCircle(lastp, game.getCurrentP().getColor(),
-					Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-					Grid.gridLineStroke, g2);
-			drawCursor(lastp, Grid.gridLineStroke, Grid.half_squareSize,
-					Grid.gridLineCol, g2);
-			drawCircle(before_lastp, game.getCurrentP().getFadedColor(),
-					Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-					Grid.gridLineStroke, g2);
-			drawCursor(before_lastp, Grid.gridLineStroke, Grid.half_squareSize,
-					Grid.gridLineCol, g2);
-
-			if (!contour.isEmpty()) {
-				game.setLastp(before_lastp);
-				contour.remove(index);
-			}
-
-		} catch (NullPointerException e) {
-			System.out.println("In drawCell: " + e.getMessage());
-		}
-	}
+//	protected static void unDrawSelection(ArrayList<Point> contour,
+//			Graphics2D g2) {
+//		AbstractGame game = JKemik.game;
+//		try {
+//			/* Erase last line */
+//			int index = contour.size() - 1;
+//			Point lastp = null, before_lastp = null;
+//			if (contour.size() > 1) {
+//				lastp = contour.get(index);
+//				before_lastp = contour.get(index - 1);
+//			} else if (contour.size() == 1) {
+//				lastp = contour.get(index);
+//				drawCircle(lastp, game.getCurrentP().getColor(),
+//						Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
+//						Grid.gridLineStroke, g2);
+//				drawCursor(lastp, Grid.gridLineStroke, Grid.half_squareSize,
+//						Grid.gridLineCol, g2);
+//				contour.remove(index);
+//				return;
+//			} else {
+//				return;
+//			}
+//
+//			drawLine(lastp, before_lastp, Grid.gridLineStroke
+//					+ Grid.CURSOR_VARIANT_STROKE, BoardFrame.BOARD_COLOR, g2);
+//			drawCircle(lastp, game.getCurrentP().getColor(),
+//					Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
+//					Grid.gridLineStroke, g2);
+//			drawCursor(lastp, Grid.gridLineStroke, Grid.half_squareSize,
+//					Grid.gridLineCol, g2);
+//			drawCircle(before_lastp, game.getCurrentP().getFadedColor(),
+//					Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
+//					Grid.gridLineStroke, g2);
+//			drawCursor(before_lastp, Grid.gridLineStroke, Grid.half_squareSize,
+//					Grid.gridLineCol, g2);
+//
+//			if (!contour.isEmpty()) {
+//				game.setLastp(before_lastp);
+//				contour.remove(index);
+//			}
+//
+//		} catch (NullPointerException e) {
+//			System.out.println("In drawCell: " + e.getMessage());
+//		}
+//	}
 }

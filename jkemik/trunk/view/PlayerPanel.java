@@ -181,8 +181,11 @@ public class PlayerPanel extends JPanel {
 
 	public void updatePlayerPanel(AbstractPlayer abstractPlayer) {
 		try {
-			plottedv.setText("" + abstractPlayer.getPloted().size());
-			capturedv.setText("" + abstractPlayer.getCapturedDots().size());
+//			plottedv.setText("" + abstractPlayer.getPloted().size());
+//			capturedv.setText("" + abstractPlayer.getCapturedDots().size());
+			
+			plottedv.setText("" + 0);
+			capturedv.setText("" + 0);
 			cellsv.setText("" + abstractPlayer.getCells().size());
 			captCellsv.setText("" + abstractPlayer.getCapturedCells().size());
 			scorev.setText("" + abstractPlayer.getScore());
