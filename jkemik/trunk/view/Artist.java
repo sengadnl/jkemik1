@@ -247,7 +247,7 @@ public class Artist {
 		}
 		return true;
 	}
-
+//TODO
 //	protected static void drawGame(AbstractGame g, Graphics2D g2) {
 //		Player p1 = (Player) g.getPlayer1();
 //		Player p2 = (Player) g.getPlayer2();
@@ -299,7 +299,7 @@ public class Artist {
 		try {
 			//for (Cell c : cells) {
 				ArrayList<Point> contour = c.getCellContour();
-
+				
 				/* draw cell contour */
 				Artist.drawLine(contour.get(0),
 						contour.get(contour.size() - 1), Grid.gridLineStroke
@@ -321,6 +321,13 @@ public class Artist {
 					g2.setStroke(new BasicStroke(Grid.gridLineStroke
 							+ Grid.CURSOR_VARIANT_STROKE));
 				}
+				for (int i = 0; i < contour.size() - 1; i++) {
+					Artist.drawCircle(contour.get(i),col, Grid.HALF_DIAMETER,
+							Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
+					Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
+							Grid.half_squareSize, Grid.gridLineCol, g2);
+				}
+				
 //				if (drawCell(c.getCellsInCell(), pl2, pl1, g2)) {
 //				}
 //			}
