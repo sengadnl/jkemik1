@@ -294,23 +294,22 @@ public class Artist {
 	 *            of pl1 cells, pl1, pl2
 	 * @return void Draws a cell with all its content.
 	 * */
-	protected static boolean drawCell(ArrayList<Cell> cells, Player pl1,
-			Player pl2, Graphics2D g2) {
+	protected static boolean drawCell(Cell c, Color col , Graphics2D g2) {
 
 		try {
-			for (Cell c : cells) {
+			//for (Cell c : cells) {
 				ArrayList<Point> contour = c.getCellContour();
 
 				/* draw cell contour */
 				Artist.drawLine(contour.get(0),
 						contour.get(contour.size() - 1), Grid.gridLineStroke
-								+ Grid.CURSOR_VARIANT_STROKE, pl1.getColor(),
+								+ Grid.CURSOR_VARIANT_STROKE, col,
 						g2);
 				for (int i = 0; i < contour.size() - 1; i++) {
 
 					Artist.drawLine(contour.get(i), contour.get(i + 1),
 							Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE,
-							pl1.getColor(), g2);
+							col, g2);
 
 					// draw intersection
 					Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
@@ -318,13 +317,13 @@ public class Artist {
 
 					Artist.drawCursor(contour.get(i + 1), Grid.gridLineStroke,
 							Grid.half_squareSize, Grid.gridLineCol, g2);
-					g2.setColor(pl1.getColor());
+					g2.setColor(col);
 					g2.setStroke(new BasicStroke(Grid.gridLineStroke
 							+ Grid.CURSOR_VARIANT_STROKE));
 				}
-				if (drawCell(c.getCellsInCell(), pl2, pl1, g2)) {
-				}
-			}
+//				if (drawCell(c.getCellsInCell(), pl2, pl1, g2)) {
+//				}
+//			}
 
 		} catch (NullPointerException e) {
 			System.out.println("In drawCell: " + e.getMessage());
