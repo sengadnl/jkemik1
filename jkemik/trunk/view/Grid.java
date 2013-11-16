@@ -110,10 +110,10 @@ public class Grid extends JPanel {
 				Artist.drawGrid(g2, Grid.dimension, Grid.squareFadeVariant,
 						Grid.gridLineStroke, BoardFrame.BOARD_COLOR);
 
-				// if (Grid.refresh) {
-				// Artist.drawGame(game, g2);
-				// Grid.refresh = false;
-				// }
+//				 if (Grid.refresh) {
+//				 Artist.drawGame(game, g2);
+//				 Grid.refresh = false;
+//				 }
 				this.drawn = true;
 			}
 		} catch (Exception e) {
