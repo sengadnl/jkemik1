@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
 import utilities.Tools;
 
 /**
@@ -26,6 +27,7 @@ public abstract class AbstractPlayer implements Serializable {
 		this.name = name;
 		this.score = 0.0;
 		this.CapturedCells = new ArrayList<Cell>();
+		this.selected = new ArrayList<Point>();
 		this.Cells = new ArrayList<Cell>();
 	}
 
@@ -50,31 +52,28 @@ public abstract class AbstractPlayer implements Serializable {
             Point[] box = Tools.boxCoord(o, squareSize);
             /* Find the point in this box that belongs to the path */
             for (int i = 0; i < box.length; i++) {
-                    /* Stop recursive call here if a path was already found */
-                    if (this.successful) {
-                            return true;
+
+                    if (AbstractGame.isPath(box[i])) {// if this Point is path
+                            if (box[i].compareTo(this.from) != 0) {// is it == to previous
+                                    if (!Tools.containPoint(o,this.selected)) {
+                                            /* Add o if it hasn't been visited */
+                                            this.selected.add(o);
+                                            this.from = o; /* Move to the next Point*/
+                                            if (box[i].compareTo(this.origin) == 0
+                                                            && this.selected.size() > 3) {
+                                                    this.successful = true;/* Set recursive call stop */
+                                                    this.origin = null;/* Reset the origin */
+                                                    System.out.println("Found cell...");
+                                                    return true;/* Capture was found */
+                                            }
+                                            /* This adjacent Point was a dead end */
+                                            if (!buildPath(box[i], squareSize)) {
+                                                    this.selected.remove(o);
+                                                    continue;
+                                            }
+                                    }
+                            }
                     }
-//                    if (AbstractGame.isPath(box[i])) {// if this Point is path
-//                            if (box[i].compareTo(this.from) != 0) {// is it == to previous
-//                                    if (!Tools.containPoint(o, this.selected)) {
-//                                            /* Add o if it hasn't been visited */
-//                                            this.selected.add(o);
-//                                            this.from = o; /* Move to the next Point */
-//                                            if (box[i].compareTo(this.origin) == 0
-//                                                            && this.selected.size() > 3) {
-//                                                    this.successful = true;/* Set recursive call stop */
-//                                                    this.origin = null;/* Reset the origin */
-//                                                    System.out.println("Found cell...");
-//                                                    return true;/* Capture was found */
-//                                            }
-//                                            /* This adjacent Point was a dead end */
-//                                            if (!buildPath(box[i], squareSize)) {
-//                                                    this.selected.remove(o);
-//                                                    continue;
-//                                            }
-//                                    }
-//                            }
-//                    }
             }
             return false;/* No path */
     }
@@ -269,14 +268,43 @@ public abstract class AbstractPlayer implements Serializable {
 		this.id = id;
 	}
 
+	public ArrayList<Point> getSelected() {
+		return selected;
+	}
+
+	public void setSelected(ArrayList<Point> selected) {
+		this.selected = selected;
+	}
+
+	public Point getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(Point origin) {
+		this.origin = origin;
+	}
+
+	public Point getFrom() {
+		return from;
+	}
+
+	public void setFrom(Point from) {
+		this.from = from;
+	}
+
 	private String name = "player";
 	private int id = 0;//player1 = -1 and player2 = 1
 	private boolean turn = false;
 	private boolean ai = false;
 	private double score = 0.0;
 	private Color color;
+	
+	private Point origin = new Point(444444, 7798979);
+    private Point from = new Point(553355, 7798979);
+	
 	private ArrayList<Cell> Cells = null;
 	private ArrayList<Cell> CapturedCells = null;
+	private ArrayList<Point> selected = null;
 	
 	private boolean successful = false;
 	private int FADE_VARIANT = 70;

@@ -18,12 +18,12 @@ public class Cell implements Comparable<Cell>, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public Cell(int id, ArrayList<Point> cellContour, ArrayList<Point> areaIncell,
-			ArrayList<Point> capturedPoints, ArrayList<Cell> cellsInCell) {
+			 ArrayList<Cell> cellsInCell) {
 		super();
 		this.id = id;
 		this.cellContour = cellContour;
 		this.areaIncell = areaIncell;
-		this.capturedPoints = capturedPoints;
+		//this.capturedPoints = capturedPoints;
 		this.capturedcell_Count = 0;
 		this.cellsInCell = cellsInCell;
 		evaluateCell();
@@ -34,7 +34,7 @@ public class Cell implements Comparable<Cell>, Serializable {
 
 	/** Calculates what this cell is worth */
 	public void evaluateCell() {
-		this.value = this.capturedPoints.size();
+		//this.value = this.capturedPoints.size();
 	}
 
 	/**
@@ -68,7 +68,8 @@ public class Cell implements Comparable<Cell>, Serializable {
 	}
 
 	public int getNumberPrisonner() {
-		return this.capturedPoints.size();
+		//return this.capturedPoints.size();
+		return 0;
 	}
 
 	/**
@@ -92,20 +93,20 @@ public class Cell implements Comparable<Cell>, Serializable {
 	/**
 	 * @return the capturedPoints
 	 */
-	public ArrayList<Point> getCapturedPoints() {
-		if (this.capturedPoints == null) {
-			throw new NullPointerException();
-		}
-		return this.capturedPoints;
-	}
+//	public ArrayList<Point> getCapturedPoints() {
+//		if (this.capturedPoints == null) {
+//			throw new NullPointerException();
+//		}
+//		return this.capturedPoints;
+//	}
 
 	/**
 	 * @param capturedPoints
 	 *            the capturedPoints to set
 	 */
-	public void setCapturedPoints(ArrayList<Point> capturedPoints) {
-		this.capturedPoints = capturedPoints;
-	}
+//	public void setCapturedPoints(ArrayList<Point> capturedPoints) {
+//		this.capturedPoints = capturedPoints;
+//	}
 
 	/**
 	 * Number of points making the contour of the cell, plus the number of empty
@@ -215,7 +216,7 @@ public class Cell implements Comparable<Cell>, Serializable {
 
 	private ArrayList<Point> cellContour;
 	private ArrayList<Point> areaIncell;
-	private ArrayList<Point> capturedPoints;
+	//private ArrayList<Point> capturedPoints;
 	private ArrayList<Cell> cellsInCell;
 	private int capturedcell_Count;
 	private double value = 0.0;

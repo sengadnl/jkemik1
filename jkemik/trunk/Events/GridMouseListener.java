@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -31,33 +32,72 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
+		AbstractGame game = JKemik.game;
+		Player current = (Player) game.getCurrentP();
+		// Allow mouse click
 		Grid.mouseclicked = true;
+
+		// Get X and Y
 		Grid.x = e.getX();
 		Grid.y = e.getY();
-		AbstractGame game = JKemik.game;
-		Player current = (Player)game.getCurrentP();
-		
+
+		// Guess player's point
 		Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
 		Point temp = new Point(Grid.x, Grid.y);
-		
-		 if (game.getCurrentP().isTurn()) {
-             // System.out.println("Saw turn ...");
-             if (!game.getCollection().containsKey(temp.toString())) {
-                     // System.out.println("Plotting ...");
-                     Grid.plotPoint = true;
-                     BoardFrame.grid.repaint();
-                     temp.setStatus(1);
-                     temp.setId(current.getId());
-                     game.getCollection().put(temp.toString(), temp);
-                     //game.setEmbuche_on(true);
-                     //System.out.println("Collection: " + game.getCollection());
-                     game.setPlayFlag();
-                     game.getCurrentP().setTurn(false);
-                     Grid.mouseMove = false;
-             }
-		 }
-		
-			//System.out.println("Collection: " + game.getCollection().toString());
+
+		if (Grid.manualc) {
+			temp = game.getCollection().get(temp.toString());
+			if (game.select(temp, Grid.squareSize)) {
+				Grid.selectPoint = true;
+				Grid.setSelectedP(temp);
+				if (temp.adjacentTo(current.getOrigin(), Grid.squareSize)
+						&& current.getSelected().size() >= 4) {
+					Grid.cell = game.capture((int) Grid.squareSize);//
+					game.getCurrentP().setSelected(new ArrayList<Point>());
+					// System.out.println(current.getSelected().size()
+					// + " were selected");
+					BoardFrame.mouseSelection.setSelected(false);
+					BoardFrame.mode.setVisible(true);
+					// if (BoardFrame.manual.isSelected()) {
+					// BoardFrame.manual.setSelected(false);
+					// JKemik.settings_t.restaureMemo();
+					// BoardFrame.showControlButtons();
+					// BoardFrame.updateSettingPanel();
+					// }
+					Grid.manualc = false;
+				}
+				BoardFrame.grid.repaint();
+			}
+		} else {
+			if (game.getCurrentP().isTurn()) {
+				// System.out.println("Saw turn ...");
+				if (!game.getCollection().containsKey(temp.toString())) {
+					// System.out.println("Plotting ...");
+					Grid.plotPoint = true;
+					BoardFrame.grid.repaint();
+
+					// Mark point as played
+					temp.setStatus(1);
+
+					// Mark point as belonging to current player
+					temp.setId(current.getId());
+
+					// Add to the board
+					game.getCollection().put(temp.toString(), temp);
+
+					// game.setEmbuche_on(true);
+					// System.out.println("Collection: " +
+					// game.getCollection());
+
+					// Setting turn
+					game.setPlayFlag();
+					game.getCurrentP().setTurn(false);
+					Grid.mouseMove = false;
+				}
+			}
+		}
+
+		// System.out.println("Collection: " + game.getCollection().toString());
 		BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
 		BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
 		BoardFrame.updateBoardStatus();

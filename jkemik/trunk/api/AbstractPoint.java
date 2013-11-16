@@ -25,11 +25,10 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
 	protected int id;
 
 	/*
-	 * Current status of this point 0 = unknown, 1 = plotted, 2 = connected, 3 =
-	 * captured, 4 = dead
+	 * Current status of this point -1 = unknown, 1 = played, 2 = connected, 3 =
+	 * captured, 0 = dead
 	 */
 	protected int status;
-
 	protected boolean north;
 	protected boolean south;
 	protected boolean east;
@@ -66,10 +65,14 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
 		return status;
 	}
 
+	/**
+	 * @param int status: 0 = unknown, 1 = plotted, 2 = connected, 3 = captured,
+	 *        4 = dead
+	 * @return void
+	 */
 	public void setStatus(int status) {
 		this.status = status;
 	}
-
 
 	public boolean isNorth() {
 		return north;
