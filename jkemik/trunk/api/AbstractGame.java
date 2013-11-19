@@ -121,7 +121,7 @@ public abstract class AbstractGame implements Serializable {
 			}/* end first if else */
 		}/* end of second for loop */
 		setStatusForAll(currentP.getSelected(), Point.CONNECTED);
-		cell = new Cell(getCurrentP().getId(),getCurrentP().getSelected(),
+		cell = new Cell(getCurrentP().getId(), getCurrentP().getSelected(),
 				area, null);// Engine.getGame().
 
 		calculateScore(cell);
@@ -131,76 +131,28 @@ public abstract class AbstractGame implements Serializable {
 	/**
 	 * @return collection of objects that corresponding to the refs set in grid
 	 */
-//	private ArrayList<Point> getReferences(ArrayList<Point> refs) {
-//		ArrayList<Point> set = new ArrayList<Point>();
-//		for (Point p : refs) {
-//			set.add(collection.get(p.toString()));
-//		}
-//		return set;
-//	}
+	// private ArrayList<Point> getReferences(ArrayList<Point> refs) {
+	// ArrayList<Point> set = new ArrayList<Point>();
+	// for (Point p : refs) {
+	// set.add(collection.get(p.toString()));
+	// }
+	// return set;
+	// }
 
 	// TODO
-	// public boolean connectDots(double squareSize) {
-	// currentP.setSuccessful(false);
-	//
-	// ArrayList<Point> currentPPoints = currentP.getPloted();
-	//
-	// int start = currentPPoints.size() - 1;
-	// for (int i = start; i >= 0; i--) {
-	// Point currentPP = currentPPoints.get(i);
-	// currentP.setOrigin(currentPP);
-	// try {
-	//
-	// tempCell = capture(currentPP, squareSize);
-	// if (tempCell != null) {
-	// System.out.println("Cell was not NULL");
-	// return true;
-	// } else {
-	// continue;
-	// }
-	// } catch (IndexOutOfBoundsException e) {
-	// currentP.setSelected(new ArrayList<Point>());
-	// System.out.println("In connectDots(): Area out of bounds"
-	// + e.getMessage());
-	// continue;
-	// } catch (NullPointerException e) {
-	// System.out.println("In connectDots(): " + e.getMessage());
-	// continue;
-	// }
-	// }
-	// return false;
-	// }
+	public Cell connectDots(double squareSize) {
+		currentP.setSuccessful(false);
+		currentP.setOrigin(currentP.getLatestP());
 
-	// public Cell embush(double squareSize) {
-	// if (JKemik.settings_t.isAutoCapture()) {
-	// try {
-	// if (connectDots(squareSize)) {
-	// return tempCell;
-	// } else {
-	// embuche_on = false;
-	// }
-	// } catch (Exception e) {
-	// System.out.println("Error in PaintComponent: capture "
-	// + e.getMessage());
-	// }
-	// } else {
-	// if (JKemik.settings_t.isManualCapture()) {
-	// try {
-	// if (connectDots(squareSize)) {
-	// embuche_on = false;
-	// return tempCell;
-	// } else {
-	// embuche_on = false;
-	// }
-	// } catch (Exception e) {
-	// System.out.println("Error in PaintComponent: capture "
-	// + e.getMessage());
-	// }
-	// JKemik.settings_t.setManualCapture(false);
-	// }
-	// }
-	// return null;
-	// }
+		Cell tempCell = capture(currentP.getLatestP(), squareSize);
+		if (tempCell != null) {
+			System.out.println("Cell was not NULL");
+			return tempCell;
+		}
+		return null;
+
+	}
+
 	public boolean select(Point p, double squareSize) {
 
 		if (currentP.getSelected().isEmpty() && p.getId() == currentP.getId()
@@ -431,14 +383,6 @@ public abstract class AbstractGame implements Serializable {
 		this.maxScore = max;
 	}
 
-	public Cell getTempCell() {
-		return tempCell;
-	}
-
-	public void setTempCell(Cell tempCell) {
-		this.tempCell = tempCell;
-	}
-
 	// TODO
 	private void setStatusForAll(ArrayList<Point> points, int status) {
 		for (Point p : points) {
@@ -498,7 +442,7 @@ public abstract class AbstractGame implements Serializable {
 	/* Connecting dots utilities */
 	public boolean AI = false;
 	public boolean embuche_on = false;
-	private Cell tempCell = null;
+	// private Cell tempCell = null;
 	private int status = 0;
 	private int maxScore = 2;
 	public Point lastp = new Point(553355, 7798979);
