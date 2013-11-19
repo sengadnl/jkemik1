@@ -32,6 +32,21 @@ public abstract class AbstractGame implements Serializable {
 		this.status = 0;
 	}
 
+	/**
+	 * Only plotted points can be undone, dead points can not be revived
+	 */
+	public boolean undo() {
+		if (collection.get(currentP.getLatestP()).getStatus() == Point.CONNECTED) {
+			return false;
+		}
+		if (collection.remove(currentP.getLatestP()) != null) {// remove last
+																// point
+			unSetPlayFlag();
+			return true;
+		}
+		return false;
+	}
+
 	public Cell capture(Point o, double squareSize) {
 		Cell cell = null; /* cell to be returned */
 
@@ -106,12 +121,23 @@ public abstract class AbstractGame implements Serializable {
 			}/* end first if else */
 		}/* end of second for loop */
 		setStatusForAll(currentP.getSelected(), Point.CONNECTED);
-		cell = new Cell(getCurrentP().getId(), getCurrentP().getSelected(),
+		cell = new Cell(getCurrentP().getId(),getCurrentP().getSelected(),
 				area, null);// Engine.getGame().
 
 		calculateScore(cell);
 		return cell;
 	}
+
+	/**
+	 * @return collection of objects that corresponding to the refs set in grid
+	 */
+//	private ArrayList<Point> getReferences(ArrayList<Point> refs) {
+//		ArrayList<Point> set = new ArrayList<Point>();
+//		for (Point p : refs) {
+//			set.add(collection.get(p.toString()));
+//		}
+//		return set;
+//	}
 
 	// TODO
 	// public boolean connectDots(double squareSize) {

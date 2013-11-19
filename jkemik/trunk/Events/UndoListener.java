@@ -30,9 +30,9 @@ public class UndoListener implements MouseListener {
 
 	public void mouseClicked(MouseEvent arg0) {
 		AbstractGame game = JKemik.game;
-		System.out.println("entering undo > flag = " 
-				+ game.getCurrentP().getPlay_flag() + "\nturn = " + 
-				game.getCurrentP().isTurn());
+//		System.out.println("entering undo > flag = " 
+//				+ game.getCurrentP().getPlay_flag() + "\nturn = " + 
+//				game.getCurrentP().isTurn());
 		if(game.getCurrentP().getPlay_flag() == 1){
 			if (!game.getCurrentP().isTurn()) {
 				Grid.undo = true;
@@ -41,8 +41,6 @@ public class UndoListener implements MouseListener {
 				}
 				BoardFrame.grid.repaint();
 			}
-			BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
-			BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
 		}else{
 			if(Grid.manualc){
 				Grid.undo = true;
@@ -52,6 +50,8 @@ public class UndoListener implements MouseListener {
 			}
 			JOptionPane.showMessageDialog(null, BoardFrame.messages.getString("ilUndo")+"\n", BoardFrame.messages.getString("ilAction"), JOptionPane.WARNING_MESSAGE);
 		}
+		BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
+		BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
