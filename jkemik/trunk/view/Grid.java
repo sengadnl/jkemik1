@@ -72,6 +72,7 @@ public class Grid extends JPanel {
 					Grid.half_squareSize, gridLineCol, g2);
 			highLightDot(game.getCurrentP().getColor());
 
+			// play
 			if (mouseclicked && plotPoint) {
 				Artist.drawCircle(new Point(x, y, game.getCurrentP().getId()),
 						game.getCurrentP().getColor(), Grid.HALF_DIAMETER,
@@ -79,6 +80,8 @@ public class Grid extends JPanel {
 				plotPoint = false;
 				mouseclicked = false;
 			}
+
+			// capture by selection
 			if (selectPoint && game.getCurrentP().getSelected().size() >= 1) {
 				Color fade = game.getCurrentP().getFadedColor();
 				Artist.drawLine(game.getLastp(), selectedP, gridLineStroke
@@ -95,9 +98,27 @@ public class Grid extends JPanel {
 				g2.setColor(fade);
 				selectPoint = false;
 			}
-			 if (Artist.drawCell(cell, game.getCurrentP().getColor(), g2)) {
-			 cell = null;
-			 }
+
+			if (cell != null) {
+				Artist.drawCell(cell, game.getCurrentP().getColor(), g2);
+				cell = null;
+			}
+
+			if (undo) {
+				if (manualc) {
+					if (game.getCurrentP().getSelected().size() >= 1) {
+						Artist.unDrawSelection(
+								game.getCurrentP().getSelected(), g2);//
+					} else {
+
+					}
+				} else {
+					if (game.undo()) {
+						Artist.unDraw(game.getLastp(), g2);
+					}
+				}
+				undo = false;
+			}
 
 			//
 			if (JKemik.settings_t.isAutoPass()
@@ -116,8 +137,11 @@ public class Grid extends JPanel {
 				}
 				this.drawn = true;
 			}
+		} catch (NullPointerException e) {
+			System.out.println("NullPointer in paintComponent: "
+					+ e.getMessage());
 		} catch (Exception e) {
-			System.out.println("Error in paint: " + e.getMessage());
+			System.out.println("Exception paintComponent: " + e.getMessage());
 		}
 
 	}

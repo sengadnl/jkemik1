@@ -302,7 +302,7 @@ public class Artist {
 	 * @return void Draws a cell with all its content.
 	 * */
 	protected static boolean drawCell(Cell c, Color col, Graphics2D g2) {
-
+		
 		try {
 			// for (Cell c : cells) {
 			ArrayList<Point> contour = c.getCellContour();
@@ -311,6 +311,7 @@ public class Artist {
 			Artist.drawLine(contour.get(0), contour.get(contour.size() - 1),
 					Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE, col, g2);
 			for (int i = 0; i < contour.size() - 1; i++) {
+				
 
 				Artist.drawLine(contour.get(i), contour.get(i + 1),
 						Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE, col,
@@ -377,7 +378,7 @@ public class Artist {
                     }
 
             } catch (NullPointerException e) {
-                    System.out.println("In drawCell: " + e.getMessage());
+                    System.out.println("In drawAllCell: " + e.getMessage());
             }
             return true;
     }
@@ -414,49 +415,49 @@ public class Artist {
 		g2.setColor(JKemik.game.getCurrentP().getColor());
 	}
 
-	// protected static void unDrawSelection(ArrayList<Point> contour,
-	// Graphics2D g2) {
-	// AbstractGame game = JKemik.game;
-	// try {
-	// /* Erase last line */
-	// int index = contour.size() - 1;
-	// Point lastp = null, before_lastp = null;
-	// if (contour.size() > 1) {
-	// lastp = contour.get(index);
-	// before_lastp = contour.get(index - 1);
-	// } else if (contour.size() == 1) {
-	// lastp = contour.get(index);
-	// drawCircle(lastp, game.getCurrentP().getColor(),
-	// Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-	// Grid.gridLineStroke, g2);
-	// drawCursor(lastp, Grid.gridLineStroke, Grid.half_squareSize,
-	// Grid.gridLineCol, g2);
-	// contour.remove(index);
-	// return;
-	// } else {
-	// return;
-	// }
-	//
-	// drawLine(lastp, before_lastp, Grid.gridLineStroke
-	// + Grid.CURSOR_VARIANT_STROKE, BoardFrame.BOARD_COLOR, g2);
-	// drawCircle(lastp, game.getCurrentP().getColor(),
-	// Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-	// Grid.gridLineStroke, g2);
-	// drawCursor(lastp, Grid.gridLineStroke, Grid.half_squareSize,
-	// Grid.gridLineCol, g2);
-	// drawCircle(before_lastp, game.getCurrentP().getFadedColor(),
-	// Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-	// Grid.gridLineStroke, g2);
-	// drawCursor(before_lastp, Grid.gridLineStroke, Grid.half_squareSize,
-	// Grid.gridLineCol, g2);
-	//
-	// if (!contour.isEmpty()) {
-	// game.setLastp(before_lastp);
-	// contour.remove(index);
-	// }
-	//
-	// } catch (NullPointerException e) {
-	// System.out.println("In drawCell: " + e.getMessage());
-	// }
-	// }
+	protected static void unDrawSelection(ArrayList<Point> contour,
+			Graphics2D g2) {
+		AbstractGame game = JKemik.game;
+		try {
+			/* Erase last line */
+			int index = contour.size() - 1;
+			Point lastp = null, before_lastp = null;
+			if (contour.size() > 1) {
+				lastp = contour.get(index);
+				before_lastp = contour.get(index - 1);
+			} else if (contour.size() == 1) {
+				lastp = contour.get(index);
+				drawCircle(lastp, game.getCurrentP().getColor(),
+						Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
+						Grid.gridLineStroke, g2);
+				drawCursor(lastp, Grid.gridLineStroke, Grid.half_squareSize,
+						Grid.gridLineCol, g2);
+				contour.remove(index);
+				return;
+			} else {
+				return;
+			}
+
+			drawLine(lastp, before_lastp, Grid.gridLineStroke
+					+ Grid.CURSOR_VARIANT_STROKE, BoardFrame.BOARD_COLOR, g2);
+			drawCircle(lastp, game.getCurrentP().getColor(),
+					Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
+					Grid.gridLineStroke, g2);
+			drawCursor(lastp, Grid.gridLineStroke, Grid.half_squareSize,
+					Grid.gridLineCol, g2);
+			drawCircle(before_lastp, game.getCurrentP().getFadedColor(),
+					Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
+					Grid.gridLineStroke, g2);
+			drawCursor(before_lastp, Grid.gridLineStroke, Grid.half_squareSize,
+					Grid.gridLineCol, g2);
+
+			if (!contour.isEmpty()) {
+				game.setLastp(before_lastp);
+				contour.remove(index);
+			}
+
+		} catch (NullPointerException e) {
+			System.out.println("In drawCell: " + e.getMessage());
+		}
+	}
 }

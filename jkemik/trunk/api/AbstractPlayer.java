@@ -292,6 +292,14 @@ public abstract class AbstractPlayer implements Serializable {
 		this.from = from;
 	}
 
+	public Point getLatestP() {
+		return latestP;
+	}
+
+	public void setLatestP(Point latestP) {
+		this.latestP = latestP;
+	}
+
 	private String name = "player";
 	private int id = 0;//player1 = -1 and player2 = 1
 	private boolean turn = false;
@@ -301,6 +309,7 @@ public abstract class AbstractPlayer implements Serializable {
 	
 	private Point origin = new Point(444444, 7798979);
     private Point from = new Point(553355, 7798979);
+    private Point latestP = new Point(550055, 7798979);
 	
 	private ArrayList<Cell> Cells = null;
 	private ArrayList<Cell> CapturedCells = null;

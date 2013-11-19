@@ -25,6 +25,7 @@ public class ManualSelectionListener implements MouseListener {
 			Grid.setManualc(true);
 			Grid.selectPoint = true;
 			BoardFrame.mode.setVisible(false);
+			BoardFrame.pass_turn.setVisible(false);
 			JKemik.game.setEmbuche_on(false);
 		} else {
 			JKemik.game.getCurrentP().setSelected(new ArrayList<Point>());
@@ -33,6 +34,7 @@ public class ManualSelectionListener implements MouseListener {
 			Grid.manualc = false;
 			Grid.refresh = true;
 			BoardFrame.mode.setVisible(true);
+			BoardFrame.pass_turn.setVisible(true);
 		}
 	}
 

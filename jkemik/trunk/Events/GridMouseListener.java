@@ -58,6 +58,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					// + " were selected");
 					BoardFrame.mouseSelection.setSelected(false);
 					BoardFrame.mode.setVisible(true);
+					BoardFrame.pass_turn.setVisible(true);
 					// if (BoardFrame.manual.isSelected()) {
 					// BoardFrame.manual.setSelected(false);
 					// JKemik.settings_t.restaureMemo();
@@ -81,6 +82,9 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 					// Mark point as belonging to current player
 					temp.setId(current.getId());
+					
+					//Remember last play
+					current.setLatestP(temp);
 
 					// Add to the board
 					game.getCollection().put(temp.toString(), temp);
