@@ -47,7 +47,9 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 		if (Grid.manualc) {
 			temp = game.getCollection().get(temp.toString());
-			if(temp == null){return;}
+			if (temp == null) {
+				return;
+			}
 			if (game.select(temp, Grid.squareSize)) {
 				Grid.selectPoint = true;
 				Grid.setSelectedP(temp);
@@ -83,8 +85,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 					// Mark point as belonging to current player
 					temp.setId(current.getId());
-					
-					//Remember last play
+
+					// Remember last play
 					current.setLatestP(temp);
 
 					// Add to the board
@@ -101,7 +103,21 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 				}
 			}
 		}
-
+		if (game.isEmbuche_on() && JKemik.settings_t.isAutoCapture()) {
+			BoardFrame.progressB.setVisible(true);
+			BoardFrame.progressB.setIndeterminate(true);
+			Grid.cell = JKemik.embush(Grid.squareSize);// new line
+			BoardFrame.progressB.setIndeterminate(false);
+			BoardFrame.progressB.setVisible(false);
+			BoardFrame.grid.repaint();
+			System.out.println("Embush attempt");
+			game.getCurrentP().setSelected(new ArrayList<Point>());
+		}
+		if (game.getCurrentP().isTurn()) {
+			System.out
+					.println("Marking " + game.getCurrentP() + " end of turn");
+			this.grid.setMouseclicked(true);
+		}
 		// System.out.println("Collection: " + game.getCollection().toString());
 		BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
 		BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
