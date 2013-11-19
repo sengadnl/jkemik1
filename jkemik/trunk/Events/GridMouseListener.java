@@ -47,6 +47,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 		if (Grid.manualc) {
 			temp = game.getCollection().get(temp.toString());
+			if(temp == null){return;}
 			if (game.select(temp, Grid.squareSize)) {
 				Grid.selectPoint = true;
 				Grid.setSelectedP(temp);
