@@ -92,9 +92,9 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					// Add to the board
 					game.getCollection().put(temp.toString(), temp);
 
-					// game.setEmbuche_on(true);
-					// System.out.println("Collection: " +
-					// game.getCollection());
+					game.setEmbuche_on(true);
+					 System.out.println("Collection: " +
+					 game.getCollection());
 
 					// Setting turn
 					game.setPlayFlag();
@@ -104,6 +104,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			}
 		}
 		if (game.isEmbuche_on() && JKemik.settings_t.isAutoCapture()) {
+			System.out.println("In embush!!!!!!!!!!!!!");
 			BoardFrame.progressB.setVisible(true);
 			BoardFrame.progressB.setIndeterminate(true);
 			Grid.cell = JKemik.embush(Grid.squareSize);// new line

@@ -17,9 +17,9 @@ public class STemplate implements Serializable {
 	private boolean hh = true;
 	private boolean ch = false;
 	private boolean net = false;
-	private boolean manualCapture = false;
-	private boolean autoCapture = false;
-	private boolean autoPass = false;
+	private boolean manualCapture = true;
+	private boolean autoCapture = true;
+	private boolean autoPass = true;
 	private boolean gameSetupMode = true;
 	private boolean playMode = false;
 	private boolean systemSetupMode = false;
