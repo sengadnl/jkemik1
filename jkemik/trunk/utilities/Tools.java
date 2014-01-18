@@ -8,6 +8,8 @@ import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import api.Point;
 import api.STemplate;
 
@@ -25,9 +27,18 @@ public class Tools {
 		return "";
 	}
 
+	public static void printCollectionPointsStatus(
+			HashMap<String, Point> collection) {
+		for (Point p : collection.values()) {
+			System.out.println("[" + p.toString() + "]" + " Status: "
+					+ p.getStatus() + " ID: " + p.getId());
+		}
+	}
+
 	// TODO may not use this
 	/**
-	 * @param gcontainer: board container dimension in quare;
+	 * @param gcontainer
+	 *            : board container dimension in quare;
 	 * @return Square size
 	 * 
 	 * */
@@ -46,7 +57,7 @@ public class Tools {
 		}
 		return counter;
 	}
-	
+
 	/**
 	 * Board size in terms of number of squares
 	 **/
@@ -60,8 +71,6 @@ public class Tools {
 
 		return new Dimension(w, h);
 	}
-
-	
 
 	/**
 	 * @param framew
@@ -246,8 +255,11 @@ public class Tools {
 
 		return new Color((int) r, (int) g, (int) b);
 	}
+
 	/**
-	 * @param Color and the percentage to which it should faded. This percentage is a whole number
+	 * @param Color
+	 *            and the percentage to which it should faded. This percentage
+	 *            is a whole number
 	 * @return faded color
 	 */
 	public static Color fade(Color c, double percent) {
@@ -255,9 +267,9 @@ public class Tools {
 		double g = c.getGreen();
 		double b = c.getBlue();
 		try {
-			r = r - (r * (percent/100));
-			g = g - (g * (percent/100));
-			b = b - (b * (percent/100));
+			r = r - (r * (percent / 100));
+			g = g - (g * (percent / 100));
+			b = b - (b * (percent / 100));
 			if (r < 0) {
 				r = 0;
 			}
@@ -267,15 +279,15 @@ public class Tools {
 			if (b < 0) {
 				b = 0;
 			}
-//			if (r < 0) {
-//				r = 0;
-//			}
-//			if (g < 0) {
-//				g = 0;
-//			}
-//			if (b < 0) {
-//				b = 0;
-//			}
+			// if (r < 0) {
+			// r = 0;
+			// }
+			// if (g < 0) {
+			// g = 0;
+			// }
+			// if (b < 0) {
+			// b = 0;
+			// }
 
 		} catch (Exception e) {
 			System.err.println("In Tools.boost: " + e.getMessage());
@@ -316,9 +328,9 @@ public class Tools {
 		double g = c.getGreen();
 		double b = c.getBlue();
 		try {
-			r = r + (r * (percent/100));
-			g = g + (g * (percent/100));
-			b = b + (b * (percent/100));
+			r = r + (r * (percent / 100));
+			g = g + (g * (percent / 100));
+			b = b + (b * (percent / 100));
 			if (r > 255) {
 				r = 255;
 			}
@@ -328,7 +340,6 @@ public class Tools {
 			if (b > 255) {
 				b = 255;
 			}
-
 
 		} catch (Exception e) {
 			System.err.println("In Tools.boost: " + e.getMessage());

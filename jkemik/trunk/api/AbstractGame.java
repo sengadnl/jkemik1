@@ -33,7 +33,8 @@ public abstract class AbstractGame implements Serializable {
 		currentP.setTurn(true);
 		this.status = 0;
 	}
-	//TODO
+
+	// TODO
 	/**
 	 * Finds a capture by following a path that starts at Point "o" location and
 	 * ends at "o" as well. Recursively checks every adjacent Point to find a
@@ -56,26 +57,32 @@ public abstract class AbstractGame implements Serializable {
 		/* Find the point in this box that belongs to the path */
 		for (int i = 0; i < box.length; i++) {
 			/* Stop recursive call here if a path was already found */
-            if (currentP.getSuccessful()) {
-                    return true;
-            }
+			if (currentP.getSuccessful()) {
+				return true;
+			}
 			Point temp = collection.get(box[i].toString());
-			if(temp == null){
+			if (temp == null) {
 				continue;
 			}
-			//System.err.println("\nTemp= " + temp);
+			// System.err.println("\nTemp= " + temp);
 			if (AbstractGame.isPath(temp)) {// if this Point is path
-				if (temp.compareTo(currentP.getFrom()) != 0) {// is it == to previous
+				if (temp.compareTo(currentP.getFrom()) != 0) {// is it == to
+																// previous
 					if (!Tools.containPoint(o, currentP.getSelected())) {
 						/* Add o if it hasn't been visited */
 						currentP.getSelected().add(o);
-						System.out.println("\nAdd to Selected : " + currentP.getSelected());
+						System.out.println("\nAdd to Selected : "
+								+ currentP.getSelected());
 						currentP.setFrom(o); /* Move to the next Point */
 						if (temp.compareTo(currentP.getOrigin()) == 0
 								&& currentP.getSelected().size() > 3) {
-							currentP.setSuccessful(true);/* Set recursive call stop */
+							currentP.setSuccessful(true);/*
+														 * Set recursive call
+														 * stop
+														 */
 							currentP.setOrigin(null);/* Reset the origin */
-							System.out.println("\nFound cell...: " + currentP.getSelected());
+							System.out.println("\nFound cell...: "
+									+ currentP.getSelected());
 							return true;/* Capture was found */
 						}
 						/* This adjacent Point was a dead end */
@@ -89,6 +96,7 @@ public abstract class AbstractGame implements Serializable {
 		}
 		return false;/* No path */
 	}
+
 	/**
 	 * Only plotted points can be undone, dead points can not be revived
 	 */
@@ -113,7 +121,7 @@ public abstract class AbstractGame implements Serializable {
 					squareSize);
 
 			ArrayList<Point> area = getTrueArea(TempArea);
-
+			System.err.println("Area: " + area);
 			if (isAreaEmpty(area)) {
 				currentP.setSelected(new ArrayList<Point>());
 				return null;
@@ -121,18 +129,19 @@ public abstract class AbstractGame implements Serializable {
 
 			/* Go through all selected dots from recursion */
 			for (Point p : area) {
-				if (p.getId() == guest.getId()
-						&& p.getStatus() != Point.CAPTURED) {
-
-					/* keep track of captures for this cell */
-					p.setStatus(3);
-
-				} else if (p.getStatus() != Point.DEAD
-						&& p.getStatus() != Point.PLAYED) {//
-					// getDeadDots().add(p);//
+				Point object = this.collection.get(p.toString());
+				if (object == null) {
 					p.setStatus(Point.DEAD);
 					this.collection.put(p.toString(), p);
-
+					continue;
+				}
+				if (object.getId() == guest.getId()) {
+					/* keep track of captures for this cell */
+					object.setStatus(Point.CAPTURED);
+					System.err.println("Found captured point..");
+				} else if (object.getStatus() != Point.CAPTURED) {//
+					object.setStatus(Point.DEAD);
+					// this.collection.put(object.toString(), p);
 				}/* end first if else */
 			}/* end of second for loop */
 			setStatusForAll(currentP.getSelected(), Point.CONNECTED);
@@ -201,7 +210,9 @@ public abstract class AbstractGame implements Serializable {
 		currentP.setOrigin(currentP.getLatestP());
 
 		Cell tempCell = capture(currentP.getLatestP(), squareSize);
-		System.out.println("Cell: " + tempCell);
+		// System.out.println("Cell: " + tempCell);
+		// Tools.printCollectionPointsStatus(this.collection);
+
 		if (tempCell != null) {
 			System.out.println("Cell was not NULL");
 			return tempCell;
@@ -236,7 +247,7 @@ public abstract class AbstractGame implements Serializable {
 
 		// add all point that are not dead or belong to guest to a new Arraylist
 		// these point will be part of the a cell.
-	
+
 		for (Point p1 : area) {
 			if (p1.getStatus() == 4 || p1.getId() == currentP.getId()) {
 				continue;
@@ -253,9 +264,12 @@ public abstract class AbstractGame implements Serializable {
 	 * @return true if p belongs to the path and false if not
 	 */
 	public static boolean isPath(Point p) {
-		if ((p.getStatus() != Point.DEAD) && (p.getId() != guest.getId())) {
-//(p.getStatus() != Point.PLAYED) && 
-			return true;
+
+		if (((p.getId() != guest.getId()))) {
+			if ((p.getStatus() == Point.PLAYED) || (p.getStatus() == Point.CONNECTED)) {
+				System.out.print("Point status: " + p.getStatus());
+				return true;
+			}
 		}
 		return false;
 	}
@@ -441,7 +455,9 @@ public abstract class AbstractGame implements Serializable {
 
 	private void setStatusForAll(ArrayList<Point> points, int status) {
 		for (Point p : points) {
-			p.setStatus(status);
+			if (p.getStatus() != Point.CAPTURED) {
+				p.setStatus(status);
+			}
 		}
 	}
 
@@ -501,7 +517,6 @@ public abstract class AbstractGame implements Serializable {
 	private int status = 0;
 	private int maxScore = 2;
 	public Point lastp = new Point(553355, 7798979);
-	
 
 	/* keeps track of all captured points */
 	private AbstractPlayer player1;

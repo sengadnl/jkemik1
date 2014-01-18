@@ -81,7 +81,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					BoardFrame.grid.repaint();
 
 					// Mark point as played
-					temp.setStatus(1);
+					temp.setStatus(Point.PLAYED);
 
 					// Mark point as belonging to current player
 					temp.setId(current.getId());
@@ -93,8 +93,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					game.getCollection().put(temp.toString(), temp);
 
 					game.setEmbuche_on(true);
-					 System.out.println("Collection: " +
-					 game.getCollection());
+					// System.out.println("Collection size: " +
+					// game.getCollection().size());
 
 					// Setting turn
 					game.setPlayFlag();
@@ -104,14 +104,13 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			}
 		}
 		if (game.isEmbuche_on() && JKemik.settings_t.isAutoCapture()) {
-			System.out.println("In embush!!!!!!!!!!!!!");
+			System.out.println("Embush attempt");
 			BoardFrame.progressB.setVisible(true);
 			BoardFrame.progressB.setIndeterminate(true);
 			Grid.cell = JKemik.embush(Grid.squareSize);// new line
 			BoardFrame.progressB.setIndeterminate(false);
 			BoardFrame.progressB.setVisible(false);
 			BoardFrame.grid.repaint();
-			System.out.println("Embush attempt");
 			game.getCurrentP().setSelected(new ArrayList<Point>());
 		}
 		if (game.getCurrentP().isTurn()) {
