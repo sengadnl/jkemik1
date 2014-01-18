@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import controler.JKemik;
 
 import utilities.Tools;
 
@@ -31,52 +32,7 @@ public abstract class AbstractPlayer implements Serializable {
 		this.Cells = new ArrayList<Cell>();
 	}
 
-	/**
-     * Finds a capture by following a path that starts at Point "o" location and
-     * ends at "o" as well. Recursively checks every adjacent Point to find a
-     * valid path. Reverts when a dead end has been reached. a valid capture
-     * must have at least 4 Point Objects.
-     * 
-     * @param o
-     *            Point where to start
-     * @param squareSize
-     *            integer length of the sides of a grid square
-     * @return true when a valid capture was found, and false otherwise.
-     * @throws InterruptedException
-     */
-    public boolean buildPath(Point o, double squareSize) {
-            if (this.successful) {
-                    return true;
-            }
-            /* Get all adjacent Points */
-            Point[] box = Tools.boxCoord(o, squareSize);
-            /* Find the point in this box that belongs to the path */
-            for (int i = 0; i < box.length; i++) {
-
-                    if (AbstractGame.isPath(box[i])) {// if this Point is path
-                            if (box[i].compareTo(this.from) != 0) {// is it == to previous
-                                    if (!Tools.containPoint(o,this.selected)) {
-                                            /* Add o if it hasn't been visited */
-                                            this.selected.add(o);
-                                            this.from = o; /* Move to the next Point*/
-                                            if (box[i].compareTo(this.origin) == 0
-                                                            && this.selected.size() > 3) {
-                                                    this.successful = true;/* Set recursive call stop */
-                                                    this.origin = null;/* Reset the origin */
-                                                    System.out.println("Found cell...");
-                                                    return true;/* Capture was found */
-                                            }
-                                            /* This adjacent Point was a dead end */
-                                            if (!buildPath(box[i], squareSize)) {
-                                                    this.selected.remove(o);
-                                                    continue;
-                                            }
-                                    }
-                            }
-                    }
-            }
-            return false;/* No path */
-    }
+	
 
 	/**
 	 * @return the successful
@@ -84,7 +40,13 @@ public abstract class AbstractPlayer implements Serializable {
 	public boolean isSuccessful() {
 		return this.successful;
 	}
-
+	/**
+	 * @param successful
+	 *            the successful to set
+	 */
+	public boolean getSuccessful() {
+		return this.successful;
+	}
 	/**
 	 * @param successful
 	 *            the successful to set
@@ -151,9 +113,6 @@ public abstract class AbstractPlayer implements Serializable {
 		this.CapturedCells = capturedCells;
 	}
 
-	
-	
-
 	/**
 	 * @param cells
 	 *            the cells to set
@@ -162,7 +121,6 @@ public abstract class AbstractPlayer implements Serializable {
 		this.Cells = cells;
 	}
 
-	
 	/**
 	 * @return the cells
 	 */
@@ -231,6 +189,7 @@ public abstract class AbstractPlayer implements Serializable {
 	public void setPlay_flag(int playFlag) {
 		play_flag = playFlag;
 	}
+
 	public int compareTo(AbstractPlayer o) {
 		if (this.getColor().equals(o.getColor())) {
 			return 0;
@@ -252,11 +211,12 @@ public abstract class AbstractPlayer implements Serializable {
 	 */
 
 	public String toString() {
-		return "\nID: " + this.id + "\nName: " + this.name + "\nColor: " + this.color.toString()
-				+ "\nFaded Color: " + this.getFadedColor() + "\nScore: "
-				+ this.score + "\nMy turn: " + this.turn + "\nCells: " + this.Cells + "\nCapturedCells: "
-				+ this.CapturedCells  +  "\nPlay Flag: " + this.play_flag
-				+ "\nCapture successfull: " + this.successful
+		return "\nID: " + this.id + "\nName: " + this.name + "\nColor: "
+				+ this.color.toString() + "\nFaded Color: "
+				+ this.getFadedColor() + "\nScore: " + this.score
+				+ "\nMy turn: " + this.turn + "\nCells: " + this.Cells
+				+ "\nCapturedCells: " + this.CapturedCells + "\nPlay Flag: "
+				+ this.play_flag + "\nCapture successfull: " + this.successful
 				+ "\nFade variant: " + this.FADE_VARIANT + "\n";
 	}
 
@@ -301,20 +261,20 @@ public abstract class AbstractPlayer implements Serializable {
 	}
 
 	private String name = "player";
-	private int id = 0;//player1 = -1 and player2 = 1
+	private int id = 0;// player1 = -1 and player2 = 1
 	private boolean turn = false;
 	private boolean ai = false;
 	private double score = 0.0;
 	private Color color;
-	
+
 	private Point origin = new Point(444444, 7798979);
-    private Point from = new Point(553355, 7798979);
-    private Point latestP = new Point(550055, 7798979);
-	
+	private Point from = new Point(553355, 7798979);
+	private Point latestP = new Point(550055, 7798979);
+
 	private ArrayList<Cell> Cells = null;
 	private ArrayList<Cell> CapturedCells = null;
 	private ArrayList<Point> selected = null;
-	
+
 	private boolean successful = false;
 	private int FADE_VARIANT = 70;
 	private int play_flag = 0;

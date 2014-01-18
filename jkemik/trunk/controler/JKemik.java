@@ -285,8 +285,7 @@ public class JKemik extends Application {
 				}
 			}
 		} catch (NullPointerException e) {
-			System.out.println("Error in PaintComponent: capture "
-					+ e.getMessage());
+			System.out.println("Error in embush: capture " + e.getMessage());
 		}
 		return null;
 	}
