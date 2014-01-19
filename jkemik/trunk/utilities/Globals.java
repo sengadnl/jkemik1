@@ -21,6 +21,10 @@ public class Globals {
 	public static final String gameObjectFile = "/tmp/game.obj";
 	public static final String settingsTemplateObjectFile = "/tmp/stemplate.obj";
 	public static final String VERSION = "Beta-5.0.315 ";
+	
+	public static final int POINT_VALUE = 1;
+	public static final int REDEEMED_POINT_VALUE = 3;
+	
 	public static final int RED_INDEX = 0;
 	public static final int WHITE_INDEX = 4;
 	public static final int GREEN_INDEX = 5;

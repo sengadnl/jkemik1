@@ -44,7 +44,7 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
 		this.x = x;
 		this.y = y;
 		this.id = id;
-		this.status = 0;
+		this.status = -1;
 		this.north = false;
 		this.south = false;
 		this.east = false;

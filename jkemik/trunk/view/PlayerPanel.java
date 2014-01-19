@@ -119,10 +119,10 @@ public class PlayerPanel extends JPanel {
 				this.FONT_SIZE);
 		scorev.setFont(scvfont);
 
-		 final JLabel plotted = new JLabel(" Plt Pt: ");
+		 final JLabel plotted = new JLabel(" Rd Pt: ");
 		final JLabel captured = new JLabel(" Cp Pt: ");
-		final JLabel cptcells = new JLabel(" Cp Cll: ");
-		   final JLabel cells = new JLabel(" Cll: ");
+		final JLabel cptcells = new JLabel(" Cp Cl: ");
+		   final JLabel cells = new JLabel(" Cl: ");
 		   final JLabel score = new JLabel(" Scr: ");
 
 
@@ -181,11 +181,9 @@ public class PlayerPanel extends JPanel {
 
 	public void updatePlayerPanel(AbstractPlayer abstractPlayer) {
 		try {
-//			plottedv.setText("" + abstractPlayer.getPloted().size());
-//			capturedv.setText("" + abstractPlayer.getCapturedDots().size());
 			
-			plottedv.setText("" + 0);
-			capturedv.setText("" + 0);
+			plottedv.setText("" + abstractPlayer.getRedeemed_count());
+			capturedv.setText("" + abstractPlayer.getCapture_count());
 			cellsv.setText("" + abstractPlayer.getCells().size());
 			captCellsv.setText("" + abstractPlayer.getCapturedCells().size());
 			scorev.setText("" + abstractPlayer.getScore());

@@ -3,6 +3,7 @@ package api;
 import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * COPYRIGHT(c)2010 Daniel Senga. All Right Reserved. This class is a parent to
@@ -23,9 +24,9 @@ public abstract class AbstractPlayer implements Serializable {
 		this.color = color;
 		this.name = name;
 		this.score = 0.0;
-		this.CapturedCells = new ArrayList<Cell>();
+		this.CapturedCells = new HashMap<Integer, Cell>();
 		this.selected = new ArrayList<Point>();
-		this.Cells = new ArrayList<Cell>();
+		this.Cells = new HashMap<Integer, Cell>();
 	}
 
 	
@@ -55,7 +56,7 @@ public abstract class AbstractPlayer implements Serializable {
 	public void addCell(Cell c) {
 
 		// Add what this cell is worth to this player'score
-		this.Cells.add(c);
+		this.Cells.put(c.getPIN(), c);
 		this.score += c.getValue();
 
 	}
@@ -70,7 +71,7 @@ public abstract class AbstractPlayer implements Serializable {
 	}
 
 	public void addCapturedCells(Cell c) {
-		this.CapturedCells.add(c);
+		this.CapturedCells.put(c.getPIN(), c);
 	}
 
 	/**
@@ -97,7 +98,7 @@ public abstract class AbstractPlayer implements Serializable {
 	/**
 	 * @return the capturedCells
 	 */
-	public ArrayList<Cell> getCapturedCells() {
+	public HashMap<Integer, Cell> getCapturedCells() {
 		return this.CapturedCells;
 	}
 
@@ -105,7 +106,7 @@ public abstract class AbstractPlayer implements Serializable {
 	 * @param capturedCells
 	 *            the capturedCells to set
 	 */
-	public void setCapturedCells(ArrayList<Cell> capturedCells) {
+	public void setCapturedCells(HashMap<Integer, Cell> capturedCells) {
 		this.CapturedCells = capturedCells;
 	}
 
@@ -113,14 +114,14 @@ public abstract class AbstractPlayer implements Serializable {
 	 * @param cells
 	 *            the cells to set
 	 */
-	public void setCells(ArrayList<Cell> cells) {
+	public void setCells(HashMap<Integer, Cell> cells) {
 		this.Cells = cells;
 	}
 
 	/**
 	 * @return the cells
 	 */
-	public ArrayList<Cell> getCells() {
+	public HashMap<Integer, Cell> getCells() {
 		return this.Cells;
 	}
 
@@ -256,19 +257,43 @@ public abstract class AbstractPlayer implements Serializable {
 		this.latestP = latestP;
 	}
 
+	public int getCapture_count() {
+		return capture_count;
+	}
+
+
+	public void refreshCapture_count(int capture_count) {
+		this.capture_count += capture_count;
+	}
+
+
+
+	public int getRedeemed_count() {
+		return redeemed_count;
+	}
+
+
+
+	public void refreshRedeemed_count(int value) {
+		this.redeemed_count += value;
+	}
+
 	private String name = "player";
 	private int id = 0;// player1 = -1 and player2 = 1
 	private boolean turn = false;
 	private boolean ai = false;
 	private double score = 0.0;
+	private int capture_count = 0;
+	private int redeemed_count = 0;
 	private Color color;
 
 	private Point origin = new Point(444444, 7798979);
 	private Point from = new Point(553355, 7798979);
 	private Point latestP = new Point(550055, 7798979);
 
-	private ArrayList<Cell> Cells = null;
-	private ArrayList<Cell> CapturedCells = null;
+	private HashMap<Integer, Cell> Cells = null;
+	//TODO
+	private HashMap<Integer, Cell> CapturedCells = null;
 	private ArrayList<Point> selected = null;
 
 	private boolean successful = false;
