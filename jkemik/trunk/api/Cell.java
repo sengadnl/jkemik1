@@ -5,6 +5,9 @@ package api;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import utilities.Tools;
 
 /**
  * @author dalet
@@ -18,7 +21,7 @@ public class Cell implements Comparable<Cell>, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public Cell(int id, ArrayList<Point> cellContour, ArrayList<Point> areaIncell,
-			 ArrayList<Cell> cellsInCell) {
+			HashMap<Integer, Cell> cellsInCell) {
 		super();
 		this.id = id;
 		this.cellContour = cellContour;
@@ -26,15 +29,10 @@ public class Cell implements Comparable<Cell>, Serializable {
 		//this.capturedPoints = capturedPoints;
 		this.capturedcell_Count = 0;
 		this.cellsInCell = cellsInCell;
-		evaluateCell();
+		this.pin = Tools.pinGenerator(areaIncell);
 	}
 	public String toString() {
 		return "" + this.cellContour;
-	}
-
-	/** Calculates what this cell is worth */
-	public void evaluateCell() {
-		//this.value = this.capturedPoints.size();
 	}
 
 	/**
@@ -185,7 +183,7 @@ public class Cell implements Comparable<Cell>, Serializable {
 	 */
 	public void addCellToCell(Cell c) {
 		try {
-			this.cellsInCell.add(c);
+			this.cellsInCell.put(c.getPIN(),c);
 			this.value = this.value + c.getValue();
 		} catch (Exception e) {
 			System.out.println("in Cell:addCellToCell " + e.getMessage());
@@ -195,7 +193,7 @@ public class Cell implements Comparable<Cell>, Serializable {
 	/**
 	 * @return the cellsInCell
 	 */
-	public ArrayList<Cell> getCellsInCell() {
+	public HashMap<Integer, Cell> getCellsInCell() {
 		return this.cellsInCell;
 	}
 
@@ -203,7 +201,7 @@ public class Cell implements Comparable<Cell>, Serializable {
 	 * @param cellsInCell
 	 *            the cellsInCell to set
 	 */
-	public void setCellsInCell(ArrayList<Cell> cellsInCell) {
+	public void setCellsInCell(HashMap<Integer, Cell> cellsInCell) {
 		this.cellsInCell = cellsInCell;
 	}
 
@@ -214,12 +212,20 @@ public class Cell implements Comparable<Cell>, Serializable {
 		this.id = id;
 	}
 
+	
+	public int getPIN() {
+		return pin;
+	}
+	public void setPIN(int pin) {
+		this.pin = pin;
+	}
+
+
 	private ArrayList<Point> cellContour;
 	private ArrayList<Point> areaIncell;
-	//private ArrayList<Point> capturedPoints;
-	private ArrayList<Cell> cellsInCell;
+	private HashMap<Integer, Cell> cellsInCell;
 	private int capturedcell_Count;
 	private double value = 0.0;
 	private int id = 0;
-	//private Color color;
+	private int pin = 0;
 }

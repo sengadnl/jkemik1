@@ -46,12 +46,12 @@ public class SysPrefsListener implements MouseListener {
 
 	public void mouseExited(MouseEvent arg0) {
 
-		this.label.setForeground(Globals.SYSPREFS_BUTTON_FGCOLOR);
-		if (!JKemik.settings_t.isSystemSetupMode()) {
-			System.out.println("Refreshing ...");
-			Grid.refresh = true;
-			BoardFrame.displayGrid(true);
-		}
+//		this.label.setForeground(Globals.SYSPREFS_BUTTON_FGCOLOR);
+//		if (!JKemik.settings_t.isSystemSetupMode()) {
+//			System.out.println("Refreshing ...");
+//			Grid.refresh = true;
+//			BoardFrame.displayGrid(true);
+//		}
 	}
 
 	public void mousePressed(MouseEvent arg0) {

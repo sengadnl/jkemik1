@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -256,8 +257,8 @@ public class Artist {
 	protected static void drawGame(AbstractGame g, Graphics2D g2) {
 		Player p1 = (Player) g.getPlayer1();
 		Player p2 = (Player) g.getPlayer2();
-		ArrayList<Cell> p1c = p1.getCells();
-		ArrayList<Cell> p2c = p2.getCells();
+		HashMap<Integer, Cell> p1c = p1.getCells();
+		HashMap<Integer, Cell> p2c = p2.getCells();
 
 		// draw p1 cells
 		if (drawAllCell(p1c, p1, p2, g2)) {
@@ -345,11 +346,11 @@ public class Artist {
      *            of pl1 cells, pl1, pl2
      * @return void Draws a cell with all its content.
      * */
-    protected static boolean drawAllCell(ArrayList<Cell> cells, Player pl1,
+    protected static boolean drawAllCell(HashMap<Integer, Cell> cells, Player pl1,
                     Player pl2, Graphics2D g2) {
 
             try {
-                    for (Cell c : cells) {
+                    for (Cell c : cells.values()) {
                             ArrayList<Point> contour = c.getCellContour();
 
                             /* draw cell contour */

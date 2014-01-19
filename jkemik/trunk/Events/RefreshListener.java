@@ -33,10 +33,10 @@ public class RefreshListener implements MouseListener {
 	}
 
 	public void mouseExited(MouseEvent arg0) {
-		if (!JKemik.settings_t.isSystemSetupMode()) {
-			Grid.refresh = true;
-			BoardFrame.displayGrid(true);
-		}
+//		if (!JKemik.settings_t.isSystemSetupMode()) {
+//			Grid.refresh = true;
+//			BoardFrame.displayGrid(true);
+//		}
 		//BoardFrame.displayGrid(true);
 	}
 
