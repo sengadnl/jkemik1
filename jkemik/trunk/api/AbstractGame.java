@@ -6,10 +6,7 @@ package api;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import javax.swing.JOptionPane;
-
-import controler.JKemik;
 import utilities.Tools;
 
 /**
@@ -34,7 +31,6 @@ public abstract class AbstractGame implements Serializable {
 		this.status = 0;
 	}
 
-	// TODO
 	/**
 	 * Finds a capture by following a path that starts at Point "o" location and
 	 * ends at "o" as well. Recursively checks every adjacent Point to find a
@@ -71,8 +67,8 @@ public abstract class AbstractGame implements Serializable {
 					if (!Tools.containPoint(o, currentP.getSelected())) {
 						/* Add o if it hasn't been visited */
 						currentP.getSelected().add(o);
-						System.out.println("\nAdd to Selected : "
-								+ currentP.getSelected());
+						// System.out.println("\nAdd to Selected : "
+						// + currentP.getSelected());
 						currentP.setFrom(o); /* Move to the next Point */
 						if (temp.compareTo(currentP.getOrigin()) == 0
 								&& currentP.getSelected().size() > 3) {
@@ -130,19 +126,22 @@ public abstract class AbstractGame implements Serializable {
 			/* Go through all selected dots from recursion */
 			for (Point p : area) {
 				Point object = this.collection.get(p.toString());
+
+				/* if pt is not in collection, add it */
 				if (object == null) {
 					p.setStatus(Point.DEAD);
 					this.collection.put(p.toString(), p);
 					continue;
 				}
-				if (object.getId() == guest.getId()) {
+	
+
+				if (object.getId() == guest.getId()
+						&& object.getStatus() != Point.CAPTURED) {
 					/* keep track of captures for this cell */
 					object.setStatus(Point.CAPTURED);
 					System.err.println("Found captured point..");
-				} else if (object.getStatus() != Point.CAPTURED) {//
-					object.setStatus(Point.DEAD);
-					// this.collection.put(object.toString(), p);
-				}/* end first if else */
+				}
+
 			}/* end of second for loop */
 			setStatusForAll(currentP.getSelected(), Point.CONNECTED);
 			cell = new Cell(getCurrentP().getId(), getCurrentP().getSelected(),
@@ -249,10 +248,12 @@ public abstract class AbstractGame implements Serializable {
 		// these point will be part of the a cell.
 
 		for (Point p1 : area) {
-			if (p1.getStatus() == 4 || p1.getId() == currentP.getId()) {
+			Point temp = this.collection.get(p1.toString());
+			if (temp == null || temp.getStatus() == Point.DEAD
+					|| temp.getId() == currentP.getId()) {
 				continue;
 			}
-			newArea.add(p1);
+			newArea.add(temp);
 		}
 		// System.out.println("TrueArea is equal " + newArea.size());
 		return newArea;
@@ -265,9 +266,16 @@ public abstract class AbstractGame implements Serializable {
 	 */
 	public static boolean isPath(Point p) {
 
+		/* if the point belong to the current player */
 		if (((p.getId() != guest.getId()))) {
-			if ((p.getStatus() == Point.PLAYED) || (p.getStatus() == Point.CONNECTED)) {
-				System.out.print("Point status: " + p.getStatus());
+
+			/* Wrong way, if the pt is captured*/
+			if (p.getStatus() == Point.CAPTURED) {
+				return false;
+			}
+			/* Return true if this pt is played or connected */
+			if ((p.getStatus() == Point.PLAYED)
+					|| (p.getStatus() == Point.CONNECTED)) {
 				return true;
 			}
 		}
@@ -371,17 +379,19 @@ public abstract class AbstractGame implements Serializable {
 	 * @return void
 	 */
 	public void evalCell(Cell cell) {
+	
 		for (Cell c : guest.getCells()) {
 			Point p = c.getCellContour().get(0);
-			if (p.getStatus() == Point.CAPTURED) {
+			Point temp = this.collection.get(p.toString());
+			if (temp.getStatus() == Point.CAPTURED) {
 				currentP.addCapturedCells(c);
-				// currentP.getCapturedCells().add(c);
 				cell.setValue(cell.getValue() + c.getValue());
 				cell.addCellToCell(c);
 				// guest.getCells().remove(c);
 				guest.setScore(guest.getScore() - c.getValue());
 			}
 		}
+		// return true;
 	}
 
 	/**
@@ -400,8 +410,9 @@ public abstract class AbstractGame implements Serializable {
 	 * @return the number of cuptured cells by the current player
 	 */
 	public void calculateScore(Cell c) {
-		evalCell(c);// check for captured cells in this cell
-		currentP.addCell(c);// make last a prisoner
+		evalCell(c);
+
+		currentP.addCell(c);
 		if ((currentP.getScore()) >= this.getMaxScore()) {
 			this.status = 1;// End the Game
 		}
