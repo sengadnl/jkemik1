@@ -4,10 +4,6 @@ import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import controler.JKemik;
-
-import utilities.Tools;
-
 /**
  * COPYRIGHT(c)2010 Daniel Senga. All Right Reserved. This class is a parent to
  * all Player Objects and their subclasses.
