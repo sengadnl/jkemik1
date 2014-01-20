@@ -257,12 +257,11 @@ public class JKemik extends Application {
 									.getString("maxWinSizeMustbBe2"),
 					BoardFrame.messages.getString("wrongInput"),
 					JOptionPane.WARNING_MESSAGE);
-
 		}
 	}
 
 	public static Cell embush(double squareSize) {
-		try {
+		//try {
 			Cell temp = game.connectDots(squareSize);
 			if (settings_t.isAutoCapture()) {
 
@@ -284,9 +283,9 @@ public class JKemik extends Application {
 					JKemik.settings_t.setManualCapture(false);
 				}
 			}
-		} catch (NullPointerException e) {
-			System.out.println("Error in embush: capture " + e.getMessage());
-		}
+//		} catch (NullPointerException e) {
+//			System.out.println("Error in embush: capture " + e.getLocalizedMessage());
+//		}
 		return null;
 	}
 

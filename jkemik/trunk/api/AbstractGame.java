@@ -71,7 +71,7 @@ public abstract class AbstractGame implements Serializable {
 						currentP.setFrom(o); /* Move to the next Point */
 						if (temp.compareTo(currentP.getOrigin()) == 0
 								&& currentP.getSelected().size() > 3) {
-
+							currentP.setSuccessful(true);/* Set recursive call stop */
 							currentP.setOrigin(null);/* Reset the origin */
 							System.out.println("\nFound cell...");
 							return true;/* Capture was found */
@@ -104,7 +104,7 @@ public abstract class AbstractGame implements Serializable {
 	}
 
 	public Cell capture(Point o, double squareSize) {
-		Cell cell = null; /* Cell to be returned */
+		Cell cell = null; /*Cell to be returned*/
 
 		if (buildPath(o, squareSize)) {
 			try {
@@ -112,7 +112,7 @@ public abstract class AbstractGame implements Serializable {
 						currentP.getSelected(), squareSize);
 
 				ArrayList<Point> area = getTrueArea(TempArea);
-				// System.err.println("Area: " + TempArea);
+				
 				if (isAreaEmpty(area)) {
 					currentP.setSelected(new ArrayList<Point>());
 					return null;
