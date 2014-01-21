@@ -63,8 +63,8 @@ public class SysPrefsListener implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
-		this.label.setForeground(Tools
-				.fade(Globals.SYSPREFS_BUTTON_FGCOLOR, 20));
+//		this.label.setForeground(Tools
+//				.fade(Globals.SYSPREFS_BUTTON_FGCOLOR, 20));
 		// this.label.setToolTipText("System Preferences.");
 		this.label
 				.setToolTipText(BoardFrame.messages.getString("sysPrefHover"));

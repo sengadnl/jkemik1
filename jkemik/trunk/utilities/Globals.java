@@ -13,9 +13,7 @@ public class Globals {
 	public static final double FADE_VARIANT = .35;//for fading colors
 	public static final double LABEL_VARIANT = 120;//for fading colors
 	public static final int FADE_THRESHOLD = 50;
-	public static final Color BTN_FRD_COLOR = new Color(220,220,10);
-	public static final Color BTN_BGD_COLOR = new Color(60,0,0);
-	public static final Color PENALTY_COL = new Color(224,27,208);
+	
 	public static final String templateObjectFile = "/tmp/template.obj";
 	public static final String tempFile = "tmp";
 	public static final String gameObjectFile = "/tmp/game.obj";
@@ -54,15 +52,22 @@ public class Globals {
 		new Color(97, 237, 135),
 		new Color(247, 174, 101),
 		new Color(170, 85, 173)};
-	public static final Color EXIT_BUTTON_BGCOLOR = new Color(180, 50, 50);
-	public static final Color SYSPREFS_BUTTON_BGCOLOR = new Color(160, 29, 100);
-	public static final Color HELP_BUTTON_BGCOLOR = new Color(120, 120, 120);
-	public static final Color NEWG_BUTTON_BGCOLOR = new Color(29, 180, 100);
+
+//	public static final Color BTN_FRD_COLOR = new Color(220,220,10);
+//	public static final Color BTN_BGD_COLOR = new Color(60,0,0);
 	
-	public static final Color EXIT_BUTTON_FGCOLOR = new Color(255, 200, 200);
-	public static final Color SYSPREFS_BUTTON_FGCOLOR = new Color(255, 150, 245);
-	public static final Color HELP_BUTTON_FRCOLOR = new Color(255, 255, 255);
-	public static final Color NEWG_BUTTON_FRCOLOR = new Color(200, 255, 200);
+	public static final Color PENALTY_COL = new Color(224,27,208);
+	public static final Color SYSPREFS_BUTTON_BGCOLOR = new Color(255, 150, 245);//
+	public static final Color SYSPREFS_BUTTON_FGCOLOR = new Color(160, 29, 100);
+	
+//	public static final Color HELP_BUTTON_BGCOLOR = new Color(120, 120, 120);
+//	public static final Color HELP_BUTTON_FRCOLOR = new Color(255, 255, 255);
+	
+	public static final Color EXIT_BUTTON_BGCOLOR = new Color(220, 80, 80);//
+	public static final Color EXIT_BUTTON_FGCOLOR = new Color(100, 40, 40);
+	
+	public static final Color NEWG_BUTTON_BGCOLOR = new Color(50, 200, 50);
+	public static final Color NEWG_BUTTON_FRCOLOR = new Color(25, 100, 25);
 	
 	public static final String[] code = {"en","fr","de"};
 	public static final String[] laguageNames = {"ENGLISH","FRANCAIS","DEUTSCH"};
