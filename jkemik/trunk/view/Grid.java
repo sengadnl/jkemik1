@@ -63,7 +63,7 @@ public class Grid extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
-		// super.paintComponent(g2);
+		//super.paintComponent(g2);
 		Grid.g2 = (Graphics2D) g;
 		AbstractGame game = JKemik.game;
 
