@@ -267,6 +267,7 @@ public class Artist {
 		// draw p1 cells
 		if (drawAllCell(p2c, p2, p1, g2)) {
 		}
+
 		// draw p1 points
 		for (Point p : JKemik.game.getCollection().values()) {
 
@@ -303,7 +304,7 @@ public class Artist {
 	 * @return void Draws a cell with all its content.
 	 * */
 	protected static boolean drawCell(Cell c, Color col, Graphics2D g2) {
-		
+
 		try {
 			// for (Cell c : cells) {
 			ArrayList<Point> contour = c.getCellContour();
@@ -312,7 +313,6 @@ public class Artist {
 			Artist.drawLine(contour.get(0), contour.get(contour.size() - 1),
 					Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE, col, g2);
 			for (int i = 0; i < contour.size() - 1; i++) {
-				
 
 				Artist.drawLine(contour.get(i), contour.get(i + 1),
 						Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE, col,
@@ -342,47 +342,54 @@ public class Artist {
 	}
 
 	/**
-     * @param Arraylist
-     *            of pl1 cells, pl1, pl2
-     * @return void Draws a cell with all its content.
-     * */
-    protected static boolean drawAllCell(HashMap<Integer, Cell> cells, Player pl1,
-                    Player pl2, Graphics2D g2) {
+	 * @param Arraylist
+	 *            of pl1 cells, pl1, pl2
+	 * @return void Draws a cell with all its content.
+	 * */
+	protected static boolean drawAllCell(HashMap<Integer, Cell> cells,
+			Player pl1, Player pl2, Graphics2D g2) {
 
-            try {
-                    for (Cell c : cells.values()) {
-                            ArrayList<Point> contour = c.getCellContour();
+		try {
+			if (cells.isEmpty()) {
+				return false;
+			}
 
-                            /* draw cell contour */
-                            Artist.drawLine(contour.get(0),
-                                            contour.get(contour.size() - 1), Grid.gridLineStroke
-                                                            + Grid.CURSOR_VARIANT_STROKE, pl1.getColor(),
-                                            g2);
-                            for (int i = 0; i < contour.size() - 1; i++) {
+			for (Cell c : cells.values()) {
 
-                                    Artist.drawLine(contour.get(i), contour.get(i + 1),
-                                                    Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE,
-                                                    pl1.getColor(), g2);
-                                    
-                                    // draw intersection
-                                    Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
-                                                    Grid.half_squareSize, Grid.gridLineCol, g2);
+				ArrayList<Point> contour = c.getCellContour();
 
-                                    Artist.drawCursor(contour.get(i + 1), Grid.gridLineStroke,
-                                                    Grid.half_squareSize, Grid.gridLineCol, g2);
-                                    g2.setColor(pl1.getColor());
-                                    g2.setStroke(new BasicStroke(Grid.gridLineStroke
-                                                    + Grid.CURSOR_VARIANT_STROKE));
-                            }
-                            if (drawAllCell(c.getCellsInCell(), pl2, pl1, g2)) {
-                            }
-                    }
+				/* draw cell contour */
+				Artist.drawLine(contour.get(0),
+						contour.get(contour.size() - 1), Grid.gridLineStroke
+								+ Grid.CURSOR_VARIANT_STROKE, pl1.getColor(),
+						g2);
+				for (int i = 0; i < contour.size() - 1; i++) {
 
-            } catch (NullPointerException e) {
-                    System.out.println("In drawAllCell: " + e.getMessage());
-            }
-            return true;
-    }
+					Artist.drawLine(contour.get(i), contour.get(i + 1),
+							Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE,
+							pl1.getColor(), g2);
+
+					// draw intersection
+					Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
+							Grid.half_squareSize, Grid.gridLineCol, g2);
+
+					Artist.drawCursor(contour.get(i + 1), Grid.gridLineStroke,
+							Grid.half_squareSize, Grid.gridLineCol, g2);
+					g2.setColor(pl1.getColor());
+					g2.setStroke(new BasicStroke(Grid.gridLineStroke
+							+ Grid.CURSOR_VARIANT_STROKE));
+				}
+				if (drawAllCell(c.getCellsInCell(), pl2, pl1, g2)) {
+					System.err.println("Drawing captured cells ...");
+				}
+			}
+
+		} catch (NullPointerException e) {
+			System.out.println("In drawAllCell: " + e.getMessage());
+		}
+		return true;
+	}
+
 	protected static void unDraw(Point p, Graphics2D g2) {
 
 		try {
@@ -392,11 +399,11 @@ public class Artist {
 					- Grid.HALF_DIAMETER, py - Grid.HALF_DIAMETER,
 					Grid.CIRCLE_DIAMETER, Grid.CIRCLE_DIAMETER);
 			g2.setColor(BoardFrame.BOARD_COLOR);
-			// g2.setColor(BoardFrame.THEME_COLOR);
+
 			g2.fill(circle);
 			g2.draw(circle);
 			g2.setColor(Grid.gridLineCol);
-			// drawCursor(p, squareFadeVariant,
+
 			Artist.drawCursor(p, Grid.squareFadeVariant, Grid.half_squareSize,
 					Tools.fade(BoardFrame.BOARD_COLOR), g2);
 			drawLongCursor(p, Grid.gridLineStroke, Grid.gridLineCol, g2);

@@ -21,7 +21,7 @@ public class Globals {
 	public static final String VERSION = "Beta-5.0.315 ";
 	
 	public static final int POINT_VALUE = 1;
-	public static final int REDEEMED_POINT_VALUE = 3;
+	public static final int REDEEMED_POINT_VALUE = 1;
 	
 	public static final int RED_INDEX = 0;
 	public static final int WHITE_INDEX = 4;
@@ -37,9 +37,9 @@ public class Globals {
 	public static final double SIZE_PERCENT = .75;
 	
 	public static final Color[] CHEMIK_COLOR = {
-		new Color(250, 0, 255),
-		new Color(170, 200, 190),
-		new Color(255, 255, 100)};
+		new Color(77, 192, 250),
+		new Color(103, 250, 95),
+		new Color(250, 250, 57)};
 	public static final Color[] ORIGINE_COLOR = {
 		new Color(232, 216, 37),
 		new Color(99, 196, 235),
@@ -47,27 +47,22 @@ public class Globals {
 	public static final Color[] CLASSIC_COLOR = {
 		new Color(0, 255, 0),
 		new Color(250, 50, 50),
-		new Color(100, 250, 110)};
+		new Color(250, 250, 250)};
 	public static final Color[] GEECKY_COLOR = {
-		new Color(97, 237, 135),
-		new Color(247, 174, 101),
-		new Color(170, 85, 173)};
+		new Color(166, 171, 179),
+		new Color(206, 156, 151),
+		new Color(150, 196, 147)};
 
-//	public static final Color BTN_FRD_COLOR = new Color(220,220,10);
-//	public static final Color BTN_BGD_COLOR = new Color(60,0,0);
 	
 	public static final Color PENALTY_COL = new Color(224,27,208);
 	public static final Color SYSPREFS_BUTTON_BGCOLOR = new Color(255, 150, 245);//
 	public static final Color SYSPREFS_BUTTON_FGCOLOR = new Color(160, 29, 100);
-	
-//	public static final Color HELP_BUTTON_BGCOLOR = new Color(120, 120, 120);
-//	public static final Color HELP_BUTTON_FRCOLOR = new Color(255, 255, 255);
-	
-	public static final Color EXIT_BUTTON_BGCOLOR = new Color(220, 80, 80);//
+
+	public static final Color EXIT_BUTTON_BGCOLOR = new Color(200, 20, 20);//
 	public static final Color EXIT_BUTTON_FGCOLOR = new Color(100, 40, 40);
 	
-	public static final Color NEWG_BUTTON_BGCOLOR = new Color(50, 200, 50);
-	public static final Color NEWG_BUTTON_FRCOLOR = new Color(25, 100, 25);
+	public static final Color NEWG_BUTTON_BGCOLOR = new Color(30, 200, 30);
+	public static final Color NEWG_BUTTON_FRCOLOR = new Color(20, 100, 20);
 	
 	public static final String[] code = {"en","fr","de"};
 	public static final String[] laguageNames = {"ENGLISH","FRANCAIS","DEUTSCH"};

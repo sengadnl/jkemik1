@@ -330,11 +330,12 @@ public class BoardFrame extends JFrame {
 		middle_container.add(status_panel_container, BorderLayout.EAST);
 		grid_container.add(settings_p);
 		grid_container.add(grid);
-		
+
 	}
 
 	private void setAllBorders() {
-		System.err.println("settings borders color to " + BoardFrame.BORDER_COLOR);
+		System.err.println("settings borders color to "
+				+ BoardFrame.BORDER_COLOR);
 		grid_container.setBorder(BorderFactory
 				.createLineBorder(BoardFrame.BORDER_COLOR));
 		status_panel_container.setBorder(BorderFactory
@@ -358,20 +359,25 @@ public class BoardFrame extends JFrame {
 	}
 
 	public static void decoratebuttons(Color bg, Color fg) {
+		
 		pass_turn.setBackground(bg);
 		pass_turn.setForeground(fg);
+		
 		undo.setBackground(bg);
 		undo.setForeground(fg);
+		
 		refresh.setBackground(bg);
 		refresh.setForeground(fg);
-		startG.setBackground(new Color(255, 33, 00));
-		startG.setForeground(new Color(255, 230, 200));
-		
+
+		startG.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT));
+		startG.setForeground(fg);
+
 		settings.setForeground(fg);
 		settings.setBackground(bg);
-		
+
 		help.setForeground(fg);
 		help.setBackground(bg);
+
 	}
 
 	public static void decorateLabelss(Color fg) {
@@ -543,10 +549,12 @@ public class BoardFrame extends JFrame {
 		top_right.setBackground(BoardFrame.THEME_COLOR);
 
 		exit.setForeground(Globals.EXIT_BUTTON_FGCOLOR);
-		exit.setBackground(Globals.EXIT_BUTTON_BGCOLOR);
+		exit.setBackground(Tools.boost(Globals.EXIT_BUTTON_BGCOLOR,
+				Globals.LABEL_VARIANT));
 
 		Game_status.setForeground(Globals.NEWG_BUTTON_FRCOLOR);
-		Game_status.setBackground(Globals.NEWG_BUTTON_BGCOLOR);
+		Game_status.setBackground(Tools.boost(Globals.NEWG_BUTTON_BGCOLOR,
+				Globals.LABEL_VARIANT));
 
 		print_point.setForeground(Color.GREEN);
 		la.setForeground(BoardFrame.BOARD_COLOR);
@@ -608,7 +616,8 @@ public class BoardFrame extends JFrame {
 			pColor2.setBackground(Globals.CHEMIK_COLOR[0]);
 			label1.setForeground(Color.WHITE);
 			label2.setForeground(Color.WHITE);
-			decoratebuttons(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT),BOARD_COLOR);
+			decoratebuttons(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT),
+					BOARD_COLOR);
 			decorateLabelss(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
 
 		} else if (str.equals("Origins")) {
@@ -623,7 +632,8 @@ public class BoardFrame extends JFrame {
 			pColor2.setBackground(Globals.ORIGINE_COLOR[0]);
 			label1.setForeground(Color.WHITE);
 			label2.setForeground(Color.WHITE);
-			decoratebuttons(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT),BOARD_COLOR);
+			decoratebuttons(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT),
+					BOARD_COLOR);
 			decorateLabelss(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
 		} else if (str.equals("Geeky")) {
 			setSkin(Tools.fade(Tools.fade(new Color(70, 70, 20))), new Color(0,
@@ -638,7 +648,8 @@ public class BoardFrame extends JFrame {
 			label1.setForeground(Color.WHITE);
 			label2.setForeground(Color.WHITE);
 
-			decoratebuttons(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT),BOARD_COLOR);
+			decoratebuttons(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT),
+					BOARD_COLOR);
 			decorateLabelss(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
 		} else {
 			setSkin(Tools.fade(Tools.fade(new Color(40, 60, 40))), new Color(0,
@@ -652,7 +663,8 @@ public class BoardFrame extends JFrame {
 			pColor2.setBackground(Globals.CLASSIC_COLOR[0]);
 			label1.setForeground(Color.WHITE);
 			label2.setForeground(Color.WHITE);
-			decoratebuttons(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT),BOARD_COLOR);
+			decoratebuttons(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT),
+					BOARD_COLOR);
 			decorateLabelss(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
 		}
 	}

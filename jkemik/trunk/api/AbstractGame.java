@@ -217,7 +217,7 @@ public abstract class AbstractGame implements Serializable {
 		setStatusForAll(currentP.getSelected(), Point.CONNECTED);
 		cell = new Cell(getCurrentP().getId(), getCurrentP().getSelected(),
 				area, null);
-		if (currentP.getCells().containsKey(cell.getPIN())) {
+		if (currentP.getCells().containsKey(cell.hashCode())) {
 			return null;
 		}
 
@@ -403,19 +403,19 @@ public abstract class AbstractGame implements Serializable {
 	 * @return void
 	 */
 	public void evalCell(Cell cell) {
-
+	
 		for (Cell c : guest.getCells().values()) {
 			Point p = c.getCellContour().get(0);
 			Point temp = this.collection.get(p.toString());
 			if (temp.getStatus() == Point.CAPTURED) {
-				currentP.addCapturedCells(c);
+				//currentP.setCaptured_cell_count(1);
 				cell.setValue(cell.getValue() + c.getValue());
 				cell.addCellToCell(c);
-				// guest.getCells().remove(c);
+				//guest.getCells().remove(c.hashCode());
 				guest.setScore(guest.getScore() - c.getValue());
 			}
 		}
-		// return true;
+		currentP.setCaptured_cell_count(cell.getCellsInCell().size());
 	}
 
 	/**
