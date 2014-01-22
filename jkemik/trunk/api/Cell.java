@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import utilities.Tools;
 
 /**
  * @author dalet
@@ -29,7 +28,6 @@ public class Cell implements Comparable<Cell>, Serializable {
 		//this.capturedPoints = capturedPoints;
 		this.capturedcell_Count = 0;
 		this.cellsInCell = cellsInCell;
-		this.pin = Tools.pinGenerator(areaIncell);
 	}
 	public String toString() {
 		return "" + this.cellContour;
@@ -88,30 +86,12 @@ public class Cell implements Comparable<Cell>, Serializable {
 		return ret;
 	}
 
-	/**
-	 * @return the capturedPoints
-	 */
-//	public ArrayList<Point> getCapturedPoints() {
-//		if (this.capturedPoints == null) {
-//			throw new NullPointerException();
-//		}
-//		return this.capturedPoints;
-//	}
-
-	/**
-	 * @param capturedPoints
-	 *            the capturedPoints to set
-	 */
-//	public void setCapturedPoints(ArrayList<Point> capturedPoints) {
-//		this.capturedPoints = capturedPoints;
-//	}
 
 	/**
 	 * Number of points making the contour of the cell, plus the number of empty
 	 * intersections in the cell
 	 */
 	public int getCellSize() {
-		// return cellContour.size();
 		return this.areaIncell.size();
 	}
 
@@ -183,7 +163,7 @@ public class Cell implements Comparable<Cell>, Serializable {
 	 */
 	public void addCellToCell(Cell c) {
 		try {
-			this.cellsInCell.put(c.getPIN(),c);
+			this.cellsInCell.put(c.hashCode(),c);
 			this.value = this.value + c.getValue();
 		} catch (Exception e) {
 			System.out.println("in Cell:addCellToCell " + e.getMessage());
@@ -212,20 +192,11 @@ public class Cell implements Comparable<Cell>, Serializable {
 		this.id = id;
 	}
 
-	
-	public int getPIN() {
-		return pin;
-	}
-	public void setPIN(int pin) {
-		this.pin = pin;
-	}
-
-
 	private ArrayList<Point> cellContour;
 	private ArrayList<Point> areaIncell;
 	private HashMap<Integer, Cell> cellsInCell;
 	private int capturedcell_Count;
 	private double value = 0.0;
 	private int id = 0;
-	private int pin = 0;
+	
 }

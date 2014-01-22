@@ -67,7 +67,7 @@ public class Grid extends JPanel {
 		Grid.g2 = (Graphics2D) g;
 		AbstractGame game = JKemik.game;
 
-		try {
+	try {
 			Artist.drawCursor(new Point(hl_x, hl_y, 0), gridLineStroke,
 					Grid.half_squareSize, gridLineCol, g2);
 			highLightDot(game.getCurrentP().getColor());
@@ -140,8 +140,6 @@ public class Grid extends JPanel {
 		} catch (NullPointerException e) {
 			System.out.println("NullPointer in paintComponent: "
 					+ e.getMessage());
-		} catch (Exception e) {
-			System.out.println("Exception paintComponent: " + e.getMessage());
 		}
 
 	}

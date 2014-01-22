@@ -5,9 +5,8 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 //import javax.swing.JLabel;
 
-import utilities.Globals;
 import utilities.Manual;
-import utilities.Tools;
+
 import view.BoardFrame;
 
 public class HelpListener implements MouseListener {
@@ -23,7 +22,7 @@ public class HelpListener implements MouseListener {
 	}
 
 	public void mouseExited(MouseEvent arg0) {
-		this.label.setForeground(Globals.HELP_BUTTON_FRCOLOR);
+		
 	}
 
 	public void mousePressed(MouseEvent arg0) {
@@ -35,7 +34,6 @@ public class HelpListener implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
-		this.label.setForeground(Tools.fade(Globals.HELP_BUTTON_FRCOLOR,20));
 		this.label.setToolTipText(BoardFrame.messages.getString("onlineManualHover"));
 	}
 }
