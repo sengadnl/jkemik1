@@ -50,8 +50,8 @@ public class SaveButtonListener implements MouseListener {
 			JKemik.createGame(t, s);
 
 			JKemik.game.setMaxScore(s.getMaxWinVal());//
-			
-			/*Toggling from manual mode to auto*/
+
+			/* Toggling from manual mode to auto */
 			if (!JKemik.settings_t.getMemo()[0]
 					&& !JKemik.settings_t.getMemo()[1]) {
 				BoardFrame.mode.setSelected(true);
@@ -59,8 +59,8 @@ public class SaveButtonListener implements MouseListener {
 				BoardFrame.mode.setSelected(false);
 			}
 			BoardFrame.updateBoardStatus();
-			BoardFrame.uiLooksUpdate(s, t);
 			ViewEvents.uiEventUpdates(s, t);
+
 			int response = JOptionPane.showConfirmDialog(null,
 					BoardFrame.messages.getString("startGameWill") + str1 + " "
 							+ BoardFrame.messages.getString("starGameFirst")
@@ -73,8 +73,8 @@ public class SaveButtonListener implements MouseListener {
 			} else {
 
 			}
-
-			System.out.println(JKemik.game + "\n\n");
+			BoardFrame.uiLooksUpdate(s, t);
+			//System.out.println(JKemik.game + "\n\n");
 			JKemik.writeSettings();
 		}
 	}

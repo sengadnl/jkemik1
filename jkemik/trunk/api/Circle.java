@@ -24,7 +24,7 @@ public class Circle extends AbstractPoint implements Serializable {
 	private double d;
 	private double Diameter = 10.0;
 
-	public Circle(double x, double y, int id, double d, Color color) {
+	public Circle(double x, double y,int id, double d, Color color) {
 		super(x, y, id);
 		this.color = color;
 		this.d = d;
