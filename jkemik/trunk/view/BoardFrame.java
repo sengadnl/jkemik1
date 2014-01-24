@@ -48,11 +48,11 @@ public class BoardFrame extends JFrame {
 
 		messages = ResourceBundle.getBundle(properties, currentLocale);
 		instantiateAllPanels();
+		setPanelSizes();
 		instantiateAllLabels();
 		instantiateAllButtonss();
 		instantiateAllCheckBoxes();
 		setAllLayouts();
-		setPanelSizes();
 		addComponentsToPanels();
 		setTheme(JKemik.settings_t.getTheme());
 
@@ -166,13 +166,8 @@ public class BoardFrame extends JFrame {
 
 	private void instantiateAllLabels() {
 		print_point = new JLabel("");
-		// Game_status = new JLabel(messages.getString("newG"));
-		// settings = new JLabel(messages.getString("settings"));
-		// help = new JLabel(messages.getString("help"));
-		// exit = new JLabel(messages.getString("exit"));
 		l1 = new RotateLabel(JKemik.settings_t.getGridDimensionsToString());
 		l2 = new RotateLabel(this.gameType);
-
 		label1 = new JLabel();
 		label2 = new JLabel();
 		la = new JLabel(" " + messages.getString("capturel"));
@@ -181,7 +176,6 @@ public class BoardFrame extends JFrame {
 		AutoCap = new JLabel(JKemik.settings_t.getAutoCaptureStatus());
 		AutoPass = new JLabel(JKemik.settings_t.getAutoPassStatus());
 		Win = new JLabel("" + JKemik.settings_t.getMaxWinVal());
-		// exit = new JLabel(messages.getString("exit"));
 		progressB = new JProgressBar(0, PROGRESS_BAR_MAX);
 		icon = new JKIcon("media/jkemik-small.png", "");
 	}
@@ -240,7 +234,7 @@ public class BoardFrame extends JFrame {
 		middle_container.setPreferredSize(new Dimension(
 				(int) (.8 * this.width), (int) (.75 * this.height)));
 		bottom_container.setPreferredSize(new Dimension((int) this.width,
-				(int) (.10 * this.height)));
+				(int) (.098 * this.height)));
 
 		logo_panel.setPreferredSize(new Dimension(
 				(int) (CORNER_WIDTH * this.width),
@@ -303,7 +297,6 @@ public class BoardFrame extends JFrame {
 
 		controler_panel.add(pass_turn);
 		controler_panel.add(undo);
-		// controler_panel.add(refresh);
 		controler_panel.add(mouseSelection);
 		controler_panel.add(mode);
 
@@ -334,8 +327,6 @@ public class BoardFrame extends JFrame {
 	}
 
 	private void setAllBorders() {
-		System.err.println("settings borders color to "
-				+ BoardFrame.BORDER_COLOR);
 		grid_container.setBorder(BorderFactory
 				.createLineBorder(BoardFrame.BORDER_COLOR));
 		status_panel_container.setBorder(BorderFactory
@@ -369,7 +360,7 @@ public class BoardFrame extends JFrame {
 		refresh.setBackground(bg);
 		refresh.setForeground(fg);
 
-		startG.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT));
+		startG.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT/2));
 		startG.setForeground(fg);
 
 		settings.setForeground(fg);
@@ -865,7 +856,7 @@ public class BoardFrame extends JFrame {
 	public static PlayerPanel p1panel, p2panel;
 	private String[] gameType = { "Origins", "Jkemik", "Classic", "Geeky" };
 	public static final double CORNER_WIDTH = .35, CORNER_HEIGHT = .04,
-			SIDE_WIDTH = .18, SIDE_HEIGHT = .8, PLAYER_PNL_W_SCALAR = .085,
+			SIDE_WIDTH = .18, SIDE_HEIGHT = .8, PLAYER_PNL_W_SCALAR = .080,
 			PLAYER_PNL_H_SCALAR = .20, P2_W = .26, BOTTOM_COLOR_P_W = 80,
 			BOTTOM_COLOR_P_H = 5;
 	public static Grid grid;

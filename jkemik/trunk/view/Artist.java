@@ -4,8 +4,8 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-//import java.awt.Image;
-//import java.awt.Toolkit;
+import java.awt.RenderingHints;
+
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -142,12 +142,15 @@ public class Artist {
 
 	protected static void drawCircle(Point p, Color c, double h_d, double c_d,
 			int stroke, Graphics2D g2) {
-		g2.setStroke(new BasicStroke(stroke));
+		g2.setStroke(new BasicStroke(stroke + 1));
 		Point recenter = new Point(p.getXC() - h_d, p.getYC() - h_d);
 		Ellipse2D.Double circle = new Ellipse2D.Double(recenter.getXC(),
 				recenter.getYC(), c_d, c_d);
+
 		g2.setColor(c);
 		g2.fill(circle);
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setColor(Tools.fade(c));
 		g2.draw(circle);
 		g2.setColor(c);
@@ -328,7 +331,7 @@ public class Artist {
 				g2.setStroke(new BasicStroke(Grid.gridLineStroke
 						+ Grid.CURSOR_VARIANT_STROKE));
 			}
-			for (int i = 0; i < contour.size() - 1; i++) {
+			for (int i = 0; i < contour.size(); i++) {
 				Artist.drawCircle(contour.get(i), col, Grid.HALF_DIAMETER,
 						Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
 				Artist.drawCursor(contour.get(i), Grid.gridLineStroke,

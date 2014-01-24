@@ -161,7 +161,7 @@ public class Cell implements Comparable<Cell>, Serializable {
 	 * @param Cell
 	 * @return void
 	 */
-	public void addCellToCell(Cell c) {
+	public void addCell(Cell c) {
 		try {
 			this.cellsInCell.put(c.hashCode(),c);
 			this.value = this.value + c.getValue();

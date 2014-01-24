@@ -62,7 +62,7 @@ public abstract class AbstractGame implements Serializable {
 			if (temp == null) {
 				continue;
 			}
-			
+
 			if (AbstractGame.isPath(temp)) {// if this Point is path
 				if (temp.compareTo(currentP.getFrom()) != 0) {
 					if (!Tools.containPoint(o, currentP.getSelected())) {
@@ -71,7 +71,10 @@ public abstract class AbstractGame implements Serializable {
 						currentP.setFrom(o); /* Move to the next Point */
 						if (temp.compareTo(currentP.getOrigin()) == 0
 								&& currentP.getSelected().size() > 3) {
-							currentP.setSuccessful(true);/* Set recursive call stop */
+							currentP.setSuccessful(true);/*
+														 * Set recursive call
+														 * stop
+														 */
 							currentP.setOrigin(null);/* Reset the origin */
 							System.out.println("\nFound cell...");
 							return true;/* Capture was found */
@@ -104,66 +107,66 @@ public abstract class AbstractGame implements Serializable {
 	}
 
 	public Cell capture(Point o, double squareSize) {
-		Cell cell = null; /*Cell to be returned*/
+		Cell cell = null; /* Cell to be returned */
 
 		if (buildPath(o, squareSize)) {
-			try {
-				ArrayList<Point> TempArea = Tools.getArea(
-						currentP.getSelected(), squareSize);
+			// try {
+			ArrayList<Point> TempArea = Tools.getArea(currentP.getSelected(),
+					squareSize);
 
-				ArrayList<Point> area = getTrueArea(TempArea);
-				
-				if (isAreaEmpty(area)) {
-					currentP.setSelected(new ArrayList<Point>());
-					return null;
-				}
+			ArrayList<Point> area = getTrueArea(TempArea);
 
-				int captured_count = 0;
-				int redeemed_count = 0;
-				/* Go through all selected dots from recursion */
-				for (Point p : TempArea) {
+			if (isAreaEmpty(area)) {
+				currentP.setSelected(new ArrayList<Point>());
+				return null;
+			}
 
-					/* If p exist in collection */
-					if (this.collection.containsKey(p.toString())) {
-						Point object = this.collection.get(p.toString());
+			int captured_count = 0;
+			int redeemed_count = 0;
+			/* Go through all selected dots from recursion */
+			for (Point p : TempArea) {
 
-						/* captures */
-						if (object.getId() == guest.getId()
-								&& object.getStatus() != Point.CAPTURED) {
-							object.setStatus(Point.CAPTURED);
-							captured_count += Globals.POINT_VALUE;
-						}
+				/* If p exist in collection */
+				if (this.collection.containsKey(p.toString())) {
+					Point object = this.collection.get(p.toString());
 
-						/* Count redeemed points */
-						if (object.getId() == currentP.getId()
-								&& object.getStatus() == Point.CAPTURED) {
-							object.setStatus(Point.REDEEMED);
-							redeemed_count += Globals.REDEEMED_POINT_VALUE;
-						}
-
-					} else {
-						/* If p doesn't exist in collection */
-						p.setStatus(Point.DEAD);
-						this.collection.put(p.toString(), p);
+					/* captures */
+					if (object.getId() == guest.getId()
+							&& object.getStatus() != Point.CAPTURED) {
+						object.setStatus(Point.CAPTURED);
+						captured_count += Globals.POINT_VALUE;
 					}
 
-				}/* end of second for loop */
+					/* Count redeemed points */
+					if (object.getId() == currentP.getId()
+							&& object.getStatus() == Point.CAPTURED) {
+						object.setStatus(Point.REDEEMED);
+						redeemed_count += Globals.REDEEMED_POINT_VALUE;
+					}
 
-				setStatusForAll(currentP.getSelected(), Point.CONNECTED);
-				cell = new Cell(getCurrentP().getId(), getCurrentP()
-						.getSelected(), area, null);
-
-				if (captured_count == 0) {
-					return null;
+				} else {
+					/* If p doesn't exist in collection */
+					p.setStatus(Point.DEAD);
+					this.collection.put(p.toString(), p);
 				}
-				cell.setValue(captured_count + redeemed_count);
-				currentP.addCell(cell);
-				currentP.refreshCapture_count(captured_count);
-				currentP.refreshRedeemed_count(redeemed_count);
-				calculateScore(cell);
-			} catch (NullPointerException ex) {
-				System.err.println("In capture: " + ex.getMessage());
+
+			}/* end of second for loop */
+
+			setStatusForAll(currentP.getSelected(), Point.CONNECTED);
+			cell = new Cell(getCurrentP().getId(), getCurrentP().getSelected(),
+					area, null);
+
+			if (captured_count == 0) {
+				return null;
 			}
+			cell.setValue(captured_count + redeemed_count);
+			currentP.refreshCapture_count(captured_count);
+			currentP.refreshRedeemed_count(redeemed_count);
+			currentP.addCell(cell);
+			calculateScore(cell);
+			// } catch (NullPointerException ex) {
+			// System.err.println("In capture: " + ex.getMessage());
+			// }
 		} else {
 			currentP.setSuccessful(false);
 			currentP.setSelected(new ArrayList<Point>());
@@ -173,7 +176,7 @@ public abstract class AbstractGame implements Serializable {
 	}
 
 	public Cell capture(int squareSize) {
-		Cell cell = null; /* cell to be returned */
+		//Cell cell = null; /* cell to be returned */
 
 		ArrayList<Point> TempArea = Tools.getArea(currentP.getSelected(),
 				squareSize);
@@ -215,7 +218,7 @@ public abstract class AbstractGame implements Serializable {
 		}/* end of second for loop */
 
 		setStatusForAll(currentP.getSelected(), Point.CONNECTED);
-		cell = new Cell(getCurrentP().getId(), getCurrentP().getSelected(),
+		Cell cell = new Cell(getCurrentP().getId(), getCurrentP().getSelected(),
 				area, null);
 		if (currentP.getCells().containsKey(cell.hashCode())) {
 			return null;
@@ -403,19 +406,18 @@ public abstract class AbstractGame implements Serializable {
 	 * @return void
 	 */
 	public void evalCell(Cell cell) {
-	
+		// check for capture
 		for (Cell c : guest.getCells().values()) {
 			Point p = c.getCellContour().get(0);
 			Point temp = this.collection.get(p.toString());
 			if (temp.getStatus() == Point.CAPTURED) {
-				//currentP.setCaptured_cell_count(1);
 				cell.setValue(cell.getValue() + c.getValue());
-				cell.addCellToCell(c);
-				//guest.getCells().remove(c.hashCode());
-				guest.setScore(guest.getScore() - c.getValue());
+				cell.addCell(c);
+				/*Losing a cell is equivalent to losing twice its value*/
+				guest.removeCell(c);
 			}
 		}
-		currentP.setCaptured_cell_count(cell.getCellsInCell().size());
+
 	}
 
 	/**
