@@ -382,6 +382,8 @@ public class Artist {
 					g2.setStroke(new BasicStroke(Grid.gridLineStroke
 							+ Grid.CURSOR_VARIANT_STROKE));
 				}
+				
+				System.out.println("CellsInCell : " + c.getCellsInCell());
 				if (drawAllCell(c.getCellsInCell(), pl2, pl1, g2)) {
 					System.err.println("Drawing captured cells ...");
 				}

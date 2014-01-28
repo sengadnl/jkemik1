@@ -23,7 +23,7 @@ public class STemplate implements Serializable {
 	private boolean gameSetupMode = true;
 	private boolean playMode = false;
 	private boolean systemSetupMode = false;
-	private String theme = "Geeky";
+	private String theme = "Jkemik";
 	private int maxWinVal = 4;
 	private double MaxPointPerPlayer = 0.0;
 	private String language = "ENGLISH";

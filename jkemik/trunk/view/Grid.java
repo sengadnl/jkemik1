@@ -123,11 +123,11 @@ public class Grid extends JPanel {
 			//
 			if (JKemik.settings_t.isAutoPass()
 					&& game.getCurrentP().getPlay_flag() == 1) {
-				System.out.println("Automatic pass is true...");
 				game.switchPlayTurns();
 			}
 
 			if (!this.drawn) {
+				System.err.println("IN DRAW !!!");
 				Artist.drawGrid(g2, Grid.dimension, Grid.squareFadeVariant,
 						Grid.gridLineStroke, BoardFrame.BOARD_COLOR);
 

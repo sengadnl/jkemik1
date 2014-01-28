@@ -40,12 +40,7 @@ public class PassTurnListener implements MouseListener {
 			 */
 			if (JKemik.game.getCurrentP().getPlay_flag() == 1) {
 				JKemik.game.switchPlayTurns();
-				//Grid.setCcolor(JKemik.game.getCurrentP().getColor());
-
 			} else {
-//				JOptionPane.showMessageDialog(null,
-//						"YOU HAVE NOT PLAYED YET!!!",
-//						"Ellegal Action", JOptionPane.WARNING_MESSAGE);
 				JOptionPane.showMessageDialog(null,
 						BoardFrame.messages.getString("ilPass"),
 						BoardFrame.messages.getString("ilAction"), JOptionPane.WARNING_MESSAGE);

@@ -154,7 +154,7 @@ public abstract class AbstractGame implements Serializable {
 
 			setStatusForAll(currentP.getSelected(), Point.CONNECTED);
 			cell = new Cell(getCurrentP().getId(), getCurrentP().getSelected(),
-					area, null);
+					area);
 
 			if (captured_count == 0) {
 				return null;
@@ -176,7 +176,7 @@ public abstract class AbstractGame implements Serializable {
 	}
 
 	public Cell capture(int squareSize) {
-		//Cell cell = null; /* cell to be returned */
+		// Cell cell = null; /* cell to be returned */
 
 		ArrayList<Point> TempArea = Tools.getArea(currentP.getSelected(),
 				squareSize);
@@ -218,8 +218,8 @@ public abstract class AbstractGame implements Serializable {
 		}/* end of second for loop */
 
 		setStatusForAll(currentP.getSelected(), Point.CONNECTED);
-		Cell cell = new Cell(getCurrentP().getId(), getCurrentP().getSelected(),
-				area, null);
+		Cell cell = new Cell(getCurrentP().getId(),
+				getCurrentP().getSelected(), area);
 		if (currentP.getCells().containsKey(cell.hashCode())) {
 			return null;
 		}
@@ -325,6 +325,7 @@ public abstract class AbstractGame implements Serializable {
 	 * */
 	public void switchPlayTurns() {
 		try {
+			currentP.setSelected(new ArrayList<Point>());
 			if (this.player1.compareTo(currentP) == 0) {
 				currentP = this.player2;
 				guest = this.player1;
@@ -410,10 +411,15 @@ public abstract class AbstractGame implements Serializable {
 		for (Cell c : guest.getCells().values()) {
 			Point p = c.getCellContour().get(0);
 			Point temp = this.collection.get(p.toString());
-			if (temp.getStatus() == Point.CAPTURED) {
+			if (temp.getStatus() == Point.CAPTURED
+					&& c.getStatus() != Globals.CELL_CAPTURED
+					&& c.getStatus() != Globals.CELL_REDEEMED) {
+				currentP.setCaptured_cell_count(1);
+				guest.refreshCapture_count(-1);
 				cell.setValue(cell.getValue() + c.getValue());
+				c.setStatus(Globals.CELL_CAPTURED);
 				cell.addCell(c);
-				/*Losing a cell is equivalent to losing twice its value*/
+				/* Losing a cell is equivalent to losing twice its value */
 				guest.removeCell(c);
 			}
 		}

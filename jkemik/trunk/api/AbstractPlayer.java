@@ -56,11 +56,11 @@ public abstract class AbstractPlayer implements Serializable {
 	public void addCell(Cell c) {
 
 		// Add what this cell is worth to this player'score
-		
-			if (c == null) {
-			}
-			this.score += c.getValue();
-			this.Cells.put(c.hashCode(), c);
+
+		if (c == null) {
+		}
+		this.score += c.getValue();
+		this.Cells.put(c.hashCode(), c);
 	}
 
 	/** Adds a captured cell to this player */
@@ -68,7 +68,7 @@ public abstract class AbstractPlayer implements Serializable {
 
 		// Add what this cell is worth to this player'score
 		this.Cells.remove(c);
-		this.score -= c.getValue()*2;
+		this.score -= c.getValue() * 2;
 	}
 
 	// public void addCapturedCells(Cell c) {
@@ -279,9 +279,9 @@ public abstract class AbstractPlayer implements Serializable {
 		return captured_cell_count;
 	}
 
-	// public void setCaptured_cell_count( int captured_cell_count) {
-	// this.captured_cell_count += captured_cell_count;
-	// }
+	public void setCaptured_cell_count(int captured_cell_count) {
+		this.captured_cell_count += captured_cell_count;
+	}
 
 	private String name = "player";
 	private int id = 0;// player1 = -1 and player2 = 1

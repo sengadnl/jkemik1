@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import utilities.Globals;
+
 
 /**
  * @author dalet
@@ -19,15 +21,15 @@ public class Cell implements Comparable<Cell>, Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public Cell(int id, ArrayList<Point> cellContour, ArrayList<Point> areaIncell,
-			HashMap<Integer, Cell> cellsInCell) {
+	public Cell(int id, ArrayList<Point> cellContour, ArrayList<Point> areaIncell) {
 		super();
 		this.id = id;
 		this.cellContour = cellContour;
 		this.areaIncell = areaIncell;
 		//this.capturedPoints = capturedPoints;
+		this.status = Globals.CELL_FREE;
 		this.capturedcell_Count = 0;
-		this.cellsInCell = cellsInCell;
+		this.cellsInCell = new HashMap<Integer, Cell>();
 	}
 	public String toString() {
 		return "" + this.cellContour;
@@ -192,11 +194,19 @@ public class Cell implements Comparable<Cell>, Serializable {
 		this.id = id;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	private ArrayList<Point> cellContour;
 	private ArrayList<Point> areaIncell;
 	private HashMap<Integer, Cell> cellsInCell;
 	private int capturedcell_Count;
 	private double value = 0.0;
 	private int id = 0;
+	private int status = 0;
 	
 }
