@@ -57,17 +57,10 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 						&& current.getSelected().size() >= 4) {
 					Grid.cell = game.capture((int) Grid.squareSize);//
 					game.getCurrentP().setSelected(new ArrayList<Point>());
-					// System.out.println(current.getSelected().size()
-					// + " were selected");
+					
 					BoardFrame.mouseSelection.setSelected(false);
 					BoardFrame.mode.setVisible(true);
 					BoardFrame.pass_turn.setVisible(true);
-					// if (BoardFrame.manual.isSelected()) {
-					// BoardFrame.manual.setSelected(false);
-					// JKemik.settings_t.restaureMemo();
-					// BoardFrame.showControlButtons();
-					// BoardFrame.updateSettingPanel();
-					// }
 					Grid.manualc = false;
 				}
 				BoardFrame.grid.repaint();
@@ -104,21 +97,18 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			}
 		}
 		if (game.isEmbuche_on() && JKemik.settings_t.isAutoCapture()) {
-			System.out.println("Embush attempt");
+			//System.out.println("Embush attempt");
 			BoardFrame.progressB.setVisible(true);
 			BoardFrame.progressB.setIndeterminate(true);
 			Grid.cell = JKemik.embush(Grid.squareSize);// new line
 			BoardFrame.progressB.setIndeterminate(false);
 			BoardFrame.progressB.setVisible(false);
 			BoardFrame.grid.repaint();
-			game.getCurrentP().setSelected(new ArrayList<Point>());
+			//game.getCurrentP().setSelected(new ArrayList<Point>());
 		}
 		if (game.getCurrentP().isTurn()) {
-			System.out
-					.println("Marking " + game.getCurrentP() + " end of turn");
 			this.grid.setMouseclicked(true);
 		}
-		// System.out.println("Collection: " + game.getCollection().toString());
 		BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
 		BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
 		BoardFrame.updateBoardStatus();
@@ -158,8 +148,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			BoardFrame.grid.repaint();
 			Grid.mouseMove = true;
 		}
-		// }
-		// if (JKemik.game.checkEndGame()) {
+		
 		if (JKemik.game.getStatus() == 1) {
 			JOptionPane.showMessageDialog(null, ""
 					+ JKemik.game.getGuest().getName() + " "
@@ -176,6 +165,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			BoardFrame.Game_status.setForeground(Color.GREEN);
 		}
 		BoardFrame.grid.repaint();
+		
 		// }
 		// BoardFrame.grid.setToolTipText("" + new Point(Grid.x, Grid.y));
 	}

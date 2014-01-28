@@ -51,7 +51,7 @@ public class ViewEvents {
 	public static HelpListener helpListener = new HelpListener(BoardFrame.help);
 	public static RefreshListener refreshListener = new RefreshListener(
 			BoardFrame.refresh);
-	public static WindowEvents windowListener = new WindowEvents(JKemik.view);
+	//public static WindowEvents windowListener = new WindowEvents(JKemik.view);
 	public static ManualSelectionListener manualCaptureButtonListener = new ManualSelectionListener(
 			BoardFrame.mouseSelection);
 	public static ModeToggleListener modeToggleListener = new ModeToggleListener(
@@ -89,11 +89,11 @@ public class ViewEvents {
 		}
 	}
 
-	public static void windowActionListener() {
-		if (JKemik.view.getComponentListeners().length == 0) {
-			JKemik.view.addComponentListener(windowListener);
-		}
-	}
+//	public static void windowActionListener() {
+//		if (JKemik.view.getComponentListeners().length == 0) {
+//			JKemik.view.addComponentListener(windowListener);
+//		}
+//	}
 
 	public static void refreshListener() {
 		if (BoardFrame.refresh.getComponentListeners().length == 0) {

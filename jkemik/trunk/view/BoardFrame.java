@@ -38,7 +38,7 @@ public class BoardFrame extends JFrame {
 		width = 1280.0;
 
 		setFrameSize((int) width, (int) height);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		System.out.println("Frame: " + width + " X " + height);
 
@@ -59,7 +59,7 @@ public class BoardFrame extends JFrame {
 		makingGame = true;
 		init();
 		BoardFrame.mode.setVisible(false);
-		setTitle("J-Kemik " + Globals.VERSION);
+//		setTitle("J-Kemik " + Globals.VERSION);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 		pack();
@@ -125,7 +125,7 @@ public class BoardFrame extends JFrame {
 
 	private void setFrameSize(int w, int h) {
 		if (ValidateInput.validateScreenResolution(w, h)) {
-			setSize(w, h);
+			setPreferredSize(new Dimension(w, h));
 		}
 	}
 
@@ -564,6 +564,7 @@ public class BoardFrame extends JFrame {
 		middle_container.setBackground(BoardFrame.THEME_COLOR);
 		status_panel_container.setBackground(BoardFrame.THEME_COLOR);
 		grid_container.setBackground(Tools.fade(BoardFrame.BOARD_COLOR, 20));
+		
 		west_blank_panel.setBackground(BoardFrame.THEME_COLOR);
 		settings_p.setBackground(BoardFrame.THEME_COLOR);
 
@@ -638,7 +639,6 @@ public class BoardFrame extends JFrame {
 			pColor2.setBackground(Globals.GEECKY_COLOR[0]);
 			label1.setForeground(Color.WHITE);
 			label2.setForeground(Color.WHITE);
-
 			decoratebuttons(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT),
 					BOARD_COLOR);
 			decorateLabelss(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
@@ -804,9 +804,7 @@ public class BoardFrame extends JFrame {
 			undo.setVisible(false);
 			pass_turn.setVisible(false);
 			mode.setVisible(false);
-
 			displayGrid(true);
-
 		}
 		if (s.isPlayMode()) {
 			Game_status.setText(BoardFrame.messages.getString("endG"));

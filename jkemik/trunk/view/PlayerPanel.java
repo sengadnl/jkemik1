@@ -121,7 +121,7 @@ public class PlayerPanel extends JPanel {
 
 		 final JLabel plotted = new JLabel(" Rd Pt: ");
 		final JLabel captured = new JLabel(" Cp Pt: ");
-		//final JLabel cptcells = new JLabel(" Cp Cl: ");
+		final JLabel cptcells = new JLabel(" Cp Cl: ");
 		   final JLabel cells = new JLabel(" Cl: ");
 		   final JLabel score = new JLabel(" Scr: ");
 
@@ -138,9 +138,9 @@ public class PlayerPanel extends JPanel {
 		Font clfont = new Font("Arial", Font.BOLD, this.FONT_SIZE);
 		cells.setFont(clfont);
 
-//		cptcells.setForeground(new Color(255, 204, 51));
-//		Font ctcellsf = new Font("Arial", Font.BOLD, this.FONT_SIZE);
-//		cptcells.setFont(ctcellsf);
+		cptcells.setForeground(new Color(255, 204, 51));
+		Font ctcellsf = new Font("Arial", Font.BOLD, this.FONT_SIZE);
+		cptcells.setFont(ctcellsf);
 
 		score.setForeground(new Color(250, 104, 60));
 		Font scfont = new Font("Arial", Font.BOLD, this.FONT_SIZE);
@@ -153,8 +153,8 @@ public class PlayerPanel extends JPanel {
 		this.holder.add(capturedv);
 		this.holder.add(cells);
 		this.holder.add(cellsv);
-//		this.holder.add(cptcells);
-//		this.holder.add(captCellsv);
+		this.holder.add(cptcells);
+		this.holder.add(captCellsv);
 		this.holder.add(score);
 		this.holder.add(scorev);
 		add(add(this.player_name), BorderLayout.NORTH);
@@ -185,7 +185,7 @@ public class PlayerPanel extends JPanel {
 			plottedv.setText("" + abstractPlayer.getRedeemed_count());
 			capturedv.setText("" + abstractPlayer.getCapture_count());
 			cellsv.setText("" + abstractPlayer.getCells().size());
-			//captCellsv.setText("" + abstractPlayer.getCaptured_cell_count());
+			captCellsv.setText("" + abstractPlayer.getCaptured_cell_count());
 			scorev.setText("" + abstractPlayer.getScore());
 		} catch (Exception e) {
 			System.out.println(" In PlayerPanel " + e.getMessage());
@@ -196,7 +196,7 @@ public class PlayerPanel extends JPanel {
 		plottedv.setText("0");
 		capturedv.setText("0");
 		cellsv.setText("0");
-		//captCellsv.setText("0");
+		captCellsv.setText("0");
 		scorev.setText("0");
 
 	}
@@ -211,7 +211,7 @@ public class PlayerPanel extends JPanel {
 			plottedv.setText("0");
 			capturedv.setText("0");
 			cellsv.setText("0");
-			//captCellsv.setText("0");
+			captCellsv.setText("0");
 			scorev.setText("0");
 		} catch (Exception e) {
 			System.err.println(" in PlayerPanel " + e.getMessage());

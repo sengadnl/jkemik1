@@ -18,10 +18,11 @@ public class Globals {
 	public static final String tempFile = "tmp";
 	public static final String gameObjectFile = "/tmp/game.obj";
 	public static final String settingsTemplateObjectFile = "/tmp/stemplate.obj";
-	public static final String VERSION = "Beta-5.0.315 ";
+	public static final String VERSION = "Beta-5.0.332 ";
 	
 	public static final int POINT_VALUE = 1;
 	public static final int REDEEMED_POINT_VALUE = 1;
+	public static int CELL_CAPTURED = 1, CELL_FREE = 0, CELL_REDEEMED = 2;
 	
 	public static final int RED_INDEX = 0;
 	public static final int WHITE_INDEX = 4;
