@@ -104,13 +104,13 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			BoardFrame.progressB.setIndeterminate(false);
 			BoardFrame.progressB.setVisible(false);
 			BoardFrame.grid.repaint();
-			//game.getCurrentP().setSelected(new ArrayList<Point>());
+			BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
+			BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
 		}
 		if (game.getCurrentP().isTurn()) {
 			this.grid.setMouseclicked(true);
 		}
-		BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
-		BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
+		
 		BoardFrame.updateBoardStatus();
 	}
 

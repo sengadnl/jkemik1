@@ -110,7 +110,7 @@ public abstract class AbstractGame implements Serializable {
 		Cell cell = null; /* Cell to be returned */
 
 		if (buildPath(o, squareSize)) {
-			// try {
+		try {
 			ArrayList<Point> TempArea = Tools.getArea(currentP.getSelected(),
 					squareSize);
 
@@ -160,13 +160,13 @@ public abstract class AbstractGame implements Serializable {
 				return null;
 			}
 			cell.setValue(captured_count + redeemed_count);
-			currentP.refreshCapture_count(captured_count);
-			currentP.refreshRedeemed_count(redeemed_count);
+			
+			cell.setStatus(Globals.CELL_FREE);
 			currentP.addCell(cell);
 			calculateScore(cell);
-			// } catch (NullPointerException ex) {
-			// System.err.println("In capture: " + ex.getMessage());
-			// }
+			} catch (NullPointerException ex) {
+				System.err.println("In capture: " + ex.getMessage());
+			}
 		} else {
 			currentP.setSuccessful(false);
 			currentP.setSelected(new ArrayList<Point>());
@@ -225,9 +225,10 @@ public abstract class AbstractGame implements Serializable {
 		}
 
 		cell.setValue(captured_count + redeemed_count);
+		cell.setStatus(Globals.CELL_FREE);
 		currentP.addCell(cell);
-		currentP.refreshCapture_count(captured_count);
-		currentP.refreshRedeemed_count(redeemed_count);
+		
+		//currentP.refreshRedeemed_count(redeemed_count);
 		calculateScore(cell);
 		return cell;
 	}
@@ -409,15 +410,21 @@ public abstract class AbstractGame implements Serializable {
 	public void evalCell(Cell cell) {
 		// check for capture
 		for (Cell c : guest.getCells().values()) {
+			
 			Point p = c.getCellContour().get(0);
 			Point temp = this.collection.get(p.toString());
 			if (temp.getStatus() == Point.CAPTURED
 					&& c.getStatus() != Globals.CELL_CAPTURED
 					&& c.getStatus() != Globals.CELL_REDEEMED) {
-				currentP.setCaptured_cell_count(1);
-				guest.refreshCapture_count(-1);
 				cell.setValue(cell.getValue() + c.getValue());
 				c.setStatus(Globals.CELL_CAPTURED);
+				//Redeem cells
+				if(!c.getCellsInCell().isEmpty()){
+					for(Cell r: c.getCellsInCell().values()){
+						r.setStatus(Globals.CELL_REDEEMED);
+					}
+				}
+				//add captured cell
 				cell.addCell(c);
 				/* Losing a cell is equivalent to losing twice its value */
 				guest.removeCell(c);
