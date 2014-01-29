@@ -182,10 +182,10 @@ public class PlayerPanel extends JPanel {
 	public void updatePlayerPanel(AbstractPlayer abstractPlayer) {
 		try {
 			
-			plottedv.setText("" + abstractPlayer.getRedeemed_count());
-			capturedv.setText("" + abstractPlayer.getCapture_count());
-			cellsv.setText("" + abstractPlayer.getCells().size());
-			captCellsv.setText("" + abstractPlayer.getCaptured_cell_count());
+			plottedv.setText("" + abstractPlayer.countRedeemedPoints());
+			capturedv.setText("" + abstractPlayer.countCapturedPoints());
+			cellsv.setText("" + abstractPlayer.countFreeCells());
+			captCellsv.setText("" + abstractPlayer.countCapturedCells());
 			scorev.setText("" + abstractPlayer.getScore());
 		} catch (Exception e) {
 			System.out.println(" In PlayerPanel " + e.getMessage());

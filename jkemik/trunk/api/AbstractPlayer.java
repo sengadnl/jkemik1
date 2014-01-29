@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import utilities.Globals;
+
 /**
  * COPYRIGHT(c)2010 Daniel Senga. All Right Reserved. This class is a parent to
  * all Player Objects and their subclasses.
@@ -27,6 +29,70 @@ public abstract class AbstractPlayer implements Serializable {
 		// this.CapturedCells = new HashMap<Integer, Cell>();
 		this.selected = new ArrayList<Point>();
 		this.Cells = new HashMap<Integer, Cell>();
+	}
+	public int countRedeemedPoints() {
+		int count = 0;
+		if (this.Cells.isEmpty()) {
+			return 0;
+		} else {
+			for (Cell c1 : this.Cells.values()) {
+				if (c1.getStatus() == Globals.CELL_FREE) {
+					for (Point p : c1.getAreaIncell()) {
+						if (p.getStatus() == Point.REDEEMED) {
+							count++;
+						}
+					}
+				}
+			}
+		}
+		return count;
+	}
+	public int countCapturedPoints() {
+		int count = 0;
+		if (this.Cells.isEmpty()) {
+			return 0;
+		} else {
+			for (Cell c1 : this.Cells.values()) {
+				if (c1.getStatus() == Globals.CELL_FREE) {
+					for (Point p : c1.getAreaIncell()) {
+						if (p.getStatus() == Point.CAPTURED) {
+							count++;
+						}
+					}
+				}
+			}
+		}
+		return count;
+	}
+
+	public int countFreeCells() {
+		int count = 0;
+		if (this.Cells.isEmpty()) {
+			return 0;
+		} else {
+			for (Cell c1 : this.Cells.values()) {
+				if (c1.getStatus() == Globals.CELL_FREE) {
+					count++;
+				}
+			}
+		}
+		return count;
+	}
+
+	public int countCapturedCells() {
+		int count = 0;
+		if (this.Cells.isEmpty()) {
+			return 0;
+		} else {
+			for (Cell c1 : this.Cells.values()) {
+				for (Cell c2 : c1.getCellsInCell().values()) {
+					if (c2.getStatus() == Globals.CELL_CAPTURED) {
+						count++;
+					}
+				}
+			}
+		}
+		return count;
 	}
 
 	/**
@@ -213,7 +279,7 @@ public abstract class AbstractPlayer implements Serializable {
 				+ this.color.toString() + "\nFaded Color: "
 				+ this.getFadedColor() + "\nScore: " + this.score
 				+ "\nMy turn: " + this.turn + "\nCells: " + this.Cells
-				+ "\nCapturedCells: " + this.getCaptured_cell_count()
+				+ "\nCapturedCells: " + this.countCapturedCells()
 				+ "\nPlay Flag: " + this.play_flag + "\nCapture successfull: "
 				+ this.successful + "\nFade variant: " + this.FADE_VARIANT
 				+ "\n";
@@ -259,38 +325,26 @@ public abstract class AbstractPlayer implements Serializable {
 		this.latestP = latestP;
 	}
 
-	public int getCapture_count() {
-		return capture_count;
-	}
-
-	public void refreshCapture_count(int capture_count) {
-		this.capture_count += capture_count;
-	}
-
-	public int getRedeemed_count() {
-		return redeemed_count;
-	}
-
-	public void refreshRedeemed_count(int value) {
-		this.redeemed_count += value;
-	}
-
-	public int getCaptured_cell_count() {
-		return captured_cell_count;
-	}
-
-	public void setCaptured_cell_count(int captured_cell_count) {
-		this.captured_cell_count += captured_cell_count;
-	}
+	// public int getCapture_count() {
+	// return capture_count;
+	// }
+	//
+	// public int getRedeemed_count() {
+	// return redeemed_count;
+	// }
+	//
+	// public int getCaptured_cell_count() {
+	// return captured_cell_count;
+	// }
 
 	private String name = "player";
 	private int id = 0;// player1 = -1 and player2 = 1
 	private boolean turn = false;
 	private boolean ai = false;
 	private double score = 0.0;
-	private int capture_count = 0;
-	private int redeemed_count = 0;
-	private int captured_cell_count = 0;
+	// private int capture_count = 0;
+	// private int redeemed_count = 0;
+	// private int captured_cell_count = 0;
 	private Color color;
 
 	private Point origin = new Point(444444, 7798979);
