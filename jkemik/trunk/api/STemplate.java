@@ -33,7 +33,8 @@ public class STemplate implements Serializable {
 
 	public STemplate() {
 		boardSizes(Globals.SIZE_PERCENT);
-		setGridDimension(sizes.get(2));
+		setGridDimension(sizes.get(0));
+		this.maxWinVal = (int)(dimesion.positions() * Globals.MAX_WIN);
 	}
 	public double getSqrSize(String str) {
 		double sqrSize = 32;
