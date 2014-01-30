@@ -656,6 +656,27 @@ public class Tools {
 
 		return box;
 	}
+	//TODO implement persistent capture
+//	public static ArrayList<Point> boxCoord(Point p, double squareSize) {
+//		ArrayList<Point> persistence = new ArrayList<Point>();
+//		//Point[] box = new Point[9];
+//		double x = p.getXC();
+//		double y = p.getYC();
+//
+//		persistance.add(new Point(x - squareSize, y + squareSize));
+//		persistance.add(new Point(x - squareSize, y));
+//		persistance.add(new Point(x - squareSize, y - squareSize));
+//
+//		persistance.add(new Point(x, y + squareSize));
+//		persistance.add(new Point(x, y - squareSize));
+//
+//		persistance.add(new Point(x + squareSize, y + squareSize));
+//		persistance.add(new Point(x + squareSize, y));
+//		persistance.add(new Point(x + squareSize, y - squareSize));
+//		persistance.add(p);
+//
+//		return persistance;
+//	}
 
 	/**
 	 * @author dalet
