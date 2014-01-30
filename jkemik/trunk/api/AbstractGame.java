@@ -52,6 +52,10 @@ public abstract class AbstractGame implements Serializable {
 		}
 		/* Get all adjacent Points */
 		Point[] box = Tools.boxCoord(o, squareSize);
+		
+		//this.box = Tools.boxCoord(o, squareSize);
+		//TODO implement persistent capture
+		
 		/* Find the point in this box that belongs to the path */
 		for (int i = 0; i < box.length; i++) {
 			/* Stop recursive call here if a path was already found */
@@ -71,12 +75,9 @@ public abstract class AbstractGame implements Serializable {
 						currentP.setFrom(o); /* Move to the next Point */
 						if (temp.compareTo(currentP.getOrigin()) == 0
 								&& currentP.getSelected().size() > 3) {
-							currentP.setSuccessful(true);/*
-														 * Set recursive call
-														 * stop
-														 */
+							currentP.setSuccessful(true);
 							currentP.setOrigin(null);/* Reset the origin */
-							System.out.println("\nFound cell...");
+							System.out.println("\nFound cell...Index is " + i);
 							return true;/* Capture was found */
 						}
 						/* This adjacent Point was a dead end */
@@ -243,7 +244,21 @@ public abstract class AbstractGame implements Serializable {
 		if (tempCell != null) {
 			System.out.println("Cell was not NULL");
 			return tempCell;
-		}
+		} 
+//		else {
+//			/* Persist to bypass unwanted empty cells */
+//			if (!this.box.isEmpty()) {
+//				System.out.println("Persisting!!!!");
+//				/* check the other point in the box */
+//				for (int e = this.box.size() - 1; e >= 1; e--) {
+//					Point temp = this.collection.get(this.box.get(e).toString());
+//					if(temp == null){continue;}
+//					tempCell = capture(temp, squareSize);
+//					if (tempCell == null) {continue;}else{return tempCell;}
+//				}
+//				this.box = new ArrayList<Point>();
+//			}
+//		}
 		return null;
 	}
 
@@ -561,6 +576,15 @@ public abstract class AbstractGame implements Serializable {
 	public void setLastp(Point lastp) {
 		this.lastp = lastp;
 	}
+	
+	//TODO implement persistent capture
+//	public ArrayList<Point> getBox() {
+//		return box;
+//	}
+//
+//	public void setBox(ArrayList<Point> persistanceList) {
+//		this.box = persistanceList;
+//	}
 
 	/* Connecting dots utilities */
 	public boolean AI = false;
@@ -569,6 +593,10 @@ public abstract class AbstractGame implements Serializable {
 	private int status = 0;
 	private int maxScore = 2;
 	public Point lastp = new Point(553355, 7798979);
+	
+	//TODO implement persistent capture
+	//public ArrayList<Point> box = new ArrayList<Point>();
+
 
 	/* keeps track of all captured points */
 	private AbstractPlayer player1;
