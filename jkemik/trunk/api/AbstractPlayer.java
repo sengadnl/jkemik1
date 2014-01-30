@@ -30,16 +30,24 @@ public abstract class AbstractPlayer implements Serializable {
 		this.selected = new ArrayList<Point>();
 		this.Cells = new HashMap<Integer, Cell>();
 	}
+
 	public int countRedeemedPoints() {
 		int count = 0;
 		if (this.Cells.isEmpty()) {
 			return 0;
 		} else {
+			/*Look through this player's cells*/
 			for (Cell c1 : this.Cells.values()) {
-				if (c1.getStatus() == Globals.CELL_FREE) {
-					for (Point p : c1.getAreaIncell()) {
-						if (p.getStatus() == Point.REDEEMED) {
-							count++;
+				/*Find any captured cells*/
+				for (Cell c2 : c1.getCellsInCell().values()) {
+					/*Make sure we are looking into a captured cell*/
+					if (c2.getStatus() == Globals.CELL_CAPTURED) {
+						/*Count any redeemed points*/
+						for (Point p : c2.getAreaIncell()) {
+							if (p.getId() == this.getId()
+									&& p.getStatus() == Point.REDEEMED) {
+								count++;
+							}
 						}
 					}
 				}
@@ -47,6 +55,7 @@ public abstract class AbstractPlayer implements Serializable {
 		}
 		return count;
 	}
+
 	public int countCapturedPoints() {
 		int count = 0;
 		if (this.Cells.isEmpty()) {
