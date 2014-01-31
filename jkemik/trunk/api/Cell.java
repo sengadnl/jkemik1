@@ -27,7 +27,7 @@ public class Cell implements Comparable<Cell>, Serializable {
 		this.cellContour = cellContour;
 		this.areaIncell = areaIncell;
 		//this.capturedPoints = capturedPoints;
-		this.status = Globals.CELL_FREE;
+		this.status = Globals.CELL_EMPTY;
 		this.capturedcell_Count = 0;
 		this.cellsInCell = new HashMap<Integer, Cell>();
 	}

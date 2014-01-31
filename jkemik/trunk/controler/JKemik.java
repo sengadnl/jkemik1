@@ -261,8 +261,9 @@ public class JKemik extends Application {
 	}
 
 	public static Cell embush(double squareSize) {
-		try {
+		//try {
 			Cell temp = game.connectDots(squareSize);
+			
 			if (settings_t.isAutoCapture()) {
 
 				if (temp != null) {
@@ -283,9 +284,9 @@ public class JKemik extends Application {
 					JKemik.settings_t.setManualCapture(false);
 				}
 			}
-		} catch (NullPointerException e) {
-			System.out.println("Error in embush: capture " + e.getLocalizedMessage());
-		}
+//		} catch (NullPointerException e) {
+//			System.out.println("Error in embush: capture " + e.getLocalizedMessage());
+//		}
 		return null;
 	}
 
