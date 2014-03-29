@@ -637,45 +637,24 @@ public class Tools {
 		return false;
 	}
 
-//	public static Point[] boxCoord(Point p, double squareSize) {
-//		Point[] box = new Point[9];
-//		double x = p.getXC();
-//		double y = p.getYC();
-//
-//		box[0] = new Point(x - squareSize, y + squareSize);
-//		box[1] = new Point(x - squareSize, y);
-//		box[2] = new Point(x - squareSize, y - squareSize);
-//
-//		box[3] = new Point(x, y + squareSize);
-//		box[4] = new Point(x, y - squareSize);
-//
-//		box[5] = new Point(x + squareSize, y + squareSize);
-//		box[6] = new Point(x + squareSize, y);
-//		box[7] = new Point(x + squareSize, y - squareSize);
-//		box[8] = p;
-//
-//		return box;
-//	}
-	//TODO implement persistent capture
-	public static ArrayList<Point> boxCoord(Point p, double squareSize) {
-		ArrayList<Point> persistence = new ArrayList<Point>();
-		//Point[] box = new Point[9];
+	public static Point[] boxCoord(Point p, double squareSize) {
+		Point[] box = new Point[9];
 		double x = p.getXC();
 		double y = p.getYC();
 
-		persistence.add(new Point(x - squareSize, y + squareSize));
-		persistence.add(new Point(x - squareSize, y));
-		persistence.add(new Point(x - squareSize, y - squareSize));
+		box[0] = new Point(x - squareSize, y + squareSize);
+		box[1] = new Point(x - squareSize, y);
+		box[2] = new Point(x - squareSize, y - squareSize);
 
-		persistence.add(new Point(x, y + squareSize));
-		persistence.add(new Point(x, y - squareSize));
+		box[3] = new Point(x, y + squareSize);
+		box[4] = new Point(x, y - squareSize);
 
-		persistence.add(new Point(x + squareSize, y + squareSize));
-		persistence.add(new Point(x + squareSize, y));
-		persistence.add(new Point(x + squareSize, y - squareSize));
-		persistence.add(p);
+		box[5] = new Point(x + squareSize, y + squareSize);
+		box[6] = new Point(x + squareSize, y);
+		box[7] = new Point(x + squareSize, y - squareSize);
+		box[8] = p;
 
-		return persistence;
+		return box;
 	}
 
 	/**
