@@ -17,7 +17,7 @@ import agents.JkBot;
 import api.*;
 
 /**
- * COPYRIGHT(C)2012 Daniel Senga. All Right Reserved Main class of Jkemik
+ * COPYRIGHT(C)2012 Daniel Senga. All Right Reserved Main class of Jkemik.
  * 
  * @author Daniel Senga
  * @version Beta 4.0 12-2012
@@ -263,7 +263,6 @@ public class JKemik extends Application {
 	public static Cell embush(double squareSize) {
 		//try {
 			Cell temp = game.connectDots(squareSize);
-			
 			if (settings_t.isAutoCapture()) {
 
 				if (temp != null) {

@@ -333,7 +333,6 @@ public abstract class AbstractPlayer implements Serializable {
 	public void setLatestP(Point latestP) {
 		this.latestP = latestP;
 	}
-	
 
 	// public int getCapture_count() {
 	// return capture_count;
