@@ -76,7 +76,7 @@ public abstract class AbstractGame implements Serializable {
 														 * stop
 														 */
 							currentP.setOrigin(null);/* Reset the origin */
-							//System.out.println("\nFound cell...");
+							System.out.println("\nFound cell...");
 							return true;/* Capture was found */
 						}
 						/* This adjacent Point was a dead end */
@@ -242,7 +242,7 @@ public abstract class AbstractGame implements Serializable {
 		// Tools.printCollectionPointsStatus(this.collection);
 
 		if (tempCell != null) {
-			System.out.println("Found cell");
+			//System.out.println("Found cell");
 			return tempCell;
 		}
 		return null;
