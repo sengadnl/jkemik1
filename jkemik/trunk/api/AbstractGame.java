@@ -6,6 +6,7 @@ package api;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import javax.swing.JOptionPane;
 
 import utilities.Globals;
@@ -77,7 +78,8 @@ public abstract class AbstractGame implements Serializable {
 								&& currentP.getSelected().size() > 3) {
 							currentP.setSuccessful(true);
 							currentP.setOrigin(null);/* Reset the origin */
-							System.out.println("\nFound cell...Index is " + i);
+							// System.out.println("\nFound cell...Index is " +
+							// i);
 							return true;/* Capture was found */
 						}
 						/* This adjacent Point was a dead end */
@@ -119,22 +121,25 @@ public abstract class AbstractGame implements Serializable {
 
 				cell = new Cell(getCurrentP().getId(), getCurrentP()
 						.getSelected(), area);
-				if (isAreaEmpty(area)) {
+
+				/* When this cell is empty */
+				if (isAreaEmpty(TempArea)) {
 					cell.setStatus(Globals.CELL_EMPTY);
-					// currentP.setSelected(new ArrayList<Point>());
-					// return null;
+					return cell;
 				}
 
 				int captured_count = 0;
 				int redeemed_count = 0;
 				/* Go through all selected dots from recursion */
-				for (Point p : TempArea) {
-
+				System.out.println("Examining area!!!!!!!!!!!!!!!!!!!!!!!!");
+				for (Point p : area) {
 					/* If p exist in collection */
 					if (this.collection.containsKey(p.toString())) {
 						Point object = this.collection.get(p.toString());
+						System.out.println("Point status: "
+								+ object.getStatus());
 
-						/* captures */
+						/* if guest point is free, capture it */
 						if (object.getId() == guest.getId()
 								&& object.getStatus() != Point.CAPTURED) {
 							object.setStatus(Point.CAPTURED);
@@ -150,23 +155,24 @@ public abstract class AbstractGame implements Serializable {
 
 					} else {
 						/* If p doesn't exist in collection */
+						System.out
+								.println("Adding dead points to collection...");
 						p.setStatus(Point.DEAD);
 						this.collection.put(p.toString(), p);
 					}
 
 				}/* end of second for loop */
 
-				setStatusForAll(currentP.getSelected(), Point.CONNECTED);
-				// cell = new Cell(getCurrentP().getId(), getCurrentP()
-				// .getSelected(), area);
+				if (captured_count <= 0) {
+					System.out.println("NO CAPTURES , CELL IS INVALID ");
+					return null;
+				}
 
-				// if (captured_count == 0) {
-				// return null;
-				// }
+				setStatusForAll(currentP.getSelected(), Point.CONNECTED);
 				cell.setValue(captured_count + redeemed_count);
 				cell.setStatus(Globals.CELL_FREE);
-				// currentP.addCell(cell);
-				// calculateScore(cell);
+				currentP.addCell(cell);
+				calculateScore(cell);
 			} catch (NullPointerException ex) {
 				System.err.println("In capture: " + ex.getMessage());
 			}
@@ -245,48 +251,51 @@ public abstract class AbstractGame implements Serializable {
 			// Tools.printCollectionPointsStatus(this.collection);
 			if (tempCell == null) {
 				currentP.setSelected(new ArrayList<Point>());
+				//System.out.println("Found a null cell");
+				return null;
 			}
 
-			if (tempCell != null && tempCell.getStatus() == Globals.CELL_FREE) {
-				//System.out.println("Found an empty cell");
+			if (tempCell.getStatus() == Globals.CELL_FREE) {
+				System.out.println("Found an good cell");
 				return tempCell;
-			} else if (tempCell != null && tempCell.getStatus() == Globals.CELL_EMPTY) {
-				/* Persist to bypass unwanted empty cells */
-				ArrayList<Point> newBox = getBox();
-				if (!newBox.isEmpty()) {
-					System.out.println("Persisting!!!!");
-					/* check the other point in the box */
-					for (int e = newBox.size() - 1; e >= 1; e--) {
-						Point temp = this.collection.get(newBox.get(e)
-								.toString());
-						// check if this is a valid point
-						if (temp == null) {
-							continue;
-						}
-						// start a capture from this point
-						tempCell = capture(temp, squareSize);
-
-						
-						if (tempCell != null) {
-							// Check for other empty cells
-							if (tempCell.getStatus() == Globals.CELL_EMPTY) {
-								continue;
-							}
-							// If we found a cell we stop looking into this box
-							if (tempCell.getStatus() == Globals.CELL_FREE) {
-								break;
-							}
-						}else{
-							currentP.setSelected(new ArrayList<Point>());
-						}
-
-					}
-					tempCell.setStatus(Globals.CELL_FREE);
-					currentP.addCell(tempCell);
-					calculateScore(tempCell);
-				}
-				
 			}
+
+			if (tempCell.getStatus() == Globals.CELL_EMPTY) {
+				System.err.println("Found an empty cell");
+				return null;
+			}
+
+			// else {
+			// /* Persist to bypass unwanted empty cells */
+			// ArrayList<Point> newBox = getBox();
+			// if (!newBox.isEmpty()) {
+			// System.out.println("Persisting!!!!");
+			// /* check the other point in the box */
+			// for (int e = newBox.size() - 1; e >= 1; e--) {
+			// Point temp = this.collection.get(newBox.get(e)
+			// .toString());
+			// // check if this is a valid point
+			// if (temp == null) {
+			// continue;
+			// }
+			// // start a capture from this point
+			// tempCell = capture(temp, squareSize);
+			//
+			// if (tempCell != null) {
+			// // Check for other empty cells
+			// if (tempCell.getStatus() == Globals.CELL_EMPTY) {
+			// continue;
+			// }
+			// // If we found a cell we stop looking into this box
+			// if (tempCell.getStatus() == Globals.CELL_FREE) {
+			// break;
+			// }
+			// } else {
+			// currentP.setSelected(new ArrayList<Point>());
+			// }
+			// }
+			// }
+			// }
 		} catch (IndexOutOfBoundsException ex) {
 			System.err.println("In connectDots" + ex.getMessage());
 		}
@@ -319,11 +328,10 @@ public abstract class AbstractGame implements Serializable {
 
 	public ArrayList<Point> getTrueArea(ArrayList<Point> area) {
 		ArrayList<Point> newArea = new ArrayList<Point>();
-		//TODO
+		// TODO
 		int flag_of_validity = 0;
-		
-		// add all point that are not dead or belong to guest to a new Arraylist
-		// these point will be part of the a cell.
+
+		// add all points that are not dead or belong to guest to a new
 
 		for (Point p1 : area) {
 			Point temp = this.collection.get(p1.toString());
@@ -331,15 +339,15 @@ public abstract class AbstractGame implements Serializable {
 					|| temp.getId() == currentP.getId()) {
 				continue;
 			}
-			if(temp.getStatus() == Point.PLAYED){
+			if (temp.getStatus() == Point.PLAYED) {
 				flag_of_validity = 1;
 			}
 			newArea.add(temp);
 		}
-		if(flag_of_validity == 0){
+		if (flag_of_validity == 0) {
 			return new ArrayList<Point>();
 		}
-		
+
 		// System.out.println("TrueArea is equal " + newArea.size());
 		return newArea;
 	}
@@ -464,17 +472,19 @@ public abstract class AbstractGame implements Serializable {
 	 *            cell object cells: ArrayList of enemy cells
 	 * @return void
 	 */
-	public void evalCell(Cell cell) {
+	public double evalCell(Cell cell) {
 		// check for capture
+		double value = 0;
 		for (Cell c : guest.getCells().values()) {
-
 			Point p = c.getCellContour().get(0);
 			Point temp = this.collection.get(p.toString());
 			if (temp.getStatus() == Point.CAPTURED
 					&& c.getStatus() != Globals.CELL_CAPTURED
 					&& c.getStatus() != Globals.CELL_REDEEMED) {
-				cell.setValue(cell.getValue() + c.getValue());
+				value = cell.getValue() + c.getValue();
+				cell.setValue(value);
 				c.setStatus(Globals.CELL_CAPTURED);
+
 				// Redeem cells
 				if (!c.getCellsInCell().isEmpty()) {
 					for (Cell r : c.getCellsInCell().values()) {
@@ -487,6 +497,7 @@ public abstract class AbstractGame implements Serializable {
 				guest.removeCell(c);
 			}
 		}
+		return value;
 	}
 
 	/**
@@ -617,13 +628,28 @@ public abstract class AbstractGame implements Serializable {
 	}
 
 	// TODO implement persistent capture
-	 private ArrayList<Point> getBox() {
-	 return box;
-	 }
-	
-	 private void setBox(ArrayList<Point> persistanceList) {
-	 this.box = persistanceList;
-	 }
+	private ArrayList<Point> getBox() {
+		return box;
+	}
+
+	private void setBox(ArrayList<Point> persistanceList) {
+		this.box = persistanceList;
+	}
+
+	/*
+	 * If a point in this area is a part of a guest cell contour and the
+	 */
+	public boolean isAreaAlreadySeen(ArrayList<Point> area) {
+		for (Point p : area) {
+			for (Cell c : guest.getCells().values()) {
+				if (c.getStatus() == Globals.CELL_CAPTURED
+						&& Tools.containPoint(p, c.getCellContour())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	/* Connecting dots utilities */
 	public boolean AI = false;
