@@ -30,6 +30,7 @@ public class SysPrefsListener implements MouseListener {
 					JOptionPane.YES_OPTION);
 			if (res == 0) {
 				JKemik.settings_t.setSystemSetupMode(true);
+				JKemik.createGame(JKemik.template, JKemik.settings_t);
 				BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
 				ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
 			} else {
