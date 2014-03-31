@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -19,7 +18,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import controler.JKemik;
-
+import utilities.Globals;
 import utilities.Tools;
 import api.Cell;
 import api.AbstractGame;
@@ -73,7 +72,7 @@ public class Artist {
 		int Width = (int) d.getWidth(), Height = (int) d.getHeight(), squareSize = dimension
 				.getSqrSize();
 
-		int sqrLineFadePercent = 50;
+		//double sqrLineFadePercent = Globals.SQR_LINE_SHADE_PERCENT;
 		int gridLineFadePercent = 35;
 		int currentColPos = 0;
 		int currentRowPos = 0;
@@ -86,9 +85,9 @@ public class Artist {
 				Point from = new Point(squareSize * index, 0);
 				Point to = new Point(squareSize * index, Height);
 				Artist.drawLine(from, to, squareFadeVariant,
-						Tools.fade(c, sqrLineFadePercent), g2);
+						Tools.fade(c, Globals.SQR_LINE_SHADE_PERCENT), g2);
 				Artist.drawLine(from, to, gridLineStroke,
-						Tools.fade(c, sqrLineFadePercent), g2);
+						Tools.fade(c, Globals.SQR_LINE_SHADE_PERCENT), g2);
 				currentColPos += squareSize;
 			}
 			// draw rows
@@ -97,9 +96,9 @@ public class Artist {
 				Point from = new Point(0, squareSize * index);
 				Point to = new Point(Width, squareSize * index);
 				Artist.drawLine(from, to, squareFadeVariant,
-						Tools.fade(c, sqrLineFadePercent), g2);
+						Tools.fade(c, Globals.SQR_LINE_SHADE_PERCENT), g2);
 				Artist.drawLine(from, to, gridLineStroke,
-						Tools.fade(c, sqrLineFadePercent), g2);
+						Tools.fade(c, Globals.SQR_LINE_SHADE_PERCENT), g2);
 				currentRowPos += squareSize;
 			}
 			index++;
@@ -153,17 +152,6 @@ public class Artist {
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setColor(Tools.fade(c));
 		g2.draw(circle);
-		g2.setColor(c);
-	}
-
-	protected static void drawCursor(Point p, int stroke, double h_sqr,
-			Color c, Graphics2D g2) {
-		g2.setColor(c);
-		g2.setStroke(new BasicStroke(stroke));
-		g2.draw(new Line2D.Double(p.getXC(), p.getYC() + h_sqr, p.getXC(), p
-				.getYC() - h_sqr));
-		g2.draw(new Line2D.Double(p.getXC() - h_sqr, p.getYC(), p.getXC()
-				+ h_sqr, p.getYC()));
 		g2.setColor(c);
 	}
 
@@ -400,21 +388,42 @@ public class Artist {
 		try {
 			double px = p.getXC();
 			double py = p.getYC();
+			
+//			Artist.drawCircle(new Point(px, py, JKemik.game.getCurrentP().getId()),
+//					BoardFrame.BOARD_COLOR, Grid.HALF_DIAMETER,
+//					Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
+			
 			Ellipse2D.Double circle = new Ellipse2D.Double(px
 					- Grid.HALF_DIAMETER, py - Grid.HALF_DIAMETER,
 					Grid.CIRCLE_DIAMETER, Grid.CIRCLE_DIAMETER);
 			g2.setColor(BoardFrame.BOARD_COLOR);
-
+			g2.setStroke(new BasicStroke(Grid.gridLineStroke + 1));
 			g2.fill(circle);
+			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+					RenderingHints.VALUE_ANTIALIAS_ON);
 			g2.draw(circle);
 			g2.setColor(Grid.gridLineCol);
+			
+			
 
 			Artist.drawCursor(p, Grid.squareFadeVariant, Grid.half_squareSize,
-					Tools.fade(BoardFrame.BOARD_COLOR), g2);
+					Tools.fade(BoardFrame.BOARD_COLOR,Globals.SQR_LINE_SHADE_PERCENT), g2);
 			drawLongCursor(p, Grid.gridLineStroke, Grid.gridLineCol, g2);
+			
 		} catch (Exception e) {
 			System.err.println("Error in unDraw: " + e.getMessage());
 		}
+	}
+	
+	protected static void drawCursor(Point p, int stroke, double h_sqr,
+			Color c, Graphics2D g2) {
+		g2.setColor(c);
+		g2.setStroke(new BasicStroke(stroke));
+		g2.draw(new Line2D.Double(p.getXC(), p.getYC() + h_sqr, p.getXC(), p
+				.getYC() - h_sqr));
+		g2.draw(new Line2D.Double(p.getXC() - h_sqr, p.getYC(), p.getXC()
+				+ h_sqr, p.getYC()));
+		g2.setColor(c);
 	}
 
 	protected static void drawLongCursor(Point p, int stroke, Color c,

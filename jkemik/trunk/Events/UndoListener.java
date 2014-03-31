@@ -30,9 +30,6 @@ public class UndoListener implements MouseListener {
 
 	public void mouseClicked(MouseEvent arg0) {
 		AbstractGame game = JKemik.game;
-//		System.out.println("entering undo > flag = " 
-//				+ game.getCurrentP().getPlay_flag() + "\nturn = " + 
-//				game.getCurrentP().isTurn());
 		if(game.getCurrentP().getPlay_flag() == 1){
 			if (!game.getCurrentP().isTurn()) {
 				Grid.undo = true;

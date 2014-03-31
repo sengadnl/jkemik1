@@ -95,14 +95,19 @@ public abstract class AbstractGame implements Serializable {
 	 * Only plotted points can be undone, dead points can not be revived
 	 */
 	public boolean undo() {
-		if (collection.get(currentP.getLatestP()).getStatus() == Point.CONNECTED) {
+
+		if (collection.get(currentP.getLatestP().toString()).getStatus() == Point.CONNECTED) {
+			System.out.println("First if is true");
 			return false;
 		}
-		if (collection.remove(currentP.getLatestP()) != null) {// remove last
-																// point
+
+		if (collection.remove(currentP.getLatestP().toString()) != null) {// remove
+																			// last
+			System.out.println("Second if is true"); // point
 			unSetPlayFlag();
 			return true;
 		}
+
 		return false;
 	}
 
@@ -242,9 +247,31 @@ public abstract class AbstractGame implements Serializable {
 		// Tools.printCollectionPointsStatus(this.collection);
 
 		if (tempCell != null) {
-			//System.out.println("Found cell");
+			// System.out.println("Found cell");
 			return tempCell;
 		}
+		// TODO
+		// else {
+		// /* Persist to bypass unwanted empty cells */
+		// if (!this.box.isEmpty()) {
+		// System.out.println("Persisting!!!!");
+		// /* check the other point in the box */
+		// for (int e = this.box.size() - 1; e >= 1; e--) {
+		// Point temp = this.collection
+		// .get(this.box.get(e).toString());
+		// if (temp == null) {
+		// continue;
+		// }
+		// tempCell = capture(temp, squareSize);
+		// if (tempCell == null) {
+		// continue;
+		// } else {
+		// return tempCell;
+		// }
+		// }
+		// this.box = new ArrayList<Point>();
+		// }
+		// }
 		return null;
 	}
 
@@ -563,6 +590,15 @@ public abstract class AbstractGame implements Serializable {
 		this.lastp = lastp;
 	}
 
+	// TODO implement persistent capture
+	public ArrayList<Point> getBox() {
+		return box;
+	}
+
+	public void setBox(ArrayList<Point> persistanceList) {
+		this.box = persistanceList;
+	}
+
 	/* Connecting dots utilities */
 	public boolean AI = false;
 	public boolean embuche_on = false;
@@ -577,5 +613,9 @@ public abstract class AbstractGame implements Serializable {
 	private static AbstractPlayer currentP = new Player(null, "");
 	private static AbstractPlayer guest = new Player(null, "");
 	private HashMap<String, Point> collection = new HashMap<String, Point>();
+
+	/* persistance */
+	// TODO implement persistent capture
+	public ArrayList<Point> box = new ArrayList<Point>();
 
 }
