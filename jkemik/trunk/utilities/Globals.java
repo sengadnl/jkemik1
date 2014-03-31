@@ -13,6 +13,7 @@ public class Globals {
 	public static final double FADE_VARIANT = .35;//for fading colors
 	public static final double LABEL_VARIANT = 120;//for fading colors
 	public static final int FADE_THRESHOLD = 50;
+	public static final int SQR_LINE_SHADE_PERCENT = 50;
 	
 	public static final String templateObjectFile = "/tmp/template.obj";
 	public static final String tempFile = "tmp";

@@ -67,7 +67,7 @@ public class Grid extends JPanel {
 		Grid.g2 = (Graphics2D) g;
 		AbstractGame game = JKemik.game;
 
-	// try {
+	//try {
 			Artist.drawCursor(new Point(hl_x, hl_y, 0), gridLineStroke,
 					Grid.half_squareSize, gridLineCol, g2);
 			highLightDot(game.getCurrentP().getColor());
@@ -108,24 +108,20 @@ public class Grid extends JPanel {
 				if (manualc) {
 					if (game.getCurrentP().getSelected().size() >= 1) {
 						Artist.unDrawSelection(
-								game.getCurrentP().getSelected(), g2);//
-					} else {
-
-					}
+								game.getCurrentP().getSelected(), g2);
+					} 
 				} else {
 					if (game.undo()) {
-						Artist.unDraw(game.getLastp(), g2);
+						Artist.unDraw(game.getCurrentP().getLatestP(), g2);
 					}
 				}
 				undo = false;
 			}
-
 			//
 			if (JKemik.settings_t.isAutoPass()
 					&& game.getCurrentP().getPlay_flag() == 1) {
 				game.switchPlayTurns();
 			}
-
 			if (!this.drawn) {
 				System.err.println("IN DRAW !!!");
 				Artist.drawGrid(g2, Grid.dimension, Grid.squareFadeVariant,
@@ -141,7 +137,6 @@ public class Grid extends JPanel {
 //			System.out.println("NullPointer in paintComponent: "
 //					+ e.getMessage());
 //		}
-
 	}
 
 	public void highLightDot(Color c) {
