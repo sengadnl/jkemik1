@@ -2,11 +2,11 @@ package Events;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import controler.JKemik;
-
 import view.BoardFrame;
 import view.Grid;
 
@@ -31,6 +31,7 @@ public class PassTurnListener implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
+		
 		if (!BoardFrame.mouseSelection.isSelected()) {
 			System.out.println("" + JKemik.game.getCurrentP().getName()+ " > "+
 					"Play Flag: " + JKemik.game.getCurrentP().getPlay_flag());

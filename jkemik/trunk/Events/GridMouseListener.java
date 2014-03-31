@@ -10,9 +10,9 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import controler.JKemik;
-
 import api.AbstractGame;
 import api.Player;
 import api.Point;
@@ -32,85 +32,108 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		AbstractGame game = JKemik.game;
-		Player current = (Player) game.getCurrentP();
-		// Allow mouse click
-		Grid.mouseclicked = true;
 
-		// Get X and Y
-		Grid.x = e.getX();
-		Grid.y = e.getY();
-
-		// Guess player's point
-		Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
-		Point temp = new Point(Grid.x, Grid.y);
-
-		if (Grid.manualc) {
-			temp = game.getCollection().get(temp.toString());
-			if (temp == null) {
-				return;
-			}
-			if (game.select(temp, Grid.squareSize)) {
-				Grid.selectPoint = true;
-				Grid.setSelectedP(temp);
-				if (temp.adjacentTo(current.getOrigin(), Grid.squareSize)
-						&& current.getSelected().size() >= 4) {
-					Grid.cell = game.capture((int) Grid.squareSize);//
-					game.getCurrentP().setSelected(new ArrayList<Point>());
-					
-					BoardFrame.mouseSelection.setSelected(false);
-					BoardFrame.mode.setVisible(true);
-					BoardFrame.pass_turn.setVisible(true);
-					Grid.manualc = false;
+		//Pass turn is this is a right click
+		if (SwingUtilities.isRightMouseButton(e)) {
+			if (!BoardFrame.mouseSelection.isSelected()) {
+				System.out.println("" + JKemik.game.getCurrentP().getName()
+						+ " > " + "Play Flag: "
+						+ JKemik.game.getCurrentP().getPlay_flag());
+				/*
+				 * Pass turn only if mouse was clicked and it's no longer
+				 * currentP's turn
+				 */
+				if (JKemik.game.getCurrentP().getPlay_flag() == 1) {
+					JKemik.game.switchPlayTurns();
+				} else {
+					JOptionPane.showMessageDialog(null,
+							BoardFrame.messages.getString("ilPass"),
+							BoardFrame.messages.getString("ilAction"),
+							JOptionPane.WARNING_MESSAGE);
 				}
+			}
+		} else { 
+
+			AbstractGame game = JKemik.game;
+			Player current = (Player) game.getCurrentP();
+			// Allow mouse click
+			Grid.mouseclicked = true;
+
+			// Get X and Y
+			Grid.x = e.getX();
+			Grid.y = e.getY();
+
+			// Guess player's point
+			Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
+			Point temp = new Point(Grid.x, Grid.y);
+
+			if (Grid.manualc) {
+				temp = game.getCollection().get(temp.toString());
+				if (temp == null) {
+					return;
+				}
+				if (game.select(temp, Grid.squareSize)) {
+					Grid.selectPoint = true;
+					Grid.setSelectedP(temp);
+					if (temp.adjacentTo(current.getOrigin(), Grid.squareSize)
+							&& current.getSelected().size() >= 4) {
+						Grid.cell = game.capture((int) Grid.squareSize);//
+						game.getCurrentP().setSelected(new ArrayList<Point>());
+
+						BoardFrame.mouseSelection.setSelected(false);
+						BoardFrame.mode.setVisible(true);
+						BoardFrame.pass_turn.setVisible(true);
+						Grid.manualc = false;
+					}
+					BoardFrame.grid.repaint();
+				}
+			} else {
+				if (game.getCurrentP().isTurn()) {
+					// System.out.println("Saw turn ...");
+					if (!game.getCollection().containsKey(temp.toString())) {
+						// System.out.println("Plotting ...");
+						Grid.plotPoint = true;
+						BoardFrame.grid.repaint();
+
+						// Mark point as played
+						temp.setStatus(Point.PLAYED);
+
+						// Mark point as belonging to current player
+						temp.setId(current.getId());
+
+						// Remember last play
+						current.setLatestP(temp);
+
+						// Add to the board
+						game.getCollection().put(temp.toString(), temp);
+
+						game.setEmbuche_on(true);
+						// System.out.println("Collection size: " +
+						// game.getCollection().size());
+
+						// Setting turn
+						game.setPlayFlag();
+						game.getCurrentP().setTurn(false);
+						Grid.mouseMove = false;
+					}
+				}
+			}
+			if (game.isEmbuche_on() && JKemik.settings_t.isAutoCapture()) {
+				// System.out.println("Embush attempt");
+				BoardFrame.progressB.setVisible(true);
+				BoardFrame.progressB.setIndeterminate(true);
+				Grid.cell = JKemik.embush(Grid.squareSize);// new line
+				BoardFrame.progressB.setIndeterminate(false);
+				BoardFrame.progressB.setVisible(false);
 				BoardFrame.grid.repaint();
 			}
-		} else {
 			if (game.getCurrentP().isTurn()) {
-				// System.out.println("Saw turn ...");
-				if (!game.getCollection().containsKey(temp.toString())) {
-					// System.out.println("Plotting ...");
-					Grid.plotPoint = true;
-					BoardFrame.grid.repaint();
-
-					// Mark point as played
-					temp.setStatus(Point.PLAYED);
-
-					// Mark point as belonging to current player
-					temp.setId(current.getId());
-
-					// Remember last play
-					current.setLatestP(temp);
-
-					// Add to the board
-					game.getCollection().put(temp.toString(), temp);
-
-					game.setEmbuche_on(true);
-					// System.out.println("Collection size: " +
-					// game.getCollection().size());
-
-					// Setting turn
-					game.setPlayFlag();
-					game.getCurrentP().setTurn(false);
-					Grid.mouseMove = false;
-				}
+				this.grid.setMouseclicked(true);
 			}
+			BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
+			BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
+			BoardFrame.updateBoardStatus();
 		}
-		if (game.isEmbuche_on() && JKemik.settings_t.isAutoCapture()) {
-			//System.out.println("Embush attempt");
-			BoardFrame.progressB.setVisible(true);
-			BoardFrame.progressB.setIndeterminate(true);
-			Grid.cell = JKemik.embush(Grid.squareSize);// new line
-			BoardFrame.progressB.setIndeterminate(false);
-			BoardFrame.progressB.setVisible(false);
-			BoardFrame.grid.repaint();
-		}
-		if (game.getCurrentP().isTurn()) {
-			this.grid.setMouseclicked(true);
-		}
-		BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
-		BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
-		BoardFrame.updateBoardStatus();
 	}
 
 	public void mouseEntered(MouseEvent e) {
@@ -147,7 +170,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			BoardFrame.grid.repaint();
 			Grid.mouseMove = true;
 		}
-		
+
 		if (JKemik.game.getStatus() == 1) {
 			JOptionPane.showMessageDialog(null, ""
 					+ JKemik.game.getGuest().getName() + " "
@@ -164,7 +187,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			BoardFrame.Game_status.setForeground(Color.GREEN);
 		}
 		BoardFrame.grid.repaint();
-		
+
 		// }
 		// BoardFrame.grid.setToolTipText("" + new Point(Grid.x, Grid.y));
 	}
