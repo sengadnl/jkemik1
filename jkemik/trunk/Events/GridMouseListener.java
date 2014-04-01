@@ -184,7 +184,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 			// Reset game exit label
 			BoardFrame.Game_status.setText("NEW");
-			BoardFrame.Game_status.setForeground(Color.GREEN);
+			//BoardFrame.Game_status.setForeground(Color.GREEN);
 		}
 		BoardFrame.grid.repaint();
 
