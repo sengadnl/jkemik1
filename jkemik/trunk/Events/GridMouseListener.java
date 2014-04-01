@@ -34,7 +34,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 	public void mouseClicked(MouseEvent e) {
 
 		//Pass turn is this is a right click
-		if (SwingUtilities.isRightMouseButton(e)) {
+		if (SwingUtilities.isRightMouseButton(e) && !JKemik.settings_t.isAutoPass()) {
 			if (!BoardFrame.mouseSelection.isSelected()) {
 				System.out.println("" + JKemik.game.getCurrentP().getName()
 						+ " > " + "Play Flag: "
