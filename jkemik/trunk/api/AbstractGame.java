@@ -122,7 +122,7 @@ public abstract class AbstractGame implements Serializable {
 				ArrayList<Point> area = getTrueArea(TempArea);
 
 				if (isAreaEmpty(area)) {
-					System.err.println("The cell is emppty..");
+					currentP.setSuccessful(false);
 					currentP.setSelected(new ArrayList<Point>());
 					return null;
 				}
@@ -173,10 +173,9 @@ public abstract class AbstractGame implements Serializable {
 			} catch (NullPointerException ex) {
 				System.err.println("In capture: " + ex.getMessage());
 			}
-		} else {
-			currentP.setSuccessful(false);
-			currentP.setSelected(new ArrayList<Point>());
 		}
+		currentP.setSuccessful(false);
+		currentP.setSelected(new ArrayList<Point>());
 
 		return cell;
 	}

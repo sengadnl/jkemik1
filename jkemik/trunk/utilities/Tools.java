@@ -557,69 +557,6 @@ public class Tools {
 		return ret;
 	}
 
-	/**
-	 * @author dalet
-	 * @param a
-	 *            Point object, an arrayList of points, and the length of one
-	 *            side of squares that make the chemik's grid
-	 * @return an array of points forming the box which contains the point
-	 *         parameter
-	 */
-	public static Point[] boxCoord(Point p, ArrayList<Point> list,
-			double squareSize) {
-		ArrayList<Point> b = new ArrayList<Point>();
-		Point[] box = new Point[9];
-		// Point[] box = new Point[8];
-
-		double x = p.getXC();
-		double y = p.getYC();
-
-		box[0] = new Point(x - squareSize, y + squareSize);
-		if (containPoint(box[0], list)) {
-			b.add(box[0]);
-		}
-		box[1] = new Point(x - squareSize, y);
-		if (containPoint(box[1], list)) {
-			b.add(box[1]);
-		}
-		box[2] = new Point(x - squareSize, y - squareSize);
-		if (containPoint(box[2], list)) {
-			b.add(box[2]);
-		}
-
-		box[3] = new Point(x, y + squareSize);
-		if (containPoint(box[3], list)) {
-			b.add(box[3]);
-		}
-		box[4] = new Point(x, y - squareSize);
-		if (containPoint(box[4], list)) {
-			b.add(box[4]);
-		}
-
-		box[5] = new Point(x + squareSize, y + squareSize);
-		if (containPoint(box[5], list)) {
-			b.add(box[5]);
-		}
-		box[6] = new Point(x + squareSize, y);
-		if (containPoint(box[6], list)) {
-			b.add(box[6]);
-		}
-
-		box[7] = new Point(x + squareSize, y - squareSize);
-		if (containPoint(box[7], list)) {
-			b.add(box[7]);
-		}
-
-		box[8] = new Point(x, y);
-		if (containPoint(box[8], list)) {
-			b.add(box[8]);
-		}
-
-		box = null;
-		box = b.toArray(new Point[b.size()]);
-		return box;
-	}
-
 	public static boolean containPoint(Point p, ArrayList<Point> a) {
 		try {
 			if (a.isEmpty()) {
@@ -645,13 +582,11 @@ public class Tools {
 		box[0] = new Point(x - squareSize, y + squareSize);
 		box[1] = new Point(x - squareSize, y);
 		box[2] = new Point(x - squareSize, y - squareSize);
-
-		box[3] = new Point(x, y + squareSize);
-		box[4] = new Point(x, y - squareSize);
-
-		box[5] = new Point(x + squareSize, y + squareSize);
-		box[6] = new Point(x + squareSize, y);
-		box[7] = new Point(x + squareSize, y - squareSize);
+		box[3] = new Point(x, y - squareSize);
+		box[4] = new Point(x + squareSize, y - squareSize);
+		box[5] = new Point(x + squareSize, y);
+		box[6] = new Point(x + squareSize, y + squareSize);
+		box[7] = new Point(x, y + squareSize);
 		box[8] = p;
 
 		return box;
