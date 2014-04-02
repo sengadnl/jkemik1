@@ -26,15 +26,7 @@ public class Tools {
 		}
 		return "";
 	}
-	/*Generates a personal identification number for a cell*/
-//	public static int pinGenerator(ArrayList<Point> area){
-//		int id = 0;
-//		for(Point p: area){
-//			id += (int)(p.getXC());
-//			id += (int)(p.getYC());
-//		}
-//		return id;
-//	}
+
 	public static void printCollectionPointsStatus(
 			HashMap<String, Point> collection) {
 		for (Point p : collection.values()) {
