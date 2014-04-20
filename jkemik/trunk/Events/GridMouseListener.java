@@ -173,7 +173,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 		if (JKemik.game.getStatus() == 1) {
 			JOptionPane.showMessageDialog(null, ""
-					+ JKemik.game.getGuest().getName() + " "
+					+ JKemik.game.getCurrentP().getName() + " "
 					+ BoardFrame.messages.getString("winM"), " Win",
 					JOptionPane.OK_OPTION);
 			JKemik.game.setStatus(1);
