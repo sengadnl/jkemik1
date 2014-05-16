@@ -3,7 +3,6 @@
  */
 package Events;
 
-import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -106,6 +105,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 						// Add to the board
 						game.getCollection().put(temp.toString(), temp);
+						
+						game.getCurrentP().rememberPoint(temp);
 
 						game.setEmbuche_on(true);
 						// System.out.println("Collection size: " +

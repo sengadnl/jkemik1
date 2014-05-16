@@ -132,10 +132,10 @@ public abstract class AbstractPlayer implements Serializable {
 
 		// Add what this cell is worth to this player'score
 
-		if (c == null) {
+		if (c != null && c.getStatus() == Globals.CELL_FREE) {
+			this.score += c.getValue();
+			this.Cells.put(c.hashCode(), c);
 		}
-		this.score += c.getValue();
-		this.Cells.put(c.hashCode(), c);
 	}
 
 	/** Adds a captured cell to this player */
@@ -345,6 +345,30 @@ public abstract class AbstractPlayer implements Serializable {
 	// public int getCaptured_cell_count() {
 	// return captured_cell_count;
 	// }
+	public Cell getLastCapture() {
+		return lastCapture;
+	}
+
+	public void setLastCapture(Cell lastCapture) {
+		this.lastCapture = lastCapture;
+	}
+	
+	public void rememberPoint(Point p) {
+		if (this.lastpoints.size() < 2) {
+			this.lastpoints.add(p);
+		} else {
+			this.lastpoints.remove(0);
+			this.lastpoints.add(p);
+		}
+	}
+	
+	public ArrayList<Point> getLastpoints() {
+		return lastpoints;
+	}
+
+	public void setLastpoints(ArrayList<Point> lastpoints) {
+		this.lastpoints = lastpoints;
+	}
 
 	private String name = "player";
 	private int id = 0;// player1 = -1 and player2 = 1
@@ -359,8 +383,11 @@ public abstract class AbstractPlayer implements Serializable {
 	private Point origin = new Point(444444, 7798979);
 	private Point from = new Point(553355, 7798979);
 	private Point latestP = new Point(550055, 7798979);
+	
+	public ArrayList<Point> lastpoints = new ArrayList<Point>();
 
 	private HashMap<Integer, Cell> Cells = null;
+	private Cell lastCapture = null;
 	// TODO
 	// private HashMap<Integer, Cell> CapturedCells = null;
 	private ArrayList<Point> selected = null;
