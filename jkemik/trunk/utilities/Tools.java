@@ -572,17 +572,37 @@ public class Tools {
 		double y = p.getYC();
 
 		box[0] = new Point(x - squareSize, y + squareSize);
-		box[1] = new Point(x - squareSize, y);
-		box[2] = new Point(x - squareSize, y - squareSize);
-		box[3] = new Point(x, y - squareSize);
-		box[4] = new Point(x + squareSize, y - squareSize);
-		box[5] = new Point(x + squareSize, y);
-		box[6] = new Point(x + squareSize, y + squareSize);
+		box[1] = new Point(x + squareSize, y - squareSize);
+		
+		box[2] = new Point(x - squareSize, y);
+		box[3] = new Point(x + squareSize, y);
+		
+		box[4] = new Point(x - squareSize, y - squareSize);
+		box[5] = new Point(x + squareSize, y + squareSize);
+		
+		box[6] = new Point(x, y - squareSize);
 		box[7] = new Point(x, y + squareSize);
+		
 		box[8] = p;
 
 		return box;
 	}
+//	public static Stack<Point> boxCoord(Point p, double squareSize) {
+//		Stack<Point> box = new Stack<Point>();
+//		double x = p.getXC();
+//		double y = p.getYC();
+//		//box.push(p);
+//		box.push(new Point(x - squareSize, y + squareSize));
+//		box.push(new Point(x - squareSize, y));
+//		box.push(new Point(x - squareSize, y - squareSize));
+//		box.push(new Point(x, y - squareSize));
+//		box.push(new Point(x + squareSize, y - squareSize));
+//		box.push(new Point(x + squareSize, y));
+//		box.push(new Point(x + squareSize, y + squareSize));
+//		box.push(new Point(x, y + squareSize));
+//		//box.push(p);
+//		return box;
+//	}
 
 	/**
 	 * @author dalet

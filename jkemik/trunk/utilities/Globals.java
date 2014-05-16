@@ -23,7 +23,7 @@ public class Globals {
 	
 	public static final int POINT_VALUE = 1;
 	public static final int REDEEMED_POINT_VALUE = 1;
-	public static int CELL_CAPTURED = 1, CELL_FREE = 0, CELL_REDEEMED = 2;
+	public static int CELL_CAPTURED = 1, CELL_FREE = 0, CELL_EMPTY = 3, CELL_REDEEMED = 2;
 	
 	public static final int RED_INDEX = 0;
 	public static final int WHITE_INDEX = 4;

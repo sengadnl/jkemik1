@@ -190,6 +190,9 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
 	}
 
 	public int compareTo(Point p) {
+		if(p == null){
+			return -1;
+		}
 		if (x == p.getXC() && y == p.getYC()) {
 			return 0;
 		}
