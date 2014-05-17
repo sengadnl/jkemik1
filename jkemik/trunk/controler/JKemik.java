@@ -213,6 +213,7 @@ public class JKemik extends Application {
 						new FileInputStream(s_object));
 
 				settings_t = (STemplate) input.readObject();
+				settings_t.setGameSetupMode(true);
 
 				input.close();
 			} else {

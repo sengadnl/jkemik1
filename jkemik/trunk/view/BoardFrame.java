@@ -89,10 +89,14 @@ public class BoardFrame extends JFrame {
 		JKemik.load.plus("Setting cursor initial state...");// 24
 		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
 		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
-
+		
+	
+		
 		// if (BoardFrame.getThereIsSavedGame() == 0) {
 		// } else {
 		// }
+		
+		/*Events*/
 		progressB.setVisible(false);
 		l1.rotateLabel(JKemik.settings_t.getGridDimension().toString());
 		// System Preferences Events
