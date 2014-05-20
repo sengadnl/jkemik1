@@ -262,11 +262,16 @@ public class JKemik extends Application {
 	}
 
 	public static Cell embush(double squareSize) {
-		//try {
-			Cell temp = game.connectDots(squareSize);
+		try {
+			long start = System.currentTimeMillis();
+			Cell temp = game.connectDots(squareSize);//
+			long end = System.currentTimeMillis();
+			double total = (end - start)/1000;
+			
 			if (settings_t.isAutoCapture()) {
 
 				if (temp != null) {
+					System.err.println("Capture Duration = " + total);
 					return temp;
 				} else {
 					game.setEmbuche_on(false);
@@ -276,6 +281,7 @@ public class JKemik extends Application {
 				if (settings_t.isManualCapture()) {
 
 					if (temp != null) {
+						System.err.println("Capture Duration = " + total);
 						game.setEmbuche_on(false);
 						return temp;
 					} else {
@@ -284,9 +290,9 @@ public class JKemik extends Application {
 					JKemik.settings_t.setManualCapture(false);
 				}
 			}
-//		} catch (NullPointerException e) {
-//			System.out.println("Error in embush: capture " + e.getLocalizedMessage());
-//		}
+		} catch (NullPointerException e) {
+			System.out.println("Error in embush: capture " + e.getLocalizedMessage());
+		}
 		return null;
 	}
 

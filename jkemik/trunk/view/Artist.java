@@ -22,6 +22,7 @@ import utilities.Globals;
 import utilities.Tools;
 import api.Cell;
 import api.AbstractGame;
+import api.Game;
 import api.GridDimension;
 import api.Player;
 import api.Point;
@@ -72,7 +73,7 @@ public class Artist {
 		int Width = (int) d.getWidth(), Height = (int) d.getHeight(), squareSize = dimension
 				.getSqrSize();
 
-		//double sqrLineFadePercent = Globals.SQR_LINE_SHADE_PERCENT;
+		// double sqrLineFadePercent = Globals.SQR_LINE_SHADE_PERCENT;
 		int gridLineFadePercent = 35;
 		int currentColPos = 0;
 		int currentRowPos = 0;
@@ -261,20 +262,32 @@ public class Artist {
 
 		// draw p1 points
 		for (Point p : JKemik.game.getCollection().values()) {
-
-			if (p.getId() == p1.getId()) {
+			
+			if (p.getId() == p1.getId()) { // && p.getStatus() == Point.CAPTURED
 				Artist.drawCircle(p, p1.getColor(), Grid.HALF_DIAMETER,
 						Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
 				Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
 						Grid.gridLineCol, g2);
 			}
+//				else{
+//				Artist.drawCircle(p, p1.getColor(), Grid.HALF_DIAMETER,
+//						Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
+//				Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
+//						Grid.gridLineCol, g2);
+//			}
 
-			if (p.getId() == p2.getId()) {
+			if (p.getId() == p2.getId()) { // && p.getStatus() == Point.CAPTURED
 				Artist.drawCircle(p, p2.getColor(), Grid.HALF_DIAMETER,
 						Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
 				Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
 						Grid.gridLineCol, g2);
 			}
+//			else{
+//				Artist.drawCircle(p, p2.getColor(), Grid.HALF_DIAMETER,
+//						Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
+//				Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
+//						Grid.gridLineCol, g2);
+//			}
 		}
 
 		if (Grid.manualc) {
@@ -338,7 +351,7 @@ public class Artist {
 	 * @return void Draws a cell with all its content.
 	 * */
 	protected static boolean drawAllCell(HashMap<Integer, Cell> cells,
-			Player pl1, Player pl2, Graphics2D g2) {
+			Player current, Player other, Graphics2D g2) {
 
 		try {
 			if (cells.isEmpty()) {
@@ -352,13 +365,13 @@ public class Artist {
 				/* draw cell contour */
 				Artist.drawLine(contour.get(0),
 						contour.get(contour.size() - 1), Grid.gridLineStroke
-								+ Grid.CURSOR_VARIANT_STROKE, pl1.getColor(),
-						g2);
+								+ Grid.CURSOR_VARIANT_STROKE,
+						current.getColor(), g2);
 				for (int i = 0; i < contour.size() - 1; i++) {
 
 					Artist.drawLine(contour.get(i), contour.get(i + 1),
 							Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE,
-							pl1.getColor(), g2);
+							current.getColor(), g2);
 
 					// draw intersection
 					Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
@@ -366,13 +379,13 @@ public class Artist {
 
 					Artist.drawCursor(contour.get(i + 1), Grid.gridLineStroke,
 							Grid.half_squareSize, Grid.gridLineCol, g2);
-					g2.setColor(pl1.getColor());
+					g2.setColor(current.getColor());
 					g2.setStroke(new BasicStroke(Grid.gridLineStroke
 							+ Grid.CURSOR_VARIANT_STROKE));
 				}
-				
+
 				System.out.println("CellsInCell : " + c.getCellsInCell());
-				if (drawAllCell(c.getCellsInCell(), pl2, pl1, g2)) {
+				if (drawAllCell(c.getCellsInCell(), other, current, g2)) {
 					System.err.println("Drawing captured cells ...");
 				}
 			}
@@ -388,11 +401,12 @@ public class Artist {
 		try {
 			double px = p.getXC();
 			double py = p.getYC();
-			
-//			Artist.drawCircle(new Point(px, py, JKemik.game.getCurrentP().getId()),
-//					BoardFrame.BOARD_COLOR, Grid.HALF_DIAMETER,
-//					Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
-			
+
+			// Artist.drawCircle(new Point(px, py,
+			// JKemik.game.getCurrentP().getId()),
+			// BoardFrame.BOARD_COLOR, Grid.HALF_DIAMETER,
+			// Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
+
 			Ellipse2D.Double circle = new Ellipse2D.Double(px
 					- Grid.HALF_DIAMETER, py - Grid.HALF_DIAMETER,
 					Grid.CIRCLE_DIAMETER, Grid.CIRCLE_DIAMETER);
@@ -403,18 +417,17 @@ public class Artist {
 					RenderingHints.VALUE_ANTIALIAS_ON);
 			g2.draw(circle);
 			g2.setColor(Grid.gridLineCol);
-			
-			
 
 			Artist.drawCursor(p, Grid.squareFadeVariant, Grid.half_squareSize,
-					Tools.fade(BoardFrame.BOARD_COLOR,Globals.SQR_LINE_SHADE_PERCENT), g2);
+					Tools.fade(BoardFrame.BOARD_COLOR,
+							Globals.SQR_LINE_SHADE_PERCENT), g2);
 			drawLongCursor(p, Grid.gridLineStroke, Grid.gridLineCol, g2);
-			
+
 		} catch (Exception e) {
 			System.err.println("Error in unDraw: " + e.getMessage());
 		}
 	}
-	
+
 	protected static void drawCursor(Point p, int stroke, double h_sqr,
 			Color c, Graphics2D g2) {
 		g2.setColor(c);

@@ -351,10 +351,10 @@ public abstract class AbstractPlayer implements Serializable {
 
 	public void setLastCapture(Cell lastCapture) {
 		this.lastCapture = lastCapture;
-	}
+	}//dsenga8n26f8 - jarme3000
 	
 	public void rememberPoint(Point p) {
-		if (this.lastpoints.size() < 2) {
+		if (this.lastpoints.size() < 1) {
 			this.lastpoints.add(p);
 		} else {
 			this.lastpoints.remove(0);
