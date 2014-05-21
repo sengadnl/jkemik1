@@ -269,7 +269,7 @@ public class JKemik extends Application {
 			long end = System.currentTimeMillis();
 			double total = (end - start) / 1000;
 
-			DecimalFormat format = new DecimalFormat("#.###");
+			DecimalFormat format = new DecimalFormat("###.###");
 			String str = format.format(total);
 
 			if (settings_t.isAutoCapture()) {
