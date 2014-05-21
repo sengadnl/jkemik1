@@ -79,7 +79,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 							&& current.getSelected().size() >= 4) {
 						Grid.cell = game.capture((int) Grid.squareSize);//
 						game.getCurrentP().setSelected(new ArrayList<Point>());
-
+						BoardFrame.feedbackarea.setText((game.getCaptured_count() + game
+								.getRedeemed_count()) + " " + BoardFrame.messages.getString("feedback3") + " " + game.getCurrentP().getName());
 						BoardFrame.mouseSelection.setSelected(false);
 						BoardFrame.mode.setVisible(true);
 						BoardFrame.pass_turn.setVisible(true);

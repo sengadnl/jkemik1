@@ -369,23 +369,23 @@ public class BoardFrame extends JFrame {
 
 	public static void decoratebuttons(Color bg, Color fg) {
 
-		pass_turn.setBackground(bg);
+		pass_turn.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT / 2));
 		pass_turn.setForeground(fg);
 
-		undo.setBackground(bg);
+		undo.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT / 2));
 		undo.setForeground(fg);
 
-		refresh.setBackground(bg);
+		refresh.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT / 2));
 		refresh.setForeground(fg);
 
 		startG.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT / 2));
 		startG.setForeground(fg);
 
 		settings.setForeground(fg);
-		settings.setBackground(bg);
+		settings.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT / 2));
 
 		help.setForeground(fg);
-		help.setBackground(bg);
+		help.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT / 2));
 
 	}
 
@@ -882,6 +882,9 @@ public class BoardFrame extends JFrame {
 			BoardFrame.Game_status.setVisible(false);
 			BoardFrame.startG.setVisible(false);
 			disableGameControlPanel();
+			undo.setVisible(false);
+			pass_turn.setVisible(false);
+			mode.setVisible(false);
 			displayGrid(false);
 			gridstats.init();
 		}
