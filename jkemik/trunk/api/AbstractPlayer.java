@@ -334,24 +334,13 @@ public abstract class AbstractPlayer implements Serializable {
 		this.latestP = latestP;
 	}
 
-	// public int getCapture_count() {
-	// return capture_count;
-	// }
-	//
-	// public int getRedeemed_count() {
-	// return redeemed_count;
-	// }
-	//
-	// public int getCaptured_cell_count() {
-	// return captured_cell_count;
-	// }
 	public Cell getLastCapture() {
 		return lastCapture;
 	}
 
 	public void setLastCapture(Cell lastCapture) {
 		this.lastCapture = lastCapture;
-	}//dsenga8n26f8 - jarme3000
+	}
 	
 	public void rememberPoint(Point p) {
 		if (this.lastpoints.size() < 1) {
@@ -375,9 +364,6 @@ public abstract class AbstractPlayer implements Serializable {
 	private boolean turn = false;
 	private boolean ai = false;
 	private double score = 0.0;
-	// private int capture_count = 0;
-	// private int redeemed_count = 0;
-	// private int captured_cell_count = 0;
 	private Color color;
 
 	private Point origin = new Point(444444, 7798979);
@@ -388,8 +374,6 @@ public abstract class AbstractPlayer implements Serializable {
 
 	private HashMap<Integer, Cell> Cells = null;
 	private Cell lastCapture = null;
-	// TODO
-	// private HashMap<Integer, Cell> CapturedCells = null;
 	private ArrayList<Point> selected = null;
 
 	private boolean successful = false;

@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.io.*;
+import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -268,10 +269,14 @@ public class JKemik extends Application {
 			long end = System.currentTimeMillis();
 			double total = (end - start)/1000;
 			
+			DecimalFormat format = new DecimalFormat("#.###");
+			String str = format.format(total);
+			
+			
 			if (settings_t.isAutoCapture()) {
 
 				if (temp != null) {
-					System.err.println("Capture Duration = " + total);
+					System.err.println("Capture Duration = " + str);
 					return temp;
 				} else {
 					game.setEmbuche_on(false);

@@ -23,7 +23,7 @@ public class STemplate implements Serializable {
 	private boolean gameSetupMode = true;
 	private boolean playMode = false;
 	private boolean systemSetupMode = false;
-	private String theme = "Jkemik";
+	private String theme = "Origins";
 	private int maxWinVal = 4;
 	private double MaxPointPerPlayer = 0.0;
 	private String language = "ENGLISH";
@@ -33,7 +33,7 @@ public class STemplate implements Serializable {
 
 	public STemplate() {
 		boardSizes(Globals.SIZE_PERCENT);
-		setGridDimension(sizes.get(0));
+		setGridDimension(sizes.get(2));
 		this.maxWinVal = (int)(dimesion.positions() * Globals.MAX_WIN);
 	}
 	public double getSqrSize(String str) {

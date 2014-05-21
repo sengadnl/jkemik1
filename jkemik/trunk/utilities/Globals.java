@@ -32,8 +32,8 @@ public class Globals {
 	public static final double MAX_WIN = .05;
 	public static final int LIGHT_PURPPLE_INDEX = 3;
 	public static final int DARK_PURPPLE_INDEX = 9;
-	public static final int SQUARE_MIN_SIZE = 15;
-	public static final int SQUARE_MAX_SIZE = 64;
+	public static final int SQUARE_MIN_SIZE = 20;
+	public static final int SQUARE_MAX_SIZE = 55;
 	public static final double FRAME_WIDTH = 1280;
 	public static final double FRAME_HEIGHT = 800;
 	public static final double SIZE_PERCENT = .75;
