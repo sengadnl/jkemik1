@@ -91,53 +91,7 @@ public abstract class AbstractGame implements Serializable {
 		}
 		return false;/* No path */
 	}
-	/**Finds a cell contained in selectedPoints starting at point o
-	 * Populates the selected collection in Player
-	 *@return true is a cell was found and false if not*/
-	public boolean buildPath2(Point o, double squareSize, HashMap<String, Point> selectedPoints) {
-		if (currentP.getSuccessful()) {
-			return true;
-		}
-		/* Get all adjacent Points */
-		Point[] box = Tools.boxCoord(o, squareSize);
-		/* Find the point in this box that belongs to the path */
-		for (int i = 0; i < box.length; i++) {
-			/* Stop recursive call here if a path was already found */
-			if (currentP.getSuccessful()) {
-				return true;
-			}
-			Point temp = selectedPoints.get(box[i].toString());
-			if (temp == null) {
-				continue;
-			}
-
-			if (AbstractGame.isPath(temp)) {// if this Point is path
-				if (temp.compareTo(currentP.getFrom()) != 0) {
-					if (!Tools.containPoint(o, currentP.getSelected())) {
-						/* Add o if it hasn't been visited */
-						currentP.getSelected().add(o);
-						//System.out.println("Adding " + currentP.getSelected());
-						currentP.setFrom(o); /* Move to the next Point */
-						if (temp.compareTo(currentP.getOrigin()) == 0
-								&& currentP.getSelected().size() > 3) {
-							currentP.setSuccessful(true);
-							currentP.setOrigin(null);/* Reset the origin */
-							System.err.println("\n" + currentP.getSelected());
-							return true;/* Capture was found */
-						}
-
-						/* This adjacent Point was a dead end */
-						if (!buildPath(temp, squareSize)) {
-							currentP.getSelected().remove(o);
-							continue;
-						}
-					}
-				}
-			}
-		}
-		return false;/* No path */
-	}
-
+	
 	/**
 	 * Only plotted points can be undone, dead points can not be revived
 	 */
@@ -183,8 +137,9 @@ public abstract class AbstractGame implements Serializable {
 						continue;
 					}
 
-					int captured_count = 0;
-					int redeemed_count = 0;
+					this.captured_count = 0;
+					this.redeemed_count = 0;
+					
 					/* Go through all selected dots from recursion */
 					for (Point p : TempArea) {
 
@@ -219,6 +174,7 @@ public abstract class AbstractGame implements Serializable {
 							.getSelected(), area);
 
 					if (captured_count == 0) {
+						cell.setStatus(Globals.CELL_EMPTY);
 						continue;
 					}
 					cell.setValue(captured_count + redeemed_count);
@@ -252,8 +208,8 @@ public abstract class AbstractGame implements Serializable {
 			return null;
 		}
 
-		int captured_count = 0;
-		int redeemed_count = 0;
+		this.captured_count = 0;
+		this.redeemed_count = 0;
 		/* Go through all selected dots from recursion */
 		for (Point p : area) {
 			/* If p exist in collection */
@@ -634,12 +590,30 @@ public abstract class AbstractGame implements Serializable {
 		this.firstBox = persistanceList;
 	}
 
+	public int getCaptured_count() {
+		return captured_count;
+	}
+
+	public void setCaptured_count(int captured_count) {
+		this.captured_count = captured_count;
+	}
+
+	public int getRedeemed_count() {
+		return redeemed_count;
+	}
+
+	public void setRedeemed_count(int redeemed_count) {
+		this.redeemed_count = redeemed_count;
+	}
+
 	/* Connecting dots utilities */
 	public boolean AI = false;
 	public boolean embuche_on = false;
 	// private Cell tempCell = null;
 	private int status = 0;
 	private int maxScore = 2;
+	public int captured_count = 0;
+	public int redeemed_count = 0;
 	public Point lastp = new Point(553355, 7798979);
 
 	/* keeps track of all captured points */

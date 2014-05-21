@@ -10,7 +10,6 @@ import javax.swing.*;
 import utilities.Tools;
 import api.AbstractPlayer;
 
-
 /**
  * @author dalet
  * 
@@ -39,25 +38,36 @@ public class PlayerPanel extends JPanel {
 	// private JLabel plotted;
 	private JLabel captCellsv;
 
+	private JLabel plotted = new JLabel(" Rd Pt: "),
+			captured = new JLabel(" Cp Pt: "), cells = new JLabel(" Cls: "),
+			cptcells = new JLabel(" Cp Cl: "), score = new JLabel(" Scr: ");
+
 	private JLabel scorev;
 	private final int FONT_SIZE = 10;
 	private final int LINE_BORDER_STOKE = 2;
 	private final double LB_FADE_VAR = .60;
 	private final int FADE_TH = 10;// fade threshold
 
+	private Color plottedvc = new Color(204, 255, 100), capturedvc = new Color(
+			255, 51, 100), cellsvc = new Color(179, 100, 255),
+			cellsc = new Color(255, 204, 51), captCellsvc = new Color(255, 150,
+					100), scorevc = new Color(0, 255, 0);
+
 	public PlayerPanel() {
-		
+
 		setPreferredSize(new Dimension(this.WIDTH, this.HEIGHT));
 
 		System.out.println("PlayerPanel -- Width = " + this.WIDTH
 				+ " Height = " + this.HEIGHT);
 		createPlayerPanel();
 	}
+
 	/**
-	 * constructor for BoardFrame*/
+	 * constructor for BoardFrame
+	 */
 	public PlayerPanel(int w, int h) {
-		 this.WIDTH = w;
-		 this.HEIGHT = h;
+		this.WIDTH = w;
+		this.HEIGHT = h;
 		setPreferredSize(new Dimension(this.WIDTH, this.HEIGHT));
 		System.out.println("PlayerPanel -- Width = " + this.WIDTH
 				+ " Height = " + this.HEIGHT);
@@ -67,9 +77,11 @@ public class PlayerPanel extends JPanel {
 	public JPanel getHolder() {
 		return holder;
 	}
+
 	public void setHolder(JPanel holder) {
 		this.holder = holder;
 	}
+
 	public void createPlayerPanel() {
 		setBackground(Color.BLACK);
 		setLayout(new BorderLayout());
@@ -81,7 +93,8 @@ public class PlayerPanel extends JPanel {
 
 		this.holder.setLayout(new GridLayout(5, 2));
 
-		setBorder(BorderFactory.createLineBorder(Color.WHITE, LINE_BORDER_STOKE));
+		setBorder(BorderFactory
+				.createLineBorder(Color.WHITE, LINE_BORDER_STOKE));
 		this.player_name = new JLabel("PName");
 		this.player_name.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -119,12 +132,11 @@ public class PlayerPanel extends JPanel {
 				this.FONT_SIZE);
 		scorev.setFont(scvfont);
 
-		 final JLabel plotted = new JLabel(" Rd Pt: ");
-		final JLabel captured = new JLabel(" Cp Pt: ");
-		final JLabel cptcells = new JLabel(" Cp Cl: ");
-		   final JLabel cells = new JLabel(" Cl: ");
-		   final JLabel score = new JLabel(" Scr: ");
-
+		// plotted = new JLabel(" Rd Pt: ");
+		// captured = new JLabel(" Cp Pt: ");
+		// cptcells = new JLabel(" Cp Cl: ");
+		// fcells = new JLabel(" Cl: ");
+		// score = new JLabel(" Scr: ");
 
 		plotted.setForeground(new Color(255, 204, 51));
 		Font pttfont = new Font("Arial", Font.BOLD, this.FONT_SIZE);
@@ -178,10 +190,9 @@ public class PlayerPanel extends JPanel {
 		this.player_name.setText(pname);
 	}
 
-
 	public void updatePlayerPanel(AbstractPlayer abstractPlayer) {
 		try {
-			
+
 			plottedv.setText("" + abstractPlayer.countRedeemedPoints());
 			capturedv.setText("" + abstractPlayer.countCapturedPoints());
 			cellsv.setText("" + abstractPlayer.countFreeCells());
@@ -203,7 +214,9 @@ public class PlayerPanel extends JPanel {
 
 	public void initPanelForNewGame(String pname, Color pcolor) {
 		try {
-			setBorder(BorderFactory.createLineBorder(Tools.fade(pcolor, FADE_TH, LB_FADE_VAR), LINE_BORDER_STOKE));
+			setBorder(BorderFactory
+					.createLineBorder(Tools.fade(pcolor, FADE_TH, LB_FADE_VAR),
+							LINE_BORDER_STOKE));
 			pname = pname.toUpperCase();
 			setPlayer("  " + pname);
 			setBackground(Tools.fade(pcolor, FADE_TH, LB_FADE_VAR));
@@ -295,5 +308,38 @@ public class PlayerPanel extends JPanel {
 
 	public void setLabelColor(Color c) {
 		this.player_name.setForeground(c);
+	}
+
+	public void disablePanelDecor() {
+		//System.err.println("Disabling panel!");
+		plottedv.setForeground(Tools.fade(plottedvc));
+		capturedv.setForeground(Tools.fade(capturedvc));
+		cells.setForeground(Tools.fade(cellsc));
+		cellsv.setForeground(Tools.fade(cellsvc));
+		captCellsv.setForeground(Tools.fade(captCellsvc));
+		scorev.setForeground(Tools.fade(scorevc));
+		
+		plotted.setForeground(Tools.fade(new Color(255, 204, 51)));
+		captured.setForeground(Tools.fade(new Color(255, 204, 51)));
+		cptcells.setForeground(Tools.fade(new Color(255, 204, 51)));
+		cells.setForeground(Tools.fade(new Color(255, 204, 51)));
+		score.setForeground(Tools.fade(new Color(250, 104, 60)));
+		//this.repaint();
+	}
+
+	public void enablePanelDecor() {
+		//System.err.println("enabling panel!");
+		plottedv.setForeground(plottedvc);
+		capturedv.setForeground(capturedvc);
+		cells.setForeground(cellsc);
+		cellsv.setForeground(cellsvc);
+		captCellsv.setForeground(captCellsvc);
+		scorev.setForeground(scorevc);
+		//this.repaint();
+		plotted.setForeground(new Color(255, 204, 51));
+		captured.setForeground(new Color(255, 204, 51));
+		cptcells.setForeground(new Color(255, 204, 51));
+		cells.setForeground(new Color(255, 204, 51));
+		score.setForeground(new Color(250, 104, 60));
 	}
 }

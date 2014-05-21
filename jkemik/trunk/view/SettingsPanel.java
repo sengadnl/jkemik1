@@ -55,6 +55,8 @@ public class SettingsPanel extends JPanel{
 	
 	private String[] auto_cap = { "ON", "OFF" };
 	private String[] auto_t_p = { "ON", "OFF" };
+	
+	//private Color fg = new Color(255,255,255);
 	//private static java.awt.Container container;
 
 	public SettingsPanel(int w, int h) {
