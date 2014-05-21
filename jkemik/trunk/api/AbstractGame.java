@@ -325,11 +325,11 @@ public abstract class AbstractGame implements Serializable {
 					&& getLastp().adjacentTo(p, squareSize)
 					&& !Tools.containPoint(p, currentP.getSelected())) {
 				currentP.getSelected().add(p);
-				System.out.println("Selected returned true ");
+				//System.out.println("Selected returned true ");
 				return true;
 			}
 		}
-		System.out.println("Selected returned false ");
+		//System.out.println("Selected returned false ");
 		return false;
 	}
 

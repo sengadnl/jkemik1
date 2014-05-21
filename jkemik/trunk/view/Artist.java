@@ -22,7 +22,6 @@ import utilities.Globals;
 import utilities.Tools;
 import api.Cell;
 import api.AbstractGame;
-import api.Game;
 import api.GridDimension;
 import api.Player;
 import api.Point;
@@ -245,7 +244,6 @@ public class Artist {
 		return true;
 	}
 
-	// TODO
 	protected static void drawGame(AbstractGame g, Graphics2D g2) {
 		Player p1 = (Player) g.getPlayer1();
 		Player p2 = (Player) g.getPlayer2();
@@ -269,12 +267,6 @@ public class Artist {
 				Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
 						Grid.gridLineCol, g2);
 			}
-//				else{
-//				Artist.drawCircle(p, p1.getColor(), Grid.HALF_DIAMETER,
-//						Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
-//				Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
-//						Grid.gridLineCol, g2);
-//			}
 
 			if (p.getId() == p2.getId()) { // && p.getStatus() == Point.CAPTURED
 				Artist.drawCircle(p, p2.getColor(), Grid.HALF_DIAMETER,
@@ -282,12 +274,7 @@ public class Artist {
 				Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
 						Grid.gridLineCol, g2);
 			}
-//			else{
-//				Artist.drawCircle(p, p2.getColor(), Grid.HALF_DIAMETER,
-//						Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
-//				Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
-//						Grid.gridLineCol, g2);
-//			}
+
 		}
 
 		if (Grid.manualc) {
