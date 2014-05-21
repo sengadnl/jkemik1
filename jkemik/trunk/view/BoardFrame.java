@@ -9,7 +9,6 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 
 import api.GTemplate;
 import api.Point;
@@ -38,7 +37,7 @@ public class BoardFrame extends JFrame {
 		width = 1280.0;
 
 		setFrameSize((int) width, (int) height);
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		System.out.println("Frame: " + width + " X " + height);
 
@@ -59,7 +58,7 @@ public class BoardFrame extends JFrame {
 		makingGame = true;
 		init();
 		BoardFrame.mode.setVisible(false);
-//		setTitle("J-Kemik " + Globals.VERSION);
+		// setTitle("J-Kemik " + Globals.VERSION);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 		pack();
@@ -89,14 +88,12 @@ public class BoardFrame extends JFrame {
 		JKemik.load.plus("Setting cursor initial state...");// 24
 		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
 		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
-		
-	
-		
+
 		// if (BoardFrame.getThereIsSavedGame() == 0) {
 		// } else {
 		// }
-		
-		/*Events*/
+
+		/* Events */
 		progressB.setVisible(false);
 		l1.rotateLabel(JKemik.settings_t.getGridDimension().toString());
 		// System Preferences Events
@@ -115,8 +112,10 @@ public class BoardFrame extends JFrame {
 		ViewEvents.modeToggleActionListener();
 		ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
 		print_point.setText("" + messages.getString("gameSetupMode"));
+		feedbackarea.setText(messages.getString("feedback1") + " "
+				+ messages.getString("startGameB") + " "
+				+ messages.getString("feedback2"));
 		uiLooksUpdate(JKemik.settings_t, JKemik.template);
-
 	}
 
 	/**
@@ -155,6 +154,7 @@ public class BoardFrame extends JFrame {
 		pColor2 = new RotateColor((int) BOTTOM_COLOR_P_W,
 				(int) BOTTOM_COLOR_P_H);
 		down_left = new JPanel();
+		feedbackarea = new JTextArea("");
 		setupP = new JPanel();
 		panel32 = new JPanel();
 		controler_panel = new JPanel();
@@ -180,6 +180,7 @@ public class BoardFrame extends JFrame {
 		AutoCap = new JLabel(JKemik.settings_t.getAutoCaptureStatus());
 		AutoPass = new JLabel(JKemik.settings_t.getAutoPassStatus());
 		Win = new JLabel("" + JKemik.settings_t.getMaxWinVal());
+		//feedback = new JLabel("");
 		progressB = new JProgressBar(0, PROGRESS_BAR_MAX);
 		icon = new JKIcon("media/jkemik-small.png", "");
 	}
@@ -230,6 +231,7 @@ public class BoardFrame extends JFrame {
 		gSizeAndTheme.setLayout(new GridLayout(3, 1));
 
 		/* Bottom panels layout */
+	
 	}
 
 	private void setPanelSizes() {
@@ -259,6 +261,10 @@ public class BoardFrame extends JFrame {
 				(int) (.04 * this.height)));
 		down_left.setPreferredSize(new Dimension(
 				(int) (CORNER_WIDTH * this.width), (int) (.1 * this.height)));
+		feedbackarea.setPreferredSize(new Dimension(
+				(int) (CORNER_WIDTH * this.width), (int) (.05 * this.height)));
+		feedbackarea.setLineWrap(true);
+		feedbackarea.setFont(new Font("Arial", Font.BOLD, 11));
 	}
 
 	private void addComponentsToPanels() {
@@ -318,7 +324,10 @@ public class BoardFrame extends JFrame {
 		// ..........................................................//
 		bottom_container.add(down_left);// gridstats
 		bottom_container.add(gridstats);
-		down_left.add(progressB, BorderLayout.SOUTH);
+		//gridstats.add(feedbackarea,BorderLayout.NORTH);
+		//feedbackarea.add(feedback);
+		down_left.add(progressB, BorderLayout.NORTH);
+		down_left.add(feedbackarea, BorderLayout.SOUTH);
 
 		// ..........................................................//
 		// ..........................................................//
@@ -341,30 +350,35 @@ public class BoardFrame extends JFrame {
 				.createLineBorder(BoardFrame.BORDER_COLOR));
 		bottom_container.setBorder(BorderFactory
 				.createLineBorder(BoardFrame.BORDER_COLOR));
-		controler_panel.setBorder(BorderFactory
+		// controler_panel.setBorder(BorderFactory
+		// .createLineBorder(BoardFrame.BORDER_COLOR));
+
+		// TitledBorder SetupBorder = new TitledBorder("Setup");
+		// SetupBorder.setTitleColor(BORDER_COLOR);
+		// gSizeAndTheme.setBorder(SetupBorder);
+		gSizeAndTheme.setBorder(BorderFactory
 				.createLineBorder(BoardFrame.BORDER_COLOR));
-
-		TitledBorder SetupBorder = new TitledBorder("Setup");
-		SetupBorder.setTitleColor(BORDER_COLOR);
-		gSizeAndTheme.setBorder(SetupBorder);
-
-		TitledBorder ControlBorder = new TitledBorder("Control");
-		ControlBorder.setTitleColor(BORDER_COLOR);
-		config_container.setBorder(ControlBorder);
+		// TitledBorder ControlBorder = new TitledBorder("Control");
+		// ControlBorder.setTitleColor(BORDER_COLOR);
+		// config_container.setBorder(ControlBorder);
+		config_container.setBorder(BorderFactory
+				.createLineBorder(BoardFrame.BORDER_COLOR));
+		feedbackarea.setBorder(BorderFactory
+				.createLineBorder(BoardFrame.BORDER_COLOR));
 	}
 
 	public static void decoratebuttons(Color bg, Color fg) {
-		
+
 		pass_turn.setBackground(bg);
 		pass_turn.setForeground(fg);
-		
+
 		undo.setBackground(bg);
 		undo.setForeground(fg);
-		
+
 		refresh.setBackground(bg);
 		refresh.setForeground(fg);
 
-		startG.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT/2));
+		startG.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT / 2));
 		startG.setForeground(fg);
 
 		settings.setForeground(fg);
@@ -389,6 +403,14 @@ public class BoardFrame extends JFrame {
 		label2.setForeground(Tools.fade(JKemik.template.getP2_c()));
 		pColor1.setBackground(Tools.fade(JKemik.template.getP1_c()));
 		pColor2.setBackground(Tools.fade(JKemik.template.getP2_c()));
+
+		la.setForeground(Tools.fade(BoardFrame.BOARD_COLOR));
+		lb.setForeground(Tools.fade(BoardFrame.BOARD_COLOR));
+		lc.setForeground(Tools.fade(BoardFrame.BOARD_COLOR));
+		AutoCap.setForeground(Tools.fade(Color.WHITE));
+		AutoPass.setForeground(Tools.fade(Color.WHITE));
+		Win.setForeground(Tools.fade(Color.WHITE));
+
 		// fadeButton(startG);
 	}
 
@@ -406,7 +428,6 @@ public class BoardFrame extends JFrame {
 
 		pColor1.setBackground(JKemik.template.getP1_c());
 		pColor2.setBackground(JKemik.template.getP2_c());
-
 	}
 
 	public static void highlightP2() {
@@ -552,6 +573,8 @@ public class BoardFrame extends JFrame {
 				Globals.LABEL_VARIANT));
 
 		print_point.setForeground(Color.GREEN);
+		feedbackarea.setForeground(Color.GREEN);
+		feedbackarea.setBackground(BoardFrame.CPANEL_COLOR);
 		la.setForeground(BoardFrame.BOARD_COLOR);
 		lb.setForeground(BoardFrame.BOARD_COLOR);
 		lc.setForeground(BoardFrame.BOARD_COLOR);
@@ -568,12 +591,13 @@ public class BoardFrame extends JFrame {
 		middle_container.setBackground(BoardFrame.THEME_COLOR);
 		status_panel_container.setBackground(BoardFrame.THEME_COLOR);
 		grid_container.setBackground(Tools.fade(BoardFrame.BOARD_COLOR, 20));
-		
+
 		west_blank_panel.setBackground(BoardFrame.THEME_COLOR);
 		settings_p.setBackground(BoardFrame.THEME_COLOR);
 
 		bottom_container.setBackground(BoardFrame.THEME_COLOR);
 		down_left.setBackground(BoardFrame.THEME_COLOR);
+		// down_left.setForeground(BoardFrame.BOARD_COLOR);
 		panel32.setBackground(BoardFrame.THEME_COLOR);
 		controler_panel.setBackground(BoardFrame.THEME_COLOR);
 		config_container.setBackground(BoardFrame.THEME_COLOR);
@@ -582,10 +606,10 @@ public class BoardFrame extends JFrame {
 		progressB.setForeground(BOARD_COLOR);
 
 		p1p2NameHolder.setBackground(BoardFrame.THEME_COLOR);
-		setupP.setBackground(BoardFrame.CPANEL_COLOR);
-		pname1.setBackground(Tools.fade(BoardFrame.BOARD_COLOR));
+		setupP.setBackground(BoardFrame.THEME_COLOR);
+		pname1.setBackground(BoardFrame.CPANEL_COLOR);
 		gSizeAndTheme.setBackground(BoardFrame.CPANEL_COLOR);
-		pname2.setBackground(Tools.fade(BoardFrame.BOARD_COLOR));
+		pname2.setBackground(BoardFrame.CPANEL_COLOR);
 
 		l1.setForeground(Tools.boost(Color.WHITE, Globals.LABEL_VARIANT));
 		l2.setForeground(Tools.boost(Color.WHITE, Globals.LABEL_VARIANT));
@@ -694,6 +718,9 @@ public class BoardFrame extends JFrame {
 		settings.setText(messages.getString("settings"));
 		exit.setText(messages.getString("exit"));
 		help.setText(messages.getString("help"));
+		feedbackarea.setText(messages.getString("feedback1") + " "
+				+ messages.getString("startGameB") + " "
+				+ messages.getString("feedback2"));
 
 		// panel 33
 		pass_turn.setText(messages.getString("passB"));
@@ -742,7 +769,6 @@ public class BoardFrame extends JFrame {
 		}
 	}
 
-	// TODO should handle this in memo in the future
 	protected static void initMouseSelection() {
 		BoardFrame.mouseSelection.setSelected(false);
 		JKemik.view.repaint();
@@ -802,6 +828,16 @@ public class BoardFrame extends JFrame {
 			updateSettingPanel();
 			translateUI();
 			enableGameControlPanel();
+			p1panel.disablePanelDecor();
+			p2panel.disablePanelDecor();
+
+			la.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
+			lb.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
+			lc.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
+			AutoCap.setForeground(Color.WHITE);
+			AutoPass.setForeground(Color.WHITE);
+			Win.setForeground(Color.WHITE);
+
 			mouseSelection.setVisible(false);
 			BoardFrame.startG.setVisible(true);
 			BoardFrame.Game_status.setVisible(false);
@@ -814,6 +850,16 @@ public class BoardFrame extends JFrame {
 			Game_status.setText(BoardFrame.messages.getString("endG"));
 			// Game_status.setForeground(Color.RED);
 			disableGameControlPanel();
+			p1panel.enablePanelDecor();
+			p2panel.enablePanelDecor();
+
+			la.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
+			lb.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
+			lc.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
+			AutoCap.setForeground(Color.WHITE);
+			AutoPass.setForeground(Color.WHITE);
+			Win.setForeground(Color.WHITE);
+
 			showControlButtons();
 			BoardFrame.Game_status.setVisible(true);
 			BoardFrame.startG.setVisible(false);
@@ -831,6 +877,8 @@ public class BoardFrame extends JFrame {
 			settings_p.translateSettingsPanel(s);
 			print_point.setText(""
 					+ BoardFrame.messages.getString("sysSetupMode"));
+			p1panel.disablePanelDecor();
+			p2panel.disablePanelDecor();
 			BoardFrame.Game_status.setVisible(false);
 			BoardFrame.startG.setVisible(false);
 			disableGameControlPanel();
@@ -851,7 +899,8 @@ public class BoardFrame extends JFrame {
 			help, Game_status;
 	public static JCheckBox mouseSelection, mode;
 	public static JLabel print_point, label1, label2, la, lb, lc, AutoCap,
-			AutoPass, Win;// exit, settings, help;
+			AutoPass, Win;// feedback;// exit, settings, help;
+	public static JTextArea feedbackarea;
 	public static JKIcon icon;
 	public static RotateColor pColor1, pColor2;
 	public static RotateLabel l1, l2;

@@ -298,6 +298,11 @@ public class Artist {
 
 		try {
 			// for (Cell c : cells) {
+			if(c.getStatus() == Globals.CELL_EMPTY){
+				System.out.println(" This cell is empty");
+				return false;
+			}
+			
 			ArrayList<Point> contour = c.getCellContour();
 
 			/* draw cell contour */
@@ -419,6 +424,10 @@ public class Artist {
 			Color c, Graphics2D g2) {
 		g2.setColor(c);
 		g2.setStroke(new BasicStroke(stroke));
+		
+		//Highlight of visited intersection
+//		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+//				RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.draw(new Line2D.Double(p.getXC(), p.getYC() + h_sqr, p.getXC(), p
 				.getYC() - h_sqr));
 		g2.draw(new Line2D.Double(p.getXC() - h_sqr, p.getYC(), p.getXC()
@@ -430,6 +439,8 @@ public class Artist {
 			Graphics2D g2) {
 		g2.setColor(c);
 		g2.setStroke(new BasicStroke(stroke));
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.draw(new Line2D.Double(p.getXC(), p.getYC() + Grid.squareSize, p
 				.getXC(), p.getYC() - Grid.squareSize));
 		g2.draw(new Line2D.Double(p.getXC() - Grid.squareSize, p.getYC(), p

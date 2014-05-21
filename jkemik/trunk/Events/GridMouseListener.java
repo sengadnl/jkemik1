@@ -32,8 +32,9 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 	public void mouseClicked(MouseEvent e) {
 
-		//Pass turn is this is a right click
-		if (SwingUtilities.isRightMouseButton(e) && !JKemik.settings_t.isAutoPass()) {
+		// Pass turn is this is a right click
+		if (SwingUtilities.isRightMouseButton(e)
+				&& !JKemik.settings_t.isAutoPass()) {
 			if (!BoardFrame.mouseSelection.isSelected()) {
 				System.out.println("" + JKemik.game.getCurrentP().getName()
 						+ " > " + "Play Flag: "
@@ -51,7 +52,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 							JOptionPane.WARNING_MESSAGE);
 				}
 			}
-		} else { 
+		} else {
 
 			AbstractGame game = JKemik.game;
 			Player current = (Player) game.getCurrentP();
@@ -105,7 +106,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 						// Add to the board
 						game.getCollection().put(temp.toString(), temp);
-						
+
 						game.getCurrentP().rememberPoint(temp);
 
 						game.setEmbuche_on(true);
@@ -116,6 +117,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 						game.setPlayFlag();
 						game.getCurrentP().setTurn(false);
 						Grid.mouseMove = false;
+						BoardFrame.feedbackarea.setText(game.getCurrentP()
+								.getName() + " just played.");
 					}
 				}
 			}
@@ -174,7 +177,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 		if (JKemik.game.getStatus() == 1) {
 			JOptionPane.showMessageDialog(null, ""
-					+ JKemik.game.getCurrentP().getName() + " "
+					+ JKemik.game.getGuest().getName() + " "
 					+ BoardFrame.messages.getString("winM"), " Win",
 					JOptionPane.OK_OPTION);
 			JKemik.game.setStatus(1);
@@ -185,7 +188,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 			// Reset game exit label
 			BoardFrame.Game_status.setText("NEW");
-			//BoardFrame.Game_status.setForeground(Color.GREEN);
+			// BoardFrame.Game_status.setForeground(Color.GREEN);
 		}
 		BoardFrame.grid.repaint();
 
