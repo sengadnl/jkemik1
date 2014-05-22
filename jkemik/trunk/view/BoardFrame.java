@@ -4,7 +4,6 @@
 package view;
 
 import java.awt.*;
-
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -112,7 +111,7 @@ public class BoardFrame extends JFrame {
 		ViewEvents.modeToggleActionListener();
 		ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
 		print_point.setText("" + messages.getString("gameSetupMode"));
-		feedbackarea.setText(messages.getString("feedback1") + " "
+		BoardFrame.feedback(messages.getString("feedback1") + " "
 				+ messages.getString("startGameB") + " "
 				+ messages.getString("feedback2"));
 		uiLooksUpdate(JKemik.settings_t, JKemik.template);
@@ -264,6 +263,7 @@ public class BoardFrame extends JFrame {
 		feedbackarea.setPreferredSize(new Dimension(
 				(int) (CORNER_WIDTH * this.width), (int) (.05 * this.height)));
 		feedbackarea.setLineWrap(true);
+		//feedbackarea.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
 		feedbackarea.setFont(new Font("Arial", Font.BOLD, 11));
 	}
 
@@ -418,9 +418,9 @@ public class BoardFrame extends JFrame {
 		l1.setForeground(Tools.boost(Color.WHITE, Globals.FADE_VARIANT));
 		l2.setForeground(Tools.boost(Color.WHITE, Globals.FADE_VARIANT));
 
-		label1.setText(JKemik.template.getP1_name());
+		label1.setText(JKemik.template.getP1_name().toUpperCase());
 		label1.setForeground(Color.WHITE);
-		label2.setText(JKemik.template.getP2_name());
+		label2.setText(JKemik.template.getP2_name().toUpperCase());
 		label2.setForeground(Color.WHITE);
 
 		p1panel.initPanelForNewGame("", JKemik.template.getP1_c());
@@ -691,18 +691,14 @@ public class BoardFrame extends JFrame {
 	public static void updateSettingPanel() {
 		try {
 			if (JKemik.settings_t.isAutoCapture()) {
-				// AutoCap.setText("AUTO");
 				AutoCap.setText(messages.getString("capturela"));
 			} else {
-				// AutoCap.setText("MANUAL");
 				AutoCap.setText(messages.getString("capturelm"));
 			}
 
 			if (JKemik.settings_t.isAutoPass()) {
-				// AutoPass.setText("AUTO");
 				AutoPass.setText(messages.getString("passla"));
 			} else {
-				// AutoPass.setText("MANUAL");
 				AutoPass.setText(messages.getString("passlm"));
 			}
 			String str = "" + JKemik.settings_t.getMaxWinVal();
@@ -718,7 +714,7 @@ public class BoardFrame extends JFrame {
 		settings.setText(messages.getString("settings"));
 		exit.setText(messages.getString("exit"));
 		help.setText(messages.getString("help"));
-		feedbackarea.setText(messages.getString("feedback1") + " "
+		BoardFrame.feedback(messages.getString("feedback1") + " "
 				+ messages.getString("startGameB") + " "
 				+ messages.getString("feedback2"));
 
@@ -738,7 +734,6 @@ public class BoardFrame extends JFrame {
 		la.setText(" " + messages.getString("capturel"));
 		lb.setText(" " + messages.getString("passl"));
 		lc.setText(" " + messages.getString("winl"));
-
 	}
 
 	public static void showControlButtons() {
@@ -746,11 +741,9 @@ public class BoardFrame extends JFrame {
 			if (JKemik.settings_t.isAutoCapture()) {
 				mouseSelection.setVisible(false);
 				undo.setVisible(false);
-				// manual.setVisible(true);
 			} else {
 				undo.setVisible(true);
 				mouseSelection.setVisible(true);
-				// manual.setVisible(false);
 			}
 
 			if (JKemik.settings_t.isAutoPass()) {
@@ -758,7 +751,6 @@ public class BoardFrame extends JFrame {
 			} else {
 				undo.setVisible(true);
 				pass_turn.setVisible(true);
-				// manual.setVisible(false);
 			}
 
 			initMouseSelection();
@@ -888,6 +880,14 @@ public class BoardFrame extends JFrame {
 			displayGrid(false);
 			gridstats.init();
 		}
+	}
+	public static void feedback(String message){
+		feedbackarea.setForeground(Color.GREEN);
+		feedbackarea.setText(message);
+	}
+	public static void errorFeedback(String error){
+		feedbackarea.setForeground(Color.RED);
+		feedbackarea.setText(error);
 	}
 
 	public double height = 0.0, width = 0.0;

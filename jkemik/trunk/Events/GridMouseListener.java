@@ -15,6 +15,7 @@ import controler.JKemik;
 import api.AbstractGame;
 import api.Player;
 import api.Point;
+import utilities.Globals;
 import view.BoardFrame;
 import view.Grid;
 
@@ -79,12 +80,24 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 							&& current.getSelected().size() >= 4) {
 						Grid.cell = game.capture((int) Grid.squareSize);//
 						game.getCurrentP().setSelected(new ArrayList<Point>());
-						BoardFrame.feedbackarea.setText((game.getCaptured_count() + game
-								.getRedeemed_count()) + " " + BoardFrame.messages.getString("feedback3") + " " + game.getCurrentP().getName());
+						BoardFrame.feedbackarea
+								.setText((game.getCaptured_count() + game
+										.getRedeemed_count())
+										+ " "
+										+ BoardFrame.messages
+												.getString("feedback3")
+										+ " "
+										+ game.getCurrentP().getName());
 						BoardFrame.mouseSelection.setSelected(false);
 						BoardFrame.mode.setVisible(true);
 						BoardFrame.pass_turn.setVisible(true);
 						Grid.manualc = false;
+						if (Grid.cell == null
+								|| Grid.cell.getStatus() == Globals.CELL_EMPTY) {
+							Grid.refresh = true;
+							BoardFrame.errorFeedback("ELLEGAL CAPTURE!!");
+							BoardFrame.displayGrid(true);
+						}
 					}
 					BoardFrame.grid.repaint();
 				}
@@ -118,7 +131,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 						game.setPlayFlag();
 						game.getCurrentP().setTurn(false);
 						Grid.mouseMove = false;
-						BoardFrame.feedbackarea.setText(game.getCurrentP()
+						BoardFrame.feedback(game.getCurrentP()
 								.getName() + " just played.");
 					}
 				}
