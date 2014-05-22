@@ -37,14 +37,11 @@ public abstract class AbstractGame implements Serializable {
 
 	/**
 	 * Finds a capture by following a path that starts at Point "o" location and
-	 * ends at "o" as well. Recursively checks every adjacent Point to find a
+	 * ends at Point "o" as well. Recursively checks every adjacent Point to find a
 	 * valid path. Reverts when a dead end has been reached. a valid capture
 	 * must have at least 4 Point Objects.
-	 * 
-	 * @param o
-	 *            Point where to start
-	 * @param squareSize
-	 *            integer length of the sides of a grid square
+	 * @param o Point where to start
+	 * @param squareSize integer length of the sides of a grid square
 	 * @return true when a valid capture was found, and false otherwise.
 	 * @throws InterruptedException
 	 */
@@ -242,6 +239,11 @@ public abstract class AbstractGame implements Serializable {
 				area);
 		if (currentP.getCells().containsKey(cell.hashCode())) {
 			return null;
+		}
+		
+		if (captured_count == 0) {
+			cell.setStatus(Globals.CELL_EMPTY);
+			return cell;
 		}
 
 		cell.setValue(captured_count + redeemed_count);

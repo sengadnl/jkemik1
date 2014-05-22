@@ -10,7 +10,7 @@ public class JkBot extends Player implements AgentAction{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public boolean engage = false;
+	public boolean engaged = false;
 	public JkBot(Color color, String name) {
 		super(color, name);
 		this.setAi(true);
@@ -21,10 +21,10 @@ public class JkBot extends Player implements AgentAction{
 		return false;
 	}
 	public boolean isEngage() {
-		return engage;
+		return engaged;
 	}
 	public void setEngage(boolean engage) {
-		this.engage = engage;
+		this.engaged = engage;
 	}
 
 }
