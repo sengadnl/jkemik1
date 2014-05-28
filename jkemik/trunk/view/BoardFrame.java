@@ -795,17 +795,17 @@ public class BoardFrame extends JFrame {
 		BoardFrame.makingGame = inOptions;
 	}
 
-	public static int getThereIsSavedGame() {
-		return thereIsSavedGame;
-	}
-
-	/**
-	 * @param integer
-	 *            , 1 if not game was saved 0 if a game was saved
-	 * */
-	public static void setThereIsSavedGame(int thereIsSavedGame) {
-		BoardFrame.thereIsSavedGame = thereIsSavedGame;
-	}
+//	public static int getThereIsSavedGame() {
+//		return thereIsSavedGame;
+//	}
+//
+//	/**
+//	 * @param integer
+//	 *            , 1 if not game was saved 0 if a game was saved
+//	 * */
+//	public static void setThereIsSavedGame(int thereIsSavedGame) {
+//		BoardFrame.thereIsSavedGame = thereIsSavedGame;
+//	}
 
 	public static ResourceBundle getMessages() {
 		return messages;
