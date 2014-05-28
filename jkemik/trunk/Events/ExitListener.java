@@ -32,12 +32,8 @@ public class ExitListener implements MouseListener{
 				BoardFrame.messages.getString("exitMessage") + "\n", BoardFrame.messages.getString("question"),
 				JOptionPane.YES_OPTION);
 		if (response == 0) {
-			//STemplate t = JKemik.settings_t;
-			//t.setMemo(t.isAutoCapture(), t.isAutoPass());
-			JKemik.settings_t.restaureMemo();
-			JKemik.settings_t.setGameSetupMode(true);
-			// Save settings
-			//JKemik.writeGame();
+			System.out.println("writting game: " + JKemik.game.toString());
+			JKemik.writeGame();
 			JKemik.writeSettings();
 			// Save current Game
 			System.exit(0);

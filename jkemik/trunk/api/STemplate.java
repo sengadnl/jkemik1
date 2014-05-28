@@ -24,7 +24,7 @@ public class STemplate implements Serializable {
 	private boolean playMode = false;
 	private boolean systemSetupMode = false;
 	private String theme = "Origins";
-	private int maxWinVal = 4;
+	private int maxWinVal = 4, backtrackingDistance = 2;
 	private double MaxPointPerPlayer = 0.0;
 	private String language = "ENGLISH";
 	private boolean[] memo = { true, true };
@@ -36,6 +36,15 @@ public class STemplate implements Serializable {
 		setGridDimension(sizes.get(2));
 		this.maxWinVal = (int)(dimesion.positions() * Globals.MAX_WIN);
 	}
+	
+	public int getBacktrackingDistance() {
+		return backtrackingDistance;
+	}
+
+	public void setBacktrackingDistance(int backtrackingDistance) {
+		this.backtrackingDistance = backtrackingDistance;
+	}
+
 	public double getSqrSize(String str) {
 		double sqrSize = 32;
 		//System.out.println("GridDimensions: " + sizes);
@@ -148,6 +157,9 @@ public class STemplate implements Serializable {
 		this.playMode = playMode;
 		this.systemSetupMode = !playMode;
 		this.gameSetupMode = !playMode;
+	}
+	public boolean getPlayMode() {
+		return this.playMode;
 	}
 
 	public boolean isGameSetupMode() {

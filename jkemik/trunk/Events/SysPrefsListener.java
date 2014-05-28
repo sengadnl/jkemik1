@@ -33,13 +33,14 @@ public class SysPrefsListener implements MouseListener {
 				JKemik.createGame(JKemik.template, JKemik.settings_t);
 				BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
 				ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
-			} else {
-				return;
-			}
+			} 
+//			else {
+//				return;
+//			}
 		}
-		JKemik.settings_t.setSystemSetupMode(true);
-		BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
-		ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
+//		JKemik.settings_t.setSystemSetupMode(true);
+//		BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
+//		ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
 
 	}
 

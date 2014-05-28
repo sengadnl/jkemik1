@@ -341,9 +341,14 @@ public abstract class AbstractPlayer implements Serializable {
 	public void setLastCapture(Cell lastCapture) {
 		this.lastCapture = lastCapture;
 	}
-	
-	public void rememberPoint(Point p) {
-		if (this.lastpoints.size() < 1) {
+	/**
+	 * Remember this point as previously visited
+	 * @param p point to remember and max the maximum number of points remembered
+	 * max also determines how far the capture algorithm should backtrack from the 
+	 * latest point
+	 * @return void*/
+	public void rememberPoint(Point p, int max) {
+		if (this.lastpoints.size() < max) {
 			this.lastpoints.add(p);
 		} else {
 			this.lastpoints.remove(0);

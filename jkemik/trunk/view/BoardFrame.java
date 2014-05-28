@@ -56,7 +56,7 @@ public class BoardFrame extends JFrame {
 
 		makingGame = true;
 		init();
-		BoardFrame.mode.setVisible(false);
+		//BoardFrame.mode.setVisible(false);
 		// setTitle("J-Kemik " + Globals.VERSION);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
@@ -88,10 +88,6 @@ public class BoardFrame extends JFrame {
 		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
 		JKemik.load.plus("ViewEvents.ExitGameEvent();...");// 25
 
-		// if (BoardFrame.getThereIsSavedGame() == 0) {
-		// } else {
-		// }
-
 		/* Events */
 		progressB.setVisible(false);
 		l1.rotateLabel(JKemik.settings_t.getGridDimension().toString());
@@ -107,6 +103,8 @@ public class BoardFrame extends JFrame {
 		ViewEvents.exitListener();
 		ViewEvents.helpListener();
 		ViewEvents.refreshListener();
+		ViewEvents.sysPrefsListener();
+		ViewEvents.newGameEvent();
 
 		ViewEvents.modeToggleActionListener();
 		ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
@@ -115,6 +113,8 @@ public class BoardFrame extends JFrame {
 				+ messages.getString("startGameB") + " "
 				+ messages.getString("feedback2"));
 		uiLooksUpdate(JKemik.settings_t, JKemik.template);
+		// System.out.println("Playmode: " + JKemik.settings_t.getPlayMode());
+
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class BoardFrame extends JFrame {
 		AutoCap = new JLabel(JKemik.settings_t.getAutoCaptureStatus());
 		AutoPass = new JLabel(JKemik.settings_t.getAutoPassStatus());
 		Win = new JLabel("" + JKemik.settings_t.getMaxWinVal());
-		//feedback = new JLabel("");
+		// feedback = new JLabel("");
 		progressB = new JProgressBar(0, PROGRESS_BAR_MAX);
 		icon = new JKIcon("media/jkemik-small.png", "");
 	}
@@ -201,7 +201,7 @@ public class BoardFrame extends JFrame {
 
 	private void instantiateAllCheckBoxes() {
 		mouseSelection = new JCheckBox(messages.getString("captureMode"));
-		mode = new JCheckBox(messages.getString("manualModel"));
+		mode = new JCheckBox(messages.getString("switchModel"));
 
 		mouseSelection.setVisible(false);
 	}
@@ -230,7 +230,7 @@ public class BoardFrame extends JFrame {
 		gSizeAndTheme.setLayout(new GridLayout(3, 1));
 
 		/* Bottom panels layout */
-	
+
 	}
 
 	private void setPanelSizes() {
@@ -263,7 +263,7 @@ public class BoardFrame extends JFrame {
 		feedbackarea.setPreferredSize(new Dimension(
 				(int) (CORNER_WIDTH * this.width), (int) (.05 * this.height)));
 		feedbackarea.setLineWrap(true);
-		//feedbackarea.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
+		// feedbackarea.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
 		feedbackarea.setFont(new Font("Arial", Font.BOLD, 11));
 	}
 
@@ -324,8 +324,8 @@ public class BoardFrame extends JFrame {
 		// ..........................................................//
 		bottom_container.add(down_left);// gridstats
 		bottom_container.add(gridstats);
-		//gridstats.add(feedbackarea,BorderLayout.NORTH);
-		//feedbackarea.add(feedback);
+		// gridstats.add(feedbackarea,BorderLayout.NORTH);
+		// feedbackarea.add(feedback);
 		down_left.add(progressB, BorderLayout.NORTH);
 		down_left.add(feedbackarea, BorderLayout.SOUTH);
 
@@ -725,7 +725,7 @@ public class BoardFrame extends JFrame {
 		mouseSelection.setText(messages.getString("captureMode"));
 
 		// panel 23
-		mode.setText(messages.getString("manualModel"));
+		mode.setText(messages.getString("switchModel"));
 
 		// panel 32
 		startG.setText(messages.getString("startGameB"));
@@ -738,10 +738,14 @@ public class BoardFrame extends JFrame {
 
 	public static void showControlButtons() {
 		try {
+			System.out.println("autocapture: "
+					+ JKemik.settings_t.isAutoCapture() + "\nautopass: "
+					+ JKemik.settings_t.isAutoPass());
 			if (JKemik.settings_t.isAutoCapture()) {
 				mouseSelection.setVisible(false);
 				undo.setVisible(false);
 			} else {
+				System.out.println("show undo and selection checkbox");
 				undo.setVisible(true);
 				mouseSelection.setVisible(true);
 			}
@@ -749,11 +753,14 @@ public class BoardFrame extends JFrame {
 			if (JKemik.settings_t.isAutoPass()) {
 				pass_turn.setVisible(false);
 			} else {
+				System.out.println("show undo and pass_turn button");
 				undo.setVisible(true);
 				pass_turn.setVisible(true);
+			
 			}
 
 			initMouseSelection();
+			System.err.println("Displaying mode!!!!");
 			mode.setVisible(true);
 			BoardFrame.refresh.setVisible(true);
 		} catch (Exception e) {
@@ -792,6 +799,10 @@ public class BoardFrame extends JFrame {
 		return thereIsSavedGame;
 	}
 
+	/**
+	 * @param integer
+	 *            , 1 if not game was saved 0 if a game was saved
+	 * */
 	public static void setThereIsSavedGame(int thereIsSavedGame) {
 		BoardFrame.thereIsSavedGame = thereIsSavedGame;
 	}
@@ -839,6 +850,7 @@ public class BoardFrame extends JFrame {
 			displayGrid(true);
 		}
 		if (s.isPlayMode()) {
+			System.out.println("setting playmode");
 			Game_status.setText(BoardFrame.messages.getString("endG"));
 			// Game_status.setForeground(Color.RED);
 			disableGameControlPanel();
@@ -864,6 +876,7 @@ public class BoardFrame extends JFrame {
 			p2panel.initPanelForNewGame(p2n, p2c);
 			Win.setText(JKemik.settings_t.getMaxWinVal() + "");
 			setMakingGame(false);
+			displayGrid(true);
 		}
 		if (s.isSystemSetupMode()) {
 			settings_p.translateSettingsPanel(s);
@@ -881,11 +894,13 @@ public class BoardFrame extends JFrame {
 			gridstats.init();
 		}
 	}
-	public static void feedback(String message){
+
+	public static void feedback(String message) {
 		feedbackarea.setForeground(Color.GREEN);
 		feedbackarea.setText(message);
 	}
-	public static void errorFeedback(String error){
+
+	public static void errorFeedback(String error) {
 		feedbackarea.setForeground(Color.RED);
 		feedbackarea.setText(error);
 	}

@@ -1,8 +1,15 @@
 package api;
 
+import java.io.Serializable;
+
 import agents.JkBot;
 
-public class GameCreator implements GameFactory {
+public class GameCreator implements GameFactory,Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public Game createGame(Player p1, Player p2) {

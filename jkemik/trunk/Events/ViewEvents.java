@@ -98,6 +98,12 @@ public class ViewEvents {
 			BoardFrame.refresh.addMouseListener(refreshListener);
 		}
 	}
+	
+	public static void sysPrefsListener() {
+		if (BoardFrame.settings.getComponentListeners().length == 0) {
+			BoardFrame.settings.addMouseListener(sysPrefsListener);
+		}
+	}
 
 	public static void helpListener() {
 		if (BoardFrame.help.getComponentListeners().length == 0) {
@@ -231,7 +237,7 @@ public class ViewEvents {
 			BoardFrame.label2.removeMouseListener(n2Listener);
 			BoardFrame.l1.removeMouseListener(gridSizeListener);
 			BoardFrame.l2.removeMouseListener(gameThemeListener);
-			BoardFrame.settings.removeMouseListener(sysPrefsListener);
+			//BoardFrame.settings.removeMouseListener(sysPrefsListener);
 			BoardFrame.startG.removeMouseListener(saveListener);
 
 			// Enable control buttons
