@@ -149,29 +149,32 @@ public class JKemik extends Application {
 
 	public static void readGameObj() {
 		try {
-
+			/* Is there a saved game */
 			if (g_object.exists()) {
 				ObjectInputStream input = new ObjectInputStream(
 						new FileInputStream(g_object));
 				game = (Game) input.readObject();
+
 				int response = JOptionPane.showConfirmDialog(null,
 						"Continues with saved Game?\n", "Question",
 						JOptionPane.YES_NO_OPTION);
 				if (response == 0) {
-					BoardFrame.setThereIsSavedGame(response);
+					//BoardFrame.setThereIsSavedGame(response);
 					game.init();
 					Grid.refresh = true;
 					input.close();
 				} else {
-					BoardFrame.setThereIsSavedGame(response);
+					//BoardFrame.setThereIsSavedGame(1);
+					settings_t.setGameSetupMode(true);
+					Game.getInstance(
+							new Player(template.getP1_c(), template.getP1_name()),
+							new Player(template.getP2_c(), template.getP1_name()));
 				}
+
 			} else {
-//				game = new Game(new Player(template.getP1_c(),
-//						template.getP1_name()), new Player(template.getP2_c(),
-//						template.getP1_name()));
-				Game.getInstance(new Player(template.getP1_c(),
-						template.getP1_name()), new Player(template.getP2_c(),
-						template.getP1_name()));
+				Game.getInstance(
+						new Player(template.getP1_c(), template.getP1_name()),
+						new Player(template.getP2_c(), template.getP1_name()));
 			}
 		} catch (FileNotFoundException exception1) {
 			System.out.println("JKemik: readGame " + exception1.getMessage());
@@ -216,7 +219,7 @@ public class JKemik extends Application {
 						new FileInputStream(s_object));
 
 				settings_t = (STemplate) input.readObject();
-				//settings_t.setGameSetupMode(true);
+				// settings_t.setGameSetupMode(true);
 				settings_t.setPlayMode(true);
 
 				input.close();
@@ -247,7 +250,7 @@ public class JKemik extends Application {
 		String properties = Tools.propertiesFilename(key);
 		int maxw = Integer.parseInt(str);
 		int btrack = Integer.parseInt(backtrack);
-		
+
 		if (Tools.isMaxWinLessThanGrid(Grid.getDimension().positions(), maxw)) {
 			t.setMaxWinVal(maxw);
 			t.setMemo(t.isAutoCapture(), t.isAutoPass());
