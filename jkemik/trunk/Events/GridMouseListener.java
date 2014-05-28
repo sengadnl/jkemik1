@@ -37,9 +37,6 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		if (SwingUtilities.isRightMouseButton(e)
 				&& !JKemik.settings_t.isAutoPass()) {
 			if (!BoardFrame.mouseSelection.isSelected()) {
-				System.out.println("" + JKemik.game.getCurrentP().getName()
-						+ " > " + "Play Flag: "
-						+ JKemik.game.getCurrentP().getPlay_flag());
 				/*
 				 * Pass turn only if mouse was clicked and it's no longer
 				 * currentP's turn
@@ -67,7 +64,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			// Guess player's point
 			Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
 			Point temp = new Point(Grid.x, Grid.y);
-
+			
 			if (Grid.manualc) {
 				temp = game.getCollection().get(temp.toString());
 				if (temp == null) {
@@ -103,9 +100,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 				}
 			} else {
 				if (game.getCurrentP().isTurn()) {
-					// System.out.println("Saw turn ...");
 					if (!game.getCollection().containsKey(temp.toString())) {
-						// System.out.println("Plotting ...");
+
 						Grid.plotPoint = true;
 						BoardFrame.grid.repaint();
 
@@ -121,18 +117,17 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 						// Add to the board
 						game.getCollection().put(temp.toString(), temp);
 
-						game.getCurrentP().rememberPoint(temp);
+						game.getCurrentP().rememberPoint(temp,
+								JKemik.settings_t.getBacktrackingDistance());
 
 						game.setEmbuche_on(true);
-						// System.out.println("Collection size: " +
-						// game.getCollection().size());
 
 						// Setting turn
 						game.setPlayFlag();
 						game.getCurrentP().setTurn(false);
 						Grid.mouseMove = false;
-						BoardFrame.feedback(game.getCurrentP()
-								.getName() + " just played.");
+						BoardFrame.feedback(game.getCurrentP().getName()
+								+ " " + BoardFrame.messages.getString("feedback4"));
 					}
 				}
 			}

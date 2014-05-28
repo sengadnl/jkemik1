@@ -34,6 +34,17 @@ public abstract class AbstractGame implements Serializable {
 		currentP.setTurn(true);
 		this.status = 0;
 	}
+	public void init(){
+		if(this.player1.isTurn()){
+			currentP = player1;
+			guest = player2;
+		}else{
+			currentP = player2;
+			guest = player1;
+		}
+		currentP.setTurn(true);
+		this.status = 0;
+	}
 
 	/**
 	 * Finds a capture by following a path that starts at Point "o" location and
@@ -537,8 +548,8 @@ public abstract class AbstractGame implements Serializable {
 	public String toString() {
 		return "GAME\n-------------" + this.player1 + "\nVS\n" + this.player2
 				+ "-----------------------------------------"
-				+ "\nCurrent Player: " + currentP.getName()
-				+ "\nGuest Player: " + guest.getName() + "\nEmbush: "
+				+ "\nCurrent Player: " + currentP.getName() + " Color: " + currentP.getColor()
+				+ "\nGuest Player: " + guest.getName() + " Color: " + guest.getColor() + "\nEmbush: "
 				+ this.embuche_on + "\nMaximum score: " + this.maxScore;
 	}
 
@@ -621,8 +632,8 @@ public abstract class AbstractGame implements Serializable {
 	/* keeps track of all captured points */
 	private AbstractPlayer player1;
 	private AbstractPlayer player2;
-	private static AbstractPlayer currentP = new Player(null, "");
-	private static AbstractPlayer guest = new Player(null, "");
+	private static AbstractPlayer currentP;
+	private static AbstractPlayer guest;
 	private HashMap<String, Point> collection = new HashMap<String, Point>();
 
 	/* persistance */

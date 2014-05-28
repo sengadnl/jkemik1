@@ -45,8 +45,9 @@ public class SettingsPanel extends JPanel{
 	public static RotateColor left_color;
 	public static RotateColor right_color;
 	public static JTextField max_win;
+	public static JTextField backtrack;
 	public static JComboBox languageList;
-	public static JLabel label1,label2,label3,label4,label5;	
+	public static JLabel label1,label2,label3,label4,label5,label6;	
 	private int maxWinVal;
 	static ResourceBundle messages;
 	public static JRadioButton humHumButton,humComButton, networkButton;  
@@ -55,15 +56,20 @@ public class SettingsPanel extends JPanel{
 	
 	private String[] auto_cap = { "ON", "OFF" };
 	private String[] auto_t_p = { "ON", "OFF" };
-	
-	//private Color fg = new Color(255,255,255);
-	//private static java.awt.Container container;
 
 	public SettingsPanel(int w, int h) {
 		maxWinVal = 2;
 		setLayout(new BorderLayout());
 		setSize(w,h);
 		buildPane();
+	}
+
+	public static JTextField getBacktrack() {
+		return backtrack;
+	}
+
+	public static void setBacktrack(JTextField backtrack) {
+		SettingsPanel.backtrack = backtrack;
 	}
 
 	public static JComboBox getLanguageList() {
@@ -138,7 +144,7 @@ public class SettingsPanel extends JPanel{
 //		l1.setBackground(BoardFrame.BOARD_COLOR);
 		l2 = new JPanel();
 		
-		l2.setLayout(new GridLayout(4, 2,20,20));
+		l2.setLayout(new GridLayout(5, 2,20,20));
 		l3 = new JPanel();
 		l3.setLayout(new BorderLayout());
 		
@@ -147,6 +153,7 @@ public class SettingsPanel extends JPanel{
 		auto_turn_pass = new RotateLabel(auto_t_p);
 		
 		max_win = new JTextField("" + JKemik.settings_t.getMaxWinVal());
+		backtrack = new JTextField("" + JKemik.settings_t.getBacktrackingDistance());
 		
 		languageList = new JComboBox(Globals.laguageNames);//
 
@@ -155,6 +162,7 @@ public class SettingsPanel extends JPanel{
 		label3 = new JLabel("  " + messages.getString("manualCapt") + " : ");
 		label4 = new JLabel("  " + messages.getString("maxWinl") + " : ");
 		label5 = new JLabel("  " + messages.getString("language") + " : ");
+		label6 = new JLabel("  " + messages.getString("backtrack") + " : ");
 		
 		
 		save.setText(messages.getString("saveB"));
@@ -170,8 +178,11 @@ public class SettingsPanel extends JPanel{
 		l2.add(auto_turn_pass);
 		l2.add(label4);
 		l2.add(max_win);
+		l2.add(label6);
+		l2.add(backtrack);
 		l2.add(label5);
 		l2.add(languageList);
+		
 		createRadioButtons();
 		buttonsHolder.add(save);
 		buttonsHolder.add(cancel);
@@ -185,6 +196,7 @@ public class SettingsPanel extends JPanel{
 		label3.setForeground(fg);
 		label4.setForeground(fg);
 		label5.setForeground(fg);
+		label6.setForeground(fg);
 		decoratebuttons(fg, bg);
 		
 		l2.setBackground(bg);
@@ -196,6 +208,10 @@ public class SettingsPanel extends JPanel{
 		max_win.setBackground(fg);
 		max_win.setForeground(bg);
 		max_win.setCaretColor(bg);
+		
+		backtrack.setBackground(fg);
+		backtrack.setForeground(bg);
+		backtrack.setCaretColor(bg);
 		
 		languageList.setBackground(fg);
 		languageList.setForeground(bg);
@@ -273,6 +289,7 @@ public class SettingsPanel extends JPanel{
 		label3.setText("  " + messages.getString("manualCapt") + " : ");
 		label4.setText("  " + messages.getString("maxWinl") + " : ");
 		label5.setText("  " + messages.getString("language") + " : ");
+		label6.setText("  " + messages.getString("backtrack") + " : ");
 		save.setText(messages.getString("saveB"));
 	}
 

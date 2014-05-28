@@ -49,9 +49,7 @@ public class JKemik extends Application {
 			}
 			readTemplate();
 			readSettings();
-			// readGameObj();// TODO
-
-			createGame(JKemik.template, JKemik.settings_t);
+			readGameObj();// TODO
 			System.out.println(game + "\n\n");
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
@@ -136,50 +134,54 @@ public class JKemik extends Application {
 		}
 	}
 
-	// public static void writeGame() {
-	// try {
-	// ObjectOutputStream out = new ObjectOutputStream(
-	// new FileOutputStream(g_object));
-	// out.writeObject(game);
-	// out.close();
-	// } catch (FileNotFoundException exception1) {
-	// System.out.println("JKemik: writeGame " + exception1.getMessage());
-	// } catch (IOException exception2) {
-	// System.out.println("JKemik: writeGame " + exception2.getMessage());
-	// }
-	// }
-	//
-	// public static void readGameObj() {
-	// try {
-	//
-	// if (g_object.exists()) {
-	// ObjectInputStream input = new ObjectInputStream(
-	// new FileInputStream(g_object));
-	// game = (Game) input.readObject();
-	// int response = JOptionPane.showConfirmDialog(null,
-	// "Continues with saved Game?\n", "Question",
-	// JOptionPane.YES_NO_OPTION);
-	// if (response == 0) {
-	// BoardFrame.setThereIsSavedGame(response);
-	// Grid.refresh = true;
-	// input.close();
-	// } else {
-	// BoardFrame.setThereIsSavedGame(response);
-	// }
-	// } else {
-	// game = new Game(new Player(template.getP1_c(),
-	// template.getP1_name()), new Player(template.getP2_c(),
-	// template.getP1_name()));
-	// }
-	// } catch (FileNotFoundException exception1) {
-	// System.out.println("JKemik: readGame " + exception1.getMessage());
-	// } catch (IOException exception2) {
-	// System.out.println("JKemik: readGame " + exception2.getMessage());
-	// } catch (ClassNotFoundException exception3) {
-	// System.out.println("JKemik: readGame " + exception3.getMessage());
-	// }
-	//
-	// }
+	public static void writeGame() {
+		try {
+			ObjectOutputStream out = new ObjectOutputStream(
+					new FileOutputStream(g_object));
+			out.writeObject(game);
+			out.close();
+		} catch (FileNotFoundException exception1) {
+			System.out.println("JKemik: writeGame " + exception1.getMessage());
+		} catch (IOException exception2) {
+			System.out.println("JKemik: writeGame " + exception2.getMessage());
+		}
+	}
+
+	public static void readGameObj() {
+		try {
+
+			if (g_object.exists()) {
+				ObjectInputStream input = new ObjectInputStream(
+						new FileInputStream(g_object));
+				game = (Game) input.readObject();
+				int response = JOptionPane.showConfirmDialog(null,
+						"Continues with saved Game?\n", "Question",
+						JOptionPane.YES_NO_OPTION);
+				if (response == 0) {
+					BoardFrame.setThereIsSavedGame(response);
+					game.init();
+					Grid.refresh = true;
+					input.close();
+				} else {
+					BoardFrame.setThereIsSavedGame(response);
+				}
+			} else {
+//				game = new Game(new Player(template.getP1_c(),
+//						template.getP1_name()), new Player(template.getP2_c(),
+//						template.getP1_name()));
+				Game.getInstance(new Player(template.getP1_c(),
+						template.getP1_name()), new Player(template.getP2_c(),
+						template.getP1_name()));
+			}
+		} catch (FileNotFoundException exception1) {
+			System.out.println("JKemik: readGame " + exception1.getMessage());
+		} catch (IOException exception2) {
+			System.out.println("JKemik: readGame " + exception2.getMessage());
+		} catch (ClassNotFoundException exception3) {
+			System.out.println("JKemik: readGame " + exception3.getMessage());
+		}
+
+	}
 
 	public static void readTemplate() {
 		try {
@@ -214,7 +216,8 @@ public class JKemik extends Application {
 						new FileInputStream(s_object));
 
 				settings_t = (STemplate) input.readObject();
-				settings_t.setGameSetupMode(true);
+				//settings_t.setGameSetupMode(true);
+				settings_t.setPlayMode(true);
 
 				input.close();
 			} else {
@@ -236,16 +239,20 @@ public class JKemik extends Application {
 	public static void saveSysPrefs() {
 		STemplate t = JKemik.settings_t;
 		String str = SettingsPanel.max_win.getText();
+		String backtrack = SettingsPanel.backtrack.getText();
 		// SettingsPanel.translateUI();
 		String lang = (String) SettingsPanel.getLanguageList()
 				.getSelectedItem();
 		String key = Tools.languageKey(lang);
 		String properties = Tools.propertiesFilename(key);
 		int maxw = Integer.parseInt(str);
+		int btrack = Integer.parseInt(backtrack);
+		
 		if (Tools.isMaxWinLessThanGrid(Grid.getDimension().positions(), maxw)) {
 			t.setMaxWinVal(maxw);
 			t.setMemo(t.isAutoCapture(), t.isAutoPass());
 			t.setLanguage(lang);
+			t.setBacktrackingDistance(btrack);
 			Locale local = new Locale(key);
 			BoardFrame.setMessages(ResourceBundle.getBundle(properties, local));
 			BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
@@ -276,8 +283,14 @@ public class JKemik extends Application {
 
 				if (temp != null) {
 					System.err.println("Capture Duration = " + str);
-					BoardFrame.feedbackarea.setText((game.getCaptured_count() + game
-							.getRedeemed_count()) + " " + BoardFrame.messages.getString("feedback3") + " " + game.getCurrentP().getName());
+					BoardFrame.feedbackarea
+							.setText((game.getCaptured_count() + game
+									.getRedeemed_count())
+									+ " "
+									+ BoardFrame.messages
+											.getString("feedback3")
+									+ " "
+									+ game.getCurrentP().getName());
 					return temp;
 				} else {
 					game.setEmbuche_on(false);
@@ -288,8 +301,14 @@ public class JKemik extends Application {
 
 					if (temp != null) {
 						System.err.println("Capture Duration = " + total);
-						BoardFrame.feedbackarea.setText((game.getCaptured_count() + game
-								.getRedeemed_count()) + " " + BoardFrame.messages.getString("feedback3") + " " + game.getCurrentP().getName());
+						BoardFrame.feedbackarea
+								.setText((game.getCaptured_count() + game
+										.getRedeemed_count())
+										+ " "
+										+ BoardFrame.messages
+												.getString("feedback3")
+										+ " "
+										+ game.getCurrentP().getName());
 						game.setEmbuche_on(false);
 						return temp;
 					} else {
