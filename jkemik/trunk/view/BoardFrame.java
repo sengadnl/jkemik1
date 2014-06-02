@@ -93,6 +93,7 @@ public class BoardFrame extends JFrame {
 		l1.rotateLabel(JKemik.settings_t.getGridDimension().toString());
 		// System Preferences Events
 		ViewEvents.saveSettingsAction();
+		ViewEvents.cancelSettingsAction();
 		ViewEvents.onAutoCaptureAction();
 		ViewEvents.onAutoPassTurnAction();
 		ViewEvents.networkGameListener();
@@ -176,9 +177,11 @@ public class BoardFrame extends JFrame {
 		la = new JLabel(" " + messages.getString("capturel"));
 		lb = new JLabel(" " + messages.getString("passl"));
 		lc = new JLabel(" " + messages.getString("winl"));
+		ld = new JLabel(" " + messages.getString("backtrack"));
 		AutoCap = new JLabel(JKemik.settings_t.getAutoCaptureStatus());
 		AutoPass = new JLabel(JKemik.settings_t.getAutoPassStatus());
 		Win = new JLabel("" + JKemik.settings_t.getMaxWinVal());
+		backt = new JLabel("" + JKemik.settings_t.getBacktrackingDistance());
 		// feedback = new JLabel("");
 		progressB = new JProgressBar(0, PROGRESS_BAR_MAX);
 		icon = new JKIcon("media/jkemik-small.png", "");
@@ -222,7 +225,7 @@ public class BoardFrame extends JFrame {
 		status_panel_container.setLayout(new FlowLayout());
 		playerPanel_container.setLayout(new BorderLayout(5, 10));
 		controler_panel.setLayout(new GridLayout(4, 1, 10, 10));
-		config_container.setLayout(new GridLayout(3, 2));
+		config_container.setLayout(new GridLayout(4, 2));
 		setupP.setLayout(new BorderLayout(5, 10));
 		p1p2NameHolder.setLayout(new BorderLayout(5, 5));
 		pname1.setLayout(new GridLayout(2, 1));
@@ -292,12 +295,15 @@ public class BoardFrame extends JFrame {
 		playerPanel_container.add(p1panel, BorderLayout.WEST);
 		playerPanel_container.add(p2panel, BorderLayout.EAST);
 		playerPanel_container.add(config_container, BorderLayout.SOUTH);
+		
 		config_container.add(la);
 		config_container.add(AutoCap);
 		config_container.add(lb);
 		config_container.add(AutoPass);
 		config_container.add(lc);
 		config_container.add(Win);
+		config_container.add(ld);
+		config_container.add(backt);
 
 		p1p2NameHolder.add(pname1, BorderLayout.NORTH);
 		p1p2NameHolder.add(pname2, BorderLayout.SOUTH);
@@ -393,6 +399,7 @@ public class BoardFrame extends JFrame {
 		la.setForeground(fg);
 		lb.setForeground(fg);
 		lc.setForeground(fg);
+		ld.setForeground(fg);
 	}
 
 	public static void disableGameControlPanel() {
@@ -407,9 +414,11 @@ public class BoardFrame extends JFrame {
 		la.setForeground(Tools.fade(BoardFrame.BOARD_COLOR));
 		lb.setForeground(Tools.fade(BoardFrame.BOARD_COLOR));
 		lc.setForeground(Tools.fade(BoardFrame.BOARD_COLOR));
+		ld.setForeground(Tools.fade(BoardFrame.BOARD_COLOR));
 		AutoCap.setForeground(Tools.fade(Color.WHITE));
 		AutoPass.setForeground(Tools.fade(Color.WHITE));
 		Win.setForeground(Tools.fade(Color.WHITE));
+		backt.setForeground(Tools.fade(Color.WHITE));
 
 		// fadeButton(startG);
 	}
@@ -578,9 +587,11 @@ public class BoardFrame extends JFrame {
 		la.setForeground(BoardFrame.BOARD_COLOR);
 		lb.setForeground(BoardFrame.BOARD_COLOR);
 		lc.setForeground(BoardFrame.BOARD_COLOR);
+		ld.setForeground(BoardFrame.BOARD_COLOR);
 		AutoCap.setForeground(Color.WHITE);
 		AutoPass.setForeground(Color.WHITE);
 		Win.setForeground(Color.WHITE);
+		backt.setForeground(Color.WHITE);
 
 		Grid.setGridLineCol(Tools.fade(BoardFrame.BOARD_COLOR, 35));
 		top_container.setBackground(BoardFrame.THEME_COLOR);
@@ -703,6 +714,9 @@ public class BoardFrame extends JFrame {
 			}
 			String str = "" + JKemik.settings_t.getMaxWinVal();
 			BoardFrame.Win.setText(str);
+			
+			String str1 = "" + JKemik.settings_t.getBacktrackingDistance();
+			BoardFrame.backt.setText(str1);
 		} catch (Exception e) {
 
 		}
@@ -734,6 +748,8 @@ public class BoardFrame extends JFrame {
 		la.setText(" " + messages.getString("capturel"));
 		lb.setText(" " + messages.getString("passl"));
 		lc.setText(" " + messages.getString("winl"));
+		ld.setText(" " + messages.getString("backtrack"));
+		
 	}
 
 	public static void showControlButtons() {
@@ -837,9 +853,11 @@ public class BoardFrame extends JFrame {
 			la.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
 			lb.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
 			lc.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
+			ld.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
 			AutoCap.setForeground(Color.WHITE);
 			AutoPass.setForeground(Color.WHITE);
 			Win.setForeground(Color.WHITE);
+			backt.setForeground(Color.WHITE);
 
 			mouseSelection.setVisible(false);
 			BoardFrame.startG.setVisible(true);
@@ -860,9 +878,11 @@ public class BoardFrame extends JFrame {
 			la.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
 			lb.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
 			lc.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
+			ld.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
 			AutoCap.setForeground(Color.WHITE);
 			AutoPass.setForeground(Color.WHITE);
 			Win.setForeground(Color.WHITE);
+			backt.setForeground(Color.WHITE);
 
 			showControlButtons();
 			BoardFrame.Game_status.setVisible(true);
@@ -916,8 +936,8 @@ public class BoardFrame extends JFrame {
 	public static JButton refresh, startG, undo, pass_turn, exit, settings,
 			help, Game_status;
 	public static JCheckBox mouseSelection, mode;
-	public static JLabel print_point, label1, label2, la, lb, lc, AutoCap,
-			AutoPass, Win;// feedback;// exit, settings, help;
+	public static JLabel print_point, label1, label2, la, lb, lc, ld, AutoCap,
+			AutoPass, Win, backt;// feedback;// exit, settings, help;
 	public static JTextArea feedbackarea;
 	public static JKIcon icon;
 	public static RotateColor pColor1, pColor2;

@@ -33,13 +33,16 @@ public class ExitListener implements MouseListener{
 				JOptionPane.YES_OPTION);
 		if (response == 0) {
 			System.out.println("writting game: " + JKemik.game.toString());
+			if(JKemik.game.getCollection().isEmpty()){
+				JKemik.removeGameObj();
+			}
 			JKemik.writeGame();
 			JKemik.writeSettings();
 			// Save current Game
 			System.exit(0);
 			//Application.setDone();
 		} else {
-			
+			//
 		}
 	}
 	

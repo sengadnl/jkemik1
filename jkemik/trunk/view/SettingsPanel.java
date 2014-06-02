@@ -162,8 +162,7 @@ public class SettingsPanel extends JPanel{
 		label3 = new JLabel("  " + messages.getString("manualCapt") + " : ");
 		label4 = new JLabel("  " + messages.getString("maxWinl") + " : ");
 		label5 = new JLabel("  " + messages.getString("language") + " : ");
-		label6 = new JLabel("  " + messages.getString("backtrack") + " : ");
-		
+		label6 = new JLabel("  " + messages.getString("backtrack"));
 		
 		save.setText(messages.getString("saveB"));
 
