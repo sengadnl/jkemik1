@@ -130,7 +130,7 @@ public abstract class AbstractGame implements Serializable {
 		for (int i = start; i >= 0; i--) {
 			cell = null;
 			currentP.setSelected(new ArrayList<Point>());
-			System.out.println(i + "-" + lastps.get(i));
+			System.out.println(i + "- backtracking at " + lastps.get(i));
 			currentP.setOrigin(lastps.get(i));/* Reset the origin */
 			if (buildPath(lastps.get(i), squareSize)) {
 				try {
