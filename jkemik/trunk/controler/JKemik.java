@@ -291,15 +291,15 @@ public class JKemik extends Application {
 			long start = System.currentTimeMillis();
 			Cell temp = game.connectDots(squareSize);//
 			long end = System.currentTimeMillis();
-			double total = (end - start) / 1000;
+			double total = (end - start);
 
-			DecimalFormat format = new DecimalFormat("###.###");
+			DecimalFormat format = new DecimalFormat("##.##");
 			String str = format.format(total);
 
 			if (settings_t.isAutoCapture()) {
 
 				if (temp != null) {
-					System.err.println("Capture Duration = " + str);
+					System.err.println("- Capture Duration = " + str + " MilliSecs");
 					BoardFrame.feedbackarea
 							.setText((game.getCaptured_count() + game
 									.getRedeemed_count())
@@ -307,7 +307,8 @@ public class JKemik extends Application {
 									+ BoardFrame.messages
 											.getString("feedback3")
 									+ " "
-									+ game.getCurrentP().getName());
+									+ game.getCurrentP().getName()
+									+ " (" + str + " MilliSecs)");
 					return temp;
 				} else {
 					game.setEmbuche_on(false);
