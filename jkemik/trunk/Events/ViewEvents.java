@@ -37,6 +37,7 @@ public class ViewEvents {
 			BoardFrame.settings);
 	public static SaveSettingsListener saveSetting = new SaveSettingsListener(
 			SettingsPanel.save);
+	public static SysPrefsCancelListener cancelSettings = new SysPrefsCancelListener(SettingsPanel.cancel);
 	public static UndoListener undoListener = new UndoListener(BoardFrame.undo);
 
 	public static PassTurnListener passTurnListener = new PassTurnListener(
@@ -140,6 +141,13 @@ public class ViewEvents {
 			SettingsPanel.save.addMouseListener(saveSetting);
 		}
 	}
+	public static void cancelSettingsAction() {
+	if (SettingsPanel.cancel.getComponentListeners().length == 0) {
+		SettingsPanel.cancel.addMouseListener(saveSetting);
+	}
+}
+	
+	
 
 	public static void settingsLabelAction() {
 		if (BoardFrame.settings.getComponentListeners().length == 0) {
@@ -211,7 +219,6 @@ public class ViewEvents {
 	public static void uiEventUpdates(STemplate s, GTemplate t) {
 		if (s.isGameSetupMode()) {
 			ViewEvents.newGameEvent();
-			ViewEvents.settingsLabelAction();
 			changeColorPanel1Action(BoardFrame.pColor1);
 			changeColorPanel2Action(BoardFrame.pColor2);
 			addPlayer1NameAction(BoardFrame.label1);

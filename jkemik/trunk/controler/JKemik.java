@@ -146,6 +146,20 @@ public class JKemik extends Application {
 			System.out.println("JKemik: writeGame " + exception2.getMessage());
 		}
 	}
+	public static void removeGameObj() {
+		try {
+			/* Is there a saved game */
+			if (g_object.exists()) {
+				if(g_object.delete()){
+	    			System.out.println(g_object.getAbsolutePath() + " is deleted!");
+	    		}else{
+	    			System.out.println("Delete operation failed.");
+	    		}
+			} 
+		} catch (Exception exception1) {
+			System.out.println("JKemik: removeGameObj " + exception1.getMessage());
+		}
+	}
 
 	public static void readGameObj() {
 		try {
