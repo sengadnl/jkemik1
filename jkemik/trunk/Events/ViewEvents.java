@@ -63,6 +63,8 @@ public class ViewEvents {
 			SettingsPanel.networkButton);
 	public static HvsAIListener HvsAI = new HvsAIListener(
 			SettingsPanel.humComButton);
+	public static ManualCaptureButtonListener captureButtonListener = new ManualCaptureButtonListener(
+			BoardFrame.capture);
 
 	public static void hvsAIListener() {
 		if (SettingsPanel.humComButton.getComponentListeners().length == 0) {
@@ -117,6 +119,12 @@ public class ViewEvents {
 	public static void exitListener() {
 		if (BoardFrame.exit.getComponentListeners().length == 0) {
 			BoardFrame.exit.addMouseListener(exitlistener);
+		}
+	}
+	
+	public static void captureButtonListener(JButton capture) {
+		if (capture.getComponentListeners().length == 0) {
+			capture.addMouseListener(captureButtonListener);
 		}
 	}
 
@@ -246,6 +254,7 @@ public class ViewEvents {
 			// Enable control buttons
 			manualSelectionActionListener(BoardFrame.mouseSelection);
 			undoAction(BoardFrame.undo);
+			captureButtonListener(BoardFrame.capture);
 			passTurnAction(BoardFrame.pass_turn);
 			gridMouseAction(BoardFrame.grid);
 		}

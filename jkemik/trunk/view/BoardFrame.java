@@ -191,6 +191,7 @@ public class BoardFrame extends JFrame {
 		refresh = new JButton(messages.getString("refreshB"));
 		startG = new JButton(messages.getString("startGameB"));
 		undo = new JButton(messages.getString("undoB"));
+		capture = new JButton(messages.getString("captureB"));
 		pass_turn = new JButton(messages.getString("passB"));
 
 		pass_turn.setVisible(false);
@@ -224,7 +225,7 @@ public class BoardFrame extends JFrame {
 		/* Middle panels layout */
 		status_panel_container.setLayout(new FlowLayout());
 		playerPanel_container.setLayout(new BorderLayout(5, 10));
-		controler_panel.setLayout(new GridLayout(4, 1, 10, 10));
+		controler_panel.setLayout(new GridLayout(5, 1, 10, 10));
 		config_container.setLayout(new GridLayout(4, 2));
 		setupP.setLayout(new BorderLayout(5, 10));
 		p1p2NameHolder.setLayout(new BorderLayout(5, 5));
@@ -313,6 +314,7 @@ public class BoardFrame extends JFrame {
 
 		controler_panel.add(pass_turn);
 		controler_panel.add(undo);
+		controler_panel.add(capture);
 		controler_panel.add(mouseSelection);
 		controler_panel.add(mode);
 
@@ -380,6 +382,9 @@ public class BoardFrame extends JFrame {
 
 		undo.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT / 2));
 		undo.setForeground(fg);
+		
+		capture.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT / 2));
+		capture.setForeground(fg);
 
 		refresh.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT / 2));
 		refresh.setForeground(fg);
@@ -735,6 +740,7 @@ public class BoardFrame extends JFrame {
 		// panel 33
 		pass_turn.setText(messages.getString("passB"));
 		undo.setText(messages.getString("undoB"));
+		capture.setText(messages.getString("captureB"));
 		refresh.setText(messages.getString("refreshB"));
 		mouseSelection.setText(messages.getString("captureMode"));
 
@@ -760,10 +766,12 @@ public class BoardFrame extends JFrame {
 			if (JKemik.settings_t.isAutoCapture()) {
 				mouseSelection.setVisible(false);
 				undo.setVisible(false);
+				capture.setVisible(false);
 			} else {
 				System.out.println("show undo and selection checkbox");
 				undo.setVisible(true);
 				mouseSelection.setVisible(true);
+				capture.setVisible(true);
 			}
 
 			if (JKemik.settings_t.isAutoPass()) {
@@ -863,6 +871,7 @@ public class BoardFrame extends JFrame {
 			BoardFrame.startG.setVisible(true);
 			BoardFrame.Game_status.setVisible(false);
 			undo.setVisible(false);
+			capture.setVisible(false);
 			pass_turn.setVisible(false);
 			mode.setVisible(false);
 			displayGrid(true);
@@ -908,6 +917,7 @@ public class BoardFrame extends JFrame {
 			BoardFrame.startG.setVisible(false);
 			disableGameControlPanel();
 			undo.setVisible(false);
+			capture.setVisible(false);
 			pass_turn.setVisible(false);
 			mode.setVisible(false);
 			displayGrid(false);
@@ -934,7 +944,7 @@ public class BoardFrame extends JFrame {
 			pname1, gSizeAndTheme, pname2, p1p2NameHolder;
 	public static GridStatus gridstats;
 	public static JButton refresh, startG, undo, pass_turn, exit, settings,
-			help, Game_status;
+			help, Game_status, capture;
 	public static JCheckBox mouseSelection, mode;
 	public static JLabel print_point, label1, label2, la, lb, lc, ld, AutoCap,
 			AutoPass, Win, backt;// feedback;// exit, settings, help;
