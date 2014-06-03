@@ -131,7 +131,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					}
 				}
 			}
-			if (game.isEmbuche_on()) {// && JKemik.settings_t.isAutoCapture()
+			if (game.isEmbuche_on() && JKemik.settings_t.isAutoCapture()) {// 
 				// System.out.println("Embush attempt");
 				BoardFrame.progressB.setVisible(true);
 				BoardFrame.progressB.setIndeterminate(true);
