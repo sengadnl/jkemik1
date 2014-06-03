@@ -37,7 +37,8 @@ public class ViewEvents {
 			BoardFrame.settings);
 	public static SaveSettingsListener saveSetting = new SaveSettingsListener(
 			SettingsPanel.save);
-	public static SysPrefsCancelListener cancelSettings = new SysPrefsCancelListener(SettingsPanel.cancel);
+	public static SysPrefsCancelListener cancelSettings = new SysPrefsCancelListener(
+			SettingsPanel.cancel);
 	public static UndoListener undoListener = new UndoListener(BoardFrame.undo);
 
 	public static PassTurnListener passTurnListener = new PassTurnListener(
@@ -50,7 +51,8 @@ public class ViewEvents {
 	public static HelpListener helpListener = new HelpListener(BoardFrame.help);
 	public static RefreshListener refreshListener = new RefreshListener(
 			BoardFrame.refresh);
-	//public static WindowEvents windowListener = new WindowEvents(JKemik.view);
+	// public static WindowEvents windowListener = new
+	// WindowEvents(JKemik.view);
 	public static ManualSelectionListener manualCaptureButtonListener = new ManualSelectionListener(
 			BoardFrame.mouseSelection);
 	public static ModeToggleListener modeToggleListener = new ModeToggleListener(
@@ -88,18 +90,18 @@ public class ViewEvents {
 		}
 	}
 
-//	public static void windowActionListener() {
-//		if (JKemik.view.getComponentListeners().length == 0) {
-//			JKemik.view.addComponentListener(windowListener);
-//		}
-//	}
+	// public static void windowActionListener() {
+	// if (JKemik.view.getComponentListeners().length == 0) {
+	// JKemik.view.addComponentListener(windowListener);
+	// }
+	// }
 
 	public static void refreshListener() {
 		if (BoardFrame.refresh.getComponentListeners().length == 0) {
 			BoardFrame.refresh.addMouseListener(refreshListener);
 		}
 	}
-	
+
 	public static void sysPrefsListener() {
 		if (BoardFrame.settings.getComponentListeners().length == 0) {
 			BoardFrame.settings.addMouseListener(sysPrefsListener);
@@ -141,17 +143,10 @@ public class ViewEvents {
 			SettingsPanel.save.addMouseListener(saveSetting);
 		}
 	}
-	public static void cancelSettingsAction() {
-	if (SettingsPanel.cancel.getComponentListeners().length == 0) {
-		SettingsPanel.cancel.addMouseListener(saveSetting);
-	}
-}
-	
-	
 
-	public static void settingsLabelAction() {
-		if (BoardFrame.settings.getComponentListeners().length == 0) {
-			BoardFrame.settings.addMouseListener(sysPrefsListener);
+	public static void cancelSettingsAction() {
+		if (SettingsPanel.cancel.getComponentListeners().length == 0) {
+			SettingsPanel.cancel.addMouseListener(saveSetting);
 		}
 	}
 
@@ -226,18 +221,17 @@ public class ViewEvents {
 			setBoardSizeAction(BoardFrame.l1);
 			setGameThemeAction(BoardFrame.l2);
 			saveAction(BoardFrame.startG);
-			settingsLabelAction();
-			
-			
+
 			BoardFrame.grid.removeMouseListener(gridListener);
 			BoardFrame.grid.removeMouseMotionListener(gridListener);
 
 			// Disable control buttons
-			BoardFrame.mouseSelection.removeMouseListener(manualCaptureButtonListener);
+			BoardFrame.mouseSelection
+					.removeMouseListener(manualCaptureButtonListener);
 			BoardFrame.undo.removeMouseListener(undoListener);
 			BoardFrame.pass_turn.removeMouseListener(passTurnListener);
 		}
-		
+
 		if (s.isPlayMode()) {
 			BoardFrame.pColor1.removeMouseListener(p1Listener);
 			BoardFrame.pColor2.removeMouseListener(p2Listener);
@@ -245,8 +239,8 @@ public class ViewEvents {
 			BoardFrame.label2.removeMouseListener(n2Listener);
 			BoardFrame.l1.removeMouseListener(gridSizeListener);
 			BoardFrame.l2.removeMouseListener(gameThemeListener);
-			//BoardFrame.mode.addMouseListener(modeToggleListener);
-			//BoardFrame.settings.removeMouseListener(sysPrefsListener);
+			// BoardFrame.mode.addMouseListener(modeToggleListener);
+			// BoardFrame.settings.removeMouseListener(sysPrefsListener);
 			BoardFrame.startG.removeMouseListener(saveListener);
 
 			// Enable control buttons
@@ -256,7 +250,7 @@ public class ViewEvents {
 			gridMouseAction(BoardFrame.grid);
 		}
 		if (s.isSystemSetupMode()) {
-			
+
 			BoardFrame.pColor1.removeMouseListener(p1Listener);
 			BoardFrame.pColor2.removeMouseListener(p2Listener);
 			BoardFrame.label1.removeMouseListener(n1Listener);
