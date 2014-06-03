@@ -34,14 +34,8 @@ public class SysPrefsListener implements MouseListener {
 				BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
 				ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
 			} 
-//			else {
-//				return;
-//			}
+			
 		}
-//		JKemik.settings_t.setSystemSetupMode(true);
-//		BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
-//		ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
-
 	}
 
 	public void mouseExited(MouseEvent arg0) {
