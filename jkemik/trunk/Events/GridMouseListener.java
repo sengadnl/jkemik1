@@ -64,7 +64,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			// Guess player's point
 			Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
 			Point temp = new Point(Grid.x, Grid.y);
-			
+
 			if (Grid.manualc) {
 				temp = game.getCollection().get(temp.toString());
 				if (temp == null) {
@@ -126,23 +126,28 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 						game.setPlayFlag();
 						game.getCurrentP().setTurn(false);
 						Grid.mouseMove = false;
-						BoardFrame.feedback(game.getCurrentP().getName()
-								+ " " + BoardFrame.messages.getString("feedback4"));
+						BoardFrame.feedback(game.getCurrentP().getName() + " "
+								+ BoardFrame.messages.getString("feedback4"));
 					}
 				}
 			}
-			if (game.isEmbuche_on() && JKemik.settings_t.isAutoCapture()) {// 
-				// System.out.println("Embush attempt");
-				BoardFrame.progressB.setVisible(true);
-				BoardFrame.progressB.setIndeterminate(true);
-				Grid.cell = JKemik.embush(Grid.squareSize);// new line
-				BoardFrame.progressB.setIndeterminate(false);
-				BoardFrame.progressB.setVisible(false);
-				BoardFrame.grid.repaint();
+			
+			if (game.isEmbuche_on()) {
+				if (JKemik.settings_t.isAutoCapture()) {
+					System.out.println("capture ... with autocapture on");
+					BoardFrame.progressB.setVisible(true);
+					BoardFrame.progressB.setIndeterminate(true);
+					Grid.cell = JKemik.embush(Grid.squareSize);
+					BoardFrame.progressB.setIndeterminate(false);
+					BoardFrame.progressB.setVisible(false);
+					BoardFrame.grid.repaint();
+				}
 			}
+			
 			if (game.getCurrentP().isTurn()) {
 				this.grid.setMouseclicked(true);
 			}
+			
 			BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
 			BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
 			BoardFrame.updateBoardStatus();
