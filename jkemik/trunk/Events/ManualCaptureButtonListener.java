@@ -17,12 +17,13 @@ public class ManualCaptureButtonListener implements MouseListener{
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
-		Grid.setManualc(true);
-		Grid.selectPoint = true;
+		//Grid.setManualc(true);
+		//Grid.selectPoint = true;
+		System.out.println("trying to capture...");
 		JKemik.game.getCurrentP().setOrigin(JKemik.game.getLastp());
 		JKemik.game.getCurrentP().getSelected().add(JKemik.game.getLastp());
 		Grid.setSelectedP(JKemik.game.getLastp());
-		JKemik.game.setEmbuche_on(false);
+		JKemik.game.setEmbuche_on(true);
 		BoardFrame.grid.repaint();
 	}
 
