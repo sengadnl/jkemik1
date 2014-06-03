@@ -290,6 +290,7 @@ public class JKemik extends Application {
 		try {
 			long start = System.currentTimeMillis();
 			Cell temp = game.connectDots(squareSize);//
+			System.err.println("after connectDots : " + temp);
 			long end = System.currentTimeMillis();
 			double total = (end - start);
 
