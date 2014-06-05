@@ -383,7 +383,7 @@ public class BoardFrame extends JFrame {
 		undo.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT / 2));
 		undo.setForeground(fg);
 		
-		capture.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT / 2));
+		capture.setBackground(bg);
 		capture.setForeground(fg);
 
 		refresh.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT / 2));
@@ -780,7 +780,7 @@ public class BoardFrame extends JFrame {
 				System.out.println("show undo and pass_turn button");
 				undo.setVisible(true);
 				pass_turn.setVisible(true);
-			
+				capture.setVisible(true);
 			}
 
 			initMouseSelection();

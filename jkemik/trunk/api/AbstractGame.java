@@ -84,7 +84,7 @@ public abstract class AbstractGame implements Serializable {
 								&& currentP.getSelected().size() > 3) {
 							currentP.setSuccessful(true);
 							currentP.setOrigin(null);/* Reset the origin */
-							System.err.println("\n" + currentP.getSelected());
+							System.err.println("\nbuildPath: " + currentP.getSelected());
 							return true;/* Capture was found */
 						}
 
@@ -120,13 +120,11 @@ public abstract class AbstractGame implements Serializable {
 		return false;
 	}
 
-	public Cell capture(Point o, double squareSize) {
+	public Cell capture(double squareSize) {
 		System.out.println("---------------------------------------------");
 		Cell cell = null; /* Cell to be returned */
 		ArrayList<Point> lastps = currentP.getLastpoints();
 		int start = lastps.size() - 1;
-		// System.out.println("Size of last point for " + currentP.getName()
-		// + " is " + lastps.size());
 		for (int i = start; i >= 0; i--) {
 			cell = null;
 			currentP.setSelected(new ArrayList<Point>());
@@ -150,7 +148,6 @@ public abstract class AbstractGame implements Serializable {
 					
 					/* Go through all selected dots from recursion */
 					for (Point p : TempArea) {
-
 						/* If p exist in collection */
 						if (this.collection.containsKey(p.toString())) {
 							Point object = this.collection.get(p.toString());
@@ -176,7 +173,7 @@ public abstract class AbstractGame implements Serializable {
 						}
 
 					}/* end of second for loop */
-
+					
 					setStatusForAll(currentP.getSelected(), Point.CONNECTED);
 					cell = new Cell(getCurrentP().getId(), getCurrentP()
 							.getSelected(), area);
@@ -198,7 +195,6 @@ public abstract class AbstractGame implements Serializable {
 		}
 		currentP.setSuccessful(false);
 		currentP.setSelected(new ArrayList<Point>());
-
 		return cell;
 	}
 
@@ -261,7 +257,6 @@ public abstract class AbstractGame implements Serializable {
 		cell.setStatus(Globals.CELL_FREE);
 		currentP.addCell(cell);
 
-		// currentP.refreshRedeemed_count(redeemed_count);
 		calculateScore(cell);
 		return cell;
 	}
@@ -270,7 +265,7 @@ public abstract class AbstractGame implements Serializable {
 		currentP.setSuccessful(false);
 		currentP.setOrigin(currentP.getLatestP());
 
-		Cell tempCell = capture(currentP.getLatestP(), squareSize);
+		Cell tempCell = capture(squareSize);
 
 		if (tempCell != null) {
 			return tempCell;

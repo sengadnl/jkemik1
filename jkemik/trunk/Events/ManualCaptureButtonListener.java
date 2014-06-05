@@ -22,9 +22,10 @@ public class ManualCaptureButtonListener implements MouseListener{
 	public void mouseClicked(MouseEvent arg0) {
 		
 		System.out.println("trying to capture...");
-		Grid.cell = JKemik.game.capture(JKemik.game.getCurrentP().getLatestP(), Grid.squareSize);
+		Grid.cell = JKemik.game.capture(Grid.squareSize);
+		System.out.println("Capture result: " + Grid.cell);
 		JKemik.game.getCurrentP().setSelected(new ArrayList<Point>());
-		BoardFrame.grid.repaint();
+		BoardFrame.grid.repaint();//
 		BoardFrame.p1panel.updatePlayerPanel(JKemik.game.getPlayer1());
 		BoardFrame.p2panel.updatePlayerPanel(JKemik.game.getPlayer2());
 		BoardFrame.updateBoardStatus();

@@ -48,16 +48,5 @@ public class Point extends AbstractPoint implements Serializable{
 		}else{
 			return -1;
 		}
-	}
-	
-//	public boolean adjacentTo(Point p, int squareSize) {
-//		Point box[] = Tools.boxCoord(this, squareSize);
-//		for(int i = 0; i < box.length; i++){
-//			if(p.compareTo(box[i]) == 0){
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
-	
+	}	
 }
