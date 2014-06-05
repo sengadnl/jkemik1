@@ -222,6 +222,7 @@ public class ViewEvents {
 	public static void uiEventUpdates(STemplate s, GTemplate t) {
 		if (s.isGameSetupMode()) {
 			newGameEvent();
+			sysPrefsListener();
 			changeColorPanel1Action(BoardFrame.pColor1);
 			changeColorPanel2Action(BoardFrame.pColor2);
 			addPlayer1NameAction(BoardFrame.label1);
@@ -249,10 +250,11 @@ public class ViewEvents {
 			BoardFrame.l1.removeMouseListener(gridSizeListener);
 			BoardFrame.l2.removeMouseListener(gameThemeListener);
 			// BoardFrame.mode.addMouseListener(modeToggleListener);
-			// BoardFrame.settings.removeMouseListener(sysPrefsListener);
+			//BoardFrame.settings.removeMouseListener(sysPrefsListener);
 			BoardFrame.startG.removeMouseListener(saveListener);
 
 			// Enable control buttons
+			sysPrefsListener();
 			manualSelectionActionListener(BoardFrame.mouseSelection);
 			undoAction(BoardFrame.undo);
 			captureButtonListener(BoardFrame.capture);

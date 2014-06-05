@@ -206,7 +206,6 @@ public class BoardFrame extends JFrame {
 	private void instantiateAllCheckBoxes() {
 		mouseSelection = new JCheckBox(messages.getString("captureMode"));
 		mode = new JCheckBox(messages.getString("switchModel"));
-
 		mouseSelection.setVisible(false);
 	}
 
