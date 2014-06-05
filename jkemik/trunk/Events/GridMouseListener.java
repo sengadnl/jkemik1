@@ -71,6 +71,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					return;
 				}
 				if (game.select(temp, Grid.squareSize)) {
+					System.out.println("Current Selection: "
+							+ game.getCurrentP().getSelected());
 					Grid.selectPoint = true;
 					Grid.setSelectedP(temp);
 					if (temp.adjacentTo(current.getOrigin(), Grid.squareSize)
@@ -89,10 +91,14 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 						BoardFrame.mode.setVisible(true);
 						BoardFrame.pass_turn.setVisible(true);
 						Grid.manualc = false;
-						if (Grid.cell == null
-								|| Grid.cell.getStatus() == Globals.CELL_EMPTY) {
+						if (Grid.cell == null) {
 							Grid.refresh = true;
-							BoardFrame.errorFeedback("ELLEGAL CAPTURE!!");
+							BoardFrame.errorFeedback("THIS CELL IS NULL!!!");
+							BoardFrame.displayGrid(true);
+						}
+						if (Grid.cell.getStatus() == Globals.CELL_EMPTY) {
+							Grid.refresh = true;
+							BoardFrame.errorFeedback("CELL STATUS IS EMPTY!!!");
 							BoardFrame.displayGrid(true);
 						}
 					}
@@ -131,7 +137,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					}
 				}
 			}
-			
+
 			if (game.isEmbuche_on()) {
 				if (JKemik.settings_t.isAutoCapture()) {
 					System.out.println("capture ... with autocapture on");
@@ -143,11 +149,11 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					BoardFrame.grid.repaint();
 				}
 			}
-			
+
 			if (game.getCurrentP().isTurn()) {
 				this.grid.setMouseclicked(true);
 			}
-			
+
 			BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
 			BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
 			BoardFrame.updateBoardStatus();

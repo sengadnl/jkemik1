@@ -237,6 +237,7 @@ public class ViewEvents {
 			BoardFrame.mouseSelection
 					.removeMouseListener(manualCaptureButtonListener);
 			BoardFrame.undo.removeMouseListener(undoListener);
+			BoardFrame.capture.removeMouseListener(captureButtonListener);
 			BoardFrame.pass_turn.removeMouseListener(passTurnListener);
 		}
 

@@ -40,8 +40,8 @@ public class NewGameListener implements MouseListener {
 					BoardFrame.setMakingGame(true);
 				}
 				JKemik.settings_t.setGameSetupMode(true);
-				BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
-				ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
+//				BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
+//				ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
 			} else {
 				return;
 			}
@@ -59,7 +59,6 @@ public class NewGameListener implements MouseListener {
 			// set listeners
 			JKemik.settings_t.setGameSetupMode(true);
 			JKemik.createGame( JKemik.template,JKemik.settings_t);
-			//JKemik.game.getCurrentP().setSelected(new ArrayList<Point>());
 		} else if (response == 1) {
 			int res = JOptionPane.showConfirmDialog(null,
 					BoardFrame.messages.getString("exitGame") + "\n",
