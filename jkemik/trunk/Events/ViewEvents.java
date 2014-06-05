@@ -249,8 +249,6 @@ public class ViewEvents {
 			BoardFrame.label2.removeMouseListener(n2Listener);
 			BoardFrame.l1.removeMouseListener(gridSizeListener);
 			BoardFrame.l2.removeMouseListener(gameThemeListener);
-			// BoardFrame.mode.addMouseListener(modeToggleListener);
-			//BoardFrame.settings.removeMouseListener(sysPrefsListener);
 			BoardFrame.startG.removeMouseListener(saveListener);
 
 			// Enable control buttons
