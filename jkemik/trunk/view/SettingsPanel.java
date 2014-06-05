@@ -46,7 +46,7 @@ public class SettingsPanel extends JPanel{
 	public static RotateColor right_color;
 	public static JTextField max_win;
 	public static JTextField backtrack;
-	public static JComboBox languageList;
+	public static JComboBox<String> languageList;
 	public static JLabel label1,label2,label3,label4,label5,label6;	
 	private int maxWinVal;
 	static ResourceBundle messages;
@@ -72,11 +72,11 @@ public class SettingsPanel extends JPanel{
 		SettingsPanel.backtrack = backtrack;
 	}
 
-	public static JComboBox getLanguageList() {
+	public static JComboBox<String> getLanguageList() {
 		return languageList;
 	}
 
-	public static void setLanguageList(JComboBox languageList) {
+	public static void setLanguageList(JComboBox<String> languageList) {
 		SettingsPanel.languageList = languageList;
 	}
 
@@ -140,8 +140,7 @@ public class SettingsPanel extends JPanel{
 		//JKIcon icon = new JKIcon("media/jkemik-small.png", "");
 		save = new JButton("Done");
 		cancel = new JButton("CANCEL");
-//		l1 = new JPanel();
-//		l1.setBackground(BoardFrame.BOARD_COLOR);
+
 		l2 = new JPanel();
 		
 		l2.setLayout(new GridLayout(5, 2,20,20));
@@ -155,7 +154,7 @@ public class SettingsPanel extends JPanel{
 		max_win = new JTextField("" + JKemik.settings_t.getMaxWinVal());
 		backtrack = new JTextField("" + JKemik.settings_t.getBacktrackingDistance());
 		
-		languageList = new JComboBox(Globals.laguageNames);//
+		languageList = new JComboBox<String>(Globals.laguageNames);//
 
 		label1 = new JLabel("  " + messages.getString("autoCaptureL") + " : ");
 		label2 = new JLabel("  " + messages.getString("autoPassL") + " : ");
