@@ -10,6 +10,7 @@ import java.util.Stack;
 
 import javax.swing.JOptionPane;
 
+import controler.JKemik;
 import utilities.Globals;
 import utilities.Tools;
 
@@ -32,27 +33,33 @@ public abstract class AbstractGame implements Serializable {
 		currentP = player1;
 		guest = player2;
 		currentP.setTurn(true);
+		this.play_count = JKemik.settings_t.getMaxPointPerPlayer() * 2;
 		this.status = 0;
 	}
-	public void init(){
-		if(this.player1.isTurn()){
+
+	public void init() {
+		if (this.player1.isTurn()) {
 			currentP = player1;
 			guest = player2;
-		}else{
+		} else {
 			currentP = player2;
 			guest = player1;
 		}
 		currentP.setTurn(true);
+		this.play_count = JKemik.settings_t.getMaxPointPerPlayer() * 2;
 		this.status = 0;
 	}
 
 	/**
 	 * Finds a capture by following a path that starts at Point "o" location and
-	 * ends at Point "o" as well. Recursively checks every adjacent Point to find a
-	 * valid path. Reverts when a dead end has been reached. a valid capture
-	 * must have at least 4 Point Objects.
-	 * @param o Point where to start
-	 * @param squareSize integer length of the sides of a grid square
+	 * ends at Point "o" as well. Recursively checks every adjacent Point to
+	 * find a valid path. Reverts when a dead end has been reached. a valid
+	 * capture must have at least 4 Point Objects.
+	 * 
+	 * @param o
+	 *            Point where to start
+	 * @param squareSize
+	 *            integer length of the sides of a grid square
 	 * @return true when a valid capture was found, and false otherwise.
 	 * @throws InterruptedException
 	 */
@@ -78,13 +85,15 @@ public abstract class AbstractGame implements Serializable {
 					if (!Tools.containPoint(o, currentP.getSelected())) {
 						/* Add o if it hasn't been visited */
 						currentP.getSelected().add(o);
-						//System.out.println("Adding " + currentP.getSelected());
+						// System.out.println("Adding " +
+						// currentP.getSelected());
 						currentP.setFrom(o); /* Move to the next Point */
 						if (temp.compareTo(currentP.getOrigin()) == 0
 								&& currentP.getSelected().size() > 3) {
 							currentP.setSuccessful(true);
 							currentP.setOrigin(null);/* Reset the origin */
-							System.err.println("\nbuildPath: " + currentP.getSelected());
+							System.err.println("\nbuildPath: "
+									+ currentP.getSelected());
 							return true;/* Capture was found */
 						}
 
@@ -99,7 +108,7 @@ public abstract class AbstractGame implements Serializable {
 		}
 		return false;/* No path */
 	}
-	
+
 	/**
 	 * Only plotted points can be undone, dead points can not be revived
 	 */
@@ -145,7 +154,7 @@ public abstract class AbstractGame implements Serializable {
 
 					this.captured_count = 0;
 					this.redeemed_count = 0;
-					
+
 					/* Go through all selected dots from recursion */
 					for (Point p : TempArea) {
 						/* If p exist in collection */
@@ -173,7 +182,7 @@ public abstract class AbstractGame implements Serializable {
 						}
 
 					}/* end of second for loop */
-					
+
 					setStatusForAll(currentP.getSelected(), Point.CONNECTED);
 					cell = new Cell(getCurrentP().getId(), getCurrentP()
 							.getSelected(), area);
@@ -186,7 +195,7 @@ public abstract class AbstractGame implements Serializable {
 
 					cell.setStatus(Globals.CELL_FREE);
 					currentP.addCell(cell);
-					calculateScore(cell);
+					evalCell(cell);
 					return cell;
 				} catch (NullPointerException ex) {
 					System.err.println("In capture: " + ex.getMessage());
@@ -197,7 +206,6 @@ public abstract class AbstractGame implements Serializable {
 		currentP.setSelected(new ArrayList<Point>());
 		return cell;
 	}
-
 
 	public Cell capture(int squareSize) {
 		Cell cell = null; /* cell to be returned */
@@ -247,7 +255,7 @@ public abstract class AbstractGame implements Serializable {
 		if (currentP.getCells().containsKey(cell.hashCode())) {
 			return null;
 		}
-		
+
 		if (captured_count == 0) {
 			cell.setStatus(Globals.CELL_EMPTY);
 			return cell;
@@ -256,8 +264,7 @@ public abstract class AbstractGame implements Serializable {
 		cell.setValue(captured_count + redeemed_count);
 		cell.setStatus(Globals.CELL_FREE);
 		currentP.addCell(cell);
-
-		calculateScore(cell);
+		evalCell(cell);
 		return cell;
 	}
 
@@ -289,11 +296,11 @@ public abstract class AbstractGame implements Serializable {
 					&& getLastp().adjacentTo(p, squareSize)
 					&& !Tools.containPoint(p, currentP.getSelected())) {
 				currentP.getSelected().add(p);
-				//System.out.println("Selected returned true ");
+				// System.out.println("Selected returned true ");
 				return true;
 			}
 		}
-		//System.out.println("Selected returned false ");
+		// System.out.println("Selected returned false ");
 		return false;
 	}
 
@@ -339,14 +346,6 @@ public abstract class AbstractGame implements Serializable {
 		return false;
 	}
 
-	public boolean checkEndGame() {
-		if ((guest.getScore()) >= this.getMaxScore()) {
-			this.status = 1;
-			return true;
-		}
-		return false;
-	}
-
 	/**
 	 * This function set the current player. It manages play turns
 	 * 
@@ -363,6 +362,7 @@ public abstract class AbstractGame implements Serializable {
 				currentP = this.player1;
 				guest = this.player2;
 			}
+			play_count--;
 			currentP.setTurn(true);
 		} catch (NullPointerException e) {
 			JOptionPane.showMessageDialog(null,
@@ -430,11 +430,19 @@ public abstract class AbstractGame implements Serializable {
 	}
 
 	/**
-	 * Whenever a cell is found in this cell it is removed from the
+	 * When this function is called, the captured cell is evaluated then added
+	 * the the current player captured cell count. Four major events happen in
+	 * this function: 1. Scanning for inscribed cells 2. Adding inscribed cells
+	 * value to c's value 3. Now that we know the true value of c, add it to the
+	 * current player's captured cells count. 4 As the addCell method executes
+	 * the current player's score is updated
 	 * 
-	 * @param a
-	 *            cell object cells: ArrayList of enemy cells
-	 * @return void
+	 * SCORING FORMULA --------------- SCORE = CAPTURED POINTS + INSCRIBED
+	 * CELL(S) VALUE
+	 * 
+	 * @param the
+	 *            captured cell
+	 * @return the number of cuptured cells by the current player
 	 */
 	public void evalCell(Cell cell) {
 		// check for capture
@@ -458,31 +466,6 @@ public abstract class AbstractGame implements Serializable {
 				/* Losing a cell is equivalent to losing twice its value */
 				guest.removeCell(c);
 			}
-		}
-
-	}
-
-	/**
-	 * When this function is called, the captured cell is evaluated then added
-	 * the the current player captured cell count. Four major events happen in
-	 * this function: 1. Scanning for inscribed cells 2. Adding inscribed cells
-	 * value to c's value 3. Now that we know the true value of c, add it to the
-	 * current player's captured cells count. 4 As the addCell method executes
-	 * the current player's score is updated
-	 * 
-	 * SCORING FORMULA --------------- SCORE = CAPTURED POINTS + INSCRIBED
-	 * CELL(S) VALUE
-	 * 
-	 * @param the
-	 *            captured cell
-	 * @return the number of cuptured cells by the current player
-	 */
-	public void calculateScore(Cell c) {
-
-		evalCell(c);
-
-		if ((currentP.getScore()) >= this.getMaxScore()) {
-			this.status = 1;// End the Game
 		}
 	}
 
@@ -543,8 +526,9 @@ public abstract class AbstractGame implements Serializable {
 	public String toString() {
 		return "GAME\n-------------" + this.player1 + "\nVS\n" + this.player2
 				+ "-----------------------------------------"
-				+ "\nCurrent Player: " + currentP.getName() + " Color: " + currentP.getColor()
-				+ "\nGuest Player: " + guest.getName() + " Color: " + guest.getColor() + "\nEmbush: "
+				+ "\nCurrent Player: " + currentP.getName() + " Color: "
+				+ currentP.getColor() + "\nGuest Player: " + guest.getName()
+				+ " Color: " + guest.getColor() + "\nEmbush: "
 				+ this.embuche_on + "\nMaximum score: " + this.maxScore;
 	}
 
@@ -614,6 +598,15 @@ public abstract class AbstractGame implements Serializable {
 		this.redeemed_count = redeemed_count;
 	}
 
+	public int getPlay_count() {
+		return play_count;
+	}
+
+	public void setPlay_count(int play_count) {
+		this.play_count = play_count;
+	}
+	
+
 	/* Connecting dots utilities */
 	public boolean AI = false;
 	public boolean embuche_on = false;
@@ -622,6 +615,7 @@ public abstract class AbstractGame implements Serializable {
 	private int maxScore = 2;
 	public int captured_count = 0;
 	public int redeemed_count = 0;
+	public int play_count = 0;
 	public Point lastp = new Point(553355, 7798979);
 
 	/* keeps track of all captured points */

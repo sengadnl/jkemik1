@@ -26,7 +26,6 @@ public abstract class AbstractPlayer implements Serializable {
 		this.color = color;
 		this.name = name;
 		this.score = 0.0;
-		// this.CapturedCells = new HashMap<Integer, Cell>();
 		this.selected = new ArrayList<Point>();
 		this.Cells = new HashMap<Integer, Cell>();
 	}
@@ -364,8 +363,17 @@ public abstract class AbstractPlayer implements Serializable {
 		this.lastpoints = lastpoints;
 	}
 
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+
 	private String name = "player";
 	private int id = 0;// player1 = -1 and player2 = 1
+	private int points = 0;
 	private boolean turn = false;
 	private boolean ai = false;
 	private double score = 0.0;

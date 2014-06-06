@@ -37,6 +37,7 @@ public class Globals {
 	public static final double FRAME_WIDTH = 1280;
 	public static final double FRAME_HEIGHT = 800;
 	public static final double SIZE_PERCENT = .75;
+	public static final double MAX_POINTS_SCALAR = .80;
 	
 	public static final Color[] CHEMIK_COLOR = {
 		new Color(77, 192, 250),

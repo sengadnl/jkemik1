@@ -140,7 +140,6 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 			if (game.isEmbuche_on()) {
 				if (JKemik.settings_t.isAutoCapture()) {
-					System.out.println("capture ... with autocapture on");
 					BoardFrame.progressB.setVisible(true);
 					BoardFrame.progressB.setIndeterminate(true);
 					Grid.cell = JKemik.embush(Grid.squareSize);
@@ -195,11 +194,11 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			Grid.mouseMove = true;
 		}
 
-		if (JKemik.game.getStatus() == 1) {
+		if (JKemik.checkEndGame()) {
 			JOptionPane.showMessageDialog(null, ""
-					+ JKemik.game.getGuest().getName() + " "
-					+ BoardFrame.messages.getString("winM"), " Win",
+					+ JKemik.getEndingMessage(), " Win",
 					JOptionPane.OK_OPTION);
+			BoardFrame.feedback(JKemik.getEndingMessage());
 			JKemik.game.setStatus(1);
 			JKemik.createGame(JKemik.template, JKemik.settings_t);
 			JKemik.settings_t.setGameSetupMode(true);
