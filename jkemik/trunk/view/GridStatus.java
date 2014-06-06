@@ -4,14 +4,13 @@
 package view;
 import java.awt.Color;
 import java.awt.Dimension;
-
 import java.awt.Font;
 import java.awt.GridLayout;
-
 import java.text.DecimalFormat;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 
 /**
  * @author dalet
@@ -25,6 +24,8 @@ public class GridStatus extends JPanel{
 	private JLabel deadGridInPercent;
 	private JLabel freeGridInPercent;
 	private JLabel deadCount;
+	private JLabel tot_play_count;
+
 	//private JLabel gridSize;
 	
 	
@@ -33,15 +34,15 @@ public class GridStatus extends JPanel{
 		
 		setPreferredSize(new Dimension(w,h));
 		setOpaque(true);
-//		setBackground(new Color(40, 20, 10));
-//		setBorder(BorderFactory.createLineBorder(new Color(100, 100, 0), 1));
-		setLayout(new GridLayout(1,3));
+		//setBackground(BoardFrame.BOARD_COLOR);
+		//setBorder(BorderFactory.createLineBorder(BoardFrame.BOARD_COLOR, 1));
+		setLayout(new GridLayout(2,4));
 		
 		//this.gridSize = new JLabel(0 + " x " + 0); // Assuming the GridPanel already exists
 		this.deadCount = new JLabel();
 		this.deadGridInPercent = new JLabel();
 		this.freeGridInPercent = new JLabel();
-		
+		this.tot_play_count = new JLabel();
 		
 		this.deadCount.setForeground(new Color(204,255,100));
         Font pttvfont = new Font("Arial",Font.BOLD,this.FONT_SIZE);  
@@ -55,9 +56,10 @@ public class GridStatus extends JPanel{
         Font clvfont = new Font("Arial",Font.BOLD,this.FONT_SIZE);  
         this.freeGridInPercent.setFont(clvfont);
        
-//        this.gridSize.setForeground(new Color(190,100,200));
-//        Font gsfont = new Font("Arial",Font.BOLD,this.FONT_SIZE);  
-//        this.gridSize.setFont(gsfont);
+        
+        this.tot_play_count.setForeground(Color.YELLOW);
+        Font gsfont = new Font("Arial",Font.BOLD,this.FONT_SIZE);  
+        this.tot_play_count.setFont(gsfont);
           
         final JLabel dc = new JLabel("  Tot plots:");
         dc.setForeground(new Color(255,255,255));
@@ -74,10 +76,10 @@ public class GridStatus extends JPanel{
         Font clfont = new Font("Arial",Font.BOLD,this.FONT_SIZE);  
         fgp.setFont(clfont);
         
-//        final JLabel gs = new JLabel("  Grid size: ");
-//        gs.setForeground(new Color(255,255,255));
-//        Font gfont = new Font("Arial",Font.BOLD,this.FONT_SIZE);  
-//        gs.setFont(gfont);
+        final JLabel gs = new JLabel("  Play: ");
+        gs.setForeground(new Color(255,255,255));
+        Font gfont = new Font("Arial",Font.BOLD,this.FONT_SIZE);  
+        gs.setFont(gfont);
         init();
 
         
@@ -87,8 +89,8 @@ public class GridStatus extends JPanel{
         add(this.deadGridInPercent);
         add(fgp);
         add(this.freeGridInPercent);
-//        add(gs);
-//        add(this.gridSize);
+        add(gs);
+        add(this.tot_play_count);
 	}
 
 	/**
@@ -114,8 +116,18 @@ public class GridStatus extends JPanel{
 		setDeadCountV("0");
 		setDeadGridInPercentV(0);
 		setFreeGridInPercentV(0);
-	//	setGridSize(Board.rows, Board.cols);
+		setTot_play_count(0);
 	}
+	
+	public JLabel getTot_play_count() {
+		return tot_play_count;
+	}
+
+	public void setTot_play_count(int player1_count) {
+		this.tot_play_count.setText("" + player1_count);
+	}
+
+
 	/**
 	 * @return the deadCount
 	 */

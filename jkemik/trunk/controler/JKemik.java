@@ -38,7 +38,8 @@ public class JKemik extends Application {
 	static File t_object = new File(Tools.fullPath()
 			+ Globals.templateObjectFile);
 	static File g_object = new File(Tools.fullPath() + Globals.gameObjectFile);
-
+	private static String endingMessage = "This Game has not ended you";
+	
 	protected void init() {
 		try {
 			load = new Load(362, 183);
@@ -156,6 +157,15 @@ public class JKemik extends Application {
 	    			System.out.println("Delete operation failed.");
 	    		}
 			} 
+			
+			/* Is there a saved template */
+			if(t_object.exists()){
+				if(t_object.delete()){
+					System.out.println(t_object.getAbsolutePath() + " is deleted!");
+				}else{
+					System.out.println("Delete operation failed.");
+				}
+			}
 		} catch (Exception exception1) {
 			System.out.println("JKemik: removeGameObj " + exception1.getMessage());
 		}
@@ -186,9 +196,10 @@ public class JKemik extends Application {
 				}
 
 			} else {
-				Game.getInstance(
-						new Player(template.getP1_c(), template.getP1_name()),
-						new Player(template.getP2_c(), template.getP1_name()));
+//				Game.getInstance(
+//						new Player(template.getP1_c(), template.getP1_name()),
+//						new Player(template.getP2_c(), template.getP1_name()));
+				settings_t.setGameSetupMode(true);
 			}
 		} catch (FileNotFoundException exception1) {
 			System.out.println("JKemik: readGame " + exception1.getMessage());
@@ -342,6 +353,28 @@ public class JKemik extends Application {
 		}
 		return null;
 	}
+	public static boolean checkEndGame() {
+		boolean result = false;
+		if ((game.getGuest().getScore()) >= game.getMaxScore()) {
+			endingMessage = game.getGuest().getName() + " " + BoardFrame.messages.getString("winM");
+			game.setStatus(1);
+			result = true;
+		}
+		
+		if(game.getPlay_count() < 1){
+			game.setStatus(1);
+			
+			if(game.getGuest().getScore() > game.getCurrentP().getScore()){
+				endingMessage = game.getGuest().getName() + " " + BoardFrame.messages.getString("winM");
+			} else if(game.getGuest().getScore() < game.getCurrentP().getScore()){
+				endingMessage = game.getCurrentP().getName() + " " + BoardFrame.messages.getString("winM");
+			} else{
+				endingMessage = "Tide";
+			}
+			result = true;
+		}
+		return result;
+	}
 
 	public boolean screenResolutionCheck() {
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -357,8 +390,17 @@ public class JKemik extends Application {
 
 	public static void options(String args[]) {
 		if (args[0].equals("-v")) {
-			System.out.println("\nJ-Kemik Version " + Globals.VERSION);//
+			System.out.println("\nJ-Kemik Version " + Globals.VERSION + 
+					"\nJDK: 1.7");//
 		}
+	}
+
+	public static String getEndingMessage() {
+		return endingMessage.toUpperCase();
+	}
+
+	public static void setEndingMessage(String endingMessage) {
+		JKemik.endingMessage = endingMessage;
 	}
 
 	public static void main(String[] args) {

@@ -25,7 +25,6 @@ public class STemplate implements Serializable {
 	private boolean systemSetupMode = false;
 	private String theme = "Origins";
 	private int maxWinVal = 4, backtrackingDistance = 2;
-	private double MaxPointPerPlayer = 0.0;
 	private String language = "ENGLISH";
 	private boolean[] memo = { true, true };
 	private GridDimension dimesion = new GridDimension(new Dimension(0,0),0);
@@ -189,13 +188,8 @@ public class STemplate implements Serializable {
 	public void setLanguage(String language) {
 		this.language = language;
 	}
-
-	public double getMaxPointPerPlayer() {
-		return MaxPointPerPlayer;
-	}
-
-	public void setMaxPointPerPlayer(double maxPointPerPlayer) {
-		MaxPointPerPlayer = maxPointPerPlayer;
+	public int getMaxPointPerPlayer() {
+		return (int) (dimesion.positions() * Globals.MAX_POINTS_SCALAR)/2;
 	}
 
 	public boolean[] getMemo() {
@@ -302,8 +296,7 @@ public class STemplate implements Serializable {
 	}
 
 	public String toString() {
-		return "MaxPointPerPlayer: " + this.MaxPointPerPlayer + "\nMaxWinVal :"
-				+ this.maxWinVal;
+		return  "\nMaxWinVal :" + this.maxWinVal;
 	}
 
 }

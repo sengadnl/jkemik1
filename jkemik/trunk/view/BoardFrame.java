@@ -56,7 +56,7 @@ public class BoardFrame extends JFrame {
 
 		makingGame = true;
 		init();
-		//BoardFrame.mode.setVisible(false);
+		// BoardFrame.mode.setVisible(false);
 		// setTitle("J-Kemik " + Globals.VERSION);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
@@ -165,7 +165,9 @@ public class BoardFrame extends JFrame {
 		gSizeAndTheme = new JPanel();
 
 		gridstats = new GridStatus((int) (.4 * this.width),
-				(int) (.1 * this.height));
+				(int) (.064 * this.height));
+//		System.out.println("Max Pts per Player : "
+//				+ JKemik.settings_t.getMaxPointPerPlayer());
 	}
 
 	private void instantiateAllLabels() {
@@ -295,7 +297,7 @@ public class BoardFrame extends JFrame {
 		playerPanel_container.add(p1panel, BorderLayout.WEST);
 		playerPanel_container.add(p2panel, BorderLayout.EAST);
 		playerPanel_container.add(config_container, BorderLayout.SOUTH);
-		
+
 		config_container.add(la);
 		config_container.add(AutoCap);
 		config_container.add(lb);
@@ -357,6 +359,7 @@ public class BoardFrame extends JFrame {
 				.createLineBorder(BoardFrame.BORDER_COLOR));
 		bottom_container.setBorder(BorderFactory
 				.createLineBorder(BoardFrame.BORDER_COLOR));
+		gridstats.setBorder(BorderFactory.createLineBorder(BoardFrame.BOARD_COLOR, 1));
 		// controler_panel.setBorder(BorderFactory
 		// .createLineBorder(BoardFrame.BORDER_COLOR));
 
@@ -381,7 +384,7 @@ public class BoardFrame extends JFrame {
 
 		undo.setBackground(Tools.boost(bg, Globals.LABEL_VARIANT / 2));
 		undo.setForeground(fg);
-		
+
 		capture.setBackground(bg);
 		capture.setForeground(fg);
 
@@ -616,7 +619,7 @@ public class BoardFrame extends JFrame {
 		panel32.setBackground(BoardFrame.THEME_COLOR);
 		controler_panel.setBackground(BoardFrame.THEME_COLOR);
 		config_container.setBackground(BoardFrame.THEME_COLOR);
-		gridstats.setBackground(BoardFrame.THEME_COLOR);
+		gridstats.setBackground(Tools.fade(BoardFrame.BOARD_COLOR));
 		progressB.setBackground(BoardFrame.THEME_COLOR);
 		progressB.setForeground(BOARD_COLOR);
 
@@ -718,7 +721,7 @@ public class BoardFrame extends JFrame {
 			}
 			String str = "" + JKemik.settings_t.getMaxWinVal();
 			BoardFrame.Win.setText(str);
-			
+
 			String str1 = "" + JKemik.settings_t.getBacktrackingDistance();
 			BoardFrame.backt.setText(str1);
 		} catch (Exception e) {
@@ -754,7 +757,7 @@ public class BoardFrame extends JFrame {
 		lb.setText(" " + messages.getString("passl"));
 		lc.setText(" " + messages.getString("winl"));
 		ld.setText(" " + messages.getString("backtrack"));
-		
+
 	}
 
 	public static void showControlButtons() {
@@ -818,17 +821,17 @@ public class BoardFrame extends JFrame {
 		BoardFrame.makingGame = inOptions;
 	}
 
-//	public static int getThereIsSavedGame() {
-//		return thereIsSavedGame;
-//	}
-//
-//	/**
-//	 * @param integer
-//	 *            , 1 if not game was saved 0 if a game was saved
-//	 * */
-//	public static void setThereIsSavedGame(int thereIsSavedGame) {
-//		BoardFrame.thereIsSavedGame = thereIsSavedGame;
-//	}
+	// public static int getThereIsSavedGame() {
+	// return thereIsSavedGame;
+	// }
+	//
+	// /**
+	// * @param integer
+	// * , 1 if not game was saved 0 if a game was saved
+	// * */
+	// public static void setThereIsSavedGame(int thereIsSavedGame) {
+	// BoardFrame.thereIsSavedGame = thereIsSavedGame;
+	// }
 
 	public static ResourceBundle getMessages() {
 		return messages;
@@ -846,6 +849,7 @@ public class BoardFrame extends JFrame {
 		gridstats.setDeadGridInPercentV(deadBoard);
 		gridstats.setFreeGridInPercentV((free * 100) / totalOnBoard);
 		gridstats.setDeadCountV("" + totPlots);
+		gridstats.setTot_play_count(JKemik.game.getPlay_count());
 	}
 
 	public static void uiLooksUpdate(STemplate s, GTemplate t) {

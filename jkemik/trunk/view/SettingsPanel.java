@@ -134,7 +134,6 @@ public class SettingsPanel extends JPanel{
 		Locale currentLocale = new Locale(code.toLowerCase());
 		buttonsHolder = new JPanel();
 		buttonsHolder.setBackground(BoardFrame.THEME_COLOR);
-	//	ResourceBundle 
 		messages = ResourceBundle.getBundle(properties, currentLocale);
 		
 		//JKIcon icon = new JKIcon("media/jkemik-small.png", "");
