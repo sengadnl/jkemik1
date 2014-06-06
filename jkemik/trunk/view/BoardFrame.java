@@ -153,7 +153,7 @@ public class BoardFrame extends JFrame {
 				(int) BOTTOM_COLOR_P_H);
 		pColor2 = new RotateColor((int) BOTTOM_COLOR_P_W,
 				(int) BOTTOM_COLOR_P_H);
-		down_left = new JPanel();
+		//down_left = new JPanel();
 		feedbackarea = new JTextArea("");
 		setupP = new JPanel();
 		panel32 = new JPanel();
@@ -164,7 +164,7 @@ public class BoardFrame extends JFrame {
 		p1p2NameHolder = new JPanel();
 		gSizeAndTheme = new JPanel();
 
-		gridstats = new GridStatus((int) (.4 * this.width),
+		gridstats = new GridStatus((int) (.35 * this.width),
 				(int) (.064 * this.height));
 //		System.out.println("Max Pts per Player : "
 //				+ JKemik.settings_t.getMaxPointPerPlayer());
@@ -226,7 +226,7 @@ public class BoardFrame extends JFrame {
 		/* Middle panels layout */
 		status_panel_container.setLayout(new FlowLayout());
 		playerPanel_container.setLayout(new BorderLayout(5, 10));
-		controler_panel.setLayout(new GridLayout(5, 1, 10, 10));
+		controler_panel.setLayout(new GridLayout(6, 1, 10, 10));
 		config_container.setLayout(new GridLayout(4, 2));
 		setupP.setLayout(new BorderLayout(5, 10));
 		p1p2NameHolder.setLayout(new BorderLayout(5, 5));
@@ -263,10 +263,10 @@ public class BoardFrame extends JFrame {
 				(int) (.04 * this.height)));
 		pname2.setPreferredSize(new Dimension(((int) (.1 * this.width)),
 				(int) (.04 * this.height)));
-		down_left.setPreferredSize(new Dimension(
-				(int) (CORNER_WIDTH * this.width), (int) (.1 * this.height)));
+//		down_left.setPreferredSize(new Dimension(
+//				(int) (CORNER_WIDTH * this.width), (int) (.1 * this.height)));
 		feedbackarea.setPreferredSize(new Dimension(
-				(int) (CORNER_WIDTH * this.width), (int) (.05 * this.height)));
+				(int) (.35 * this.width), (int) (.064 * this.height)));
 		feedbackarea.setLineWrap(true);
 		// feedbackarea.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
 		feedbackarea.setFont(new Font("Arial", Font.BOLD, 11));
@@ -318,6 +318,8 @@ public class BoardFrame extends JFrame {
 		controler_panel.add(capture);
 		controler_panel.add(mouseSelection);
 		controler_panel.add(mode);
+		controler_panel.add(progressB);
+		
 
 		pname1.add(label1);
 		pname1.add(pColor1);
@@ -331,12 +333,9 @@ public class BoardFrame extends JFrame {
 
 		// ..........................................................//
 		// ..........................................................//
-		bottom_container.add(down_left);// gridstats
+		bottom_container.add(feedbackarea);// gridstats
 		bottom_container.add(gridstats);
-		// gridstats.add(feedbackarea,BorderLayout.NORTH);
-		// feedbackarea.add(feedback);
-		down_left.add(progressB, BorderLayout.NORTH);
-		down_left.add(feedbackarea, BorderLayout.SOUTH);
+	
 
 		// ..........................................................//
 		// ..........................................................//
@@ -614,8 +613,7 @@ public class BoardFrame extends JFrame {
 		settings_p.setBackground(BoardFrame.THEME_COLOR);
 
 		bottom_container.setBackground(BoardFrame.THEME_COLOR);
-		down_left.setBackground(BoardFrame.THEME_COLOR);
-		// down_left.setForeground(BoardFrame.BOARD_COLOR);
+		
 		panel32.setBackground(BoardFrame.THEME_COLOR);
 		controler_panel.setBackground(BoardFrame.THEME_COLOR);
 		config_container.setBackground(BoardFrame.THEME_COLOR);
@@ -943,8 +941,8 @@ public class BoardFrame extends JFrame {
 	public static JPanel status_panel_container, grid_container,
 			west_blank_panel, playerPanel_container, logo_panel, top_middle,
 			top_right, top_container, middle_container, bottom_container,
-			down_left, setupP, panel32, controler_panel, config_container,
-			pname1, gSizeAndTheme, pname2, p1p2NameHolder;
+			 setupP, panel32, controler_panel, config_container,
+			pname1, gSizeAndTheme, pname2, p1p2NameHolder;//down_left
 	public static GridStatus gridstats;
 	public static JButton refresh, startG, undo, pass_turn, exit, settings,
 			help, Game_status, capture;

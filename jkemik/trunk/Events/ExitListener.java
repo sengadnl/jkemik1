@@ -35,11 +35,13 @@ public class ExitListener implements MouseListener {
 				BoardFrame.messages.getString("question"),
 				JOptionPane.YES_OPTION);
 		if (response == 0) {
-			System.out.println("writting game: " + JKemik.game.toString());
-			if (JKemik.game.getCollection().isEmpty()
-					|| JKemik.settings_t.isGameSetupMode()
+			if (JKemik.settings_t.isGameSetupMode()
 					|| JKemik.settings_t.isSystemSetupMode()) {
 				JKemik.removeGameObj();
+			} else if (JKemik.game != null) {
+				if (JKemik.game.getCollection().isEmpty()) {
+					JKemik.removeGameObj();
+				}
 			} else {
 				JKemik.writeGame();
 				JKemik.writeSettings();
