@@ -34,15 +34,16 @@ public class BoardSizeListener implements MouseListener{
 		Grid.setDimension(t.getGridDimension());
 
 		// change the grid size
-		if (BoardFrame.grid.drawn) {
-			BoardFrame.grid.drawn = false;
-			BoardFrame.grid.repaint();
-		}
+//		if (BoardFrame.grid.drawn) {
+//			System.out.println("drawing drid.......................");
+//			BoardFrame.grid.drawn = false;
+//			BoardFrame.grid.repaint();
+//		}
+		BoardFrame.displayGrid(true);
 		BoardFrame.Win.setText((int)(t.getGridDimension().positions()* Globals.MAX_WIN) + "");
 		t.setMaxWinVal((int)(t.getGridDimension().positions() * Globals.MAX_WIN));
 	}
 
-	
 	public void mouseEntered(MouseEvent e) {
 		Color c = Tools.boost(BoardFrame.BOARD_COLOR,Globals.LABEL_VARIANT);
 		this.label.setForeground(Tools.fade(c));
