@@ -195,9 +195,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		}
 
 		if (JKemik.checkEndGame()) {
-			JOptionPane.showMessageDialog(null, ""
-					+ JKemik.getEndingMessage(), " Win",
-					JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "" + JKemik.getEndingMessage(),
+					" Win", JOptionPane.OK_OPTION);
 			BoardFrame.feedback(JKemik.getEndingMessage());
 			JKemik.game.setStatus(1);
 			JKemik.createGame(JKemik.template, JKemik.settings_t);

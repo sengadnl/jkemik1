@@ -335,7 +335,6 @@ public class BoardFrame extends JFrame {
 		// ..........................................................//
 		bottom_container.add(feedbackarea);// gridstats
 		bottom_container.add(gridstats);
-	
 
 		// ..........................................................//
 		// ..........................................................//

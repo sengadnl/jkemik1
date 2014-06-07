@@ -189,17 +189,17 @@ public class JKemik extends Application {
 					input.close();
 				} else {
 					//BoardFrame.setThereIsSavedGame(1);
-					settings_t.setGameSetupMode(true);
+					//settings_t.setGameSetupMode(true);
+					System.out.println("No saved game was found, instantiating one..."); 
 					Game.getInstance(
 							new Player(template.getP1_c(), template.getP1_name()),
 							new Player(template.getP2_c(), template.getP1_name()));
 				}
-
 			} else {
-//				Game.getInstance(
-//						new Player(template.getP1_c(), template.getP1_name()),
-//						new Player(template.getP2_c(), template.getP1_name()));
-				settings_t.setGameSetupMode(true);
+				Game.getInstance(
+						new Player(template.getP1_c(), template.getP1_name()),
+						new Player(template.getP2_c(), template.getP2_name()));
+				//settings_t.setGameSetupMode(true);
 			}
 		} catch (FileNotFoundException exception1) {
 			System.out.println("JKemik: readGame " + exception1.getMessage());
@@ -208,7 +208,6 @@ public class JKemik extends Application {
 		} catch (ClassNotFoundException exception3) {
 			System.out.println("JKemik: readGame " + exception3.getMessage());
 		}
-
 	}
 
 	public static void readTemplate() {
@@ -233,7 +232,6 @@ public class JKemik extends Application {
 			System.out.println("JKemik: readSettings "
 					+ exception3.getMessage());
 		}
-
 	}
 
 	public static void readSettings() {
@@ -244,10 +242,10 @@ public class JKemik extends Application {
 						new FileInputStream(s_object));
 
 				settings_t = (STemplate) input.readObject();
-				// settings_t.setGameSetupMode(true);
-				settings_t.setPlayMode(true);
-
+				//settings_t.setGameSetupMode(true);
+				//settings_t.setPlayMode(true);
 				input.close();
+				
 			} else {
 				settings_t = new STemplate();
 			}
@@ -261,7 +259,6 @@ public class JKemik extends Application {
 			System.out.println("JKemik: readSettings "
 					+ exception3.getMessage());
 		}
-
 	}
 
 	public static void saveSysPrefs() {
