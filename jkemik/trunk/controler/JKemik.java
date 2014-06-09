@@ -264,6 +264,7 @@ public class JKemik extends Application {
 		STemplate t = JKemik.settings_t;
 		String str = SettingsPanel.max_win.getText();
 		String backtrack = SettingsPanel.backtrack.getText();
+		String maxPointScaler = SettingsPanel.maxPointScaler.getText();
 		// SettingsPanel.translateUI();
 		String lang = (String) SettingsPanel.getLanguageList()
 				.getSelectedItem();
@@ -271,12 +272,14 @@ public class JKemik extends Application {
 		String properties = Tools.propertiesFilename(key);
 		int maxw = Integer.parseInt(str);
 		int btrack = Integer.parseInt(backtrack);
+		double maxPtScaler = Double.parseDouble(maxPointScaler);
 
 		if (Tools.isMaxWinLessThanGrid(Grid.getDimension().positions(), maxw)) {
 			t.setMaxWinVal(maxw);
 			t.setMemo(t.isAutoCapture(), t.isAutoPass());
 			t.setLanguage(lang);
 			t.setBacktrackingDistance(btrack);
+			t.setMaxPointScaler(maxPtScaler);
 			Locale local = new Locale(key);
 			BoardFrame.setMessages(ResourceBundle.getBundle(properties, local));
 			BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);

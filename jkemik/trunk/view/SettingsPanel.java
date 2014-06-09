@@ -46,8 +46,9 @@ public class SettingsPanel extends JPanel{
 	public static RotateColor right_color;
 	public static JTextField max_win;
 	public static JTextField backtrack;
+	public static JTextField maxPointScaler;
 	public static JComboBox<String> languageList;
-	public static JLabel label1,label2,label3,label4,label5,label6;	
+	public static JLabel label1,label2,label3,label4,label5,label6,label7;	
 	private int maxWinVal;
 	static ResourceBundle messages;
 	public static JRadioButton humHumButton,humComButton, networkButton;  
@@ -70,6 +71,14 @@ public class SettingsPanel extends JPanel{
 
 	public static void setBacktrack(JTextField backtrack) {
 		SettingsPanel.backtrack = backtrack;
+	}
+
+	public static JTextField getMaxPointScaler() {
+		return maxPointScaler;
+	}
+
+	public static void setMaxPointScaler(JTextField maxPointScaler) {
+		SettingsPanel.maxPointScaler = maxPointScaler;
 	}
 
 	public static JComboBox<String> getLanguageList() {
@@ -142,7 +151,7 @@ public class SettingsPanel extends JPanel{
 
 		l2 = new JPanel();
 		
-		l2.setLayout(new GridLayout(5, 2,20,20));
+		l2.setLayout(new GridLayout(6, 2,20,20));
 		l3 = new JPanel();
 		l3.setLayout(new BorderLayout());
 		
@@ -152,6 +161,7 @@ public class SettingsPanel extends JPanel{
 		
 		max_win = new JTextField("" + JKemik.settings_t.getMaxWinVal());
 		backtrack = new JTextField("" + JKemik.settings_t.getBacktrackingDistance());
+		maxPointScaler = new JTextField("" + JKemik.settings_t.getMaxPointScaler());
 		
 		languageList = new JComboBox<String>(Globals.laguageNames);//
 
@@ -161,6 +171,7 @@ public class SettingsPanel extends JPanel{
 		label4 = new JLabel("  " + messages.getString("maxWinl") + " : ");
 		label5 = new JLabel("  " + messages.getString("language") + " : ");
 		label6 = new JLabel("  " + messages.getString("backtrack"));
+		label7 = new JLabel("  " + messages.getString("maxPointScaler"));
 		
 		save.setText(messages.getString("saveB"));
 
@@ -177,6 +188,8 @@ public class SettingsPanel extends JPanel{
 		l2.add(max_win);
 		l2.add(label6);
 		l2.add(backtrack);
+		l2.add(label7);
+		l2.add(maxPointScaler);
 		l2.add(label5);
 		l2.add(languageList);
 		
@@ -194,6 +207,7 @@ public class SettingsPanel extends JPanel{
 		label4.setForeground(fg);
 		label5.setForeground(fg);
 		label6.setForeground(fg);
+		label7.setForeground(fg);
 		decoratebuttons(fg, bg);
 		
 		l2.setBackground(bg);
@@ -209,6 +223,10 @@ public class SettingsPanel extends JPanel{
 		backtrack.setBackground(fg);
 		backtrack.setForeground(bg);
 		backtrack.setCaretColor(bg);
+		
+		maxPointScaler.setBackground(fg);
+		maxPointScaler.setForeground(bg);
+		maxPointScaler.setCaretColor(bg);
 		
 		languageList.setBackground(fg);
 		languageList.setForeground(bg);

@@ -33,7 +33,7 @@ public abstract class AbstractGame implements Serializable {
 		currentP = player1;
 		guest = player2;
 		currentP.setTurn(true);
-		this.play_count = JKemik.settings_t.getMaxPointPerPlayer() * 2;
+		this.play_count = JKemik.settings_t.getMaxPointPerPlayer();
 		this.status = 0;
 	}
 
