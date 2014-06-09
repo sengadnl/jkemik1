@@ -38,11 +38,11 @@ public class ExitListener implements MouseListener {
 			if (JKemik.settings_t.isGameSetupMode()
 					|| JKemik.settings_t.isSystemSetupMode()) {
 				JKemik.settings_t.setGameSetupMode(true);
-				//JKemik.removeGameObj();
+				JKemik.removeGameObj();
 			} else if (JKemik.game != null
 					&& JKemik.game.getCollection().isEmpty()) {
 				JKemik.settings_t.setGameSetupMode(true);
-				//JKemik.removeGameObj();
+				JKemik.removeGameObj();
 			} else {
 				JKemik.writeGame();
 				JKemik.writeSettings();
