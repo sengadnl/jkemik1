@@ -48,7 +48,7 @@ public class SettingsPanel extends JPanel{
 	public static JTextField backtrack;
 	public static JTextField maxPointScaler;
 	public static JComboBox<String> languageList;
-	public static JLabel label1,label2,label3,label4,label5,label6,label7;	
+	public static JLabel label1,label2,label4,label5,label6,label7, labela,labelb,labeld,labele,labelf,labelg;	
 	private int maxWinVal;
 	static ResourceBundle messages;
 	public static JRadioButton humHumButton,humComButton, networkButton;  
@@ -151,7 +151,7 @@ public class SettingsPanel extends JPanel{
 
 		l2 = new JPanel();
 		
-		l2.setLayout(new GridLayout(6, 2,20,20));
+		l2.setLayout(new GridLayout(6, 3,20,20));
 		l3 = new JPanel();
 		l3.setLayout(new BorderLayout());
 		
@@ -166,12 +166,17 @@ public class SettingsPanel extends JPanel{
 		languageList = new JComboBox<String>(Globals.laguageNames);//
 
 		label1 = new JLabel("  " + messages.getString("autoCaptureL") + " : ");
+		labela = new JLabel(" ");
 		label2 = new JLabel("  " + messages.getString("autoPassL") + " : ");
-		label3 = new JLabel("  " + messages.getString("manualCapt") + " : ");
+		labelb = new JLabel(" ");
 		label4 = new JLabel("  " + messages.getString("maxWinl") + " : ");
+		labeld = new JLabel(" [1," + JKemik.settings_t.getMaxPointPerPlayer() + "]");
 		label5 = new JLabel("  " + messages.getString("language") + " : ");
-		label6 = new JLabel("  " + messages.getString("backtrack"));
-		label7 = new JLabel("  " + messages.getString("maxPointScaler"));
+		labele = new JLabel(" ");
+		label6 = new JLabel("  " + messages.getString("backtrack") + " :");
+		labelf = new JLabel(" [1 , 10] ");
+		label7 = new JLabel("  " + messages.getString("maxPointScaler") + " :");
+		labelg = new JLabel(" [0.3 , 1.0[ ");
 		
 		save.setText(messages.getString("saveB"));
 
@@ -182,16 +187,27 @@ public class SettingsPanel extends JPanel{
 		//l1.add(icon.createIcon());
 		l2.add(label1);
 		l2.add(auto_capture);
+		l2.add(labela);
+		
 		l2.add(label2);
 		l2.add(auto_turn_pass);
+		l2.add(labelb);
+		
 		l2.add(label4);
 		l2.add(max_win);
+		l2.add(labeld);
+		
 		l2.add(label6);
 		l2.add(backtrack);
+		l2.add(labelf);
+		
 		l2.add(label7);
 		l2.add(maxPointScaler);
+		l2.add(labelg);
+		
 		l2.add(label5);
 		l2.add(languageList);
+		l2.add(labele);
 		
 		createRadioButtons();
 		buttonsHolder.add(save);
@@ -203,11 +219,17 @@ public class SettingsPanel extends JPanel{
 		setBorder(BorderFactory.createLineBorder(fg));
 		label1.setForeground(fg);
 		label2.setForeground(fg);
-		label3.setForeground(fg);
+		//label3.setForeground(fg);
 		label4.setForeground(fg);
 		label5.setForeground(fg);
 		label6.setForeground(fg);
 		label7.setForeground(fg);
+		labela.setForeground(fg);
+		labelb.setForeground(fg);
+		labeld.setForeground(fg);
+		labele.setForeground(fg);
+		labelf.setForeground(fg);
+		labelg.setForeground(fg);
 		decoratebuttons(fg, bg);
 		
 		l2.setBackground(bg);
@@ -301,7 +323,7 @@ public class SettingsPanel extends JPanel{
 	public static void translateUI(){
 		label1.setText("  " + messages.getString("autoCaptureL") + " : ");
 		label2.setText("  " + messages.getString("autoPassL") + " : ");
-		label3.setText("  " + messages.getString("manualCapt") + " : ");
+		//label3.setText("  " + messages.getString("manualCapt") + " : ");
 		label4.setText("  " + messages.getString("maxWinl") + " : ");
 		label5.setText("  " + messages.getString("language") + " : ");
 		label6.setText("  " + messages.getString("backtrack") + " : ");

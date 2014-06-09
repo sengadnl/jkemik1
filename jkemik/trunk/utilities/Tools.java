@@ -166,12 +166,7 @@ public class Tools {
 		return path;
 	}
 
-	public static boolean isMaxWinLessThanGrid(int gridSize, int maxWin) {
-		if (maxWin > gridSize) {
-			return false;
-		}
-		return true;
-	}
+
 
 	public static void resetMaxWin(int positionsCount, STemplate t) {
 		int defaultMaxWin = (int) (positionsCount * Globals.MAX_WIN);

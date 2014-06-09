@@ -39,7 +39,7 @@ public class JKemik extends Application {
 			+ Globals.templateObjectFile);
 	static File g_object = new File(Tools.fullPath() + Globals.gameObjectFile);
 	private static String endingMessage = "This Game has not ended you";
-	
+
 	protected void init() {
 		try {
 			load = new Load(362, 183);
@@ -147,27 +147,31 @@ public class JKemik extends Application {
 			System.out.println("JKemik: writeGame " + exception2.getMessage());
 		}
 	}
+
 	public static void removeGameObj() {
 		try {
 			/* Is there a saved game */
 			if (g_object.exists()) {
-				if(g_object.delete()){
-	    			System.out.println(g_object.getAbsolutePath() + " is deleted!");
-	    		}else{
-	    			System.out.println("Delete operation failed.");
-	    		}
-			} 
-			
+				if (g_object.delete()) {
+					System.out.println(g_object.getAbsolutePath()
+							+ " is deleted!");
+				} else {
+					System.out.println("Delete operation failed.");
+				}
+			}
+
 			/* Is there a saved template */
-			if(t_object.exists()){
-				if(t_object.delete()){
-					System.out.println(t_object.getAbsolutePath() + " is deleted!");
-				}else{
+			if (t_object.exists()) {
+				if (t_object.delete()) {
+					System.out.println(t_object.getAbsolutePath()
+							+ " is deleted!");
+				} else {
 					System.out.println("Delete operation failed.");
 				}
 			}
 		} catch (Exception exception1) {
-			System.out.println("JKemik: removeGameObj " + exception1.getMessage());
+			System.out.println("JKemik: removeGameObj "
+					+ exception1.getMessage());
 		}
 	}
 
@@ -183,22 +187,23 @@ public class JKemik extends Application {
 						"Continues with saved Game?\n", "Question",
 						JOptionPane.YES_NO_OPTION);
 				if (response == 0) {
-					//BoardFrame.setThereIsSavedGame(response);
+					// BoardFrame.setThereIsSavedGame(response);
 					game.init();
 					Grid.refresh = true;
 					input.close();
 				} else {
-					//BoardFrame.setThereIsSavedGame(1);
-					System.out.println("No saved game was found, instantiating one..."); 
-					game = new Game(
-							new Player(template.getP1_c(), template.getP1_name()),
-							new Player(template.getP2_c(), template.getP2_name()));
+					// BoardFrame.setThereIsSavedGame(1);
+					System.out
+							.println("No saved game was found, instantiating one...");
+					game = new Game(new Player(template.getP1_c(),
+							template.getP1_name()), new Player(
+							template.getP2_c(), template.getP2_name()));
 				}
 			} else {
-				game = new Game(
-						new Player(template.getP1_c(), template.getP1_name()),
-						new Player(template.getP2_c(), template.getP2_name()));
-				//System.out.println("Game: " + game.toString());
+				game = new Game(new Player(template.getP1_c(),
+						template.getP1_name()), new Player(template.getP2_c(),
+						template.getP2_name()));
+				// System.out.println("Game: " + game.toString());
 			}
 		} catch (FileNotFoundException exception1) {
 			System.out.println("JKemik: readGame " + exception1.getMessage());
@@ -241,10 +246,10 @@ public class JKemik extends Application {
 						new FileInputStream(s_object));
 
 				settings_t = (STemplate) input.readObject();
-				//settings_t.setGameSetupMode(true);
-				//settings_t.setPlayMode(true);
+				// settings_t.setGameSetupMode(true);
+				// settings_t.setPlayMode(true);
 				input.close();
-				
+
 			} else {
 				settings_t = new STemplate();
 			}
@@ -274,26 +279,29 @@ public class JKemik extends Application {
 		int btrack = Integer.parseInt(backtrack);
 		double maxPtScaler = Double.parseDouble(maxPointScaler);
 
-		if (Tools.isMaxWinLessThanGrid(Grid.getDimension().positions(), maxw)) {
-			t.setMaxWinVal(maxw);
-			t.setMemo(t.isAutoCapture(), t.isAutoPass());
-			t.setLanguage(lang);
-			t.setBacktrackingDistance(btrack);
-			t.setMaxPointScaler(maxPtScaler);
-			Locale local = new Locale(key);
-			BoardFrame.setMessages(ResourceBundle.getBundle(properties, local));
-			BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
-			ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
-		} else {
-			JOptionPane.showMessageDialog(
-					null,
-					BoardFrame.messages.getString("maxWinSizeMustbBe1")
-							+ Grid.getDimension().positions()
-							+ BoardFrame.messages
-									.getString("maxWinSizeMustbBe2"),
-					BoardFrame.messages.getString("wrongInput"),
-					JOptionPane.WARNING_MESSAGE);
+		if (!ValidateInput.maxWin(maxw, t.getMaxPointPerPlayer())) {
+			return;
 		}
+		
+		if (!ValidateInput.maxPointScaler(maxPtScaler)) {
+			return;
+		}
+		
+		if (!ValidateInput.backtrack(btrack)) {
+			return;
+		}
+				
+		t.setMaxWinVal(maxw);
+		t.setMemo(t.isAutoCapture(), t.isAutoPass());
+		t.setLanguage(lang);
+		t.setBacktrackingDistance(btrack);
+		t.setMaxPointScaler(maxPtScaler);
+		
+		Locale local = new Locale(key);
+		BoardFrame.setMessages(ResourceBundle.getBundle(properties, local));
+		BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
+		ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
+
 	}
 
 	public static Cell embush(double squareSize) {
@@ -310,7 +318,8 @@ public class JKemik extends Application {
 			if (settings_t.isAutoCapture()) {
 
 				if (temp != null) {
-					System.err.println("- Capture Duration = " + str + " MilliSecs");
+					System.err.println("- Capture Duration = " + str
+							+ " MilliSecs");
 					BoardFrame.feedbackarea
 							.setText((game.getCaptured_count() + game
 									.getRedeemed_count())
@@ -319,7 +328,9 @@ public class JKemik extends Application {
 											.getString("feedback3")
 									+ " "
 									+ game.getCurrentP().getName()
-									+ " (" + str + " MilliSecs)");
+									+ " ("
+									+ str
+									+ " MilliSecs)");
 					return temp;
 				} else {
 					game.setEmbuche_on(false);
@@ -352,22 +363,27 @@ public class JKemik extends Application {
 		}
 		return null;
 	}
+
 	public static boolean checkEndGame() {
 		boolean result = false;
 		if ((game.getGuest().getScore()) >= game.getMaxScore()) {
-			endingMessage = game.getGuest().getName() + " " + BoardFrame.messages.getString("winM");
+			endingMessage = game.getGuest().getName() + " "
+					+ BoardFrame.messages.getString("winM");
 			game.setStatus(1);
 			result = true;
 		}
-		
-		if(game.getPlay_count() < 1){
+
+		if (game.getPlay_count() < 1) {
 			game.setStatus(1);
-			
-			if(game.getGuest().getScore() > game.getCurrentP().getScore()){
-				endingMessage = game.getGuest().getName() + " " + BoardFrame.messages.getString("winM");
-			} else if(game.getGuest().getScore() < game.getCurrentP().getScore()){
-				endingMessage = game.getCurrentP().getName() + " " + BoardFrame.messages.getString("winM");
-			} else{
+
+			if (game.getGuest().getScore() > game.getCurrentP().getScore()) {
+				endingMessage = game.getGuest().getName() + " "
+						+ BoardFrame.messages.getString("winM");
+			} else if (game.getGuest().getScore() < game.getCurrentP()
+					.getScore()) {
+				endingMessage = game.getCurrentP().getName() + " "
+						+ BoardFrame.messages.getString("winM");
+			} else {
 				endingMessage = "Tide";
 			}
 			result = true;
@@ -389,8 +405,8 @@ public class JKemik extends Application {
 
 	public static void options(String args[]) {
 		if (args[0].equals("-v")) {
-			System.out.println("\nJ-Kemik Version " + Globals.VERSION + 
-					"\nJDK: 1.7");//
+			System.out.println("\nJ-Kemik Version " + Globals.VERSION
+					+ "\nJDK: 1.7");//
 		}
 	}
 
