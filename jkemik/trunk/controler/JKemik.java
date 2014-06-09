@@ -189,17 +189,16 @@ public class JKemik extends Application {
 					input.close();
 				} else {
 					//BoardFrame.setThereIsSavedGame(1);
-					//settings_t.setGameSetupMode(true);
 					System.out.println("No saved game was found, instantiating one..."); 
-					Game.getInstance(
+					game = new Game(
 							new Player(template.getP1_c(), template.getP1_name()),
-							new Player(template.getP2_c(), template.getP1_name()));
+							new Player(template.getP2_c(), template.getP2_name()));
 				}
 			} else {
-				Game.getInstance(
+				game = new Game(
 						new Player(template.getP1_c(), template.getP1_name()),
 						new Player(template.getP2_c(), template.getP2_name()));
-				//settings_t.setGameSetupMode(true);
+				//System.out.println("Game: " + game.toString());
 			}
 		} catch (FileNotFoundException exception1) {
 			System.out.println("JKemik: readGame " + exception1.getMessage());
