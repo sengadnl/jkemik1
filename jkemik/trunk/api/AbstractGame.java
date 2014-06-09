@@ -362,7 +362,7 @@ public abstract class AbstractGame implements Serializable {
 				currentP = this.player1;
 				guest = this.player2;
 			}
-			play_count--;
+			//play_count--;
 			currentP.setTurn(true);
 		} catch (NullPointerException e) {
 			JOptionPane.showMessageDialog(null,

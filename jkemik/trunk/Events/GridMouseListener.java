@@ -51,7 +51,6 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 				}
 			}
 		} else {
-
 			AbstractGame game = JKemik.game;
 			Player current = (Player) game.getCurrentP();
 			// Allow mouse click
@@ -107,7 +106,6 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			} else {
 				if (game.getCurrentP().isTurn()) {
 					if (!game.getCollection().containsKey(temp.toString())) {
-
 						Grid.plotPoint = true;
 						BoardFrame.grid.repaint();
 
@@ -122,10 +120,9 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 						// Add to the board
 						game.getCollection().put(temp.toString(), temp);
-
 						game.getCurrentP().rememberPoint(temp,
 								JKemik.settings_t.getBacktrackingDistance());
-
+						game.setPlay_count(game.getPlay_count() - 1);
 						game.setEmbuche_on(true);
 
 						// Setting turn
@@ -137,7 +134,6 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					}
 				}
 			}
-
 			if (game.isEmbuche_on()) {
 				if (JKemik.settings_t.isAutoCapture()) {
 					BoardFrame.progressB.setVisible(true);
@@ -148,11 +144,9 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					BoardFrame.grid.repaint();
 				}
 			}
-
 			if (game.getCurrentP().isTurn()) {
 				this.grid.setMouseclicked(true);
 			}
-
 			BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
 			BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
 			BoardFrame.updateBoardStatus();
@@ -180,20 +174,21 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 	}
 
 	public void mouseMoved(MouseEvent e) {
+		
 		Grid.mouseMove = true;
 		Grid.x = e.getX();
 		Grid.y = e.getY();
-		// if (!Grid.outOfBoard(Grid.x, Grid.y, (int) Grid.squareSize)) {
+		
 		Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
 		Point temp = Grid.makeDrawable(Grid.x, Grid.y);
 		AbstractGame game = JKemik.game;
+		
 		if (game.getCollection().containsKey(temp.toString())) {
-
 		} else {
 			BoardFrame.grid.repaint();
 			Grid.mouseMove = true;
 		}
-
+		
 		if (JKemik.checkEndGame()) {
 			JOptionPane.showMessageDialog(null, "" + JKemik.getEndingMessage(),
 					" Win", JOptionPane.OK_OPTION);
@@ -201,16 +196,11 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			JKemik.game.setStatus(1);
 			JKemik.createGame(JKemik.template, JKemik.settings_t);
 			JKemik.settings_t.setGameSetupMode(true);
-			BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
-			ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
-
 			// Reset game exit label
 			BoardFrame.Game_status.setText("NEW");
-			// BoardFrame.Game_status.setForeground(Color.GREEN);
+			BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
+			ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
 		}
 		BoardFrame.grid.repaint();
-
-		// }
-		// BoardFrame.grid.setToolTipText("" + new Point(Grid.x, Grid.y));
 	}
 }
