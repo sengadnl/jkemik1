@@ -33,16 +33,16 @@ public class Cell implements Comparable<Cell>, Serializable {
 	public String toString() {
 		if(this.status == Globals.CELL_FREE){
 			return "ID:" + id + " - Countour:" + cellContour.size() 
-					+ " - Status:FREE";
+					+ " - Status:FREE" + " - Value:" + value;
 		}else if(this.status == Globals.CELL_CAPTURED){
 			return "ID:" + id + " - Countour:" + cellContour.size() 
-					+ " - Status:CAPTURED";
+					+ " - Status:CAPTURED" + " - Value:" + value;
 		}else if(this.status == Globals.CELL_REDEEMED){
 			return "ID:" + id + " - Countour:" + cellContour.size() 
-					+ " - Status:CAPTURED";
+					+ " - Status:CAPTURED" + " - Value:" + value;
 		}else{
 			return "ID:" + id + " - Countour:" + cellContour.size() 
-					+ " - Status: EMPTY";
+					+ " - Status:EMPTY" + " - Value:" + value;
 		}
 	}
 

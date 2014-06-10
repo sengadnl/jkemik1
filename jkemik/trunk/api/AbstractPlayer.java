@@ -141,6 +141,7 @@ public abstract class AbstractPlayer implements Serializable {
 	public void removeCell(Cell c) {
 
 		// Add what this cell is worth to this player'score
+		System.out.println("Removing a cell : " + c.toString());
 		this.Cells.remove(c);
 		this.score -= c.getValue();
 	}

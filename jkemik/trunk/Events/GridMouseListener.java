@@ -70,8 +70,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					return;
 				}
 				if (game.select(temp, Grid.squareSize)) {
-					System.out.println("Current Selection: "
-							+ game.getCurrentP().getSelected());
+//					System.out.println("Current Selection: "
+//							+ game.getCurrentP().getSelected());
 					Grid.selectPoint = true;
 					Grid.setSelectedP(temp);
 					if (temp.adjacentTo(current.getOrigin(), Grid.squareSize)
@@ -181,9 +181,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		
 		Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
 		Point temp = Grid.makeDrawable(Grid.x, Grid.y);
-		AbstractGame game = JKemik.game;
 		
-		if (game.getCollection().containsKey(temp.toString())) {
+		if (JKemik.game.getCollection().containsKey(temp.toString())) {
 		} else {
 			BoardFrame.grid.repaint();
 			Grid.mouseMove = true;

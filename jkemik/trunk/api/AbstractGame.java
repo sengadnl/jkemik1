@@ -92,8 +92,8 @@ public abstract class AbstractGame implements Serializable {
 								&& currentP.getSelected().size() > 3) {
 							currentP.setSuccessful(true);
 							currentP.setOrigin(null);/* Reset the origin */
-							System.err.println("\nbuildPath: "
-									+ currentP.getSelected());
+//							System.err.println("\nbuildPath: "
+//									+ currentP.getSelected());
 							return true;/* Capture was found */
 						}
 
