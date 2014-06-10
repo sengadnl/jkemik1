@@ -445,16 +445,24 @@ public abstract class AbstractGame implements Serializable {
 	 * @return the number of cuptured cells by the current player
 	 */
 	public void evalCell(Cell cell) {
-		// check for capture
+		/*Look at all guest cells*/
 		for (Cell c : guest.getCells().values()) {
-
+			
+			/*Pick one point on each guest cell*/
 			Point p = c.getCellContour().get(0);
+			
+			/*Get the associated point in the board*/
 			Point temp = this.collection.get(p.toString());
+			
+			/*If the point is captured, and its associated cell is
+			 * neither captured nor is it redeemed, a new captured
+			 * cell is found.*/
 			if (temp.getStatus() == Point.CAPTURED
 					&& c.getStatus() != Globals.CELL_CAPTURED
 					&& c.getStatus() != Globals.CELL_REDEEMED) {
 				cell.setValue(cell.getValue() + c.getValue());
 				c.setStatus(Globals.CELL_CAPTURED);
+				
 				// Redeem cells
 				if (!c.getCellsInCell().isEmpty()) {
 					for (Cell r : c.getCellsInCell().values()) {
@@ -463,7 +471,9 @@ public abstract class AbstractGame implements Serializable {
 				}
 				// add captured cell
 				cell.addCell(c);
-				/* Losing a cell is equivalent to losing twice its value */
+				
+				/* Losing a cell will also subtract its value to 
+				 * the owner's score*/
 				guest.removeCell(c);
 			}
 		}

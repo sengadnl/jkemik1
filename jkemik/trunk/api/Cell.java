@@ -31,7 +31,19 @@ public class Cell implements Comparable<Cell>, Serializable {
 		this.cellsInCell = new HashMap<Integer, Cell>();
 	}
 	public String toString() {
-		return "" + this.cellContour;
+		if(this.status == Globals.CELL_FREE){
+			return "ID:" + id + " - Countour:" + cellContour.size() 
+					+ " - Status:FREE";
+		}else if(this.status == Globals.CELL_CAPTURED){
+			return "ID:" + id + " - Countour:" + cellContour.size() 
+					+ " - Status:CAPTURED";
+		}else if(this.status == Globals.CELL_REDEEMED){
+			return "ID:" + id + " - Countour:" + cellContour.size() 
+					+ " - Status:CAPTURED";
+		}else{
+			return "ID:" + id + " - Countour:" + cellContour.size() 
+					+ " - Status: EMPTY";
+		}
 	}
 
 	/**
