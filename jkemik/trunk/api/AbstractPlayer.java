@@ -142,12 +142,8 @@ public abstract class AbstractPlayer implements Serializable {
 
 		// Add what this cell is worth to this player'score
 		this.Cells.remove(c);
-		this.score -= c.getValue() * 2;
+		this.score -= c.getValue();
 	}
-
-	// public void addCapturedCells(Cell c) {
-	// this.CapturedCells.put(c.getPIN(), c);
-	// }
 
 	/**
 	 * @return the fadedColor
