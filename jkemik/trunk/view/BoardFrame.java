@@ -853,6 +853,7 @@ public class BoardFrame extends JFrame {
 		if (s.isGameSetupMode()) {
 			print_point.setText("" + messages.getString("gameSetupMode"));
 			updateSettingPanel();
+			updateBoardStatus();
 			translateUI();
 			enableGameControlPanel();
 			p1panel.disablePanelDecor();
@@ -879,7 +880,7 @@ public class BoardFrame extends JFrame {
 		if (s.isPlayMode()) {
 			System.out.println("setting playmode");
 			Game_status.setText(BoardFrame.messages.getString("endG"));
-			// Game_status.setForeground(Color.RED);
+			
 			disableGameControlPanel();
 			p1panel.enablePanelDecor();
 			p2panel.enablePanelDecor();
