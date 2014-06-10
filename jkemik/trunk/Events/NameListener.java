@@ -23,6 +23,8 @@ import view.BoardFrame;
 public class NameListener implements MouseListener {
 
 	private JLabel lab;
+	
+	/**Identifies which player name we are dealing with*/
 	private int one;
 
 	public NameListener(JLabel label, int one) {
@@ -42,11 +44,10 @@ public class NameListener implements MouseListener {
 		try {
 			if (ValidateInput.nameLength(name)) {
 				this.lab.setText(name.toUpperCase());
-				name = BoardFrame.getLabel1().getText();
 				if (this.one == 1) {
 					JKemik.template.setP1_name(name);
 				} else {
-					JKemik.template.setP1_name(name);
+					JKemik.template.setP2_name(name);
 				}
 			}
 		} catch (Exception ex) {
