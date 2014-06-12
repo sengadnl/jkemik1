@@ -51,7 +51,9 @@ public class JKemik extends Application {
 			readTemplate();
 			readSettings();
 			readGameObj();// TODO
-			System.out.println(game + "\n\n");
+			JKemik.view.setTheme(settings_t.getTheme());
+			
+			BoardFrame.uiLooksUpdate(settings_t,template); 
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 		}
@@ -156,17 +158,30 @@ public class JKemik extends Application {
 					System.out.println(g_object.getAbsolutePath()
 							+ " is deleted!");
 				} else {
-					System.out.println("Delete operation failed.");
+					System.out.println("Deleting " + g_object.getAbsolutePath() +
+							" failed!");
 				}
 			}
 
+			/* Is there a saved template */
+			if (s_object.exists()) {
+				if (s_object.delete()) {
+					System.out.println(s_object.getAbsolutePath()
+							+ " is deleted!");
+				} else {
+					System.out.println("Deleting " + s_object.getAbsolutePath() +
+							" failed!");
+				}
+			}
+			
 			/* Is there a saved template */
 			if (t_object.exists()) {
 				if (t_object.delete()) {
 					System.out.println(t_object.getAbsolutePath()
 							+ " is deleted!");
 				} else {
-					System.out.println("Delete operation failed.");
+					System.out.println("Deleting " + t_object.getAbsolutePath() +
+							" failed!");
 				}
 			}
 		} catch (Exception exception1) {
@@ -195,15 +210,10 @@ public class JKemik extends Application {
 					// BoardFrame.setThereIsSavedGame(1);
 					System.out
 							.println("No saved game was found, instantiating one...");
-					game = new Game(new Player(template.getP1_c(),
-							template.getP1_name()), new Player(
-							template.getP2_c(), template.getP2_name()));
+					createGame(template, settings_t);
 				}
 			} else {
-				game = new Game(new Player(template.getP1_c(),
-						template.getP1_name()), new Player(template.getP2_c(),
-						template.getP2_name()));
-				// System.out.println("Game: " + game.toString());
+				createGame(template, settings_t);
 			}
 		} catch (FileNotFoundException exception1) {
 			System.out.println("JKemik: readGame " + exception1.getMessage());
@@ -282,21 +292,21 @@ public class JKemik extends Application {
 		if (!ValidateInput.maxWin(maxw, t.getMaxPointPerPlayer())) {
 			return;
 		}
-		
+
 		if (!ValidateInput.maxPointScaler(maxPtScaler)) {
 			return;
 		}
-		
+
 		if (!ValidateInput.backtrack(btrack)) {
 			return;
 		}
-				
+
 		t.setMaxWinVal(maxw);
 		t.setMemo(t.isAutoCapture(), t.isAutoPass());
 		t.setLanguage(lang);
 		t.setBacktrackingDistance(btrack);
 		t.setMaxPointScaler(maxPtScaler);
-		
+
 		Locale local = new Locale(key);
 		BoardFrame.setMessages(ResourceBundle.getBundle(properties, local));
 		BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
