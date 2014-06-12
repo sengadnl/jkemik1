@@ -29,6 +29,8 @@ public class GameThemeListener implements MouseListener{
 		String str = this.label.getActiveLabel();
 		JKemik.view.setTheme(str);
 		JKemik.settings_t.setTheme(str);
+		JKemik.view.setTheme(str);
+		JKemik.view.initTheme(str);
 		// change the grid size
 		if (BoardFrame.grid.drawn) {
 			BoardFrame.grid.drawn = false;
@@ -36,6 +38,7 @@ public class GameThemeListener implements MouseListener{
 		}
 		BoardFrame.uiLooksUpdate(JKemik.settings_t,JKemik.template);
 	}
+	
 	public void mouseEntered(MouseEvent e) {
 		Color c = Tools.boost(BoardFrame.BOARD_COLOR,Globals.LABEL_VARIANT);
 		this.label.setForeground(Tools.fade(c));

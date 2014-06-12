@@ -52,9 +52,9 @@ public class Globals {
 		new Color(250, 50, 50),
 		new Color(250, 250, 250)};
 	public static final Color[] GEECKY_COLOR = {
-		new Color(166, 171, 179),
-		new Color(206, 156, 151),
-		new Color(150, 196, 147)};
+		new Color(80, 225, 210),
+		new Color(225, 70, 255),
+		new Color(255, 50, 20)};
 
 	
 	public static final Color PENALTY_COL = new Color(224,27,208);

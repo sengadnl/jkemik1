@@ -36,8 +36,8 @@ public class GTemplate implements Serializable{
 		this.dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.P1_name = "Danny";
 		this.P2_name = "Sarah";
-		this.p1_c = new Color(0, 250, 0);
-		this.p2_c = new Color(250, 0, 0);
+		this.p1_c = new Color(250, 250, 57);
+		this.p2_c = new Color(103, 250, 95);
 		//this.G_size = ((this.dimension.getWidth() * this.GRID_PERCENT) / this.MIDIUM_SCALAR);
 	}
 
