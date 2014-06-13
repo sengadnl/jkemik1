@@ -192,7 +192,6 @@ public class PlayerPanel extends JPanel {
 
 	public void updatePlayerPanel(AbstractPlayer abstractPlayer) {
 		try {
-
 			plottedv.setText("" + abstractPlayer.countRedeemedPoints());
 			capturedv.setText("" + abstractPlayer.countCapturedPoints());
 			cellsv.setText("" + abstractPlayer.countFreeCells());

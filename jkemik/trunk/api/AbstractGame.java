@@ -92,8 +92,8 @@ public abstract class AbstractGame implements Serializable {
 								&& currentP.getSelected().size() > 3) {
 							currentP.setSuccessful(true);
 							currentP.setOrigin(null);/* Reset the origin */
-//							System.err.println("\nbuildPath: "
-//									+ currentP.getSelected());
+							// System.err.println("\nbuildPath: "
+							// + currentP.getSelected());
 							return true;/* Capture was found */
 						}
 
@@ -192,7 +192,8 @@ public abstract class AbstractGame implements Serializable {
 						continue;
 					}
 					cell.setValue(captured_count + redeemed_count);
-
+					cell.setCapturesCount(captured_count);
+					cell.setRedeemedCount(redeemed_count);
 					cell.setStatus(Globals.CELL_FREE);
 					currentP.addCell(cell);
 					evalCell(cell);
@@ -362,7 +363,7 @@ public abstract class AbstractGame implements Serializable {
 				currentP = this.player1;
 				guest = this.player2;
 			}
-			//play_count--;
+			// play_count--;
 			currentP.setTurn(true);
 		} catch (NullPointerException e) {
 			JOptionPane.showMessageDialog(null,
@@ -445,24 +446,25 @@ public abstract class AbstractGame implements Serializable {
 	 * @return the number of cuptured cells by the current player
 	 */
 	public void evalCell(Cell cell) {
-		/*Look at all guest cells*/
+		/* Look at all guest cells */
 		for (Cell c : guest.getCells().values()) {
-			
-			/*Pick one point on each guest cell*/
+
+			/* Pick one point on each guest cell */
 			Point p = c.getCellContour().get(0);
-			
-			/*Get the associated point in the board*/
+
+			/* Get the associated point in the board */
 			Point temp = this.collection.get(p.toString());
-			
-			/*If the point is captured, and its associated cell is
-			 * neither captured nor is it redeemed, a new captured
-			 * cell is found.*/
+
+			/*
+			 * If the point is captured, and its associated cell is neither
+			 * captured nor is it redeemed, a new captured cell is found.
+			 */
 			if (temp.getStatus() == Point.CAPTURED
 					&& c.getStatus() != Globals.CELL_CAPTURED
 					&& c.getStatus() != Globals.CELL_REDEEMED) {
 				cell.setValue(cell.getValue() + c.getValue());
 				c.setStatus(Globals.CELL_CAPTURED);
-				
+
 				// Redeem cells
 				if (!c.getCellsInCell().isEmpty()) {
 					for (Cell r : c.getCellsInCell().values()) {
@@ -471,9 +473,11 @@ public abstract class AbstractGame implements Serializable {
 				}
 				// add captured cell
 				cell.addCell(c);
-				
-				/* Losing a cell will also subtract its value to 
-				 * the owner's score*/
+
+				/*
+				 * Losing a cell will also subtract its value to the owner's
+				 * score
+				 */
 				guest.removeCell(c);
 			}
 		}
@@ -615,7 +619,7 @@ public abstract class AbstractGame implements Serializable {
 	public void setPlay_count(int play_count) {
 		this.play_count = play_count;
 	}
-	
+
 
 	/* Connecting dots utilities */
 	public boolean AI = false;
