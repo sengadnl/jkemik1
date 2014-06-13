@@ -617,7 +617,7 @@ public class BoardFrame extends JFrame {
 		panel32.setBackground(BoardFrame.THEME_COLOR);
 		controler_panel.setBackground(BoardFrame.THEME_COLOR);
 		config_container.setBackground(BoardFrame.THEME_COLOR);
-		gridstats.setBackground(Tools.fade(BoardFrame.BOARD_COLOR,50,.7));
+		gridstats.setBackground(Tools.fade(BoardFrame.BOARD_COLOR, 50, .7));
 		progressB.setBackground(BoardFrame.THEME_COLOR);
 		progressB.setForeground(BOARD_COLOR);
 
@@ -719,7 +719,7 @@ public class BoardFrame extends JFrame {
 			pColor1.rotateColor(Globals.CLASSIC_COLOR[0]);
 			pColor2.rotateColor(Globals.CLASSIC_COLOR[1]);
 		}
-	
+
 	}
 
 	public static void updateSettingPanel() {
@@ -866,6 +866,12 @@ public class BoardFrame extends JFrame {
 		gridstats.setFreeGridInPercentV((free * 100) / totalOnBoard);
 		gridstats.setDeadCountV("" + totPlots);
 		gridstats.setTot_play_count(JKemik.game.getPlay_count());
+	}
+
+	public static double boardDeadAreaInPercent() {
+		double totPlots = JKemik.game.getCollection().size();
+		double totalOnBoard = JKemik.settings_t.getGridDimension().positions();
+		return (100 * totPlots) / totalOnBoard;
 	}
 
 	public static void uiLooksUpdate(STemplate s, GTemplate t) {
