@@ -382,7 +382,7 @@ public class JKemik extends Application {
 			result = true;
 		}
 
-		if (game.getPlay_count() < 1) {
+		if (game.getPlay_count() < 1 || BoardFrame.boardDeadAreaInPercent() >= 75) {
 			game.setStatus(1);
 
 			if (game.getGuest().getScore() > game.getCurrentP().getScore()) {
@@ -397,6 +397,7 @@ public class JKemik extends Application {
 			}
 			result = true;
 		}
+		
 		return result;
 	}
 

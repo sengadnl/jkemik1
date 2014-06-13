@@ -227,12 +227,20 @@ public class Cell implements Comparable<Cell>, Serializable {
 		this.redeemedCount = redeemedCount;
 	}
 	
+	public int getBonus() {
+		return bonus;
+	}
+	public void setBonus(int bonus) {
+		this.bonus = bonus;
+	}
+
 	private ArrayList<Point> cellContour;
 	private ArrayList<Point> areaIncell;
 	private HashMap<Integer, Cell> cellsInCell;
 	private int capturedcell_Count;
 	private int capturesCount;
 	private int redeemedCount;
+	private int bonus;
 	private double value = 0.0;
 	private int id = 0;
 	private int status = 0;

@@ -154,6 +154,7 @@ public abstract class AbstractGame implements Serializable {
 
 					this.captured_count = 0;
 					this.redeemed_count = 0;
+					//this.bonus = 0;
 
 					/* Go through all selected dots from recursion */
 					for (Point p : TempArea) {
@@ -174,6 +175,13 @@ public abstract class AbstractGame implements Serializable {
 								object.setStatus(Point.REDEEMED);
 								redeemed_count += Globals.REDEEMED_POINT_VALUE;
 							}
+							
+							/* Recapture redeemed Points*/
+//							if (object.getId() == guest.getId()
+//									&& object.getStatus() != Point.REDEEMED) {
+//								object.setStatus(Point.CONVERT);
+//								//bonus += Globals.POINT_BONUS;
+//							}
 
 						} else {
 							/* If p doesn't exist in collection */
@@ -194,6 +202,7 @@ public abstract class AbstractGame implements Serializable {
 					cell.setValue(captured_count + redeemed_count);
 					cell.setCapturesCount(captured_count);
 					cell.setRedeemedCount(redeemed_count);
+					//cell.setBonus(bonus);
 					cell.setStatus(Globals.CELL_FREE);
 					currentP.addCell(cell);
 					evalCell(cell);
@@ -223,6 +232,7 @@ public abstract class AbstractGame implements Serializable {
 
 		this.captured_count = 0;
 		this.redeemed_count = 0;
+		//this.bonus = 0;
 		/* Go through all selected dots from recursion */
 		for (Point p : area) {
 			/* If p exist in collection */
@@ -242,6 +252,14 @@ public abstract class AbstractGame implements Serializable {
 					object.setStatus(Point.REDEEMED);
 					redeemed_count += Globals.REDEEMED_POINT_VALUE;
 				}
+				
+
+				/* Recapture redeemed Points*/
+//				if (object.getId() == guest.getId()
+//						&& object.getStatus() == Point.REDEEMED) {
+//					object.setStatus(Point.CONVERT);
+//					//bonus += Globals.POINT_BONUS;
+//				}
 
 			} else {
 				/* If p doesn't exist in collection */
@@ -263,6 +281,9 @@ public abstract class AbstractGame implements Serializable {
 		}
 
 		cell.setValue(captured_count + redeemed_count);
+		cell.setCapturesCount(captured_count);
+		cell.setRedeemedCount(redeemed_count);
+	//	cell.setBonus(bonus);
 		cell.setStatus(Globals.CELL_FREE);
 		currentP.addCell(cell);
 		evalCell(cell);
@@ -629,6 +650,7 @@ public abstract class AbstractGame implements Serializable {
 	private int maxScore = 2;
 	public int captured_count = 0;
 	public int redeemed_count = 0;
+	public int bonus = 0;
 	public int play_count = 0;
 	public Point lastp = new Point(553355, 7798979);
 
