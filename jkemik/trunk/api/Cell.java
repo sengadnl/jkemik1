@@ -28,6 +28,7 @@ public class Cell implements Comparable<Cell>, Serializable {
 		this.areaIncell = areaIncell;
 		this.status = Globals.CELL_FREE;
 		this.capturedcell_Count = 0;
+		this.capturesCount = 0;
 		this.cellsInCell = new HashMap<Integer, Cell>();
 	}
 	public String toString() {
@@ -211,11 +212,27 @@ public class Cell implements Comparable<Cell>, Serializable {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	public int getCapturesCount() {
+		return capturesCount;
+	}
+	public void setCapturesCount(int capturesCount) {
+		this.capturesCount = capturesCount;
+	}
 
+	public int getRedeemedCount() {
+		return redeemedCount;
+	}
+	
+	public void setRedeemedCount(int redeemedCount) {
+		this.redeemedCount = redeemedCount;
+	}
+	
 	private ArrayList<Point> cellContour;
 	private ArrayList<Point> areaIncell;
 	private HashMap<Integer, Cell> cellsInCell;
 	private int capturedcell_Count;
+	private int capturesCount;
+	private int redeemedCount;
 	private double value = 0.0;
 	private int id = 0;
 	private int status = 0;

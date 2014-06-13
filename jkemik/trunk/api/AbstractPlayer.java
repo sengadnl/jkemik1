@@ -35,21 +35,10 @@ public abstract class AbstractPlayer implements Serializable {
 		if (this.Cells.isEmpty()) {
 			return 0;
 		} else {
-			/*Look through this player's cells*/
+			/* Look through this player's cells */
 			for (Cell c1 : this.Cells.values()) {
-				/*Find any captured cells*/
-				for (Cell c2 : c1.getCellsInCell().values()) {
-					/*Make sure we are looking into a captured cell*/
-					if (c2.getStatus() == Globals.CELL_CAPTURED) {
-						/*Count any redeemed points*/
-						for (Point p : c2.getAreaIncell()) {
-							if (p.getId() == this.getId()
-									&& p.getStatus() == Point.REDEEMED) {
-								count++;
-							}
-						}
-					}
-				}
+				/* Find any captured cells */
+				count += c1.getRedeemedCount();
 			}
 		}
 		return count;
@@ -59,15 +48,11 @@ public abstract class AbstractPlayer implements Serializable {
 		int count = 0;
 		if (this.Cells.isEmpty()) {
 			return 0;
-		} else {
-			for (Cell c1 : this.Cells.values()) {
-				if (c1.getStatus() == Globals.CELL_FREE) {
-					for (Point p : c1.getAreaIncell()) {
-						if (p.getStatus() == Point.CAPTURED) {
-							count++;
-						}
-					}
-				}
+		}
+
+		for (Cell c1 : this.Cells.values()) {
+			if (c1.getStatus() == Globals.CELL_FREE) {
+				count += c1.getCapturesCount();
 			}
 		}
 		return count;
@@ -166,21 +151,6 @@ public abstract class AbstractPlayer implements Serializable {
 		}
 		return new Color(red, green, blue);
 	}
-
-	/**
-	 * @return the capturedCells
-	 */
-	// public HashMap<Integer, Cell> getCapturedCells() {
-	// return this.CapturedCells;
-	// }
-
-	/**
-	 * @param capturedCells
-	 *            the capturedCells to set
-	 */
-	// public void setCapturedCells(HashMap<Integer, Cell> capturedCells) {
-	// this.CapturedCells = capturedCells;
-	// }
 
 	/**
 	 * @param cells
@@ -337,12 +307,16 @@ public abstract class AbstractPlayer implements Serializable {
 	public void setLastCapture(Cell lastCapture) {
 		this.lastCapture = lastCapture;
 	}
+
 	/**
 	 * Remember this point as previously visited
-	 * @param p point to remember and max the maximum number of points remembered
-	 * max also determines how far the capture algorithm should backtrack from the 
-	 * latest point
-	 * @return void*/
+	 * 
+	 * @param p
+	 *            point to remember and max the maximum number of points
+	 *            remembered max also determines how far the capture algorithm
+	 *            should backtrack from the latest point
+	 * @return void
+	 */
 	public void rememberPoint(Point p, int max) {
 		if (this.lastpoints.size() < max) {
 			this.lastpoints.add(p);
@@ -351,7 +325,7 @@ public abstract class AbstractPlayer implements Serializable {
 			this.lastpoints.add(p);
 		}
 	}
-	
+
 	public ArrayList<Point> getLastpoints() {
 		return lastpoints;
 	}
@@ -371,6 +345,7 @@ public abstract class AbstractPlayer implements Serializable {
 	private String name = "player";
 	private int id = 0;// player1 = -1 and player2 = 1
 	private int points = 0;
+
 	private boolean turn = false;
 	private boolean ai = false;
 	private double score = 0.0;
@@ -379,7 +354,7 @@ public abstract class AbstractPlayer implements Serializable {
 	private Point origin = new Point(444444, 7798979);
 	private Point from = new Point(553355, 7798979);
 	private Point latestP = new Point(550055, 7798979);
-	
+
 	public ArrayList<Point> lastpoints = new ArrayList<Point>();
 
 	private HashMap<Integer, Cell> Cells = null;
