@@ -15,7 +15,7 @@ http://jkemik.googlecode.com/files/board.png
 
   * *Nonempty Capture* 
 
-    A capture consists of a loop of adjacent *Dots*, as defined in the second rule. These *Dots* must form a wall around one or more of the opponent's *Dots*. Therefore, a Cell can also be captured.
+    A capture consists of a polygon of adjacent *Dots*, as defined in the second rule. These *Dots* must form a wall around one or more of the opponent's *Dots*. Therefore, a Cell can also be captured.
 
 See the [GetStarted StartGuide] for details on how to run the application.
 
