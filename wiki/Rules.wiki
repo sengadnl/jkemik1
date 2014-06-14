@@ -3,7 +3,7 @@
 
 http://jkemik.googlecode.com/files/board.png
 
-==A. Play==
+==A. Play Rules==
 
   * *One Dot play* 
 
@@ -19,7 +19,7 @@ http://jkemik.googlecode.com/files/board.png
 
 See the [GetStarted StartGuide] for details on how to run the application.
 
-==B. Scoring==
+==B. Scoring Rules==
 
  * *Dot Rule*: One point is earned for every captured *Dot*. 1 *Dot* = 1 Point
  * *Cell Value Rule*: The value of a captured Cell equates the number of captured points within itself. Therefore the value of this *Cell* is also subtracted from the score of its former owner. 
