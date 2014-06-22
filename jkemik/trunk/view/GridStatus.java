@@ -76,7 +76,7 @@ public class GridStatus extends JPanel{
         Font clfont = new Font("Arial",Font.BOLD,this.FONT_SIZE);  
         fgp.setFont(clfont);
         
-        final JLabel gs = new JLabel("  Play: ");
+        final JLabel gs = new JLabel("  Moves: ");
         gs.setForeground(new Color(255,255,255));
         Font gfont = new Font("Arial",Font.BOLD,this.FONT_SIZE);  
         gs.setFont(gfont);

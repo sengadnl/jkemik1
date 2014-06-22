@@ -32,9 +32,9 @@ public class NameListener implements MouseListener {
 		this.one = one;
 
 		if (one == 1) {
-			this.lab = BoardFrame.label1;
+			this.lab = BoardFrame.pnamelabel1;
 		} else {
-			this.lab = BoardFrame.label2;
+			this.lab = BoardFrame.pnamelabel2;
 		}
 	}
 
@@ -74,17 +74,17 @@ public class NameListener implements MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		if (this.one == 1) {
 			Color c = JKemik.template.getP1_c();
-			BoardFrame.label1.setForeground(Tools.fade(c));
+			BoardFrame.pnamelabel1.setForeground(Tools.fade(c));
 		} else {
 			Color c = JKemik.template.getP2_c();
-			BoardFrame.label2.setForeground(Tools.fade(c));
+			BoardFrame.pnamelabel2.setForeground(Tools.fade(c));
 		}
 		lab.setToolTipText(BoardFrame.messages.getString("playerNameHover"));
 	}
 
 	public void mouseExited(MouseEvent e) {
-		BoardFrame.label1.setForeground(Color.WHITE);
-		BoardFrame.label2.setForeground(Color.WHITE);
+		BoardFrame.pnamelabel1.setForeground(Color.WHITE);
+		BoardFrame.pnamelabel2.setForeground(Color.WHITE);
 	}
 
 	public void mousePressed(MouseEvent e) {

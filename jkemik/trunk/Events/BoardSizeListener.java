@@ -31,17 +31,12 @@ public class BoardSizeListener implements MouseListener{
 		t.setGridDimesion(sqr);
 		//Grid.setSquareSize(sqr);
 		
-		Grid.setDimension(t.getGridDimension());
-
-		// change the grid size
-//		if (BoardFrame.grid.drawn) {
-//			System.out.println("drawing drid.......................");
-//			BoardFrame.grid.drawn = false;
-//			BoardFrame.grid.repaint();
-//		}
+		Grid.setDimension(t.getGridDimension());		
+		BoardFrame.settings_p.updateSettingsPanel(JKemik.settings_t);
 		BoardFrame.displayGrid(true);
 		BoardFrame.Win.setText((int)(t.getGridDimension().positions()* Globals.MAX_WIN) + "");
 		t.setMaxWinVal((int)(t.getGridDimension().positions() * Globals.MAX_WIN));
+
 	}
 
 	public void mouseEntered(MouseEvent e) {

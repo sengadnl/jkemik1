@@ -19,9 +19,9 @@ public class ViewEvents {
 			BoardFrame.pColor1);
 	public static ColorChangeListenerB p2Listener = new ColorChangeListenerB(
 			BoardFrame.pColor2);
-	public static NameListener n1Listener = new NameListener(BoardFrame.label1,
+	public static NameListener n1Listener = new NameListener(BoardFrame.pnamelabel1,
 			1);
-	public static NameListener n2Listener = new NameListener(BoardFrame.label2,
+	public static NameListener n2Listener = new NameListener(BoardFrame.pnamelabel2,
 			2);
 	public static NewGameListener newGameListener = new NewGameListener(
 			BoardFrame.Game_status);
@@ -225,8 +225,8 @@ public class ViewEvents {
 			sysPrefsListener();
 			changeColorPanel1Action(BoardFrame.pColor1);
 			changeColorPanel2Action(BoardFrame.pColor2);
-			addPlayer1NameAction(BoardFrame.label1);
-			addPlayer2NameAction(BoardFrame.label2);
+			addPlayer1NameAction(BoardFrame.pnamelabel1);
+			addPlayer2NameAction(BoardFrame.pnamelabel2);
 			setBoardSizeAction(BoardFrame.l1);
 			setGameThemeAction(BoardFrame.l2);
 			saveAction(BoardFrame.startG);
@@ -245,8 +245,8 @@ public class ViewEvents {
 		if (s.isPlayMode()) {
 			BoardFrame.pColor1.removeMouseListener(p1Listener);
 			BoardFrame.pColor2.removeMouseListener(p2Listener);
-			BoardFrame.label1.removeMouseListener(n1Listener);
-			BoardFrame.label2.removeMouseListener(n2Listener);
+			BoardFrame.pnamelabel1.removeMouseListener(n1Listener);
+			BoardFrame.pnamelabel2.removeMouseListener(n2Listener);
 			BoardFrame.l1.removeMouseListener(gridSizeListener);
 			BoardFrame.l2.removeMouseListener(gameThemeListener);
 			BoardFrame.startG.removeMouseListener(saveListener);
@@ -263,8 +263,8 @@ public class ViewEvents {
 
 			BoardFrame.pColor1.removeMouseListener(p1Listener);
 			BoardFrame.pColor2.removeMouseListener(p2Listener);
-			BoardFrame.label1.removeMouseListener(n1Listener);
-			BoardFrame.label2.removeMouseListener(n2Listener);
+			BoardFrame.pnamelabel1.removeMouseListener(n1Listener);
+			BoardFrame.pnamelabel2.removeMouseListener(n2Listener);
 			BoardFrame.l1.removeMouseListener(gridSizeListener);
 			BoardFrame.l2.removeMouseListener(gameThemeListener);
 			BoardFrame.startG.removeMouseListener(saveListener);
