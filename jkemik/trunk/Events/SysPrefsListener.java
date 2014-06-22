@@ -23,6 +23,7 @@ public class SysPrefsListener implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
+		BoardFrame.settings_p.updateSettingsPanel(JKemik.settings_t);
 		if (JKemik.settings_t.isPlayMode()) {
 			int res = JOptionPane.showConfirmDialog(null,
 					BoardFrame.messages.getString("stopGame"),

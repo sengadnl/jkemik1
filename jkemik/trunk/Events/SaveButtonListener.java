@@ -34,8 +34,8 @@ public class SaveButtonListener implements MouseListener {
 		c2 = BoardFrame.pColor2.getBackground();
 
 		String str1, str2;
-		str1 = BoardFrame.label1.getText();
-		str2 = BoardFrame.label2.getText();
+		str1 = BoardFrame.pnamelabel1.getText();
+		str2 = BoardFrame.pnamelabel2.getText();
 
 		GTemplate t = JKemik.template;
 		STemplate s = JKemik.settings_t;

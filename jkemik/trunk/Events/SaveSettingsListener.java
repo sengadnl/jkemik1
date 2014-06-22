@@ -32,6 +32,7 @@ public class SaveSettingsListener implements MouseListener {
 				BoardFrame.print_point.setText("" + BoardFrame.messages.getString("gameSetupMode"));
 				JKemik.saveSysPrefs();	
 			}
+			BoardFrame.settings_p.updateSettingsPanel(JKemik.settings_t);
 		} catch (Exception exp) {
 
 		}

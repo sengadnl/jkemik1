@@ -54,9 +54,7 @@ public class PlayerPanel extends JPanel {
 					100), scorevc = new Color(0, 255, 0);
 
 	public PlayerPanel() {
-
 		setPreferredSize(new Dimension(this.WIDTH, this.HEIGHT));
-
 		System.out.println("PlayerPanel -- Width = " + this.WIDTH
 				+ " Height = " + this.HEIGHT);
 		createPlayerPanel();
@@ -131,12 +129,6 @@ public class PlayerPanel extends JPanel {
 		Font scvfont = new Font("Arial", scorev.getFont().getStyle(),
 				this.FONT_SIZE);
 		scorev.setFont(scvfont);
-
-		// plotted = new JLabel(" Rd Pt: ");
-		// captured = new JLabel(" Cp Pt: ");
-		// cptcells = new JLabel(" Cp Cl: ");
-		// fcells = new JLabel(" Cl: ");
-		// score = new JLabel(" Scr: ");
 
 		plotted.setForeground(new Color(255, 204, 51));
 		Font pttfont = new Font("Arial", Font.BOLD, this.FONT_SIZE);
