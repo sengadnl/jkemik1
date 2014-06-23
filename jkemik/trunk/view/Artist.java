@@ -403,6 +403,15 @@ public class Artist {
 			
 			//cells inside this cell
 			for (Point p : c.getAreaIncell()) {
+				if(p.getStatus() == Point.DEAD){
+					Artist.drawCircle(p,
+							BoardFrame.BOARD_COLOR,
+							Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
+							Grid.gridLineStroke, g2);
+					Artist.drawCursor(p, Grid.gridLineStroke,
+							Grid.half_squareSize, Grid.gridLineCol, g2);
+				}
+				
 				if (p.getId() == JKemik.game.getGuest().getId()) {//&& p.getStatus() == Point.CAPTURED
 					Artist.drawCircle(p,
 							Tools.fade(capturedc),
