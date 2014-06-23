@@ -193,7 +193,7 @@ public abstract class AbstractGame implements Serializable {
 
 					setStatusForAll(currentP.getSelected(), Point.CONNECTED);
 					cell = new Cell(getCurrentP().getId(), getCurrentP()
-							.getSelected(), area);
+							.getSelected(), TempArea);
 
 					if (captured_count == 0) {
 						cell.setStatus(Globals.CELL_EMPTY);
