@@ -45,8 +45,8 @@ public class PlayerPanel extends JPanel {
 	private JLabel scorev;
 	private final int FONT_SIZE = 10;
 	private final int LINE_BORDER_STOKE = 2;
-	private final double LB_FADE_VAR = .60;
-	private final int FADE_TH = 10;// fade threshold
+	private final double LB_FADE_VAR = .50;
+	private final int FADE_TH = 20;// fade threshold
 
 	private Color plottedvc = new Color(204, 255, 100), capturedvc = new Color(
 			255, 51, 100), cellsvc = new Color(179, 100, 255),
@@ -211,13 +211,13 @@ public class PlayerPanel extends JPanel {
 			pname = pname.toUpperCase();
 			setPlayer("  " + pname);
 			setBackground(Tools.fade(pcolor, FADE_TH, LB_FADE_VAR));
-			this.player_name.setForeground(pcolor);
+			this.player_name.setForeground(Tools.boost(pcolor));
 			plottedv.setText("0");
 			capturedv.setText("0");
 			cellsv.setText("0");
 			captCellsv.setText("0");
 			scorev.setText("0");
-		} catch (Exception e) {
+		} catch (NumberFormatException e) {
 			System.err.println(" in PlayerPanel " + e.getMessage());
 		}
 	}

@@ -233,8 +233,15 @@ public class Tools {
 
 	/**
 	 * fades color
+	 * @param f_th fade threshold: no color goes below this value
+	 * f_var scaler percent variable between 0 and 1.
 	 */
 	public static Color fade(Color c, int f_th, double f_var) {
+		
+		if(f_var > 1 || f_var < 0){
+			throw new NumberFormatException();
+		}
+			
 		double r = c.getRed();
 		double g = c.getGreen();
 		double b = c.getBlue();
@@ -319,10 +326,14 @@ public class Tools {
 	}
 
 	public static Color boost(Color c, double percent) {
+		
+		/*Get individual colors*/
 		double r = c.getRed();
 		double g = c.getGreen();
 		double b = c.getBlue();
+
 		try {
+			
 			r = r + (r * (percent / 100));
 			g = g + (g * (percent / 100));
 			b = b + (b * (percent / 100));
@@ -335,7 +346,7 @@ public class Tools {
 			if (b > 255) {
 				b = 255;
 			}
-
+		
 		} catch (Exception e) {
 			System.err.println("In Tools.boost: " + e.getMessage());
 		}

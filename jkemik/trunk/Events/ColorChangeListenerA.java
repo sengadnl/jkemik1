@@ -3,7 +3,6 @@
  */
 package Events;
 
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -31,17 +30,14 @@ public class ColorChangeListenerA implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		Color c = JKemik.template.getP1_c();
-		c = Tools.fade(c);
-		this.panel.setBackground(c);
+	
+		this.panel.setBackground(Tools.fade(JKemik.template.getP1_c()));
 		//panel.setToolTipText("Click to change the color.");
 		panel.setToolTipText(BoardFrame.messages.getString("changeColorHover"));
 	}
 
 	public void mouseExited(MouseEvent e) {
-		Color c = JKemik.template.getP1_c();
-		c = Tools.boost(c);
-		this.panel.setBackground(c);
+		this.panel.setBackground(JKemik.template.getP1_c());
 	}
 
 	public void mousePressed(MouseEvent e) {

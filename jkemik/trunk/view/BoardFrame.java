@@ -402,7 +402,7 @@ public class BoardFrame extends JFrame {
 
 	}
 
-	public static void decorateLabelss(Color fg) {
+	public static void decorateLabelForeground(Color fg) {
 		la.setForeground(fg);
 		lb.setForeground(fg);
 		lc.setForeground(fg);
@@ -410,22 +410,20 @@ public class BoardFrame extends JFrame {
 	}
 
 	public static void disableGameControlPanel() {
-		Color c = Tools.boost(BoardFrame.BOARD_COLOR, Globals.FADE_VARIANT);
+//		Color c = Tools.boost(BoardFrame.BOARD_COLOR, Globals.FADE_VARIANT);
+		Color c = BoardFrame.BOARD_COLOR;
 		l1.setForeground(Tools.fade(c));
 		l2.setForeground(Tools.fade(c));
-		pnamelabel1.setForeground(Tools.fade(JKemik.template.getP1_c()));
-		pnamelabel2.setForeground(Tools.fade(JKemik.template.getP2_c()));
-		pColor1.setBackground(Tools.fade(JKemik.template.getP1_c()));
-		pColor2.setBackground(Tools.fade(JKemik.template.getP2_c()));
-
-		la.setForeground(Tools.fade(BoardFrame.BOARD_COLOR));
-		lb.setForeground(Tools.fade(BoardFrame.BOARD_COLOR));
-		lc.setForeground(Tools.fade(BoardFrame.BOARD_COLOR));
-		ld.setForeground(Tools.fade(BoardFrame.BOARD_COLOR));
-		AutoCap.setForeground(Tools.fade(Color.WHITE));
-		AutoPass.setForeground(Tools.fade(Color.WHITE));
-		Win.setForeground(Tools.fade(Color.WHITE));
-		backt.setForeground(Tools.fade(Color.WHITE));
+		pnamelabel1.setForeground(Tools.fade(JKemik.template.getP1_c(),Globals.LABEL_VARIANT/2));
+		pnamelabel2.setForeground(Tools.fade(JKemik.template.getP2_c(),Globals.LABEL_VARIANT/2));
+		pColor1.setBackground(Tools.fade(JKemik.template.getP1_c(),Globals.LABEL_VARIANT/2));
+		pColor2.setBackground(Tools.fade(JKemik.template.getP2_c(),Globals.LABEL_VARIANT/2));
+		
+		decorateLabelForeground(Tools.fade(BoardFrame.BOARD_COLOR,Globals.LABEL_VARIANT/2));
+		AutoCap.setForeground(Tools.fade(Color.WHITE,Globals.LABEL_VARIANT/2));
+		AutoPass.setForeground(Tools.fade(Color.WHITE,Globals.LABEL_VARIANT/2));
+		Win.setForeground(Tools.fade(Color.WHITE,Globals.LABEL_VARIANT/2));
+		backt.setForeground(Tools.fade(Color.WHITE,Globals.LABEL_VARIANT/2));
 		// fadeButton(startG);
 	}
 
@@ -598,10 +596,11 @@ public class BoardFrame extends JFrame {
 		print_point.setForeground(Color.GREEN);
 		feedbackarea.setForeground(Color.GREEN);
 		feedbackarea.setBackground(BoardFrame.CPANEL_COLOR);
-		la.setForeground(BoardFrame.BOARD_COLOR);
-		lb.setForeground(BoardFrame.BOARD_COLOR);
-		lc.setForeground(BoardFrame.BOARD_COLOR);
-		ld.setForeground(BoardFrame.BOARD_COLOR);
+//		la.setForeground(BoardFrame.BOARD_COLOR);
+//		lb.setForeground(BoardFrame.BOARD_COLOR);
+//		lc.setForeground(BoardFrame.BOARD_COLOR);
+//		ld.setForeground(BoardFrame.BOARD_COLOR);00436878655
+		decorateLabelForeground(Tools.boost(BoardFrame.BOARD_COLOR));
 		AutoCap.setForeground(Color.WHITE);
 		AutoPass.setForeground(Color.WHITE);
 		Win.setForeground(Color.WHITE);
@@ -660,7 +659,7 @@ public class BoardFrame extends JFrame {
 			pnamelabel2.setForeground(Color.WHITE);
 			decoratebuttons(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT),
 					BOARD_COLOR);
-			decorateLabelss(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
+			decorateLabelForeground(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT + 30));
 
 		} else if (str.equals("Origins")) {
 			setSkin(Tools.fade(Tools.fade(new Color(110, 56, 27))), new Color(
@@ -673,7 +672,7 @@ public class BoardFrame extends JFrame {
 			pnamelabel2.setForeground(Color.WHITE);
 			decoratebuttons(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT),
 					BOARD_COLOR);
-			decorateLabelss(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
+			decorateLabelForeground(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT  + 30));
 		} else if (str.equals("Geeky")) {
 			setSkin(Tools.fade(Tools.fade(new Color(70, 70, 20))), new Color(0,
 					0, 0), new Color(70, 70, 20));
@@ -687,7 +686,7 @@ public class BoardFrame extends JFrame {
 			pnamelabel2.setForeground(Color.WHITE);
 			decoratebuttons(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT),
 					BOARD_COLOR);
-			decorateLabelss(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
+			decorateLabelForeground(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT  + 30));
 		} else {
 			setSkin(Tools.fade(Tools.fade(new Color(40, 60, 40))), new Color(0,
 					0, 0), new Color(40, 60, 40));
@@ -701,7 +700,7 @@ public class BoardFrame extends JFrame {
 			pnamelabel2.setForeground(Color.WHITE);
 			decoratebuttons(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT),
 					BOARD_COLOR);
-			decorateLabelss(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT));
+			decorateLabelForeground(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT  + 30));
 		}
 	}
 
@@ -897,10 +896,7 @@ public class BoardFrame extends JFrame {
 			p1panel.disablePanelDecor();
 			p2panel.disablePanelDecor();
 
-			la.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
-			lb.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
-			lc.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
-			ld.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
+			decorateLabelForeground(Tools.boost(BOARD_COLOR,Globals.LABEL_VARIANT  + 60));
 			AutoCap.setForeground(Color.WHITE);
 			AutoPass.setForeground(Color.WHITE);
 			Win.setForeground(Color.WHITE);
@@ -926,10 +922,7 @@ public class BoardFrame extends JFrame {
 			p1panel.enablePanelDecor();
 			p2panel.enablePanelDecor();
 
-			la.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
-			lb.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
-			lc.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
-			ld.setForeground(Tools.boost(BoardFrame.BOARD_COLOR));
+			decorateLabelForeground(Tools.boost(BOARD_COLOR,Globals.LABEL_VARIANT  + 60));
 			AutoCap.setForeground(Color.WHITE);
 			AutoPass.setForeground(Color.WHITE);
 			Win.setForeground(Color.WHITE);
