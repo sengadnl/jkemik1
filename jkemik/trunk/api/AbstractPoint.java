@@ -30,14 +30,7 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
 	 * captured, 0 = dead
 	 */
 	protected int status;
-	protected boolean north;
-	protected boolean south;
-	protected boolean east;
-	protected boolean west;
-	protected boolean north_east;
-	protected boolean north_west;
-	protected boolean south_east;
-	protected boolean south_west;
+
 
 	public AbstractPoint(double x, double y, int id) {
 		super();
@@ -45,13 +38,6 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
 		this.y = y;
 		this.id = id;
 		this.status = -1;
-		this.north = false;
-		this.south = false;
-		this.east = false;
-		this.west = false;
-		this.north_west = false;
-		this.south_east = false;
-		this.south_west = false;
 	}
 
 	public int getId() {
@@ -73,70 +59,6 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
 	 */
 	public void setStatus(int status) {
 		this.status = status;
-	}
-
-	public boolean isNorth() {
-		return north;
-	}
-
-	public void setNorth(boolean north) {
-		this.north = north;
-	}
-
-	public boolean isSouth() {
-		return south;
-	}
-
-	public void setSouth(boolean south) {
-		this.south = south;
-	}
-
-	public boolean isEast() {
-		return east;
-	}
-
-	public void setEast(boolean east) {
-		this.east = east;
-	}
-
-	public boolean isWest() {
-		return west;
-	}
-
-	public void setWest(boolean west) {
-		this.west = west;
-	}
-
-	public boolean isNorth_east() {
-		return north_east;
-	}
-
-	public void setNorth_east(boolean north_east) {
-		this.north_east = north_east;
-	}
-
-	public boolean isNorth_west() {
-		return north_west;
-	}
-
-	public void setNorth_west(boolean north_west) {
-		this.north_west = north_west;
-	}
-
-	public boolean isSouth_east() {
-		return south_east;
-	}
-
-	public void setSouth_east(boolean south_east) {
-		this.south_east = south_east;
-	}
-
-	public boolean isSouth_west() {
-		return south_west;
-	}
-
-	public void setSouth_west(boolean south_west) {
-		this.south_west = south_west;
 	}
 
 	public static long getSerialversionuid() {

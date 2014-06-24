@@ -33,6 +33,12 @@ public class Point extends AbstractPoint implements Serializable{
 //	public Point(double x, double y) {
 //		super(x, y);
 //	}
+	public void setPoint(Point p){
+		this.x = p.x;
+		this.y = p.y;
+		this.id = p.id;
+		this.status = p.status;
+	}
 	public double distanceTo(Point p) {
 		return Math.sqrt(Math.abs((super.getXC() - p.getXC())
 				* ((super.getXC() - p.getXC()) + Math.abs((super.getYC() - p.getYC())
