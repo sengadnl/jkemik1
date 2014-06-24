@@ -311,50 +311,50 @@ public class Artist {
 		}
 	}
 
-//	protected static void drawGame(AbstractGame g, Graphics2D g2) {
-//		Player p1 = (Player) g.getPlayer1();
-//		Player p2 = (Player) g.getPlayer2();
-//		HashMap<Integer, Cell> p1c = p1.getCells();
-//		HashMap<Integer, Cell> p2c = p2.getCells();
-//
-//		// draw p1 cells
-//		if (drawAllCell(p1c, p1, p2, g2)) {
-//		}
-//
-//		// draw p1 cells
-//		if (drawAllCell(p2c, p2, p1, g2)) {
-//		}
-//
-//		// draw p1 points
-//		for (Point p : JKemik.game.getCollection().values()) {
-//
-//			if (p.getId() == p1.getId()) { // && p.getStatus() == Point.CAPTURED
-//				Artist.drawCircle(p, p1.getColor(), Grid.HALF_DIAMETER,
-//						Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
-//				Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
-//						Grid.gridLineCol, g2);
-//			}
-//
-//			if (p.getId() == p2.getId()) { // && p.getStatus() == Point.CAPTURED
-//				Artist.drawCircle(p, p2.getColor(), Grid.HALF_DIAMETER,
-//						Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
-//				Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
-//						Grid.gridLineCol, g2);
-//			}
-//
-//		}
-//
-//		if (Grid.manualc) {
-//			for (Point p : g.getCurrentP().getSelected()) {
-//
-//				Artist.drawCircle(p, g.getCurrentP().getFadedColor(),
-//						Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-//						Grid.gridLineStroke, g2);
-//				Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
-//						Grid.gridLineCol, g2);
-//			}
-//		}
-//	}
+	// protected static void drawGame(AbstractGame g, Graphics2D g2) {
+	// Player p1 = (Player) g.getPlayer1();
+	// Player p2 = (Player) g.getPlayer2();
+	// HashMap<Integer, Cell> p1c = p1.getCells();
+	// HashMap<Integer, Cell> p2c = p2.getCells();
+	//
+	// // draw p1 cells
+	// if (drawAllCell(p1c, p1, p2, g2)) {
+	// }
+	//
+	// // draw p1 cells
+	// if (drawAllCell(p2c, p2, p1, g2)) {
+	// }
+	//
+	// // draw p1 points
+	// for (Point p : JKemik.game.getCollection().values()) {
+	//
+	// if (p.getId() == p1.getId()) { // && p.getStatus() == Point.CAPTURED
+	// Artist.drawCircle(p, p1.getColor(), Grid.HALF_DIAMETER,
+	// Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
+	// Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
+	// Grid.gridLineCol, g2);
+	// }
+	//
+	// if (p.getId() == p2.getId()) { // && p.getStatus() == Point.CAPTURED
+	// Artist.drawCircle(p, p2.getColor(), Grid.HALF_DIAMETER,
+	// Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
+	// Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
+	// Grid.gridLineCol, g2);
+	// }
+	//
+	// }
+	//
+	// if (Grid.manualc) {
+	// for (Point p : g.getCurrentP().getSelected()) {
+	//
+	// Artist.drawCircle(p, g.getCurrentP().getFadedColor(),
+	// Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
+	// Grid.gridLineStroke, g2);
+	// Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
+	// Grid.gridLineCol, g2);
+	// }
+	// }
+	// }
 
 	/**
 	 * @param Arraylist
@@ -371,7 +371,7 @@ public class Artist {
 			}
 
 			ArrayList<Point> contour = c.getCellContour();
-			//Color cellc = Artist.getCellColor(c);
+			// Color cellc = Artist.getCellColor(c);
 			Color capturedc = Artist.getCellCapturesColor(c);
 
 			/* draw cell contour */
@@ -393,28 +393,28 @@ public class Artist {
 				g2.setStroke(new BasicStroke(Grid.gridLineStroke
 						+ Grid.CURSOR_VARIANT_STROKE));
 			}
-			//circles in contour
+			// circles in contour
 			for (int i = 0; i < contour.size(); i++) {
 				Artist.drawCircle(contour.get(i), col, Grid.HALF_DIAMETER,
 						Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
 				Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
 						Grid.half_squareSize, Grid.gridLineCol, g2);
 			}
-			
-			//cells inside this cell
+
+			// cells inside this cell
 			for (Point p : c.getAreaIncell()) {
-				if(p.getStatus() == Point.DEAD){
-					Artist.drawCircle(p,
-							BoardFrame.BOARD_COLOR,
+			
+				if (p.getStatus() == Point.CAPTURED) {
+					Artist.drawCircle(p, Tools.fade(capturedc),
 							Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 							Grid.gridLineStroke, g2);
 					Artist.drawCursor(p, Grid.gridLineStroke,
 							Grid.half_squareSize, Grid.gridLineCol, g2);
+					System.out.println("drawing : " + p);
 				}
-				
-				if (p.getId() == JKemik.game.getGuest().getId()) {//&& p.getStatus() == Point.CAPTURED
-					Artist.drawCircle(p,
-							Tools.fade(capturedc),
+
+				if (p.getStatus() == Point.DEAD) {
+					Artist.drawCircle(p, BoardFrame.BOARD_COLOR,
 							Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 							Grid.gridLineStroke, g2);
 					Artist.drawCursor(p, Grid.gridLineStroke,
@@ -432,85 +432,85 @@ public class Artist {
 		return true;
 	}
 
-//	/**
-//	 * @param Arraylist
-//	 *            of pl1 cells, pl1, pl2
-//	 * @return void Draws a cell with all its content.
-//	 * */
-//	protected static boolean drawAllCell(HashMap<Integer, Cell> cells,
-//			Player current, Player other, Graphics2D g2) {
-//
-//		try {
-//			if (cells.isEmpty()) {
-//				return false;
-//			}
-//
-//			for (Cell c : cells.values()) {
-//				ArrayList<Point> contour = c.getCellContour();
-//				Color col = getCellColor(c);
-//
-//				if (c.getStatus() != Globals.CELL_CAPTURED) {
-//					/* draw cell contour */
-//					Artist.drawLine(contour.get(0),
-//							contour.get(contour.size() - 1),
-//							Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE,
-//							current.getColor(), g2);
-//					for (int i = 0; i < contour.size() - 1; i++) {
-//
-//						Artist.drawLine(contour.get(i), contour.get(i + 1),
-//								Grid.gridLineStroke
-//										+ Grid.CURSOR_VARIANT_STROKE,
-//								current.getColor(), g2);
-//
-//						// draw intersection
-//						Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
-//								Grid.half_squareSize, Grid.gridLineCol, g2);
-//
-//						Artist.drawCursor(contour.get(i + 1),
-//								Grid.gridLineStroke, Grid.half_squareSize,
-//								Grid.gridLineCol, g2);
-//						g2.setColor(current.getColor());
-//						g2.setStroke(new BasicStroke(Grid.gridLineStroke
-//								+ Grid.CURSOR_VARIANT_STROKE));
-//					}
-//				} else {
-//
-//					/* draw cell contour */
-//					Artist.drawLine(contour.get(0),
-//							contour.get(contour.size() - 1),
-//							Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE,
-//							Tools.fade(col), g2);
-//					for (int i = 0; i < contour.size() - 1; i++) {
-//
-//						Artist.drawLine(contour.get(i), contour.get(i + 1),
-//								Grid.gridLineStroke
-//										+ Grid.CURSOR_VARIANT_STROKE,
-//								Tools.fade(col), g2);
-//
-//						// draw intersection
-//						Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
-//								Grid.half_squareSize, Grid.gridLineCol, g2);
-//
-//						Artist.drawCursor(contour.get(i + 1),
-//								Grid.gridLineStroke, Grid.half_squareSize,
-//								Grid.gridLineCol, g2);
-//						g2.setColor(Tools.fade(col));
-//						g2.setStroke(new BasicStroke(Grid.gridLineStroke
-//								+ Grid.CURSOR_VARIANT_STROKE));
-//					}
-//
-//					System.out.println("CellsInCell : " + c.getCellsInCell());
-//					if (drawAllCell(c.getCellsInCell(), other, current, g2)) {
-//						System.err.println("Drawing captured cells ...");
-//					}
-//				}
-//			}
-//
-//		} catch (NullPointerException e) {
-//			System.out.println("In drawAllCell: " + e.getMessage());
-//		}
-//		return true;
-//	}
+	// /**
+	// * @param Arraylist
+	// * of pl1 cells, pl1, pl2
+	// * @return void Draws a cell with all its content.
+	// * */
+	// protected static boolean drawAllCell(HashMap<Integer, Cell> cells,
+	// Player current, Player other, Graphics2D g2) {
+	//
+	// try {
+	// if (cells.isEmpty()) {
+	// return false;
+	// }
+	//
+	// for (Cell c : cells.values()) {
+	// ArrayList<Point> contour = c.getCellContour();
+	// Color col = getCellColor(c);
+	//
+	// if (c.getStatus() != Globals.CELL_CAPTURED) {
+	// /* draw cell contour */
+	// Artist.drawLine(contour.get(0),
+	// contour.get(contour.size() - 1),
+	// Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE,
+	// current.getColor(), g2);
+	// for (int i = 0; i < contour.size() - 1; i++) {
+	//
+	// Artist.drawLine(contour.get(i), contour.get(i + 1),
+	// Grid.gridLineStroke
+	// + Grid.CURSOR_VARIANT_STROKE,
+	// current.getColor(), g2);
+	//
+	// // draw intersection
+	// Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
+	// Grid.half_squareSize, Grid.gridLineCol, g2);
+	//
+	// Artist.drawCursor(contour.get(i + 1),
+	// Grid.gridLineStroke, Grid.half_squareSize,
+	// Grid.gridLineCol, g2);
+	// g2.setColor(current.getColor());
+	// g2.setStroke(new BasicStroke(Grid.gridLineStroke
+	// + Grid.CURSOR_VARIANT_STROKE));
+	// }
+	// } else {
+	//
+	// /* draw cell contour */
+	// Artist.drawLine(contour.get(0),
+	// contour.get(contour.size() - 1),
+	// Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE,
+	// Tools.fade(col), g2);
+	// for (int i = 0; i < contour.size() - 1; i++) {
+	//
+	// Artist.drawLine(contour.get(i), contour.get(i + 1),
+	// Grid.gridLineStroke
+	// + Grid.CURSOR_VARIANT_STROKE,
+	// Tools.fade(col), g2);
+	//
+	// // draw intersection
+	// Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
+	// Grid.half_squareSize, Grid.gridLineCol, g2);
+	//
+	// Artist.drawCursor(contour.get(i + 1),
+	// Grid.gridLineStroke, Grid.half_squareSize,
+	// Grid.gridLineCol, g2);
+	// g2.setColor(Tools.fade(col));
+	// g2.setStroke(new BasicStroke(Grid.gridLineStroke
+	// + Grid.CURSOR_VARIANT_STROKE));
+	// }
+	//
+	// System.out.println("CellsInCell : " + c.getCellsInCell());
+	// if (drawAllCell(c.getCellsInCell(), other, current, g2)) {
+	// System.err.println("Drawing captured cells ...");
+	// }
+	// }
+	// }
+	//
+	// } catch (NullPointerException e) {
+	// System.out.println("In drawAllCell: " + e.getMessage());
+	// }
+	// return true;
+	// }
 
 	protected static Color getCellColor(Cell c) {
 		if (c.getId() == JKemik.game.getCurrentP().getId()) {

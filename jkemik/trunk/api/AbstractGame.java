@@ -6,8 +6,6 @@ package api;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Stack;
-
 import javax.swing.JOptionPane;
 
 import controler.JKemik;
@@ -144,9 +142,11 @@ public abstract class AbstractGame implements Serializable {
 					ArrayList<Point> TempArea = Tools.getArea(
 							currentP.getSelected(), squareSize);
 
-					ArrayList<Point> area = getTrueArea(TempArea);
+					ArrayList<Point> activePoints = getTrueArea(TempArea);
+					ArrayList<Point> area = new ArrayList<Point>();
 
-					if (isAreaEmpty(area)) {
+					/*Cell is invalid if there are no active points*/
+					if (isAreaEmpty(activePoints)) {
 						currentP.setSuccessful(false);
 						currentP.setSelected(new ArrayList<Point>());
 						continue;
@@ -156,7 +156,7 @@ public abstract class AbstractGame implements Serializable {
 					this.redeemed_count = 0;
 					//this.bonus = 0;
 
-					/* Go through all selected dots from recursion */
+					/* Go through all points in this cell */
 					for (Point p : TempArea) {
 						/* If p exist in collection */
 						if (this.collection.containsKey(p.toString())) {
@@ -175,25 +175,21 @@ public abstract class AbstractGame implements Serializable {
 								object.setStatus(Point.REDEEMED);
 								redeemed_count += Globals.REDEEMED_POINT_VALUE;
 							}
+							/*Copy reference to area*/
+							area.add(object);
 							
-							/* Recapture redeemed Points*/
-//							if (object.getId() == guest.getId()
-//									&& object.getStatus() != Point.REDEEMED) {
-//								object.setStatus(Point.CONVERT);
-//								//bonus += Globals.POINT_BONUS;
-//							}
-
 						} else {
 							/* If p doesn't exist in collection */
 							p.setStatus(Point.DEAD);
 							this.collection.put(p.toString(), p);
+							area.add(p);
 						}
 
 					}/* end of second for loop */
 
 					setStatusForAll(currentP.getSelected(), Point.CONNECTED);
 					cell = new Cell(getCurrentP().getId(), getCurrentP()
-							.getSelected(), TempArea);
+							.getSelected(), area);
 
 					if (captured_count == 0) {
 						cell.setStatus(Globals.CELL_EMPTY);
@@ -223,18 +219,19 @@ public abstract class AbstractGame implements Serializable {
 		ArrayList<Point> TempArea = Tools.getArea(currentP.getSelected(),
 				squareSize);
 
-		ArrayList<Point> area = getTrueArea(TempArea);
+		ArrayList<Point> activePoints = getTrueArea(TempArea);
+		ArrayList<Point> area = new ArrayList<Point>();
 
-		if (isAreaEmpty(area)) {
+		/*Cell is invalid if there are no active points*/
+		if (isAreaEmpty(activePoints)) {
 			currentP.setSelected(new ArrayList<Point>());
 			return null;
 		}
 
 		this.captured_count = 0;
 		this.redeemed_count = 0;
-		//this.bonus = 0;
 		/* Go through all selected dots from recursion */
-		for (Point p : area) {
+		for (Point p : TempArea) {
 			/* If p exist in collection */
 			if (this.collection.containsKey(p.toString())) {
 				Point object = this.collection.get(p.toString());
@@ -252,19 +249,12 @@ public abstract class AbstractGame implements Serializable {
 					object.setStatus(Point.REDEEMED);
 					redeemed_count += Globals.REDEEMED_POINT_VALUE;
 				}
-				
-
-				/* Recapture redeemed Points*/
-//				if (object.getId() == guest.getId()
-//						&& object.getStatus() == Point.REDEEMED) {
-//					object.setStatus(Point.CONVERT);
-//					//bonus += Globals.POINT_BONUS;
-//				}
-
+				area.add(object);
 			} else {
 				/* If p doesn't exist in collection */
 				p.setStatus(Point.DEAD);
 				this.collection.put(p.toString(), p);
+				area.add(p);
 			}
 		}/* end of second for loop */
 
@@ -283,7 +273,6 @@ public abstract class AbstractGame implements Serializable {
 		cell.setValue(captured_count + redeemed_count);
 		cell.setCapturesCount(captured_count);
 		cell.setRedeemedCount(redeemed_count);
-	//	cell.setBonus(bonus);
 		cell.setStatus(Globals.CELL_FREE);
 		currentP.addCell(cell);
 		evalCell(cell);
@@ -608,14 +597,6 @@ public abstract class AbstractGame implements Serializable {
 		this.lastp = lastp;
 	}
 
-	// TODO implement persistent capture
-	public Stack<Point> getBox() {
-		return firstBox;
-	}
-
-	public void setBox(Stack<Point> persistanceList) {
-		this.firstBox = persistanceList;
-	}
 
 	public int getCaptured_count() {
 		return captured_count;
@@ -650,7 +631,6 @@ public abstract class AbstractGame implements Serializable {
 	private int maxScore = 2;
 	public int captured_count = 0;
 	public int redeemed_count = 0;
-	public int bonus = 0;
 	public int play_count = 0;
 	public Point lastp = new Point(553355, 7798979);
 
@@ -663,6 +643,6 @@ public abstract class AbstractGame implements Serializable {
 
 	/* persistance */
 	// TODO implement persistent capture
-	public Stack<Point> firstBox = null;
+	//public Stack<Point> firstBox = null;
 
 }
