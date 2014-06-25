@@ -134,13 +134,11 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 					}
 				}
 			}
+			BoardFrame.progressB.setVisible(true);
+			BoardFrame.progressB.setIndeterminate(true);
 			if (game.isEmbuche_on()) {
 				if (JKemik.settings_t.isAutoCapture()) {
-					BoardFrame.progressB.setVisible(true);
-					BoardFrame.progressB.setIndeterminate(true);
 					Grid.cell = JKemik.embush(Grid.squareSize);
-					BoardFrame.progressB.setIndeterminate(false);
-					BoardFrame.progressB.setVisible(false);
 					BoardFrame.grid.repaint();
 				}
 			}
@@ -150,6 +148,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
 			BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
 			BoardFrame.updateBoardStatus();
+			BoardFrame.progressB.setIndeterminate(false);
+			BoardFrame.progressB.setVisible(false);
 		}
 	}
 

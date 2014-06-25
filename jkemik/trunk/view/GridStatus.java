@@ -82,36 +82,16 @@ public class GridStatus extends JPanel{
         gs.setFont(gfont);
         init();
 
-        
-        add(dc);
-        add(this.deadCount);
-        add(dgp);
-        add(this.deadGridInPercent);
-        add(fgp);
-        add(this.freeGridInPercent);
         add(gs);
         add(this.tot_play_count);
+        add(dgp);
+        add(this.deadGridInPercent);
+        add(dc);
+        add(this.deadCount);
+        add(fgp);
+        add(this.freeGridInPercent);
 	}
 
-	/**
-	 * @return the dridSize
-	 */
-//	public JLabel getGridSize() {
-//		return this.gridSize;
-//	}
-//	/**
-//	 * @param dridSize the dridSize to set
-//	 */
-//	public void setGridSize(int rows, int cols) {
-//	//	if(rows > 0 && cols > 0){
-//		cols = cols - 1;
-//		rows = rows - 1;
-//		this.gridSize.setText(cols + " x " + rows);
-//		System.out.println((cols - 1) + " x " + (rows - 1));
-////		}else{
-////			throw new IllegalStateException();
-////		}
-//	}
 	public void init(){
 		setDeadCountV("0");
 		setDeadGridInPercentV(0);
@@ -175,11 +155,4 @@ public class GridStatus extends JPanel{
 		this.freeGridInPercent.setText(str + " %");
 	}
 
-
-	/**
-	 * @param gridSize the gridSize to set
-	 */
-//	public void setGridSize(JLabel gridSize) {
-//		this.gridSize = gridSize;
-//	}
 }
