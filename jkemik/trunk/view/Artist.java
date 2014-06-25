@@ -410,7 +410,6 @@ public class Artist {
 							Grid.gridLineStroke, g2);
 					Artist.drawCursor(p, Grid.gridLineStroke,
 							Grid.half_squareSize, Grid.gridLineCol, g2);
-					System.out.println("drawing : " + p);
 				}
 
 				if (p.getStatus() == Point.DEAD) {
@@ -431,86 +430,6 @@ public class Artist {
 		}
 		return true;
 	}
-
-	// /**
-	// * @param Arraylist
-	// * of pl1 cells, pl1, pl2
-	// * @return void Draws a cell with all its content.
-	// * */
-	// protected static boolean drawAllCell(HashMap<Integer, Cell> cells,
-	// Player current, Player other, Graphics2D g2) {
-	//
-	// try {
-	// if (cells.isEmpty()) {
-	// return false;
-	// }
-	//
-	// for (Cell c : cells.values()) {
-	// ArrayList<Point> contour = c.getCellContour();
-	// Color col = getCellColor(c);
-	//
-	// if (c.getStatus() != Globals.CELL_CAPTURED) {
-	// /* draw cell contour */
-	// Artist.drawLine(contour.get(0),
-	// contour.get(contour.size() - 1),
-	// Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE,
-	// current.getColor(), g2);
-	// for (int i = 0; i < contour.size() - 1; i++) {
-	//
-	// Artist.drawLine(contour.get(i), contour.get(i + 1),
-	// Grid.gridLineStroke
-	// + Grid.CURSOR_VARIANT_STROKE,
-	// current.getColor(), g2);
-	//
-	// // draw intersection
-	// Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
-	// Grid.half_squareSize, Grid.gridLineCol, g2);
-	//
-	// Artist.drawCursor(contour.get(i + 1),
-	// Grid.gridLineStroke, Grid.half_squareSize,
-	// Grid.gridLineCol, g2);
-	// g2.setColor(current.getColor());
-	// g2.setStroke(new BasicStroke(Grid.gridLineStroke
-	// + Grid.CURSOR_VARIANT_STROKE));
-	// }
-	// } else {
-	//
-	// /* draw cell contour */
-	// Artist.drawLine(contour.get(0),
-	// contour.get(contour.size() - 1),
-	// Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE,
-	// Tools.fade(col), g2);
-	// for (int i = 0; i < contour.size() - 1; i++) {
-	//
-	// Artist.drawLine(contour.get(i), contour.get(i + 1),
-	// Grid.gridLineStroke
-	// + Grid.CURSOR_VARIANT_STROKE,
-	// Tools.fade(col), g2);
-	//
-	// // draw intersection
-	// Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
-	// Grid.half_squareSize, Grid.gridLineCol, g2);
-	//
-	// Artist.drawCursor(contour.get(i + 1),
-	// Grid.gridLineStroke, Grid.half_squareSize,
-	// Grid.gridLineCol, g2);
-	// g2.setColor(Tools.fade(col));
-	// g2.setStroke(new BasicStroke(Grid.gridLineStroke
-	// + Grid.CURSOR_VARIANT_STROKE));
-	// }
-	//
-	// System.out.println("CellsInCell : " + c.getCellsInCell());
-	// if (drawAllCell(c.getCellsInCell(), other, current, g2)) {
-	// System.err.println("Drawing captured cells ...");
-	// }
-	// }
-	// }
-	//
-	// } catch (NullPointerException e) {
-	// System.out.println("In drawAllCell: " + e.getMessage());
-	// }
-	// return true;
-	// }
 
 	protected static Color getCellColor(Cell c) {
 		if (c.getId() == JKemik.game.getCurrentP().getId()) {
