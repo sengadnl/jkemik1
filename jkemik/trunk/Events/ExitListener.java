@@ -30,6 +30,7 @@ public class ExitListener implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
+            System.out.println("exit clicked");
 		int response = JOptionPane.showConfirmDialog(null,
 				BoardFrame.messages.getString("exitMessage") + "\n",
 				BoardFrame.messages.getString("question"),

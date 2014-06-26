@@ -21,6 +21,13 @@ public class GridDimension implements Comparable<GridDimension>, Serializable {
 		this.squares = squares;
 		this.sqrSize = sqrSize;
 	}
+        public int gridHeight(){
+		//int height = (int) this.squares.getHeight() + 1;
+            return (int) (this.squares.getHeight() * this.sqrSize);
+        }
+        public int gridWidth(){
+             return (int) (this.squares.getWidth() * this.sqrSize);
+        }
 
 	/**
 	 * @param none

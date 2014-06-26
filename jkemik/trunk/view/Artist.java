@@ -311,51 +311,6 @@ public class Artist {
 		}
 	}
 
-	// protected static void drawGame(AbstractGame g, Graphics2D g2) {
-	// Player p1 = (Player) g.getPlayer1();
-	// Player p2 = (Player) g.getPlayer2();
-	// HashMap<Integer, Cell> p1c = p1.getCells();
-	// HashMap<Integer, Cell> p2c = p2.getCells();
-	//
-	// // draw p1 cells
-	// if (drawAllCell(p1c, p1, p2, g2)) {
-	// }
-	//
-	// // draw p1 cells
-	// if (drawAllCell(p2c, p2, p1, g2)) {
-	// }
-	//
-	// // draw p1 points
-	// for (Point p : JKemik.game.getCollection().values()) {
-	//
-	// if (p.getId() == p1.getId()) { // && p.getStatus() == Point.CAPTURED
-	// Artist.drawCircle(p, p1.getColor(), Grid.HALF_DIAMETER,
-	// Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
-	// Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
-	// Grid.gridLineCol, g2);
-	// }
-	//
-	// if (p.getId() == p2.getId()) { // && p.getStatus() == Point.CAPTURED
-	// Artist.drawCircle(p, p2.getColor(), Grid.HALF_DIAMETER,
-	// Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
-	// Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
-	// Grid.gridLineCol, g2);
-	// }
-	//
-	// }
-	//
-	// if (Grid.manualc) {
-	// for (Point p : g.getCurrentP().getSelected()) {
-	//
-	// Artist.drawCircle(p, g.getCurrentP().getFadedColor(),
-	// Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-	// Grid.gridLineStroke, g2);
-	// Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
-	// Grid.gridLineCol, g2);
-	// }
-	// }
-	// }
-
 	/**
 	 * @param Arraylist
 	 *            of pl1 cells, pl1, pl2
@@ -483,8 +438,8 @@ public class Artist {
 		g2.setStroke(new BasicStroke(stroke));
 
 		// Highlight of visited intersection
-		// g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-		// RenderingHints.VALUE_ANTIALIAS_ON);
+//		 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+//		 RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.draw(new Line2D.Double(p.getXC(), p.getYC() + h_sqr, p.getXC(), p
 				.getYC() - h_sqr));
 		g2.draw(new Line2D.Double(p.getXC() - h_sqr, p.getYC(), p.getXC()

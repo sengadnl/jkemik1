@@ -22,6 +22,7 @@ public class RefreshListener implements MouseListener {
 				|| JKemik.settings_t.isPlayMode()) {
 			Grid.setRefresh(true);
 			BoardFrame.displayGrid(true);
+                        BoardFrame.grid.repaint();
 			BoardFrame.updateBoardStatus();
 		} else {
 			BoardFrame.displayGrid(false);

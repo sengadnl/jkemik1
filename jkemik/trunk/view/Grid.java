@@ -63,14 +63,16 @@ public class Grid extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
+            try {
 		//super.paintComponent(g2);
 		Grid.g2 = (Graphics2D) g;
 		AbstractGame game = JKemik.game;
 
-	try {
-			Artist.drawCursor(new Point(hl_x, hl_y, 0), gridLineStroke,
-					Grid.half_squareSize, gridLineCol, g2);
-			highLightDot(game.getCurrentP().getColor());
+	
+//			Artist.drawCursor(new Point(hl_x, hl_y, 0), gridLineStroke,
+//					Grid.half_squareSize, gridLineCol, g2);
+//                Artist.drawGrid(g2, Grid.dimension, Grid.squareFadeVariant,
+//						Grid.gridLineStroke, BoardFrame.BOARD_COLOR);
 
 			// play
 			if (mouseclicked && plotPoint) {
@@ -133,6 +135,10 @@ public class Grid extends JPanel {
 				}
 				this.drawn = true;
 			}
+                        
+                        //draw cursor
+                        highLightDot(game.getCurrentP().getColor());
+                        
 		} catch (NullPointerException e) {
 			System.out.println("NullPointer in paintComponent: "
 					+ e.getMessage());
