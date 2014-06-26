@@ -102,6 +102,7 @@ public class BoardFrame extends JFrame {
 
 		// constant events
 		ViewEvents.exitListener();
+                //exit.addMouseListener(ViewEvents.exitlistener);
 		ViewEvents.helpListener();
 		ViewEvents.refreshListener();
 		ViewEvents.sysPrefsListener();
@@ -141,7 +142,9 @@ public class BoardFrame extends JFrame {
 		top_right = new JPanel();
 		status_panel_container = new JPanel();
 		grid_container = new JPanel();
+               // grid_container.setOpaque(false);
 		grid = Grid.getInstance(JKemik.settings_t.getGridDimension());//
+               grid.setOpaque(false);//set to trasnparent
 		west_blank_panel = new JPanel();
 		playerPanel_container = new JPanel();
 		p1panel = new PlayerPanel((int) (PLAYER_PNL_W_SCALAR * this.width),
@@ -615,6 +618,7 @@ public class BoardFrame extends JFrame {
 		middle_container.setBackground(BoardFrame.THEME_COLOR);
 		status_panel_container.setBackground(BoardFrame.THEME_COLOR);
 		grid_container.setBackground(Tools.fade(BoardFrame.BOARD_COLOR, 20));
+                //grid_container.setOpaque(false);
 
 		west_blank_panel.setBackground(BoardFrame.THEME_COLOR);
 		settings_p.setBackground(BoardFrame.THEME_COLOR);
@@ -827,12 +831,13 @@ public class BoardFrame extends JFrame {
 
 	public static void displayGrid(boolean display) {
 		settings_p.setVisible(!display);
-		grid_container.repaint();
+                
+		//grid_container.repaint();
 		grid.setVisible(display);
 		if (grid.drawn) {
 			System.out.println("Displaying the grid.....");
 			grid.drawn = false;
-			grid.repaint();
+			//grid.repaint();
 		}
 	}
 
@@ -884,83 +889,85 @@ public class BoardFrame extends JFrame {
 	public static void uiLooksUpdate(STemplate s, GTemplate t) {
 
 		if (s.isGameSetupMode()) {
-			print_point.setText("" + messages.getString("gameSetupMode"));
-			updateSettingPanel();
-			updateBoardStatus();
-			translateUI();
+                    print_point.setText("" + messages.getString("gameSetupMode"));
+                    updateSettingPanel();
+                    updateBoardStatus();
+                    translateUI();
 
-			pnamelabel1.setText(JKemik.template.getP1_name().toUpperCase());
-			pnamelabel2.setText(JKemik.template.getP2_name().toUpperCase());
+                    pnamelabel1.setText(JKemik.template.getP1_name().toUpperCase());
+                    pnamelabel2.setText(JKemik.template.getP2_name().toUpperCase());
 
-			enableGameControlPanel();
-			p1panel.disablePanelDecor();
-			p2panel.disablePanelDecor();
+                    enableGameControlPanel();
+                    p1panel.disablePanelDecor();
+                    p2panel.disablePanelDecor();
 
-			decorateLabelForeground(Tools.boost(BOARD_COLOR,Globals.LABEL_VARIANT  + 60));
-			AutoCap.setForeground(Color.WHITE);
-			AutoPass.setForeground(Color.WHITE);
-			Win.setForeground(Color.WHITE);
-			backt.setForeground(Color.WHITE);
+                    decorateLabelForeground(Tools.boost(BOARD_COLOR,Globals.LABEL_VARIANT  + 60));
+                    AutoCap.setForeground(Color.WHITE);
+                    AutoPass.setForeground(Color.WHITE);
+                    Win.setForeground(Color.WHITE);
+                    backt.setForeground(Color.WHITE);
 
-			mouseSelection.setVisible(false);
-			BoardFrame.startG.setVisible(true);
-			BoardFrame.Game_status.setVisible(false);
-			undo.setVisible(false);
-			capture.setVisible(false);
-			pass_turn.setVisible(false);
-			mode.setVisible(false);
-			displayGrid(true);
+                    mouseSelection.setVisible(false);
+                    BoardFrame.startG.setVisible(true);
+                    BoardFrame.Game_status.setVisible(false);
+                    undo.setVisible(false);
+                    capture.setVisible(false);
+                    pass_turn.setVisible(false);
+                    mode.setVisible(false);
+                    displayGrid(true);
+                    grid.repaint();
 		}
 		if (s.isPlayMode()) {
-			System.out.println("setting playmode");
-			Game_status.setText(BoardFrame.messages.getString("endG"));
+                    System.out.println("setting playmode");
+                    Game_status.setText(BoardFrame.messages.getString("endG"));
 
-			pnamelabel1.setText(JKemik.template.getP1_name().toUpperCase());
-			pnamelabel2.setText(JKemik.template.getP2_name().toUpperCase());
+                    pnamelabel1.setText(JKemik.template.getP1_name().toUpperCase());
+                    pnamelabel2.setText(JKemik.template.getP2_name().toUpperCase());
 
-			disableGameControlPanel();
-			p1panel.enablePanelDecor();
-			p2panel.enablePanelDecor();
+                    disableGameControlPanel();
+                    p1panel.enablePanelDecor();
+                    p2panel.enablePanelDecor();
 
-			decorateLabelForeground(Tools.boost(BOARD_COLOR,Globals.LABEL_VARIANT  + 60));
-			AutoCap.setForeground(Color.WHITE);
-			AutoPass.setForeground(Color.WHITE);
-			Win.setForeground(Color.WHITE);
-			backt.setForeground(Color.WHITE);
+                    decorateLabelForeground(Tools.boost(BOARD_COLOR,Globals.LABEL_VARIANT  + 60));
+                    AutoCap.setForeground(Color.WHITE);
+                    AutoPass.setForeground(Color.WHITE);
+                    Win.setForeground(Color.WHITE);
+                    backt.setForeground(Color.WHITE);
 
-			showControlButtons();
-			BoardFrame.Game_status.setVisible(true);
-			BoardFrame.startG.setVisible(false);
-			print_point.setText("" + (new Point(0, 0)).toString());
-			String p1n = t.getP1_name();
-			String p2n = t.getP2_name();
-			Color p1c = t.getP1_c();
-			Color p2c = t.getP2_c();
-			p1panel.initPanelForNewGame(p1n, p1c);
-			p2panel.initPanelForNewGame(p2n, p2c);
-			Win.setText(JKemik.settings_t.getMaxWinVal() + "");
-			setMakingGame(false);
-			displayGrid(true);
+                    showControlButtons();
+                    BoardFrame.Game_status.setVisible(true);
+                    BoardFrame.startG.setVisible(false);
+                    print_point.setText("" + (new Point(0, 0)).toString());
+                    String p1n = t.getP1_name();
+                    String p2n = t.getP2_name();
+                    Color p1c = t.getP1_c();
+                    Color p2c = t.getP2_c();
+                    p1panel.initPanelForNewGame(p1n, p1c);
+                    p2panel.initPanelForNewGame(p2n, p2c);
+                    Win.setText(JKemik.settings_t.getMaxWinVal() + "");
+                    setMakingGame(false);
+                    displayGrid(true);
+                    grid.repaint();
 		}
 		if (s.isSystemSetupMode()) {
-			settings_p.updateSettingsPanel(s);
-			print_point.setText(""
-					+ BoardFrame.messages.getString("sysSetupMode"));
-			pnamelabel1.setText(JKemik.template.getP1_name().toUpperCase());
-			pnamelabel2.setText(JKemik.template.getP2_name().toUpperCase());
+                    settings_p.updateSettingsPanel(s);
+                    print_point.setText(""
+                                    + BoardFrame.messages.getString("sysSetupMode"));
+                    pnamelabel1.setText(JKemik.template.getP1_name().toUpperCase());
+                    pnamelabel2.setText(JKemik.template.getP2_name().toUpperCase());
 
-			p1panel.disablePanelDecor();
-			p2panel.disablePanelDecor();
+                    p1panel.disablePanelDecor();
+                    p2panel.disablePanelDecor();
 
-			BoardFrame.Game_status.setVisible(false);
-			BoardFrame.startG.setVisible(false);
-			disableGameControlPanel();
-			undo.setVisible(false);
-			capture.setVisible(false);
-			pass_turn.setVisible(false);
-			mode.setVisible(false);
-			displayGrid(false);
-			gridstats.init();
+                    BoardFrame.Game_status.setVisible(false);
+                    BoardFrame.startG.setVisible(false);
+                    disableGameControlPanel();
+                    undo.setVisible(false);
+                    capture.setVisible(false);
+                    pass_turn.setVisible(false);
+                    mode.setVisible(false);
+                    displayGrid(false);
+                    gridstats.init();
 		}
 	}
 

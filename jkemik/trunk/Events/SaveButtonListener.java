@@ -29,6 +29,7 @@ public class SaveButtonListener implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
+             System.out.println("Game start clicked");
 		Color c1, c2;
 		c1 = BoardFrame.pColor1.getBackground();
 		c2 = BoardFrame.pColor2.getBackground();
