@@ -34,6 +34,8 @@ public class BoardSizeListener implements MouseListener{
 		Grid.setDimension(t.getGridDimension());		
 		BoardFrame.settings_p.updateSettingsPanel(JKemik.settings_t);
 		BoardFrame.displayGrid(true);
+                BoardFrame.grid.repaint();
+                
 		BoardFrame.Win.setText((int)(t.getGridDimension().positions()* Globals.MAX_WIN) + "");
 		t.setMaxWinVal((int)(t.getGridDimension().positions() * Globals.MAX_WIN));
 
