@@ -20,15 +20,16 @@ public class ManualSelectionListener implements MouseListener {
 		this.setDebug(capture);
 	}
 
+        @Override
 	public void mouseClicked(MouseEvent arg0) {
 		if (capture.isSelected()) {
-			Grid.setManualc(true);
-			Grid.selectPoint = true;
-			BoardFrame.mode.setVisible(false);
-			BoardFrame.pass_turn.setVisible(false);
-			JKemik.game.setEmbuche_on(false);
+                    Grid.setManualc(true);
+                    Grid.selectPoint = true;
+                    BoardFrame.mode.setVisible(false);
+                    BoardFrame.pass_turn.setVisible(false);
+                    JKemik.game.setEmbuche_on(false);
 		} else {
-			JKemik.game.getCurrentP().setSelected(new ArrayList<Point>());
+			JKemik.game.getCurrentP().setSelected(new ArrayList<>());
 			JKemik.view.repaint();
 			BoardFrame.grid.drawn = false;
 			Grid.manualc = false;
@@ -38,19 +39,23 @@ public class ManualSelectionListener implements MouseListener {
 		}
 	}
 
+        @Override
 	public void mouseEntered(MouseEvent arg0) {
 		//capture.setToolTipText("Check to select manually.");
 		capture.setToolTipText(BoardFrame.messages.getString("checkSelect"));
 	}
 
+        @Override
 	public void mouseExited(MouseEvent arg0) {
 
 	}
 
+        @Override
 	public void mousePressed(MouseEvent arg0) {
 
 	}
 
+        @Override
 	public void mouseReleased(MouseEvent arg0) {
 
 	}
@@ -59,7 +64,7 @@ public class ManualSelectionListener implements MouseListener {
 		return capture;
 	}
 
-	public void setDebug(JCheckBox debug) {
+	private void setDebug(JCheckBox debug) {
 		this.capture = debug;
 	}
 }

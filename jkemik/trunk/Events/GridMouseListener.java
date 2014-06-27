@@ -101,7 +101,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 							BoardFrame.displayGrid(true);
 						}
 					}
-					//BoardFrame.grid.repaint();
+					BoardFrame.grid.repaint();
 				}
 			} else {
 				if (game.getCurrentP().isTurn()) {
@@ -158,10 +158,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
                         
 			BoardFrame.progressB.setIndeterminate(false);
 			BoardFrame.progressB.setVisible(false);
-                        
-                       
-                        
-                       
+   
 		}
 	}
 
