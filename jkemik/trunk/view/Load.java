@@ -25,7 +25,7 @@ public class Load extends JFrame {
 	static JProgressBar progressBar;
 	static JLabel label; 
 	protected static int COUNTER = 1;
-	protected static int MAX_VAL = 11;
+	protected static int MAX_VAL = 14;
 
 	private static java.awt.Container container;
 

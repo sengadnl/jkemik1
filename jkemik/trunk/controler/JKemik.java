@@ -40,6 +40,7 @@ public class JKemik extends Application {
 	static File g_object = new File(Tools.fullPath() + Globals.gameObjectFile);
 	private static String endingMessage = "This Game has not ended you";
 
+        @Override
 	protected void init() {
 		try {
 			load = new Load(362, 183);
@@ -51,7 +52,7 @@ public class JKemik extends Application {
 			readTemplate();
 			readSettings();
 			readGameObj();// TODO
-			JKemik.view.setTheme(settings_t.getTheme());
+			BoardFrame.setTheme(settings_t.getTheme());
 			
 			BoardFrame.uiLooksUpdate(settings_t,template); 
 		} catch (Exception e) {
@@ -59,6 +60,7 @@ public class JKemik extends Application {
 		}
 	}
 
+        @Override
 	protected void idle() {
 		// try {
 		if (screenResolutionCheck()) {
@@ -75,6 +77,7 @@ public class JKemik extends Application {
 		// }
 	}
 
+        @Override
 	protected void cleanup() {
 		System.exit(0);
 	}
@@ -87,6 +90,13 @@ public class JKemik extends Application {
 	}
 
 	/**/
+
+    /**
+     *
+     * @param t is the game template
+     * @param s is the settings template
+     */
+    
 	public static void createGame(GTemplate t, STemplate s) {
 		GameCreator create = new GameCreator();
 		System.out.println("CH: " + s.isCh() + "\nHH: " + s.isHh() + "\nNet: "
@@ -217,10 +227,8 @@ public class JKemik extends Application {
 			}
 		} catch (FileNotFoundException exception1) {
 			System.out.println("JKemik: readGame " + exception1.getMessage());
-		} catch (IOException exception2) {
+		} catch (IOException | ClassNotFoundException exception2) {
 			System.out.println("JKemik: readGame " + exception2.getMessage());
-		} catch (ClassNotFoundException exception3) {
-			System.out.println("JKemik: readGame " + exception3.getMessage());
 		}
 	}
 
@@ -228,23 +236,19 @@ public class JKemik extends Application {
 		try {
 
 			if (t_object.exists()) {
-				ObjectInputStream input = new ObjectInputStream(
-						new FileInputStream(t_object));
-				template = (GTemplate) input.readObject();
-				// updateSettingsPanel();
-				input.close();
+                            try (ObjectInputStream input = new ObjectInputStream(
+                                    new FileInputStream(t_object))) {
+                                template = (GTemplate) input.readObject();
+                            }
 			} else {
 				template = new GTemplate();
 			}
 		} catch (FileNotFoundException exception1) {
 			System.out.println("JKemik: readSettings "
 					+ exception1.getMessage());
-		} catch (IOException exception2) {
+		} catch (IOException | ClassNotFoundException exception2) {
 			System.out.println("JKemik: readSettings "
 					+ exception2.getMessage());
-		} catch (ClassNotFoundException exception3) {
-			System.out.println("JKemik: readSettings "
-					+ exception3.getMessage());
 		}
 	}
 
@@ -252,26 +256,19 @@ public class JKemik extends Application {
 		try {
 
 			if (s_object.exists()) {
-				ObjectInputStream input = new ObjectInputStream(
-						new FileInputStream(s_object));
-
-				settings_t = (STemplate) input.readObject();
-				// settings_t.setGameSetupMode(true);
-				// settings_t.setPlayMode(true);
-				input.close();
-
+                            try (ObjectInputStream input = new ObjectInputStream(
+                                    new FileInputStream(s_object))) {
+                                settings_t = (STemplate) input.readObject();
+                            }
 			} else {
 				settings_t = new STemplate();
 			}
 		} catch (FileNotFoundException exception1) {
 			System.out.println("JKemik: readSettings "
 					+ exception1.getMessage());
-		} catch (IOException exception2) {
+		} catch (IOException | ClassNotFoundException exception2) {
 			System.out.println("JKemik: readSettings "
 					+ exception2.getMessage());
-		} catch (ClassNotFoundException exception3) {
-			System.out.println("JKemik: readSettings "
-					+ exception3.getMessage());
 		}
 	}
 

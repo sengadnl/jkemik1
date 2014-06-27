@@ -102,17 +102,16 @@ public class BoardFrame extends JFrame {
                 setExtendedState(JFrame.MAXIMIZED_BOTH);
                 JKemik.load.plus("Packing..");
                 pack();
+                JKemik.load.plus("Showing..");
                 setVisible(true);
                
                 JKemik.load.plus("Creating initial look...");
 		uiLooksUpdate(JKemik.settings_t, JKemik.template);
                 
-                
-
 	}
 
 	/**
-	 * Defines container's attributes
+	 * Defines container attributes
 	 * */
 	// private void setContainerAttributs() {
 	// container = getContentPane();
