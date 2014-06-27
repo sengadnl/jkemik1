@@ -45,7 +45,7 @@ public class Load extends JFrame {
 		setVisible(false);
 	}
 
-	public void creadLoadingBar() {
+	private void creadLoadingBar() {
 		label = new JLabel("  ");
 		label.setForeground(new Color(0,255,0));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -69,14 +69,13 @@ public class Load extends JFrame {
 				progressBar.setValue(i);
 				Thread.sleep(num);
 			}
-		} catch (Exception e) {
+		} catch (InterruptedException e) {
 
 		}
 	}
 
 	/**
-	 * @return the progressBar
-	 * @throws InterruptedException
+     * @param print
 	 */
 	public void plus(String print){
 		long num = 150;
@@ -90,7 +89,7 @@ public class Load extends JFrame {
 				setVisible(false);
 				COUNTER = 0;
 			}
-		} catch (Exception e) {
+		} catch (InterruptedException e) {
 
 		}
 	}

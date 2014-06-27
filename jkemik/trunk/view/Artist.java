@@ -23,6 +23,7 @@ import api.AbstractGame;
 import api.GridDimension;
 import api.Player;
 import api.Point;
+import static view.Grid.gridLineStroke;
 
 public class Artist {
 	protected static void drawGridBG(Graphics2D g2, double w, double h) {
@@ -153,59 +154,6 @@ public class Artist {
 		g2.setColor(c);
 	}
 
-	// protected static boolean drawCell(Cell cell, Graphics2D g2) {
-	// AbstractGame game = JKemik.game;
-	// try {
-	// if (cell == null) {
-	// return false;
-	// }
-	// ArrayList<Point> contour = cell.getCellContour();
-	// ArrayList<Point> captured = cell.getCapturedPoints();
-	// ArrayList<Point> area = cell.getAreaIncell();
-	// if (area.isEmpty()) {
-	// return false;
-	// }
-	// if (captured.isEmpty()) {
-	// System.out.println("About to undraw a cell");
-	// return unDrawCell(cell, g2);
-	// }
-	// game.getCurrentP().getConnectedPoints().addAll(contour);
-	//
-	// /* draw cell contour */
-	// drawLine(contour.get(0), contour.get(contour.size() - 1),
-	// Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE, game
-	// .getCurrentP().getColor(), g2);
-	// for (int i = 0; i < contour.size() - 1; i++) {
-	//
-	// drawLine(contour.get(i), contour.get(i + 1),
-	// Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE, game
-	// .getCurrentP().getColor(), g2);
-	// }
-	//
-	// // draw positions
-	// for (Point p : contour) {
-	// drawCircle(p, game.getCurrentP().getColor(),
-	// Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-	// Grid.gridLineStroke, g2);
-	//
-	// drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
-	// Grid.gridLineCol, g2);
-	// g2.setColor(game.getCurrentP().getColor());
-	// g2.setStroke(new BasicStroke(Grid.gridLineStroke));// +
-	// }
-	//
-	// /* Mark empty dots */
-	// ArrayList<Point> free_dots = new ArrayList<Point>();
-	//
-	// free_dots.addAll(area);
-	// free_dots.removeAll(captured);
-	//
-	// } catch (NullPointerException e) {
-	// System.out.println("In drawCell: " + e.getMessage());
-	// }
-	// return true;
-	// }
-
 	protected static boolean unDrawCell(Cell cell, Graphics2D g2) {
 		try {
 			ArrayList<Point> contour = cell.getCellContour();
@@ -246,74 +194,72 @@ public class Artist {
 		Player p1 = (Player) g.getPlayer1();
 		Player p2 = (Player) g.getPlayer2();
 
-		// drap p1 cells
-		for (Cell c : p1.getCells().values()) {
-			Color cc = p1.getColor();
-			if (c.getStatus() == Globals.CELL_CAPTURED) {
-				cc = Tools.fade(cc);
-			}
-			drawCell(c, cc, g2);
-		}
+                //foreach loop in a "funtion operator" form
+                p1.getCells().values().stream().forEach((c) -> {
+                    Color cc = p1.getColor();
+                    if (c.getStatus() == Globals.CELL_CAPTURED) {
+                        cc = Tools.fade(cc);
+                    }
+                    drawCell(c, cc, g2);
+                });
+                
+                //foreach loop in a "funtion operator" form
+                p2.getCells().values().stream().forEach((c) -> {
+                    Color cc = p2.getColor();
+                    if (c.getStatus() == Globals.CELL_CAPTURED) {
+                        cc = Tools.fade(cc);
+                    }
+                    drawCell(c, cc, g2);
+                });
 
-		// drap p2 cells
-		for (Cell c : p2.getCells().values()) {
-			Color cc = p2.getColor();
-			if (c.getStatus() == Globals.CELL_CAPTURED) {
-				cc = Tools.fade(cc);
-			}
-			drawCell(c, cc, g2);
-		}
-
-		// draw points
-		for (Point p : JKemik.game.getCollection().values()) {
-
-			if (p.getId() == p1.getId()) {
-				if (p.getStatus() == Point.CAPTURED) {
-					Artist.drawCircle(p, Tools.fade(p1.getColor()),
-							Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-							Grid.gridLineStroke, g2);
-					Artist.drawCursor(p, Grid.gridLineStroke,
-							Grid.half_squareSize, Grid.gridLineCol, g2);
-				} else {
-					Artist.drawCircle(p, p1.getColor(), Grid.HALF_DIAMETER,
-							Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
-					Artist.drawCursor(p, Grid.gridLineStroke,
-							Grid.half_squareSize, Grid.gridLineCol, g2);
-				}
-			}
-
-			if (p.getId() == p2.getId()) { // &&
-				if (p.getStatus() == Point.CAPTURED) {
-					Artist.drawCircle(p, Tools.fade(p2.getColor()),
-							Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-							Grid.gridLineStroke, g2);
-					Artist.drawCursor(p, Grid.gridLineStroke,
-							Grid.half_squareSize, Grid.gridLineCol, g2);
-				} else {
-					Artist.drawCircle(p, p2.getColor(), Grid.HALF_DIAMETER,
-							Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
-					Artist.drawCursor(p, Grid.gridLineStroke,
-							Grid.half_squareSize, Grid.gridLineCol, g2);
-				}
-			}
-
-		}
+                JKemik.game.getCollection().values().stream().map((Point p) -> {
+                    if (p.getId() == p1.getId()) {
+                        if (p.getStatus() == Point.CAPTURED) {
+                            Artist.drawCircle(p, Tools.fade(p1.getColor()),
+                                    Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
+                                    Grid.gridLineStroke, g2);
+                            Artist.drawCursor(p, Grid.gridLineStroke,
+                                    Grid.half_squareSize, Grid.gridLineCol, g2);
+                        } else {
+                            Artist.drawCircle(p, p1.getColor(), Grid.HALF_DIAMETER,
+                                    Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
+                            Artist.drawCursor(p, Grid.gridLineStroke,
+                                    Grid.half_squareSize, Grid.gridLineCol, g2);
+                        }
+                    }
+                    return p;
+                }).filter((p) -> (p.getId() == p2.getId())).forEach((Point p) -> {
+                    if (p.getStatus() == Point.CAPTURED) {
+                        Artist.drawCircle(p, Tools.fade(p2.getColor()),
+                                Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
+                                Grid.gridLineStroke, g2);
+                        Artist.drawCursor(p, Grid.gridLineStroke,
+                                Grid.half_squareSize, Grid.gridLineCol, g2);
+                    } else {
+                        Artist.drawCircle(p, p2.getColor(), Grid.HALF_DIAMETER,
+                                Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
+                        Artist.drawCursor(p, Grid.gridLineStroke,
+                                Grid.half_squareSize, Grid.gridLineCol, g2);
+                    }
+                });
 
 		if (Grid.manualc) {
-			for (Point p : g.getCurrentP().getSelected()) {
-
-				Artist.drawCircle(p, g.getCurrentP().getFadedColor(),
-						Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-						Grid.gridLineStroke, g2);
-				Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
-						Grid.gridLineCol, g2);
-			}
+                    g.getCurrentP().getSelected().stream().map((p) -> {
+                        Artist.drawCircle(p, g.getCurrentP().getFadedColor(),
+                                Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
+                                Grid.gridLineStroke, g2);
+                        return p;
+                    }).forEach((p) -> {
+                        Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
+                                Grid.gridLineCol, g2);
+                    });
 		}
 	}
 
 	/**
-	 * @param Arraylist
-	 *            of pl1 cells, pl1, pl2
+     * @param c
+     * @param col
+     * @param g2
 	 * @return void Draws a cell with all its content.
 	 * */
 	protected static boolean drawCell(Cell c, Color col, Graphics2D g2) {
@@ -459,14 +405,53 @@ public class Artist {
 				.getXC() + Grid.squareSize, p.getYC()));
 		g2.setColor(JKemik.game.getCurrentP().getColor());
 	}
+        protected static void drawSelection(ArrayList<Point> list, Point newPoint, Color fade,Graphics2D g2){
+            try{
+                if(list.isEmpty()){
+                    return;
+                }
 
+                Point last = list.get(0);
+                for(int i = 0; i < list.size(); i++){
+                    if(i + 1 >= list.size()){
+                        last = list.get(i);
+                        break;
+                    }
+                   
+                    Artist.drawLine(last, list.get(i + 1), gridLineStroke
+                                    + Grid.CURSOR_VARIANT_STROKE, fade, g2);
+                    Artist.drawCircle(last, fade, Grid.HALF_DIAMETER,
+                                    Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
+                    Artist.drawCursor(last, gridLineStroke,
+                                    Grid.half_squareSize, Grid.gridLineCol, g2);
+                    Artist.drawCircle(list.get(i + 1), fade, Grid.HALF_DIAMETER,
+                                    Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
+                    Artist.drawCursor(list.get(i + 1), gridLineStroke,
+                                        Grid.half_squareSize, Grid.gridLineCol, g2);
+                    last = list.get(i + 1);
+                }
+                list.add(newPoint);
+                Artist.drawLine(last, newPoint, gridLineStroke
+                                    + Grid.CURSOR_VARIANT_STROKE, fade, g2);
+                Artist.drawCircle(last, fade, Grid.HALF_DIAMETER,
+                                Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
+                Artist.drawCursor(last, gridLineStroke,
+                                Grid.half_squareSize, Grid.gridLineCol, g2);
+                Artist.drawCircle(newPoint, fade, Grid.HALF_DIAMETER,
+                                Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
+                Artist.drawCursor(newPoint, gridLineStroke,
+                                        Grid.half_squareSize, Grid.gridLineCol, g2);
+                
+            }catch(Exception e){
+            }
+        }
 	protected static void unDrawSelection(ArrayList<Point> contour,
 			Graphics2D g2) {
 		AbstractGame game = JKemik.game;
 		try {
 			/* Erase last line */
 			int index = contour.size() - 1;
-			Point lastp = null, before_lastp = null;
+			Point lastp, before_lastp;
 			if (contour.size() > 1) {
 				lastp = contour.get(index);
 				before_lastp = contour.get(index - 1);

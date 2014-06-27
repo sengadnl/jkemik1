@@ -67,77 +67,73 @@ public class Grid extends JPanel {
 		//super.paintComponent(g2);
 		Grid.g2 = (Graphics2D) g;
 		AbstractGame game = JKemik.game;
-
-	
-//			Artist.drawCursor(new Point(hl_x, hl_y, 0), gridLineStroke,
-//					Grid.half_squareSize, gridLineCol, g2);
-//                Artist.drawGrid(g2, Grid.dimension, Grid.squareFadeVariant,
-//						Grid.gridLineStroke, BoardFrame.BOARD_COLOR);
-
 			// play
-			if (mouseclicked && plotPoint) {
-				Artist.drawCircle(new Point(x, y, game.getCurrentP().getId()),
-						game.getCurrentP().getColor(), Grid.HALF_DIAMETER,
-						Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
-				plotPoint = false;
-				mouseclicked = false;
-			}
+                    if (mouseclicked && plotPoint) {
+                            Artist.drawCircle(new Point(x, y, game.getCurrentP().getId()),
+                                            game.getCurrentP().getColor(), Grid.HALF_DIAMETER,
+                                            Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
+                            plotPoint = false;
+                            mouseclicked = false;
+                    }
 
-			// capture by selection
-			if (selectPoint && game.getCurrentP().getSelected().size() >= 1) {
-				Color fade = game.getCurrentP().getFadedColor();
-				Artist.drawLine(game.getLastp(), selectedP, gridLineStroke
-						+ CURSOR_VARIANT_STROKE, fade, g2);
-				Artist.drawCircle(game.getLastp(), fade, Grid.HALF_DIAMETER,
-						Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
-				Artist.drawCursor(game.getLastp(), gridLineStroke,
-						Grid.half_squareSize, gridLineCol, g2);
-				Artist.drawCircle(selectedP, fade, Grid.HALF_DIAMETER,
-						Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
-				Artist.drawCursor(selectedP, gridLineStroke,
-						Grid.half_squareSize, gridLineCol, g2);
-				game.setLastp(selectedP);
-				g2.setColor(fade);
-				selectPoint = false;
-			}
 
-			if (cell != null) {
-				Artist.drawCell(cell, game.getCurrentP().getColor(), g2);
-				cell = null;
-			}
+                    if (cell != null) {
+                            Artist.drawCell(cell, game.getCurrentP().getColor(), g2);
+                            cell = null;
+                    }
 
-			if (undo) {
-				if (manualc) {
-					if (game.getCurrentP().getSelected().size() >= 1) {
-						Artist.unDrawSelection(
-								game.getCurrentP().getSelected(), g2);
-					} 
-				} else {
-					if (game.undo()) {
-						Artist.unDraw(game.getCurrentP().getLatestP(), g2);
-					}
-				}
-				undo = false;
-			}
-			//
-			if (JKemik.settings_t.isAutoPass()
-					&& game.getCurrentP().getPlay_flag() == 1) {
-				game.switchPlayTurns();
-			}
-			if (!this.drawn) {
-				System.err.println("IN DRAW !!!");
-				Artist.drawGrid(g2, Grid.dimension, Grid.squareFadeVariant,
-						Grid.gridLineStroke, BoardFrame.BOARD_COLOR);
+                    //
+                    if (JKemik.settings_t.isAutoPass()
+                                    && game.getCurrentP().getPlay_flag() == 1) {
+                        game.switchPlayTurns();
+                    }
+                    //draw board
+                    if (!this.drawn) {
+                        System.err.println("IN DRAW !!!");
+                        Artist.drawGrid(g2, Grid.dimension, Grid.squareFadeVariant,
+                                        Grid.gridLineStroke, BoardFrame.BOARD_COLOR);
 
-				if (Grid.refresh) {
-					Artist.drawGame(game, g2);
-					Grid.refresh = false;
-				}
-				this.drawn = true;
-			}
-                        
-                        //draw cursor
-                        highLightDot(game.getCurrentP().getColor());
+                        if (Grid.refresh) {
+                                Artist.drawGame(game, g2);
+                                Grid.refresh = false;
+                        }
+                        this.drawn = true;
+                    }
+                    
+                    //draw cursor
+                    highLightDot(game.getCurrentP().getColor());
+                    
+                    // capture by selection
+                    if (selectPoint && game.getCurrentP().getSelected().size() >= 1) {
+                        Color fade = game.getCurrentP().getFadedColor();
+//                        Artist.drawCircle(game.getLastp(), fade, Grid.HALF_DIAMETER,
+//                                        Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
+//                        Artist.drawCursor(game.getLastp(), gridLineStroke,
+//                                        Grid.half_squareSize, gridLineCol, g2);
+//                        Artist.drawLine(game.getLastp(), selectedP, gridLineStroke
+//                                        + CURSOR_VARIANT_STROKE, fade, g2);
+//                        Artist.drawCircle(selectedP, fade, Grid.HALF_DIAMETER,
+//                                        Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
+//                        Artist.drawCursor(selectedP, gridLineStroke,
+//                                        Grid.half_squareSize, gridLineCol, g2);
+                        Artist.drawSelection(game.getCurrentP().getSelected(), selectedP, fade, g2);
+                        game.setLastp(selectedP);
+                        g2.setColor(fade);
+                        selectPoint = false;
+                    }
+                    if (undo) {
+                        if (manualc) {
+                                if (game.getCurrentP().getSelected().size() >= 1) {
+                                        Artist.unDrawSelection(
+                                                        game.getCurrentP().getSelected(), g2);
+                                } 
+                        } else {
+                                if (game.undo()) {
+                                        Artist.unDraw(game.getCurrentP().getLatestP(), g2);
+                                }
+                        }
+                        undo = false;
+                    }
                         
 		} catch (NullPointerException e) {
 			System.out.println("NullPointer in paintComponent: "
