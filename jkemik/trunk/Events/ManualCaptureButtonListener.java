@@ -1,12 +1,11 @@
 package Events;
 
+import api.Point;
+import controler.JKemik;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
-
-import controler.JKemik;
 import view.BoardFrame;
 import view.Grid;
 
@@ -24,7 +23,7 @@ public class ManualCaptureButtonListener implements MouseListener{
 		System.out.println("trying to capture...");
 		Grid.cell = JKemik.game.capture(Grid.squareSize);
 		System.out.println("Capture result: " + Grid.cell);
-		JKemik.game.getCurrentP().setSelected(new ArrayList<>());
+		JKemik.game.getCurrentP().setSelected(new ArrayList<Point>());
                 Grid.setRefresh(true);
                 BoardFrame.displayGrid(true);
 		BoardFrame.grid.repaint();//
