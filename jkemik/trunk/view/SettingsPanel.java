@@ -55,8 +55,8 @@ public class SettingsPanel extends JPanel{
 	private static TitledBorder RBBorder;
 	private ButtonGroup group = new ButtonGroup(); 
 	
-	private String[] auto_cap = { "ON", "OFF" };
-	private String[] auto_t_p = { "ON", "OFF" };
+	private final String[] auto_cap = { "ON", "OFF" };
+	private final String[] auto_t_p = { "ON", "OFF" };
 
 	public SettingsPanel(int w, int h) {
 		maxWinVal = 2;
@@ -137,7 +137,7 @@ public class SettingsPanel extends JPanel{
 		}
 	}
 
-	public void buildPane() {
+	private void buildPane() {
 		String code = Tools.languageKey(JKemik.settings_t.getLanguage());
 		String properties = Tools.propertiesFilename(code);
 		Locale currentLocale = new Locale(code.toLowerCase());
@@ -163,7 +163,7 @@ public class SettingsPanel extends JPanel{
 		backtrack = new JTextField("" + JKemik.settings_t.getBacktrackingDistance());
 		maxPointScaler = new JTextField("" + JKemik.settings_t.getMaxPointScaler());
 		
-		languageList = new JComboBox<String>(Globals.laguageNames);//
+		languageList = new JComboBox<>(Globals.laguageNames);//
 
 		label1 = new JLabel("  " + messages.getString("autoCaptureL") + " : ");
 		catpureLabel = new JLabel(" Click on value to make a change.  ");

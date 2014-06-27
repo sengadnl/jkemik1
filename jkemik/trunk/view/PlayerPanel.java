@@ -43,7 +43,7 @@ public class PlayerPanel extends JPanel {
 			cptcells = new JLabel(" Cp Cl: "), score = new JLabel(" Scr: ");
 
 	private JLabel scorev;
-	private final int FONT_SIZE = 10;
+	private final int FONT_SIZE = 11;
 	private final int LINE_BORDER_STOKE = 2;
 	private final double LB_FADE_VAR = .50;
 	private final int FADE_TH = 20;// fade threshold
