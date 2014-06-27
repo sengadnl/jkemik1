@@ -194,72 +194,74 @@ public class Artist {
 		Player p1 = (Player) g.getPlayer1();
 		Player p2 = (Player) g.getPlayer2();
 
-                //foreach loop in a "funtion operator" form
-                p1.getCells().values().stream().forEach((c) -> {
-                    Color cc = p1.getColor();
-                    if (c.getStatus() == Globals.CELL_CAPTURED) {
-                        cc = Tools.fade(cc);
-                    }
-                    drawCell(c, cc, g2);
-                });
-                
-                //foreach loop in a "funtion operator" form
-                p2.getCells().values().stream().forEach((c) -> {
-                    Color cc = p2.getColor();
-                    if (c.getStatus() == Globals.CELL_CAPTURED) {
-                        cc = Tools.fade(cc);
-                    }
-                    drawCell(c, cc, g2);
-                });
+		// drap p1 cells
+		for (Cell c : p1.getCells().values()) {
+			Color cc = p1.getColor();
+			if (c.getStatus() == Globals.CELL_CAPTURED) {
+				cc = Tools.fade(cc);
+			}
+			drawCell(c, cc, g2);
+		}
 
-                JKemik.game.getCollection().values().stream().map((Point p) -> {
-                    if (p.getId() == p1.getId()) {
-                        if (p.getStatus() == Point.CAPTURED) {
-                            Artist.drawCircle(p, Tools.fade(p1.getColor()),
-                                    Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-                                    Grid.gridLineStroke, g2);
-                            Artist.drawCursor(p, Grid.gridLineStroke,
-                                    Grid.half_squareSize, Grid.gridLineCol, g2);
-                        } else {
-                            Artist.drawCircle(p, p1.getColor(), Grid.HALF_DIAMETER,
-                                    Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
-                            Artist.drawCursor(p, Grid.gridLineStroke,
-                                    Grid.half_squareSize, Grid.gridLineCol, g2);
-                        }
-                    }
-                    return p;
-                }).filter((p) -> (p.getId() == p2.getId())).forEach((Point p) -> {
-                    if (p.getStatus() == Point.CAPTURED) {
-                        Artist.drawCircle(p, Tools.fade(p2.getColor()),
-                                Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-                                Grid.gridLineStroke, g2);
-                        Artist.drawCursor(p, Grid.gridLineStroke,
-                                Grid.half_squareSize, Grid.gridLineCol, g2);
-                    } else {
-                        Artist.drawCircle(p, p2.getColor(), Grid.HALF_DIAMETER,
-                                Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
-                        Artist.drawCursor(p, Grid.gridLineStroke,
-                                Grid.half_squareSize, Grid.gridLineCol, g2);
-                    }
-                });
+		// drap p2 cells
+		for (Cell c : p2.getCells().values()) {
+			Color cc = p2.getColor();
+			if (c.getStatus() == Globals.CELL_CAPTURED) {
+				cc = Tools.fade(cc);
+			}
+			drawCell(c, cc, g2);
+		}
+
+		// draw points
+		for (Point p : JKemik.game.getCollection().values()) {
+
+			if (p.getId() == p1.getId()) {
+				if (p.getStatus() == Point.CAPTURED) {
+					Artist.drawCircle(p, Tools.fade(p1.getColor()),
+							Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
+							Grid.gridLineStroke, g2);
+					Artist.drawCursor(p, Grid.gridLineStroke,
+							Grid.half_squareSize, Grid.gridLineCol, g2);
+				} else {
+					Artist.drawCircle(p, p1.getColor(), Grid.HALF_DIAMETER,
+							Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
+					Artist.drawCursor(p, Grid.gridLineStroke,
+							Grid.half_squareSize, Grid.gridLineCol, g2);
+				}
+			}
+
+			if (p.getId() == p2.getId()) { // &&
+				if (p.getStatus() == Point.CAPTURED) {
+					Artist.drawCircle(p, Tools.fade(p2.getColor()),
+							Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
+							Grid.gridLineStroke, g2);
+					Artist.drawCursor(p, Grid.gridLineStroke,
+							Grid.half_squareSize, Grid.gridLineCol, g2);
+				} else {
+					Artist.drawCircle(p, p2.getColor(), Grid.HALF_DIAMETER,
+							Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
+					Artist.drawCursor(p, Grid.gridLineStroke,
+							Grid.half_squareSize, Grid.gridLineCol, g2);
+				}
+			}
+
+		}
 
 		if (Grid.manualc) {
-                    g.getCurrentP().getSelected().stream().map((p) -> {
-                        Artist.drawCircle(p, g.getCurrentP().getFadedColor(),
-                                Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
-                                Grid.gridLineStroke, g2);
-                        return p;
-                    }).forEach((p) -> {
-                        Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
-                                Grid.gridLineCol, g2);
-                    });
+			for (Point p : g.getCurrentP().getSelected()) {
+
+				Artist.drawCircle(p, g.getCurrentP().getFadedColor(),
+						Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
+						Grid.gridLineStroke, g2);
+				Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
+						Grid.gridLineCol, g2);
+			}
 		}
 	}
 
 	/**
-     * @param c
-     * @param col
-     * @param g2
+	 * @param Arraylist
+	 *            of pl1 cells, pl1, pl2
 	 * @return void Draws a cell with all its content.
 	 * */
 	protected static boolean drawCell(Cell c, Color col, Graphics2D g2) {
