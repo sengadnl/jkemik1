@@ -178,11 +178,11 @@ public class Artist {
 						JKemik.game.getCurrentP().getColor(),
 						Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 						Grid.gridLineStroke, g2);
-				drawCursor(contour.get(e), Grid.gridLineStroke,
-						Grid.half_squareSize, Grid.gridLineCol, g2);
-				g2.setColor(BoardFrame.BOARD_COLOR);
-				g2.setStroke(new BasicStroke(Grid.gridLineStroke
-						+ Grid.CURSOR_VARIANT_STROKE));
+//				drawCursor(contour.get(e), Grid.gridLineStroke,
+//						Grid.half_squareSize, Grid.gridLineCol, g2);
+//				g2.setColor(BoardFrame.BOARD_COLOR);
+//				g2.setStroke(new BasicStroke(Grid.gridLineStroke
+//						+ Grid.CURSOR_VARIANT_STROKE));
 			}
 		} catch (NullPointerException e) {
 			System.out.println("In drawCell: " + e.getMessage());
@@ -220,13 +220,13 @@ public class Artist {
 					Artist.drawCircle(p, Tools.fade(p1.getColor()),
 							Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 							Grid.gridLineStroke, g2);
-					Artist.drawCursor(p, Grid.gridLineStroke,
-							Grid.half_squareSize, Grid.gridLineCol, g2);
+//					Artist.drawCursor(p, Grid.gridLineStroke,
+//							Grid.half_squareSize, Grid.gridLineCol, g2);
 				} else {
 					Artist.drawCircle(p, p1.getColor(), Grid.HALF_DIAMETER,
 							Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
-					Artist.drawCursor(p, Grid.gridLineStroke,
-							Grid.half_squareSize, Grid.gridLineCol, g2);
+//					Artist.drawCursor(p, Grid.gridLineStroke,
+//							Grid.half_squareSize, Grid.gridLineCol, g2);
 				}
 			}
 
@@ -235,13 +235,13 @@ public class Artist {
 					Artist.drawCircle(p, Tools.fade(p2.getColor()),
 							Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 							Grid.gridLineStroke, g2);
-					Artist.drawCursor(p, Grid.gridLineStroke,
-							Grid.half_squareSize, Grid.gridLineCol, g2);
+//					Artist.drawCursor(p, Grid.gridLineStroke,
+//							Grid.half_squareSize, Grid.gridLineCol, g2);
 				} else {
 					Artist.drawCircle(p, p2.getColor(), Grid.HALF_DIAMETER,
 							Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
-					Artist.drawCursor(p, Grid.gridLineStroke,
-							Grid.half_squareSize, Grid.gridLineCol, g2);
+//					Artist.drawCursor(p, Grid.gridLineStroke,
+//							Grid.half_squareSize, Grid.gridLineCol, g2);
 				}
 			}
 
@@ -253,8 +253,8 @@ public class Artist {
 				Artist.drawCircle(p, g.getCurrentP().getFadedColor(),
 						Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 						Grid.gridLineStroke, g2);
-				Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
-						Grid.gridLineCol, g2);
+//				Artist.drawCursor(p, Grid.gridLineStroke, Grid.half_squareSize,
+//						Grid.gridLineCol, g2);
 			}
 		}
 	}
@@ -287,21 +287,21 @@ public class Artist {
 						g2);
 
 				// draw intersection
-				Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
-						Grid.half_squareSize, Grid.gridLineCol, g2);
-
-				Artist.drawCursor(contour.get(i + 1), Grid.gridLineStroke,
-						Grid.half_squareSize, Grid.gridLineCol, g2);
-				g2.setColor(col);
-				g2.setStroke(new BasicStroke(Grid.gridLineStroke
-						+ Grid.CURSOR_VARIANT_STROKE));
+//				Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
+//						Grid.half_squareSize, Grid.gridLineCol, g2);
+//
+//				Artist.drawCursor(contour.get(i + 1), Grid.gridLineStroke,
+//						Grid.half_squareSize, Grid.gridLineCol, g2);
+//				g2.setColor(col);
+//				g2.setStroke(new BasicStroke(Grid.gridLineStroke
+//						+ Grid.CURSOR_VARIANT_STROKE));
 			}
 			// circles in contour
 			for (int i = 0; i < contour.size(); i++) {
 				Artist.drawCircle(contour.get(i), col, Grid.HALF_DIAMETER,
 						Grid.CIRCLE_DIAMETER, Grid.gridLineStroke, g2);
-				Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
-						Grid.half_squareSize, Grid.gridLineCol, g2);
+//				Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
+//						Grid.half_squareSize, Grid.gridLineCol, g2);
 			}
 
 			// cells inside this cell
@@ -311,16 +311,16 @@ public class Artist {
 					Artist.drawCircle(p, Tools.fade(capturedc),
 							Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 							Grid.gridLineStroke, g2);
-					Artist.drawCursor(p, Grid.gridLineStroke,
-							Grid.half_squareSize, Grid.gridLineCol, g2);
+//					Artist.drawCursor(p, Grid.gridLineStroke,
+//							Grid.half_squareSize, Grid.gridLineCol, g2);
 				}
 
 				if (p.getStatus() == Point.DEAD) {
 					Artist.drawCircle(p, BoardFrame.BOARD_COLOR,
 							Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 							Grid.gridLineStroke, g2);
-					Artist.drawCursor(p, Grid.gridLineStroke,
-							Grid.half_squareSize, Grid.gridLineCol, g2);
+//					Artist.drawCursor(p, Grid.gridLineStroke,
+//							Grid.half_squareSize, Grid.gridLineCol, g2);
 				}
 			}
 
@@ -370,10 +370,10 @@ public class Artist {
 			g2.draw(circle);
 			g2.setColor(Grid.gridLineCol);
 
-			Artist.drawCursor(p, Grid.squareFadeVariant, Grid.half_squareSize,
-					Tools.fade(BoardFrame.BOARD_COLOR,
-							Globals.SQR_LINE_SHADE_PERCENT), g2);
-			drawLongCursor(p, Grid.gridLineStroke, Grid.gridLineCol, g2);
+//			Artist.drawCursor(p, Grid.squareFadeVariant, Grid.half_squareSize,
+//					Tools.fade(BoardFrame.BOARD_COLOR,
+//							Globals.SQR_LINE_SHADE_PERCENT), g2);
+//			drawLongCursor(p, Grid.gridLineStroke, Grid.gridLineCol, g2);
 
 		} catch (Exception e) {
 			System.err.println("Error in unDraw: " + e.getMessage());
@@ -424,12 +424,12 @@ public class Artist {
                                     + Grid.CURSOR_VARIANT_STROKE, fade, g2);
                     Artist.drawCircle(last, fade, Grid.HALF_DIAMETER,
                                     Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
-                    Artist.drawCursor(last, gridLineStroke,
-                                    Grid.half_squareSize, Grid.gridLineCol, g2);
+//                    Artist.drawCursor(last, gridLineStroke,
+//                                    Grid.half_squareSize, Grid.gridLineCol, g2);
                     Artist.drawCircle(list.get(i + 1), fade, Grid.HALF_DIAMETER,
                                     Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
-                    Artist.drawCursor(list.get(i + 1), gridLineStroke,
-                                        Grid.half_squareSize, Grid.gridLineCol, g2);
+//                    Artist.drawCursor(list.get(i + 1), gridLineStroke,
+//                                        Grid.half_squareSize, Grid.gridLineCol, g2);
                     last = list.get(i + 1);
                 }
                 list.add(newPoint);
@@ -437,12 +437,12 @@ public class Artist {
                                     + Grid.CURSOR_VARIANT_STROKE, fade, g2);
                 Artist.drawCircle(last, fade, Grid.HALF_DIAMETER,
                                 Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
-                Artist.drawCursor(last, gridLineStroke,
-                                Grid.half_squareSize, Grid.gridLineCol, g2);
+//                Artist.drawCursor(last, gridLineStroke,
+//                                Grid.half_squareSize, Grid.gridLineCol, g2);
                 Artist.drawCircle(newPoint, fade, Grid.HALF_DIAMETER,
                                 Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
-                Artist.drawCursor(newPoint, gridLineStroke,
-                                        Grid.half_squareSize, Grid.gridLineCol, g2);
+//                Artist.drawCursor(newPoint, gridLineStroke,
+//                                        Grid.half_squareSize, Grid.gridLineCol, g2);
                 
             }catch(Exception e){
             }
@@ -462,8 +462,8 @@ public class Artist {
 				drawCircle(lastp, game.getCurrentP().getColor(),
 						Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 						Grid.gridLineStroke, g2);
-				drawCursor(lastp, Grid.gridLineStroke, Grid.half_squareSize,
-						Grid.gridLineCol, g2);
+//				drawCursor(lastp, Grid.gridLineStroke, Grid.half_squareSize,
+//						Grid.gridLineCol, g2);
 				contour.remove(index);
 				return;
 			} else {
@@ -475,13 +475,13 @@ public class Artist {
 			drawCircle(lastp, game.getCurrentP().getColor(),
 					Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 					Grid.gridLineStroke, g2);
-			drawCursor(lastp, Grid.gridLineStroke, Grid.half_squareSize,
-					Grid.gridLineCol, g2);
+//			drawCursor(lastp, Grid.gridLineStroke, Grid.half_squareSize,
+//					Grid.gridLineCol, g2);
 			drawCircle(before_lastp, game.getCurrentP().getFadedColor(),
 					Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 					Grid.gridLineStroke, g2);
-			drawCursor(before_lastp, Grid.gridLineStroke, Grid.half_squareSize,
-					Grid.gridLineCol, g2);
+//			drawCursor(before_lastp, Grid.gridLineStroke, Grid.half_squareSize,
+//					Grid.gridLineCol, g2);
 
 			if (!contour.isEmpty()) {
 				game.setLastp(before_lastp);

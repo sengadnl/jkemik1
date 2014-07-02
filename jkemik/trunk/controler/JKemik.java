@@ -297,6 +297,9 @@ public class JKemik extends Application {
 		if (!ValidateInput.backtrack(btrack)) {
 			return;
 		}
+                
+//                if(SettingsPanel.humComButton.isSelected()){
+//                }
 
 		t.setMaxWinVal(maxw);
 		t.setMemo(t.isAutoCapture(), t.isAutoPass());

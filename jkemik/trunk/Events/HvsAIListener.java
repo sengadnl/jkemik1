@@ -18,7 +18,7 @@ public class HvsAIListener implements MouseListener {
 		return gtype;
 	}
 
-	public void setNetwork(JRadioButton network) {
+	private void setNetwork(JRadioButton network) {
 		this.gtype = network;
 	}
 

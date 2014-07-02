@@ -59,6 +59,7 @@ public class SaveButtonListener implements MouseListener {
 			} else {
 				BoardFrame.mode.setSelected(false);
 			}
+                        BoardFrame.addstartedPoints(4);
 			BoardFrame.updateBoardStatus();
 			ViewEvents.uiEventUpdates(s, t);
 
