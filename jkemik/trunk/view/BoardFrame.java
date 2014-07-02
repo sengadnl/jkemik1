@@ -3,16 +3,20 @@
  */
 package view;
 
+import Events.*;
+import api.GTemplate;
+import api.Game;
+import api.Point;
+import api.STemplate;
+import controler.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.*;
-import api.GTemplate;
-import api.Point;
-import api.STemplate;
-import Events.*;
-import controler.*;
 import utilities.*;
+import static view.Grid.x;
+import static view.Grid.y;
 
 /**
  * @author Daniel Senga 
@@ -106,9 +110,36 @@ public class BoardFrame extends JFrame {
                 setVisible(true);
                
                 JKemik.load.plus("Creating initial look...");
+                
 		uiLooksUpdate(JKemik.settings_t, JKemik.template);
                 
 	}
+
+    /**
+     *
+     * @param number of points
+     */
+    public static void addstartedPoints(int number){
+            try{
+                ArrayList<Point> starters = Grid.starterPointsGenerator(JKemik.settings_t.getGridDimension(), number);
+                for(int i = 0; i < starters.size(); i++){
+                    Point temp1 = starters.get(i);
+                     System.out.println("Adjusted Random (x,y) : " + temp1);
+                    temp1.setId(JKemik.game.getPlayer1().getId());
+                    temp1.setStatus(Point.PLAYED);
+                    JKemik.game.getCollection().put(temp1.toString(), temp1);
+
+                    Point temp2 = starters.get(i + 1);
+                    System.out.println("Adjusted Random (x,y) : " + temp2);
+                    temp2.setId(JKemik.game.getPlayer2().getId());
+                    temp2.setStatus(Point.PLAYED);
+                    JKemik.game.getCollection().put(temp2.toString(), temp2);
+                    i = i + 1;
+                }
+            }catch(NumberFormatException e){
+                System.out.println(e.getMessage() + " BoardFrame.addstartedPoints");
+            }
+        }
 
 	/**
 	 * Defines container attributes
@@ -830,7 +861,7 @@ public class BoardFrame extends JFrame {
 		//grid_container.repaint();
 		grid.setVisible(display);
 		if (grid.drawn) {
-			System.out.println("Displaying the grid.....");
+			//System.out.println("Displaying the grid.....");
 			grid.drawn = false;
 			//grid.repaint();
 		}

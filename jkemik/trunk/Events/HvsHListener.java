@@ -16,7 +16,7 @@ public class HvsHListener implements MouseListener{
 		return gtype;
 	}
 
-	public void setGtype(JRadioButton gtype) {
+	private void setGtype(JRadioButton gtype) {
 		this.gtype = gtype;
 	}
 

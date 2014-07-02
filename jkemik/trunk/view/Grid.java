@@ -3,12 +3,14 @@
  */
 package view;
 
-import java.awt.*;
-
-import javax.swing.*;
-import controler.*;
 import api.*;
 import api.Point;
+import controler.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Random;
+import javax.swing.*;
+import utilities.Tools;
 
 /**
  * @author Dalet
@@ -22,7 +24,7 @@ public class Grid extends JPanel {
 	private static Graphics2D g2;
 	// private JKIcon board = new JKIcon("media/board1.PNG", "");
 	protected static int gridLineStroke = 2, squareFadeVariant = 4,
-			CURSOR_VARIANT_STROKE = 6;
+			CURSOR_VARIANT_STROKE = 6,  SQR_OFFSET = 1;
 	public static double CIRCLE_DIAMETER = 10.0, HALF_DIAMETER = 5.0,
 			squareSize = 64, half_squareSize = 32;
 
@@ -89,7 +91,7 @@ public class Grid extends JPanel {
                     }
                     //draw board
                     if (!this.drawn) {
-                        System.err.println("IN DRAW !!!");
+                        
                         Artist.drawGrid(g2, Grid.dimension, Grid.squareFadeVariant,
                                         Grid.gridLineStroke, BoardFrame.BOARD_COLOR);
 
@@ -106,16 +108,6 @@ public class Grid extends JPanel {
                     // capture by selection
                     if (selectPoint && game.getCurrentP().getSelected().size() >= 1) {
                         Color fade = game.getCurrentP().getFadedColor();
-//                        Artist.drawCircle(game.getLastp(), fade, Grid.HALF_DIAMETER,
-//                                        Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
-//                        Artist.drawCursor(game.getLastp(), gridLineStroke,
-//                                        Grid.half_squareSize, gridLineCol, g2);
-//                        Artist.drawLine(game.getLastp(), selectedP, gridLineStroke
-//                                        + CURSOR_VARIANT_STROKE, fade, g2);
-//                        Artist.drawCircle(selectedP, fade, Grid.HALF_DIAMETER,
-//                                        Grid.CIRCLE_DIAMETER, gridLineStroke, g2);
-//                        Artist.drawCursor(selectedP, gridLineStroke,
-//                                        Grid.half_squareSize, gridLineCol, g2);
                         Artist.drawSelection(game.getCurrentP().getSelected(), selectedP, fade, g2);
                         game.setLastp(selectedP);
                         g2.setColor(fade);
@@ -321,5 +313,47 @@ public class Grid extends JPanel {
 		gridLineStroke = (int) (squareSize * .12);
 		squareFadeVariant = (int) (squareSize * .25);
 	}
+        public static ArrayList<Point> starterPointsGenerator(GridDimension dimension, int number){
+            if(number%2 != 0){
+                throw new NumberFormatException();
+            }
+            ArrayList<Point> list;
+           list = new ArrayList<>();
+            double maxX = dimension.getPixelDimension().getWidth();
+            double maxY = dimension.getPixelDimension().getHeight();
+            Random r = new Random();
+           int i = 0;
+           System.out.println("squaresize: " + Grid.squareSize);
+            do{
+                while(i < number){
+                    double tempx = (double)r.nextInt((int)maxX);
+                    double tempy = (double)r.nextInt((int)maxY);
+                    System.out.println("Random (x,y) : (" + tempx + "," + tempy + ")");
+                    if(tempx <=  (Grid.squareSize*SQR_OFFSET)){
+                         tempx = (Grid.squareSize * (SQR_OFFSET)) + tempx;
+                    }
+                    if(tempx >=  (maxX - (Grid.squareSize*SQR_OFFSET))){
+                         tempx = maxX - (Grid.squareSize * (SQR_OFFSET));
+                    }
+
+                    if(tempy <= (Grid.squareSize*SQR_OFFSET)){
+                         tempy = (Grid.squareSize * (SQR_OFFSET)) + tempy;
+                    }
+                    if(tempy >=  (maxY - (Grid.squareSize*SQR_OFFSET))){
+                         tempy = maxY - (Grid.squareSize * (SQR_OFFSET));
+                    }
+                    closestTo(tempx,tempy, (int) Grid.squareSize);
+                    Point temp;
+
+                    temp = new Point(x,y);
+                    if(!Tools.containPoint(temp, list)){
+                         list.add(temp);
+                         i++;
+                    }
+                }
+            }while(list.size() != number);
+            
+            return list;
+        }
 
 }
