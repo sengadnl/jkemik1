@@ -101,7 +101,27 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
 		g.draw(l);
 		g.setColor(new Color(153, 102, 0));
 	}
+        /**
+         @param squareSize
+         @return array of all adjacent points*/
+        public Point[] box(double squareSize) {
+		Point[] box = new Point[8];
+		box[0] = new Point(this.getXC() - squareSize, this.getYC() + squareSize);
+		box[1] = new Point(this.getXC() + squareSize, this.getYC() - squareSize);
+		
+		box[2] = new Point(this.getXC() - squareSize, this.getYC());
+		box[3] = new Point(this.getXC() + squareSize, this.getYC());
+		
+		box[4] = new Point(this.getXC() - squareSize, this.getYC() - squareSize);
+		box[5] = new Point(this.getXC() + squareSize, this.getYC() + squareSize);
+		
+		box[6] = new Point(this.getXC(), this.getYC() - squareSize);
+		box[7] = new Point(this.getXC(), this.getYC() + squareSize);
+		
+		return box;
+	}
 
+        @Override
 	public String toString()// for debugging
 	{
 		return x + ":" + y;

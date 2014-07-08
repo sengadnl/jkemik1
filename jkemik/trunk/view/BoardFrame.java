@@ -5,7 +5,6 @@ package view;
 
 import Events.*;
 import api.GTemplate;
-import api.Game;
 import api.Point;
 import api.STemplate;
 import controler.*;
@@ -15,8 +14,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.*;
 import utilities.*;
-import static view.Grid.x;
-import static view.Grid.y;
+
 
 /**
  * @author Daniel Senga 

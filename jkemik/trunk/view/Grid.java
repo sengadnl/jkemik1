@@ -86,7 +86,8 @@ public class Grid extends JPanel {
 
                     //
                     if (JKemik.settings_t.isAutoPass()
-                                    && game.getCurrentP().getPlay_flag() == 1) {
+                                    && (game.getCurrentP().getPlay_flag() == 1) 
+                            && !JKemik.settings_t.isCh()) {
                         game.switchPlayTurns();
                     }
                     //draw board
@@ -164,8 +165,7 @@ public class Grid extends JPanel {
 	}
 
 	public static Point makeDrawable(double x, double y) {
-		return new Point(Grid.x - HALF_DIAMETER, Grid.y - HALF_DIAMETER,
-				JKemik.game.getCurrentP().getId());
+		return new Point(Grid.x - HALF_DIAMETER, Grid.y - HALF_DIAMETER,JKemik.game.getCurrentP().getId());
 	}
 
 	public Point makeDrawable(Point p) {

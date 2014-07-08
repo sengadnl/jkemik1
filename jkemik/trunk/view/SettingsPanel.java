@@ -301,6 +301,13 @@ public class SettingsPanel extends JPanel{
 		getLanguageList().setSelectedItem(t.getLanguage());
 		setAutoCap(t.isAutoCapture());
 		setAutoPass(t.isAutoPass());
+                if(t.isHh()){
+                    humHumButton.setSelected(true);
+                }else if(t.isCh()){
+                    humComButton.setSelected(true);
+                }else{
+                    networkButton.setSelected(true);
+                }
 		SettingsPanel.setMax_win(t.getMaxWinVal());
 		maxPointScaler.setText("" + t.getMaxPointScaler());
 		
