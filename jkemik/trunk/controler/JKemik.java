@@ -298,8 +298,15 @@ public class JKemik extends Application {
 			return;
 		}
                 
-//                if(SettingsPanel.humComButton.isSelected()){
-//                }
+                if(SettingsPanel.humComButton.isSelected()){
+                    t.setCh(true);
+                }
+                if(SettingsPanel.humHumButton.isSelected()){
+                    t.setHh(true);
+                }
+                if(SettingsPanel.networkButton.isSelected()){
+                    t.setNet(true);
+                }
 
 		t.setMaxWinVal(maxw);
 		t.setMemo(t.isAutoCapture(), t.isAutoPass());

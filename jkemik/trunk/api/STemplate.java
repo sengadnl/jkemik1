@@ -14,8 +14,8 @@ public class STemplate implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private boolean hh = true;
-	private boolean ch = false;
+	private boolean hh = false;
+	private boolean ch = true;
 	private boolean net = false;
 	private boolean manualCapture = true;
 	private boolean autoCapture = true;

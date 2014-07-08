@@ -6,9 +6,12 @@
 
 package Events;
 
-import api.AbstractGame;
+import agents.JkBot;
+import api.AIGame;
 import api.Player;
 import api.Point;
+import controler.AgentMoveRunnable;
+import controler.HumanMoveRunnable;
 import controler.JKemik;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -27,61 +30,77 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener{
         this.grid = grid;
     }
     @Override
+    @SuppressWarnings("empty-statement")
     public void mouseClicked(MouseEvent e) {
-
-	
-        AbstractGame game = JKemik.game;
-        Player current = (Player) game.getCurrentP();
-        // Allow mouse click
-        Grid.mouseclicked = true;
-
         // Get X and Y
         Grid.x = e.getX();
         Grid.y = e.getY();
+        
+//        HumanMoveRunnable hThread = new HumanMoveRunnable();
+//        AgentMoveRunnable mThread = new AgentMoveRunnable();
+//        
+//        Thread ht = new Thread(hThread);
+//        Thread mt = new Thread(mThread);
+//        ht.start();
+//        mt.start();
+        
+//        ht.stop();
+//        mt.stop();
+        
+        
+        
+	
+        AIGame game = (AIGame) JKemik.game;
+        Player current;
+        current = (Player) game.getHuman();
+        JkBot bot = (JkBot) game.getMachine();
+        // Allow mouse click
+        Grid.mouseclicked = true;
+
 
         // Guess player's point
         Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
         Point temp = new Point(Grid.x, Grid.y);
 
-        if (game.getCurrentP().isTurn()) {
-                if (!game.getCollection().containsKey(temp.toString())) {
-                        Grid.plotPoint = true;
+        
+        if (!game.getCollection().containsKey(temp.toString())) {
+                Grid.plotPoint = true;
 
-                        //BoardFrame.grid.repaint();
+                //BoardFrame.grid.repaint();
 
-                        // Mark point as played
-                        temp.setStatus(Point.PLAYED);
+                // Mark point as played
+                temp.setStatus(Point.PLAYED);
 
-                        // Mark point as belonging to current player
-                        temp.setId(current.getId());
+                // Mark point as belonging to current player
+                temp.setId(current.getId());
 
-                        // Remember last play
-                        current.setLatestP(temp);
+                // Remember last play
+                current.setLatestP(temp);
 
-                        // Add to the board
-                        game.getCollection().put(temp.toString(), temp);
-                        game.getCurrentP().rememberPoint(temp,
-                                        JKemik.settings_t.getBacktrackingDistance());
-                        game.setPlay_count(game.getPlay_count() - 1);
-                        game.setEmbuche_on(true);
+                // Add to the board
+                game.getCollection().put(temp.toString(), temp);
+                game.getCurrentP().rememberPoint(temp,
+                                JKemik.settings_t.getBacktrackingDistance());
+                game.setPlay_count(game.getPlay_count() - 1);
+                game.setEmbuche_on(true);
 
-                        // Setting turn
-                        game.setPlayFlag();
-                        game.getCurrentP().setTurn(false);
-                        Grid.mouseMove = false;
-                        BoardFrame.feedback(game.getCurrentP().getName() + " "
-                                        + BoardFrame.messages.getString("feedback4"));
-                }
+                // Setting turn
+                game.setPlayFlag();
+                game.getCurrentP().setTurn(false);
+                Grid.mouseMove = false;
+                BoardFrame.feedback(game.getCurrentP().getName() + " "
+                                + BoardFrame.messages.getString("feedback4"));
         }
+        
         
         BoardFrame.progressB.setVisible(true);
         BoardFrame.progressB.setIndeterminate(true);
-//        if (game.isEmbuche_on()) {
-//                if (JKemik.settings_t.isAutoCapture()) {
-//                        Grid.cell = JKemik.embush(Grid.squareSize);
-//                        BoardFrame.grid.repaint();
-//                }
-//        }
+        if (game.isEmbuche_on()) {
+                if (JKemik.settings_t.isAutoCapture()) {
+                        Grid.cell = JKemik.embush(Grid.squareSize);
+                        BoardFrame.grid.repaint();
+                }
+        }
         if (game.getCurrentP().isTurn()) {
                 this.grid.setMouseclicked(true);
         }
@@ -97,8 +116,9 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener{
 
         BoardFrame.progressB.setIndeterminate(false);
         BoardFrame.progressB.setVisible(false);
-   
-		
+        if(bot.play(game));
+            BoardFrame.grid.repaint();
+       
 	}
 
     @Override
@@ -128,7 +148,6 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener{
 
     @Override
 	public void mouseMoved(MouseEvent e) {
-		
             Grid.mouseMove = true;
             Grid.x = e.getX();
             Grid.y = e.getY();

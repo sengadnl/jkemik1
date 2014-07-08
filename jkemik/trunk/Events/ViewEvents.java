@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import api.GTemplate;
 import api.STemplate;
+import controler.JKemik;
 
 import view.*;
 
@@ -26,6 +27,8 @@ public class ViewEvents {
 	public static NewGameListener newGameListener = new NewGameListener(
 			BoardFrame.Game_status);
 	public static GridMouseListener gridListener = new GridMouseListener(
+			BoardFrame.grid);
+        public static GridAIMouseListener AIgridListener = new GridAIMouseListener(
 			BoardFrame.grid);
 	public static BoardSizeListener gridSizeListener = new BoardSizeListener(
 			BoardFrame.l1);
@@ -177,6 +180,13 @@ public class ViewEvents {
 		//}
 	}
 
+        public static void gridAIMouseAction(final Grid grid) {
+		//if (grid.getComponentListeners().length == 0) {
+            System.out.println("Setting up AI event listeners...");
+			grid.addMouseListener(AIgridListener);
+			grid.addMouseMotionListener(AIgridListener);
+		//}
+	}
 	public static void changeColorPanel1Action(final RotateColor panel) {
 		//if (panel.getComponentListeners().length == 0) {
 			panel.addMouseListener(p1Listener);
@@ -231,8 +241,14 @@ public class ViewEvents {
 			setGameThemeAction(BoardFrame.l2);
 			saveAction(BoardFrame.startG);
 
-			BoardFrame.grid.removeMouseListener(gridListener);
-			BoardFrame.grid.removeMouseMotionListener(gridListener);
+                        if(JKemik.settings_t.isCh()){
+                            BoardFrame.grid.removeMouseListener(AIgridListener);
+                            BoardFrame.grid.removeMouseMotionListener(AIgridListener);
+                        }else{
+                            BoardFrame.grid.removeMouseListener(gridListener);
+                            BoardFrame.grid.removeMouseMotionListener(gridListener);
+                        }
+                        //AIgridListener
 
 			// Disable control buttons
 			BoardFrame.mouseSelection
@@ -257,10 +273,13 @@ public class ViewEvents {
 			undoAction(BoardFrame.undo);
 			captureButtonListener(BoardFrame.capture);
 			passTurnAction(BoardFrame.pass_turn);
-			gridMouseAction(BoardFrame.grid);
+                        if(JKemik.settings_t.isCh()){
+                           gridAIMouseAction(BoardFrame.grid);
+                        }else{
+                           gridMouseAction(BoardFrame.grid);
+                        }
 		}
 		if (s.isSystemSetupMode()) {
-
 			BoardFrame.pColor1.removeMouseListener(p1Listener);
 			BoardFrame.pColor2.removeMouseListener(p2Listener);
 			BoardFrame.pnamelabel1.removeMouseListener(n1Listener);
