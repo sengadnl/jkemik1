@@ -30,7 +30,7 @@ public class JkBot extends Player implements AgentAction{
                 ArrayList<Point> hPoints = game.getHuman().getLastpoints();
                 ArrayList<Point> machineMove = game.getMachine().getLastpoints();
                 Point hMove = hPoints.get((hPoints.size() - 1));
-                boolean offense1 = offense(game);
+                boolean offense1 = offense(game);//
                  
                 //================================================
                 //ArrayList<Point> o = offenseStrategy(machineMove.get(machineMove.size() - 1), game, Grid.squareSize);
