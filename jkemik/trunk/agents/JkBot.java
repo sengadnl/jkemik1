@@ -5,8 +5,7 @@ import controler.JKemik;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import utilities.Tools;
 import view.Grid;
 
 //import api.AbstractPlayer;
@@ -27,23 +26,29 @@ public class JkBot extends Player implements AgentAction{
 	public boolean play(AIGame game) {
             //turnChangeLock.lock();
             try{
-            ArrayList<Point> hPoints;
-            hPoints = game.getHuman().getLastpoints();
-            //for(int i = (hPoints.size() - 1) ; i < 0; i--){
+                
+                ArrayList<Point> hPoints = game.getHuman().getLastpoints();
+                ArrayList<Point> machineMove = game.getMachine().getLastpoints();
                 Point hMove = hPoints.get((hPoints.size() - 1));
-                Point machineMove = bestAdjacantMoveTo(hMove, game.getCollection());
-            //}
-                machineMove.setStatus(Point.PLAYED);
+                boolean offense1 = offense(game);
+                 
+                //================================================
+                //ArrayList<Point> o = offenseStrategy(machineMove.get(machineMove.size() - 1), game, Grid.squareSize);
+
+                //Point move = bestAdjacantMoveTo(o.get(o.size() - 1), game.getCollection());
+                Point move = bestAdjacantMoveTo(hMove, game.getCollection());
+                //===================================================
+                move.setStatus(Point.PLAYED);
 
                 // Mark point as belonging to current player
-                machineMove.setId(this.getId());
+                move.setId(this.getId());
 
                 // Remember last play
-                this.setLatestP(machineMove);
+                this.setLatestP(move);
 
                 // Add to the board
-                game.getCollection().put(machineMove.toString(), machineMove);
-                game.getCurrentP().rememberPoint(machineMove,
+                game.getCollection().put(move.toString(), move);
+                game.getCurrentP().rememberPoint(move,
                                 JKemik.settings_t.getBacktrackingDistance());
                 game.setPlay_count(game.getPlay_count() - 1);
                 game.setEmbuche_on(true);
@@ -52,7 +57,7 @@ public class JkBot extends Player implements AgentAction{
                 game.setPlayFlag();
                 game.getCurrentP().setTurn(false);
                 Grid.mouseMove = false;
-            }catch(NullPointerException e){
+            }catch(NullPointerException | ArrayIndexOutOfBoundsException e){
                 System.out.println("play: " + e.getMessage());
             }
             
@@ -61,6 +66,21 @@ public class JkBot extends Player implements AgentAction{
 //            }
             return false;
 	}
+
+        /**
+         *
+         * @param offense
+         * @param defense
+         * @return
+         */
+        public boolean offense(AIGame game){
+            int size = game.getMachine().getLastpoints().size();
+            offenseOrigine = game.getMachine().getLastpoints().get(size - 1);
+            if(toAreaAdd(offenseOrigine,game)){
+                System.out.println("strategy: " + offense);
+            } 
+            return true;
+        }
         public Point bestAdjacantMoveTo(Point p, HashMap<String,Point> collection){
             Point[] box = p.box(Grid.squareSize);
             Point adj = null;
@@ -92,5 +112,97 @@ public class JkBot extends Player implements AgentAction{
 	public void setEngage(boolean engage) {
 		this.engaged = engage;
 	}
-    private Lock turnChangeLock;
+        /**
+         * This functions goal is a add to a path that defines the current strategy
+	 * @param o
+	 *            Point where to start
+     * @param game
+	 * @param squareSize
+	 *            integer length of the sides of a grid square
+	 * @return true when a valid capture was found, and false otherwise.
+	 */
+	private boolean toAreaAdd(Point o, AIGame game) {
+
+                Point[] box = o.box(Grid.squareSize);
+                for(Point p: box){
+                    /*Spik if*/
+                    if(offenseArea.containsKey(p.toString()) 
+                            || offense.containsKey(p.toString())){
+                        continue;
+                    }
+                    /*if this point belongs to human add it to area*/
+                    if(game.getCollection().containsKey(p.toString()) 
+                            && p.getId() == game.getHuman().getId()){
+                        offenseArea.put(p.toString(),p);
+                        if(!toAreaAdd(p, game)){
+                        }
+
+                    }else{
+                        if(offenseOrigine.compareTo(p) == 0 && offense.size() > 3){
+                            return true;
+                        }
+                        /*if not add to cell*/
+                        offense.put(p.toString(),p);
+                    }
+                }
+            return false;        
+	}
+        
+        /**
+         * This functions goal is a add to a path that defines the current strategy
+	 * @param o
+	 *            Point where to start
+     * @param game
+	 * @param squareSize
+	 *            integer length of the sides of a grid square
+	 * @return true when a valid capture was found, and false otherwise.
+	 */
+	public ArrayList<Point> defenseStrategy(Point o, AIGame game, double squareSize) {
+		if (this.getSuccessful()) {
+			return defense;
+		}
+		/* Get all adjacent Points */
+		Point[] box = Tools.boxCoord(o, squareSize);
+            for (Point box1 : box) {
+                /* Stop recursive call here if a path was already found */
+                if (this.getSuccessful()) {
+                    return defense;
+                }
+                Point temp = game.getCollection().get(box1.toString());
+                if (temp == null) {
+                    continue;
+                }
+                if (AbstractGame.isPath(temp)) {// if this Point is path
+                    if (temp.compareTo(game.getHuman().getFrom()) != 0) {
+                        if (!Tools.containPoint(o, game.getHuman().getSelected())) {
+                            /* Add o if it hasn't been visited */
+                            game.getHuman().getSelected().add(o);
+                            // System.out.println("Adding " +
+                            // currentP.getSelected());
+                            game.getHuman().setFrom(o); /* Move to the next Point */
+                            if (temp.compareTo(game.getHuman().getOrigin()) == 0
+                                    && game.getHuman().getSelected().size() > 3) {
+                                game.getHuman().setSuccessful(true);
+                                game.getHuman().setOrigin(null);/* Reset the origin */
+                                // System.err.println("\nbuildPath: "
+                                // + currentP.getSelected());
+                                return defense;
+                            }
+                            
+                            /* This adjacent Point was a dead end */
+                            if (defenseStrategy(temp, game, squareSize) != null) {
+                                game.getHuman().getSelected().remove(o);
+                            }
+                        }
+                    }
+                }
+            }
+            return defense;
+	}
+    //private Lock turnChangeLock;
+        private HashMap<String, Point> offense;
+        private HashMap<String, Point> offenseArea;
+        private Point offenseOrigine = new Point(0,0);
+        private ArrayList<Point> defense;
+        
 }
