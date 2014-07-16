@@ -320,7 +320,65 @@ public class JKemik extends Application {
 		ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
 
 	}
+	public static Cell embush(double squareSize, AbstractPlayer player) {
+		try {
+			long start = System.currentTimeMillis();
+			AIGame game = (AIGame) JKemik.game;
+			Cell temp = game.connectDots(squareSize);//
+			long end = System.currentTimeMillis();
+			double total = (end - start);
 
+			DecimalFormat format = new DecimalFormat("##.##");
+			String str = format.format(total);
+
+			if (settings_t.isAutoCapture()) {
+
+				if (temp != null) {
+					System.err.println("- Capture Duration = " + str
+							+ " MilliSecs");
+					BoardFrame.feedbackarea
+							.setText((game.getCaptured_count() + game
+									.getRedeemed_count())
+									+ " "
+									+ BoardFrame.messages
+											.getString("feedback3")
+									+ " "
+									+ game.getCurrentP().getName()
+									+ " ("
+									+ str
+									+ " MilliSecs)");
+					return temp;
+				} else {
+					game.setEmbuche_on(false);
+				}
+
+			} else {
+				if (settings_t.isManualCapture()) {
+
+					if (temp != null) {
+						System.err.println("Capture Duration = " + total);
+						BoardFrame.feedbackarea
+								.setText((game.getCaptured_count() + game
+										.getRedeemed_count())
+										+ " "
+										+ BoardFrame.messages
+												.getString("feedback3")
+										+ " "
+										+ game.getCurrentP().getName());
+						game.setEmbuche_on(false);
+						return temp;
+					} else {
+						game.setEmbuche_on(false);
+					}
+					JKemik.settings_t.setManualCapture(false);
+				}
+			}
+		} catch (NullPointerException e) {
+			System.out.println("Error in embush: capture "
+					+ e.getLocalizedMessage());
+		}
+		return null;
+	}
 	public static Cell embush(double squareSize) {
 		try {
 			long start = System.currentTimeMillis();

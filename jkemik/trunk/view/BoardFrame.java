@@ -8,11 +8,14 @@ import api.GTemplate;
 import api.Point;
 import api.STemplate;
 import controler.*;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
 import javax.swing.*;
+
 import utilities.*;
 
 
@@ -125,13 +128,17 @@ public class BoardFrame extends JFrame {
                      System.out.println("Adjusted Random (x,y) : " + temp1);
                     temp1.setId(JKemik.game.getPlayer1().getId());
                     temp1.setStatus(Point.PLAYED);
+                    JKemik.game.getPlayer1().getLastpoints().add(temp1);
                     JKemik.game.getCollection().put(temp1.toString(), temp1);
+                    JKemik.game.getPlayer1().setPoints(1);
 
                     Point temp2 = starters.get(i + 1);
                     System.out.println("Adjusted Random (x,y) : " + temp2);
                     temp2.setId(JKemik.game.getPlayer2().getId());
                     temp2.setStatus(Point.PLAYED);
+                    JKemik.game.getPlayer2().getLastpoints().add(temp2);
                     JKemik.game.getCollection().put(temp2.toString(), temp2);
+                    JKemik.game.getPlayer2().setPoints(1);
                     i = i + 1;
                 }
             }catch(NumberFormatException e){
@@ -901,7 +908,31 @@ public class BoardFrame extends JFrame {
 		gridstats.setDeadGridInPercentV(deadBoard);
 		gridstats.setFreeGridInPercentV((free * 100) / totalOnBoard);
 		gridstats.setDeadCountV("" + totPlots);
-		gridstats.setTot_play_count(JKemik.game.getPlay_count());
+		int moves = JKemik.settings_t.getMaxPointPerPlayer();
+		int movesPerPlayer = JKemik.settings_t.getMaxPointPerPlayer()/2;
+		gridstats.setTot_play_count(moves);
+		
+		int p1 = (movesPerPlayer) - JKemik.game.getPlayer1().getPoints();
+		int p2 = (movesPerPlayer) - JKemik.game.getPlayer2().getPoints();
+		gridstats.getP1count().setForeground(JKemik.game.getPlayer1().getColor());
+		gridstats.getP2count().setForeground(JKemik.game.getPlayer2().getColor());
+		gridstats.setP1count(p1);
+		gridstats.setP2count(p2);
+		
+		//set p1 when even
+//		if(p1%2 == 0 && p2%2 != 0){
+//			gridstats.setP1count(p1/2);
+//			gridstats.setP2count((int)(p2/2) + 1);
+//		}else if(p2%2 == 0 && p1%2 != 0){
+//			gridstats.setP2count(p2/2);
+//			gridstats.setP1count((int)(p1/2) + 1);
+//		}else if(p2%2 != 0 && p1%2 != 0){
+//			gridstats.setP1count((int)(p1/2) + 1);
+//			gridstats.setP2count((int)(p2/2) + 1);
+//		}else{
+//			gridstats.setP1count((p1/2));
+//			gridstats.setP2count((p2/2));
+//		}
 	}
 
 	public static double boardDeadAreaInPercent() {

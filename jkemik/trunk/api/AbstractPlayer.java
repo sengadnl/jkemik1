@@ -272,8 +272,8 @@ public abstract class AbstractPlayer implements Serializable {
 		return selected;
 	}
 
-	public void setSelected(ArrayList<Point> selected) {
-		this.selected = selected;
+	public void setSelected(ArrayList<Point> arrayList) {
+		this.selected = arrayList;
 	}
 
 	public Point getOrigin() {
@@ -339,7 +339,7 @@ public abstract class AbstractPlayer implements Serializable {
 	}
 
 	public void setPoints(int points) {
-		this.points = points;
+		this.points += points;
 	}
 
 	private String name = "player";
