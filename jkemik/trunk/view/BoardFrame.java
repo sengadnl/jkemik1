@@ -918,21 +918,7 @@ public class BoardFrame extends JFrame {
 		gridstats.getP2count().setForeground(JKemik.game.getPlayer2().getColor());
 		gridstats.setP1count(p1);
 		gridstats.setP2count(p2);
-		
-		//set p1 when even
-//		if(p1%2 == 0 && p2%2 != 0){
-//			gridstats.setP1count(p1/2);
-//			gridstats.setP2count((int)(p2/2) + 1);
-//		}else if(p2%2 == 0 && p1%2 != 0){
-//			gridstats.setP2count(p2/2);
-//			gridstats.setP1count((int)(p1/2) + 1);
-//		}else if(p2%2 != 0 && p1%2 != 0){
-//			gridstats.setP1count((int)(p1/2) + 1);
-//			gridstats.setP2count((int)(p2/2) + 1);
-//		}else{
-//			gridstats.setP1count((p1/2));
-//			gridstats.setP2count((p2/2));
-//		}
+
 	}
 
 	public static double boardDeadAreaInPercent() {

@@ -61,6 +61,7 @@ public class JkBot extends Player implements AgentAction{
                 // Setting turn
                 game.setPlayFlag();
                 game.getCurrentP().setTurn(false);
+               game.getCurrentP().setPoints(1);//count this point
                 Grid.mouseMove = false;
             }catch(NullPointerException | ArrayIndexOutOfBoundsException e){
                 System.out.println("play: " + e.getMessage());
