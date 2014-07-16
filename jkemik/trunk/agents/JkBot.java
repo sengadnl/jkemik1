@@ -20,6 +20,8 @@ public class JkBot extends Player implements AgentAction{
 	public JkBot(Color color, String name) {
 		super(color, name);
 		this.setAi(true);
+		offenseArea = new HashMap<String,Point>();
+		offense = new HashMap<String,Point>();
                 //turnChangeLock = new ReentrantLock();
 	}
 	@Override
@@ -29,8 +31,11 @@ public class JkBot extends Player implements AgentAction{
                 
                 ArrayList<Point> hPoints = game.getHuman().getLastpoints();
                 ArrayList<Point> machineMove = game.getMachine().getLastpoints();
+               // offenseOrigine = machineMove.get(machineMove.size() - 1);
                 Point hMove = hPoints.get((hPoints.size() - 1));
-                boolean offense1 = offense(game);//
+                if(offense(game)){
+                	System.out.println("Launching an offense");
+                }
                  
                 //================================================
                 //ArrayList<Point> o = offenseStrategy(machineMove.get(machineMove.size() - 1), game, Grid.squareSize);
@@ -74,12 +79,19 @@ public class JkBot extends Player implements AgentAction{
          * @return
          */
         public boolean offense(AIGame game){
+        	//get AI latest points
             int size = game.getMachine().getLastpoints().size();
-            offenseOrigine = game.getMachine().getLastpoints().get(size - 1);
-            if(toAreaAdd(offenseOrigine,game)){
+            
+           //Get the last human point
+           offenseOrigine = game.getHuman().getLastpoints().get(size - 1);
+           // offense.put(offenseOrigine.toString(), offenseOrigine);
+           
+           //check how far human is to a capture
+            if(humanNextMoveFrom(offenseOrigine,game)){
                 System.out.println("strategy: " + offense);
+                return true;
             } 
-            return true;
+            return false;
         }
         public Point bestAdjacantMoveTo(Point p, HashMap<String,Point> collection){
             Point[] box = p.box(Grid.squareSize);
@@ -121,28 +133,44 @@ public class JkBot extends Player implements AgentAction{
 	 *            integer length of the sides of a grid square
 	 * @return true when a valid capture was found, and false otherwise.
 	 */
-	private boolean toAreaAdd(Point o, AIGame game) {
+	private boolean humanNextMoveFrom(Point o, AIGame game) {
 
                 Point[] box = o.box(Grid.squareSize);
                 for(Point p: box){
                     /*Spik if*/
+                	if(offenseArea.isEmpty()){
+                		
+                	}
+                	
+                	/*Setting origine*/
+                    if(offense.isEmpty() && 
+                    		game.getCollection().containsKey(p.toString()) 
+                    		&& p.getId() == game.getMachine().getId()){
+                    	offense.put(p.toString(),p);
+                    	offenseFrom = p;
+                    }
+                    
                     if(offenseArea.containsKey(p.toString()) 
                             || offense.containsKey(p.toString())){
                         continue;
                     }
+                    
                     /*if this point belongs to human add it to area*/
                     if(game.getCollection().containsKey(p.toString()) 
                             && p.getId() == game.getHuman().getId()){
-                        offenseArea.put(p.toString(),p);
-                        if(!toAreaAdd(p, game)){
+                        //offenseArea.put(p.toString(),p);
+                        if(!humanNextMoveFrom(p, game)){
                         }
-
-                    }else{
+                        continue;
+                    }
+                    
+                    if(offenseFrom.compareTo(p) != 0){
                         if(offenseOrigine.compareTo(p) == 0 && offense.size() > 3){
                             return true;
                         }
-                        /*if not add to cell*/
+                        /*if not add to path*/
                         offense.put(p.toString(),p);
+                        offenseFrom = p;
                     }
                 }
             return false;        
@@ -203,6 +231,7 @@ public class JkBot extends Player implements AgentAction{
         private HashMap<String, Point> offense;
         private HashMap<String, Point> offenseArea;
         private Point offenseOrigine = new Point(0,0);
+        private Point offenseFrom = new Point(0,0);
         private ArrayList<Point> defense;
         
 }

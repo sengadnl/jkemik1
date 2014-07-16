@@ -86,8 +86,7 @@ public class Grid extends JPanel {
 
                     //
                     if (JKemik.settings_t.isAutoPass()
-                                    && (game.getCurrentP().getPlay_flag() == 1) 
-                            && !JKemik.settings_t.isCh()) {
+                                    && (game.getCurrentP().getPlay_flag() == 1)) {
                         game.switchPlayTurns();
                     }
                     //draw board
