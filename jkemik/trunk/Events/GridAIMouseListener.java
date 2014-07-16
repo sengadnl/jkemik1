@@ -31,7 +31,6 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener {
 	}
 
 	@Override
-	@SuppressWarnings("empty-statement")
 	public void mouseClicked(MouseEvent e) {
 		// Get X and Y
 		Grid.x = e.getX();
@@ -83,6 +82,7 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener {
 			// Setting turn
 			game.setPlayFlag();
 			game.getCurrentP().setTurn(false);
+			game.getCurrentP().setPoints(1);//count this point
 			Grid.mouseMove = false;
 			BoardFrame.feedback(game.getCurrentP().getName() + " "
 					+ BoardFrame.messages.getString("feedback4"));
@@ -114,7 +114,12 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener {
 		BoardFrame.progressB.setIndeterminate(false);
 		BoardFrame.progressB.setVisible(false);
 		if (bot.play(game)) {
-			BoardFrame.grid.repaint();
+			if (game.isEmbuche_on()) {
+				if (JKemik.settings_t.isAutoCapture()) {
+					Grid.cell = JKemik.embush(Grid.squareSize);
+					BoardFrame.grid.repaint();
+				}
+			}
 		}
 
 	}
