@@ -16,7 +16,7 @@ public class SaveSettingsListener implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		try {
+		//try {
 			if (!JKemik.settings_t.isAutoCapture()
 					&& JKemik.settings_t.isAutoPass()) {
 				
@@ -33,9 +33,9 @@ public class SaveSettingsListener implements MouseListener {
 				JKemik.saveSysPrefs();	
 			}
 			BoardFrame.settings_p.updateSettingsPanel(JKemik.settings_t);
-		} catch (Exception exp) {
-
-		}
+//		} catch (Exception exp) {
+//
+//		}
 	}
 
 	public void mouseEntered(MouseEvent e) {

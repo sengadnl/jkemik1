@@ -40,7 +40,7 @@ public class JKemik extends Application {
 	static File g_object = new File(Tools.fullPath() + Globals.gameObjectFile);
 	private static String endingMessage = "This Game has not ended you";
 
-        @Override
+	@Override
 	protected void init() {
 		try {
 			load = new Load(362, 183);
@@ -53,14 +53,14 @@ public class JKemik extends Application {
 			readSettings();
 			readGameObj();// TODO
 			BoardFrame.setTheme(settings_t.getTheme());
-			
-			BoardFrame.uiLooksUpdate(settings_t,template); 
+
+			BoardFrame.uiLooksUpdate(settings_t, template);
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 		}
 	}
 
-        @Override
+	@Override
 	protected void idle() {
 		// try {
 		if (screenResolutionCheck()) {
@@ -77,7 +77,7 @@ public class JKemik extends Application {
 		// }
 	}
 
-        @Override
+	@Override
 	protected void cleanup() {
 		System.exit(0);
 	}
@@ -91,12 +91,14 @@ public class JKemik extends Application {
 
 	/**/
 
-    /**
-     *
-     * @param t is the game template
-     * @param s is the settings template
-     */
-    
+	/**
+	 * 
+	 * @param t
+	 *            is the game template
+	 * @param s
+	 *            is the settings template
+	 */
+
 	public static void createGame(GTemplate t, STemplate s) {
 		GameCreator create = new GameCreator();
 		System.out.println("CH: " + s.isCh() + "\nHH: " + s.isHh() + "\nNet: "
@@ -168,8 +170,8 @@ public class JKemik extends Application {
 					System.out.println(g_object.getAbsolutePath()
 							+ " is deleted!");
 				} else {
-					System.out.println("Deleting " + g_object.getAbsolutePath() +
-							" failed!");
+					System.out.println("Deleting " + g_object.getAbsolutePath()
+							+ " failed!");
 				}
 			}
 
@@ -179,19 +181,19 @@ public class JKemik extends Application {
 					System.out.println(s_object.getAbsolutePath()
 							+ " is deleted!");
 				} else {
-					System.out.println("Deleting " + s_object.getAbsolutePath() +
-							" failed!");
+					System.out.println("Deleting " + s_object.getAbsolutePath()
+							+ " failed!");
 				}
 			}
-			
+
 			/* Is there a saved template */
 			if (t_object.exists()) {
 				if (t_object.delete()) {
 					System.out.println(t_object.getAbsolutePath()
 							+ " is deleted!");
 				} else {
-					System.out.println("Deleting " + t_object.getAbsolutePath() +
-							" failed!");
+					System.out.println("Deleting " + t_object.getAbsolutePath()
+							+ " failed!");
 				}
 			}
 		} catch (Exception exception1) {
@@ -236,10 +238,10 @@ public class JKemik extends Application {
 		try {
 
 			if (t_object.exists()) {
-                            try (ObjectInputStream input = new ObjectInputStream(
-                                    new FileInputStream(t_object))) {
-                                template = (GTemplate) input.readObject();
-                            }
+				try (ObjectInputStream input = new ObjectInputStream(
+						new FileInputStream(t_object))) {
+					template = (GTemplate) input.readObject();
+				}
 			} else {
 				template = new GTemplate();
 			}
@@ -256,10 +258,10 @@ public class JKemik extends Application {
 		try {
 
 			if (s_object.exists()) {
-                            try (ObjectInputStream input = new ObjectInputStream(
-                                    new FileInputStream(s_object))) {
-                                settings_t = (STemplate) input.readObject();
-                            }
+				try (ObjectInputStream input = new ObjectInputStream(
+						new FileInputStream(s_object))) {
+					settings_t = (STemplate) input.readObject();
+				}
 			} else {
 				settings_t = new STemplate();
 			}
@@ -297,16 +299,16 @@ public class JKemik extends Application {
 		if (!ValidateInput.backtrack(btrack)) {
 			return;
 		}
-                
-                if(SettingsPanel.humComButton.isSelected()){
-                    t.setCh(true);
-                }
-                if(SettingsPanel.humHumButton.isSelected()){
-                    t.setHh(true);
-                }
-                if(SettingsPanel.networkButton.isSelected()){
-                    t.setNet(true);
-                }
+
+		if (SettingsPanel.humComButton.isSelected()) {
+			t.setCh(true);
+		}
+		if (SettingsPanel.humHumButton.isSelected()) {
+			t.setHh(true);
+		}
+		if (SettingsPanel.networkButton.isSelected()) {
+			t.setNet(true);
+		}
 
 		t.setMaxWinVal(maxw);
 		t.setMemo(t.isAutoCapture(), t.isAutoPass());
@@ -320,6 +322,7 @@ public class JKemik extends Application {
 		ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
 
 	}
+
 	public static Cell embush(double squareSize, AbstractPlayer player) {
 		try {
 			long start = System.currentTimeMillis();
@@ -379,6 +382,7 @@ public class JKemik extends Application {
 		}
 		return null;
 	}
+
 	public static Cell embush(double squareSize) {
 		try {
 			long start = System.currentTimeMillis();
@@ -447,7 +451,8 @@ public class JKemik extends Application {
 			result = true;
 		}
 
-		if (game.getPlay_count() < 1 || BoardFrame.boardDeadAreaInPercent() >= 75) {
+		if (game.getPlay_count() < 1
+				|| BoardFrame.boardDeadAreaInPercent() >= 75) {
 			game.setStatus(1);
 
 			if (game.getGuest().getScore() > game.getCurrentP().getScore()) {
@@ -462,7 +467,7 @@ public class JKemik extends Application {
 			}
 			result = true;
 		}
-		
+
 		return result;
 	}
 

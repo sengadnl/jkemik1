@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import api.AIGame;
+import api.AbstractGame;
 import controler.JKemik;
 
 /**
@@ -84,14 +85,13 @@ public class GridStatus extends JPanel {
 		Font gfont = new Font("Arial", Font.BOLD, this.FONT_SIZE);
 		gs.setFont(gfont);
 		
-		if(JKemik.settings_t.isCh()){
-			AIGame game = (AIGame)JKemik.game;
-			this.p1count.setForeground(game.getHuman().getColor());
-			this.p2count.setForeground(game.getMachine().getColor());
-		}else{
-			this.p1count.setForeground(JKemik.game.getPlayer1().getColor());
-			this.p2count.setForeground(JKemik.game.getPlayer2().getColor());
-		}
+//		if(JKemik.settings_t.isCh()){
+//			this.p1count.setForeground(((AIGame) JKemik.game).getHuman().getColor());
+//			this.p2count.setForeground(((AIGame) JKemik.game).getMachine().getColor());
+//		}else{
+//			this.p1count.setForeground(JKemik.game.getPlayer1().getColor());
+//			this.p2count.setForeground(JKemik.game.getPlayer2().getColor());
+//		}
 		
 		init();
 
