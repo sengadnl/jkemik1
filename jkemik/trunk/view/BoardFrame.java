@@ -122,7 +122,7 @@ public class BoardFrame extends JFrame {
 	 * @param number
 	 *            of points
 	 */
-	public static void addstartedPoints(int number) {
+	public static void addstarterPoints(int number) {
 		try {
 			ArrayList<Point> starters = Grid.starterPointsGenerator(
 					JKemik.settings_t.getGridDimension(), number);

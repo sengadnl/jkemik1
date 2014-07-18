@@ -223,6 +223,7 @@ public class JKemik extends Application {
 					System.out
 							.println("No saved game was found, instantiating one...");
 					createGame(template, settings_t);
+					BoardFrame.addstarterPoints(4);
 				}
 			} else {
 				createGame(template, settings_t);
