@@ -40,8 +40,7 @@ public class NewGameListener implements MouseListener {
 					BoardFrame.setMakingGame(true);
 				}
 				JKemik.settings_t.setGameSetupMode(true);
-//				BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
-//				ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
+
 			} else {
 				return;
 			}

@@ -36,16 +36,15 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener {
 		Grid.x = e.getX();
 		Grid.y = e.getY();
 
-		// HumanMoveRunnable hThread = new HumanMoveRunnable();
-		// AgentMoveRunnable mThread = new AgentMoveRunnable();
-		//
-		// Thread ht = new Thread(hThread);
-		// Thread mt = new Thread(mThread);
-		// ht.start();
-		// mt.start();
-
-		// ht.stop();
-		// mt.stop();
+//		 HumanMoveRunnable hThread = new HumanMoveRunnable();
+		 AgentMoveRunnable mThread = new AgentMoveRunnable();
+//		
+//		 Thread ht = new Thread(hThread);
+		 Thread mt = new Thread(mThread);
+//		 ht.start();
+//		 mt.start();
+//		 ht.stop();
+//		 mt.stop();
 
 		AIGame game = (AIGame) JKemik.game;
 		Player current;
@@ -72,8 +71,8 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener {
 			// Remember last play
 			current.setLatestP(temp);
 
-			// Add to the board
-			game.getCollection().put(temp.toString(), temp);
+                        // Add to the board
+                        game.put(temp.toString(), temp);
 			game.getCurrentP().rememberPoint(temp,
 					JKemik.settings_t.getBacktrackingDistance());
 			game.setPlay_count(game.getPlay_count() - 1);
@@ -92,17 +91,14 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener {
 		BoardFrame.progressB.setIndeterminate(true);
 		if (game.isEmbuche_on()) {
 			if (JKemik.settings_t.isAutoCapture()) {
-				Grid.cell = JKemik.embush(Grid.squareSize);
+				Grid.cell = JKemik.embush(Grid.squareSize, game.getMachine());
+                                //System.out.println("before switch-----------" + game.getCurrentP().toString());
 				BoardFrame.grid.repaint();
 			}
 		}
 		if (game.getCurrentP().isTurn()) {
 			this.grid.setMouseclicked(true);
 		}
-		BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
-		BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
-
-		BoardFrame.updateBoardStatus();
 
 		Grid.setRefresh(true);
 		BoardFrame.displayGrid(true);
@@ -113,15 +109,20 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener {
 
 		BoardFrame.progressB.setIndeterminate(false);
 		BoardFrame.progressB.setVisible(false);
-		if (bot.play(game)) {
-			if (game.isEmbuche_on()) {
-				if (JKemik.settings_t.isAutoCapture()) {
-					Grid.cell = JKemik.embush(Grid.squareSize);
-					BoardFrame.grid.repaint();
-				}
-			}
-		}
-
+                
+//		if (bot.play(game)) {
+//			if (game.isEmbuche_on()) {
+//				if (JKemik.settings_t.isAutoCapture()) {
+//					Grid.cell = JKemik.embush(Grid.squareSize);
+//					BoardFrame.grid.repaint();
+//                                        //System.out.println("Last switch-----------" + game.getCurrentP().toString());
+//				}
+//			}
+//		}
+//                BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
+//		BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
+//		BoardFrame.updateBoardStatus();
+                mt.start();
 	}
 
 	@Override
