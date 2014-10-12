@@ -52,11 +52,11 @@ public class JKemik extends Application {
 			readTemplate();
 			readSettings();
 			readGameObj();// TODO
+                        
 			BoardFrame.setTheme(settings_t.getTheme());
-
 			BoardFrame.uiLooksUpdate(settings_t, template);
 		} catch (Exception e) {
-			System.out.println("Error: " + e.getMessage());
+			System.out.println("Initialization Error: " + e.getMessage());
 		}
 	}
 
@@ -208,8 +208,11 @@ public class JKemik extends Application {
 			if (g_object.exists()) {
 				ObjectInputStream input = new ObjectInputStream(
 						new FileInputStream(g_object));
-				game = (Game) input.readObject();
-
+                                if(settings_t.isCh()){
+                                    game = (AIGame) input.readObject();
+                                }else{
+                                   // game = (Game) input.readObject();
+                               }
 				int response = JOptionPane.showConfirmDialog(null,
 						"Continues with saved Game?\n", "Question",
 						JOptionPane.YES_NO_OPTION);

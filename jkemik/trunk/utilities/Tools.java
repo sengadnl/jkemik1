@@ -281,15 +281,7 @@ public class Tools {
 			if (b < 0) {
 				b = 0;
 			}
-			// if (r < 0) {
-			// r = 0;
-			// }
-			// if (g < 0) {
-			// g = 0;
-			// }
-			// if (b < 0) {
-			// b = 0;
-			// }
+
 
 		} catch (Exception e) {
 			System.err.println("In Tools.boost: " + e.getMessage());
@@ -590,6 +582,27 @@ public class Tools {
 		box[7] = new Point(x, y + squareSize);
 		
 		box[8] = p;
+
+		return box;
+	}
+        public static Point[] boxForBot(Point p, double squareSize) {
+		Point[] box = new Point[4];
+		double x = p.getXC();
+		double y = p.getYC();
+
+//		box[0] = new Point(x - squareSize, y + squareSize);
+//		box[1] = new Point(x + squareSize, y - squareSize);
+		
+		box[0] = new Point(x - squareSize, y);
+		box[1] = new Point(x + squareSize, y);
+		
+//		box[4] = new Point(x - squareSize, y - squareSize);
+//		box[5] = new Point(x + squareSize, y + squareSize);
+		
+		box[2] = new Point(x, y - squareSize);
+		box[3] = new Point(x, y + squareSize);
+		
+		//box[8] = p;
 
 		return box;
 	}

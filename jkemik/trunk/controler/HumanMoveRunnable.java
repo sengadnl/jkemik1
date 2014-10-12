@@ -23,11 +23,11 @@ import view.Grid;
  */
 public class HumanMoveRunnable implements Runnable{
     public HumanMoveRunnable(){
-        //humanMoveLock = new ReentrantLock();
+        humanMoveLock = new ReentrantLock();
     }
     @Override
     public void run() {
-        //humanMoveLock.lock();
+        humanMoveLock.lock();
          try {
             AIGame game = (AIGame) JKemik.game;
             Player current;
@@ -102,10 +102,10 @@ public class HumanMoveRunnable implements Runnable{
         } catch (InterruptedException ex) {
             Logger.getLogger(HumanMoveRunnable.class.getName()).log(Level.SEVERE, null, ex);
         }
-//         finally{
-//            humanMoveLock.unlock();
-//        }
+        finally{
+            humanMoveLock.unlock();
+        }
     }
     private static final int DELAY = 1;
-   // private Lock humanMoveLock ;
+    private Lock humanMoveLock ;
 }
