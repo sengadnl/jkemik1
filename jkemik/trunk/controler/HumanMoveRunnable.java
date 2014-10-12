@@ -97,8 +97,7 @@ public class HumanMoveRunnable implements Runnable{
        
        
             Thread.sleep(DELAY);
-            //throw new UnsupportedOperationException("Not supported yet.");
-            //To change body of generated methods, choose Tools | Templates.
+            
         } catch (InterruptedException ex) {
             Logger.getLogger(HumanMoveRunnable.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -106,6 +105,6 @@ public class HumanMoveRunnable implements Runnable{
             humanMoveLock.unlock();
         }
     }
-    private static final int DELAY = 1;
+    private static final int DELAY = 1000;
     private Lock humanMoveLock ;
 }

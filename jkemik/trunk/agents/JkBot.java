@@ -5,10 +5,12 @@ import controler.JKemik;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import utilities.Tools;
 import view.Grid;
+import static view.Grid.closestTo;
 
 //import api.AbstractPlayer;
 
@@ -89,37 +91,46 @@ public class JkBot extends Player implements AgentAction{
             return true;
 	}
 
-        /**
-         *
-         * @param offense
-         * @param defense
-         * @return
-         *///TODO
-        public void offense(Point p, HashMap<String,Point> collection){
-        	
-        }
-        
-        public void defense(Point p, HashMap<String,Point> collection){
-            
-        }
         
         public Point bestAdjacantMoveTo(Point p, AIGame game){
             //Point[] box = p.box(Grid.squareSize);
             Point[] box = Tools.boxForBot(p,Grid.squareSize);
             Point adj = null;
+            
             for (Point box1 : box) {
                 if (!game.getCollection().containsKey(box1.toString())) {
                     adj = box1;
                     return adj;
                 }
             }
-            System.err.println("No point found in the box... ");
-            ArrayList<Point> hPoints = game.getHuman().getLastpoints();
-            Point hMove = hPoints.get((hPoints.size() - 1));
+            Point temp = null;
+            while(adj == null){
+                temp = randomPoint();
+                if (!game.getCollection().containsKey(temp.toString())) {
+                    adj = temp;
+                }
+            }
             
-            return hMove;
+            System.err.println("Found good random point: " + adj);
+            return adj;
         }
 
+    /**
+     *
+     * @return a random point on the grid.
+     */
+    public Point randomPoint(){
+            
+            int wbound = (int) JKemik.settings_t.getGridDimension().getPixelDimension().getWidth();
+            int hbound = (int) JKemik.settings_t.getGridDimension().getPixelDimension().getHeight();
+            
+            Random r = new Random();
+            
+            double x = r.nextInt(wbound);
+            double y = r.nextInt(hbound);
+            
+            return Grid.closestPoint(x,y, (int) Grid.squareSize);
+        }
         
         private Lock turnChangeLock;
         private HashMap<String, Point> offense;

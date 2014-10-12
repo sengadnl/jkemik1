@@ -223,6 +223,29 @@ public class Grid extends JPanel {
 			y = ycoor - deltay;
 		}
 	}
+        public static Point closestPoint(double xcoor, double ycoor, int square) {
+
+		int deltax = 0, deltay = 0;
+		int xc = 0, yc = 0; double x = 0, y = 0;
+		deltax = (int) (xcoor % square);
+		xc = square - deltax;
+
+		deltay = (int) (ycoor % square);
+		yc = square - deltay;
+
+		if (deltax > xc) {
+			x = xcoor + xc;
+		} else {
+			x = xcoor - deltax;
+		}
+
+		if (deltay > yc) {
+			y = ycoor + yc;
+		} else {
+			y = ycoor - deltay;
+		}
+                return new Point(x,y);
+	}
 
 	/**
 	 * @return the mouse clicked
