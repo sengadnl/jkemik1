@@ -24,7 +24,7 @@ public class AgentMoveRunnable implements Runnable{
         try {
             AIGame game = (AIGame) JKemik.game;
             JkBot bot = (JkBot) game.getMachine();
-            //Thread.sleep(DELAY);
+            Thread.sleep(DELAY);
             if(bot.play(game)){
                 if (game.isEmbuche_on()) {
                     if (JKemik.settings_t.isAutoCapture()) {
@@ -43,5 +43,5 @@ public class AgentMoveRunnable implements Runnable{
         }
         
     }
-    private static final int DELAY = 500;
+    private static final int DELAY = 1000;
 }
