@@ -52,9 +52,8 @@ public class JkBot extends Player implements AgentAction{
                 Point point = decide(game);
                 //System.err.println("decision: " + point);
 
-                Point move = bestAdjacantMoveTo(point, game);
+                Point move = move(point, game);
                 
-                //3. Take action
                 
                 
                 //strategy is before this point
@@ -92,7 +91,7 @@ public class JkBot extends Player implements AgentAction{
 	}
 
         
-        public Point bestAdjacantMoveTo(Point p, AIGame game){
+        public Point move(Point p, AIGame game){
             //Point[] box = p.box(Grid.squareSize);
             Point[] box = Tools.boxForBot(p,Grid.squareSize);
             Point adj = null;
