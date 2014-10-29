@@ -12,9 +12,9 @@ import java.text.DecimalFormat;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import api.AIGame;
-import api.AbstractGame;
-import controler.JKemik;
+//import api.AIGame;
+//import api.AbstractGame;
+//import controler.JKemik;
 
 /**
  * @author dalet

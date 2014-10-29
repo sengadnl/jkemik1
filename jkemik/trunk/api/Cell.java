@@ -110,13 +110,6 @@ public class Cell implements Comparable<Cell>, Serializable {
 	}
 
 	/**
-	 * @return the areaIncell
-	 */
-	public ArrayList<Point> getAreaInCell() {
-		return this.areaIncell;
-	}
-
-	/**
 	 * @param areaIncell
 	 *            the areaIncell to set
 	 */

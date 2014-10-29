@@ -37,7 +37,7 @@ public class JkBot extends Player implements AgentAction{
             }
             
            int index = game.getBoardStatus().getStatus().size();
-           PointScore score1 = game.getBoardStatus().getStatus().get(index - 1);
+           HotPoint score1 = game.getBoardStatus().getStatus().get(index - 1);
            return game.getCollection().get(score1.getKey());
         }
 	@Override
@@ -92,8 +92,13 @@ public class JkBot extends Player implements AgentAction{
 
         
         public Point move(Point p, AIGame game){
-            //Point[] box = p.box(Grid.squareSize);
-            Point[] box = Tools.boxForBot(p,Grid.squareSize);
+     
+            Point[] box;
+            if(p.getId() == game.getMachine().getId()){
+                box = Tools.boxCoord(p, Grid.squareSize);
+            }else{
+               box = Tools.boxForBot(p,Grid.squareSize);
+            }   
             Point adj = null;
             
             for (Point box1 : box) {
@@ -102,7 +107,8 @@ public class JkBot extends Player implements AgentAction{
                     return adj;
                 }
             }
-            Point temp = null;
+           
+            Point temp;
             while(adj == null){
                 temp = randomPoint();
                 if (!game.getCollection().containsKey(temp.toString())) {

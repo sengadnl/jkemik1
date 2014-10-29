@@ -6,7 +6,6 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 
-
 /**
  * @author dalet
  * 
@@ -17,8 +16,8 @@ public class RotateColor extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private final int BOARD_SIZE = 3;
-	private final int W;
-	private final int H;
+	private int W = 0;
+	private int H = 0;
 	private Color[] colors;
 	private int colorIndex = 0;// specifies which color to pick
 	private boolean changeFlag = false;

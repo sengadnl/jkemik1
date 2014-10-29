@@ -201,6 +201,7 @@ public abstract class AbstractGame implements Serializable {
 					//cell.setBonus(bonus);
 					cell.setStatus(Globals.CELL_FREE);
 					currentP.addCell(cell);
+                                        this.setLastCell(cell);//Remember this cell
 					evalCell(cell);
 					return cell;
 				} catch (NullPointerException ex) {
@@ -275,6 +276,7 @@ public abstract class AbstractGame implements Serializable {
 		cell.setRedeemedCount(redeemed_count);
 		cell.setStatus(Globals.CELL_FREE);
 		currentP.addCell(cell);
+                this.setLastCell(cell);//Remember this cell
 		evalCell(cell);
 		return cell;
 	}
@@ -622,6 +624,14 @@ public abstract class AbstractGame implements Serializable {
 		this.play_count = play_count;
 	}
 
+        public Cell getLastCell() {
+            return lastCell;
+        }
+
+        public void setLastCell(Cell lastCell) {
+            this.lastCell = lastCell;
+        }
+        
 
 	/* Connecting dots utilities */
 	public boolean AI = false;
@@ -641,8 +651,7 @@ public abstract class AbstractGame implements Serializable {
 	private static AbstractPlayer guest;
 	private HashMap<String, Point> collection = new HashMap<String, Point>();
 
-	/* persistance */
-	// TODO implement persistent capture
-	//public Stack<Point> firstBox = null;
+	/* AI tools */
+        private Cell lastCell;
 
 }

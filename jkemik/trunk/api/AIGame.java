@@ -12,6 +12,7 @@ public class AIGame extends AbstractGame{
 	 */
 	private static final long serialVersionUID = 1L;
         private BoardStatus status;
+       
 	//private static volatile AIGame instance = null; 
 	public AIGame(Player player1, JkBot player2) {
 		super(player1, player2);
@@ -19,7 +20,7 @@ public class AIGame extends AbstractGame{
                 this.status = new BoardStatus();
 	}
         //TODO set point score
-        public int score(Point p, int id){
+        public int heat(Point p, int id){
             int max = 0;
             Point[] box = Tools.boxForBot(p, Grid.squareSize);
             for(int i = 0; i < box.length - 1; i++){
@@ -27,8 +28,17 @@ public class AIGame extends AbstractGame{
                 if(temp == null){
                     continue;
                 }
-                if(id != temp.getId()){
-                    max++;
+                
+                if(id != temp.getId() && temp.getStatus() == Point.PLAYED){
+                    max=max+3;
+                }
+                
+                if(id != temp.getId() && temp.getStatus() == Point.CONNECTED){
+                    max=max+5;
+                }
+                
+                if(id == temp.getId()){
+                    max=+temp.getHeatLevel();
                 }
             }
             return max;
@@ -36,11 +46,11 @@ public class AIGame extends AbstractGame{
         public Point put(String key, Point p){ 
             Point object = null;
            try{
-                
-            object = this.getCollection().put(key, p);
-           //if(object != null){
-            this.status.add(new PointScore(key,score(p, p.getId())));
-            //System.out.println("" + this.status.toString());
+                int heat = heat(p, p.getId());
+                p.setHeatLevel(heat);
+                object = this.getCollection().put(key, p);
+                this.status.add(new HotPoint(key,heat));
+                System.out.println("" + this.status.toString());
            
             }catch(NullPointerException ex){
                  System.err.println("Error in AIGame:put > " + ex.getMessage()

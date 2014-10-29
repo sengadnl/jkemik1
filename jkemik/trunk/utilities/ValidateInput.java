@@ -14,6 +14,13 @@ import view.BoardFrame;
  * 
  */
 public class ValidateInput {
+        public static boolean starterPoints(int stpts){
+            if(stpts >= 0 && stpts <= 2){
+                return true;
+            }
+            JOptionPane.showMessageDialog(null,"Input must be a number in the interval [0,2]",BoardFrame.messages.getString("wrongInput"),JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
 	public static boolean maxWin(int maxWin, int highest) {
 		if (maxWin < 1) {
 			JOptionPane.showMessageDialog(null,

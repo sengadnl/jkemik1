@@ -24,7 +24,7 @@ public class STemplate implements Serializable {
 	private boolean playMode = false;
 	private boolean systemSetupMode = false;
 	private String theme = "Origins";
-	private int maxWinVal = 4, backtrackingDistance = 2;
+	private int maxWinVal = 4, backtrackingDistance = 2, starterPoints = 0;
 	private double maxPointScaler = .8;
 	private String language = "ENGLISH";
 	private boolean[] memo = { true, true };
@@ -312,6 +312,15 @@ public class STemplate implements Serializable {
 		this.autoPass = autoPass;
 	}
 
+        public int getStarterPoints() {
+            return starterPoints;
+        }
+
+        public void setStarterPoints(int starterPoints) {
+            this.starterPoints = starterPoints;
+        }
+        
+        @Override
 	public String toString() {
 		return  "\nMaxWinVal :" + this.maxWinVal;
 	}

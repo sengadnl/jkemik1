@@ -47,8 +47,9 @@ public class SettingsPanel extends JPanel{
 	public static JTextField max_win;
 	public static JTextField backtrack;
 	public static JTextField maxPointScaler;
+        public static JTextField starterPoints;
 	public static JComboBox<String> languageList;
-	public static JLabel label1,label2,label4,label5,label6,label7, catpureLabel,turnPassLabel,maxWinLabel,languageLabel,backtrackingLabel,maxPointScalerLabel;	
+	public static JLabel label1,label2,label4,label5,label6,label7, label8, catpureLabel,turnPassLabel,maxWinLabel,languageLabel,backtrackingLabel,maxPointScalerLabel,starterPointsLabel;	
 	private int maxWinVal;
 	static ResourceBundle messages;
 	public static JRadioButton humHumButton,humComButton, networkButton;  
@@ -64,6 +65,14 @@ public class SettingsPanel extends JPanel{
 		setSize(w,h);
 		buildPane();
 	}
+
+        public static JTextField getStarterPoints() {
+            return starterPoints;
+        }
+
+        public static void setStarterPoints(JTextField starterPoints) {
+            SettingsPanel.starterPoints = starterPoints;
+        }
 
 	public static JTextField getBacktrack() {
 		return backtrack;
@@ -151,7 +160,7 @@ public class SettingsPanel extends JPanel{
 
 		l2 = new JPanel();
 		
-		l2.setLayout(new GridLayout(6, 3,20,20));
+		l2.setLayout(new GridLayout(7, 3,20,20));
 		l3 = new JPanel();
 		l3.setLayout(new BorderLayout());
 		
@@ -162,7 +171,9 @@ public class SettingsPanel extends JPanel{
 		max_win = new JTextField("" + JKemik.settings_t.getMaxWinVal());
 		backtrack = new JTextField("" + JKemik.settings_t.getBacktrackingDistance());
 		maxPointScaler = new JTextField("" + JKemik.settings_t.getMaxPointScaler());
-		
+		starterPoints = new JTextField("" + JKemik.settings_t.getStarterPoints());         
+
+                
 		languageList = new JComboBox<>(Globals.laguageNames);//
 
 		label1 = new JLabel("  " + messages.getString("autoCaptureL") + " : ");
@@ -177,6 +188,8 @@ public class SettingsPanel extends JPanel{
 		backtrackingLabel = new JLabel(" [1 , 10] ");
 		label7 = new JLabel("  " + messages.getString("maxPointScaler") + " :");
 		maxPointScalerLabel = new JLabel(" [0.3 , 1.0[ ");
+                label8 = new JLabel("  Starter point:");
+                starterPointsLabel = new JLabel("[0,2]");
 		
 		save.setText(messages.getString("saveB"));
 
@@ -204,6 +217,11 @@ public class SettingsPanel extends JPanel{
 		l2.add(label7);
 		l2.add(maxPointScaler);
 		l2.add(maxPointScalerLabel);
+                
+                l2.add(label8);
+                l2.add(starterPoints);
+                l2.add(starterPointsLabel);
+                        
 		
 		l2.add(label5);
 		l2.add(languageList);
@@ -224,12 +242,14 @@ public class SettingsPanel extends JPanel{
 		label5.setForeground(fg);
 		label6.setForeground(fg);
 		label7.setForeground(fg);
+                label8.setForeground(fg);
 		catpureLabel.setForeground(fg);
 		turnPassLabel.setForeground(fg);
 		maxWinLabel.setForeground(fg);
 		languageLabel.setForeground(fg);
 		backtrackingLabel.setForeground(fg);
 		maxPointScalerLabel.setForeground(fg);
+                starterPointsLabel.setForeground(fg);
 		decoratebuttons(fg, bg);
 		
 		l2.setBackground(bg);
@@ -249,6 +269,10 @@ public class SettingsPanel extends JPanel{
 		maxPointScaler.setBackground(fg);
 		maxPointScaler.setForeground(bg);
 		maxPointScaler.setCaretColor(bg);
+                
+                starterPoints.setBackground(fg);
+                starterPoints.setForeground(bg);
+                starterPoints.setCaretColor(bg);
 		
 		languageList.setBackground(fg);
 		languageList.setForeground(bg);
@@ -310,6 +334,7 @@ public class SettingsPanel extends JPanel{
                 }
 		SettingsPanel.setMax_win(t.getMaxWinVal());
 		maxPointScaler.setText("" + t.getMaxPointScaler());
+                starterPoints.setText("" + t.getStarterPoints());
 		
 		label1.setText("  " + messages.getString("autoCaptureL") + " : ");
 		label2.setText("  " + messages.getString("autoPassL") + " : ");
@@ -321,7 +346,8 @@ public class SettingsPanel extends JPanel{
 		catpureLabel.setText(" Click on value to make a change.  ");
 		turnPassLabel.setText(" Click on value to make a change.  ");
 		maxWinLabel.setText(" [1," + JKemik.settings_t.getMaxPointPerPlayer() + "]");
-	}
+	        starterPointsLabel.setText("[0,2]");
+        }
 
 	public static RotateLabel getAuto_capture() {
 		return auto_capture;
