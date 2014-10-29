@@ -5,7 +5,6 @@
  */
 
 package controler;
-
 import agents.JkBot;
 import api.AIGame;
 import java.util.logging.Level;
@@ -30,12 +29,17 @@ public class AgentMoveRunnable implements Runnable{
                     if (JKemik.settings_t.isAutoCapture()) {
                             Grid.cell = JKemik.embush(Grid.squareSize);
                             BoardFrame.grid.repaint();
+                            game.getBoardStatus().updateStatus();
                     }
                 }
             }
             BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
             BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
             BoardFrame.updateBoardStatus();
+            
+            Grid.setRefresh(true);
+            BoardFrame.displayGrid(true);
+            BoardFrame.grid.repaint();
             Thread.sleep(DELAY);
             
         } catch (InterruptedException ex) {
@@ -43,5 +47,5 @@ public class AgentMoveRunnable implements Runnable{
         }
         
     }
-    private static final int DELAY = 1000;
+    private static final int DELAY = 500;
 }

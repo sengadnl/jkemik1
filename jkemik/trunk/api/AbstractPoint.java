@@ -30,6 +30,7 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
 	 * captured, 0 = dead
 	 */
 	protected int status;
+        protected int heatLevel;
 
 
 	public AbstractPoint(double x, double y, int id) {
@@ -38,8 +39,17 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
 		this.y = y;
 		this.id = id;
 		this.status = -1;
+                this.heatLevel = 0;
 	}
 
+        public int getHeatLevel() {
+            return heatLevel;
+        }
+
+        public void setHeatLevel(int heatLevel) {
+            this.heatLevel = heatLevel;
+        }
+        
 	public int getId() {
 		return id;
 	}

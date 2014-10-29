@@ -283,6 +283,7 @@ public class JKemik extends Application {
 		String str = SettingsPanel.max_win.getText();
 		String backtrack = SettingsPanel.backtrack.getText();
 		String maxPointScaler = SettingsPanel.maxPointScaler.getText();
+                String starterPoints = SettingsPanel.starterPoints.getText();
 		// SettingsPanel.translateUI();
 		String lang = (String) SettingsPanel.getLanguageList()
 				.getSelectedItem();
@@ -290,7 +291,12 @@ public class JKemik extends Application {
 		String properties = Tools.propertiesFilename(key);
 		int maxw = Integer.parseInt(str);
 		int btrack = Integer.parseInt(backtrack);
+                int stpts = Integer.parseInt(starterPoints);
 		double maxPtScaler = Double.parseDouble(maxPointScaler);
+                
+                if(!ValidateInput.starterPoints(stpts)){
+                    return;
+                }
 
 		if (!ValidateInput.maxWin(maxw, t.getMaxPointPerPlayer())) {
 			return;
@@ -319,6 +325,7 @@ public class JKemik extends Application {
 		t.setLanguage(lang);
 		t.setBacktrackingDistance(btrack);
 		t.setMaxPointScaler(maxPtScaler);
+                t.setStarterPoints(stpts);
 
 		Locale local = new Locale(key);
 		BoardFrame.setMessages(ResourceBundle.getBundle(properties, local));

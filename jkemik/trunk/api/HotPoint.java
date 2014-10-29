@@ -10,14 +10,13 @@ package api;
  *
  * @author admin
  */
-public class PointScore implements Comparable<PointScore>{
+public class HotPoint implements Comparable<HotPoint>{
     private String key;
     private int score;
-    public PointScore(String key, int score){
+    public HotPoint(String key, int score){
         this.key = key ;
         this.score = score;
     }
-
 
     public String getKey() {
         return key;
@@ -36,11 +35,11 @@ public class PointScore implements Comparable<PointScore>{
     }
     
     public String toString(){
-        return "Score of " + key + " is " + score;
+        return "Heat:" + score;
     }
 
     @Override
-    public int compareTo(PointScore o) {
+    public int compareTo(HotPoint o) {
         if(this.score > o.getScore()){
             return 1;
         }else if(this.score < o.getScore()){

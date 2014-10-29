@@ -56,7 +56,7 @@ public class HumanMoveRunnable implements Runnable{
                     current.setLatestP(temp);
 
                     // Add to the board
-                    game.getCollection().put(temp.toString(), temp);
+                    game.put(temp.toString(), temp);
                     game.getCurrentP().rememberPoint(temp,
                                     JKemik.settings_t.getBacktrackingDistance());
                     game.setPlay_count(game.getPlay_count() - 1);
@@ -77,6 +77,7 @@ public class HumanMoveRunnable implements Runnable{
                     if (JKemik.settings_t.isAutoCapture()) {
                             Grid.cell = JKemik.embush(Grid.squareSize);
                             BoardFrame.grid.repaint();
+                            game.getBoardStatus().updateStatus();
                     }
             }
             if (game.getCurrentP().isTurn()) {
@@ -84,12 +85,10 @@ public class HumanMoveRunnable implements Runnable{
             }
             BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
             BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
-
             BoardFrame.updateBoardStatus();
 
             Grid.setRefresh(true);
             BoardFrame.displayGrid(true);
-
             BoardFrame.grid.repaint((int)temp.getXC() - (int)Grid.squareSize * 2, (int)temp.getYC() - (int)Grid.squareSize * 2, (int)Grid.squareSize * 4, (int)Grid.squareSize * 4);
 
             BoardFrame.progressB.setIndeterminate(false);

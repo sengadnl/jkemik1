@@ -64,6 +64,7 @@ public class Grid extends JPanel {
 		return instance;
 	}
 
+        @Override
 	public void paintComponent(Graphics g) {
             try {
 		//super.paintComponent(g2);
@@ -203,13 +204,13 @@ public class Grid extends JPanel {
 
 	public static void closestTo(double xcoor, double ycoor, int square) {
 
-		int deltax = 0, deltay = 0;
-		int xc = 0, yc = 0;
-		deltax = (int) (xcoor % square);
-		xc = square - deltax;
+		//int deltax = 0, deltay = 0;
+		//int xc = 0, yc = 0;
+		int deltax = (int) (xcoor % square);
+		int xc = square - deltax;
 
-		deltay = (int) (ycoor % square);
-		yc = square - deltay;
+		int deltay = (int) (ycoor % square);
+		int yc = square - deltay;
 
 		if (deltax > xc) {
 			x = xcoor + xc;
@@ -342,6 +343,7 @@ public class Grid extends JPanel {
 		squareFadeVariant = (int) (squareSize * .25);
 	}
         public static ArrayList<Point> starterPointsGenerator(GridDimension dimension, int number){
+            number = number*2;
             if(number%2 != 0){
                 throw new NumberFormatException();
             }
