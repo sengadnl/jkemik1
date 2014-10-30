@@ -348,8 +348,8 @@ public class JKemik extends Application {
 			if (settings_t.isAutoCapture()) {
 
 				if (temp != null) {
-					System.err.println("- Capture Duration = " + str
-							+ " MilliSecs");
+//					System.err.println("- Capture Duration = " + str
+//							+ " MilliSecs");
 					BoardFrame.feedbackarea
 							.setText((game.getCaptured_count() + game
 									.getRedeemed_count())
@@ -370,7 +370,7 @@ public class JKemik extends Application {
 				if (settings_t.isManualCapture()) {
 
 					if (temp != null) {
-						System.err.println("Capture Duration = " + total);
+						//System.err.println("Capture Duration = " + total);
 						BoardFrame.feedbackarea
 								.setText((game.getCaptured_count() + game
 										.getRedeemed_count())
@@ -407,8 +407,8 @@ public class JKemik extends Application {
 			if (settings_t.isAutoCapture()) {
 
 				if (temp != null) {
-					System.err.println("- Capture Duration = " + str
-							+ " MilliSecs");
+//					System.err.println("- Capture Duration = " + str
+//							+ " MilliSecs");
 					BoardFrame.feedbackarea
 							.setText((game.getCaptured_count() + game
 									.getRedeemed_count())
@@ -429,7 +429,7 @@ public class JKemik extends Application {
 				if (settings_t.isManualCapture()) {
 
 					if (temp != null) {
-						System.err.println("Capture Duration = " + total);
+						//System.err.println("Capture Duration = " + total);
 						BoardFrame.feedbackarea
 								.setText((game.getCaptured_count() + game
 										.getRedeemed_count())

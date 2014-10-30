@@ -10,6 +10,7 @@ import controler.JKemik;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import view.Grid;
 
 /**
  *
@@ -27,44 +28,89 @@ public class BoardStatus implements Comparator<HotPoint>{
         }
         return false;
     }
-    public void updateStatus(){
-        //System.out.println("Before updating status " + this.status.toString());
+    //TODO make sure board is being updated
+    public void updateStatus(Point obj){
+        System.out.println("Before updating status " + this.status.toString());
         AIGame game = (AIGame) JKemik.game;
         
-        try{
-        Cell c = game.getLastCell();
-        ArrayList<Point> cellWall = c.getCellContour();
-        ArrayList<Point> captures = c.getAreaIncell();
-       
-        //remove dead points from boardStatus
-        for(Point p: captures){
-            // System.out.println("Status of p = " + p.getStatus());
-            if(p.getStatus() == Point.DEAD || p.getStatus() == Point.CAPTURED){
-                for(HotPoint s: this.status){
-                    if(s.getKey().equals(p.toString())){
-                        System.out.println("Removing" + s.toString());
-                        this.status.remove(s);
-                        break;
-                    }
-                }
-            }
-        }
+        //try{
+            Cell c = null;
+            if(null != game.getLastCell()){
+                c = game.getLastCell();
+                ArrayList<Point> cellWall = c.getCellContour();
+                ArrayList<Point> captures = c.getAreaIncell();
+            
         
-        //Increase score for all connected dots
-        for(Point pt: cellWall){
-            if(pt.getStatus() == Point.CONNECTED){
-                for(HotPoint s: this.status){
-                    if(s.getKey().equals(pt.toString())){
-                        s.setScore(s.getScore() + 1);
-                        break;
+                //remove dead points from boardStatus
+                for(Point p: captures){
+                    // System.out.println("Status of p = " + p.getStatus());
+                    if(p.getStatus() == Point.DEAD || p.getStatus() == Point.CAPTURED){
+                        for(HotPoint s: this.status){
+                            if(s.getKey().equals(p.toString())){
+                                System.out.println("Removing" + s.toString());
+                                this.status.remove(s);
+                                break;
+                            }
+                        }
                     }
                 }
+            } 
+  
+            
+            for(Point temp: game.getCollection().values()){
+               updatePointStatus(temp, game);
+            }
+            
+            //update board status
+            if(!this.status.isEmpty()){
+                for(HotPoint s: this.status){
+                    Point z = game.getCollection().get(s.getKey());
+                    if(z != null){ 
+                        if(z.getStatus() == Point.CONNECTED){
+                            s.setScore(0);
+                        }
+                        s.setScore(z.heatLevel);
+                    } 
+                }
+            }
+            Collections.sort(status);
+            System.out.println("After updating status " + this.status.toString());
+//        }catch(NullPointerException ex){
+//            System.out.println("Exception in BoardStatus:updateStatus " + ex.getMessage());
+//        }
+        
+    }
+    private void updatePointStatus(Point p, AIGame game){
+        System.out.println("\nStarting Heat for: " + p + " " + p.getHeatLevel());
+        int max;
+        max = p.getHeatLevel();
+        int id = p.getId();
+        Point[] box;
+        box = p.boxForBot(Grid.squareSize);
+        for(int i = 0; i < box.length - 1; i++){ 
+            Point temp = game.getCollection().get(box[i].toString());
+            
+            if(temp == null){
+                    continue;
+             }
+            
+            //Opponent uncaptured point
+            if(id != temp.getId() && temp.getStatus() == Point.PLAYED){
+                max = max + 1;
+            }
+
+            //Opponent connected point
+            if(id != temp.getId() && temp.getStatus() == Point.CONNECTED){
+                max = max + 2;
+            }
+            
+            //my points
+            if(id == temp.getId()){
+                max = max - 1;
             }
         }
-        }catch(NullPointerException ex){
-            System.out.println("Exception in BoardStatus:updateStatus" + ex.getMessage());
-        }
-        System.out.println("After updating status  " + this.status.toString());
+        p.setHeatLevel(max);
+        System.out.println("Ending Heat for: " + p + " " + p.getHeatLevel());
     }
     public ArrayList<HotPoint> getStatus() {
         return status;
@@ -73,9 +119,10 @@ public class BoardStatus implements Comparator<HotPoint>{
     public void setStatus(ArrayList<HotPoint> status) {
         this.status = status;
     }
+    @Override
     public String toString(){
         for(HotPoint p : this.status){
-            System.out.println("\n" + p.toString());
+            System.err.println(p.toString());
         }
         return "";
     }

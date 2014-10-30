@@ -66,6 +66,7 @@ public class HumanMoveRunnable implements Runnable{
                     game.setPlayFlag();
                     game.getCurrentP().setTurn(false);
                     Grid.mouseMove = false;
+                    //game.getBoardStatus().updateStatus(temp);
                     BoardFrame.feedback(game.getCurrentP().getName() + " "
                                     + BoardFrame.messages.getString("feedback4"));
             }
@@ -77,7 +78,7 @@ public class HumanMoveRunnable implements Runnable{
                     if (JKemik.settings_t.isAutoCapture()) {
                             Grid.cell = JKemik.embush(Grid.squareSize);
                             BoardFrame.grid.repaint();
-                            game.getBoardStatus().updateStatus();
+                            //game.getBoardStatus().updateStatus(temp);
                     }
             }
             if (game.getCurrentP().isTurn()) {
