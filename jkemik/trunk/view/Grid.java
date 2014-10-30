@@ -91,7 +91,7 @@ public class Grid extends JPanel {
                                     && (game.getCurrentP().getPlay_flag() == 1)) {
                         System.err.println("Switching turns .....");
                         game.switchPlayTurns();
-                        System.out.println("After switch-----------" + game.getCurrentP().toString());
+                        //System.out.println("After switch-----------" + game.getCurrentP().toString());
                     }
                     
                     //draw board
@@ -353,12 +353,12 @@ public class Grid extends JPanel {
             double maxY = dimension.getPixelDimension().getHeight();
             Random r = new Random();
            int i = 0;
-           System.out.println("squaresize: " + Grid.squareSize);
+           //System.out.println("squaresize: " + Grid.squareSize);
             do{
                 while(i < number){
                     double tempx = (double)r.nextInt((int)maxX);
                     double tempy = (double)r.nextInt((int)maxY);
-                    System.out.println("Random (x,y) : (" + tempx + "," + tempy + ")");
+                    //System.out.println("Random (x,y) : (" + tempx + "," + tempy + ")");
                     if(tempx <=  (Grid.squareSize*SQR_OFFSET)){
                          tempx = (Grid.squareSize * (SQR_OFFSET)) + tempx;
                     }

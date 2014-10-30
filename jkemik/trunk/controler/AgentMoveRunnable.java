@@ -29,7 +29,6 @@ public class AgentMoveRunnable implements Runnable{
                     if (JKemik.settings_t.isAutoCapture()) {
                             Grid.cell = JKemik.embush(Grid.squareSize);
                             BoardFrame.grid.repaint();
-                            game.getBoardStatus().updateStatus();
                     }
                 }
             }
@@ -47,5 +46,5 @@ public class AgentMoveRunnable implements Runnable{
         }
         
     }
-    private static final int DELAY = 500;
+    private static final int DELAY = 1000;
 }

@@ -590,20 +590,12 @@ public class Tools {
 		double x = p.getXC();
 		double y = p.getYC();
 
-//		box[0] = new Point(x - squareSize, y + squareSize);
-//		box[1] = new Point(x + squareSize, y - squareSize);
-		
 		box[0] = new Point(x - squareSize, y);
 		box[1] = new Point(x + squareSize, y);
-		
-//		box[4] = new Point(x - squareSize, y - squareSize);
-//		box[5] = new Point(x + squareSize, y + squareSize);
-		
+
 		box[2] = new Point(x, y - squareSize);
 		box[3] = new Point(x, y + squareSize);
-		
-		//box[8] = p;
-
+	
 		return box;
 	}
 //	public static Stack<Point> boxCoord(Point p, double squareSize) {
