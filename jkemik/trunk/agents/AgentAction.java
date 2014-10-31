@@ -9,5 +9,4 @@ import api.Point;
 public interface AgentAction {
     public boolean play(AIGame game);
     public Point offense(AIGame game, Point humanPoint);
-    public Point defense(AIGame game, Point aiPoint);
 }
