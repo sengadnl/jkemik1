@@ -161,7 +161,6 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 
 			BoardFrame.progressB.setIndeterminate(false);
 			BoardFrame.progressB.setVisible(false);
-
 		}
 	}
 
