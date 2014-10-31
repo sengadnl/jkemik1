@@ -16,6 +16,9 @@ import controler.JKemik;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import javax.swing.JOptionPane;
 import view.BoardFrame;
 import view.Grid;
 
@@ -33,96 +36,19 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// Get X and Y
-		Grid.x = e.getX();
-		Grid.y = e.getY();
+            Grid.x = e.getX();
+            Grid.y = e.getY();
 
-		 HumanMoveRunnable hThread = new HumanMoveRunnable();
-		 AgentMoveRunnable mThread = new AgentMoveRunnable();
+            HumanMoveRunnable hThread = new HumanMoveRunnable();
+            AgentMoveRunnable mThread = new AgentMoveRunnable();
 //		
-		 Thread ht = new Thread(hThread);
-		 Thread mt = new Thread(mThread);
-		 ht.start();
-		 mt.start();
-//		 ht.stop();
-//		 mt.stop();
-
-//		AIGame game = (AIGame) JKemik.game;
-//		Player current;
-//		current = (Player) game.getHuman();
-//		JkBot bot = (JkBot) game.getMachine();
-//		// Allow mouse click
-//		Grid.mouseclicked = true;
-//
-//		// Guess player's point
-//		Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
-//		Point temp = new Point(Grid.x, Grid.y);
-//
-//		if (!game.getCollection().containsKey(temp.toString())) {
-//			Grid.plotPoint = true;
-//
-//			// BoardFrame.grid.repaint();
-//
-//			// Mark point as played
-//			temp.setStatus(Point.PLAYED);
-//
-//			// Mark point as belonging to current player
-//			temp.setId(current.getId());
-//
-//			// Remember last play
-//			current.setLatestP(temp);
-//
-//                        // Add to the board
-//                        game.put(temp.toString(), temp);
-//			game.getCurrentP().rememberPoint(temp,
-//					JKemik.settings_t.getBacktrackingDistance());
-//			game.setPlay_count(game.getPlay_count() - 1);
-//			game.setEmbuche_on(true);
-//
-//			// Setting turn
-//			game.setPlayFlag();
-//			game.getCurrentP().setTurn(false);
-//			game.getCurrentP().setPoints(1);//count this point
-//			Grid.mouseMove = false;
-//			BoardFrame.feedback(game.getCurrentP().getName() + " "
-//					+ BoardFrame.messages.getString("feedback4"));
-//		}
-//
-//		BoardFrame.progressB.setVisible(true);
-//		BoardFrame.progressB.setIndeterminate(true);
-//		if (game.isEmbuche_on()) {
-//			if (JKemik.settings_t.isAutoCapture()) {
-//				Grid.cell = JKemik.embush(Grid.squareSize, game.getMachine());
-//                                //System.out.println("before switch-----------" + game.getCurrentP().toString());
-//				BoardFrame.grid.repaint();
-//			}
-//		}
-//		if (game.getCurrentP().isTurn()) {
-//			this.grid.setMouseclicked(true);
-//		}
-//
-//		Grid.setRefresh(true);
-//		BoardFrame.displayGrid(true);
-//
-//		BoardFrame.grid.repaint((int) temp.getXC() - (int) Grid.squareSize * 2,
-//				(int) temp.getYC() - (int) Grid.squareSize * 2,
-//				(int) Grid.squareSize * 4, (int) Grid.squareSize * 4);
-//
-//		BoardFrame.progressB.setIndeterminate(false);
-//		BoardFrame.progressB.setVisible(false);
-                
-//		if (bot.play(game)) {
-//			if (game.isEmbuche_on()) {
-//				if (JKemik.settings_t.isAutoCapture()) {
-//					Grid.cell = JKemik.embush(Grid.squareSize);
-//					BoardFrame.grid.repaint();
-//                                        //System.out.println("Last switch-----------" + game.getCurrentP().toString());
-//				}
-//			}
-//		}
-//                BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
-//		BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
-//		BoardFrame.updateBoardStatus();
-//                mt.start();
+            Thread ht = new Thread(hThread);
+            Thread mt = new Thread(mThread);
+            ExecutorService pool = Executors.newFixedThreadPool(2);
+            pool.execute(ht);
+            pool.execute(mt);
+//            ht.start();
+//            mt.start();
 	}
 
 	@Override
@@ -165,7 +91,7 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener {
 			BoardFrame.displayGrid(true);
 			BoardFrame.grid.repaint();
 			Grid.mouseMove = true;
-
 		}
+                
 	}
 }
