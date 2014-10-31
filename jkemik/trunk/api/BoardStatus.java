@@ -30,7 +30,7 @@ public class BoardStatus implements Comparator<HotPoint>{
     }
     //TODO make sure board is being updated
     public void updateStatus(Point obj){
-        System.out.println("Before updating status " + this.status.toString());
+        System.out.println("STATUS!!!!!!!!!!!!!!!!!!");
         AIGame game = (AIGame) JKemik.game;
         
         //try{
@@ -56,12 +56,12 @@ public class BoardStatus implements Comparator<HotPoint>{
                 }
             } 
   
-            
+            //update status
             for(Point temp: game.getCollection().values()){
                updatePointStatus(temp, game);
             }
             
-            //update board status
+            //Make to score of connected points 0
             if(!this.status.isEmpty()){
                 for(HotPoint s: this.status){
                     Point z = game.getCollection().get(s.getKey());
@@ -74,19 +74,18 @@ public class BoardStatus implements Comparator<HotPoint>{
                 }
             }
             Collections.sort(status);
-            System.out.println("After updating status " + this.status.toString());
 //        }catch(NullPointerException ex){
 //            System.out.println("Exception in BoardStatus:updateStatus " + ex.getMessage());
 //        }
         
     }
     private void updatePointStatus(Point p, AIGame game){
-        System.out.println("\nStarting Heat for: " + p + " " + p.getHeatLevel());
+        //System.out.println("\nStarting Heat for: " + p + " " + p.getHeatLevel());
         int max;
-        max = p.getHeatLevel();
+        max = 0;
         int id = p.getId();
         Point[] box;
-        box = p.boxForBot(Grid.squareSize);
+        box = p.axisBox(Grid.squareSize);
         for(int i = 0; i < box.length - 1; i++){ 
             Point temp = game.getCollection().get(box[i].toString());
             
@@ -96,21 +95,25 @@ public class BoardStatus implements Comparator<HotPoint>{
             
             //Opponent uncaptured point
             if(id != temp.getId() && temp.getStatus() == Point.PLAYED){
-                max = max + 1;
+                max++;
+                continue;
             }
 
             //Opponent connected point
             if(id != temp.getId() && temp.getStatus() == Point.CONNECTED){
-                max = max + 2;
+                max++;
+                max++;
+                continue;
             }
             
             //my points
             if(id == temp.getId()){
-                max = max - 1;
+                max--;
+                continue;
             }
         }
         p.setHeatLevel(max);
-        System.out.println("Ending Heat for: " + p + " " + p.getHeatLevel());
+        //System.out.println("Ending Heat for: " + p + " " + p.getHeatLevel());
     }
     public ArrayList<HotPoint> getStatus() {
         return status;

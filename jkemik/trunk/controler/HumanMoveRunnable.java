@@ -65,7 +65,9 @@ public class HumanMoveRunnable implements Runnable{
                     // Setting turn
                     game.setPlayFlag();
                     game.getCurrentP().setTurn(false);
+                    game.getCurrentP().setPoints(1);
                     Grid.mouseMove = false;
+                    System.out.println(bot.getHumanStatus().toString());
                     //game.getBoardStatus().updateStatus(temp);
                     BoardFrame.feedback(game.getCurrentP().getName() + " "
                                     + BoardFrame.messages.getString("feedback4"));

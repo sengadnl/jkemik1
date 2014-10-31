@@ -27,10 +27,11 @@ public class AIGame extends AbstractGame{
                 JkBot ai = (JkBot)this.getMachine();
                 if(p.getId() == ai.getId()){
                     ai.getAiStatus().add(new HotPoint(key,0));
-                    ai.getAiStatus().updateStatus(p);
+                }else{
+                    ai.getHumanStatus().add(new HotPoint(key,0));  
                 }
-                ai.getHumanStatus().add(new HotPoint(key,0));
                 ai.getHumanStatus().updateStatus(p);
+                ai.getAiStatus().updateStatus(p);
                 
                 this.setLastp(p);
 
@@ -70,12 +71,4 @@ public class AIGame extends AbstractGame{
 		this.setPlayer2(player2);
 	}
 
-//        public BoardStatus getBoardStatus() {
-//            return status;
-//        }
-//
-//        public void setBoardStatus(BoardStatus status) {
-//            this.status = status;
-//        }
-        
 }
