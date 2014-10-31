@@ -115,7 +115,8 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
          @param squareSize
          @return array of all adjacent points*/
         public Point[] box(double squareSize) {
-		Point[] box = new Point[8];
+         
+		Point[] box = new Point[9];
 		box[0] = new Point(this.getXC() - squareSize, this.getYC() + squareSize);
 		box[1] = new Point(this.getXC() + squareSize, this.getYC() - squareSize);
 		
@@ -127,7 +128,7 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
 		
 		box[6] = new Point(this.getXC(), this.getYC() - squareSize);
 		box[7] = new Point(this.getXC(), this.getYC() + squareSize);
-		
+		box[8] = new Point(this.x,this.y);
 		return box;
 	}
         

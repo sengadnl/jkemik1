@@ -66,7 +66,8 @@ public abstract class AbstractGame implements Serializable {
 			return true;
 		}
 		/* Get all adjacent Points */
-		Point[] box = Tools.boxCoord(o, squareSize);
+		//Point[] box = Tools.boxCoord(o, squareSize);
+                Point[] box = o.box(squareSize);
 		/* Find the point in this box that belongs to the path */
 		for (int i = 0; i < box.length; i++) {
 			/* Stop recursive call here if a path was already found */

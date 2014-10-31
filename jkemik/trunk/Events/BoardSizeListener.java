@@ -31,13 +31,14 @@ public class BoardSizeListener implements MouseListener{
 		t.setGridDimesion(sqr);
 		//Grid.setSquareSize(sqr);
 		
-		Grid.setDimension(t.getGridDimension());		
+		Grid.setDimension(t.getGridDimension());	
 		BoardFrame.settings_p.updateSettingsPanel(JKemik.settings_t);
 		BoardFrame.displayGrid(true);
                 BoardFrame.grid.repaint();
-                
 		BoardFrame.Win.setText((int)(t.getGridDimension().positions()* Globals.MAX_WIN) + "");
-		t.setMaxWinVal((int)(t.getGridDimension().positions() * Globals.MAX_WIN));
+                t.setMaxWinVal((int)(t.getGridDimension().positions() * Globals.MAX_WIN));
+                System.out.println("Set Max val = " + (t.getGridDimension().positions() * Globals.MAX_WIN));
+		System.out.println("Max val = " + t.getMaxWinVal());
 
 	}
 

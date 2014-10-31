@@ -79,10 +79,12 @@ public class HumanMoveRunnable implements Runnable{
             BoardFrame.progressB.setIndeterminate(true);
             
             if (game.isEmbuche_on()) {
-                    if (JKemik.settings_t.isAutoCapture()) {
-                        Grid.cell = JKemik.embush(Grid.squareSize);
+                if (JKemik.settings_t.isAutoCapture()) {
+                    Grid.cell = JKemik.embush(Grid.squareSize);
+                    if(Grid.cell != null){
                         BoardFrame.grid.repaint();
-                    }
+                    } 
+                }
             }
             if (game.getCurrentP().isTurn()) {
                     BoardFrame.grid.setMouseclicked(true);
@@ -94,7 +96,7 @@ public class HumanMoveRunnable implements Runnable{
             Grid.setRefresh(true);
             BoardFrame.displayGrid(true);
             BoardFrame.grid.repaint((int)temp.getXC() - (int)Grid.squareSize * 2, (int)temp.getYC() - (int)Grid.squareSize * 2, (int)Grid.squareSize * 4, (int)Grid.squareSize * 4);
-
+            
             BoardFrame.progressB.setIndeterminate(false);
             BoardFrame.progressB.setVisible(false);
 
@@ -122,6 +124,6 @@ public class HumanMoveRunnable implements Runnable{
         }
         //Thread.interrupted();
     }
-    private static final int DELAY = 500;
+    private static final int DELAY = 300;
     private Lock humanMoveLock ;
 }
