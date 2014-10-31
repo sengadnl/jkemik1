@@ -455,7 +455,7 @@ public abstract class AbstractGame implements Serializable {
 	 * 
 	 * @param the
 	 *            captured cell
-	 * @return the number of cuptured cells by the current player
+	 * @return the number of captured cells by the current player
 	 */
 	public void evalCell(Cell cell) {
 		/* Look at all guest cells */

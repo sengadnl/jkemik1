@@ -31,7 +31,6 @@ public class JkBot extends Player implements AgentAction{
                 this.humanStatus = new BoardStatus();
                 turnChangeLock = new ReentrantLock();
 	}
-        
         private Point move(AIGame game){
 
           
@@ -41,23 +40,43 @@ public class JkBot extends Player implements AgentAction{
                 return offense(game, game.getLastp());
             }
 
-            int indexai,indexh;
-            indexai = this.aiStatus.getStatus().size();
-            indexh = this.humanStatus.getStatus().size();
+            ArrayList<HotPoint> hStatus, aiStatus;
+            int sizeAI,sizeH;
+            
+            hStatus = this.humanStatus.getStatus();
+            aiStatus = this.aiStatus.getStatus();
+                    
+            sizeAI = aiStatus.size();
+            sizeH = hStatus.size();
+            
             /*get most vulnerable ai point*/
             HotPoint ai,h;
-            ai = this.aiStatus.getStatus().get(indexai - 1);
-            h = this.humanStatus.getStatus().get(indexh - 1);
+            ai = this.aiStatus.getStatus().get(sizeAI - 1);
+            h = hStatus.get(sizeH - 1);
             
             /*offense if ai is less or equally vulnerable than h*/
+            Point temp;
+            System.err.println("offense >>>");
+            //Evaluate who is most vulnerable
             if(ai.compareTo(h) <= 0){
-                System.err.println("offense >>>");
-                return offense(game, game.getCollection().get(h.getKey()));
+                for(int i = sizeH - 1; i >= 0 ; i--){
+                    temp = offense(game, game.getCollection().get(hStatus.get(i).getKey()));
+                    if(temp != null){
+                        return temp;
+                    } 
+                }
             }
             /*Defense if ai is more vulnerable than h*/
             System.err.println("Defense >>>");
-            return offense(game, game.getCollection().get(ai.getKey()));
+            for(int i = sizeAI - 1; i >= 0 ; i--){
+                temp = offense(game, game.getCollection().get(aiStatus.get(i).getKey()));
+                if(temp != null){
+                    return temp;
+                } 
+            }
+            return null;
         }
+
 	@Override
         /*Strategy: 
         - Defense or offence
@@ -101,8 +120,6 @@ public class JkBot extends Player implements AgentAction{
             }
             return true;
 	}
-        
-        @Override
         public Point offense(AIGame game, Point humanPoint) {
             Point[] axis,diagonals;
             ArrayList<Point> holder;
@@ -135,14 +152,9 @@ public class JkBot extends Player implements AgentAction{
                 return holder.get((new Random()).nextInt(holder.size()));
             }
             
-            return randomPoint();
+            return null;
         }
 
-        @Override
-        public Point defense(AIGame game, Point aiPoint) {
-            
-            return aiPoint;
-        }
     /**
      *
      * @return a random point on the grid.
