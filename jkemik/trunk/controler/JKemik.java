@@ -55,6 +55,7 @@ public class JKemik extends Application {
                         
 			BoardFrame.setTheme(settings_t.getTheme());
 			BoardFrame.uiLooksUpdate(settings_t, template);
+                        setStarted(true);
 		} catch (Exception e) {
 			System.out.println("Initialization Error: " + e.getMessage());
 		}
@@ -62,7 +63,6 @@ public class JKemik extends Application {
 
 	@Override
 	protected void idle() {
-		// try {
 		if (screenResolutionCheck()) {
 			view = BoardFrame.getInstance(Globals.FRAME_WIDTH,
 					Globals.FRAME_HEIGHT);
@@ -71,10 +71,7 @@ public class JKemik extends Application {
 			System.exit(0);
 			// setDone();
 		}
-		// } catch (Exception e) {
-		// System.err.println("Error: " + e.getMessage() + "\nStack Trace: " +
-		// e.getStackTrace());
-		// }
+	 
 	}
 
 	@Override
