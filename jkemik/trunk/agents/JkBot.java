@@ -82,10 +82,10 @@ public class JkBot extends Player implements AgentAction{
         - Defense or offence
         - If defence, predict opponents next move, return the infered next move.
         - If offence, pursuit a plan, return the next*/
-	public boolean play(AIGame game) {
+	public Point play(AIGame game) {
             turnChangeLock.lock();
+            Point move = null;
             try{
-                Point move;
                 move = move(game);
                 
 
@@ -118,18 +118,24 @@ public class JkBot extends Player implements AgentAction{
             finally{
                 turnChangeLock.unlock();
             }
-            return true;
+            return move;
 	}
         public Point offense(AIGame game, Point humanPoint) {
             Point[] axis,diagonals;
             ArrayList<Point> holder;
+            double w, h;
+            
+            w = JKemik.settings_t.getGridDimension().getPixelDimension().getWidth();
+            h = JKemik.settings_t.getGridDimension().getPixelDimension().getHeight();
 
             //Detect a square cell
             axis = humanPoint.axisBox(Grid.squareSize);
             holder = new ArrayList<>();
             for (Point a : axis) {
                 if (!game.getCollection().containsKey(a.toString())) {
-                    holder.add(a);
+                    if(this.isPointInBoard(a, w, h)){
+                        holder.add(a);
+                    }
                 }
             }
             //Randomization
@@ -143,7 +149,9 @@ public class JkBot extends Player implements AgentAction{
             holder = new ArrayList<>();//reset
             for (Point d : diagonals) {
                 if (!game.getCollection().containsKey(d.toString())) {
-                    holder.add(d);
+                    if(this.isPointInBoard(d, w, h)){
+                        holder.add(d);
+                    }
                 }
             }
             //Randomization
@@ -200,6 +208,18 @@ public class JkBot extends Player implements AgentAction{
         private HashMap<String, Point> offense;
         private HashMap<String, Point> offenseArea;
         private ArrayList<Point> defense;
+
+    @Override
+        public boolean isPointInBoard(Point p, double w, double h) {
+            double x,y;
+            x = p.getXC();
+            y = p.getYC();
+            
+           if(x > w || x < 0.0 || y > h || y < 0.0){
+               return false;
+           }
+           return true;
+        }
 
        
 }

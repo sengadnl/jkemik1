@@ -24,7 +24,7 @@ public class STemplate implements Serializable {
 	private boolean playMode = false;
 	private boolean systemSetupMode = false;
 	private String theme = "Origins";
-	private int maxWinVal = 4, backtrackingDistance = 2, starterPoints = 0;
+	private int maxWinVal,backtrackingDistance = 2, starterPoints = 0;// 
 	private double maxPointScaler = .8;
 	private String language = "ENGLISH";
 	private boolean[] memo = { true, true };
@@ -33,7 +33,7 @@ public class STemplate implements Serializable {
 
 	public STemplate() {
 		boardSizes(Globals.SIZE_PERCENT);
-		setGridDimension(sizes.get(2));
+		setGridDimension(sizes.get(3));
 		this.maxWinVal = (int)(dimesion.positions() * Globals.MAX_WIN);
 	}
 	

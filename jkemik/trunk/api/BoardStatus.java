@@ -125,7 +125,7 @@ public class BoardStatus implements Comparator<HotPoint>{
     @Override
     public String toString(){
         for(HotPoint p : this.status){
-            System.err.println(p.toString());
+            System.out.println(p.toString());
         }
         return "";
     }

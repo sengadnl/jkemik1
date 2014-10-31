@@ -8,6 +8,7 @@ package controler;
 import Events.ViewEvents;
 import agents.JkBot;
 import api.AIGame;
+import api.Point;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -29,7 +30,7 @@ public class AgentMoveRunnable implements Runnable{
     @Override
     public void run() {
         aiMoveLock.lock();
-        boolean done = false;
+        
         try {
            
             BoardFrame.progressB.setVisible(true);
@@ -38,11 +39,14 @@ public class AgentMoveRunnable implements Runnable{
             AIGame game = (AIGame) JKemik.game;
             JkBot bot = (JkBot) game.getMachine();
             Thread.sleep(DELAY);
-            if(bot.play(game)){
+            Point move = bot.play(game);
+            if(move != null){
                 if (game.isEmbuche_on()) {
                     if (JKemik.settings_t.isAutoCapture()) {
                             Grid.cell = JKemik.embush(Grid.squareSize);
-                            BoardFrame.grid.repaint();
+                            if(Grid.cell != null){
+                                BoardFrame.grid.repaint();
+                            } 
                     }
                 }
             }
@@ -53,7 +57,8 @@ public class AgentMoveRunnable implements Runnable{
 
             Grid.setRefresh(true);
             BoardFrame.displayGrid(true);
-            BoardFrame.grid.repaint();
+            BoardFrame.grid.repaint((int)move.getXC() - (int)Grid.squareSize * 2, (int)move.getYC() - (int)Grid.squareSize * 2, (int)Grid.squareSize * 4, (int)Grid.squareSize * 4);
+            
             Thread.sleep(DELAY);
 
             //Remove progress bar

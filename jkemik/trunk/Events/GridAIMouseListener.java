@@ -47,6 +47,7 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener {
             ExecutorService pool = Executors.newFixedThreadPool(2);
             pool.execute(ht);
             pool.execute(mt);
+            
 //            ht.start();
 //            mt.start();
 	}
@@ -90,8 +91,8 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener {
 			Grid.setRefresh(true);
 			BoardFrame.displayGrid(true);
 			BoardFrame.grid.repaint();
+                        BoardFrame.grid.repaint((int)temp.getXC() - (int)Grid.squareSize * 2, (int)temp.getYC() - (int)Grid.squareSize * 2, (int)Grid.squareSize * 4, (int)Grid.squareSize * 4);
 			Grid.mouseMove = true;
-		}
-                
+		} 
 	}
 }

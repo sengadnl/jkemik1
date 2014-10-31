@@ -564,56 +564,41 @@ public class Tools {
 		return false;
 	}
 
-	public static Point[] boxCoord(Point p, double squareSize) {
-		Point[] box = new Point[9];
-		double x = p.getXC();
-		double y = p.getYC();
-
-		box[0] = new Point(x - squareSize, y + squareSize);
-		box[1] = new Point(x + squareSize, y - squareSize);
-		
-		box[2] = new Point(x - squareSize, y);
-		box[3] = new Point(x + squareSize, y);
-		
-		box[4] = new Point(x - squareSize, y - squareSize);
-		box[5] = new Point(x + squareSize, y + squareSize);
-		
-		box[6] = new Point(x, y - squareSize);
-		box[7] = new Point(x, y + squareSize);
-		
-		box[8] = p;
-
-		return box;
-	}
-        public static Point[] boxForBot(Point p, double squareSize) {
-		Point[] box = new Point[4];
-		double x = p.getXC();
-		double y = p.getYC();
-
-		box[0] = new Point(x - squareSize, y);
-		box[1] = new Point(x + squareSize, y);
-
-		box[2] = new Point(x, y - squareSize);
-		box[3] = new Point(x, y + squareSize);
-	
-		return box;
-	}
-//	public static Stack<Point> boxCoord(Point p, double squareSize) {
-//		Stack<Point> box = new Stack<Point>();
+//	public static Point[] boxCoord(Point p, double squareSize) {
+//		Point[] box = new Point[9];
 //		double x = p.getXC();
 //		double y = p.getYC();
-//		//box.push(p);
-//		box.push(new Point(x - squareSize, y + squareSize));
-//		box.push(new Point(x - squareSize, y));
-//		box.push(new Point(x - squareSize, y - squareSize));
-//		box.push(new Point(x, y - squareSize));
-//		box.push(new Point(x + squareSize, y - squareSize));
-//		box.push(new Point(x + squareSize, y));
-//		box.push(new Point(x + squareSize, y + squareSize));
-//		box.push(new Point(x, y + squareSize));
-//		//box.push(p);
+//
+//		box[0] = new Point(x - squareSize, y + squareSize);
+//		box[1] = new Point(x + squareSize, y - squareSize);
+//		
+//		box[2] = new Point(x - squareSize, y);
+//		box[3] = new Point(x + squareSize, y);
+//		
+//		box[4] = new Point(x - squareSize, y - squareSize);
+//		box[5] = new Point(x + squareSize, y + squareSize);
+//		
+//		box[6] = new Point(x, y - squareSize);
+//		box[7] = new Point(x, y + squareSize);
+//		
+//		box[8] = p;
+//
 //		return box;
 //	}
+//        public static Point[] boxForBot(Point p, double squareSize) {
+//		Point[] box = new Point[4];
+//		double x = p.getXC();
+//		double y = p.getYC();
+//
+//		box[0] = new Point(x - squareSize, y);
+//		box[1] = new Point(x + squareSize, y);
+//
+//		box[2] = new Point(x, y - squareSize);
+//		box[3] = new Point(x, y + squareSize);
+//	
+//		return box;
+//	}
+
 
 	/**
 	 * @author dalet
@@ -692,8 +677,8 @@ public class Tools {
 			return selectPoints;
 		}
 		int pivot = selectPoints.size() / 2;
-		ArrayList<Point> lesser = new ArrayList<Point>();
-		ArrayList<Point> greater = new ArrayList<Point>();
+		ArrayList<Point> lesser = new ArrayList<>();
+		ArrayList<Point> greater = new ArrayList<>();
 		int sameAsPivot = 0;
 		for (Point p : selectPoints) {
 			if (p.getXC() > selectPoints.get(pivot).getXC())
@@ -707,7 +692,7 @@ public class Tools {
 		for (int i = 0; i < sameAsPivot; i++)
 			lesser.add(selectPoints.get(pivot));
 		greater = quickSort(greater);
-		ArrayList<Point> sorted = new ArrayList<Point>();
+		ArrayList<Point> sorted = new ArrayList<>();
 		for (Point p : lesser) {
 			sorted.add(p);
 		}
