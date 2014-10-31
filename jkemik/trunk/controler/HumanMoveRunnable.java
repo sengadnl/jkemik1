@@ -6,6 +6,7 @@
 
 package controler;
 
+import Events.ViewEvents;
 import agents.JkBot;
 import api.AIGame;
 import api.Player;
@@ -14,6 +15,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import view.BoardFrame;
 import view.Grid;
 
@@ -73,14 +75,13 @@ public class HumanMoveRunnable implements Runnable{
                                     + BoardFrame.messages.getString("feedback4"));
             }
 
-
             BoardFrame.progressB.setVisible(true);
             BoardFrame.progressB.setIndeterminate(true);
+            
             if (game.isEmbuche_on()) {
                     if (JKemik.settings_t.isAutoCapture()) {
-                            Grid.cell = JKemik.embush(Grid.squareSize);
-                            BoardFrame.grid.repaint();
-                            //game.getBoardStatus().updateStatus(temp);
+                        Grid.cell = JKemik.embush(Grid.squareSize);
+                        BoardFrame.grid.repaint();
                     }
             }
             if (game.getCurrentP().isTurn()) {
@@ -96,17 +97,31 @@ public class HumanMoveRunnable implements Runnable{
 
             BoardFrame.progressB.setIndeterminate(false);
             BoardFrame.progressB.setVisible(false);
-       
-       
+
+            if (JKemik.checkEndGame()) {
+                JOptionPane.showMessageDialog(null, "" + JKemik.getEndingMessage(),
+                                " Win", JOptionPane.OK_OPTION);
+                BoardFrame.feedback(JKemik.getEndingMessage());
+                JKemik.game.setStatus(1);
+                JKemik.createGame(JKemik.template, JKemik.settings_t);
+                JKemik.settings_t.setGameSetupMode(true);
+                // Reset game exit label
+                BoardFrame.Game_status.setText("NEW");
+                BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
+                ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
+
+                Grid.setRefresh(true);
+                BoardFrame.displayGrid(true);
+                BoardFrame.grid.repaint();
+            }
             Thread.sleep(DELAY);
-            
         } catch (InterruptedException ex) {
             Logger.getLogger(HumanMoveRunnable.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
+        }finally{
             humanMoveLock.unlock();
         }
+        //Thread.interrupted();
     }
-    private static final int DELAY = 1000;
+    private static final int DELAY = 500;
     private Lock humanMoveLock ;
 }
