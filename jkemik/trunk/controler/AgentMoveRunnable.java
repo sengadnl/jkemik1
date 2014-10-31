@@ -32,6 +32,7 @@ public class AgentMoveRunnable implements Runnable{
                     }
                 }
             }
+            System.out.println(bot.getAiStatus().toString());
             BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
             BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
             BoardFrame.updateBoardStatus();

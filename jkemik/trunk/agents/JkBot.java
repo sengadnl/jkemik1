@@ -32,22 +32,13 @@ public class JkBot extends Player implements AgentAction{
                 turnChangeLock = new ReentrantLock();
 	}
         
-        private Point decide(AIGame game){
+        private Point move(AIGame game){
 
           
             //Return a random point if there is no status to track
-            if(this.aiStatus.getStatus().isEmpty() || 
-                    this.humanStatus.getStatus().isEmpty()){
-//                boolean done = false;
-//                Point random = null;
-//                while(!done){
-//                    random = randomPoint();
-//                    if (!game.getCollection().containsKey(random.toString())) {
-//                        done = true;
-//                    }
-//                }
+            if(this.aiStatus.getStatus().isEmpty()){
                 System.err.println("??? can't decide were to play!!! mmmmm, trying ");
-                return game.getLastp();
+                return offense(game, game.getLastp());
             }
 
             int indexai,indexh;
@@ -60,10 +51,12 @@ public class JkBot extends Player implements AgentAction{
             
             /*offense if ai is less or equally vulnerable than h*/
             if(ai.compareTo(h) <= 0){
+                System.err.println("offense >>>");
                 return offense(game, game.getCollection().get(h.getKey()));
             }
             /*Defense if ai is more vulnerable than h*/
-            return defense(game, game.getCollection().get(ai.getKey()));
+            System.err.println("Defense >>>");
+            return offense(game, game.getCollection().get(ai.getKey()));
         }
 	@Override
         /*Strategy: 
@@ -73,16 +66,10 @@ public class JkBot extends Player implements AgentAction{
 	public boolean play(AIGame game) {
             turnChangeLock.lock();
             try{
-                //Return the most vulnerable point
-                Point point = decide(game);
-                //System.err.println("decision: " + point);
+                Point move;
+                move = move(game);
+                
 
-                Point move = move(point, game);
-                
-                
-                
-                //strategy is before this point
-                //==========================================================
                 move.setStatus(Point.PLAYED);
 
                 // Mark point as belonging to current player
@@ -91,7 +78,7 @@ public class JkBot extends Player implements AgentAction{
                 // Remember last play
                 this.setLatestP(move);
 
-                System.out.println("Adjacent point: " + move);
+                //System.out.println("Adjacent point: " + move);
                 
                 //Add to the board 
                 game.put(move.toString(), move);
@@ -116,64 +103,70 @@ public class JkBot extends Player implements AgentAction{
 	}
         
         @Override
-        public Point offense(AIGame game, Point p) {
-            //TODO implement a offense strategy
-            return p;
+        public Point offense(AIGame game, Point humanPoint) {
+            Point[] axis,diagonals;
+            ArrayList<Point> holder;
+
+            //Detect a square cell
+            axis = humanPoint.axisBox(Grid.squareSize);
+            holder = new ArrayList<>();
+            for (Point a : axis) {
+                if (!game.getCollection().containsKey(a.toString())) {
+                    holder.add(a);
+                }
+            }
+            //Randomization
+            if(!holder.isEmpty()){
+                System.err.println("offense - quare cell : " + (holder.size()));
+                return holder.get((new Random()).nextInt(holder.size()));
+            }
+            
+            //Detect other forms
+            diagonals = humanPoint.diagonalBox(Grid.squareSize);
+            holder = new ArrayList<>();//reset
+            for (Point d : diagonals) {
+                if (!game.getCollection().containsKey(d.toString())) {
+                    holder.add(d);
+                }
+            }
+            //Randomization
+            if(!holder.isEmpty()){
+                System.err.println("offense - not quare cell : " + (holder.size()));
+                return holder.get((new Random()).nextInt(holder.size()));
+            }
+            
+            return randomPoint();
         }
 
         @Override
-        public Point defense(AIGame game, Point p) {
-            //TODO implement a offense strategy
-            return p;
-        }
-        
-        @SuppressWarnings("empty-statement")
-        public Point move(Point p, AIGame game){
+        public Point defense(AIGame game, Point aiPoint) {
             
-            Point[] box;
-            
-            box = p.box(Grid.squareSize);
-            System.out.println("Boxing human point ...");
-   
-            ArrayList<Point> adj = new ArrayList<>();
-            for (Point box1 : box) {
-                if (!game.getCollection().containsKey(box1.toString())) {
-                    adj.add(box1);
-                    //return adj;
-                }
-            }
-            int index = 0;
-            if(!adj.isEmpty()){
-                System.err.println("Bound was : " + (adj.size()));
-                index = (new Random()).nextInt(adj.size());
-                return adj.get(index);
-            }
-            System.err.println("All points around the target already exist\n"
-                    + "Picking a random one" + index);
-       
-            //TODO deal with the null condition
-            return randomPoint();
+            return aiPoint;
         }
-//    public Point randomArrayPoint(Point[] a){
-//      
-//      
-//     return null;
-//    }
     /**
      *
      * @return a random point on the grid.
      */
         public Point randomPoint(){
+            AIGame game;
+            Point p1,p2;
+            Random r;
+            double x,y;
             
+            game = (AIGame)JKemik.game;
             int wbound = (int) JKemik.settings_t.getGridDimension().getPixelDimension().getWidth();
             int hbound = (int) JKemik.settings_t.getGridDimension().getPixelDimension().getHeight();
             
-            Random r = new Random();
+            r = new Random();
             
-            double x = r.nextInt(wbound);
-            double y = r.nextInt(hbound);
-            
-            return Grid.closestPoint(x,y, (int) Grid.squareSize);
+            do{
+                x = r.nextInt(wbound);
+                y = r.nextInt(hbound);
+                p1 = Grid.closestPoint(x,y, (int) Grid.squareSize);
+                p2 = game.getCollection().get(p1.toString());
+            }while(p2 != null);
+            System.err.println("Returning a random point!!!!!!!!");
+            return p1;
         }
         public BoardStatus getAiStatus() {
             return aiStatus;

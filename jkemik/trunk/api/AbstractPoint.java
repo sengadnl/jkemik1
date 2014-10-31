@@ -131,10 +131,23 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
 		return box;
 	}
         
+        public Point[] diagonalBox(double squareSize) {
+		Point[] box = new Point[4];
+                double xx;
+                xx = this.getXC();
+		double yy;
+                yy = this.getYC();
+		box[1] = new Point(xx + squareSize, yy - squareSize);
+                box[0] = new Point(xx - squareSize, yy + squareSize);
+		box[3] = new Point(xx + squareSize, yy + squareSize);
+                box[2] = new Point(xx - squareSize, yy - squareSize);
+		
+		return box;
+	}
         /**
          @param squareSize
          @return array of all adjacent points*/
-        public Point[] boxForBot(double squareSize) {
+        public Point[] axisBox(double squareSize) {
 		Point[] box = new Point[4];
 		double xx;
                 xx = this.getXC();
@@ -143,7 +156,6 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
 
 		box[0] = new Point(xx - squareSize, yy);
 		box[1] = new Point(xx + squareSize, yy);
-
 		box[2] = new Point(xx, yy - squareSize);
 		box[3] = new Point(xx, yy + squareSize);
 		
