@@ -65,7 +65,6 @@ public class AgentMoveRunnable implements Runnable{
             BoardFrame.progressB.setIndeterminate(false);
             BoardFrame.progressB.setVisible(false);
             
-            System.err.println("about to check end of Game");
             
 //            if (JKemik.checkEndGame()) {
 //                JOptionPane.showMessageDialog(null, "" + JKemik.getEndingMessage(),
