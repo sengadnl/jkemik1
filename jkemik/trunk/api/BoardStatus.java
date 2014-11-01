@@ -52,7 +52,8 @@ public class BoardStatus implements Comparator<HotPoint>{
   
             //update status
             for(Point temp: game.getCollection().values()){
-               updatePointStatus(temp, game);
+               updatePointStatusBasedAxises(temp, game);
+               updatePointStatusBasedDiagonals(temp,game);
             }
             
             //Make to score of connected points 0
@@ -73,40 +74,79 @@ public class BoardStatus implements Comparator<HotPoint>{
 //        }
         
     }
-    private void updatePointStatus(Point p, AIGame game){
-        //System.out.println("\nStarting Heat for: " + p + " " + p.getHeatLevel());
+    private void updatePointStatusBasedDiagonals(Point p, AIGame game){
         int max;
         max = 0;
         int id = p.getId();
-        Point[] box;
-        box = p.axisBox(Grid.squareSize);
-        for(int i = 0; i < box.length - 1; i++){ 
-            Point temp = game.getCollection().get(box[i].toString());
+        Point[] diagonals;
+        
+        diagonals = p.axisBox(Grid.squareSize);
+        for(int i = 0; i < diagonals.length - 1; i++){ 
+            Point diagonalp = game.getCollection().get(diagonals[i].toString());
             
-            if(temp == null){
+            if(diagonalp == null){
                     continue;
              }
             
             //Opponent uncaptured point
-            if(id != temp.getId() && temp.getStatus() == Point.PLAYED){
+            if(id != diagonalp.getId() && diagonalp.getStatus() == Point.PLAYED){
                 max++;
                 continue;
             }
 
             //Opponent connected point
-            if(id != temp.getId() && temp.getStatus() == Point.CONNECTED){
+            if(id != diagonalp.getId() && diagonalp.getStatus() == Point.CONNECTED){
                 max++;
                 max++;
                 continue;
             }
             
             //my points
-            if(id == temp.getId()){
+            if(id == diagonalp.getId()){
+                max--;
+            }
+        }
+        //p.setHeatLevel(p.getHeatLevel() + max);
+        p.setHeatLevel(max);
+    }
+    private void updatePointStatusBasedAxises(Point p, AIGame game){
+        //System.out.println("\nStarting Heat for: " + p + " " + p.getHeatLevel());
+        int max;
+        max = 0;
+        int id = p.getId();
+        Point[] axises;
+        
+        axises = p.axisBox(Grid.squareSize);
+        for(int i = 0; i < axises.length - 1; i++){ 
+            Point axep = game.getCollection().get(axises[i].toString());
+            
+            if(axep == null){
+                    continue;
+             }
+            
+            //Opponent uncaptured point
+            if(id != axep.getId() && axep.getStatus() == Point.PLAYED){
+                max++;
+                max++;
+                continue;
+            }
+
+            //Opponent connected point
+            if(id != axep.getId() && axep.getStatus() == Point.CONNECTED){
+                max++;
+                max++;
+                max++;
+                continue;
+            }
+            
+            //my points
+            if(id == axep.getId()){
+                max--;
                 max--;
                 continue;
             }
         }
-        p.setHeatLevel(max);
+        p.setHeatLevel(p.getHeatLevel() + max);
         //System.out.println("Ending Heat for: " + p + " " + p.getHeatLevel());
     }
     public ArrayList<HotPoint> getStatus() {
