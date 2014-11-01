@@ -58,7 +58,7 @@ public class JkBot extends Player implements AgentAction{
             Point temp;
             System.err.println("offense >>>");
             //Evaluate who is most vulnerable
-            if(ai.compareTo(h) <= 0){
+            if(ai.compareTo(h) < 0){
                 for(int i = sizeH - 1; i >= 0 ; i--){
                     temp = offense(game, game.getCollection().get(hStatus.get(i).getKey()));
                     if(temp != null){
