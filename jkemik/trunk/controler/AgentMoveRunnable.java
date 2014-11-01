@@ -64,23 +64,25 @@ public class AgentMoveRunnable implements Runnable{
             //Remove progress bar
             BoardFrame.progressB.setIndeterminate(false);
             BoardFrame.progressB.setVisible(false);
-
-            if (JKemik.checkEndGame()) {
-                JOptionPane.showMessageDialog(null, "" + JKemik.getEndingMessage(),
-                                " Win", JOptionPane.OK_OPTION);
-                BoardFrame.feedback(JKemik.getEndingMessage());
-                JKemik.game.setStatus(1);
-                JKemik.createGame(JKemik.template, JKemik.settings_t);
-                JKemik.settings_t.setGameSetupMode(true);
-                // Reset game exit label
-                BoardFrame.Game_status.setText("NEW");
-                BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
-                ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
-
-                Grid.setRefresh(true);
-                BoardFrame.displayGrid(true);
-                BoardFrame.grid.repaint();
-            }
+            
+            System.err.println("about to check end of Game");
+            
+//            if (JKemik.checkEndGame()) {
+//                JOptionPane.showMessageDialog(null, "" + JKemik.getEndingMessage(),
+//                                " Win", JOptionPane.OK_OPTION);
+//                BoardFrame.feedback(JKemik.getEndingMessage());
+//                JKemik.game.setStatus(1);
+//                JKemik.createGame(JKemik.template, JKemik.settings_t);
+//                JKemik.settings_t.setGameSetupMode(true);
+//                // Reset game exit label
+//                BoardFrame.Game_status.setText("NEW");
+//                BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
+//                ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
+//
+//                Grid.setRefresh(true);
+//                BoardFrame.displayGrid(true);
+//                BoardFrame.grid.repaint();
+//            }
         } catch (InterruptedException ex) {
             Logger.getLogger(AgentMoveRunnable.class.getName()).log(Level.SEVERE, null, ex);
         }finally{

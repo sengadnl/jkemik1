@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package api;
-
 import controler.JKemik;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import view.Grid;
-
 /**
  *
  * @author admin
@@ -30,7 +27,6 @@ public class BoardStatus implements Comparator<HotPoint>{
     }
     //TODO make sure board is being updated
     public void updateStatus(Point obj){
-        System.out.println("STATUS!!!!!!!!!!!!!!!!!!");
         AIGame game = (AIGame) JKemik.game;
         
         //try{
@@ -39,15 +35,13 @@ public class BoardStatus implements Comparator<HotPoint>{
                 c = game.getLastCell();
                 ArrayList<Point> cellWall = c.getCellContour();
                 ArrayList<Point> captures = c.getAreaIncell();
-            
-        
+
                 //remove dead points from boardStatus
                 for(Point p: captures){
-                    // System.out.println("Status of p = " + p.getStatus());
                     if(p.getStatus() == Point.DEAD || p.getStatus() == Point.CAPTURED){
                         for(HotPoint s: this.status){
                             if(s.getKey().equals(p.toString())){
-                                System.out.println("Removing" + s.toString());
+                                System.out.println("Removing " + s.toString());
                                 this.status.remove(s);
                                 break;
                             }

@@ -94,5 +94,21 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener {
                         BoardFrame.grid.repaint((int)temp.getXC() - (int)Grid.squareSize * 2, (int)temp.getYC() - (int)Grid.squareSize * 2, (int)Grid.squareSize * 4, (int)Grid.squareSize * 4);
 			Grid.mouseMove = true;
 		} 
+                if (JKemik.checkEndGame()) {
+                JOptionPane.showMessageDialog(null, "" + JKemik.getEndingMessage(),
+                                " Win", JOptionPane.OK_OPTION);
+                BoardFrame.feedback(JKemik.getEndingMessage());
+                JKemik.game.setStatus(1);
+                JKemik.createGame(JKemik.template, JKemik.settings_t);
+                JKemik.settings_t.setGameSetupMode(true);
+                // Reset game exit label
+                BoardFrame.Game_status.setText("NEW");
+                BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
+                ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
+
+                Grid.setRefresh(true);
+                BoardFrame.displayGrid(true);
+                BoardFrame.grid.repaint();
+            }
 	}
 }
