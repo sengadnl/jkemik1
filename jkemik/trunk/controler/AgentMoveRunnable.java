@@ -8,6 +8,7 @@ package controler;
 import Events.ViewEvents;
 import agents.JkBot;
 import api.AIGame;
+import api.AbstractGame;
 import api.Point;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -36,10 +37,10 @@ public class AgentMoveRunnable implements Runnable{
             BoardFrame.progressB.setVisible(true);
             BoardFrame.progressB.setIndeterminate(true);
 
-            AIGame game = (AIGame) JKemik.game;
+            AIGame game = (AIGame) JKemik.getGame();
             JkBot bot = (JkBot) game.getMachine();
             Thread.sleep(DELAY);
-            Point move = bot.play(game);
+            Point move = bot.play((AIGame) game);
             if(move != null){
                 if (game.isEmbuche_on()) {
                     if (JKemik.settings_t.isAutoCapture()) {
@@ -64,24 +65,7 @@ public class AgentMoveRunnable implements Runnable{
             //Remove progress bar
             BoardFrame.progressB.setIndeterminate(false);
             BoardFrame.progressB.setVisible(false);
-            
-            
-//            if (JKemik.checkEndGame()) {
-//                JOptionPane.showMessageDialog(null, "" + JKemik.getEndingMessage(),
-//                                " Win", JOptionPane.OK_OPTION);
-//                BoardFrame.feedback(JKemik.getEndingMessage());
-//                JKemik.game.setStatus(1);
-//                JKemik.createGame(JKemik.template, JKemik.settings_t);
-//                JKemik.settings_t.setGameSetupMode(true);
-//                // Reset game exit label
-//                BoardFrame.Game_status.setText("NEW");
-//                BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
-//                ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
-//
-//                Grid.setRefresh(true);
-//                BoardFrame.displayGrid(true);
-//                BoardFrame.grid.repaint();
-//            }
+
         } catch (InterruptedException ex) {
             Logger.getLogger(AgentMoveRunnable.class.getName()).log(Level.SEVERE, null, ex);
         }finally{

@@ -14,27 +14,29 @@ public class STemplate implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private boolean hh = false;
-	private boolean ch = true;
-	private boolean net = false;
-	private boolean manualCapture = true;
-	private boolean autoCapture = true;
-	private boolean autoPass = true;
-	private boolean gameSetupMode = true;
-	private boolean playMode = false;
-	private boolean systemSetupMode = false;
-	private String theme = "Origins";
-	private int maxWinVal,backtrackingDistance = 2, starterPoints = 0;// 
+	private boolean hh,ch,net, 
+                manualCapture,autoCapture,autoPass,
+                gameSetupMode,playMode,systemSetupMode;
+        private boolean[] memo = { true, true };
+        
+	private String theme = "Origins",language = "ENGLISH";
+	private int maxWinVal,backtrackingDistance, starterPoints;// 
 	private double maxPointScaler = .8;
-	private String language = "ENGLISH";
-	private boolean[] memo = { true, true };
+	
+	
 	private GridDimension dimesion = new GridDimension(new Dimension(0,0),0);
 	private ArrayList<GridDimension> sizes;
 
 	public STemplate() {
-		boardSizes(Globals.SIZE_PERCENT);
-		setGridDimension(sizes.get(3));
-		this.maxWinVal = (int)(dimesion.positions() * Globals.MAX_WIN);
+            hh = false;ch = true; net = false; 
+            manualCapture = true; autoCapture = true; autoPass = true;
+            gameSetupMode = true; playMode = false;systemSetupMode = false;
+            
+            backtrackingDistance = 2; starterPoints = 1;
+            maxPointScaler = .8;
+            this.boardSizes(Globals.SIZE_PERCENT);
+            this.setGridDimension(sizes.get(3));
+            this.maxWinVal = (int)(dimesion.positions() * Globals.MAX_WIN);
 	}
 	
 	public int getBacktrackingDistance() {
@@ -57,8 +59,8 @@ public class STemplate implements Serializable {
 		System.out.println("Grid size: " + sqrSize);
 		return sqrSize;
 	}
-	public void boardSizes(double grid_percent) {
-		sizes = new ArrayList<GridDimension>();
+	public final void boardSizes(double grid_percent) {
+		sizes = new ArrayList<>();
 
 		// calculate board container dimension (pixels)
 		int w_ini = (int) (Globals.FRAME_WIDTH * grid_percent);
@@ -102,7 +104,7 @@ public class STemplate implements Serializable {
 	public GridDimension getGridDimension() {
 		return dimesion;
 	}
-	public void setGridDimension(GridDimension dimesion) {
+	public final void setGridDimension(GridDimension dimesion) {
 		this.dimesion = dimesion;
 	}
 	public void setGridDimesion(double sqrSize) {
@@ -219,17 +221,22 @@ public class STemplate implements Serializable {
 	 * @return void
 	 * */
 	public void setMemo(boolean c, boolean p) {
-		if (c) {
-			this.memo[0] = true;
-		} else {
-			this.memo[0] = false;
-		}
-		if (p) {
-			this.memo[1] = true;
-		} else {
-			this.memo[1] = false;
-		}
+            this.memo[0] = c;
+            this.memo[1] = p;
 	}
+//        public void setMemo(boolean c, boolean p) {
+//		if (c) {
+//			this.memo[0] = true;
+//		} else {
+//			this.memo[0] = false;
+//		}
+//                
+//		if (p) {
+//			this.memo[1] = true;
+//		} else {
+//			this.memo[1] = false;
+//		}
+//	}
 
 	/**
 	 * Remember the current game mode in case it is temporarily switched

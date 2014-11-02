@@ -32,7 +32,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-
+                AbstractGame game = JKemik.getGame();
 		// Pass turn is this is a right click
 		if (SwingUtilities.isRightMouseButton(e)
 				&& !JKemik.settings_t.isAutoPass()) {
@@ -41,8 +41,8 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 				 * Pass turn only if mouse was clicked and it's no longer
 				 * currentP's turn
 				 */
-				if (JKemik.game.getCurrentP().getPlay_flag() == 1) {
-					JKemik.game.switchPlayTurns();
+				if (JKemik.getGame().getCurrentP().getPlay_flag() == 1) {
+					game.switchPlayTurns();
 				} else {
 					JOptionPane.showMessageDialog(null,
 							BoardFrame.messages.getString("ilPass"),
@@ -51,7 +51,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 				}
 			}
 		} else {
-			AbstractGame game = JKemik.game;
+			
 			Player current = (Player) game.getCurrentP();
 			// Allow mouse click
 			Grid.mouseclicked = true;
@@ -194,7 +194,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 		Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
 		Point temp = Grid.makeDrawable(Grid.x, Grid.y);
 
-		if (JKemik.game.getCollection().containsKey(temp.toString())) {
+		if (JKemik.getGame().getCollection().containsKey(temp.toString())) {
 		} else {
 			Grid.setRefresh(true);
 			BoardFrame.displayGrid(true);
@@ -207,7 +207,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 			JOptionPane.showMessageDialog(null, "" + JKemik.getEndingMessage(),
 					" Win", JOptionPane.OK_OPTION);
 			BoardFrame.feedback(JKemik.getEndingMessage());
-			JKemik.game.setStatus(1);
+			JKemik.getGame().setStatus(1);
 			JKemik.createGame(JKemik.template, JKemik.settings_t);
 			JKemik.settings_t.setGameSetupMode(true);
 			// Reset game exit label

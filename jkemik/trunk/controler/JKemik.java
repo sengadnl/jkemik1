@@ -26,18 +26,18 @@ import api.*;
  */
 public class JKemik extends Application {
 
-	public static AbstractGame game;
+	private static AbstractGame game;
 	public static GTemplate template;
 	public static STemplate settings_t;
 	public static BoardFrame view;
 	// public static SettingsPanel settings;
 	private static boolean isStarted = false;
-	public static Load load;
-	static File s_object = new File(Tools.fullPath()
+	private static Load load;
+	private static final File s_object = new File(Tools.fullPath()
 			+ Globals.settingsTemplateObjectFile);
-	static File t_object = new File(Tools.fullPath()
+	private static final File t_object = new File(Tools.fullPath()
 			+ Globals.templateObjectFile);
-	static File g_object = new File(Tools.fullPath() + Globals.gameObjectFile);
+	private static final File g_object = new File(Tools.fullPath() + Globals.gameObjectFile);
 	private static String endingMessage = "This Game has not ended you";
 
 	@Override
@@ -498,6 +498,14 @@ public class JKemik extends Application {
 		}
 	}
 
+        public static AbstractGame getGame() {
+            return game;
+        }
+
+        public static void setGame(AbstractGame game) {
+            JKemik.game = game;
+        }
+
 	public static String getEndingMessage() {
 		return endingMessage.toUpperCase();
 	}
@@ -506,6 +514,14 @@ public class JKemik extends Application {
 		JKemik.endingMessage = endingMessage;
 	}
 
+        public static Load getLoad() {
+            return load;
+        }
+
+        public static void setLoad(Load load) {
+            JKemik.load = load;
+        }
+        
 	public static void main(String[] args) {
 		if (args.length > 0) {
 			options(args);

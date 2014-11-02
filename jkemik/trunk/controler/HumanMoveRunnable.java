@@ -6,7 +6,7 @@
 
 package controler;
 
-import Events.ViewEvents;
+
 import agents.JkBot;
 import api.AIGame;
 import api.Player;
@@ -15,7 +15,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
 import view.BoardFrame;
 import view.Grid;
 
@@ -31,7 +31,7 @@ public class HumanMoveRunnable implements Runnable{
     public void run() {
         humanMoveLock.lock();
          try {
-            AIGame game = (AIGame) JKemik.game;
+            AIGame game = (AIGame) JKemik.getGame();
             Player current;
             current = (Player) game.getHuman();
             JkBot bot = (JkBot) game.getMachine();
