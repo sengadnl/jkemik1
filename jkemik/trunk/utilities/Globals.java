@@ -30,7 +30,7 @@ public class Globals {
 	public static final int WHITE_INDEX = 4;
 	public static final int GREEN_INDEX = 5;
 	public static final int YELLOW_INDEX = 3;
-	public static final double MAX_WIN = .075;
+	public static final double MAX_WIN = .07;
 	public static final int LIGHT_PURPPLE_INDEX = 3;
 	public static final int DARK_PURPPLE_INDEX = 9;
 	public static final int SQUARE_MIN_SIZE = 20;

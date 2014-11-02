@@ -20,23 +20,26 @@ public class STemplate implements Serializable {
         private boolean[] memo = { true, true };
         
 	private String theme = "Origins",language = "ENGLISH";
-	private int maxWinVal,backtrackingDistance, starterPoints;// 
-	private double maxPointScaler = .8;
-	
-	
-	private GridDimension dimesion = new GridDimension(new Dimension(0,0),0);
+	private int maxWinVal, backtrackingDistance, starterPoints;// 
+	private double maxPointScaler;
+
+	private GridDimension dimesion;
+        
 	private ArrayList<GridDimension> sizes;
 
 	public STemplate() {
+            this.dimesion = new GridDimension(new Dimension(0,0),0);
             hh = false;ch = true; net = false; 
             manualCapture = true; autoCapture = true; autoPass = true;
             gameSetupMode = true; playMode = false;systemSetupMode = false;
             
-            backtrackingDistance = 2; starterPoints = 1;
+            backtrackingDistance = 2; starterPoints = 0;
             maxPointScaler = .8;
+           
             this.boardSizes(Globals.SIZE_PERCENT);
             this.setGridDimension(sizes.get(3));
             this.maxWinVal = (int)(dimesion.positions() * Globals.MAX_WIN);
+            System.out.println("Maxwin = " + this.maxWinVal);
 	}
 	
 	public int getBacktrackingDistance() {
