@@ -173,7 +173,7 @@ public class JkBot extends Player implements AgentAction{
             Random r;
             double x,y;
             
-            game = (AIGame)JKemik.game;
+            game = (AIGame)JKemik.getGame();
             int wbound = (int) JKemik.settings_t.getGridDimension().getPixelDimension().getWidth();
             int hbound = (int) JKemik.settings_t.getGridDimension().getPixelDimension().getHeight();
             

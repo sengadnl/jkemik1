@@ -1,5 +1,6 @@
 package Events;
 
+import api.AbstractGame;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -31,16 +32,17 @@ public class PassTurnListener implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		
+		AbstractGame game;
+                game = JKemik.getGame();
 		if (!BoardFrame.mouseSelection.isSelected()) {
-			System.out.println("" + JKemik.game.getCurrentP().getName()+ " > "+
-					"Play Flag: " + JKemik.game.getCurrentP().getPlay_flag());
+			System.out.println("" + game.getCurrentP().getName()+ " > "+
+					"Play Flag: " + game.getCurrentP().getPlay_flag());
 			/*
 			 * Pass turn only if mouse was clicked and it's no longer currentP's
 			 * turn
 			 */
-			if (JKemik.game.getCurrentP().getPlay_flag() == 1) {
-				JKemik.game.switchPlayTurns();
+			if (game.getCurrentP().getPlay_flag() == 1) {
+				game.switchPlayTurns();
 			} else {
 				JOptionPane.showMessageDialog(null,
 						BoardFrame.messages.getString("ilPass"),

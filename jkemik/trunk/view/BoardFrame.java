@@ -56,23 +56,23 @@ public class BoardFrame extends JFrame {
 	}
 
 	private void init() {
-		JKemik.load.plus("Language setup ...");
+		JKemik.getLoad().plus("Language setup ...");
 		String code = Tools.languageKey(JKemik.settings_t.getLanguage());
 		String properties = Tools.propertiesFilename(code);
 		Locale currentLocale = new Locale(code.toLowerCase());
 		messages = ResourceBundle.getBundle(properties, currentLocale);
-		JKemik.load.plus("Creating panels ...");
+		JKemik.getLoad().plus("Creating panels ...");
 		instantiateAllPanels();
 		setPanelSizes();
-		JKemik.load.plus("Creating labels...");
+		JKemik.getLoad().plus("Creating labels...");
 		instantiateAllLabels();
-		JKemik.load.plus("Creating buttons...");
+		JKemik.getLoad().plus("Creating buttons...");
 		instantiateAllButtonss();
-		JKemik.load.plus("Creating checkboxes...");// 24
+		JKemik.getLoad().plus("Creating checkboxes...");// 24
 		instantiateAllCheckBoxes();
-		JKemik.load.plus("Setting layouts...");// 25
+		JKemik.getLoad().plus("Setting layouts...");// 25
 		setAllLayouts();
-		JKemik.load.plus("Adding components...");// 25
+		JKemik.getLoad().plus("Adding components...");// 25
 		addComponentsToPanels();
 		setTheme(JKemik.settings_t.getTheme());
 		makingGame = true;
@@ -80,7 +80,7 @@ public class BoardFrame extends JFrame {
 		l1.rotateLabel(JKemik.settings_t.getGridDimension().toString());
 
 		// System Preferences Events
-		JKemik.load.plus("Initializing jkemik..."); // 21
+		JKemik.getLoad().plus("Initializing jkemik..."); // 21
 		ViewEvents.saveSettingsAction();
 		ViewEvents.cancelSettingsAction();
 		ViewEvents.onAutoCaptureAction();
@@ -90,7 +90,7 @@ public class BoardFrame extends JFrame {
 		ViewEvents.hvsAIListener();
 
 		// constant events
-		JKemik.load.plus("Adding constant event listner...");
+		JKemik.getLoad().plus("Adding constant event listner...");
 		ViewEvents.exitListener();
 		ViewEvents.helpListener();
 		ViewEvents.refreshListener();
@@ -99,19 +99,19 @@ public class BoardFrame extends JFrame {
 		ViewEvents.modeToggleActionListener();
 		ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
 
-		JKemik.load.plus("Reporting game mode...");
+		JKemik.getLoad().plus("Reporting game mode...");
 		print_point.setText("" + messages.getString("gameSetupMode"));
 		BoardFrame.feedback(messages.getString("feedback1") + " "
 				+ messages.getString("startGameB") + " "
 				+ messages.getString("feedback2"));
-		JKemik.load.plus("Removing native exit buttons..");
+		JKemik.getLoad().plus("Removing native exit buttons..");
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		JKemik.load.plus("Packing..");
+		JKemik.getLoad().plus("Packing..");
 		pack();
-		JKemik.load.plus("Showing..");
+		JKemik.getLoad().plus("Showing..");
 		setVisible(true);
 
-		JKemik.load.plus("Creating initial look...");
+		JKemik.getLoad().plus("Creating initial look...");
 
 		uiLooksUpdate(JKemik.settings_t, JKemik.template);
 
@@ -123,25 +123,27 @@ public class BoardFrame extends JFrame {
 	 *            of points
 	 */
 	public static void addstarterPoints(int number) {
+            AbstractGame game;
 		try {
+                    game = JKemik.getGame();
 			ArrayList<Point> starters = Grid.starterPointsGenerator(
 					JKemik.settings_t.getGridDimension(), number);
 			for (int i = 0; i < starters.size(); i++) {
 				Point temp1 = starters.get(i);
 				System.out.println("Adjusted Random (x,y) : " + temp1);
-				temp1.setId(JKemik.game.getPlayer1().getId());
+				temp1.setId(game.getPlayer1().getId());
 				temp1.setStatus(Point.PLAYED);
-				JKemik.game.getPlayer1().getLastpoints().add(temp1);
-				JKemik.game.getCollection().put(temp1.toString(), temp1);
-				JKemik.game.getPlayer1().setPoints(1);
+				game.getPlayer1().getLastpoints().add(temp1);
+				game.getCollection().put(temp1.toString(), temp1);
+				game.getPlayer1().setPoints(1);
 
 				Point temp2 = starters.get(i + 1);
 				System.out.println("Adjusted Random (x,y) : " + temp2);
-				temp2.setId(JKemik.game.getPlayer2().getId());
+				temp2.setId(game.getPlayer2().getId());
 				temp2.setStatus(Point.PLAYED);
-				JKemik.game.getPlayer2().getLastpoints().add(temp2);
-				JKemik.game.getCollection().put(temp2.toString(), temp2);
-				JKemik.game.getPlayer2().setPoints(1);
+				game.getPlayer2().getLastpoints().add(temp2);
+				game.getCollection().put(temp2.toString(), temp2);
+				game.getPlayer2().setPoints(1);
 				i = i + 1;
 			}
 		} catch (NumberFormatException e) {
@@ -917,7 +919,9 @@ public class BoardFrame extends JFrame {
 	}
 
 	public static void updateBoardStatus() {
-		double totPlots = JKemik.game.getCollection().size();
+            AbstractGame game;
+            game = JKemik.getGame();
+		double totPlots = game.getCollection().size();
 		double totalOnBoard = JKemik.settings_t.getGridDimension().positions();
 		double deadBoard = (100 * totPlots) / totalOnBoard;
 		double free = totalOnBoard - totPlots;
@@ -931,7 +935,7 @@ public class BoardFrame extends JFrame {
 		int p1 = 0, p2 = 0;
 		try {
 			if (JKemik.settings_t.isCh()) {
-				AbstractGame game = (AIGame) JKemik.game;
+				game = (AIGame) JKemik.getGame();
 				gridstats.getP1count().setForeground(
 						((AIGame) game).getHuman().getColor());
 				gridstats.getP2count().setForeground(
@@ -942,11 +946,11 @@ public class BoardFrame extends JFrame {
 						- ((AIGame) game).getMachine().getPoints();
 			} else {
 				gridstats.getP1count().setForeground(
-						JKemik.game.getPlayer1().getColor());
+						game.getPlayer1().getColor());
 				gridstats.getP2count().setForeground(
-						JKemik.game.getPlayer2().getColor());
-				p1 = (movesPerPlayer) - JKemik.game.getPlayer1().getPoints();
-				p2 = (movesPerPlayer) - JKemik.game.getPlayer2().getPoints();
+						game.getPlayer2().getColor());
+				p1 = (movesPerPlayer) - game.getPlayer1().getPoints();
+				p2 = (movesPerPlayer) - game.getPlayer2().getPoints();
 			}
 		} catch (ClassCastException ex) {
 			System.err.println("BoardFrame: updateBoardStatus: " + ex.getMessage());
@@ -957,8 +961,9 @@ public class BoardFrame extends JFrame {
 	}
 
 	public static double boardDeadAreaInPercent() {
-		double totPlots = JKemik.game.getCollection().size();
-		double totalOnBoard = JKemik.settings_t.getGridDimension().positions();
+		double totPlots,totalOnBoard;
+                totPlots = JKemik.getGame().getCollection().size();
+		totalOnBoard = JKemik.settings_t.getGridDimension().positions();
 		return (100 * totPlots) / totalOnBoard;
 	}
 

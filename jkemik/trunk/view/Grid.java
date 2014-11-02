@@ -21,7 +21,7 @@ public class Grid extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Graphics2D g2;
+	protected static Graphics2D g2;
 	// private JKIcon board = new JKIcon("media/board1.PNG", "");
 	protected static int gridLineStroke = 2, squareFadeVariant = 4,
 			CURSOR_VARIANT_STROKE = 6,  SQR_OFFSET = 1;
@@ -37,9 +37,9 @@ public class Grid extends JPanel {
 	public static double Height = 640;// 640
 	public static double Width = 1024;// 1024
 
-	public static double Columns = 0.0, rows = 0.0;
+	protected static double Columns = 0.0, rows = 0.0;
 	public static double x = 0, y = 0, hl_x = 0, hl_y = 0;
-	public static Point selectedP = new Point(0, 0);
+	protected static Point selectedP = new Point(0, 0);
 	public static Cell cell = null;
 
 	private static volatile Grid instance = null;
@@ -69,7 +69,7 @@ public class Grid extends JPanel {
             try {
 		//super.paintComponent(g2);
 		Grid.g2 = (Graphics2D) g;
-		AbstractGame game = JKemik.game;
+		AbstractGame game = JKemik.getGame();
                 
 			// play
                     if (mouseclicked && plotPoint) {
@@ -139,16 +139,16 @@ public class Grid extends JPanel {
 	}
 
 	public void highLightDot(Color c) {
-            //
+            AbstractGame game = JKemik.getGame();
 		if (mouseMove) {
                    
 			BoardFrame.print_point
 					.setText(""
-							+ (new Point(hl_x, hl_y, JKemik.game.getCurrentP()
+							+ (new Point(hl_x, hl_y, game.getCurrentP()
 									.getId())).toString());
 			Artist.drawCursor(
-					new Point(x, y, JKemik.game.getCurrentP().getId()),
-					gridLineStroke, Grid.half_squareSize, JKemik.game
+					new Point(x, y, game.getCurrentP().getId()),
+					gridLineStroke, Grid.half_squareSize, game
 							.getCurrentP().getColor(), g2);
 
 			hl_x = x;
@@ -171,21 +171,21 @@ public class Grid extends JPanel {
 	}
 
 	public static Point makeDrawable(double x, double y) {
-		return new Point(Grid.x - HALF_DIAMETER, Grid.y - HALF_DIAMETER,JKemik.game.getCurrentP().getId());
+		return new Point(Grid.x - HALF_DIAMETER, Grid.y - HALF_DIAMETER,JKemik.getGame().getCurrentP().getId());
 	}
 
 	public Point makeDrawable(Point p) {
 		return new Point(p.getXC() - HALF_DIAMETER, p.getYC() - HALF_DIAMETER,
-				JKemik.game.getCurrentP().getId());
+				JKemik.getGame().getCurrentP().getId());
 	}
 
 	public static Point undoMakeDrawable(Point drawable) {
 		return new Point(drawable.getXC() + HALF_DIAMETER, drawable.getYC()
-				+ HALF_DIAMETER, JKemik.game.getCurrentP().getId());
+				+ HALF_DIAMETER, JKemik.getGame().getCurrentP().getId());
 	}
 
 	public void switchTurn() {
-		AbstractGame game = JKemik.game;
+		AbstractGame game = JKemik.getGame();
 		if (game.getCurrentP().compareTo(game.getPlayer1()) == 0) {
 			BoardFrame.p2panel.setLabelColor(game.getPlayer2().getColor());
 			BoardFrame.p1panel.setLabelColor(game.getPlayer1().getFadedColor());
@@ -376,7 +376,7 @@ public class Grid extends JPanel {
                     Point temp;
 
                     temp = new Point(x,y);
-                    if(!Tools.containPoint(temp, list)){
+                    if(!list.contains(temp)){
                          list.add(temp);
                          i++;
                     }

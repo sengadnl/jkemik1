@@ -16,7 +16,7 @@ import view.Grid;
 public class BoardStatus implements Comparator<HotPoint>{
     ArrayList<HotPoint> status;
     public BoardStatus(){
-        this.status = new ArrayList<HotPoint>();
+        this.status = new ArrayList<>();
     }
     public boolean add(HotPoint p){
         if(this.status.add(p)){
@@ -27,10 +27,9 @@ public class BoardStatus implements Comparator<HotPoint>{
     }
     //TODO make sure board is being updated
     public void updateStatus(Point obj){
-        AIGame game = (AIGame) JKemik.game;
-        
+        AIGame game = (AIGame) JKemik.getGame();
         //try{
-            Cell c = null;
+            Cell c;
             if(null != game.getLastCell()){
                 c = game.getLastCell();
                 ArrayList<Point> cellWall = c.getCellContour();

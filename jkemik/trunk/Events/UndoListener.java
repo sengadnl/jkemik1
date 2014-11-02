@@ -27,7 +27,7 @@ public class UndoListener implements MouseListener {
 
         @Override
 	public void mouseClicked(MouseEvent arg0) {
-		AbstractGame game = JKemik.game;
+		AbstractGame game = JKemik.getGame();
 		if(game.getCurrentP().getPlay_flag() == 1){
 			if (!game.getCurrentP().isTurn()) {
 				
@@ -37,7 +37,7 @@ public class UndoListener implements MouseListener {
 				//
                                 Grid.setRefresh(true);
                                 BoardFrame.displayGrid(true);
-                                Point temp = JKemik.game.getLastp();
+                                Point temp = game.getLastp();
                                 //BoardFrame.grid.repaint();
                                 Grid.undo = true;
                                 BoardFrame.grid.repaint((int)temp.getXC() - (int)Grid.squareSize * 2, (int)temp.getYC() - (int)Grid.squareSize * 2, (int)Grid.squareSize * 4, (int)Grid.squareSize * 4);
@@ -47,7 +47,7 @@ public class UndoListener implements MouseListener {
                         System.out.println("Trying to undo selection...");
                         Grid.setRefresh(true);
                         BoardFrame.displayGrid(true);
-                        Point temp = JKemik.game.getLastp();
+                        Point temp = game.getLastp();
                         BoardFrame.grid.repaint((int)temp.getXC() - (int)Grid.squareSize * 2, (int)temp.getYC() - (int)Grid.squareSize * 2, (int)Grid.squareSize * 4, (int)Grid.squareSize * 4);
                         Grid.undo = true;
                         return;

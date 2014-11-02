@@ -175,7 +175,7 @@ public class Artist {
 			/* Fix circle graphics */
 			for (int e = 0; e < contour.size(); e++) {
 				drawCircle(contour.get(e),
-						JKemik.game.getCurrentP().getColor(),
+						JKemik.getGame().getCurrentP().getColor(),
 						Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 						Grid.gridLineStroke, g2);
 //				drawCursor(contour.get(e), Grid.gridLineStroke,
@@ -213,8 +213,7 @@ public class Artist {
 		}
 
 		// draw points
-		for (Point p : JKemik.game.getCollection().values()) {
-
+		for (Point p : JKemik.getGame().getCollection().values()) {
 			if (p.getId() == p1.getId()) {
 				if (p.getStatus() == Point.CAPTURED) {
 					Artist.drawCircle(p, Tools.fade(p1.getColor()),
@@ -244,9 +243,7 @@ public class Artist {
 //							Grid.half_squareSize, Grid.gridLineCol, g2);
 				}
 			}
-
 		}
-
 		if (Grid.manualc) {
 			for (Point p : g.getCurrentP().getSelected()) {
 
@@ -258,14 +255,12 @@ public class Artist {
 			}
 		}
 	}
-
 	/**
 	 * @param Arraylist
 	 *            of pl1 cells, pl1, pl2
 	 * @return void Draws a cell with all its content.
 	 * */
 	protected static boolean drawCell(Cell c, Color col, Graphics2D g2) {
-
 		try {
 			// for (Cell c : cells) {
 			if (c.getStatus() == Globals.CELL_EMPTY) {
@@ -285,16 +280,6 @@ public class Artist {
 				Artist.drawLine(contour.get(i), contour.get(i + 1),
 						Grid.gridLineStroke + Grid.CURSOR_VARIANT_STROKE, col,
 						g2);
-
-				// draw intersection
-//				Artist.drawCursor(contour.get(i), Grid.gridLineStroke,
-//						Grid.half_squareSize, Grid.gridLineCol, g2);
-//
-//				Artist.drawCursor(contour.get(i + 1), Grid.gridLineStroke,
-//						Grid.half_squareSize, Grid.gridLineCol, g2);
-//				g2.setColor(col);
-//				g2.setStroke(new BasicStroke(Grid.gridLineStroke
-//						+ Grid.CURSOR_VARIANT_STROKE));
 			}
 			// circles in contour
 			for (int i = 0; i < contour.size(); i++) {
@@ -335,17 +320,17 @@ public class Artist {
 	}
 
 	protected static Color getCellColor(Cell c) {
-		if (c.getId() == JKemik.game.getCurrentP().getId()) {
-			return JKemik.game.getCurrentP().getColor();
+		if (c.getId() == JKemik.getGame().getCurrentP().getId()) {
+			return JKemik.getGame().getCurrentP().getColor();
 		}
-		return JKemik.game.getGuest().getColor();
+		return JKemik.getGame().getGuest().getColor();
 	}
 
 	protected static Color getCellCapturesColor(Cell c) {
-		if (c.getId() == JKemik.game.getCurrentP().getId()) {
-			return JKemik.game.getGuest().getColor();
+		if (c.getId() == JKemik.getGame().getCurrentP().getId()) {
+			return JKemik.getGame().getGuest().getColor();
 		}
-		return JKemik.game.getCurrentP().getColor();
+		return JKemik.getGame().getCurrentP().getColor();
 	}
 
 	protected static void unDraw(Point p, Graphics2D g2) {
@@ -405,7 +390,7 @@ public class Artist {
 				.getXC(), p.getYC() - Grid.squareSize));
 		g2.draw(new Line2D.Double(p.getXC() - Grid.squareSize, p.getYC(), p
 				.getXC() + Grid.squareSize, p.getYC()));
-		g2.setColor(JKemik.game.getCurrentP().getColor());
+		g2.setColor(JKemik.getGame().getCurrentP().getColor());
 	}
         protected static void drawSelection(ArrayList<Point> list, Point newPoint, Color fade,Graphics2D g2){
             try{
@@ -449,7 +434,7 @@ public class Artist {
         }
 	protected static void unDrawSelection(ArrayList<Point> contour,
 			Graphics2D g2) {
-		AbstractGame game = JKemik.game;
+		AbstractGame game = JKemik.getGame();
 		try {
 			/* Erase last line */
 			int index = contour.size() - 1;

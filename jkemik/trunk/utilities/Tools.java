@@ -382,7 +382,8 @@ public class Tools {
 		Point found = null;
 
 		for (Point current : list) {
-			if (!containPoint(current, tracker)) {
+			//if (!containPoint(current, tracker)) {
+                        if (!tracker.contains(current)) {    
 				/* Find the farthest point at y = y of current point */
 				found = scanX(list, current);
 			} else {
@@ -403,8 +404,8 @@ public class Tools {
 					tracker.add(newPoint);
 					break;
 				}
-				if (!containPoint(newPoint, area)
-						&& !containPoint(newPoint, list)
+				if (!area.contains(newPoint)
+						&& !list.contains(newPoint)
 						&& isInPolygon(list, newPoint)) {
 					area.add(newPoint);// in the future we will simply be
 					// counting instead of storing the point
@@ -423,8 +424,8 @@ public class Tools {
 					tracker.add(newPoint);
 					break;
 				}
-				if (!containPoint(newPoint, area)
-						&& !containPoint(newPoint, list)
+				if (!area.contains(newPoint)
+						&& !list.contains(newPoint)
 						&& isInPolygon(list, newPoint)) {
 					area.add(newPoint);
 					xCurrent = xCurrent - (int) squareSize;
@@ -547,57 +548,23 @@ public class Tools {
 		return ret;
 	}
 
-	public static boolean containPoint(Point p, ArrayList<Point> a) {
-		try {
-			if (a.isEmpty()) {
-				return false;
-			}
-
-			for (Point point : a) {
-				if (p.compareTo(point) == 0) {
-					return true;
-				}
-			}
-		} catch (NullPointerException e) {
-			System.out.println("Tool:containPoint: " + e.getMessage());
-		}
-		return false;
-	}
-
-//	public static Point[] boxCoord(Point p, double squareSize) {
-//		Point[] box = new Point[9];
-//		double x = p.getXC();
-//		double y = p.getYC();
+//	public static boolean containPoint(Point p, ArrayList<Point> a) {
+//		try {
+//			if (a.isEmpty()) {
+//				return false;
+//			}
 //
-//		box[0] = new Point(x - squareSize, y + squareSize);
-//		box[1] = new Point(x + squareSize, y - squareSize);
-//		
-//		box[2] = new Point(x - squareSize, y);
-//		box[3] = new Point(x + squareSize, y);
-//		
-//		box[4] = new Point(x - squareSize, y - squareSize);
-//		box[5] = new Point(x + squareSize, y + squareSize);
-//		
-//		box[6] = new Point(x, y - squareSize);
-//		box[7] = new Point(x, y + squareSize);
-//		
-//		box[8] = p;
-//
-//		return box;
+//			for (Point point : a) {
+//				if (p.compareTo(point) == 0) {
+//					return true;
+//				}
+//			}
+//		} catch (NullPointerException e) {
+//			System.out.println("Tool:containPoint: " + e.getMessage());
+//		}
+//		return false;
 //	}
-//        public static Point[] boxForBot(Point p, double squareSize) {
-//		Point[] box = new Point[4];
-//		double x = p.getXC();
-//		double y = p.getYC();
-//
-//		box[0] = new Point(x - squareSize, y);
-//		box[1] = new Point(x + squareSize, y);
-//
-//		box[2] = new Point(x, y - squareSize);
-//		box[3] = new Point(x, y + squareSize);
-//	
-//		return box;
-//	}
+
 
 
 	/**

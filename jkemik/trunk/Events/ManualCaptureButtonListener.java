@@ -1,5 +1,6 @@
 package Events;
 
+import api.AbstractGame;
 import api.Point;
 import controler.JKemik;
 import java.awt.event.MouseEvent;
@@ -19,16 +20,16 @@ public class ManualCaptureButtonListener implements MouseListener{
 
         @Override
 	public void mouseClicked(MouseEvent arg0) {
-		
+		AbstractGame game = JKemik.getGame();
 		System.out.println("trying to capture...");
-		Grid.cell = JKemik.game.capture(Grid.squareSize);
+		Grid.cell = game.capture(Grid.squareSize);
 		System.out.println("Capture result: " + Grid.cell);
-		JKemik.game.getCurrentP().setSelected(new ArrayList<Point>());
+		game.getCurrentP().setSelected(new ArrayList<Point>());
                 Grid.setRefresh(true);
                 BoardFrame.displayGrid(true);
 		BoardFrame.grid.repaint();//
-		BoardFrame.p1panel.updatePlayerPanel(JKemik.game.getPlayer1());
-		BoardFrame.p2panel.updatePlayerPanel(JKemik.game.getPlayer2());
+		BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
+		BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
 		BoardFrame.updateBoardStatus();
 	}
 

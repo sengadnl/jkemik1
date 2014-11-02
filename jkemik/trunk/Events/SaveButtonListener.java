@@ -50,7 +50,7 @@ public class SaveButtonListener implements MouseListener {
 			t.setP2_name(str2);
 			JKemik.createGame(t, s);
 
-			JKemik.game.setMaxScore(s.getMaxWinVal());//
+			JKemik.getGame().setMaxScore(s.getMaxWinVal());//
 
 			/* Toggling from manual mode to auto */
 			if (!JKemik.settings_t.getMemo()[0]
@@ -71,7 +71,7 @@ public class SaveButtonListener implements MouseListener {
 			if (response == 1) {
 				System.out
 						.println("Saving this game ...?????????????????????????????");
-				JKemik.game.switchPlayTurns();
+				JKemik.getGame().switchPlayTurns();
 			} else {
 
 			}

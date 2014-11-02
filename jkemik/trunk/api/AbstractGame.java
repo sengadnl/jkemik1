@@ -9,6 +9,8 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 import controler.JKemik;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import utilities.Globals;
 import utilities.Tools;
 
@@ -32,6 +34,7 @@ public abstract class AbstractGame implements Serializable {
 		guest = player2;
 		currentP.setTurn(true);
 		this.play_count = JKemik.settings_t.getMaxPointPerPlayer();
+                this.collectionAccessLock = new ReentrantLock();
 		this.status = 0;
 	}
 
@@ -62,6 +65,8 @@ public abstract class AbstractGame implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public boolean buildPath(Point o, double squareSize) {
+            this.collectionAccessLock.lock();
+            try{
 		if (currentP.getSuccessful()) {
 			return true;
 		}
@@ -81,7 +86,7 @@ public abstract class AbstractGame implements Serializable {
 
 			if (AbstractGame.isPath(temp)) {// if this Point is path
 				if (temp.compareTo(currentP.getFrom()) != 0) {
-					if (!Tools.containPoint(o, currentP.getSelected())) {
+					if (!currentP.getSelected().contains(o)) {
 						/* Add o if it hasn't been visited */
 						currentP.getSelected().add(o);
 						// System.out.println("Adding " +
@@ -106,6 +111,9 @@ public abstract class AbstractGame implements Serializable {
 			}
 		}
 		return false;/* No path */
+            }finally{
+                this.collectionAccessLock.unlock();
+            }
 	}
 
 	/**
@@ -308,7 +316,7 @@ public abstract class AbstractGame implements Serializable {
 					&& p.getStatus() != Point.CAPTURED
 					&& p.getStatus() != Point.REDEEMED
 					&& getLastp().adjacentTo(p, squareSize)
-					&& !Tools.containPoint(p, currentP.getSelected())) {
+					&& !currentP.getSelected().contains(p)) {
 				currentP.getSelected().add(p);
 				// System.out.println("Selected returned true ");
 				return true;
@@ -585,7 +593,12 @@ public abstract class AbstractGame implements Serializable {
 	}
 
 	public HashMap<String, Point> getCollection() {
+            collectionAccessLock.lock();
+            try{
 		return this.collection;
+            }finally{
+                collectionAccessLock.unlock();
+            }
 	}
 
 	public void setCollection(HashMap<String, Point> collection) {
@@ -635,15 +648,15 @@ public abstract class AbstractGame implements Serializable {
         
 
 	/* Connecting dots utilities */
-	public boolean AI = false;
-	public boolean embuche_on = false;
+	private boolean AI = false;
+	private boolean embuche_on = false;
 	// private Cell tempCell = null;
 	private int status = 0;
 	private int maxScore = 2;
-	public int captured_count = 0;
-	public int redeemed_count = 0;
-	public int play_count = 0;
-	public Point lastp = new Point(553355, 7798979);
+	private int captured_count = 0;
+	private int redeemed_count = 0;
+	private int play_count = 0;
+	private Point lastp = new Point(553355, 7798979);
 
 	/* keeps track of all captured points */
 	private AbstractPlayer player1;
@@ -651,6 +664,7 @@ public abstract class AbstractGame implements Serializable {
 	private static AbstractPlayer currentP;
 	private static AbstractPlayer guest;
 	private HashMap<String, Point> collection = new HashMap<String, Point>();
+        private Lock collectionAccessLock;
 
 	/* AI tools */
         private Cell lastCell;
