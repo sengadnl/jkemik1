@@ -1,9 +1,10 @@
 package api;
 
 import agents.JkBot;
+import java.io.Serializable;
 
 
-public class AIGame extends AbstractGame{
+public class AIGame extends AbstractGame implements Serializable{
 	/**
 	 * 
 	 */
