@@ -100,22 +100,6 @@ public class HumanMoveRunnable implements Runnable{
             BoardFrame.progressB.setIndeterminate(false);
             BoardFrame.progressB.setVisible(false);
 
-//            if (JKemik.checkEndGame()) {
-//                JOptionPane.showMessageDialog(null, "" + JKemik.getEndingMessage(),
-//                                " Win", JOptionPane.OK_OPTION);
-//                BoardFrame.feedback(JKemik.getEndingMessage());
-//                JKemik.game.setStatus(1);
-//                JKemik.createGame(JKemik.template, JKemik.settings_t);
-//                JKemik.settings_t.setGameSetupMode(true);
-//                // Reset game exit label
-//                BoardFrame.Game_status.setText("NEW");
-//                BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
-//                ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
-//
-//                Grid.setRefresh(true);
-//                BoardFrame.displayGrid(true);
-//                BoardFrame.grid.repaint();
-//            }
             Thread.sleep(DELAY);
         } catch (InterruptedException ex) {
             Logger.getLogger(HumanMoveRunnable.class.getName()).log(Level.SEVERE, null, ex);

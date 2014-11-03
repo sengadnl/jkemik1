@@ -38,8 +38,7 @@ public class STemplate implements Serializable {
            
             this.boardSizes(Globals.SIZE_PERCENT);
             this.setGridDimension(sizes.get(3));
-            this.maxWinVal = (int)(dimesion.positions() * Globals.MAX_WIN);
-            System.out.println("Maxwin = " + this.maxWinVal);
+            this.maxWinVal = (int)(dimesion.positions() * Globals.MAX_WIN_PERCENT_BOARD);
 	}
 	
 	public int getBacktrackingDistance() {

@@ -169,7 +169,7 @@ public class Tools {
 
 
 	public static void resetMaxWin(int positionsCount, STemplate t) {
-		int defaultMaxWin = (int) (positionsCount * Globals.MAX_WIN);
+		int defaultMaxWin = (int) (positionsCount * Globals.MAX_WIN_PERCENT_BOARD);
 		t.setMaxWinVal(defaultMaxWin);
 	}
 
