@@ -6,11 +6,13 @@
 
 package api;
 
+import java.io.Serializable;
+
 /**
  *
  * @author admin
  */
-public class HotPoint implements Comparable<HotPoint>{
+public class HotPoint implements Comparable<HotPoint>,Serializable{
     private String key;
     private int score;
     public HotPoint(String key, int score){
