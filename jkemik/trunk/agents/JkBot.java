@@ -3,6 +3,7 @@ import api.*;
 import api.Point;
 import controler.JKemik;
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -12,7 +13,7 @@ import view.Grid;
 
 //import api.AbstractPlayer;
 
-public class JkBot extends Player implements AgentAction{
+public class JkBot extends Player implements AgentAction,Serializable{
 	/**
 	 * 
 	 */
@@ -40,13 +41,13 @@ public class JkBot extends Player implements AgentAction{
                 return offense(game, game.getLastp());
             }
 
-            ArrayList<HotPoint> hStatus, aiStatus;
+            ArrayList<HotPoint> hStatus, aiStats;
             int sizeAI,sizeH;
             
             hStatus = this.humanStatus.getStatus();
-            aiStatus = this.aiStatus.getStatus();
+            aiStats = this.aiStatus.getStatus();
                     
-            sizeAI = aiStatus.size();
+            sizeAI = aiStats.size();
             sizeH = hStatus.size();
             
             /*get most vulnerable ai point*/
@@ -56,10 +57,10 @@ public class JkBot extends Player implements AgentAction{
             
             /*offense if ai is less or equally vulnerable than h*/
             Point temp;
-            System.err.println("offense >>>");
             //Evaluate who is most vulnerable
             if(ai.compareTo(h) < 0){
-                for(int i = sizeH - 1; i >= 0 ; i--){
+                System.err.println("Offense >>>");
+                for(int i = sizeH - 1 ; i >= 0 ; i--){
                     temp = offense(game, game.getCollection().get(hStatus.get(i).getKey()));
                     if(temp != null){
                         return temp;
@@ -67,9 +68,9 @@ public class JkBot extends Player implements AgentAction{
                 }
             }
             /*Defense if ai is more vulnerable than h*/
-            System.err.println("Defense >>>");
+            System.err.println("Defense <<<");
             for(int i = sizeAI - 1; i >= 0 ; i--){
-                temp = offense(game, game.getCollection().get(aiStatus.get(i).getKey()));
+                temp = offense(game, game.getCollection().get(aiStats.get(i).getKey()));
                 if(temp != null){
                     return temp;
                 } 
@@ -84,11 +85,12 @@ public class JkBot extends Player implements AgentAction{
         - If offence, pursuit a plan, return the next*/
 	public Point play(AIGame game) {
             turnChangeLock.lock();
-            Point move = null;
+            Point move = null; 
             try{
+                if(!game.getMachine().isTurn()){
+                    return move;
+                }
                 move = move(game);
-                
-
                 move.setStatus(Point.PLAYED);
 
                 // Mark point as belonging to current player
@@ -113,9 +115,7 @@ public class JkBot extends Player implements AgentAction{
                 Grid.mouseMove = false;
             }catch(NullPointerException | ArrayIndexOutOfBoundsException e){
                 System.out.println("play: " + e.getMessage());
-            }
-            
-            finally{
+            }finally{
                 turnChangeLock.unlock();
             }
             return move;

@@ -35,11 +35,8 @@ public class BoardSizeListener implements MouseListener{
 		BoardFrame.settings_p.updateSettingsPanel(JKemik.settings_t);
 		BoardFrame.displayGrid(true);
                 BoardFrame.grid.repaint();
-		BoardFrame.Win.setText((int)(t.getGridDimension().positions()* Globals.MAX_WIN) + "");
-                t.setMaxWinVal((int)(t.getGridDimension().positions() * Globals.MAX_WIN));
-                System.out.println("Set Max val = " + (t.getGridDimension().positions() * Globals.MAX_WIN));
-		System.out.println("Max val = " + t.getMaxWinVal());
-
+		BoardFrame.Win.setText((int)(t.getGridDimension().positions()* Globals.MAX_WIN_PERCENT_BOARD) + "");
+                t.setMaxWinVal((int)(t.getGridDimension().positions() * Globals.MAX_WIN_PERCENT_BOARD));
 	}
 
 	public void mouseEntered(MouseEvent e) {

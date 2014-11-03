@@ -23,9 +23,12 @@ import api.AbstractGame;
 import api.GridDimension;
 import api.Player;
 import api.Point;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import static view.Grid.gridLineStroke;
 
 public class Artist {
+    
 	protected static void drawGridBG(Graphics2D g2, double w, double h) {
 
 		// Image img1 =
@@ -191,6 +194,7 @@ public class Artist {
 	}
 
 	protected static void drawGame(AbstractGame g, Graphics2D g2) {
+           
 		Player p1 = (Player) g.getPlayer1();
 		Player p2 = (Player) g.getPlayer2();
 
@@ -254,6 +258,7 @@ public class Artist {
 //						Grid.gridLineCol, g2);
 			}
 		}
+        
 	}
 	/**
 	 * @param Arraylist
@@ -477,4 +482,5 @@ public class Artist {
 			System.out.println("In drawCell: " + e.getMessage());
 		}
 	}
+ 
 }

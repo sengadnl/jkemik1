@@ -5,17 +5,15 @@
  */
 
 package controler;
-import Events.ViewEvents;
+
 import agents.JkBot;
 import api.AIGame;
-import api.AbstractGame;
+
 import api.Point;
-import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import view.BoardFrame;
 import view.Grid;
 
@@ -66,7 +64,9 @@ public class AgentMoveRunnable implements Runnable{
             BoardFrame.progressB.setIndeterminate(false);
             BoardFrame.progressB.setVisible(false);
 
-        } catch (InterruptedException ex) {
+        }catch(NullPointerException ex){
+            System.out.println(ex.getMessage() + ": AgentMoveRunnable");
+        }catch (InterruptedException ex) {
             Logger.getLogger(AgentMoveRunnable.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             aiMoveLock.unlock();
@@ -74,6 +74,6 @@ public class AgentMoveRunnable implements Runnable{
         //Thread.interrupted();
     }
     private static final int DELAY = 1000;
-    private Lock aiMoveLock ;
+    private final Lock aiMoveLock ;
     
 }

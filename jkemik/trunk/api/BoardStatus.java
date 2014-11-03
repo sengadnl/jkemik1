@@ -5,6 +5,7 @@
  */
 package api;
 import controler.JKemik;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,7 +14,7 @@ import view.Grid;
  *
  * @author admin
  */
-public class BoardStatus implements Comparator<HotPoint>{
+public class BoardStatus implements Comparator<HotPoint>,Serializable{
     ArrayList<HotPoint> status;
     public BoardStatus(){
         this.status = new ArrayList<>();
@@ -52,7 +53,7 @@ public class BoardStatus implements Comparator<HotPoint>{
             //update status
             for(Point temp: game.getCollection().values()){
                updatePointStatusBasedAxises(temp, game);
-               updatePointStatusBasedDiagonals(temp,game);
+               //updatePointStatusBasedDiagonals(temp,game);
             }
             
             //Make to score of connected points 0
@@ -73,13 +74,13 @@ public class BoardStatus implements Comparator<HotPoint>{
 //        }
         
     }
-    private void updatePointStatusBasedDiagonals(Point p, AIGame game){
+    private int updatePointStatusBasedDiagonals(Point p, AIGame game){
         int max;
         max = 0;
         int id = p.getId();
         Point[] diagonals;
-        
-        diagonals = p.axisBox(Grid.squareSize);
+ 
+        diagonals = p.diagonalBox(Grid.squareSize);
         for(int i = 0; i < diagonals.length - 1; i++){ 
             Point diagonalp = game.getCollection().get(diagonals[i].toString());
             
@@ -95,8 +96,7 @@ public class BoardStatus implements Comparator<HotPoint>{
 
             //Opponent connected point
             if(id != diagonalp.getId() && diagonalp.getStatus() == Point.CONNECTED){
-                max++;
-                max++;
+                max+=2;
                 continue;
             }
             
@@ -105,8 +105,7 @@ public class BoardStatus implements Comparator<HotPoint>{
                 max--;
             }
         }
-        //p.setHeatLevel(p.getHeatLevel() + max);
-        p.setHeatLevel(max);
+       return max;
     }
     private void updatePointStatusBasedAxises(Point p, AIGame game){
         //System.out.println("\nStarting Heat for: " + p + " " + p.getHeatLevel());
@@ -125,28 +124,23 @@ public class BoardStatus implements Comparator<HotPoint>{
             
             //Opponent uncaptured point
             if(id != axep.getId() && axep.getStatus() == Point.PLAYED){
-                max++;
-                max++;
+                max+=2;
                 continue;
             }
 
             //Opponent connected point
             if(id != axep.getId() && axep.getStatus() == Point.CONNECTED){
-                max++;
-                max++;
-                max++;
+                max+=4;
                 continue;
             }
             
             //my points
             if(id == axep.getId()){
-                max--;
-                max--;
-                continue;
+                max-=2;
             }
         }
-        p.setHeatLevel(p.getHeatLevel() + max);
-        //System.out.println("Ending Heat for: " + p + " " + p.getHeatLevel());
+        max = max + updatePointStatusBasedDiagonals(p,game);
+        p.setHeatLevel(max);
     }
     public ArrayList<HotPoint> getStatus() {
         return status;

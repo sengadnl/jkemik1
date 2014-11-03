@@ -34,6 +34,7 @@ public class HotPoint implements Comparable<HotPoint>{
         this.score = score;
     }
     
+    @Override
     public String toString(){
         return key + " > " + score;
     }
