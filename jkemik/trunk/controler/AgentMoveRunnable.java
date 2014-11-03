@@ -6,6 +6,7 @@
 
 package controler;
 
+import Events.ViewEvents;
 import agents.JkBot;
 import api.AIGame;
 
@@ -31,7 +32,8 @@ public class AgentMoveRunnable implements Runnable{
         aiMoveLock.lock();
         
         try {
-           
+            BoardFrame.getGrid().removeMouseListener(ViewEvents.AIgridListener);
+            BoardFrame.getGrid().removeMouseMotionListener(ViewEvents.AIgridListener);
             BoardFrame.progressB.setVisible(true);
             BoardFrame.progressB.setIndeterminate(true);
 
@@ -63,7 +65,8 @@ public class AgentMoveRunnable implements Runnable{
             //Remove progress bar
             BoardFrame.progressB.setIndeterminate(false);
             BoardFrame.progressB.setVisible(false);
-
+            BoardFrame.getGrid().addMouseListener(ViewEvents.AIgridListener);
+            BoardFrame.getGrid().addMouseMotionListener(ViewEvents.AIgridListener);
         }catch(NullPointerException ex){
             System.out.println(ex.getMessage() + ": AgentMoveRunnable");
         }catch (InterruptedException ex) {
