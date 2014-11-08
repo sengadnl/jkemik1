@@ -67,16 +67,15 @@ public class AgentMoveRunnable implements Runnable{
                             } 
                     }
                 }
+                Grid.setRefresh(true);
+                BoardFrame.displayGrid(true);
+                BoardFrame.grid.repaint((int)move.getXC() - (int)Grid.squareSize * 2, (int)move.getYC() - (int)Grid.squareSize * 2, (int)Grid.squareSize * 4, (int)Grid.squareSize * 4);
             }
             
             BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
             BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
             BoardFrame.updateBoardStatus();
 
-            Grid.setRefresh(true);
-            BoardFrame.displayGrid(true);
-            BoardFrame.grid.repaint((int)move.getXC() - (int)Grid.squareSize * 2, (int)move.getYC() - (int)Grid.squareSize * 2, (int)Grid.squareSize * 4, (int)Grid.squareSize * 4);
-            
             Thread.sleep(DELAY);
 
             //Remove progress bar
@@ -90,8 +89,8 @@ public class AgentMoveRunnable implements Runnable{
                         System.err.println("Switching turns .....");
                         game.switchPlayTurns();
             }
-        }catch(NullPointerException ex){
-            System.out.println(ex.getMessage() + ": AgentMoveRunnable");
+//        }catch(NullPointerException ex){
+//            System.out.println(ex.getMessage() + ": AgentMoveRunnable");
         }catch (InterruptedException ex) {
             Logger.getLogger(AgentMoveRunnable.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
