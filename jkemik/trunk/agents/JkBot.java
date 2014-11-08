@@ -21,8 +21,9 @@ public class JkBot extends Player implements AgentAction,Serializable{
 	public boolean engaged = false;
 
    
-        public BoardStatus aiStatus;
-        public BoardStatus humanStatus;
+        private BoardStatus aiStatus;
+        private BoardStatus humanStatus;
+        private Point cursorPosition;
         
 	public JkBot(Color color, String name) {
 		super(color, name);
@@ -36,8 +37,8 @@ public class JkBot extends Player implements AgentAction,Serializable{
 
           
             //Return a random point if there is no status to track
-            if(this.aiStatus.getStatus().isEmpty()){
-                System.err.println("??? can't decide were to play!!! mmmmm, trying ");
+            if(this.humanStatus.getStatus().isEmpty() || this.aiStatus.getStatus().isEmpty()){
+                //System.err.println("??? can't decide were to play!!! mmmmm, trying");
                 return offense(game, game.getLastp());
             }
 
@@ -58,20 +59,22 @@ public class JkBot extends Player implements AgentAction,Serializable{
             /*offense if ai is less or equally vulnerable than h*/
             Point temp;
             //Evaluate who is most vulnerable
-            if(ai.compareTo(h) < 0){
-                System.err.println("Offense >>>");
+            if(ai.compareTo(h) <= 0){
+                System.err.println("AI-" + ai.toString() + " --- " + "HU-" + h.toString());
                 for(int i = sizeH - 1 ; i >= 0 ; i--){
                     temp = offense(game, game.getCollection().get(hStatus.get(i).getKey()));
                     if(temp != null){
+                        System.err.println("Offense <<< at " + temp);
                         return temp;
                     } 
                 }
             }
             /*Defense if ai is more vulnerable than h*/
-            System.err.println("Defense <<<");
+            //System.err.println("Defense <<<");
             for(int i = sizeAI - 1; i >= 0 ; i--){
                 temp = offense(game, game.getCollection().get(aiStats.get(i).getKey()));
                 if(temp != null){
+                    System.err.println("Defense <<< at " + temp);
                     return temp;
                 } 
             }
@@ -140,29 +143,29 @@ public class JkBot extends Player implements AgentAction,Serializable{
             }
             //Randomization
             if(!holder.isEmpty()){
-                System.err.println("offense - quare cell : " + (holder.size()));
+                //System.err.println("" + (holder));
                 return holder.get((new Random()).nextInt(holder.size()));
             }
             
             //Detect other forms
-            diagonals = humanPoint.diagonalBox(Grid.squareSize);
-            holder = new ArrayList<>();//reset
-            for (Point d : diagonals) {
-                if (!game.getCollection().containsKey(d.toString())) {
-                    if(this.isPointInBoard(d, w, h)){
-                        holder.add(d);
-                    }
-                }
-            }
-            //Randomization
-            if(!holder.isEmpty()){
-                System.err.println("offense - not quare cell : " + (holder.size()));
-                return holder.get((new Random()).nextInt(holder.size()));
-            }
+//            diagonals = humanPoint.diagonalBox(Grid.squareSize);
+//            holder = new ArrayList<>();//reset
+//            for (Point d : diagonals) {
+//                if (!game.getCollection().containsKey(d.toString())) {
+//                    if(this.isPointInBoard(d, w, h)){
+//                        holder.add(d);
+//                    }
+//                }
+//            }
+//            //Randomization
+//            if(!holder.isEmpty()){
+//                //System.err.println("" + (holder.size()));
+//                return holder.get((new Random()).nextInt(holder.size()));
+//            }
             
             return null;
         }
-
+        
     /**
      *
      * @return a random point on the grid.
@@ -185,7 +188,7 @@ public class JkBot extends Player implements AgentAction,Serializable{
                 p1 = Grid.closestPoint(x,y, (int) Grid.squareSize);
                 p2 = game.getCollection().get(p1.toString());
             }while(p2 != null);
-            System.err.println("Returning a random point!!!!!!!!");
+            //System.err.println("Returning a random point!!!!!!!!");
             return p1;
         }
         public BoardStatus getAiStatus() {
@@ -220,6 +223,37 @@ public class JkBot extends Player implements AgentAction,Serializable{
            }
            return true;
         }
+
+        public Point getCursorPosition() {
+            return cursorPosition;
+        }
+
+        public void setCursorPosition(Point cursorPosition) {
+            this.cursorPosition = cursorPosition;
+        }
+
+        @Override
+        public ArrayList<Point> moveCursorTo(Point o, Point d, double squareSize) {
+            ArrayList<Point> list; Point temp;
+            list = new ArrayList<>();
+            ArrayList<Point> a = o.twoPointsMoveTo(d, squareSize);
+            temp = a.get(0);
+            list.add(o);
+            while(!(temp.compareTo(d) == 0)){
+                //System.out.println(a.toString() + "\n");
+                for(Point p: a){
+                    list.add(p);
+                }
+                temp = new Point(a.get(a.size() - 1).getXC(),a.get(a.size() - 1).getYC());
+                a = temp.twoPointsMoveTo(d, squareSize);
+            }
+            return list;
+        }
+//        public static void main(String[] args){
+//            JkBot test = new JkBot(null,"");
+//            ArrayList<Point> l = test.moveCursorTo(new Point(128,320), new Point(64.0,0.0),64);
+//            System.out.println("Result: " + l);
+//        }
 
        
 }

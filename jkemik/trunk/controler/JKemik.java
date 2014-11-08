@@ -208,7 +208,7 @@ public class JKemik extends Application {
                                 if(settings_t.isCh()){
                                     game = (AIGame) input.readObject();
                                 }else{
-                                   // game = (Game) input.readObject();
+                                   game = (Game) input.readObject();
                                }
 				int response = JOptionPane.showConfirmDialog(null,
 						"Continues with saved Game?\n", "Question",

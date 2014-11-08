@@ -25,6 +25,7 @@ public class HvsAIListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		JKemik.settings_t.setCh(true);
+                //JKemik.settings_t.setAutoCapture(true);
 	}
 
 	@Override

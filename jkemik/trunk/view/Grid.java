@@ -10,7 +10,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.*;
-import utilities.Tools;
+
 
 /**
  * @author Dalet
@@ -87,12 +87,11 @@ public class Grid extends JPanel {
                     }
 
                     //
-                    if (JKemik.settings_t.isAutoPass()
-                                    && (game.getCurrentP().getPlay_flag() == 1)) {
-                        System.err.println("Switching turns .....");
-                        game.switchPlayTurns();
-                        //System.out.println("After switch-----------" + game.getCurrentP().toString());
-                    }
+//                    if (JKemik.settings_t.isAutoPass()
+//                                    && (game.getCurrentP().getPlay_flag() == 1)) {
+//                        System.err.println("Switching turns .....");
+//                        game.switchPlayTurns();
+//                    }
                     
                     //draw board
                     if (!this.drawn) {

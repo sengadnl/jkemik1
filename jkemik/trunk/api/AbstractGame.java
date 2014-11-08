@@ -96,8 +96,8 @@ public abstract class AbstractGame implements Serializable {
 								&& currentP.getSelected().size() > 3) {
 							currentP.setSuccessful(true);
 							currentP.setOrigin(null);/* Reset the origin */
-							// System.err.println("\nbuildPath: "
-							// + currentP.getSelected());
+							 System.err.println("\nbuildPath cell: "
+							 + currentP.getSelected());
 							return true;/* Capture was found */
 						}
 
@@ -144,7 +144,7 @@ public abstract class AbstractGame implements Serializable {
 		for (int i = start; i >= 0; i--) {
 			cell = null;
 			currentP.setSelected(new ArrayList<Point>());
-			System.out.println(i + "- backtracking at " + lastps.get(i));
+			//System.out.println(i + "- backtracking at " + lastps.get(i));
 			currentP.setOrigin(lastps.get(i));/* Reset the origin */
 			if (buildPath(lastps.get(i), squareSize)) {
 				try {
@@ -152,12 +152,12 @@ public abstract class AbstractGame implements Serializable {
 							currentP.getSelected(), squareSize);
 
 					ArrayList<Point> activePoints = getTrueArea(TempArea);
-					ArrayList<Point> area = new ArrayList<Point>();
+					ArrayList<Point> area = new ArrayList<>();
 
 					/*Cell is invalid if there are no active points*/
 					if (isAreaEmpty(activePoints)) {
 						currentP.setSuccessful(false);
-						currentP.setSelected(new ArrayList<Point>());
+						currentP.setSelected(new ArrayList<>());
 						continue;
 					}
 
@@ -219,7 +219,7 @@ public abstract class AbstractGame implements Serializable {
 			}
 		}
 		currentP.setSuccessful(false);
-		currentP.setSelected(new ArrayList<Point>());
+		currentP.setSelected(new ArrayList<>());
 		return cell;
 	}
 
@@ -230,11 +230,11 @@ public abstract class AbstractGame implements Serializable {
 				squareSize);
 
 		ArrayList<Point> activePoints = getTrueArea(TempArea);
-		ArrayList<Point> area = new ArrayList<Point>();
+		ArrayList<Point> area = new ArrayList<>();
 
 		/*Cell is invalid if there are no active points*/
 		if (isAreaEmpty(activePoints)) {
-			currentP.setSelected(new ArrayList<Point>());
+			currentP.setSelected(new ArrayList<>());
 			return null;
 		}
 

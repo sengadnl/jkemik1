@@ -7,7 +7,6 @@
 package controler;
 
 
-import Events.ViewEvents;
 import agents.JkBot;
 import api.AIGame;
 import api.Player;
@@ -90,6 +89,13 @@ public class HumanMoveRunnable implements Runnable{
             if (game.getCurrentP().isTurn()) {
                     BoardFrame.grid.setMouseclicked(true);
             }
+            
+            System.out.println("AI STATUS");
+            System.out.println(bot.getAiStatus().toString());
+            
+            System.out.println("HU STATUS");
+            System.out.println(bot.getHumanStatus().toString());
+            
             BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
             BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
             BoardFrame.updateBoardStatus();
@@ -100,6 +106,12 @@ public class HumanMoveRunnable implements Runnable{
             
             BoardFrame.progressB.setIndeterminate(false);
             BoardFrame.progressB.setVisible(false);
+            
+            if (JKemik.settings_t.isAutoPass()
+                                    && (game.getCurrentP().getPlay_flag() == 1)) {
+                        System.err.println("Switching turns .....");
+                        game.switchPlayTurns();
+            }
 
             Thread.sleep(DELAY);
         } catch (InterruptedException ex) {
