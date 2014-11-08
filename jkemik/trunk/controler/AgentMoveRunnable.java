@@ -11,6 +11,8 @@ import agents.JkBot;
 import api.AIGame;
 
 import api.Point;
+import java.util.ArrayList;
+
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
@@ -41,17 +43,32 @@ public class AgentMoveRunnable implements Runnable{
             JkBot bot = (JkBot) game.getMachine();
             Thread.sleep(DELAY);
             Point move = bot.play((AIGame) game);
+            
             if(move != null){
+                ArrayList<Point> path = bot.moveCursorTo(new Point(0.0,0.0), move, Grid.squareSize);
+                for(Point m: path){
+                    Grid.x = m.getXC();
+                    Grid.y = m.getYC();
+                    Grid.setRefresh(true);
+                    BoardFrame.displayGrid(true);
+                    BoardFrame.grid.repaint((int)Grid.x - (int)Grid.squareSize * 2, (int)Grid.y - (int)Grid.squareSize * 2, (int)Grid.squareSize * 4, (int)Grid.squareSize * 4);
+                    Grid.mouseMove = true;
+                    Thread.sleep(20);
+                }
+                Thread.sleep(DELAY);
                 if (game.isEmbuche_on()) {
+                    //System.out.println("Embush is on....");
                     if (JKemik.settings_t.isAutoCapture()) {
+                         //System.out.println("About to embush....");
                             Grid.cell = JKemik.embush(Grid.squareSize);
                             if(Grid.cell != null){
+                                //System.out.println("Cell was not empty....");
                                 BoardFrame.grid.repaint();
                             } 
                     }
                 }
             }
-            System.out.println(bot.getAiStatus().toString());
+            
             BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
             BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
             BoardFrame.updateBoardStatus();
@@ -67,6 +84,12 @@ public class AgentMoveRunnable implements Runnable{
             BoardFrame.progressB.setVisible(false);
             BoardFrame.getGrid().addMouseListener(ViewEvents.AIgridListener);
             BoardFrame.getGrid().addMouseMotionListener(ViewEvents.AIgridListener);
+            
+            if (JKemik.settings_t.isAutoPass()
+                                    && (game.getCurrentP().getPlay_flag() == 1)) {
+                        System.err.println("Switching turns .....");
+                        game.switchPlayTurns();
+            }
         }catch(NullPointerException ex){
             System.out.println(ex.getMessage() + ": AgentMoveRunnable");
         }catch (InterruptedException ex) {

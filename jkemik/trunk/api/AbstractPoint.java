@@ -3,11 +3,14 @@
  */
 package api;
 
+import agents.JkBot;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.io.Serializable;
+import java.util.ArrayList;
+import view.Grid;
 
 /**
  * @author Junes
@@ -162,7 +165,66 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
 		
 		return box;
 	}
-
+        /*
+         *Moves the cursor two points towards the destination*/
+        public ArrayList<Point> twoPointsMoveTo(Point d, double squareSize){
+            ArrayList<Point> points;
+            points = new ArrayList<>();
+            
+            if(this.getXC() < d.getXC() && this.getYC() > d.getYC()){
+                //System.out.println("Destination: x-pos & y-neg");
+                points.add(new Point(this.getXC() + squareSize, this.getYC()));
+                points.add(new Point(this.getXC() + squareSize, this.getYC() - squareSize));
+                return points;
+            }
+            
+            if(this.getXC() > d.getXC() && this.getYC() > d.getYC()){
+                //System.out.println("Destination: x-neg & y-neg");
+                points.add(new Point(this.getXC(), this.getYC() - squareSize));
+                points.add(new Point(this.getXC()  - squareSize, this.getYC() - squareSize));
+                return points;
+            }
+            
+            if(this.getXC() > d.getXC() && this.getYC() < d.getYC()){
+                //System.out.println("Destination: x-neg & y-pos");
+                points.add(new Point(this.getXC() - squareSize, this.getYC()));
+                points.add(new Point(this.getXC() - squareSize, this.getYC() + squareSize));
+                return points;
+            }
+            if(this.getXC() < d.getXC() && this.getYC() < d.getYC()){
+                //System.out.println("Destination: x-pos & y-pos");
+                points.add(new Point(this.getXC(), this.getYC() + squareSize));
+                points.add(new Point(this.getXC() + squareSize, this.getYC() + squareSize));
+                return points;
+            }
+            
+            if(this.getXC() == d.getXC() && this.getYC() < d.getYC()){
+               //System.out.println("north");
+                points.add(new Point(this.getXC(), this.getYC() + squareSize));
+                return points;
+            }//north
+            
+            if(this.getXC() > d.getXC() && this.getYC() == d.getYC()){
+                //System.out.println("west");
+                points.add(new Point(this.getXC() - squareSize, this.getYC()));
+                return points;
+            }//west
+            
+            if(this.getXC() == d.getXC() && this.getYC() > d.getYC()){
+                //System.out.println("south");
+                points.add(new Point(this.getXC(), this.getYC() - squareSize));
+                return points;
+            }//south
+            
+            if(this.getXC() < d.getXC() && this.getYC() == d.getYC()){
+                //System.out.println("east");
+                points.add(new Point(this.getXC() + squareSize, this.getYC()));
+                return points;
+            }//east
+            
+            return points;
+        }
+       
         @Override
 	public String toString()// for debugging
 	{
@@ -197,4 +259,9 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
 		}
 		return false;
 	}
+//        public static void main(String[] args){
+//            Point test = new Point(0.0,0.0);
+//           
+//            System.out.println("Result: " + l);
+//        }
 }

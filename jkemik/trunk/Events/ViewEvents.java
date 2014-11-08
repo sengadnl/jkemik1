@@ -274,7 +274,13 @@ public class ViewEvents {
 			captureButtonListener(BoardFrame.capture);
 			passTurnAction(BoardFrame.pass_turn);
                         if(JKemik.settings_t.isCh()){
-                           gridAIMouseAction(BoardFrame.grid);
+                           //gridAIMouseAction(BoardFrame.grid);
+                            if (BoardFrame.grid.getComponentListeners().length > 0) {
+                                BoardFrame.grid.removeMouseListener(AIgridListener);
+                                BoardFrame.grid.removeMouseMotionListener(AIgridListener);
+                            }
+                            BoardFrame.grid.addMouseListener(AIgridListener);
+                            BoardFrame.grid.addMouseMotionListener(AIgridListener);
                         }else{
                            gridMouseAction(BoardFrame.grid);
                         }

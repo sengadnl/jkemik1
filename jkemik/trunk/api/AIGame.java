@@ -2,6 +2,8 @@ package api;
 
 import agents.JkBot;
 import java.io.Serializable;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 
 public class AIGame extends AbstractGame implements Serializable{
@@ -10,15 +12,18 @@ public class AIGame extends AbstractGame implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
         //private BoardStatus status;
+        private Lock aiGameLock;
        
 	//private static volatile AIGame instance = null; 
 	public AIGame(Player player1, JkBot player2) {
 		super(player1, player2);
 		this.setAI(true);
+                this.aiGameLock = new ReentrantLock();
                 //this.status = new BoardStatus();
 	}
 
         public Point put(String key, Point p){ 
+            this.aiGameLock.lock();
             Point object = null;
            try{
 
@@ -31,15 +36,19 @@ public class AIGame extends AbstractGame implements Serializable{
                 }else{
                     ai.getHumanStatus().add(new HotPoint(key,0));  
                 }
+//                System.err.println("AI Before update: " + ai.getAiStatus().getStatus());
+//                System.err.println("HU Before update: " + ai.getHumanStatus().getStatus());
                 ai.getHumanStatus().updateStatus(p);
                 ai.getAiStatus().updateStatus(p);
-                
+
                 this.setLastp(p);
 
             }catch(NullPointerException ex){
                  System.err.println("Error in AIGame:put > " + ex.getMessage()
                  );
-            }
+            }finally{
+               this.aiGameLock.unlock();
+           }
             return object;
         }
         /**
