@@ -152,7 +152,7 @@ public class Artist {
 		g2.fill(circle);
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		g2.setColor(Tools.fade(c));
+		g2.setColor(Tools.fade(c,Globals.SQR_LINE_SHADE_PERCENT));
 		g2.draw(circle);
 		g2.setColor(c);
 	}
@@ -306,7 +306,7 @@ public class Artist {
 				}
 
 				if (p.getStatus() == Point.DEAD) {
-					Artist.drawCircle(p, BoardFrame.BOARD_COLOR,
+					Artist.drawCircle(p,BoardFrame.BOARD_COLOR,
 							Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 							Grid.gridLineStroke, g2);
 //					Artist.drawCursor(p, Grid.gridLineStroke,
