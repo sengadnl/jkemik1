@@ -17,6 +17,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import view.BoardFrame;
 import view.Grid;
 
@@ -84,9 +85,24 @@ public class AgentMoveRunnable implements Runnable{
             BoardFrame.getGrid().addMouseListener(ViewEvents.AIgridListener);
             BoardFrame.getGrid().addMouseMotionListener(ViewEvents.AIgridListener);
             
+            if (JKemik.checkEndGame()) {
+                JOptionPane.showMessageDialog(null, "" + JKemik.getEndingMessage(),
+                                " Win", JOptionPane.OK_OPTION);
+                BoardFrame.feedback(JKemik.getEndingMessage());
+                JKemik.getGame().setStatus(1);
+                JKemik.createGame(JKemik.template, JKemik.settings_t);
+                JKemik.settings_t.setGameSetupMode(true);
+                // Reset game exit label
+                BoardFrame.Game_status.setText("NEW");
+                BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
+                ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
 
-                        System.err.println("Switching turns .....");
-                        game.switchPlayTurns();
+                Grid.setRefresh(true);
+                BoardFrame.displayGrid(true);
+                BoardFrame.grid.repaint();
+            }
+            System.err.println("Switching turns .....");
+            game.switchPlayTurns();
        
         }catch(NullPointerException ex){
             System.out.println(ex.getMessage() + ": AgentMoveRunnable");
@@ -97,7 +113,7 @@ public class AgentMoveRunnable implements Runnable{
         }
         //Thread.interrupted();
     }
-    private static final int DELAY = 500;
+    private static final int DELAY = 100;
     private final Lock aiMoveLock ;
     
 }
