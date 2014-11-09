@@ -76,7 +76,6 @@ public class SaveButtonListener implements MouseListener {
 
 			}
 			BoardFrame.uiLooksUpdate(s, t);
-			//System.out.println(JKemik.game + "\n\n");
 			JKemik.writeSettings();
 		}
 	}

@@ -97,6 +97,7 @@ public class JKemik extends Application {
 	 */
 
 	public static void createGame(GTemplate t, STemplate s) {
+                game = null;
 		GameCreator create = new GameCreator();
 		System.out.println("CH: " + s.isCh() + "\nHH: " + s.isHh() + "\nNet: "
 				+ s.isNet());
