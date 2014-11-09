@@ -846,7 +846,7 @@ public class BoardFrame extends JFrame {
 				undo.setVisible(false);
 				capture.setVisible(false);
 			} else {
-				System.out.println("show undo and selection checkbox");
+				
 				undo.setVisible(true);
 				mouseSelection.setVisible(true);
 				capture.setVisible(true);
@@ -855,15 +855,20 @@ public class BoardFrame extends JFrame {
 			if (JKemik.settings_t.isAutoPass()) {
 				pass_turn.setVisible(false);
 			} else {
-				System.out.println("show undo and pass_turn button");
 				undo.setVisible(true);
 				pass_turn.setVisible(true);
 				capture.setVisible(true);
 			}
 
 			initMouseSelection();
-			System.err.println("Displaying mode!!!!");
 			mode.setVisible(true);
+                        
+                        if(JKemik.settings_t.isCh()){
+                            mode.setVisible(false);
+                            mouseSelection.setVisible(false);
+                            undo.setVisible(false);
+                            capture.setVisible(false);
+                        }
 			BoardFrame.refresh.setVisible(true);
 		} catch (Exception e) {
 

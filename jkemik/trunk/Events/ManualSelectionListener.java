@@ -3,13 +3,9 @@ package Events;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-
 import javax.swing.JCheckBox;
-
 import controler.JKemik;
-
 import api.Point;
-
 import view.BoardFrame;
 import view.Grid;
 

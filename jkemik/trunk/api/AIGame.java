@@ -11,7 +11,6 @@ public class AIGame extends AbstractGame implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-        //private BoardStatus status;
         private Lock aiGameLock;
        
 	//private static volatile AIGame instance = null; 
@@ -19,9 +18,17 @@ public class AIGame extends AbstractGame implements Serializable{
 		super(player1, player2);
 		this.setAI(true);
                 this.aiGameLock = new ReentrantLock();
-                //this.status = new BoardStatus();
 	}
-
+//        public static AIGame getInstance(Player player1, JkBot player2) {
+//		if (instance == null) {
+//			synchronized (AIGame.class) {
+//				if (instance == null) {
+//					instance = new AIGame(player1, player2);
+//				}
+//			}
+//		}
+//		return instance;
+//	}
         public Point put(String key, Point p){ 
             this.aiGameLock.lock();
             Point object = null;
@@ -80,5 +87,5 @@ public class AIGame extends AbstractGame implements Serializable{
 	public void setMachine(JkBot player2) {
 		this.setPlayer2(player2);
 	}
-
+        
 }

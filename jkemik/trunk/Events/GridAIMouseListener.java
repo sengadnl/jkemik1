@@ -6,9 +6,6 @@
 
 package Events;
 
-import agents.JkBot;
-import api.AIGame;
-import api.Player;
 import api.Point;
 import controler.AgentMoveRunnable;
 import controler.HumanMoveRunnable;

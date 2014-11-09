@@ -43,7 +43,7 @@ public class AgentMoveRunnable implements Runnable{
             JkBot bot = (JkBot) game.getMachine();
             Thread.sleep(DELAY);
             Point move = bot.play((AIGame) game);
-            
+            System.err.println("MOVE IS " + move);
             if(move != null){
                 ArrayList<Point> path = bot.moveCursorTo(new Point(0.0,0.0), move, Grid.squareSize);
                 for(Point m: path){
@@ -76,7 +76,7 @@ public class AgentMoveRunnable implements Runnable{
             BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
             BoardFrame.updateBoardStatus();
 
-            Thread.sleep(DELAY);
+            //Thread.sleep(DELAY);
 
             //Remove progress bar
             BoardFrame.progressB.setIndeterminate(false);
@@ -84,13 +84,12 @@ public class AgentMoveRunnable implements Runnable{
             BoardFrame.getGrid().addMouseListener(ViewEvents.AIgridListener);
             BoardFrame.getGrid().addMouseMotionListener(ViewEvents.AIgridListener);
             
-            if (JKemik.settings_t.isAutoPass()
-                                    && (game.getCurrentP().getPlay_flag() == 1)) {
+
                         System.err.println("Switching turns .....");
                         game.switchPlayTurns();
-            }
-//        }catch(NullPointerException ex){
-//            System.out.println(ex.getMessage() + ": AgentMoveRunnable");
+       
+        }catch(NullPointerException ex){
+            System.out.println(ex.getMessage() + ": AgentMoveRunnable");
         }catch (InterruptedException ex) {
             Logger.getLogger(AgentMoveRunnable.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
@@ -98,7 +97,7 @@ public class AgentMoveRunnable implements Runnable{
         }
         //Thread.interrupted();
     }
-    private static final int DELAY = 1000;
+    private static final int DELAY = 500;
     private final Lock aiMoveLock ;
     
 }

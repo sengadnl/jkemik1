@@ -96,10 +96,10 @@ public class JkBot extends Player implements AgentAction,Serializable{
                 move = move(game);
                 move.setStatus(Point.PLAYED);
 
-                // Mark point as belonging to current player
+                //Mark point as belonging to current player
                 move.setId(this.getId());
 
-                // Remember last play
+                //Remember last play
                 this.setLatestP(move);
 
                 //System.out.println("Adjacent point: " + move);
@@ -162,7 +162,6 @@ public class JkBot extends Player implements AgentAction,Serializable{
 //                //System.err.println("" + (holder.size()));
 //                return holder.get((new Random()).nextInt(holder.size()));
 //            }
-            
             return null;
         }
         
