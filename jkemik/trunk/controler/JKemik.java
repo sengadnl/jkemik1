@@ -30,7 +30,6 @@ public class JKemik extends Application {
 	public static GTemplate template;
 	public static STemplate settings_t;
 	public static BoardFrame view;
-	// public static SettingsPanel settings;
 	private static boolean isStarted = false;
 	private static Load load;
 	private static final File s_object = new File(Tools.fullPath()
@@ -103,7 +102,7 @@ public class JKemik extends Application {
 				+ s.isNet());
 		if (s.isCh()) {
 			System.out.println("Creating a Human vs AI game ...");
-			t.setP2_name("Com");
+			t.setP2_name("COM");
 			Player player1 = new Player(t.getP1_c(), t.getP1_name());
 			JkBot player2 = new JkBot(t.getP2_c(), t.getP2_name());
 			game = create.createGame(player1, player2);

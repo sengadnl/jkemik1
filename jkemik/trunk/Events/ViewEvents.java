@@ -236,7 +236,13 @@ public class ViewEvents {
 			changeColorPanel1Action(BoardFrame.pColor1);
 			changeColorPanel2Action(BoardFrame.pColor2);
 			addPlayer1NameAction(BoardFrame.pnamelabel1);
-			addPlayer2NameAction(BoardFrame.pnamelabel2);
+                        
+                        if(JKemik.settings_t.isCh()){
+                            BoardFrame.pnamelabel2.removeMouseListener(p2Listener);
+                        }else{
+                            addPlayer2NameAction(BoardFrame.pnamelabel2);
+                        }
+                        
 			setBoardSizeAction(BoardFrame.l1);
 			setGameThemeAction(BoardFrame.l2);
 			saveAction(BoardFrame.startG);

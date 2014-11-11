@@ -69,7 +69,6 @@ public class JkBot extends Player implements AgentAction,Serializable{
                 }
             }
             /*Defense if ai is more vulnerable than h*/
-            //System.err.println("Defense <<<");
             for(int i = sizeAI - 1; i >= 0 ; i--){
                 temp = offense(game, game.getCollection().get(aiStats.get(i).getKey()));
                 if(temp != null){
@@ -122,6 +121,14 @@ public class JkBot extends Player implements AgentAction,Serializable{
             }
             return move;
 	}
+
+    /**
+     *
+     * @param game
+     * @param humanPoint
+     * @return Point representing a move
+     */
+    @Override
         public Point offense(AIGame game, Point humanPoint) {
             Point[] axis,diagonals;
             ArrayList<Point> holder;
@@ -130,7 +137,7 @@ public class JkBot extends Player implements AgentAction,Serializable{
             w = JKemik.settings_t.getGridDimension().getPixelDimension().getWidth();
             h = JKemik.settings_t.getGridDimension().getPixelDimension().getHeight();
 
-            //Detect a square cell
+            /*Find free Points on the axises*/
             axis = humanPoint.axisBox(Grid.squareSize);
             holder = new ArrayList<>();
             for (Point a : axis) {
@@ -140,13 +147,12 @@ public class JkBot extends Player implements AgentAction,Serializable{
                     }
                 }
             }
-            //Randomization
+            /*Pick a random Point*/
             if(!holder.isEmpty()){
-                //System.err.println("" + (holder));
                 return holder.get((new Random()).nextInt(holder.size()));
             }
             
-            //Detect other forms
+            /*Find free Points on the diagonals*/
             diagonals = humanPoint.diagonalBox(Grid.squareSize);
             holder = new ArrayList<>();//reset
             for (Point d : diagonals) {
@@ -156,9 +162,8 @@ public class JkBot extends Player implements AgentAction,Serializable{
                     }
                 }
             }
-            //Randomization
+            /*Pick a random Point*/
             if(!holder.isEmpty()){
-                //System.err.println("" + (holder.size()));
                 return holder.get((new Random()).nextInt(holder.size()));
             }
             return null;
@@ -189,26 +194,6 @@ public class JkBot extends Player implements AgentAction,Serializable{
             //System.err.println("Returning a random point!!!!!!!!");
             return p1;
         }
-//        public BoardStatus getAiStatus() {
-//            return aiStatus;
-//        }
-//
-//        public void setAiStatus(BoardStatus aiStatus) {
-//            this.aiStatus = aiStatus;
-//        }
-//
-//        public BoardStatus getHumanStatus() {
-//            return humanStatus;
-//        }
-//        
-//     
-//        public void setHumanStatus(BoardStatus humanStatus) {
-//            this.humanStatus = humanStatus;
-//        }
-        private Lock turnChangeLock;
-        private HashMap<String, Point> offense;
-        private HashMap<String, Point> offenseArea;
-        private ArrayList<Point> defense;
 
     @Override
         public boolean isPointInBoard(Point p, double w, double h) {
@@ -238,7 +223,7 @@ public class JkBot extends Player implements AgentAction,Serializable{
             temp = a.get(0);
             list.add(o);
             while(!(temp.compareTo(d) == 0)){
-                //System.out.println(a.toString() + "\n");
+
                 for(Point p: a){
                     list.add(p);
                 }
@@ -247,11 +232,5 @@ public class JkBot extends Player implements AgentAction,Serializable{
             }
             return list;
         }
-//        public static void main(String[] args){
-//            JkBot test = new JkBot(null,"");
-//            ArrayList<Point> l = test.moveCursorTo(new Point(128,320), new Point(64.0,0.0),64);
-//            System.out.println("Result: " + l);
-//        }
-
-       
+        private Lock turnChangeLock;       
 }

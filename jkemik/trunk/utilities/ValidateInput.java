@@ -3,6 +3,7 @@
  */
 package utilities;
 
+import controler.JKemik;
 import java.awt.Color;
 
 import javax.swing.JOptionPane;
@@ -72,14 +73,13 @@ public class ValidateInput {
 
 	private static boolean PlayerName(String name1, String name2) {
 		try {
-
-			if (name1.equals("") || name2.equals("")) {
-				JOptionPane.showMessageDialog(null,
-						BoardFrame.messages.getString("emptyString"),
-						BoardFrame.messages.getString("wrongInput"),
-						JOptionPane.ERROR_MESSAGE);
-				return false;
-			}
+                    if (name1.equals("") || name2.equals("")) {
+                            JOptionPane.showMessageDialog(null,
+                                            BoardFrame.messages.getString("emptyString"),
+                                            BoardFrame.messages.getString("wrongInput"),
+                                            JOptionPane.ERROR_MESSAGE);
+                            return false;
+                    }
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "" + e.getMessage());
 		}

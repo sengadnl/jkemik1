@@ -33,17 +33,20 @@ public class HumanMoveRunnable implements Runnable{
     public void run() {
         humanMoveLock.lock();
          try {
+             
             AIGame game = (AIGame) JKemik.getGame();
             Player current;
             current = (Player) game.getHuman();
             JkBot bot = (JkBot) game.getMachine();
-            // Allow mouse click
+            
+            //if(current.isTurn() && current.getPlay_flag() == 0){
+                // Allow mouse click
             Grid.mouseclicked = true;
 
             // Guess player's point
             Grid.closestTo(Grid.x, Grid.y, (int) Grid.squareSize);
             Point temp = new Point(Grid.x, Grid.y);
-            
+
             if (!game.getCollection().containsKey(temp.toString())) {
                     System.out.println("HUMAN PLAYED...");
                     Grid.plotPoint = true;
@@ -71,8 +74,8 @@ public class HumanMoveRunnable implements Runnable{
                     game.getCurrentP().setTurn(false);
                     game.getCurrentP().setPoints(1);
                     Grid.mouseMove = false;
-                    
-                    
+
+
                     BoardFrame.feedback(game.getCurrentP().getName() + " "
                                     + BoardFrame.messages.getString("feedback4"));
             }
@@ -118,14 +121,9 @@ public class HumanMoveRunnable implements Runnable{
             }
             BoardFrame.progressB.setIndeterminate(false);
             BoardFrame.progressB.setVisible(false);
-            
+
             game.switchPlayTurns();
-                    
-            
-            
-            System.err.println("Switching turns .....");
-            
-          
+           
             Thread.sleep(DELAY);
         } catch (InterruptedException ex) {
             Logger.getLogger(HumanMoveRunnable.class.getName()).log(Level.SEVERE, null, ex);

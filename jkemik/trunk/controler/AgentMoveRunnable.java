@@ -47,13 +47,9 @@ public class AgentMoveRunnable implements Runnable{
             Thread.sleep(DELAY);
             Point move;
             //make sure human already played
-            if(bot.isTurn()){
-                System.err.println("Bot's turn is: " + bot.isTurn());
-                move = bot.play((AIGame) game);
-            }else{
-                move = null;
-            }
-            //System.err.println("MOVE IS " + move);
+            
+            //System.err.println("Bot's turn is: " + bot.isTurn());
+            move = bot.play((AIGame) game);
             if(move != null){
                 ArrayList<Point> path = bot.moveCursorTo(new Point(0.0,0.0), move, Grid.squareSize);
                 for(Point m: path){
@@ -81,19 +77,11 @@ public class AgentMoveRunnable implements Runnable{
                 BoardFrame.displayGrid(true);
                 BoardFrame.grid.repaint((int)move.getXC() - (int)Grid.squareSize * 2, (int)move.getYC() - (int)Grid.squareSize * 2, (int)Grid.squareSize * 4, (int)Grid.squareSize * 4);
             }
-            
-            BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
-            BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
-            BoardFrame.updateBoardStatus();
-
-            //Thread.sleep(DELAY);
-
-            //Remove progress bar
             BoardFrame.progressB.setIndeterminate(false);
             BoardFrame.progressB.setVisible(false);
             BoardFrame.getGrid().addMouseListener(ViewEvents.AIgridListener);
             BoardFrame.getGrid().addMouseMotionListener(ViewEvents.AIgridListener);
-            
+
             if (JKemik.checkEndGame()) {
                 JOptionPane.showMessageDialog(null, "" + JKemik.getEndingMessage(),
                                 " Win", JOptionPane.OK_OPTION);
@@ -112,7 +100,17 @@ public class AgentMoveRunnable implements Runnable{
             }
             System.err.println("Switching turns .....");
             game.switchPlayTurns();
-       
+
+            
+            //System.err.println("MOVE IS " + move);
+            
+            
+            BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
+            BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
+            BoardFrame.updateBoardStatus();
+
+            Thread.sleep(DELAY);
+
         }catch(NullPointerException ex){
             System.out.println(ex.getMessage() + ": AgentMoveRunnable");
         }catch (InterruptedException ex) {
