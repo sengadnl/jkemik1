@@ -1,5 +1,6 @@
 package Events;
 
+import api.GTemplate;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JRadioButton;
@@ -18,6 +19,7 @@ public class HvsHListener implements MouseListener{
 
 	private void setGtype(JRadioButton gtype) {
 		this.gtype = gtype;
+                JKemik.template = new GTemplate();
 	}
 
 	@Override

@@ -212,7 +212,8 @@ public class BoardFrame extends JFrame {
 		l1 = new RotateLabel(JKemik.settings_t.getGridDimensionsToString());
 		l2 = new RotateLabel(this.gameType);
 		pnamelabel1 = new JLabel(JKemik.template.getP1_name());
-		pnamelabel2 = new JLabel(JKemik.template.getP1_name());
+		pnamelabel2 = new JLabel(JKemik.template.getP2_name());
+                System.out.println("Player 2 name: " + JKemik.template.getP2_name());
 		la = new JLabel(" " + messages.getString("capturel"));
 		lb = new JLabel(" " + messages.getString("passl"));
 		lc = new JLabel(" " + messages.getString("winl"));
@@ -973,15 +974,18 @@ public class BoardFrame extends JFrame {
 	}
 
 	public static void uiLooksUpdate(STemplate s, GTemplate t) {
-
+                String p1n = t.getP1_name();
+                String p2n = t.getP2_name();
+                Color p1c = t.getP1_c();
+                Color p2c = t.getP2_c();
 		if (s.isGameSetupMode()) {
 			print_point.setText("" + messages.getString("gameSetupMode"));
 			updateSettingPanel();
 			updateBoardStatus();
 			translateUI();
 
-			pnamelabel1.setText(JKemik.template.getP1_name().toUpperCase());
-			pnamelabel2.setText(JKemik.template.getP2_name().toUpperCase());
+//			pnamelabel1.setText(JKemik.template.getP1_name().toUpperCase());
+//			pnamelabel2.setText(JKemik.template.getP2_name().toUpperCase());
 
 			enableGameControlPanel();
 			p1panel.disablePanelDecor();
@@ -1005,11 +1009,11 @@ public class BoardFrame extends JFrame {
 			grid.repaint();
 		}
 		if (s.isPlayMode()) {
-			System.out.println("setting playmode");
+			//System.out.println("setting playmode");
 			Game_status.setText(BoardFrame.messages.getString("endG"));
 
-			pnamelabel1.setText(JKemik.template.getP1_name().toUpperCase());
-			pnamelabel2.setText(JKemik.template.getP2_name().toUpperCase());
+//			pnamelabel1.setText(JKemik.template.getP1_name().toUpperCase());
+//			pnamelabel2.setText(JKemik.template.getP2_name().toUpperCase());
 
 			disableGameControlPanel();
 			p1panel.enablePanelDecor();
@@ -1026,12 +1030,9 @@ public class BoardFrame extends JFrame {
 			BoardFrame.Game_status.setVisible(true);
 			BoardFrame.startG.setVisible(false);
 			print_point.setText("" + (new Point(0, 0)).toString());
-			String p1n = t.getP1_name();
-			String p2n = t.getP2_name();
-			Color p1c = t.getP1_c();
-			Color p2c = t.getP2_c();
-			p1panel.initPanelForNewGame(p1n, p1c);
-			p2panel.initPanelForNewGame(p2n, p2c);
+			
+//			p1panel.initPanelForNewGame(p1n, p1c);
+//			p2panel.initPanelForNewGame(p2n, p2c);
 			Win.setText(JKemik.settings_t.getMaxWinVal() + "");
 			setMakingGame(false);
 			displayGrid(true);
@@ -1041,8 +1042,8 @@ public class BoardFrame extends JFrame {
 			settings_p.updateSettingsPanel(s);
 			print_point.setText(""
 					+ BoardFrame.messages.getString("sysSetupMode"));
-			pnamelabel1.setText(JKemik.template.getP1_name().toUpperCase());
-			pnamelabel2.setText(JKemik.template.getP2_name().toUpperCase());
+//			pnamelabel1.setText(JKemik.template.getP1_name().toUpperCase());
+//			pnamelabel2.setText(JKemik.template.getP2_name().toUpperCase());
 
 			p1panel.disablePanelDecor();
 			p2panel.disablePanelDecor();
@@ -1057,6 +1058,8 @@ public class BoardFrame extends JFrame {
 			displayGrid(false);
 			gridstats.init();
 		}
+                p1panel.initPanelForNewGame(p1n, p1c);
+                p2panel.initPanelForNewGame(p2n, p2c);
 	}
 
 	public static void feedback(String message) {

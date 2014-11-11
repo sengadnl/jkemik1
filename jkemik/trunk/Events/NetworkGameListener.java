@@ -1,5 +1,6 @@
 package Events;
 
+import api.GTemplate;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JRadioButton;
@@ -15,8 +16,9 @@ public class NetworkGameListener implements MouseListener{
 		return network;
 	}
 
-	public void setNetwork(JRadioButton network) {
+	private void setNetwork(JRadioButton network) {
 		this.network = network;
+                JKemik.template = new GTemplate();
 	}
 
 	@Override

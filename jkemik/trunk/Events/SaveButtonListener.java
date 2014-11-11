@@ -29,17 +29,19 @@ public class SaveButtonListener implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-             System.out.println("Game start clicked");
+             System.out.println("Starting a new Game");
 		Color c1, c2;
-		c1 = BoardFrame.pColor1.getBackground();
-		c2 = BoardFrame.pColor2.getBackground();
+                String str1, str2;
+                GTemplate t;
+                STemplate s;
+		c1 = JKemik.template.getP1_c();
+		c2 = JKemik.template.getP2_c();
 
-		String str1, str2;
-		str1 = BoardFrame.pnamelabel1.getText();
-		str2 = BoardFrame.pnamelabel2.getText();
-
-		GTemplate t = JKemik.template;
-		STemplate s = JKemik.settings_t;
+                t = JKemik.template;
+		s = JKemik.settings_t;
+		
+		str1 = JKemik.template.getP1_name();
+		str2 = JKemik.template.getP2_name();
 
 		if (ValidateInput.names(str1, str2)
 				&& ValidateInput.validateColors(c1, c2)) {

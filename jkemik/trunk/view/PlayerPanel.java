@@ -80,7 +80,7 @@ public class PlayerPanel extends JPanel {
 		this.holder = holder;
 	}
 
-	public void createPlayerPanel() {
+	private void createPlayerPanel() {
 		setBackground(Color.BLACK);
 		setLayout(new BorderLayout());
 
