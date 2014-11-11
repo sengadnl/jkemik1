@@ -96,8 +96,8 @@ public abstract class AbstractGame implements Serializable {
 								&& currentP.getSelected().size() > 3) {
 							currentP.setSuccessful(true);
 							currentP.setOrigin(null);/* Reset the origin */
-							 System.err.println("\nbuildPath cell: "
-							 + currentP.getSelected());
+//							 System.err.println("\nbuildPath cell: "
+//							 + currentP.getSelected());
 							return true;/* Capture was found */
 						}
 
@@ -121,7 +121,7 @@ public abstract class AbstractGame implements Serializable {
 	 */
 	public boolean undo() {
 
-		if (collection.get(currentP.getLatestP().toString()).getStatus() == Point.CONNECTED) {
+		if (collection.get(currentP.getLatestP().toString()).getStatus() == Globals.POINT_CONNECTED) {
 			System.out.println("First if is true");
 			return false;
 		}
@@ -173,15 +173,15 @@ public abstract class AbstractGame implements Serializable {
 
 							/* captures */
 							if (object.getId() == guest.getId()
-									&& object.getStatus() != Point.CAPTURED) {
-								object.setStatus(Point.CAPTURED);
+									&& object.getStatus() != Globals.POINT_CAPTURED) {
+								object.setStatus(Globals.POINT_CAPTURED);
 								captured_count += Globals.POINT_VALUE;
 							}
 
 							/* Count redeemed points */
 							if (object.getId() == currentP.getId()
-									&& object.getStatus() == Point.CAPTURED) {
-								object.setStatus(Point.REDEEMED);
+									&& object.getStatus() == Globals.POINT_CAPTURED) {
+								object.setStatus(Globals.POINT_REDEEMED);
 								redeemed_count += Globals.REDEEMED_POINT_VALUE;
 							}
 							/*Copy reference to area*/
@@ -189,14 +189,14 @@ public abstract class AbstractGame implements Serializable {
 							
 						} else {
 							/* If p doesn't exist in collection */
-							p.setStatus(Point.DEAD);
+							p.setStatus(Globals.POINT_DEAD);
 							this.collection.put(p.toString(), p);
 							area.add(p);
 						}
 
 					}/* end of second for loop */
 
-					setStatusForAll(currentP.getSelected(), Point.CONNECTED);
+					setStatusForAll(currentP.getSelected(), Globals.POINT_CONNECTED);
 					cell = new Cell(getCurrentP().getId(), getCurrentP()
 							.getSelected(), area);
 
@@ -248,27 +248,27 @@ public abstract class AbstractGame implements Serializable {
 
 				/* captures */
 				if (object.getId() == guest.getId()
-						&& object.getStatus() != Point.CAPTURED) {
-					object.setStatus(Point.CAPTURED);
+						&& object.getStatus() != Globals.POINT_CAPTURED) {
+					object.setStatus(Globals.POINT_CAPTURED);
 					captured_count += Globals.POINT_VALUE;
 				}
 
 				/* Count redeemed points */
 				if (object.getId() == currentP.getId()
-						&& object.getStatus() == Point.CAPTURED) {
-					object.setStatus(Point.REDEEMED);
+						&& object.getStatus() == Globals.POINT_CAPTURED) {
+					object.setStatus(Globals.POINT_REDEEMED);
 					redeemed_count += Globals.REDEEMED_POINT_VALUE;
 				}
 				area.add(object);
 			} else {
 				/* If p doesn't exist in collection */
-				p.setStatus(Point.DEAD);
+				p.setStatus(Globals.POINT_DEAD);
 				this.collection.put(p.toString(), p);
 				area.add(p);
 			}
 		}/* end of second for loop */
 
-		setStatusForAll(currentP.getSelected(), Point.CONNECTED);
+		setStatusForAll(currentP.getSelected(), Globals.POINT_CONNECTED);
 		cell = new Cell(getCurrentP().getId(), getCurrentP().getSelected(),
 				area);
 		if (currentP.getCells().containsKey(cell.hashCode())) {
@@ -305,16 +305,16 @@ public abstract class AbstractGame implements Serializable {
 	public boolean select(Point p, double squareSize) {
 
 		if (currentP.getSelected().isEmpty() && p.getId() == currentP.getId()
-				&& p.getStatus() != Point.DEAD) {
+				&& p.getStatus() != Globals.POINT_DEAD) {
 			currentP.setOrigin(p);
 			currentP.getSelected().add(p);
 			this.lastp = p;
 			// System.out.println("Selected returned true ");
 			return true;
 		} else {
-			if (p.getId() == currentP.getId() && p.getStatus() != Point.DEAD
-					&& p.getStatus() != Point.CAPTURED
-					&& p.getStatus() != Point.REDEEMED
+			if (p.getId() == currentP.getId() && p.getStatus() != Globals.POINT_DEAD
+					&& p.getStatus() != Globals.POINT_CAPTURED
+					&& p.getStatus() != Globals.POINT_CAPTURED
 					&& getLastp().adjacentTo(p, squareSize)
 					&& !currentP.getSelected().contains(p)) {
 				currentP.getSelected().add(p);
@@ -334,7 +334,7 @@ public abstract class AbstractGame implements Serializable {
 
 		for (Point p1 : area) {
 			Point temp = this.collection.get(p1.toString());
-			if (temp == null || temp.getStatus() == Point.DEAD
+			if (temp == null || temp.getStatus() == Globals.POINT_DEAD
 					|| temp.getId() == currentP.getId()) {
 				continue;
 			}
@@ -356,12 +356,12 @@ public abstract class AbstractGame implements Serializable {
 		if (((p.getId() != guest.getId()))) {
 
 			/* Wrong way, if the pt is captured */
-			if (p.getStatus() == Point.CAPTURED) {
+			if (p.getStatus() == Globals.POINT_CAPTURED) {
 				return false;
 			}
 			/* Return true if this pt is played or connected */
-			if ((p.getStatus() == Point.PLAYED)
-					|| (p.getStatus() == Point.CONNECTED)) {
+			if ((p.getStatus() == Globals.POINT_PLAYED)
+					|| (p.getStatus() == Globals.POINT_CONNECTED)) {
 				return true;
 			}
 		}
@@ -480,7 +480,7 @@ public abstract class AbstractGame implements Serializable {
 			 * If the point is captured, and its associated cell is neither
 			 * captured nor is it redeemed, a new captured cell is found.
 			 */
-			if (temp.getStatus() == Point.CAPTURED
+			if (temp.getStatus() == Globals.POINT_CAPTURED
 					&& c.getStatus() != Globals.CELL_CAPTURED
 					&& c.getStatus() != Globals.CELL_REDEEMED) {
 				cell.setValue(cell.getValue() + c.getValue());
@@ -552,7 +552,7 @@ public abstract class AbstractGame implements Serializable {
 
 	private void setStatusForAll(ArrayList<Point> points, int status) {
 		for (Point p : points) {
-			if (p.getStatus() != Point.CAPTURED) {
+			if (p.getStatus() != Globals.POINT_CAPTURED) {
 				p.setStatus(status);
 			}
 		}

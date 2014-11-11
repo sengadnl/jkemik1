@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import utilities.Globals;
 import view.Grid;
 
 //import api.AbstractPlayer;
@@ -21,46 +22,44 @@ public class JkBot extends Player implements AgentAction,Serializable{
 	public boolean engaged = false;
 
    
-        private BoardStatus aiStatus;
-        private BoardStatus humanStatus;
+//        private BoardStatus aiStatus;
+//        private BoardStatus humanStatus;
         private Point cursorPosition;
         
 	public JkBot(Color color, String name) {
 		super(color, name);
 		this.setAi(true);
 
-                this.aiStatus = new BoardStatus();
-                this.humanStatus = new BoardStatus();
+//                this.aiStatus = new BoardStatus();
+//                this.humanStatus = new BoardStatus();
                 turnChangeLock = new ReentrantLock();
 	}
         private Point move(AIGame game){
 
-          
-            //Return a random point if there is no status to track
-            if(this.humanStatus.getStatus().isEmpty() || this.aiStatus.getStatus().isEmpty()){
-                //System.err.println("??? can't decide were to play!!! mmmmm, trying");
-                return offense(game, game.getLastp());
-            }
-
             ArrayList<HotPoint> hStatus, aiStats;
             int sizeAI,sizeH;
             
-            hStatus = this.humanStatus.getStatus();
-            aiStats = this.aiStatus.getStatus();
+            hStatus = game.getHuman().getStatus();
+            aiStats = this.getStatus();
+            
+            //Return a random point if there is no status to track
+            if(hStatus.isEmpty() || aiStats.isEmpty()){
+                return offense(game, game.getLastp());
+            }
                     
             sizeAI = aiStats.size();
             sizeH = hStatus.size();
             
             /*get most vulnerable ai point*/
             HotPoint ai,h;
-            ai = this.aiStatus.getStatus().get(sizeAI - 1);
+            ai = aiStats.get(sizeAI - 1);
             h = hStatus.get(sizeH - 1);
             
             /*offense if ai is less or equally vulnerable than h*/
             Point temp;
             //Evaluate who is most vulnerable
             if(ai.compareTo(h) <= 0){
-                System.err.println("AI-" + ai.toString() + " --- " + "HU-" + h.toString());
+                //System.err.println("AI-" + ai.toString() + " --- " + "HU-" + h.toString());
                 for(int i = sizeH - 1 ; i >= 0 ; i--){
                     temp = offense(game, game.getCollection().get(hStatus.get(i).getKey()));
                     if(temp != null){
@@ -94,7 +93,7 @@ public class JkBot extends Player implements AgentAction,Serializable{
                     return move;
                 }
                 move = move(game);
-                move.setStatus(Point.PLAYED);
+                move.setStatus(Globals.POINT_PLAYED);
 
                 //Mark point as belonging to current player
                 move.setId(this.getId());
@@ -148,20 +147,20 @@ public class JkBot extends Player implements AgentAction,Serializable{
             }
             
             //Detect other forms
-//            diagonals = humanPoint.diagonalBox(Grid.squareSize);
-//            holder = new ArrayList<>();//reset
-//            for (Point d : diagonals) {
-//                if (!game.getCollection().containsKey(d.toString())) {
-//                    if(this.isPointInBoard(d, w, h)){
-//                        holder.add(d);
-//                    }
-//                }
-//            }
-//            //Randomization
-//            if(!holder.isEmpty()){
-//                //System.err.println("" + (holder.size()));
-//                return holder.get((new Random()).nextInt(holder.size()));
-//            }
+            diagonals = humanPoint.diagonalBox(Grid.squareSize);
+            holder = new ArrayList<>();//reset
+            for (Point d : diagonals) {
+                if (!game.getCollection().containsKey(d.toString())) {
+                    if(this.isPointInBoard(d, w, h)){
+                        holder.add(d);
+                    }
+                }
+            }
+            //Randomization
+            if(!holder.isEmpty()){
+                //System.err.println("" + (holder.size()));
+                return holder.get((new Random()).nextInt(holder.size()));
+            }
             return null;
         }
         
@@ -190,22 +189,22 @@ public class JkBot extends Player implements AgentAction,Serializable{
             //System.err.println("Returning a random point!!!!!!!!");
             return p1;
         }
-        public BoardStatus getAiStatus() {
-            return aiStatus;
-        }
-
-        public void setAiStatus(BoardStatus aiStatus) {
-            this.aiStatus = aiStatus;
-        }
-
-        public BoardStatus getHumanStatus() {
-            return humanStatus;
-        }
-        
-     
-        public void setHumanStatus(BoardStatus humanStatus) {
-            this.humanStatus = humanStatus;
-        }
+//        public BoardStatus getAiStatus() {
+//            return aiStatus;
+//        }
+//
+//        public void setAiStatus(BoardStatus aiStatus) {
+//            this.aiStatus = aiStatus;
+//        }
+//
+//        public BoardStatus getHumanStatus() {
+//            return humanStatus;
+//        }
+//        
+//     
+//        public void setHumanStatus(BoardStatus humanStatus) {
+//            this.humanStatus = humanStatus;
+//        }
         private Lock turnChangeLock;
         private HashMap<String, Point> offense;
         private HashMap<String, Point> offenseArea;

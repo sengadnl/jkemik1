@@ -6,6 +6,7 @@
 
 package Events;
 
+import api.AIGame;
 import api.Point;
 import controler.AgentMoveRunnable;
 import controler.HumanMoveRunnable;
@@ -35,15 +36,17 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener {
 		// Get X and Y
             Grid.x = e.getX();
             Grid.y = e.getY();
-
+            AIGame game = (AIGame) JKemik.getGame();
             HumanMoveRunnable hThread = new HumanMoveRunnable();
             AgentMoveRunnable mThread = new AgentMoveRunnable();
 //		
             Thread ht = new Thread(hThread);
             Thread mt = new Thread(mThread);
             ExecutorService pool = Executors.newFixedThreadPool(2);
-            pool.execute(ht);
+            pool.execute(ht);         
             pool.execute(mt);
+           
+            
             
 //            ht.start();
 //            mt.start();

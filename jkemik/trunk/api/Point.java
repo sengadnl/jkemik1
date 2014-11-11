@@ -11,8 +11,8 @@ import java.io.Serializable;
  * 
  */
 public class Point extends AbstractPoint implements Serializable{
-	public static int DEAD = 0, PLAYED = 1, CONNECTED = 2,
-			CAPTURED = 3, UNKNOWN = -1, REDEEMED = 4, CONVERT = 5;
+//	public static int DEAD = 0, PLAYED = 1, CONNECTED = 2,
+//			CAPTURED = 3, UNKNOWN = -1, REDEEMED = 4, CONVERT = 5;
 	public Point(double x, double y, int id) {
 		super(x, y, id);
 		// TODO Auto-generated constructor stub
