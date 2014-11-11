@@ -25,6 +25,8 @@ public class Globals {
 	public static final int POINT_BONUS = 5;
 	public static final int REDEEMED_POINT_VALUE = 1;
 	public static int CELL_CAPTURED = 1, CELL_FREE = 0, CELL_EMPTY = 3, CELL_REDEEMED = 2;
+        public static int POINT_DEAD = 0, POINT_PLAYED = 1, POINT_CONNECTED = 2,
+			POINT_CAPTURED = 3, POINT_UNKNOWN = -1, POINT_REDEEMED = 4, POINT_CONVERT = 5;
 	
 	public static final int RED_INDEX = 0;
 	public static final int WHITE_INDEX = 4;

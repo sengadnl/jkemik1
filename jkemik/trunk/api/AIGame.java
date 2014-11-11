@@ -33,21 +33,18 @@ public class AIGame extends AbstractGame implements Serializable{
             this.aiGameLock.lock();
             Point object = null;
            try{
-
                 object = this.getCollection().put(key, p);
 
                 /*Update board status*/
-                JkBot ai = (JkBot)this.getMachine();
+                JkBot ai = (JkBot) this.getMachine();
+                Player hu = (Player) this.getHuman();
                 if(p.getId() == ai.getId()){
-                    ai.getAiStatus().add(new HotPoint(key,0));
+                    ai.getStatus().add(new HotPoint(key,0));
                 }else{
-                    ai.getHumanStatus().add(new HotPoint(key,0));  
+                    hu.getStatus().add(new HotPoint(key,0));  
                 }
-//                System.err.println("AI Before update: " + ai.getAiStatus().getStatus());
-//                System.err.println("HU Before update: " + ai.getHumanStatus().getStatus());
-                ai.getHumanStatus().updateStatus(p);
-                ai.getAiStatus().updateStatus(p);
-
+                ai.updateBoardStatus();
+                hu.updateBoardStatus();
                 this.setLastp(p);
 
             }catch(NullPointerException ex){

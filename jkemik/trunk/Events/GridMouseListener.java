@@ -111,7 +111,7 @@ public class GridMouseListener implements MouseListener, MouseMotionListener {
 						// BoardFrame.grid.repaint();
 
 						// Mark point as played
-						temp.setStatus(Point.PLAYED);
+						temp.setStatus(Globals.POINT_PLAYED);
 
 						// Mark point as belonging to current player
 						temp.setId(current.getId());

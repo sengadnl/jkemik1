@@ -132,7 +132,7 @@ public class BoardFrame extends JFrame {
 				Point temp1 = starters.get(i);
 				System.out.println("Adjusted Random (x,y) : " + temp1);
 				temp1.setId(game.getPlayer1().getId());
-				temp1.setStatus(Point.PLAYED);
+				temp1.setStatus(Globals.POINT_PLAYED);
 				game.getPlayer1().getLastpoints().add(temp1);
 				game.getCollection().put(temp1.toString(), temp1);
 				game.getPlayer1().setPoints(1);
@@ -140,7 +140,7 @@ public class BoardFrame extends JFrame {
 				Point temp2 = starters.get(i + 1);
 				System.out.println("Adjusted Random (x,y) : " + temp2);
 				temp2.setId(game.getPlayer2().getId());
-				temp2.setStatus(Point.PLAYED);
+				temp2.setStatus(Globals.POINT_PLAYED);
 				game.getPlayer2().getLastpoints().add(temp2);
 				game.getCollection().put(temp2.toString(), temp2);
 				game.getPlayer2().setPoints(1);

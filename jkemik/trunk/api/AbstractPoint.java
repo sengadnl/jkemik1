@@ -3,14 +3,16 @@
  */
 package api;
 
-import agents.JkBot;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.io.Serializable;
 import java.util.ArrayList;
-import view.Grid;
+import java.util.HashMap;
+import utilities.Globals;
+
 
 /**
  * @author Junes
@@ -35,7 +37,6 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
 	protected int status;
         protected int heatLevel;
 
-
 	public AbstractPoint(double x, double y, int id) {
 		super();
 		this.x = x;
@@ -44,11 +45,87 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
 		this.status = -1;
                 this.heatLevel = 0;
 	}
-
+        
         public int getHeatLevel() {
             return heatLevel;
         }
-
+        public void setVulnerability(AIGame game, int sqrSize) {
+            HashMap<String, Point> board; 
+            Point[] axes,diagonals;
+            int id, score;
+            
+            board = game.getCollection();
+            axes = this.axisBox(sqrSize);
+            diagonals = this.diagonalBox(sqrSize);
+            score = 1;id = this.getId();
+            
+            /*skip this points*/
+//            if(this.getStatus() == Point.CAPTURED 
+//                    || this.getStatus() == Point.CAPTURED
+//                    || this.getStatus() == Point.REDEEMED 
+//                    || board.isEmpty()){
+//                return;
+//            }
+            
+            /*Vulnerability of the x and y axe*/
+            for(int i = 0; i < axes.length; i++){
+                Point a = board.get(axes[i].toString());
+                if(a == null){
+                    continue;
+                }
+                /*Increase vulnerability if this point is not like me*/
+                if(id != a.getId()){
+                    if(a.getStatus() == Globals.POINT_PLAYED){
+                        if(score > 0){
+                            score *= 2;
+                        }
+                        score += (int)Math.abs((double)score)*2;
+                    }
+                    if(a.getStatus() == Globals.POINT_CONNECTED){
+                            score += 4;
+                    }
+                }
+                /*Reduce vulnerability if this point is like me*/
+                if(id == a.getId()){
+                    if(a.getStatus() == Globals.POINT_PLAYED){
+                        score -= 2;
+                    }
+                    if(a.getStatus() == Globals.POINT_CONNECTED){
+                        score -= 4;
+                    }  
+                }  
+            }
+            
+            /*Vulnerability of diagonals*/
+            for(int e = 0; e < diagonals.length; e++){
+                Point d = board.get(diagonals[e].toString());
+                if(d == null){
+                    continue;
+                }
+                /*Increase vulnerability if this point is not like me*/
+                if(id != d.getId()){
+                    if(d.getStatus() == Globals.POINT_PLAYED){
+                        score++;
+                    }
+                    
+                    if(d.getStatus() == Globals.POINT_CONNECTED){
+                        score += 2;
+                    }
+                }
+                /*Reduce vulnerability if this point is like me*/
+                if(id == d.getId()){
+                    if(d.getStatus() == Globals.POINT_PLAYED){
+                       score--;
+                    }
+                    
+                    if(d.getStatus() == Globals.POINT_CONNECTED){
+                        score -= 2;
+                    }
+                }
+            }
+            //System.out.println(this.toString() + " v = " + score);
+            this.heatLevel = score;
+        }
         public void setHeatLevel(int heatLevel) {
             this.heatLevel = heatLevel;
         }

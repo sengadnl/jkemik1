@@ -219,7 +219,7 @@ public class Artist {
 		// draw points
 		for (Point p : JKemik.getGame().getCollection().values()) {
 			if (p.getId() == p1.getId()) {
-				if (p.getStatus() == Point.CAPTURED) {
+				if (p.getStatus() == Globals.POINT_CAPTURED) {
 					Artist.drawCircle(p, Tools.fade(p1.getColor()),
 							Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 							Grid.gridLineStroke, g2);
@@ -234,7 +234,7 @@ public class Artist {
 			}
 
 			if (p.getId() == p2.getId()) { // &&
-				if (p.getStatus() == Point.CAPTURED) {
+				if (p.getStatus() == Globals.POINT_CAPTURED) {
 					Artist.drawCircle(p, Tools.fade(p2.getColor()),
 							Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 							Grid.gridLineStroke, g2);
@@ -297,7 +297,7 @@ public class Artist {
 			// cells inside this cell
 			for (Point p : c.getAreaIncell()) {
 			
-				if (p.getStatus() == Point.CAPTURED) {
+				if (p.getStatus() == Globals.POINT_CAPTURED) {
 					Artist.drawCircle(p, Tools.fade(capturedc),
 							Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 							Grid.gridLineStroke, g2);
@@ -305,7 +305,7 @@ public class Artist {
 //							Grid.half_squareSize, Grid.gridLineCol, g2);
 				}
 
-				if (p.getStatus() == Point.DEAD) {
+				if (p.getStatus() == Globals.POINT_DEAD) {
 					Artist.drawCircle(p,BoardFrame.BOARD_COLOR,
 							Grid.HALF_DIAMETER, Grid.CIRCLE_DIAMETER,
 							Grid.gridLineStroke, g2);

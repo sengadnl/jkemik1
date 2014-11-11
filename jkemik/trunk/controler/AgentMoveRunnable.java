@@ -35,6 +35,7 @@ public class AgentMoveRunnable implements Runnable{
         aiMoveLock.lock();
         
         try {
+            
             BoardFrame.getGrid().removeMouseListener(ViewEvents.AIgridListener);
             BoardFrame.getGrid().removeMouseMotionListener(ViewEvents.AIgridListener);
             BoardFrame.progressB.setVisible(true);
@@ -42,9 +43,17 @@ public class AgentMoveRunnable implements Runnable{
 
             AIGame game = (AIGame) JKemik.getGame();
             JkBot bot = (JkBot) game.getMachine();
+           
             Thread.sleep(DELAY);
-            Point move = bot.play((AIGame) game);
-            System.err.println("MOVE IS " + move);
+            Point move;
+            //make sure human already played
+            if(bot.isTurn()){
+                System.err.println("Bot's turn is: " + bot.isTurn());
+                move = bot.play((AIGame) game);
+            }else{
+                move = null;
+            }
+            //System.err.println("MOVE IS " + move);
             if(move != null){
                 ArrayList<Point> path = bot.moveCursorTo(new Point(0.0,0.0), move, Grid.squareSize);
                 for(Point m: path){

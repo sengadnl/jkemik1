@@ -1,11 +1,16 @@
 package api;
 
+import controler.JKemik;
 import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import utilities.Globals;
+import view.Grid;
 
 /**
  * COPYRIGHT(c)2010 Daniel Senga. All Right Reserved. This class is a parent to
@@ -20,16 +25,79 @@ public abstract class AbstractPlayer implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+        private final Lock boardStatusLock;
+        private ArrayList<HotPoint> status;
 	public AbstractPlayer(Color color, String name) {
 		super();
 		this.color = color;
 		this.name = name;
 		this.score = 0.0;
-		this.selected = new ArrayList<Point>();
-		this.Cells = new HashMap<Integer, Cell>();
+		this.selected = new ArrayList<>();
+		this.Cells = new HashMap<>();
+                this.boardStatusLock = new ReentrantLock();
+                this.status = new ArrayList<>();
 	}
+        public void updateBoardStatus(){
+            //System.err.println("---------------------");
+            this.boardStatusLock.lock();
+            AIGame game;Cell c;
+            //ArrayList<HotPoint> status;
+            
+            try{
+                game = (AIGame) JKemik.getGame();
+                //status = this.aiStatus.getStatus();
+                if(null != game.getLastCell()){
+                    c = game.getLastCell();
+                    ArrayList<Point> cellWall = c.getCellContour();
+                    ArrayList<Point> captures = c.getAreaIncell();
 
+                    //remove dead points from boardStatus
+                    for(Point p: captures){
+                        if(p.getStatus() == Globals.POINT_DEAD || p.getStatus() == Globals.POINT_CAPTURED){
+                            for(HotPoint s: status){
+                                if(s.getKey().equals(p.toString())){
+                                    //System.out.println("Removing " + s.toString());
+                                    status.remove(s);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                } 
+
+                //update status
+                for(Point temp: game.getCollection().values()){
+                    temp.setVulnerability(game, (int) Grid.squareSize);
+                }
+                //System.err.println("Verifying collection size = " + game.getCollection().size());
+
+                //Update status
+                if(!status.isEmpty()){
+                    for(HotPoint s: status){
+                        Point z = game.getCollection().get(s.getKey());
+                        if(z != null){ 
+                            s.setScore(z.heatLevel);
+                        } 
+                    }
+                }
+                Collections.sort(status);
+                System.err.println(this.getName() + " V status = " + status);
+            }catch(NullPointerException ex){
+                System.out.println("Exception in BoardStatus:updateStatus " + ex.getMessage());
+            }finally{
+                this.boardStatusLock.unlock();
+            }
+
+        }
+
+        public ArrayList<HotPoint> getStatus() {
+            return status;
+        }
+
+        public void setStatus(ArrayList<HotPoint> status) {
+            this.status = status;
+        }
+        
 	public int countRedeemedPoints() {
 		int count = 0;
 		if (this.Cells.isEmpty()) {
@@ -362,6 +430,6 @@ public abstract class AbstractPlayer implements Serializable {
 	private ArrayList<Point> selected = null;
 
 	private boolean successful = false;
-	private int FADE_VARIANT = 70;
+	private final int FADE_VARIANT = 70;
 	private int play_flag = 0;
 }
