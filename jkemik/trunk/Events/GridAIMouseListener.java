@@ -16,7 +16,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import javax.swing.JOptionPane;
 import view.BoardFrame;
 import view.Grid;
 
@@ -45,11 +44,7 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener {
             ExecutorService pool = Executors.newFixedThreadPool(2);
             pool.execute(ht);         
             pool.execute(mt);
-           
-            
-            
-//            ht.start();
-//            mt.start();
+     
 	}
 
 	@Override
@@ -93,22 +88,6 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener {
                     BoardFrame.grid.repaint();
                     BoardFrame.grid.repaint((int)temp.getXC() - (int)Grid.squareSize * 2, (int)temp.getYC() - (int)Grid.squareSize * 2, (int)Grid.squareSize * 4, (int)Grid.squareSize * 4);
                     Grid.mouseMove = true;
-            } 
-//            if (JKemik.checkEndGame()) {
-//                JOptionPane.showMessageDialog(null, "" + JKemik.getEndingMessage(),
-//                                " Win", JOptionPane.OK_OPTION);
-//                BoardFrame.feedback(JKemik.getEndingMessage());
-//                JKemik.getGame().setStatus(1);
-//                JKemik.createGame(JKemik.template, JKemik.settings_t);
-//                JKemik.settings_t.setGameSetupMode(true);
-//                // Reset game exit label
-//                BoardFrame.Game_status.setText("NEW");
-//                BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
-//                ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
-//
-//                Grid.setRefresh(true);
-//                BoardFrame.displayGrid(true);
-//                BoardFrame.grid.repaint();
-//            }
+            }
 	}
 }
