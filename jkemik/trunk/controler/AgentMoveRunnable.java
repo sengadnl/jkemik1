@@ -35,82 +35,88 @@ public class AgentMoveRunnable implements Runnable{
         aiMoveLock.lock();
         
         try {
-            
+            /*Give bot total cursor control*/
             BoardFrame.getGrid().removeMouseListener(ViewEvents.AIgridListener);
             BoardFrame.getGrid().removeMouseMotionListener(ViewEvents.AIgridListener);
-            BoardFrame.progressB.setVisible(true);
-            BoardFrame.progressB.setIndeterminate(true);
-
-            AIGame game = (AIGame) JKemik.getGame();
-            JkBot bot = (JkBot) game.getMachine();
-           
-            Thread.sleep(DELAY);
-            Point move;
-            //make sure human already played
             
-            //System.err.println("Bot's turn is: " + bot.isTurn());
-            move = bot.play((AIGame) game);
-            if(move != null){
-                ArrayList<Point> path = bot.moveCursorTo(new Point(0.0,0.0), move, Grid.squareSize);
-                for(Point m: path){
-                    Grid.x = m.getXC();
-                    Grid.y = m.getYC();
+            AIGame game;JkBot bot;
+            
+            game = (AIGame) JKemik.getGame();
+            bot = (JkBot) game.getMachine();
+            
+            /*Give a little more time to the human thread to finish*/
+            Thread.sleep(DELAY);
+            
+            /*Play only if the it is bot's turn and if bot has not played yet*/
+            if(bot.isTurn() && bot.getPlay_flag() == 0){
+                BoardFrame.progressB.setVisible(true);
+                BoardFrame.progressB.setIndeterminate(true);
+
+                Point move;
+                /*Bot decedes where to play*/
+                move = bot.play((AIGame) game);
+                
+                /*Bot moves the cursor*/
+                if(move != null){
+                    ArrayList<Point> path = bot.moveCursorTo(new Point(0.0,0.0), move, Grid.squareSize);
+                    for(Point m: path){
+                        Grid.x = m.getXC();
+                        Grid.y = m.getYC();
+                        Grid.setRefresh(true);
+                        BoardFrame.displayGrid(true);
+                        BoardFrame.grid.repaint((int)Grid.x - (int)Grid.squareSize * 2, (int)Grid.y - (int)Grid.squareSize * 2, (int)Grid.squareSize * 4, (int)Grid.squareSize * 4);
+                        Grid.mouseMove = true;
+                        Thread.sleep(20);
+                    }
+                    /*Keep cursor where bot played for a little while*/
+                    Thread.sleep(DELAY);
+                    
+                    /*Check for captures*/
+                    if (game.isEmbuche_on()) {
+                        if (JKemik.settings_t.isAutoCapture()) {
+                                Grid.cell = JKemik.embush(Grid.squareSize);
+                                if(Grid.cell != null){
+                                    BoardFrame.grid.repaint();
+                                } 
+                        }
+                    }
+                    
+                    /*Draw move*/
                     Grid.setRefresh(true);
                     BoardFrame.displayGrid(true);
-                    BoardFrame.grid.repaint((int)Grid.x - (int)Grid.squareSize * 2, (int)Grid.y - (int)Grid.squareSize * 2, (int)Grid.squareSize * 4, (int)Grid.squareSize * 4);
-                    Grid.mouseMove = true;
-                    Thread.sleep(20);
+                    BoardFrame.grid.repaint((int)move.getXC() - (int)Grid.squareSize * 2, (int)move.getYC() - (int)Grid.squareSize * 2, (int)Grid.squareSize * 4, (int)Grid.squareSize * 4);
                 }
-                Thread.sleep(DELAY);
-                if (game.isEmbuche_on()) {
-                    //System.out.println("Embush is on....");
-                    if (JKemik.settings_t.isAutoCapture()) {
-                         //System.out.println("About to embush....");
-                            Grid.cell = JKemik.embush(Grid.squareSize);
-                            if(Grid.cell != null){
-                                //System.out.println("Cell was not empty....");
-                                BoardFrame.grid.repaint();
-                            } 
-                    }
+                BoardFrame.progressB.setIndeterminate(false);
+                BoardFrame.progressB.setVisible(false);
+     
+                game.switchPlayTurns();
+                
+                /*Check the end of the game*/
+                if (JKemik.checkEndGame()) {
+                    JOptionPane.showMessageDialog(null, "" + JKemik.getEndingMessage(),
+                                    " Win", JOptionPane.OK_OPTION);
+                    BoardFrame.feedback(JKemik.getEndingMessage());
+                    JKemik.getGame().setStatus(1);
+                    JKemik.createGame(JKemik.template, JKemik.settings_t);
+                    JKemik.settings_t.setGameSetupMode(true);
+                    // Reset game exit label
+                    BoardFrame.Game_status.setText("NEW");
+                    BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
+                    ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
+
+                    Grid.setRefresh(true);
+                    BoardFrame.displayGrid(true);
+                    BoardFrame.grid.repaint();
                 }
-                Grid.setRefresh(true);
-                BoardFrame.displayGrid(true);
-                BoardFrame.grid.repaint((int)move.getXC() - (int)Grid.squareSize * 2, (int)move.getYC() - (int)Grid.squareSize * 2, (int)Grid.squareSize * 4, (int)Grid.squareSize * 4);
+                
+                /*Update scores*/
+                BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
+                BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
+                BoardFrame.updateBoardStatus();
             }
-            BoardFrame.progressB.setIndeterminate(false);
-            BoardFrame.progressB.setVisible(false);
+            /*Return cursor control to human*/
             BoardFrame.getGrid().addMouseListener(ViewEvents.AIgridListener);
             BoardFrame.getGrid().addMouseMotionListener(ViewEvents.AIgridListener);
-
-            if (JKemik.checkEndGame()) {
-                JOptionPane.showMessageDialog(null, "" + JKemik.getEndingMessage(),
-                                " Win", JOptionPane.OK_OPTION);
-                BoardFrame.feedback(JKemik.getEndingMessage());
-                JKemik.getGame().setStatus(1);
-                JKemik.createGame(JKemik.template, JKemik.settings_t);
-                JKemik.settings_t.setGameSetupMode(true);
-                // Reset game exit label
-                BoardFrame.Game_status.setText("NEW");
-                BoardFrame.uiLooksUpdate(JKemik.settings_t, JKemik.template);
-                ViewEvents.uiEventUpdates(JKemik.settings_t, JKemik.template);
-
-                Grid.setRefresh(true);
-                BoardFrame.displayGrid(true);
-                BoardFrame.grid.repaint();
-            }
-            System.err.println("Switching turns .....");
-            game.switchPlayTurns();
-
-            
-            //System.err.println("MOVE IS " + move);
-            
-            
-            BoardFrame.p1panel.updatePlayerPanel(game.getPlayer1());
-            BoardFrame.p2panel.updatePlayerPanel(game.getPlayer2());
-            BoardFrame.updateBoardStatus();
-
-            Thread.sleep(DELAY);
-
         }catch(NullPointerException ex){
             System.out.println(ex.getMessage() + ": AgentMoveRunnable");
         }catch (InterruptedException ex) {
@@ -120,7 +126,7 @@ public class AgentMoveRunnable implements Runnable{
         }
         //Thread.interrupted();
     }
-    private static final int DELAY = 100;
+    private static final int DELAY = 300;
     private final Lock aiMoveLock ;
     
 }
