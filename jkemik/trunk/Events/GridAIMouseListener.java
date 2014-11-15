@@ -37,8 +37,7 @@ public class GridAIMouseListener implements MouseListener, MouseMotionListener {
             Grid.y = e.getY();
             AIGame game = (AIGame) JKemik.getGame();
             HumanMoveRunnable hThread = new HumanMoveRunnable();
-            AgentMoveRunnable mThread = new AgentMoveRunnable();
-//		
+            AgentMoveRunnable mThread = new AgentMoveRunnable();		
             Thread ht = new Thread(hThread);
             Thread mt = new Thread(mThread);
             ExecutorService pool = Executors.newFixedThreadPool(2);

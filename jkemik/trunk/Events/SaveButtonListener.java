@@ -3,6 +3,8 @@
  */
 package Events;
 
+import agents.JkBot;
+import api.AIGame;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -15,7 +17,15 @@ import controler.JKemik;
 import utilities.ValidateInput;
 import view.BoardFrame;
 import api.GTemplate;
+import api.Point;
 import api.STemplate;
+import controler.AgentMoveRunnable;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import view.Grid;
 
 /**
  * @author dalet
@@ -71,13 +81,15 @@ public class SaveButtonListener implements MouseListener {
 							+ "\n", BoardFrame.messages.getString("question"),
 					JOptionPane.YES_NO_OPTION);
 			if (response == 1) {
-				System.out
-						.println("Saving this game ...?????????????????????????????");
-				JKemik.getGame().switchPlayTurns();
-			} else {
-
-			}
-			BoardFrame.uiLooksUpdate(s, t);
+                            JKemik.getGame().switchPlayTurns();
+                            if(JKemik.settings_t.isCh()){
+                                AgentMoveRunnable thread = new AgentMoveRunnable();
+                                Thread ht = new Thread(thread);
+                                ExecutorService pool = Executors.newFixedThreadPool(1);
+                                pool.execute(ht);   
+                            }
+                        }
+                        BoardFrame.uiLooksUpdate(s, t);
 			JKemik.writeSettings();
 		}
 	}
