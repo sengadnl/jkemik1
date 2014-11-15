@@ -5,7 +5,6 @@ import controler.JKemik;
 import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -41,6 +40,10 @@ public class JkBot extends Player implements AgentAction,Serializable{
             
             hStatus = game.getHuman().getStatus();
             aiStats = this.getStatus();
+            
+            if(hStatus.isEmpty() && aiStats.isEmpty()){
+                return this.randomPoint();
+            }
             
             //Return a random point if there is no status to track
             if(hStatus.isEmpty() || aiStats.isEmpty()){
