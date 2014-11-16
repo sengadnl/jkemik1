@@ -7,6 +7,7 @@ import Events.*;
 import api.AIGame;
 import api.AbstractGame;
 import api.GTemplate;
+import api.HotPoint;
 import api.Point;
 import api.STemplate;
 import controler.*;
@@ -145,6 +146,11 @@ public class BoardFrame extends JFrame {
 				game.getCollection().put(temp2.toString(), temp2);
 				game.getPlayer2().setPoints(1);
 				i = i + 1;
+                                
+                                if(JKemik.settings_t.isCh()){
+                                    game.getPlayer1().getStatus().add(new HotPoint(temp1.toString(),0));
+                                    game.getPlayer2().getStatus().add(new HotPoint(temp2.toString(),0));
+                                }
 			}
 		} catch (NumberFormatException e) {
 			System.out.println(e.getMessage() + " BoardFrame.addstartedPoints");
