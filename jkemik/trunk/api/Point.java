@@ -44,15 +44,15 @@ public class Point extends AbstractPoint implements Serializable{
 				* ((super.getXC() - p.getXC()) + Math.abs((super.getYC() - p.getYC())
 						* (super.getYC() - p.getYC())))));
 	}
-	/**
-	 * checks if this point is adjacent to the point passed in a parameter*/	
-	public int adjacentTo(int offSet, Point o2) {
-		int diagonal = (int) Math.sqrt((offSet * offSet) + (offSet * offSet));
-		if (super.getXC() == o2.getXC() || super.getYC() == o2.getYC()
-				|| diagonal >= distanceTo(o2)) {
-			return 0;
-		}else{
-			return -1;
-		}
-	}	
+//	/**
+//	 * checks if this point is adjacent to the point passed in a parameter*/	
+//	public int adjacentTo(int offSet, Point o2) {
+//		int diagonal = (int) Math.sqrt((offSet * offSet) + (offSet * offSet));
+//		if (super.getXC() == o2.getXC() || super.getYC() == o2.getYC()
+//				|| diagonal >= distanceTo(o2)) {
+//			return 0;
+//		}else{
+//			return -1;
+//		}
+//	}	
 }
