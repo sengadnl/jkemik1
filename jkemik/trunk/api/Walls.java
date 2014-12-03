@@ -106,24 +106,24 @@ public class Walls{
     public static void main(String[] args){
         Walls wall = new Walls(1);
       
-        //wall.insert(new Point(2.0,2.0));
-        wall.insert(new Point(2.0,3.0));
-        //wall.insert(new Point(3.0,3.0));
-        wall.insert(new Point(3.0,7.0));
-        wall.insert(new Point(2.0,8.0));
-        wall.insert(new Point(4.0,5.0));
-       // wall.insert(new Point(5.0,5.0));
+        wall.insert(new Point(2.0,2.0));
+        wall.insert(new Point(3.0,3.0));
+        wall.insert(new Point(6.0,2.0));
+        wall.insert(new Point(5.0,3.0));
         wall.insert(new Point(4.0,4.0));
+        wall.insert(new Point(2.0,4.0));
+       // wall.insert(new Point(5.0,5.0));
+        //wall.insert(new Point(4.0,4.0));
         
         //wall.insert(new Point(2.0,6.0));
-        wall.insert(new Point(6.0,4.0));
-        wall.insert(new Point(5.0,9.0));
-         wall.insert(new Point(3.0,1.0));
+        //wall.insert(new Point(6.0,4.0));
+        //wall.insert(new Point(5.0,9.0));
+         //wall.insert(new Point(3.0,1.0));
 
         //wall.insert(new Point(4.0,8.0));
-         wall.insert(new Point(5.0,7.0));
-          wall.insert(new Point(6.0,6.0));
-           wall.insert(new Point(3.0,5.0));
+         //wall.insert(new Point(5.0,7.0));
+          //wall.insert(new Point(6.0,6.0));
+           //wall.insert(new Point(3.0,5.0));
         System.out.println(wall.toString());
         
     }

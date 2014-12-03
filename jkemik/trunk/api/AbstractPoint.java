@@ -60,12 +60,12 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
             score = 1;id = this.getId();
             
             /*skip this points*/
-//            if(this.getStatus() == Point.CAPTURED 
-//                    || this.getStatus() == Point.CAPTURED
-//                    || this.getStatus() == Point.REDEEMED 
-//                    || board.isEmpty()){
-//                return;
-//            }
+            if(this.getStatus() == Globals.POINT_CAPTURED 
+                    || this.getStatus() == Globals.POINT_CAPTURED
+                    || this.getStatus() == Globals.POINT_REDEEMED 
+                    || board.isEmpty()){
+                return;
+            }
             
             /*Vulnerability of the x and y axe*/
             for(int i = 0; i < axes.length; i++){

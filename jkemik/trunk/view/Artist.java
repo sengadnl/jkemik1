@@ -154,7 +154,16 @@ public class Artist {
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setColor(Tools.fade(c,Globals.SQR_LINE_SHADE_PERCENT));
 		g2.draw(circle);
-		g2.setColor(c);
+                
+                /*Debug mode: uncomment de debut AI board status*/
+                g2.setColor(Color.BLACK);
+                String str = "" + p.getHeatLevel();
+                g2.drawString(str, (int)p.getXC(), (int)p.getYC());
+                /*End debug code*/
+                
+                g2.setColor(c);
+                
+                
 	}
 
 	protected static boolean unDrawCell(Cell cell, Graphics2D g2) {
