@@ -23,8 +23,6 @@ import api.AbstractGame;
 import api.GridDimension;
 import api.Player;
 import api.Point;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 import static view.Grid.gridLineStroke;
 
 public class Artist {
@@ -156,11 +154,10 @@ public class Artist {
 		g2.draw(circle);
                 
                 /*Debug mode: uncomment de debut AI board status*/
-                g2.setColor(Color.BLACK);
+                g2.setColor(Color.ORANGE);
                 String str = "" + p.getHeatLevel();
-                g2.drawString(str, (int)p.getXC(), (int)p.getYC());
+                g2.drawString(str, (int)(p.getXC() - h_d), (int)(p.getYC() - h_d));
                 /*End debug code*/
-                
                 g2.setColor(c);
                 
                 

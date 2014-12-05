@@ -15,7 +15,7 @@ import utilities.Globals;
 
 
 /**
- * @author Junes
+ * @author Daniel
  * 
  */
 abstract class AbstractPoint implements Comparable<Point>, Serializable {
@@ -52,12 +52,12 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
         public void setVulnerability(AIGame game, int sqrSize) {
             HashMap<String, Point> board; 
             Point[] axes,diagonals;
-            int id, score;
+            int p_id, score;
             
             board = game.getCollection();
             axes = this.axisBox(sqrSize);
             diagonals = this.diagonalBox(sqrSize);
-            score = 1;id = this.getId();
+            score = 1;p_id = this.getId();
             
             /*skip this points*/
             if(this.getStatus() == Globals.POINT_CAPTURED 
@@ -68,42 +68,43 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
             }
             
             /*Vulnerability of the x and y axe*/
-            for(int i = 0; i < axes.length; i++){
-                Point a = board.get(axes[i].toString());
+            for (Point axe : axes) {
+                Point a = board.get(axe.toString());
                 if(a == null){
                     continue;
                 }
                 /*Increase vulnerability if this point is not like me*/
-                if(id != a.getId()){
+                if(p_id != a.getId()){
                     if(a.getStatus() == Globals.POINT_PLAYED){
                         if(score > 0){
                             score *= 2;
+                            //score += (int)Math.abs((double)score)*2;
                         }
                         score += (int)Math.abs((double)score)*2;
                     }
                     if(a.getStatus() == Globals.POINT_CONNECTED){
-                            score += 4;
+                        score += 4;
                     }
                 }
                 /*Reduce vulnerability if this point is like me*/
-                if(id == a.getId()){
+                if(p_id == a.getId()){
                     if(a.getStatus() == Globals.POINT_PLAYED){
                         score -= 2;
                     }
                     if(a.getStatus() == Globals.POINT_CONNECTED){
                         score -= 4;
-                    }  
+                    }
                 }  
             }
             
             /*Vulnerability of diagonals*/
-            for(int e = 0; e < diagonals.length; e++){
-                Point d = board.get(diagonals[e].toString());
+            for (Point diagonal : diagonals) {
+                Point d = board.get(diagonal.toString());
                 if(d == null){
                     continue;
                 }
                 /*Increase vulnerability if this point is not like me*/
-                if(id != d.getId()){
+                if(p_id != d.getId()){
                     if(d.getStatus() == Globals.POINT_PLAYED){
                         score++;
                     }
@@ -113,9 +114,9 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
                     }
                 }
                 /*Reduce vulnerability if this point is like me*/
-                if(id == d.getId()){
+                if(p_id == d.getId()){
                     if(d.getStatus() == Globals.POINT_PLAYED){
-                       score--;
+                        score--;
                     }
                     
                     if(d.getStatus() == Globals.POINT_CONNECTED){
