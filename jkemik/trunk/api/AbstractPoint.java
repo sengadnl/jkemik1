@@ -76,9 +76,9 @@ abstract class AbstractPoint implements Comparable<Point>, Serializable {
                 /*Increase vulnerability if this point is not like me*/
                 if(p_id != a.getId()){
                     if(a.getStatus() == Globals.POINT_PLAYED){
+                        /*if score is positive*/
                         if(score > 0){
                             score *= 2;
-                            //score += (int)Math.abs((double)score)*2;
                         }
                         score += (int)Math.abs((double)score)*2;
                     }

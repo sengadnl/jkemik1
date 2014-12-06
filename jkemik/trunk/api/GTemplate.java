@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.Serializable;
+import utilities.Globals;
 
 /**
  * 
@@ -29,17 +30,37 @@ public class GTemplate implements Serializable{
 	
 	private Color p1_c;
 	private Color p2_c;
+        //private String theme;
 	private Dimension dimension; // = Toolkit.getDefaultToolkit().getScreenSize();
 
 
-	public GTemplate() {
+	public GTemplate(STemplate t) {
 		this.dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		this.P1_name = "HUM";
-		this.P2_name = "COM";
-		this.p1_c = new Color(250, 250, 57);
-		this.p2_c = new Color(103, 250, 95);
+		this.P1_name = "P1";
+		this.P2_name = "P2";
+                setTheme(t);
+                //System.err.println("Creating a new game template...");
 	}
-
+        private void setTheme(STemplate t){
+            switch (t.getTheme()) {
+                case Globals.ORIGINS:
+                    this.p1_c = Globals.ORIGINE_COLOR[0];
+                    this.p2_c = Globals.ORIGINE_COLOR[1];
+                    break;
+                case Globals.JKEMIK:
+                    this.p1_c = Globals.JKEMIK_COLOR[0];
+                    this.p2_c = Globals.JKEMIK_COLOR[1];
+                    break;
+                case Globals.GEEKY:
+                    this.p1_c = Globals.GEECKY_COLOR[0];
+                    this.p2_c = Globals.GEECKY_COLOR[1];
+                    break;
+                default: 
+                    this.p1_c = Globals.CLASSIC_COLOR[0];
+                    this.p1_c = Globals.CLASSIC_COLOR[1];
+                    break;
+            }
+        }
 	/**
 	 * @return the str_p1_c
 	 */
@@ -86,12 +107,12 @@ public class GTemplate implements Serializable{
 
 
 	public void setP1_name(String P1_name) {
-		System.out.println("----------" + P1_name);
+		//System.out.println("----------" + P1_name);
 		this.P1_name = P1_name;
 	}
 
 	public void setP2_name(String P2_name) {
-		System.out.println("-----------" + P2_name);
+		//System.out.println("-----------" + P2_name);
 		this.P2_name = P2_name;
 	}
 

@@ -46,7 +46,7 @@ public class ExitListener implements MouseListener {
 				JKemik.removeGameObj();
 			} else {
 				JKemik.writeGame();
-				JKemik.writeSettings();
+				JKemik.writeTemplates();
 			}
 			// Save current Game
 			System.exit(0);

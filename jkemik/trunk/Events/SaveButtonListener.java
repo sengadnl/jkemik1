@@ -3,8 +3,6 @@
  */
 package Events;
 
-import agents.JkBot;
-import api.AIGame;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -17,15 +15,13 @@ import controler.JKemik;
 import utilities.ValidateInput;
 import view.BoardFrame;
 import api.GTemplate;
-import api.Point;
+
 import api.STemplate;
 import controler.AgentMoveRunnable;
-import java.util.ArrayList;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import view.Grid;
+
 
 /**
  * @author dalet
@@ -90,7 +86,7 @@ public class SaveButtonListener implements MouseListener {
                             }
                         }
                         BoardFrame.uiLooksUpdate(s, t);
-			JKemik.writeSettings();
+			JKemik.writeTemplates();
 		}
 	}
 
