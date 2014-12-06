@@ -457,10 +457,12 @@ public class BoardFrame extends JFrame {
 		Color c = BoardFrame.BOARD_COLOR;
 		l1.setForeground(Tools.fade(c));
 		l2.setForeground(Tools.fade(c));
-		pnamelabel1.setForeground(Tools.fade(JKemik.template.getP1_c(),
-				Globals.LABEL_VARIANT / 2));
-		pnamelabel2.setForeground(Tools.fade(JKemik.template.getP2_c(),
-				Globals.LABEL_VARIANT / 2));
+                
+                pnamelabel1.setForeground(Tools.fade(JKemik.template.getP1_c(),
+                                Globals.LABEL_VARIANT / 2));
+                pnamelabel2.setForeground(Tools.fade(JKemik.template.getP2_c(),
+                                Globals.LABEL_VARIANT / 2));
+                
 		pColor1.setBackground(Tools.fade(JKemik.template.getP1_c(),
 				Globals.LABEL_VARIANT / 2));
 		pColor2.setBackground(Tools.fade(JKemik.template.getP2_c(),
@@ -700,13 +702,19 @@ public class BoardFrame extends JFrame {
 
 	public static void setTheme(String str) {
 		switch (str) {
-		case "Jkemik":
+		case Globals.JKEMIK:
 			setSkin(Tools.fade(Tools.fade(new Color(111, 53, 70))), new Color(
 					0, 0, 0), new Color(111, 53, 70));
-			pColor1.setArrayColors(Globals.CHEMIK_COLOR);
-			pColor2.setArrayColors(Globals.CHEMIK_COLOR);
+			pColor1.setArrayColors(Globals.JKEMIK_COLOR);
+			pColor2.setArrayColors(Globals.JKEMIK_COLOR);
 			pColor1.rotateColor(JKemik.template.getP1_c());
 			pColor2.rotateColor(JKemik.template.getP2_c());
+                        System.out.println("....... Color p1: " + pColor1.getBackground());
+                         System.out.println(".......Color p2: " + pColor2.getBackground());
+                         System.out.println("....... TColor p1: " + JKemik.template.getP1_c());
+                         System.out.println(".......TColor p2: " + JKemik.template.getP2_c());
+                         System.out.println("...PColor p1: " + JKemik.getGame().getPlayer1().getColor());
+                         System.out.println("...PColor p2: " + JKemik.getGame().getPlayer2().getColor());
 			pnamelabel1.setForeground(Color.WHITE);
 			pnamelabel2.setForeground(Color.WHITE);
 			decoratebuttons(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT),
@@ -714,7 +722,7 @@ public class BoardFrame extends JFrame {
 			decorateLabelForeground(Tools.boost(BOARD_COLOR,
 					Globals.LABEL_VARIANT + 30));
 			break;
-		case "Origins":
+		case Globals.ORIGINS:
 			setSkin(Tools.fade(Tools.fade(new Color(110, 56, 27))), new Color(
 					0, 0, 0), new Color(110, 56, 27));
 			pColor1.setArrayColors(Globals.ORIGINE_COLOR);
@@ -728,7 +736,7 @@ public class BoardFrame extends JFrame {
 			decorateLabelForeground(Tools.boost(BOARD_COLOR,
 					Globals.LABEL_VARIANT + 30));
 			break;
-		case "Geeky":
+		case Globals.GEEKY:
 			setSkin(Tools.fade(Tools.fade(new Color(70, 70, 20))), new Color(0,
 					0, 0), new Color(70, 70, 20));
 			pColor1.setArrayColors(Globals.GEECKY_COLOR);
@@ -762,10 +770,10 @@ public class BoardFrame extends JFrame {
 	public void initTheme(String str) {
 		switch (str) {
 		case "Jkemik":
-			JKemik.template.setP1_c(Globals.CHEMIK_COLOR[0]);
-			JKemik.template.setP2_c(Globals.CHEMIK_COLOR[1]);
-			pColor1.rotateColor(Globals.CHEMIK_COLOR[0]);
-			pColor2.rotateColor(Globals.CHEMIK_COLOR[1]);
+			JKemik.template.setP1_c(Globals.JKEMIK_COLOR[0]);
+			JKemik.template.setP2_c(Globals.JKEMIK_COLOR[1]);
+			pColor1.rotateColor(Globals.JKEMIK_COLOR[0]);
+			pColor2.rotateColor(Globals.JKEMIK_COLOR[1]);
 			break;
 		case "Origins":
 			JKemik.template.setP1_c(Globals.ORIGINE_COLOR[0]);
@@ -1018,8 +1026,8 @@ public class BoardFrame extends JFrame {
 			//System.out.println("setting playmode");
 			Game_status.setText(BoardFrame.messages.getString("endG"));
 
-//			pnamelabel1.setText(JKemik.template.getP1_name().toUpperCase());
-//			pnamelabel2.setText(JKemik.template.getP2_name().toUpperCase());
+			pnamelabel1.setText(JKemik.template.getP1_name().toUpperCase());
+			pnamelabel2.setText(JKemik.template.getP2_name().toUpperCase());
 
 			disableGameControlPanel();
 			p1panel.enablePanelDecor();

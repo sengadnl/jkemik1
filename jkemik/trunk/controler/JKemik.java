@@ -48,9 +48,9 @@ public class JKemik extends Application {
 				if (tmp.mkdir()) {
 				}
 			}
+                        readSettings();
 			readTemplate();
-			readSettings();
-			readGameObj();// TODO
+			readGameObj();
                         
 			BoardFrame.setTheme(settings_t.getTheme());
 			BoardFrame.uiLooksUpdate(settings_t, template);
@@ -126,7 +126,7 @@ public class JKemik extends Application {
 		JKemik.isStarted = isStarted;
 	}
 
-	public static void writeSettings() {
+	public static void writeTemplates() {
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(
 					new FileOutputStream(s_object));
@@ -225,6 +225,7 @@ public class JKemik extends Application {
 					createGame(template, settings_t);
 					BoardFrame.addstarterPoints(4);
 				}
+                                //templateGameSync(game);
 			} else {
 				createGame(template, settings_t);
 			}
@@ -241,10 +242,11 @@ public class JKemik extends Application {
 			if (t_object.exists()) {
 				try (ObjectInputStream input = new ObjectInputStream(
 						new FileInputStream(t_object))) {
+                                    System.err.println("Restauring game template from disk...");
 					template = (GTemplate) input.readObject();
 				}
 			} else {
-				template = new GTemplate();
+				template = new GTemplate(settings_t);
 			}
 		} catch (FileNotFoundException exception1) {
 			System.out.println("JKemik: readSettings "
@@ -520,6 +522,13 @@ public class JKemik extends Application {
 
         public static void setLoad(Load load) {
             JKemik.load = load;
+        }
+        private static void templateGameSync(AbstractGame g){
+            GTemplate t = JKemik.template;
+            t.setP1_c(g.getPlayer1().getColor());
+            t.setP2_c(g.getPlayer2().getColor());
+            t.setP1_name(g.getPlayer1().getName());
+            t.setP2_name(g.getPlayer2().getName());
         }
         
 	public static void main(String[] args) {

@@ -20,6 +20,13 @@ public class Globals {
 	public static final String gameObjectFile = "/tmp/game.obj";
 	public static final String settingsTemplateObjectFile = "/tmp/stemplate.obj";
 	public static final String VERSION = "Beta-5.0.332 ";
+
+        public static final String ORIGINS = "Origins",
+                                   JKEMIK = "Jkemik",
+                                   GEEKY = "Geeky",
+                                   CLASSIC  = "Classic";
+       
+        
 	
 	public static final int POINT_VALUE = 1;
 	public static final int POINT_BONUS = 5;
@@ -42,7 +49,7 @@ public class Globals {
 	public static final double SIZE_PERCENT = .75;
 	public static final double MAX_POINTS_SCALAR = .80;
 	
-	public static final Color[] CHEMIK_COLOR = {
+	public static final Color[] JKEMIK_COLOR = {
 		new Color(77, 192, 250),
 		new Color(103, 250, 95),
 		new Color(250, 250, 57)};

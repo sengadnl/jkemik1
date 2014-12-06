@@ -54,7 +54,7 @@ public class RotateColor extends JPanel {
 	public Color getPanelBGC() {
 		return this.getBackground();
 	}
-
+        //TODO check if it is working properly
 	public void rotateColor(JPanel panel) {
 		this.colorIndex++;
 		if (this.colorIndex > this.BOARD_SIZE - 1) {

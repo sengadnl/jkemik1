@@ -19,7 +19,7 @@ public class HvsHListener implements MouseListener{
 
 	private void setGtype(JRadioButton gtype) {
 		this.gtype = gtype;
-                JKemik.template = new GTemplate();
+                JKemik.template = new GTemplate(JKemik.settings_t);
 	}
 
 	@Override
