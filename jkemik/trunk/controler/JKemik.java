@@ -16,6 +16,8 @@ import view.*;
 import Events.ViewEvents;
 import agents.JkBot;
 import api.*;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * COPYRIGHT(C)2012 Daniel Senga. All Right Reserved Main class of Jkemik.
@@ -38,9 +40,13 @@ public class JKemik extends Application {
 			+ Globals.templateObjectFile);
 	private static final File g_object = new File(Tools.fullPath() + Globals.gameObjectFile);
 	private static String endingMessage = "This Game has not ended you";
+//        public JKemik(){
+//            initializationLock = new ReentrantLock();
+//        }
 
 	@Override
 	protected void init() {
+            //initializationLock.lock();
 		try {
 			load = new Load(362, 183);
 			File tmp = new File(Globals.tempFile);
@@ -52,12 +58,16 @@ public class JKemik extends Application {
 			readTemplate();
 			readGameObj();
                         
-			BoardFrame.setTheme(settings_t.getTheme());
-			BoardFrame.uiLooksUpdate(settings_t, template);
+//                        System.out.println("First GUI decoration!!!!!!!!");
+//			BoardFrame.setTheme(settings_t.getTheme());
+//			BoardFrame.uiLooksUpdate(settings_t, template);
                         setStarted(true);
 		} catch (Exception e) {
-			System.out.println("Initialization Error: " + e.getMessage());
+			System.err.println("Initialization Error: " + e.getMessage());
 		}
+//                finally{
+//                    initializationLock.unlock();
+//                }
 	}
 
 	@Override
@@ -128,6 +138,7 @@ public class JKemik extends Application {
 
 	public static void writeTemplates() {
 		try {
+                        //templateGameSync(game);
 			ObjectOutputStream out = new ObjectOutputStream(
 					new FileOutputStream(s_object));
 			ObjectOutputStream out1 = new ObjectOutputStream(
@@ -209,19 +220,19 @@ public class JKemik extends Application {
                                     game = (AIGame) input.readObject();
                                 }else{
                                    game = (Game) input.readObject();
-                               }
-				int response = JOptionPane.showConfirmDialog(null,
+                                }
+                                int response = JOptionPane.showConfirmDialog(null,
 						"Continues with saved Game?\n", "Question",
 						JOptionPane.YES_NO_OPTION);
 				if (response == 0) {
 					// BoardFrame.setThereIsSavedGame(response);
 					game.init();
+                                        //templateGameSync(game);
 					Grid.refresh = true;
 					input.close();
 				} else {
 					// BoardFrame.setThereIsSavedGame(1);
-					System.out
-							.println("No saved game was found, instantiating one...");
+					System.out.println("No saved game was found, instantiating one...");
 					createGame(template, settings_t);
 					BoardFrame.addstarterPoints(4);
 				}
@@ -242,11 +253,10 @@ public class JKemik extends Application {
 			if (t_object.exists()) {
 				try (ObjectInputStream input = new ObjectInputStream(
 						new FileInputStream(t_object))) {
-                                    System.err.println("Restauring game template from disk...");
-					template = (GTemplate) input.readObject();
+                                    template = (GTemplate) input.readObject();
 				}
 			} else {
-				template = new GTemplate(settings_t);
+				template = new GTemplate();
 			}
 		} catch (FileNotFoundException exception1) {
 			System.out.println("JKemik: readSettings "
@@ -523,13 +533,13 @@ public class JKemik extends Application {
         public static void setLoad(Load load) {
             JKemik.load = load;
         }
-        private static void templateGameSync(AbstractGame g){
-            GTemplate t = JKemik.template;
-            t.setP1_c(g.getPlayer1().getColor());
-            t.setP2_c(g.getPlayer2().getColor());
-            t.setP1_name(g.getPlayer1().getName());
-            t.setP2_name(g.getPlayer2().getName());
-        }
+//        private static void templateGameSync(AbstractGame g){
+//            GTemplate t = JKemik.template;
+//            t.setP1_c(g.getPlayer1().getColor());
+//            t.setP2_c(g.getPlayer2().getColor());
+//            t.setP1_name(g.getPlayer1().getName());
+//            t.setP2_name(g.getPlayer2().getName());
+//        }
         
 	public static void main(String[] args) {
 		if (args.length > 0) {
@@ -538,4 +548,5 @@ public class JKemik extends Application {
 			(new JKemik()).run();
 		}
 	}
+        //private Lock initializationLock;
 }
