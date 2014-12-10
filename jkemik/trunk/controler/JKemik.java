@@ -16,11 +16,10 @@ import view.*;
 import Events.ViewEvents;
 import agents.JkBot;
 import api.*;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+
 
 /**
- * COPYRIGHT(C)2012 Daniel Senga. All Right Reserved Main class of Jkemik.
+ * COPYRIGHT(C)2014 Daniel Senga. All Right Reserved Main class of Jkemik.
  * 
  * @author Daniel Senga
  * @version Beta 4.0 12-2012
@@ -40,13 +39,10 @@ public class JKemik extends Application {
 			+ Globals.templateObjectFile);
 	private static final File g_object = new File(Tools.fullPath() + Globals.gameObjectFile);
 	private static String endingMessage = "This Game has not ended you";
-//        public JKemik(){
-//            initializationLock = new ReentrantLock();
-//        }
+
 
 	@Override
 	protected void init() {
-            //initializationLock.lock();
 		try {
 			load = new Load(362, 183);
 			File tmp = new File(Globals.tempFile);
@@ -57,17 +53,12 @@ public class JKemik extends Application {
                         readSettings();
 			readTemplate();
 			readGameObj();
-                        
-//                        System.out.println("First GUI decoration!!!!!!!!");
-//			BoardFrame.setTheme(settings_t.getTheme());
-//			BoardFrame.uiLooksUpdate(settings_t, template);
+
                         setStarted(true);
 		} catch (Exception e) {
 			System.err.println("Initialization Error: " + e.getMessage());
 		}
-//                finally{
-//                    initializationLock.unlock();
-//                }
+
 	}
 
 	@Override
@@ -225,16 +216,15 @@ public class JKemik extends Application {
 						"Continues with saved Game?\n", "Question",
 						JOptionPane.YES_NO_OPTION);
 				if (response == 0) {
-					// BoardFrame.setThereIsSavedGame(response);
 					game.init();
-                                        //templateGameSync(game);
 					Grid.refresh = true;
 					input.close();
 				} else {
-					// BoardFrame.setThereIsSavedGame(1);
-					System.out.println("No saved game was found, instantiating one...");
+					
+					System.out.println("instantiating one...");
 					createGame(template, settings_t);
-					BoardFrame.addstarterPoints(4);
+                                        settings_t.setGameSetupMode(true);
+					//BoardFrame.addstarterPoints(4);
 				}
                                 //templateGameSync(game);
 			} else {
@@ -506,7 +496,7 @@ public class JKemik extends Application {
 	public static void options(String args[]) {
 		if (args[0].equals("-v")) {
 			System.out.println("\nJ-Kemik Version " + Globals.VERSION
-					+ "\nJDK: 1.7");//
+					+ "\nJDK: 1.9");//
 		}
 	}
 
@@ -532,15 +522,7 @@ public class JKemik extends Application {
 
         public static void setLoad(Load load) {
             JKemik.load = load;
-        }
-//        private static void templateGameSync(AbstractGame g){
-//            GTemplate t = JKemik.template;
-//            t.setP1_c(g.getPlayer1().getColor());
-//            t.setP2_c(g.getPlayer2().getColor());
-//            t.setP1_name(g.getPlayer1().getName());
-//            t.setP2_name(g.getPlayer2().getName());
-//        }
-        
+        }        
 	public static void main(String[] args) {
 		if (args.length > 0) {
 			options(args);
