@@ -59,7 +59,7 @@ public class BoardFrame extends JFrame {
 	}
 
 	private void init() {
-            JKemik.template.setTheme(JKemik.settings_t);
+                JKemik.template.setTheme(JKemik.settings_t);
 		JKemik.getLoad().plus("Language setup ...");
 		String code = Tools.languageKey(JKemik.settings_t.getLanguage());
 		String properties = Tools.propertiesFilename(code);
@@ -109,14 +109,14 @@ public class BoardFrame extends JFrame {
 				+ messages.getString("startGameB") + " "
 				+ messages.getString("feedback2"));
 		JKemik.getLoad().plus("Removing native exit buttons..");
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
 		JKemik.getLoad().plus("Packing..");
                 JKemik.getLoad().plus("Showing..");
 		setVisible(true);
+		pack();
+                setExtendedState(JFrame.MAXIMIZED_BOTH);
 		JKemik.getLoad().plus("Creating initial look...");
 		uiLooksUpdate(JKemik.settings_t, JKemik.template);
-		pack();
-		
 	}
 
 	/**
@@ -1001,9 +1001,6 @@ public class BoardFrame extends JFrame {
 			updateBoardStatus();
 			translateUI();
 
-//			pnamelabel1.setText(JKemik.template.getP1_name().toUpperCase());
-//			pnamelabel2.setText(JKemik.template.getP2_name().toUpperCase());
-
 			enableGameControlPanel();
 			p1panel.disablePanelDecor();
 			p2panel.disablePanelDecor();
@@ -1022,8 +1019,8 @@ public class BoardFrame extends JFrame {
 			capture.setVisible(false);
 			pass_turn.setVisible(false);
 			mode.setVisible(false);
-			displayGrid(true);
-			grid.repaint();
+//			displayGrid(true);
+//			grid.repaint();
 		}
 		if (s.isPlayMode()) {
 			System.out.println("Mode: Play");
@@ -1048,21 +1045,17 @@ public class BoardFrame extends JFrame {
 			BoardFrame.startG.setVisible(false);
 			print_point.setText("" + (new Point(0, 0)).toString());
 			
-//			p1panel.initPanelForNewGame(p1n, p1c);
-//			p2panel.initPanelForNewGame(p2n, p2c);
 			Win.setText(JKemik.settings_t.getMaxWinVal() + "");
 			setMakingGame(false);
-			displayGrid(true);
-			grid.repaint();
+//			displayGrid(true);
+//			grid.repaint();
 		}
 		if (s.isSystemSetupMode()) {
                         System.out.println("Mode: System Setup");
 			settings_p.updateSettingsPanel(s);
 			print_point.setText(""
 					+ BoardFrame.messages.getString("sysSetupMode"));
-//			pnamelabel1.setText(JKemik.template.getP1_name().toUpperCase());
-//			pnamelabel2.setText(JKemik.template.getP2_name().toUpperCase());
-
+	
 			p1panel.disablePanelDecor();
 			p2panel.disablePanelDecor();
 
@@ -1073,9 +1066,12 @@ public class BoardFrame extends JFrame {
 			capture.setVisible(false);
 			pass_turn.setVisible(false);
 			mode.setVisible(false);
-			displayGrid(false);
+			//displayGrid(false);
 			gridstats.init();
 		}
+                Grid.setRefresh(true);
+                displayGrid(true);
+                grid.repaint();
                 
             }catch(NullPointerException ex){
                System.err.println("Error in uiLooksUpdate: " + ex.getMessage());

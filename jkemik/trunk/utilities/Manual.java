@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import controler.JKemik;
+import java.lang.reflect.Method;
 
 public class Manual extends JDialog {
 	/**
@@ -99,11 +100,11 @@ public class Manual extends JDialog {
 				runtime.exec(cmd);
 			}
 			// Block for Mac OS
-//			else if (os.startsWith("Mac OS")) {
-//				Class fileMgr = Class.forName("com.apple.eio.FileManager");
-//				Method openURL = fileMgr.getDeclaredMethod("openURL", new Class[] { String.class });
-//				openURL.invoke(null, new Object[] { url });
-//			}
+			else if (os.startsWith("Mac OS")) {
+				Class fileMgr = Class.forName("com.apple.eio.FileManager");
+				Method openURL = fileMgr.getDeclaredMethod("openURL", new Class[] { String.class });
+				openURL.invoke(null, new Object[] { url });
+			}
 			// Block for UNIX Platform
 			else {
 				String[] browsers = { "firefox", "opera", "konqueror",
