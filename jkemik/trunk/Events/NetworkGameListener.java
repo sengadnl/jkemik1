@@ -18,7 +18,7 @@ public class NetworkGameListener implements MouseListener{
 
 	private void setNetwork(JRadioButton network) {
 		this.network = network;
-                JKemik.template = new GTemplate(JKemik.settings_t);
+                //JKemik.template = new GTemplate();
 	}
 
 	@Override

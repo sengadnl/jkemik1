@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import controler.JKemik;
+import static controler.JKemik.template;
 
 import utilities.Globals;
 import utilities.Tools;
@@ -65,6 +66,8 @@ public class NewGameListener implements MouseListener {
 					JOptionPane.YES_NO_OPTION);
 			if (res == 0) {
 				JKemik.writeGame();
+                                System.err.println("Writing game template to disk...");
+                                System.err.println("TEMPLATE: \n" + template.toString());
 				JKemik.writeTemplates();
 				System.exit(0);
 				System.out.println("Exitting ... ");

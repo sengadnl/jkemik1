@@ -11,11 +11,11 @@ import api.HotPoint;
 import api.Point;
 import api.STemplate;
 import controler.*;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
 
 import javax.swing.*;
 
@@ -34,6 +34,8 @@ public class BoardFrame extends JFrame {
 	public static ResourceBundle messages;
 
 	private BoardFrame(double width, double height) {
+                this.gameType = this.gameType = new String[]{Globals.ORIGINS, Globals.JKEMIK, Globals.CLASSIC, Globals.GEEKY};
+                
 		this.width = width;
 		this.height = height;
 		height = 800.0;
@@ -57,6 +59,7 @@ public class BoardFrame extends JFrame {
 	}
 
 	private void init() {
+            JKemik.template.setTheme(JKemik.settings_t);
 		JKemik.getLoad().plus("Language setup ...");
 		String code = Tools.languageKey(JKemik.settings_t.getLanguage());
 		String properties = Tools.propertiesFilename(code);
@@ -108,14 +111,12 @@ public class BoardFrame extends JFrame {
 		JKemik.getLoad().plus("Removing native exit buttons..");
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		JKemik.getLoad().plus("Packing..");
-		pack();
-		JKemik.getLoad().plus("Showing..");
+                JKemik.getLoad().plus("Showing..");
 		setVisible(true);
-
 		JKemik.getLoad().plus("Creating initial look...");
-
 		uiLooksUpdate(JKemik.settings_t, JKemik.template);
-
+		pack();
+		
 	}
 
 	/**
@@ -194,8 +195,8 @@ public class BoardFrame extends JFrame {
 				(int) BOTTOM_COLOR_P_H);
 		pColor2 = new RotateColor((int) BOTTOM_COLOR_P_W,
 				(int) BOTTOM_COLOR_P_H);
-		BoardFrame.pColor1.rotateColor(JKemik.template.getP1_c());
-		BoardFrame.pColor2.rotateColor(JKemik.template.getP2_c());
+                pColor1.rotateColor(JKemik.template.getP1_c());
+		pColor2.rotateColor(JKemik.template.getP2_c());
 		// down_left = new JPanel();
 		feedbackarea = new JTextArea("");
 		setupP = new JPanel();
@@ -240,8 +241,8 @@ public class BoardFrame extends JFrame {
 		capture = new JButton(messages.getString("captureB"));
 		pass_turn = new JButton(messages.getString("passB"));
 
-		pass_turn.setVisible(false);
-		undo.setVisible(false);
+//		pass_turn.setVisible(false);
+//		undo.setVisible(false);
 
 		settings = new JButton(messages.getString("settings"));
 		help = new JButton(messages.getString("help"));
@@ -252,7 +253,7 @@ public class BoardFrame extends JFrame {
 	private void instantiateAllCheckBoxes() {
 		mouseSelection = new JCheckBox(messages.getString("captureMode"));
 		mode = new JCheckBox(messages.getString("switchModel"));
-		mouseSelection.setVisible(false);
+		//mouseSelection.setVisible(false);
 	}
 
 	private void setAllLayouts() {
@@ -385,7 +386,7 @@ public class BoardFrame extends JFrame {
 		middle_container.add(grid_container, BorderLayout.CENTER);
 		middle_container.add(status_panel_container, BorderLayout.EAST);
 		grid_container.add(settings_p);
-		settings_p.setVisible(false);
+		//settings_p.setVisible(false);
 		grid_container.add(grid);
 
 	}
@@ -454,18 +455,21 @@ public class BoardFrame extends JFrame {
 
 	public static void disableGameControlPanel() {
 		// Color c = Tools.boost(BoardFrame.BOARD_COLOR, Globals.FADE_VARIANT);
+                GTemplate t = JKemik.template;
 		Color c = BoardFrame.BOARD_COLOR;
 		l1.setForeground(Tools.fade(c));
 		l2.setForeground(Tools.fade(c));
                 
-                pnamelabel1.setForeground(Tools.fade(JKemik.template.getP1_c(),
+//                System.err.println("Test TEMPLATE: " + t.toString());
+                
+                pnamelabel1.setForeground(Tools.fade(t.getP1_c(),
                                 Globals.LABEL_VARIANT / 2));
-                pnamelabel2.setForeground(Tools.fade(JKemik.template.getP2_c(),
+                pnamelabel2.setForeground(Tools.fade(t.getP2_c(),
                                 Globals.LABEL_VARIANT / 2));
                 
-		pColor1.setBackground(Tools.fade(JKemik.template.getP1_c(),
+		pColor1.setBackground(Tools.fade(t.getP1_c(),
 				Globals.LABEL_VARIANT / 2));
-		pColor2.setBackground(Tools.fade(JKemik.template.getP2_c(),
+		pColor2.setBackground(Tools.fade(t.getP2_c(),
 				Globals.LABEL_VARIANT / 2));
 
 		decorateLabelForeground(Tools.fade(BoardFrame.BOARD_COLOR,
@@ -627,7 +631,7 @@ public class BoardFrame extends JFrame {
 	// }
 	// }
 
-	public static void setSkin(Color theme, Color cpanel, Color board) {
+	protected static void setSkin(Color theme, Color cpanel, Color board) {
 		BoardFrame.THEME_COLOR = Tools.fade(theme, 10);
 		BoardFrame.CPANEL_COLOR = cpanel;
 		BoardFrame.BOARD_COLOR = board;
@@ -649,10 +653,6 @@ public class BoardFrame extends JFrame {
 		print_point.setForeground(Color.GREEN);
 		feedbackarea.setForeground(Color.GREEN);
 		feedbackarea.setBackground(BoardFrame.CPANEL_COLOR);
-		// la.setForeground(BoardFrame.BOARD_COLOR);
-		// lb.setForeground(BoardFrame.BOARD_COLOR);
-		// lc.setForeground(BoardFrame.BOARD_COLOR);
-		// ld.setForeground(BoardFrame.BOARD_COLOR);00436878655
 		decorateLabelForeground(Tools.boost(BoardFrame.BOARD_COLOR));
 		AutoCap.setForeground(Color.WHITE);
 		AutoPass.setForeground(Color.WHITE);
@@ -709,12 +709,7 @@ public class BoardFrame extends JFrame {
 			pColor2.setArrayColors(Globals.JKEMIK_COLOR);
 			pColor1.rotateColor(JKemik.template.getP1_c());
 			pColor2.rotateColor(JKemik.template.getP2_c());
-                        System.out.println("....... Color p1: " + pColor1.getBackground());
-                         System.out.println(".......Color p2: " + pColor2.getBackground());
-                         System.out.println("....... TColor p1: " + JKemik.template.getP1_c());
-                         System.out.println(".......TColor p2: " + JKemik.template.getP2_c());
-                         System.out.println("...PColor p1: " + JKemik.getGame().getPlayer1().getColor());
-                         System.out.println("...PColor p2: " + JKemik.getGame().getPlayer2().getColor());
+           
 			pnamelabel1.setForeground(Color.WHITE);
 			pnamelabel2.setForeground(Color.WHITE);
 			decoratebuttons(Tools.boost(BOARD_COLOR, Globals.LABEL_VARIANT),
@@ -988,11 +983,19 @@ public class BoardFrame extends JFrame {
 	}
 
 	public static void uiLooksUpdate(STemplate s, GTemplate t) {
+            
+            try{
+                System.err.println("Decorating the GUI ....");
+                AbstractGame game = JKemik.getGame();
                 String p1n = t.getP1_name();
                 String p2n = t.getP2_name();
                 Color p1c = t.getP1_c();
                 Color p2c = t.getP2_c();
+                p1panel.initPanelForNewGame(p1n, p1c);
+                p2panel.initPanelForNewGame(p2n, p2c);
+                
 		if (s.isGameSetupMode()) {
+                        System.out.println("Mode: Game Setup");
 			print_point.setText("" + messages.getString("gameSetupMode"));
 			updateSettingPanel();
 			updateBoardStatus();
@@ -1023,7 +1026,7 @@ public class BoardFrame extends JFrame {
 			grid.repaint();
 		}
 		if (s.isPlayMode()) {
-			//System.out.println("setting playmode");
+			System.out.println("Mode: Play");
 			Game_status.setText(BoardFrame.messages.getString("endG"));
 
 			pnamelabel1.setText(JKemik.template.getP1_name().toUpperCase());
@@ -1053,6 +1056,7 @@ public class BoardFrame extends JFrame {
 			grid.repaint();
 		}
 		if (s.isSystemSetupMode()) {
+                        System.out.println("Mode: System Setup");
 			settings_p.updateSettingsPanel(s);
 			print_point.setText(""
 					+ BoardFrame.messages.getString("sysSetupMode"));
@@ -1072,8 +1076,10 @@ public class BoardFrame extends JFrame {
 			displayGrid(false);
 			gridstats.init();
 		}
-                p1panel.initPanelForNewGame(p1n, p1c);
-                p2panel.initPanelForNewGame(p2n, p2c);
+                
+            }catch(NullPointerException ex){
+               System.err.println("Error in uiLooksUpdate: " + ex.getMessage());
+            }
 	}
 
 	public static void feedback(String message) {
@@ -1104,7 +1110,7 @@ public class BoardFrame extends JFrame {
 	public static RotateColor pColor1, pColor2;
 	public static RotateLabel l1, l2;
 	public static PlayerPanel p1panel, p2panel;
-	private final String[] gameType = { "Origins", "Jkemik", "Classic", "Geeky" };
+	private String[] gameType;
 	public static final double CORNER_WIDTH = .42, CORNER_HEIGHT = .04,
 			SIDE_WIDTH = .18, SIDE_HEIGHT = .8, PLAYER_PNL_W_SCALAR = .080,
 			PLAYER_PNL_H_SCALAR = .20, P2_W = .26, BOTTOM_COLOR_P_W = 80,
@@ -1117,4 +1123,5 @@ public class BoardFrame extends JFrame {
 	public static int thereIsSavedGame = 1, COUNTER = 0, MAX_VAL = 0,
 			PROGRESS_BAR_MAX = 100, BORDER_COL_VARIANT = 30;
 	public static final int THEME_JKEMIK = 0, THEME_ORIGINS = 1, THEME_OLD = 3;
+       
 }

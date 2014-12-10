@@ -26,7 +26,7 @@ public class HvsAIListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		JKemik.settings_t.setCh(true);
-                JKemik.template = new GTemplate(JKemik.settings_t);
+                //JKemik.template = new GTemplate();
 	}
 
 	@Override

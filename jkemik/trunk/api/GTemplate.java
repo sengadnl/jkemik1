@@ -25,7 +25,7 @@ public class GTemplate implements Serializable{
 	 */
 	//private static final long serialVersionUID = 1L;
 	private String P1_name, P2_name;
-	private String str_p1_c = "", str_p2_c = "";
+	//private String str_p1_c = "", str_p2_c = "";
 	//private String gType = "";
 	
 	private Color p1_c;
@@ -34,15 +34,17 @@ public class GTemplate implements Serializable{
 	private Dimension dimension; // = Toolkit.getDefaultToolkit().getScreenSize();
 
 
-	public GTemplate(STemplate t) {
+	public GTemplate() {
 		this.dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.P1_name = "P1";
 		this.P2_name = "P2";
-                setTheme(t);
-                //System.err.println("Creating a new game template...");
+//                this.p1_c = Globals.ORIGINE_COLOR[0];
+//                this.p2_c = Globals.ORIGINE_COLOR[1];
+                System.err.println("Creating a new game template...");
 	}
-        private void setTheme(STemplate t){
-            switch (t.getTheme()) {
+        public void setTheme(STemplate t){
+            String str = t.getTheme();
+            switch (str) {
                 case Globals.ORIGINS:
                     this.p1_c = Globals.ORIGINE_COLOR[0];
                     this.p2_c = Globals.ORIGINE_COLOR[1];
@@ -61,33 +63,6 @@ public class GTemplate implements Serializable{
                     break;
             }
         }
-	/**
-	 * @return the str_p1_c
-	 */
-	public String getStr_p1_c() {
-		return this.str_p1_c;
-	}
-
-	/**
-	 * @param strP1C the str_p1_c to set
-	 */
-	public void setStr_p1_c(String strP1C) {
-		this.str_p1_c = strP1C;
-	}
-
-	/**
-	 * @return the str_p2_c
-	 */
-	public String getStr_p2_c() {
-		return this.str_p2_c;
-	}
-
-	/**
-	 * @param strP2C the str_p2_c to set
-	 */
-	public void setStr_p2_c(String strP2C) {
-		this.str_p2_c = strP2C;
-	}
 
 	/**
 	 * @return the dimension
@@ -136,15 +111,17 @@ public class GTemplate implements Serializable{
 	 * @param p1C the p1_c to set
 	 */
 	public void setP1_c(Color p1C) {
+            System.err.println("Setting P1 color..");
 		p1_c = p1C;
 	}
 	/**
 	 * @param p2C the p2_c to set
 	 */
 	public void setP2_c(Color p2C) {
+            System.err.println("Setting P2 color..");
 		p2_c = p2C;
 	}
 	public String toString() {
-		return " " + P1_name + " " + P2_name + " ";
+		return "" + P1_name + " " + P2_name + "\nC1: " + p1_c + "\nC2: " + p2_c;
 	}
 }
