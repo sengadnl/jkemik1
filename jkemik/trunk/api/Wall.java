@@ -10,57 +10,76 @@ import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import utilities.Globals;
 
 
 /**
  *
  * @author admin
  */
-public class Wall{
+public class Wall implements Comparable<Wall>{
     int sqrSize;
     private LinkedList<Point> list;
+    private Point cut;
     public Wall(int sqrSize){
         super();
         this.sqrSize = sqrSize;
         this.list = new LinkedList<>();
-        stitchingLock = new ReentrantLock();
+        this.cut = null;
+        //stitchingLock = new ReentrantLock();
     }
     /*
     *Adds point e at the beginning or a the end of the list
+    *@return
+     1 e was added
+     -1 e not added because it already exists.
+     0 e needs a new wall
     */
-    public boolean add(Point e){
+    public int add(Point e){
         Point last,first;
-//         boolean add;
-//         add = false;
-        if(this.list.isEmpty()){
-           this.list.add(e);
-            return true;
-        }
-        
-        /*Return false if this point already exists*/
-        for(Point p: this.list){
-            if(p.compareTo(e) == 0){
-                System.out.println("Point " + e.toString() + " already exists...");
-                return false;
+        int count, len;
+        //stitchingLock.lock();
+        //try{
+            if(this.list.isEmpty()){
+               this.list.add(e);
+                return Globals.ADD;
             }
-        }
-        
-        //try adding at the end
-        last = this.list.getLast();
-        if(e.adjacentTo(last,this.sqrSize)){
-            this.list.addLast(e);
-            return true;
-        }
-        
-        //try adding at the beginning
-        first = this.list.getFirst();
-        if(e.adjacentTo(first,this.sqrSize)){
-            this.list.addFirst(e);
-            System.out.println("Adding " + e.toString() + " at the biginning...");
-            return true;
-        }
-        System.out.println("Point " + e.toString() + " was not adjacent...");
-        return false;
+
+            /*Return false if this point already exists*/
+            len = this.list.size();
+            count = 1;
+            for(Point p: this.list){
+                if(p.adjacentTo(e,sqrSize) && count < len){
+//                    this.cut = e;
+//                    return Globals.CUT;
+                    System.out.println("Found an adjacent point...");
+                }
+                if(p.compareTo(e) == 0){
+                    System.out.println("Point " + e.toString() + " already exists...");
+                    return Globals.EXITS;
+                }
+                count++;
+            }
+
+            //try adding at the end
+            last = this.list.getLast();
+            if(e.adjacentTo(last,this.sqrSize)){
+                this.list.addLast(e);
+                return Globals.ADD;
+            }
+
+            //try adding at the beginning
+            first = this.list.getFirst();
+            if(e.adjacentTo(first,this.sqrSize)){
+                this.list.addFirst(e);
+                System.out.println("Adding " + e.toString() + " at the biginning...");
+                return Globals.ADD;
+            }
+            System.out.println("Point " + e.toString() + " was not adjacent...");
+            return Globals.ADDTONEWWALL;
+//        }finally{
+//            //stitchingLock.unlock();
+//        }
     }
     
     public int getSqrSize() {
@@ -75,9 +94,18 @@ public class Wall{
         return list;
     }
 
+    public Point getCut() {
+        return cut;
+    }
+
+    public void setCut(Point cut) {
+        this.cut = cut;
+    }
+
     public void setList(LinkedList<Point> list) {
         this.list = list;
     }
+   
     public boolean stitchTo(Wall wall){
         stitchingLock.lock();
         Iterator i,it;
@@ -182,12 +210,40 @@ public class Wall{
         wall.add(new Point(3.0,0.0));
         //wall.add(new Point(1.0,1.0));
        
-        System.out.println("Whole list: " + wall.toString());
-        System.out.println("Whole list2: " + wall2.toString());
-        System.out.println("\nStitch list to list2: " + wall2.stitchTo(wall));
-        System.out.println("\nNew list2: " + wall2.toString());
-        System.out.println("\nStitch new list2 to list: " + wall.stitchTo(wall2));
+        System.out.println("l1 : " + wall.toString());
+        System.out.println("l2 : " + wall2.toString());
+        
+        System.out.println("Stitch l1 to l2 : " + wall2.stitchTo(wall));
+        System.out.println("l2 : " + wall2.toString());
+        System.out.println("Stitch new l2 to l1: " + wall.stitchTo(wall2));
         System.out.println("\nResult: " + wall.toString());
     }
     private Lock stitchingLock;
+
+    @Override
+    public int compareTo(Wall o) {
+        Point objF,objL,otherF,otherL;
+        int objSize, otherSize;
+        
+        objF = this.getList().getFirst();
+        objL = this.getList().getLast();
+        objSize = this.getList().size();
+        
+        otherF = o.getList().getFirst();
+        otherL = o.getList().getLast();
+        otherSize = o.getList().size();
+        
+        /*Equality*/
+        if(objF.adjacentTo(otherF,sqrSize) && 
+                objL.adjacentTo(otherL,sqrSize)){
+            return 0;
+        
+        /*If they are stichable indicate that other must be place before obj*/
+        }else if(objL.adjacentTo(otherF,sqrSize) && objF.adjacentTo(otherL,sqrSize)){
+            return -1;
+        }else{
+            return 1;
+        }
+    }
+    //private Lock wallInsertionLock;
 }

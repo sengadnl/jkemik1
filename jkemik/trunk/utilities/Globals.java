@@ -13,7 +13,8 @@ public class Globals {
 	public static final double FADE_VARIANT = .35;//for fading colors
 	public static final double LABEL_VARIANT = 120;//
 	public static final int FADE_THRESHOLD = 50;
-	public static final int SQR_LINE_SHADE_PERCENT = 50;
+	public static final int SQR_LINE_SHADE_PERCENT = 30;
+        public static final int ADD = 1, EXITS = -1, ADDTONEWWALL = 0, CUT = 2;
 	
 	public static final String templateObjectFile = "/tmp/template.obj";
 	public static final String tempFile = "tmp";
@@ -24,7 +25,8 @@ public class Globals {
         public static final String ORIGINS = "Origins",
                                    JKEMIK = "Jkemik",
                                    GEEKY = "Geeky",
-                                   CLASSIC  = "Classic";
+                                   CLASSIC  = "Classic",
+                                    GO  = "Go";
         
 	public static final int POINT_VALUE = 1;
 	public static final int POINT_BONUS = 5;
@@ -63,6 +65,10 @@ public class Globals {
 		new Color(80, 225, 210),
 		new Color(225, 70, 255),
 		new Color(255, 50, 20)};
+        public static final Color[] GO_COLOR = {
+		new Color(190, 190, 255),
+		new Color(150, 200, 150),
+		new Color(190, 255, 150)};
 
 	
 	public static final Color PENALTY_COL = new Color(224,27,208);

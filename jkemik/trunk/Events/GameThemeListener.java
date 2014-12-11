@@ -29,7 +29,7 @@ public class GameThemeListener implements MouseListener{
 		String str = this.label.getActiveLabel();
 		JKemik.view.setTheme(str);
 		JKemik.settings_t.setTheme(str);
-		JKemik.view.setTheme(str);
+		//JKemik.view.setTheme(str);
 		JKemik.view.initTheme(str);
 		// change the grid size
                 BoardFrame.displayGrid(true);
