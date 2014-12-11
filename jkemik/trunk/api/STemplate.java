@@ -19,7 +19,7 @@ public class STemplate implements Serializable {
                 gameSetupMode,playMode,systemSetupMode;
         private boolean[] memo = { true, true };
         
-	private String theme = "Geeky",language = "ENGLISH";
+	private String theme = "Go",language = "ENGLISH";
 	private int maxWinVal, backtrackingDistance, starterPoints;// 
 	private double maxPointScaler;
 

@@ -12,12 +12,46 @@ import java.util.HashMap;
 
 import api.Point;
 import api.STemplate;
+import api.Wall;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 /**
  * @author dalet
  * 
  */
 public class Tools {
+    /*Trancate wall at x and return the tracated part*/
+    public static Wall trancate(Wall w, Point x){
+        Wall wall;
+        Iterator i;
+        LinkedList<Point> list = w.getList();
+        i = list.iterator();
+        
+        wall = new Wall(w.getSqrSize());
+        try{
+            /*Move iterator after x*/
+            while(i.hasNext()){
+                Point temp = (Point) i.next();
+                if(temp.compareTo(x) == 0){
+                    //System.out.println("Cursor is at " + i.next());
+                    break;
+                }
+            }
+             
+            /*Add trancated elements to another list*/
+            while(i.hasNext()){
+                wall.add((Point) i.next());
+            }
+            /*Trancate the list*/
+            list.removeAll(wall.getList());
+        }catch(NoSuchElementException ex){
+            System.out.println("Trancate " + ex.getMessage());
+        }
+         /*Return the trancated list*/
+         return wall;
+    }
 	public static String languageValue(String key) {
 		for (int i = 0; i < Globals.code.length; i++) {
 			if (key.equals(Globals.code[i])) {

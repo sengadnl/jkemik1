@@ -38,8 +38,6 @@ public class GTemplate implements Serializable{
 		this.dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.P1_name = "P1";
 		this.P2_name = "P2";
-//                this.p1_c = Globals.ORIGINE_COLOR[0];
-//                this.p2_c = Globals.ORIGINE_COLOR[1];
                 System.err.println("Creating a new game template...");
 	}
         public void setTheme(STemplate t){
@@ -56,6 +54,10 @@ public class GTemplate implements Serializable{
                 case Globals.GEEKY:
                     this.p1_c = Globals.GEECKY_COLOR[0];
                     this.p2_c = Globals.GEECKY_COLOR[1];
+                    break;
+                case Globals.GO:
+                    this.p1_c = Globals.GO_COLOR[0];
+                    this.p2_c = Globals.GO_COLOR[1];
                     break;
                 default: 
                     this.p1_c = Globals.CLASSIC_COLOR[0];
