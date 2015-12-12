@@ -1,0 +1,11 @@
+## Frequently Asked Questions ##
+
+1. How do I contribute to this project?
+
+**Contact Daniel Senga at sengadnl@gmail.com"**
+
+2. ?
+
+3.
+
+![https://code.google.com/p/jkemik/source/browse/wiki/images/home.png](https://code.google.com/p/jkemik/source/browse/wiki/images/home.png)
